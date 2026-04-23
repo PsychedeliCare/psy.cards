@@ -11,7 +11,7 @@ const {
   description = "Responsive harm-reduction reference for drug interactions, sourced from TripSit.",
 } = Astro.props;
 
-const ogImage = new URL("/assets/opengraph.jpg", Astro.site ?? Astro.url).href;
+const ogImage = new URL("/assets/opengraph.jpg", Astro.site ?? Astro.url.origin).href;
 ---
 
 <!doctype html>

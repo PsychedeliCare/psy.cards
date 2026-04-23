@@ -68,10 +68,26 @@ function ensureModal(): HTMLElement | null {
   return root;
 }
 
+let savedScrollY = 0;
+
+function lockScroll() {
+  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+  document.documentElement.style.setProperty("overflow", "hidden");
+  if (scrollbarWidth > 0) {
+    document.documentElement.style.setProperty("padding-right", `${scrollbarWidth}px`);
+  }
+}
+
+function unlockScroll() {
+  document.documentElement.style.removeProperty("overflow");
+  document.documentElement.style.removeProperty("padding-right");
+}
+
 function openModal(root: HTMLElement) {
+  savedScrollY = window.scrollY;
   root.setAttribute("data-open", "true");
   root.setAttribute("aria-hidden", "false");
-  document.documentElement.style.setProperty("overflow", "hidden");
+  lockScroll();
   const panel = root.querySelector<HTMLElement>("[data-modal-panel]");
   panel?.focus({ preventScroll: true });
 }
@@ -79,7 +95,8 @@ function openModal(root: HTMLElement) {
 function closeModal(root: HTMLElement) {
   root.setAttribute("data-open", "false");
   root.setAttribute("aria-hidden", "true");
-  document.documentElement.style.removeProperty("overflow");
+  unlockScroll();
+  window.scrollTo(0, savedScrollY);
 }
 
 async function navigateToModal(path: string, push: boolean): Promise<void> {
@@ -186,9 +203,11 @@ export function initComboModal(): void {
   if (initialised) return;
   initialised = true;
 
+  history.scrollRestoration = "manual";
+
   const root = ensureModal();
   if (root && root.getAttribute("data-open") === "true") {
-    document.documentElement.style.setProperty("overflow", "hidden");
+    lockScroll();
   }
 
   document.addEventListener("click", handleDelegatedClick);

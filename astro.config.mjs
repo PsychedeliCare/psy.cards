@@ -8,6 +8,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://psy-cards.psychedelicare-eu.workers.dev",
   integrations: [mdx()],
   adapter: cloudflare(),
 
