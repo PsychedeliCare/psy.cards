@@ -1,6 +1,6 @@
 [submodule "combogen"]
 	path = combogen
-	url = git@github.com:TripSit/combogen.git
+	url = https://github.com/TripSit/combogen.git
 [submodule "drugs"]
 	path = drugs
-	url = git@github.com:TripSit/drugs.git
+	url = https://github.com/TripSit/drugs.git
