@@ -1,40 +1,54 @@
 ---
 import ComboCell from "./ComboCell.astro";
 import { columns } from "../data/config";
+
+function getLabelSizeClass(label: string) {
+  if (label.length >= 11) return "label-xs";
+  if (label.length >= 8) return "label-sm";
+  return "label-md";
+}
 ---
 
 <section class="table-wrap" aria-label="Drug combinations">
-  <div class="table-scroll" role="region" tabindex="0">
-    <table class="combos-table" role="grid">
-      <thead>
-        <tr>
-          <th scope="col" class="corner" aria-label="Combinations"></th>
-          {
-            columns.map((col) => (
-              <th
-                scope="col"
-                class={`col-head group-${col.group} category-surface cell-text`}
-                data-substance-slug={col.slug}
-              >
-                <a
-                  href={`/${col.slug}`}
-                  class="label-link"
-                  data-substance={`/${col.slug}`}
+  <div class="shadow-left" aria-hidden="true"></div>
+  <div class="table-head-stick">
+    <div class="corner" aria-hidden="true"></div>
+    <div class="table-head-scroll" data-head-scroll>
+      <table class="combos-table combos-table--head" role="presentation">
+        <thead>
+          <tr>
+            {
+              columns.map((col) => (
+                <th
+                  scope="col"
+                  class={`col-head group-${col.group} category-surface cell-text ${getLabelSizeClass(col.label)}`}
+                  data-substance-slug={col.slug}
                 >
-                  <span class="label-text">{col.label}</span>
-                </a>
-              </th>
-            ))
-          }
-        </tr>
-      </thead>
+                  <a
+                    href={`/${col.slug}`}
+                    class="label-link col-link"
+                    data-substance={`/${col.slug}`}
+                  >
+                    <span class="label-text">{col.label}</span>
+                  </a>
+                </th>
+              ))
+            }
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+
+  <div class="table-scroll" role="region" tabindex="0" data-body-scroll>
+    <table class="combos-table combos-table--body" role="grid">
       <tbody>
         {
           columns.map((row) => (
             <tr>
               <th
                 scope="row"
-                class={`row-head group-${row.group} category-surface cell-text`}
+                class={`row-head group-${row.group} category-surface cell-text ${getLabelSizeClass(row.label)}`}
                 data-substance-slug={row.slug}
               >
                 <a
@@ -42,14 +56,14 @@ import { columns } from "../data/config";
                   class="label-link row-link"
                   data-substance={`/${row.slug}`}
                 >
-                  {row.label}
+                  <span class="label-text">{row.label}</span>
                 </a>
               </th>
               {columns.map((col) =>
                 row.key === col.key ? (
                   <th
                     scope="col"
-                    class={`diag group-${row.group} category-surface cell-text`}
+                    class={`diag group-${row.group} category-surface cell-text ${getLabelSizeClass(row.label)}`}
                   >
                     <a
                       href={`/${row.slug}`}
@@ -78,18 +92,106 @@ import { columns } from "../data/config";
   </div>
 </section>
 
+<script is:inline>
+  (() => {
+    const init = () => {
+      document.querySelectorAll(".table-wrap").forEach((wrap) => {
+        if (!(wrap instanceof HTMLElement) || wrap.dataset.shadowInit === "true") {
+          return;
+        }
+
+        const bodyScroll = wrap.querySelector("[data-body-scroll]");
+        const headScroll = wrap.querySelector("[data-head-scroll]");
+        if (!(bodyScroll instanceof HTMLElement) || !(headScroll instanceof HTMLElement)) {
+          return;
+        }
+
+        const update = () => {
+          headScroll.scrollLeft = bodyScroll.scrollLeft;
+          wrap.dataset.scrolledX = bodyScroll.scrollLeft > 2 ? "true" : "false";
+          wrap.dataset.scrolledY =
+            wrap.getBoundingClientRect().top < 0 ? "true" : "false";
+        };
+
+        wrap.dataset.shadowInit = "true";
+        update();
+
+        bodyScroll.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("resize", update, { passive: true });
+      });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init, { once: true });
+    } else {
+      init();
+    }
+  })();
+</script>
+
 <style>
   .table-wrap {
     --cell-size: clamp(28px, 4.2vw, 52px);
-    --row-head-w: clamp(92px, 20vw, 160px);
-    --col-head-h: clamp(108px, 22vw, 180px);
+    --cell-gap: 2px;
+    --row-head-size: calc(var(--cell-size) + var(--cell-gap));
     --ink: var(--color-ink);
-    --ink-2: var(--color-ink-2);
     width: 100%;
     padding: 0;
+    position: relative;
+  }
+
+  .table-head-stick {
+    position: sticky;
+    top: 0;
+    z-index: 8;
+    display: grid;
+    grid-template-columns: var(--row-head-size) 1fr;
+    align-items: stretch;
+    background-color: var(--ink);
+  }
+
+  .table-head-stick::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 14px;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.28), transparent);
+    opacity: 0;
+    transition: opacity 140ms ease;
+  }
+
+  .table-wrap[data-scrolled-y="true"] .table-head-stick::after {
+    opacity: 1;
+  }
+
+  .table-head-scroll {
+    overflow: hidden;
+    background-color: var(--ink);
+  }
+
+  .shadow-left {
+    position: absolute;
+    top: calc(var(--cell-size) + var(--cell-gap) * 2);
+    left: var(--row-head-size);
+    bottom: 0;
+    width: 14px;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.28), transparent);
+    opacity: 0;
+    transition: opacity 140ms ease;
+    z-index: 7;
+  }
+
+  .table-wrap[data-scrolled-x="true"] .shadow-left {
+    opacity: 1;
   }
 
   .table-scroll {
+    position: relative;
     width: 100%;
     overflow-x: auto;
     overflow-y: visible;
@@ -106,7 +208,7 @@ import { columns } from "../data/config";
 
   .combos-table {
     border-collapse: separate;
-    border-spacing: 2px;
+    border-spacing: var(--cell-gap);
     background-color: var(--ink);
     font-size: clamp(10px, 1.1vw, 13px);
     table-layout: fixed;
@@ -120,77 +222,65 @@ import { columns } from "../data/config";
     margin: 0;
     width: var(--cell-size);
     height: var(--cell-size);
+    min-width: var(--cell-size);
+    max-width: var(--cell-size);
     box-sizing: border-box;
+    overflow: hidden;
   }
 
   .corner {
-    position: sticky;
-    top: 0;
-    left: 0;
-    z-index: 4;
     background-color: var(--ink);
-    width: var(--row-head-w);
-    height: var(--col-head-h);
-    min-width: var(--row-head-w);
+    width: var(--row-head-size);
+    min-width: var(--row-head-size);
+    height: 100%;
   }
 
   .col-head {
-    position: sticky;
-    top: 0;
-    z-index: 2;
-    height: var(--col-head-h);
-    min-height: var(--col-head-h);
-    vertical-align: bottom;
+    height: var(--cell-size);
+    min-height: var(--cell-size);
     width: var(--cell-size);
     min-width: var(--cell-size);
     padding: 0;
   }
 
-  .col-head .label-link {
+  .label-link {
     display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: flex-end;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    align-items: center;
     justify-content: center;
-    padding: 6px 0 8px;
+    padding: 2px;
     text-decoration: none;
     color: inherit;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
-  .col-head .label-text {
+  .col-head .label-text,
+  .row-head .label-text {
     display: inline-block;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
     font-weight: 600;
-    font-size: clamp(10px, 1vw, 13px);
+    font-size: 10px;
     letter-spacing: 0.02em;
-    white-space: nowrap;
-    padding: 4px 0;
-    line-height: 1;
+    line-height: 1.05;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    max-width: 100%;
   }
 
   .row-head {
     position: sticky;
     left: 0;
-    z-index: 2;
-    width: var(--row-head-w);
-    min-width: var(--row-head-w);
-    text-align: left;
+    z-index: 3;
+    width: var(--cell-size);
+    min-width: var(--cell-size);
+    background-clip: padding-box;
+    box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.04);
   }
 
   .row-head .row-link {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0 10px;
-    font-weight: 600;
-    font-size: clamp(11px, 1vw, 14px);
-    letter-spacing: 0.01em;
-    white-space: nowrap;
-    text-decoration: none;
-    color: inherit;
+    font-size: 10px;
   }
 
   .row-head .row-link:hover,
@@ -211,13 +301,25 @@ import { columns } from "../data/config";
 
   .diag .label-text {
     display: inline-block;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
+    transform: rotate(-45deg);
     font-weight: 600;
-    font-size: clamp(9px, 0.95vw, 12px);
+    font-size: 10px;
     white-space: nowrap;
     line-height: 1;
     opacity: 0.9;
+  }
+
+  .label-xs .label-text {
+    font-size: 6px;
+    letter-spacing: 0;
+  }
+
+  .label-sm .label-text {
+    font-size: 7px;
+  }
+
+  .label-md .label-text {
+    font-size: 8px;
   }
 
   .cell-td {
@@ -228,15 +330,21 @@ import { columns } from "../data/config";
   @media (max-width: 640px) {
     .table-wrap {
       --cell-size: 30px;
-      --row-head-w: 92px;
-      --col-head-h: 104px;
     }
     .combos-table {
       font-size: 10px;
     }
-    .row-head .row-link {
-      padding: 0 8px;
-      font-size: 11px;
+
+    .label-xs .label-text {
+      font-size: 5px;
+    }
+
+    .label-sm .label-text {
+      font-size: 5.8px;
+    }
+
+    .label-md .label-text {
+      font-size: 6.8px;
     }
   }
 </style>

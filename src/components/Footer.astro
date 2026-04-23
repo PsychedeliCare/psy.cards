@@ -1,0 +1,168 @@
+---
+import PartnerLogos from "./PartnerLogos.astro";
+
+interface Props {
+  /** Constrains footer width. Defaults to wide layout used on combo pages. */
+  variant?: "wide" | "narrow";
+}
+
+const { variant = "wide" } = Astro.props;
+---
+
+<footer class:list={["site-footer", `site-footer--${variant}`]}>
+  <div class="site-footer__inner">
+    <section class="footer-block project">
+      <p class="footer-label">A project by</p>
+      <a
+        class="project-link"
+        href="https://psychedelicare.eu"
+        target="_blank"
+        rel="noreferrer noopener"
+        aria-label="PsychedeliCare.eu"
+      >
+        <img
+          src="/assets/psychedelicare-logo.png"
+          alt="PsychedeliCare.eu"
+          width="220"
+          height="56"
+          loading="lazy"
+        />
+      </a>
+    </section>
+
+    <section class="footer-block partners">
+      <p class="footer-label">Enabled by the amazing work from</p>
+      <PartnerLogos variant={variant === "narrow" ? "inline" : "wide"} />
+    </section>
+
+    <section class="footer-block contribute">
+      <a
+        class="contribute-link"
+        href="https://github.com/psychedelicare/psy.cards"
+        target="_blank"
+        rel="noreferrer noopener"
+        aria-label="Contribute on GitHub"
+      >
+        <span>Contribute on</span>
+        <img
+          src="/assets/github-logo.png"
+          alt="GitHub"
+          width="70"
+          height="16"
+          loading="lazy"
+        />
+      </a>
+    </section>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 32px;
+    padding: 32px 16px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .site-footer__inner {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 28px 48px;
+  }
+
+  .site-footer--wide .site-footer__inner {
+    max-width: 1200px;
+  }
+
+  .site-footer--narrow .site-footer__inner {
+    max-width: 720px;
+  }
+
+  .footer-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .footer-label {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-fg-mute);
+  }
+
+  .project-link {
+    display: inline-flex;
+    line-height: 0;
+    text-decoration: none;
+    transition:
+      opacity 0.15s ease,
+      filter 0.15s ease;
+    opacity: 0.62;
+    filter: grayscale(100%) brightness(1.28) contrast(0.92);
+  }
+
+  .project-link:hover,
+  .project-link:focus-visible {
+    opacity: 0.92;
+    filter: grayscale(100%) brightness(1.4) contrast(0.95);
+  }
+
+  .project-link img {
+    display: block;
+    height: 40px;
+    width: auto;
+    max-width: min(260px, 60vw);
+    object-fit: contain;
+  }
+
+  .contribute-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--color-fg);
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    white-space: nowrap;
+    transition:
+      border-color 0.15s ease,
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .contribute-link:hover,
+  .contribute-link:focus-visible {
+    border-color: rgba(255, 255, 255, 0.28);
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+
+  .contribute-link img {
+    display: block;
+    height: 14px;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: contain;
+    filter: invert(1);
+    opacity: 0.85;
+  }
+
+  @media (max-width: 720px) {
+    .site-footer__inner {
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+  }
+</style>

@@ -10,19 +10,29 @@ The project is designed around strong space constraints: each format must surfac
 
 ## Channels
 
-- `Print (Standard)`: affordable large-run card sets for festivals, outreach teams, and partner organisations.
-- `Print (Premium)`: higher-quality boxed editions for supporters, gifting, and crowdfunding rewards.
-- `Instagram`: localised carousel-friendly versions for `@psychedelicards` and language-specific accounts.
-- `Web`: mobile-friendly reference pages linked from QR codes and backed by transparent sources.
-- `AI / Chatbot`: a later safety-focused conversational layer for questions such as dosage, interactions, and risk reduction.
+| Channel | Description |
+| :-- | :-- |
+| **Print (Standard)** | Affordable large-run card sets for festivals, outreach teams, and partner organisations. |
+| **Print (Premium)** | Higher-quality boxed editions for supporters, gifting, and crowdfunding rewards. |
+| **Instagram** | Localised carousel-friendly versions for `@psychedelicards` and language-specific accounts. |
+| **Web** | Mobile-friendly reference pages linked from QR codes and backed by transparent sources. |
+| **AI / Chatbot** | A later safety-focused conversational layer for questions such as dosage, interactions, and risk reduction. |
 
 ## Roadmap
 
-- `Q2 2026`: define the core data model, card template, and multilingual publishing workflow.
-- `Q3 2026`: launch the first web companion and first standard printed card sets.
-- `Q4 2026`: expand language coverage and prepare premium print editions, packaging, and art direction.
-- `End of 2026`: deliver a stable print-first system with QR-linked web support.
-- `Early 2027`: prototype and launch an initial source-grounded AI/chatbot for tightly scoped harm reduction Q&A.
+| Milestone | Description |
+| :-- | :-- |
+| **Q2 2026** | Define the core data model, card template, and multilingual publishing workflow. |
+| **Q3 2026** | Launch the first web companion and first standard printed card sets. |
+| **Q4 2026** | Expand language coverage and prepare premium print editions, packaging, and art direction. |
+| **End of 2026** | Deliver a stable print-first system with QR-linked web support. |
+| **Early 2027** | Prototype and launch an initial source-grounded AI/chatbot for tightly scoped harm reduction Q&A. |
+
+## Data Sources
+
+Some of the core data used by `psy.cards` lives in Git submodules, currently including `TripSit/combogen` and `TripSit/drugs`. These repositories contain valuable harm reduction knowledge that this project builds on in order to make the information easier to publish, translate, and distribute in compact card-based formats.
+
+The aim is not only to reuse these amazing data sources from the `TripSit` project, but also to contribute improvements back upstream whenever possible so the broader harm reduction community can benefit from better data, clearer structures, and shared maintenance.
 
 ## Local Development
 

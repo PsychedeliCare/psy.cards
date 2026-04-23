@@ -1,5 +1,6 @@
 ---
 import Layout from "../components/Layout.astro";
+import Footer from "../components/Footer.astro";
 
 export const prerender = true;
 ---
@@ -31,35 +32,9 @@ export const prerender = true;
       </p>
     </section>
 
-    <section class="ack">
-      <h2>Acknowledgements</h2>
-      <p>
-        psy.cards stands on the shoulders of projects that have already done
-        essential harm reduction, research, and public education work.
-      </p>
-      <ul>
-        <li>
-          <a href="https://tripsit.me" target="_blank" rel="noreferrer noopener"
-            >TripSit</a
-          >
-        </li>
-        <li>
-          <a
-            href="https://psychonautwiki.org"
-            target="_blank"
-            rel="noreferrer noopener">PsychonautWiki</a
-          >
-        </li>
-        <li>
-          <a
-            href="https://www.drugwatch.org"
-            target="_blank"
-            rel="noreferrer noopener">Drugwatch</a
-          >
-        </li>
-      </ul>
-    </section>
   </main>
+
+  <Footer variant="narrow" />
 </Layout>
 
 <style>
@@ -131,50 +106,5 @@ export const prerender = true;
     line-height: 1.6;
     color: var(--color-fg);
     max-width: 58ch;
-  }
-
-  .ack {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .ack h2 {
-    margin: 0;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-fg-mute);
-  }
-
-  .ack p {
-    margin: 0;
-    font-size: 13.5px;
-    line-height: 1.55;
-    color: var(--color-fg-mute);
-    max-width: 58ch;
-  }
-
-  .ack ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 18px;
-    font-size: 13.5px;
-  }
-
-  .ack a {
-    color: var(--color-safe);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(53, 175, 255, 0.3);
-  }
-
-  .ack a:hover {
-    border-bottom-color: var(--color-safe);
   }
 </style>

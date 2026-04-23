@@ -1,0 +1,100 @@
+---
+interface Props {
+  /** `wide`: horizontal strip for combos footer. `inline`: tighter row for index. */
+  variant?: "wide" | "inline";
+}
+
+const { variant = "wide" } = Astro.props;
+
+const partners = [
+  {
+    href: "https://tripsit.me",
+    label: "TripSit",
+    src: "/assets/tripsit-logo.png",
+  },
+  {
+    href: "https://psychonautwiki.org",
+    label: "PsychonautWiki",
+    src: "/assets/psychonautwiki-logo.png",
+  },
+  {
+    href: "https://www.drugwatch.org",
+    label: "Drugwatch",
+    src: "/assets/drugwatch-logo.png",
+  },
+] as const;
+---
+
+<nav
+  class:list={["partner-logos", variant === "inline" && "partner-logos--inline"]}
+  aria-label="Partner organisations"
+>
+  <ul>
+    {
+      partners.map((p) => (
+        <li>
+          <a
+            href={p.href}
+            target="_blank"
+            rel="noreferrer noopener"
+            class="partner-link"
+          >
+            <img src={p.src} alt={p.label} width="140" height="48" loading="lazy" />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .partner-logos {
+    width: 100%;
+  }
+
+  .partner-logos ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 28px 40px;
+  }
+
+  .partner-logos--inline ul {
+    justify-content: flex-start;
+    gap: 24px 32px;
+  }
+
+  .partner-link {
+    display: block;
+    line-height: 0;
+    text-decoration: none;
+  }
+
+  .partner-link img {
+    display: block;
+    height: var(--partner-logo-h, 40px);
+    width: auto;
+    max-width: min(160px, 32vw);
+    object-fit: contain;
+    object-position: center;
+    filter: grayscale(100%) brightness(1.28) contrast(0.92);
+    opacity: 0.62;
+    transition:
+      opacity 0.15s ease,
+      filter 0.15s ease;
+  }
+
+  .partner-link:hover img,
+  .partner-link:focus-visible img {
+    opacity: 0.92;
+    filter: grayscale(100%) brightness(1.4) contrast(0.95);
+  }
+
+  .partner-logos--inline {
+    --partner-logo-h: 36px;
+  }
+</style>

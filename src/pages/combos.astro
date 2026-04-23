@@ -2,6 +2,7 @@
 import Layout from "../components/Layout.astro";
 import ComboTable from "../components/ComboTable.astro";
 import Legend from "../components/Legend.astro";
+import Footer from "../components/Footer.astro";
 
 export const prerender = true;
 ---
@@ -43,6 +44,8 @@ export const prerender = true;
         > No one is invincible.
       </p>
     </footer>
+
+    <Footer variant="wide" />
   </main>
 
   <div id="modal-slot" data-modal-slot></div>
