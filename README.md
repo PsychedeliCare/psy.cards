@@ -1,43 +1,44 @@
-# Astro Starter Kit: Minimal
+# psy.cards
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+`psy.cards` is a multilingual harm reduction card project that turns verified knowledge bases into compact, readable guidance across print, web, and social media formats. 
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The goal is to make high-quality substance information easier to access, easier to translate, and easier to distribute responsibly across Europe.
 
-## 🚀 Project Structure
+## Constraints and Scope
 
-Inside of your Astro project, you'll see the following folders and files:
+The project is designed around strong space constraints: each format must surface the most important information clearly, whether it appears on a printed card, in a carousel post, or behind a QR code on the web. Alongside substance-specific cards, the system will also support shared harm reduction content such as preparation, set and setting, integration prompts, common effects, and local support resources.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Channels
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- `Print (Standard)`: affordable large-run card sets for festivals, outreach teams, and partner organisations.
+- `Print (Premium)`: higher-quality boxed editions for supporters, gifting, and crowdfunding rewards.
+- `Instagram`: localised carousel-friendly versions for `@psychedelicards` and language-specific accounts.
+- `Web`: mobile-friendly reference pages linked from QR codes and backed by transparent sources.
+- `AI / Chatbot`: a later safety-focused conversational layer for questions such as dosage, interactions, and risk reduction.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Roadmap
 
-Any static assets, like images, can be placed in the `public/` directory.
+- `Q2 2026`: define the core data model, card template, and multilingual publishing workflow.
+- `Q3 2026`: launch the first web companion and first standard printed card sets.
+- `Q4 2026`: expand language coverage and prepare premium print editions, packaging, and art direction.
+- `End of 2026`: deliver a stable print-first system with QR-linked web support.
+- `Early 2027`: prototype and launch an initial source-grounded AI/chatbot for tightly scoped harm reduction Q&A.
 
-## 🧞 Commands
+## Local Development
 
-All commands are run from the root of the project, from a terminal:
+All commands run from the project root:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+| Command | Action |
+| :-- | :-- |
+| `pnpm install` | Install dependencies |
+| `pnpm dev` | Start the local dev server |
+| `pnpm build` | Build the production site |
+| `pnpm preview` | Preview the production build locally |
 
-## 👀 Want to learn more?
+## Acknowledgements
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+`psy.cards` is standing on the shoulders of projects and communities that have already done essential harm reduction, research, and public education work.
+
+| [TripSit](https://tripsit.me) | [PsychonautWiki](https://psychonautwiki.org) | [Drugwatch](https://www.drugwatch.org) |
+| :--: | :--: | :--: |
+| <img src="./public/assets/tripsit-logo.png" alt="TripSit logo" width="140" /> | <img src="./public/assets/psychonautwiki-logo.png" alt="PsychonautWiki logo" width="140" /> | <img src="./public/assets/drugwatch-logo.png" alt="Drugwatch logo" width="140" /> |
