@@ -1,0 +1,69 @@
+---
+import SubstanceCard from "../../components/SubstanceCard.astro";
+import ComboCard from "../../components/ComboCard.astro";
+import { columns, sortPair, columnBySlug } from "../../data/config";
+import { pairSlug, parsePairSlug } from "../../data/slug";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const paths: Array<{ params: { slug: string } }> = [];
+
+  for (const col of columns) {
+    paths.push({ params: { slug: col.slug } });
+  }
+
+  for (let i = 0; i < columns.length; i++) {
+    for (let j = i + 1; j < columns.length; j++) {
+      const a = columns[i]!;
+      const b = columns[j]!;
+      const [keyA, keyB] = sortPair(a.key, b.key);
+      paths.push({ params: { slug: pairSlug(keyA, keyB) } });
+    }
+  }
+
+  return paths;
+}
+
+const { slug } = Astro.params;
+if (!slug) {
+  return new Response("Not found", { status: 404 });
+}
+
+const isPair = slug.includes("~");
+
+let substanceKey: string | undefined;
+let pair: [string, string] | undefined;
+
+if (isPair) {
+  const parsed = parsePairSlug(slug);
+  if (!parsed) return new Response("Not found", { status: 404 });
+  const colA = columnBySlug.get(parsed[0]);
+  const colB = columnBySlug.get(parsed[1]);
+  if (!colA || !colB) return new Response("Not found", { status: 404 });
+  pair = sortPair(colA.key, colB.key);
+} else {
+  const col = columnBySlug.get(slug);
+  if (!col) return new Response("Not found", { status: 404 });
+  substanceKey = col.key;
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>card</title>
+  </head>
+  <body>
+    <div data-card-fragment>
+      {
+        isPair && pair ? (
+          <ComboCard keyA={pair[0]} keyB={pair[1]} />
+        ) : (
+          substanceKey && <SubstanceCard substanceKey={substanceKey} />
+        )
+      }
+    </div>
+  </body>
+</html>

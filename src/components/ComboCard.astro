@@ -1,0 +1,87 @@
+---
+import Icon from "./Icon.astro";
+import { getInteraction } from "../data/combos";
+import { columnByKey, sortPair } from "../data/config";
+import { keyToSlug } from "../data/slug";
+
+interface Props {
+  keyA: string;
+  keyB: string;
+}
+
+const { keyA: rawA, keyB: rawB } = Astro.props;
+const [keyA, keyB] = sortPair(rawA, rawB);
+
+const colA = columnByKey.get(keyA);
+const colB = columnByKey.get(keyB);
+const labelA = colA?.label ?? keyA;
+const labelB = colB?.label ?? keyB;
+
+const { definition, note, sources } = getInteraction(keyA, keyB);
+---
+
+<article
+  class={`combo-card status-${definition.statusKey}`}
+  data-card-type="combo"
+  data-combo-keys={`${keyA}|${keyB}`}
+>
+  <header>
+    <div class="status-bar status-surface" aria-hidden="true"></div>
+    <div class="heading">
+      <div class="pair">
+        <span class={`chip group-${colA?.group ?? "unknown"} category-surface cell-text`}>
+          {labelA}
+        </span>
+        <span class="plus" aria-hidden="true">+</span>
+        <span class={`chip group-${colB?.group ?? "unknown"} category-surface cell-text`}>
+          {labelB}
+        </span>
+      </div>
+      <div class="status-line">
+        <span class={`status-chip status-surface cell-text`}>
+          <Icon name={definition.icon} size="0.95em" />
+          <span>{definition.label}</span>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <p class="definition">{definition.definition}</p>
+
+  {
+    note && (
+      <section class="note">
+        <h3>Note on this pair</h3>
+        <p>{note}</p>
+      </section>
+    )
+  }
+
+  {
+    sources && sources.length > 0 && (
+      <section class="sources">
+        <h3>Sources</h3>
+        <ul>
+          {sources.map((s) => (
+            <li>
+              <a href={s.url} target="_blank" rel="noreferrer noopener">
+                {s.title}
+              </a>
+              {s.author && <span class="author"> — {s.author}</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <section class="actions">
+    <a class="action-link" href={`/${keyToSlug(keyA)}`} data-substance={`/${keyToSlug(keyA)}`}>
+      About {labelA}
+    </a>
+    <a class="action-link" href={`/${keyToSlug(keyB)}`} data-substance={`/${keyToSlug(keyB)}`}>
+      About {labelB}
+    </a>
+  </section>
+</article>
+

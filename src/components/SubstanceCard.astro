@@ -1,0 +1,267 @@
+---
+import {
+  getDrugByKey,
+  isDrugClass,
+  getClassDescription,
+  getDisplayName,
+} from "../data/drugs";
+import { columnByKey } from "../data/config";
+
+interface Props {
+  substanceKey: string;
+}
+
+const { substanceKey } = Astro.props;
+
+const column = columnByKey.get(substanceKey);
+const drug = getDrugByKey(substanceKey);
+const displayName = drug?.pretty_name ?? getDisplayName(substanceKey);
+const classNote = getClassDescription(substanceKey);
+
+const categories = drug?.categories ?? drug?.properties?.categories ?? [];
+const props = drug?.properties ?? {};
+const summary = props.summary ?? classNote;
+
+type DoseRow = { route: string; level: string; amount: string };
+const doseRows: DoseRow[] = [];
+if (drug?.formatted_dose) {
+  for (const [route, dose] of Object.entries(drug.formatted_dose)) {
+    if (!dose) continue;
+    for (const [level, amount] of Object.entries(dose)) {
+      if (typeof amount !== "string") continue;
+      doseRows.push({ route, level, amount });
+    }
+  }
+}
+
+function firstDurationValue(
+  d: Record<string, unknown> | undefined
+): string | undefined {
+  if (!d) return undefined;
+  const entries = Object.entries(d).filter(
+    ([k, v]) => k !== "_unit" && typeof v === "string" && v
+  );
+  if (!entries.length) return undefined;
+  return entries.map(([k, v]) => (k === "value" ? v : `${v} (${k})`)).join(", ");
+}
+
+const onsetVal = firstDurationValue(
+  drug?.formatted_onset as Record<string, unknown> | undefined
+);
+const onsetUnit = (drug?.formatted_onset as { _unit?: string } | undefined)?._unit;
+const durationVal = firstDurationValue(
+  drug?.formatted_duration as Record<string, unknown> | undefined
+);
+const durationUnit = (
+  drug?.formatted_duration as { _unit?: string } | undefined
+)?._unit;
+const afterVal = firstDurationValue(
+  drug?.formatted_aftereffects as Record<string, unknown> | undefined
+);
+const afterUnit = (
+  drug?.formatted_aftereffects as { _unit?: string } | undefined
+)?._unit;
+
+const effects = drug?.formatted_effects ?? [];
+const links = drug?.links ?? undefined;
+const pweffects = drug?.pweffects ?? undefined;
+---
+
+<article
+  class={`substance-card${column ? ` group-${column.group}` : ""}`}
+  data-card-type="substance"
+  data-substance-key={substanceKey}
+>
+  <header>
+    <div class="accent category-surface" aria-hidden="true"></div>
+    <div class="title">
+      <h2>{displayName}</h2>
+      {
+        categories.length > 0 && (
+          <ul class="tags">
+            {categories.map((c) => (
+              <li>{c}</li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </header>
+
+  {summary && <p class="summary">{summary}</p>}
+
+  {
+    !drug && isDrugClass(substanceKey) && (
+      <p class="fallback-note">
+        This column represents a drug class rather than a single compound, so
+        specific dose and duration data isn't available here.
+      </p>
+    )
+  }
+
+  {
+    !drug && !classNote && (
+      <p class="fallback-note">
+        Detailed substance data isn't available in the TripSit dataset for this
+        entry. Combination data is still accurate.
+      </p>
+    )
+  }
+
+  {
+    (onsetVal || durationVal || afterVal) && (
+      <section class="timings">
+        <h3>Timing</h3>
+        <dl>
+          {onsetVal && (
+            <div>
+              <dt>Onset</dt>
+              <dd>
+                {onsetVal} <span class="unit">{onsetUnit}</span>
+              </dd>
+            </div>
+          )}
+          {durationVal && (
+            <div>
+              <dt>Duration</dt>
+              <dd>
+                {durationVal} <span class="unit">{durationUnit}</span>
+              </dd>
+            </div>
+          )}
+          {afterVal && (
+            <div>
+              <dt>After-effects</dt>
+              <dd>
+                {afterVal} <span class="unit">{afterUnit}</span>
+              </dd>
+            </div>
+          )}
+          {props["half-life"] && (
+            <div>
+              <dt>Half-life</dt>
+              <dd>{props["half-life"]}</dd>
+            </div>
+          )}
+        </dl>
+      </section>
+    )
+  }
+
+  {
+    doseRows.length > 0 && (
+      <section class="doses">
+        <h3>Doses</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Route</th>
+              <th>Level</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {doseRows.map((r) => (
+              <tr>
+                <td>{r.route}</td>
+                <td>{r.level}</td>
+                <td>{r.amount}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {drug?.dose_note && <p class="note">{drug.dose_note}</p>}
+      </section>
+    )
+  }
+
+  {
+    effects.length > 0 && (
+      <section class="effects">
+        <h3>Effects</h3>
+        <ul class="pills">
+          {effects.map((e) => (
+            <li>{e}</li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    (props.avoid || props.warning || props["test-kits"]) && (
+      <section class="advice">
+        <h3>Safety</h3>
+        <dl>
+          {props.warning && (
+            <div>
+              <dt>Warning</dt>
+              <dd>{props.warning}</dd>
+            </div>
+          )}
+          {props.avoid && (
+            <div>
+              <dt>Avoid combining with</dt>
+              <dd>{props.avoid}</dd>
+            </div>
+          )}
+          {props["test-kits"] && (
+            <div>
+              <dt>Test kits</dt>
+              <dd>{props["test-kits"]}</dd>
+            </div>
+          )}
+        </dl>
+      </section>
+    )
+  }
+
+  {
+    pweffects && Object.keys(pweffects).length > 0 && (
+      <section class="pw">
+        <h3>PsychonautWiki effects</h3>
+        <ul class="inline-links">
+          {Object.entries(pweffects).map(([label, href]) => (
+            <li>
+              <a href={href} target="_blank" rel="noreferrer noopener">
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    links && (
+      <section class="links">
+        <h3>More</h3>
+        <ul class="inline-links">
+          {links.experiences && (
+            <li>
+              <a href={links.experiences} target="_blank" rel="noreferrer noopener">
+                Trip reports
+              </a>
+            </li>
+          )}
+          {links.pihkal && (
+            <li>
+              <a href={links.pihkal} target="_blank" rel="noreferrer noopener">
+                PiHKAL
+              </a>
+            </li>
+          )}
+          {links.tihkal && (
+            <li>
+              <a href={links.tihkal} target="_blank" rel="noreferrer noopener">
+                TiHKAL
+              </a>
+            </li>
+          )}
+        </ul>
+      </section>
+    )
+  }
+</article>
+

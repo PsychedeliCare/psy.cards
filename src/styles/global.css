@@ -1,0 +1,127 @@
+@import "tailwindcss";
+@import "./cards.css";
+
+@theme {
+  --color-psychedelic: #274e13;
+  --color-dissociative: #20124d;
+  --color-stimulant: #660000;
+  --color-depressant: #073763;
+  --color-antidepressant: #783f04;
+
+  --color-safe: #35afff;
+  --color-synergy: #0a89dd;
+  --color-decrease: #006cb3;
+  --color-caution: #d5c625;
+  --color-unsafe: #d98427;
+  --color-dangerous: #d12128;
+  --color-serotoninsyndrome: #b11f57;
+  --color-unknown: #6f6f6f;
+
+  --color-ink: #0b0b0c;
+  --color-ink-2: #141416;
+  --color-ink-3: #1d1d20;
+  --color-fg: #f5f5f5;
+  --color-fg-mute: #a6a6aa;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-ink);
+    color: var(--color-fg);
+    font-family:
+      "Open Sans",
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-ink);
+  }
+
+  a {
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-safe);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+/* Colour hue per status / category is carried by the CSS variable `--hue`
+   so the gradient utilities below can derive lighter/darker stops from it
+   without conflicting with the `color` of the text inside. */
+
+.status-synergy {
+  --hue: var(--color-synergy);
+}
+.status-safe {
+  --hue: var(--color-safe);
+}
+.status-decrease {
+  --hue: var(--color-decrease);
+}
+.status-caution {
+  --hue: var(--color-caution);
+}
+.status-unsafe {
+  --hue: var(--color-unsafe);
+}
+.status-dangerous {
+  --hue: var(--color-dangerous);
+}
+.status-serotoninsyndrome {
+  --hue: var(--color-serotoninsyndrome);
+}
+.status-unknown {
+  --hue: var(--color-unknown);
+}
+
+.group-psychedelic {
+  --hue: var(--color-psychedelic);
+}
+.group-dissociative {
+  --hue: var(--color-dissociative);
+}
+.group-stimulant {
+  --hue: var(--color-stimulant);
+}
+.group-depressant {
+  --hue: var(--color-depressant);
+}
+.group-antidepressant {
+  --hue: var(--color-antidepressant);
+}
+
+.status-surface {
+  background-color: var(--hue, var(--color-unknown));
+  background-image: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--hue, var(--color-unknown)), white 8%) 0%,
+    var(--hue, var(--color-unknown)) 45%,
+    color-mix(in oklab, var(--hue, var(--color-unknown)), black 14%) 100%
+  );
+}
+
+.category-surface {
+  background-color: var(--hue, var(--color-unknown));
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--hue, var(--color-unknown)), white 4%) 0%,
+    var(--hue, var(--color-unknown)) 60%,
+    color-mix(in oklab, var(--hue, var(--color-unknown)), black 10%) 100%
+  );
+}
+
+.cell-text {
+  color: #fff;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+}

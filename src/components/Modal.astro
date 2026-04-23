@@ -1,0 +1,40 @@
+---
+interface Props {
+  open?: boolean;
+  labelledBy?: string;
+}
+
+const { open = false, labelledBy } = Astro.props;
+---
+
+<div
+  class="modal-root"
+  data-modal-root
+  data-open={open ? "true" : "false"}
+  aria-hidden={open ? "false" : "true"}
+>
+  <button
+    type="button"
+    class="modal-backdrop"
+    data-modal-close
+    aria-label="Close"
+    tabindex={open ? 0 : -1}></button>
+  <div
+    class="modal-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby={labelledBy ?? undefined}
+    data-modal-panel
+    tabindex="-1"
+  >
+    <button type="button" class="modal-close" data-modal-close aria-label="Close">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M18.3 5.71 12 12.01l-6.3-6.3-1.41 1.41L10.59 13.4l-6.3 6.3 1.41 1.41 6.3-6.3 6.3 6.3 1.41-1.41-6.3-6.3 6.3-6.3z"></path>
+      </svg>
+    </button>
+    <div class="modal-content" data-modal-content>
+      <slot />
+    </div>
+  </div>
+</div>
+

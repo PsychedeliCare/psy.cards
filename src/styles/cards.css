@@ -1,0 +1,388 @@
+/* Shared card styles (used by SubstanceCard, ComboCard, Modal).
+   Kept global so fetched fragments style correctly when injected
+   into the modal on /combos without re-loading component CSS. */
+
+/* ---------- Modal ---------- */
+
+.modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 140ms ease;
+}
+
+.modal-root[data-open="true"] {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(
+      120% 80% at 50% 0%,
+      rgba(12, 12, 14, 0.55) 0%,
+      rgba(0, 0, 0, 0.78) 100%
+    );
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.modal-panel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(640px, calc(100vw - 24px));
+  max-height: min(82vh, calc(100dvh - 48px));
+  overflow: auto;
+  background-color: var(--color-ink-2);
+  color: var(--color-fg);
+  box-shadow:
+    0 30px 80px -20px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  outline: none;
+}
+
+.modal-close {
+  position: sticky;
+  float: right;
+  top: 8px;
+  right: 8px;
+  margin: 8px 8px 0 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--color-fg-mute);
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.modal-close:hover {
+  color: var(--color-fg);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.modal-content {
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .modal-panel {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    max-height: 88dvh;
+  }
+}
+
+/* ---------- Substance card ---------- */
+
+.substance-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  color: var(--color-fg);
+  background-color: var(--color-ink-2);
+  padding: 22px 22px 26px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.substance-card header {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+}
+
+.substance-card .accent {
+  flex: 0 0 4px;
+  width: 4px;
+  min-width: 4px;
+  align-self: stretch;
+  color: currentColor;
+}
+
+.substance-card .title {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.substance-card h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-fg);
+}
+
+.substance-card h3,
+.combo-card h3 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-fg-mute);
+}
+
+.substance-card .tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.substance-card .tags li {
+  font-size: 11px;
+  padding: 2px 8px;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--color-fg);
+}
+
+.substance-card .summary {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--color-fg);
+}
+
+.substance-card .fallback-note {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-fg-mute);
+}
+
+.substance-card section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.substance-card dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 14px;
+  margin: 0;
+}
+
+.substance-card dl > div {
+  display: contents;
+}
+
+.substance-card dt {
+  font-size: 12px;
+  color: var(--color-fg-mute);
+  align-self: baseline;
+}
+
+.substance-card dd {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--color-fg);
+  line-height: 1.5;
+}
+
+.substance-card .unit {
+  color: var(--color-fg-mute);
+  font-size: 12px;
+}
+
+.substance-card .doses table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.substance-card .doses th,
+.substance-card .doses td {
+  text-align: left;
+  padding: 6px 10px 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-weight: 400;
+}
+
+.substance-card .doses th {
+  color: var(--color-fg-mute);
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.substance-card .note {
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  color: var(--color-fg-mute);
+  line-height: 1.5;
+}
+
+.substance-card .pills {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.substance-card .pills li {
+  padding: 3px 9px;
+  font-size: 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.substance-card .inline-links,
+.combo-card .sources ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 13px;
+}
+
+.combo-card .sources ul {
+  flex-direction: column;
+  gap: 6px;
+}
+
+.substance-card .inline-links a,
+.combo-card .sources a,
+.combo-card .action-link {
+  color: var(--color-safe);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(53, 175, 255, 0.3);
+}
+
+.substance-card .inline-links a:hover,
+.combo-card .sources a:hover,
+.combo-card .action-link:hover {
+  border-bottom-color: var(--color-safe);
+}
+
+/* ---------- Combo card ---------- */
+
+.combo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--color-fg);
+  background-color: var(--color-ink-2);
+  padding: 22px 22px 26px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.combo-card header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.combo-card .status-bar {
+  height: 3px;
+  width: 100%;
+  color: currentColor;
+}
+
+.combo-card .heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.combo-card .pair {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.combo-card .chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+}
+
+.combo-card .plus {
+  color: var(--color-fg-mute);
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.combo-card .status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.combo-card .definition {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--color-fg);
+}
+
+.combo-card section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.combo-card .note p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-fg);
+}
+
+.combo-card .sources li {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.combo-card .author {
+  color: var(--color-fg-mute);
+  font-size: 12px;
+}
+
+.combo-card .actions {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: 2px;
+}
+
+.combo-card .action-link {
+  font-size: 13px;
+}

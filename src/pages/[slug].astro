@@ -1,0 +1,167 @@
+---
+import Layout from "../components/Layout.astro";
+import ComboTable from "../components/ComboTable.astro";
+import Legend from "../components/Legend.astro";
+import Modal from "../components/Modal.astro";
+import SubstanceCard from "../components/SubstanceCard.astro";
+import ComboCard from "../components/ComboCard.astro";
+import { columns, sortPair, columnBySlug } from "../data/config";
+import { pairSlug, parsePairSlug } from "../data/slug";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const paths: Array<{ params: { slug: string } }> = [];
+
+  for (const col of columns) {
+    paths.push({ params: { slug: col.slug } });
+  }
+
+  for (let i = 0; i < columns.length; i++) {
+    for (let j = i + 1; j < columns.length; j++) {
+      const a = columns[i]!;
+      const b = columns[j]!;
+      const [keyA, keyB] = sortPair(a.key, b.key);
+      paths.push({ params: { slug: pairSlug(keyA, keyB) } });
+    }
+  }
+
+  return paths;
+}
+
+const { slug } = Astro.params;
+if (!slug) {
+  return Astro.redirect("/combos");
+}
+
+const isPair = slug.includes("~");
+
+let title = "Drug combinations — psy.cards";
+let labelledBy = "card-heading";
+let substanceKey: string | undefined;
+let pair: [string, string] | undefined;
+
+if (isPair) {
+  const parsed = parsePairSlug(slug);
+  if (!parsed) return Astro.redirect("/combos");
+  const colA = columnBySlug.get(parsed[0]);
+  const colB = columnBySlug.get(parsed[1]);
+  if (!colA || !colB) return Astro.redirect("/combos");
+  const [a, b] = sortPair(colA.key, colB.key);
+  pair = [a, b];
+  const aLabel = columns.find((c) => c.key === a)?.label ?? a;
+  const bLabel = columns.find((c) => c.key === b)?.label ?? b;
+  title = `${aLabel} + ${bLabel} — psy.cards`;
+} else {
+  const col = columnBySlug.get(slug);
+  if (!col) return Astro.redirect("/combos");
+  substanceKey = col.key;
+  title = `${col.label} — psy.cards`;
+}
+---
+
+<Layout title={title}>
+  <main class="page">
+    <header class="page-head">
+      <div class="heading">
+        <h1>Drug combinations</h1>
+        <p>
+          Tap a cell to see what the combination means, or tap a label to open
+          the substance card. Data from <a
+            href="https://github.com/TripSit/drugs"
+            target="_blank"
+            rel="noreferrer noopener">TripSit</a
+          >.
+        </p>
+      </div>
+    </header>
+
+    <ComboTable />
+
+    <Legend />
+
+    <footer class="disclaimer">
+      <p>
+        This table was compiled by TripSit using the best information available.
+        <strong>Accuracy is not guaranteed.</strong> This table is only as valid
+        as the labels on your drugs: <strong>always use a test kit.</strong> Absence
+        of a warning does not imply an absence of danger. <strong
+          >Further research is necessary.</strong
+        >
+      </p>
+      <p>
+        Do not rely solely on this chart. <strong
+          >While taking certain medications,</strong
+        > your risk is higher. Do your homework now to avoid problems later. <strong
+          >Be safe out there.</strong
+        > No one is invincible.
+      </p>
+    </footer>
+  </main>
+
+  <div id="modal-slot" data-modal-slot>
+    <Modal open={true} labelledBy={labelledBy}>
+      {
+        isPair && pair ? (
+          <ComboCard keyA={pair[0]} keyB={pair[1]} />
+        ) : (
+          substanceKey && <SubstanceCard substanceKey={substanceKey} />
+        )
+      }
+    </Modal>
+  </div>
+
+  <script>
+    import { initComboModal } from "../scripts/combo-modal.ts";
+    initComboModal();
+  </script>
+</Layout>
+
+<style>
+  .page {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 16px 0 40px;
+  }
+
+  .page-head {
+    padding: 12px 16px 16px;
+  }
+
+  .heading h1 {
+    margin: 0 0 4px;
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .heading p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--color-fg-mute);
+    line-height: 1.5;
+  }
+
+  .heading a {
+    color: var(--color-safe);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(53, 175, 255, 0.3);
+  }
+
+  .disclaimer {
+    padding: 20px 16px 0;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--color-fg-mute);
+    max-width: 860px;
+  }
+
+  .disclaimer p {
+    margin: 0 0 10px;
+  }
+
+  .disclaimer strong {
+    color: var(--color-fg);
+    font-weight: 600;
+  }
+</style>

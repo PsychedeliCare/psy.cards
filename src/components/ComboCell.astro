@@ -1,0 +1,58 @@
+---
+import Icon from "./Icon.astro";
+import { getInteraction } from "../data/combos";
+import { pairSlug } from "../data/slug";
+import { sortPair } from "../data/config";
+
+interface Props {
+  rowKey: string;
+  colKey: string;
+  rowLabel: string;
+  colLabel: string;
+}
+
+const { rowKey, colKey, rowLabel, colLabel } = Astro.props;
+
+const { definition } = getInteraction(rowKey, colKey);
+const [aKey, bKey] = sortPair(rowKey, colKey);
+const href = `/${pairSlug(aKey, bKey)}`;
+const ariaLabel = `${rowLabel} + ${colLabel}: ${definition.label}`;
+---
+
+<a
+  href={href}
+  class={`combo-cell status-${definition.statusKey} status-surface cell-text`}
+  data-combo={href}
+  data-row={rowKey}
+  data-col={colKey}
+  aria-label={ariaLabel}
+  title={ariaLabel}
+>
+  <Icon name={definition.icon} size="1.05em" />
+</a>
+
+<style>
+  .combo-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: var(--cell-size, 32px);
+    aspect-ratio: 1 / 1;
+    text-decoration: none;
+    transition:
+      filter 120ms ease,
+      transform 120ms ease;
+  }
+
+  .combo-cell:hover {
+    filter: brightness(1.18) saturate(1.1);
+  }
+
+  .combo-cell:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: -3px;
+    filter: brightness(1.18);
+  }
+</style>
