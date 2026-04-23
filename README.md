@@ -1,5 +1,7 @@
 # psy.cards
 
+![psy.cards prototype](./public/assets/opengraph.jpg)
+
 `psy.cards` is a multilingual harm reduction card project that turns verified knowledge bases into compact, readable guidance across print, web, and social media formats. 
 
 The goal is to make high-quality substance information easier to access, easier to translate, and easier to distribute responsibly across Europe.
