@@ -14,7 +14,7 @@
 		}
 	],
 	"assets": {
-		"directory": "./dist",
+		"directory": "./dist/client",
 		"binding": "ASSETS"
 	},
 	"observability": {
