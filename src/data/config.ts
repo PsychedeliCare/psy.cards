@@ -7,7 +7,10 @@ export type GroupName =
   | "dissociative"
   | "stimulant"
   | "depressant"
-  | "antidepressant";
+  | "antidepressant"
+  | "empathogen"
+  | "opioid"
+  | "cannabinoid";
 
 export type Column = {
   /** Key used in `drugs/combos.json` (e.g. "benzodiazepines", "ghb/gbl"). */
@@ -27,7 +30,26 @@ for (const [key, label] of Object.entries(enTranslations.drugs)) {
 
 const groupNames = combogenConfig.groupNames as GroupName[];
 
-export const columns: Column[] = combogenConfig.tableOrder.flatMap(
+const groupOverrides: Record<string, GroupName> = {
+  cannabis: "cannabinoid",
+  mdma: "empathogen",
+  opioids: "opioid",
+  tramadol: "opioid",
+};
+
+export const visibleGroupOrder: GroupName[] = [
+  "stimulant",
+  "empathogen",
+  "psychedelic",
+  "dissociative",
+  "depressant",
+  "opioid",
+  "cannabinoid",
+];
+
+const groupOrder: GroupName[] = [...visibleGroupOrder, "antidepressant"];
+
+const originalColumns: Column[] = combogenConfig.tableOrder.flatMap(
   (groupLabels, groupIndex) =>
     groupLabels.map((label) => {
       const key = labelToKey[label] ?? label.toLowerCase();
@@ -35,10 +57,24 @@ export const columns: Column[] = combogenConfig.tableOrder.flatMap(
         key,
         label,
         slug: keyToSlug(key),
-        group: groupNames[groupIndex]!,
+        group: groupOverrides[key] ?? groupNames[groupIndex]!,
       } satisfies Column;
     })
 );
+
+const originalOrder = new Map<string, number>(
+  originalColumns.map((column, index) => [column.key, index])
+);
+
+export const columns: Column[] = [...originalColumns].sort((a, b) => {
+  const groupA = groupOrder.indexOf(a.group);
+  const groupB = groupOrder.indexOf(b.group);
+  const safeGroupA = groupA === -1 ? groupOrder.length : groupA;
+  const safeGroupB = groupB === -1 ? groupOrder.length : groupB;
+
+  if (safeGroupA !== safeGroupB) return safeGroupA - safeGroupB;
+  return (originalOrder.get(a.key) ?? 0) - (originalOrder.get(b.key) ?? 0);
+});
 
 export const columnBySlug = new Map<string, Column>(
   columns.map((c) => [c.slug, c])
@@ -61,9 +97,12 @@ export function sortPair(keyA: string, keyB: string): [string, string] {
 }
 
 export const groupLabels: Record<GroupName, string> = {
-  psychedelic: "Psychedelic",
-  dissociative: "Dissociative",
-  stimulant: "Stimulant",
-  depressant: "Depressant",
-  antidepressant: "Antidepressant",
+  psychedelic: "Psychedelics",
+  dissociative: "Dissociatives",
+  stimulant: "Stimulants",
+  depressant: "Depressants",
+  antidepressant: "Antidepressants",
+  empathogen: "Empathogens",
+  opioid: "Opioids",
+  cannabinoid: "Cannabinoids",
 };

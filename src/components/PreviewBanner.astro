@@ -1,0 +1,90 @@
+<button
+  type="button"
+  class="preview-banner"
+  data-preview-open
+  aria-haspopup="dialog"
+  aria-controls="preview-disclaimer"
+>
+  Preview
+</button>
+
+<div
+  id="preview-disclaimer"
+  class="preview-modal"
+  data-preview-modal
+  data-open="false"
+  aria-hidden="true"
+>
+  <button
+    type="button"
+    class="preview-modal__backdrop"
+    data-preview-close
+    aria-label="Close preview disclaimer"
+  ></button>
+  <section
+    class="preview-modal__panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="preview-disclaimer-title"
+    tabindex="-1"
+    data-preview-panel
+  >
+    <button
+      type="button"
+      class="preview-modal__close"
+      data-preview-close
+      aria-label="Close preview disclaimer"
+    >
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M18.3 5.71 12 12.01l-6.3-6.3-1.41 1.41L10.59 13.4l-6.3 6.3 1.41 1.41 6.3-6.3 6.3 6.3 1.41-1.41-6.3-6.3 6.3-6.3z"></path>
+      </svg>
+    </button>
+    <div class="preview-modal__content">
+      <p class="preview-modal__eyebrow">Preview build</p>
+      <h2 id="preview-disclaimer-title">Development version disclaimer</h2>
+      <p>
+        This is a development version of psy.cards and is not meant for wide
+        distribution just yet.
+      </p>
+      <p>
+        None of the information on this site has been verified for accuracy.
+        The site and its authors cannot be held liable for any inaccurate
+        information.
+      </p>
+    </div>
+  </section>
+</div>
+
+<script>
+  const modal = document.querySelector<HTMLElement>("[data-preview-modal]");
+  const panel = document.querySelector<HTMLElement>("[data-preview-panel]");
+  const openButton = document.querySelector<HTMLButtonElement>("[data-preview-open]");
+  const closeButtons = document.querySelectorAll<HTMLButtonElement>("[data-preview-close]");
+
+  function setPreviewModalOpen(open: boolean) {
+    if (!modal) return;
+    modal.setAttribute("data-open", open ? "true" : "false");
+    modal.setAttribute("aria-hidden", open ? "false" : "true");
+    document.documentElement.toggleAttribute("data-preview-modal-open", open);
+
+    if (open) {
+      panel?.focus({ preventScroll: true });
+    } else {
+      openButton?.focus({ preventScroll: true });
+    }
+  }
+
+  openButton?.addEventListener("click", () => setPreviewModalOpen(true));
+
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", () => setPreviewModalOpen(false));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    if (modal?.getAttribute("data-open") !== "true") return;
+    event.preventDefault();
+    setPreviewModalOpen(false);
+  });
+</script>
+

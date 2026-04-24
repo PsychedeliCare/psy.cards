@@ -53,6 +53,31 @@ const { variant = "wide" } = Astro.props;
         />
       </a>
     </section>
+
+    <section class="footer-block credits" aria-label="Site credits">
+      <p class="credit-links">
+        <span>Built with</span>
+        <a
+          href="https://www.fontshare.com"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          Satoshi by Indian Type Foundry
+        </a>
+        <span aria-hidden="true">/</span>
+        <a href="https://astro.build" target="_blank" rel="noreferrer noopener">
+          Astro
+        </a>
+        <span aria-hidden="true">/</span>
+        <a
+          href="https://www.cloudflare.com"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          Cloudflare
+        </a>
+      </p>
+    </section>
   </div>
 </footer>
 
@@ -156,6 +181,38 @@ const { variant = "wide" } = Astro.props;
     object-fit: contain;
     filter: invert(1);
     opacity: 0.85;
+  }
+
+  .credit-links {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    font-size: 10px;
+    line-height: 1.5;
+    color: var(--color-fg-mute);
+  }
+
+  .credits {
+    flex-basis: 100%;
+    width: 100%;
+    order: 10;
+  }
+
+  .credit-links a {
+    color: var(--color-fg-mute);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(166, 166, 170, 0.28);
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .credit-links a:hover,
+  .credit-links a:focus-visible {
+    color: var(--color-fg);
+    border-color: rgba(245, 245, 245, 0.42);
   }
 
   @media (max-width: 720px) {

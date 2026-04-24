@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import PreviewBanner from "./PreviewBanner.astro";
 
 interface Props {
   title?: string;
@@ -37,5 +38,6 @@ const ogImage = new URL("/assets/opengraph.jpg", Astro.site ?? Astro.url.origin)
   </head>
   <body>
     <slot />
+    <PreviewBanner />
   </body>
 </html>

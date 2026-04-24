@@ -1,12 +1,16 @@
 @import "tailwindcss";
+@import "../../public/fontshare/css/satoshi.css";
 @import "./cards.css";
 
 @theme {
-  --color-psychedelic: #274e13;
-  --color-dissociative: #20124d;
-  --color-stimulant: #660000;
-  --color-depressant: #073763;
-  --color-antidepressant: #783f04;
+  --color-stimulant: #f47a42;
+  --color-empathogen: #f9ba3f;
+  --color-psychedelic: #99c659;
+  --color-dissociative: #63addd;
+  --color-depressant: #898cc8;
+  --color-opioid: #b881b9;
+  --color-cannabinoid: #dd568c;
+  --color-antidepressant: #7d8bbd;
 
   --color-safe: #35afff;
   --color-synergy: #0a89dd;
@@ -29,7 +33,8 @@
     background-color: var(--color-ink);
     color: var(--color-fg);
     font-family:
-      "Open Sans",
+      "Satoshi-Variable",
+      "Satoshi-Regular",
       ui-sans-serif,
       system-ui,
       -apple-system,
@@ -45,6 +50,10 @@
     background-color: var(--color-ink);
   }
 
+  html[data-preview-modal-open] {
+    overflow: hidden;
+  }
+
   a {
     color: inherit;
   }
@@ -53,6 +62,143 @@
     outline: 2px solid var(--color-safe);
     outline-offset: 2px;
     border-radius: 2px;
+  }
+}
+
+.preview-banner {
+  position: fixed;
+  top: 22px;
+  right: -44px;
+  z-index: 45;
+  width: 168px;
+  padding: 8px 0;
+  transform: rotate(45deg);
+  color: #fff;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.preview-banner:hover {
+  background: #111;
+}
+
+.preview-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 140ms ease;
+}
+
+.preview-modal[data-open="true"] {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.preview-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.78);
+  border: 0;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.preview-modal__panel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(520px, calc(100vw - 32px));
+  max-height: calc(100dvh - 40px);
+  overflow: auto;
+  transform: translate(-50%, -50%);
+  color: var(--color-fg);
+  background: var(--color-ink-2);
+  box-shadow:
+    0 30px 80px -20px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+
+.preview-modal__close {
+  position: sticky;
+  top: 8px;
+  float: right;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin: 8px 8px 0 0;
+  color: var(--color-fg-mute);
+  background: rgba(255, 255, 255, 0.05);
+  border: 0;
+  cursor: pointer;
+}
+
+.preview-modal__close:hover {
+  color: var(--color-fg);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.preview-modal__content {
+  padding: 28px;
+}
+
+.preview-modal__eyebrow {
+  margin: 0 0 10px;
+  color: var(--color-fg-mute);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.preview-modal h2 {
+  margin: 0 0 16px;
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.preview-modal p {
+  margin: 0;
+  color: var(--color-fg);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.preview-modal p + p {
+  margin-top: 12px;
+}
+
+@media (max-width: 480px) {
+  .preview-banner {
+    top: 16px;
+    right: -48px;
+    width: 164px;
+  }
+
+  .preview-modal__panel {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: 88dvh;
+    transform: none;
   }
 }
 
@@ -94,8 +240,17 @@
 .group-stimulant {
   --hue: var(--color-stimulant);
 }
+.group-empathogen {
+  --hue: var(--color-empathogen);
+}
 .group-depressant {
   --hue: var(--color-depressant);
+}
+.group-opioid {
+  --hue: var(--color-opioid);
+}
+.group-cannabinoid {
+  --hue: var(--color-cannabinoid);
 }
 .group-antidepressant {
   --hue: var(--color-antidepressant);

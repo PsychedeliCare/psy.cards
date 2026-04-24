@@ -1,6 +1,37 @@
 ---
 import ComboCell from "./ComboCell.astro";
-import { columns } from "../data/config";
+import { columns, groupLabels, type GroupName } from "../data/config";
+
+const categorySummaries: Array<{ group: GroupName; text: string }> = [
+  {
+    group: "stimulant",
+    text: "Racing heartbeat, sweating, energy, confidence, well-being, arousal, euphoria, lowered appetite, clenched jaws, dilated pupils, paranoia, anxiety, mood swings, impotence",
+  },
+  {
+    group: "empathogen",
+    text: "Belonging, arousal, understanding, sweating, serotonin syndrome, erectile dysfunction, warmth, overheat, overdose, risk of dehydration or overhydration",
+  },
+  {
+    group: "psychedelic",
+    text: "Visual disturbance, spiritual connection, loss of control, heightened senses, opened doors of perception, panic, mood swings, arousal, fear, vomiting, mental health harms",
+  },
+  {
+    group: "dissociative",
+    text: "Euphoria, numb, safe, pain-free, floaty, relaxed, protected, happy, unaware, unconscious, in a 'hole', perceptual disturbances, scared, disconnected, vulnerable",
+  },
+  {
+    group: "depressant",
+    text: "Relaxed, confident, care-free, risk-taking, unconscious, coma, euphoria, death, disinhibited behaviours, blackouts, sleep, vomiting, nausea, aggression, dependence",
+  },
+  {
+    group: "opioid",
+    text: "Confident, pain-free, safe, sleepy, warm, feel invincible, itchy, constricted pupils, stop breathing, nausea, vomiting, euphoria, sweating, overdose, dependence, withdrawal",
+  },
+  {
+    group: "cannabinoid",
+    text: "Calm, relaxed, chilled out, floaty, reduced pain, paranoia, anxiety, loss of memory, bloodshot eyes, increased sensuality, dry mouth, overexcited, changes to appetite",
+  },
+];
 
 function getLabelSizeClass(label: string) {
   if (label.length >= 11) return "label-xs";
@@ -10,7 +41,7 @@ function getLabelSizeClass(label: string) {
 ---
 
 <section class="table-wrap" aria-label="Drug combinations">
-  <div class="shadow-left" aria-hidden="true"></div>
+  <div class="shadow-left" aria-hidden="true" data-table-shadow></div>
   <div class="table-head-stick">
     <div class="corner" aria-hidden="true"></div>
     <div class="table-head-scroll" data-head-scroll>
@@ -23,6 +54,8 @@ function getLabelSizeClass(label: string) {
                   scope="col"
                   class={`col-head group-${col.group} category-surface cell-text ${getLabelSizeClass(col.label)}`}
                   data-substance-slug={col.slug}
+                  data-col-key={col.key}
+                  data-col-group={col.group}
                 >
                   <a
                     href={`/${col.slug}`}
@@ -50,6 +83,8 @@ function getLabelSizeClass(label: string) {
                 scope="row"
                 class={`row-head group-${row.group} category-surface cell-text ${getLabelSizeClass(row.label)}`}
                 data-substance-slug={row.slug}
+                data-row-key={row.key}
+                data-row-group={row.group}
               >
                 <a
                   href={`/${row.slug}`}
@@ -64,6 +99,11 @@ function getLabelSizeClass(label: string) {
                   <th
                     scope="col"
                     class={`diag group-${row.group} category-surface cell-text ${getLabelSizeClass(row.label)}`}
+                    data-row-key={row.key}
+                    data-col-key={col.key}
+                    data-row-group={row.group}
+                    data-col-group={col.group}
+                    data-hover-cell
                   >
                     <a
                       href={`/${row.slug}`}
@@ -74,7 +114,14 @@ function getLabelSizeClass(label: string) {
                     </a>
                   </th>
                 ) : (
-                  <td class="cell-td">
+                  <td
+                    class="cell-td"
+                    data-row-key={row.key}
+                    data-col-key={col.key}
+                    data-row-group={row.group}
+                    data-col-group={col.group}
+                    data-hover-cell
+                  >
                     <ComboCell
                       rowKey={row.key}
                       colKey={col.key}
@@ -92,6 +139,27 @@ function getLabelSizeClass(label: string) {
   </div>
 </section>
 
+<nav class="category-nav" aria-label="Drug categories">
+  <div class="category-strip">
+    {
+      categorySummaries.map((category) => (
+        <button
+          class={`category-card group-${category.group} category-surface`}
+          type="button"
+          data-category={category.group}
+        >
+          <span class="category-heading">{groupLabels[category.group]}</span>
+          <p>{category.text}</p>
+        </button>
+      ))
+    }
+  </div>
+
+  <p class="category-credit">
+    Categories adapted from <a href="https://www.thedrugswheel.com/" target="_blank" rel="noreferrer noopener">The Drugs Wheel</a>.
+  </p>
+</nav>
+
 <script is:inline>
   (() => {
     const init = () => {
@@ -105,6 +173,9 @@ function getLabelSizeClass(label: string) {
         if (!(bodyScroll instanceof HTMLElement) || !(headScroll instanceof HTMLElement)) {
           return;
         }
+        const hoverCells = Array.from(
+          wrap.querySelectorAll("[data-hover-cell]")
+        ).filter((cell) => cell instanceof HTMLElement);
 
         const update = () => {
           headScroll.scrollLeft = bodyScroll.scrollLeft;
@@ -113,10 +184,96 @@ function getLabelSizeClass(label: string) {
             wrap.getBoundingClientRect().top < 0 ? "true" : "false";
         };
 
+        const categoryNav = wrap.nextElementSibling;
+        const categoryControls =
+          categoryNav instanceof HTMLElement
+            ? Array.from(categoryNav.querySelectorAll("[data-category]")).filter(
+                (control) => control instanceof HTMLElement
+              )
+            : [];
+
+        const clearHover = () => {
+          wrap.dataset.hovering = "false";
+          hoverCells.forEach((cell) => {
+            cell.classList.remove("is-highlight", "is-muted");
+          });
+        };
+
+        const setHover = (target) => {
+          if (!(target instanceof Element)) return;
+          const active = target.closest("[data-hover-cell]");
+          if (!(active instanceof HTMLElement)) {
+            clearHover();
+            return;
+          }
+
+          const row = active.dataset.rowKey;
+          const col = active.dataset.colKey;
+          wrap.dataset.hovering = "true";
+
+          hoverCells.forEach((cell) => {
+            const rowMatches = row && cell.dataset.rowKey === row;
+            const colMatches = col && cell.dataset.colKey === col;
+            const highlighted = Boolean(rowMatches || colMatches);
+            cell.classList.toggle("is-highlight", highlighted);
+            cell.classList.toggle("is-muted", !highlighted);
+          });
+        };
+
+        const setCategoryHover = (category) => {
+          wrap.dataset.hovering = "true";
+
+          hoverCells.forEach((cell) => {
+            const highlighted =
+              cell.dataset.rowGroup === category || cell.dataset.colGroup === category;
+            cell.classList.toggle("is-highlight", highlighted);
+            cell.classList.toggle("is-muted", !highlighted);
+          });
+        };
+
+        const scrollToCategory = (category) => {
+          const col = wrap.querySelector(`[data-col-group="${category}"]`);
+          const row = wrap.querySelector(`[data-row-group="${category}"]`);
+          if (col instanceof HTMLElement) {
+            bodyScroll.scrollTo({
+              left: Math.max(0, col.offsetLeft - bodyScroll.clientWidth * 0.08),
+              behavior: "smooth",
+            });
+          }
+
+          if (row instanceof HTMLElement) {
+            const stickyOffset =
+              wrap.querySelector(".table-head-stick") instanceof HTMLElement
+                ? wrap.querySelector(".table-head-stick").getBoundingClientRect().height
+                : 0;
+            window.scrollTo({
+              top: window.scrollY + row.getBoundingClientRect().top - stickyOffset - 4,
+              behavior: "smooth",
+            });
+          }
+        };
+
         wrap.dataset.shadowInit = "true";
         update();
 
         bodyScroll.addEventListener("scroll", update, { passive: true });
+        wrap.addEventListener("pointerover", (event) => setHover(event.target));
+        wrap.addEventListener("pointerleave", clearHover);
+        wrap.addEventListener("focusin", (event) => setHover(event.target));
+        wrap.addEventListener("focusout", clearHover);
+        categoryControls.forEach((control) => {
+          control.addEventListener("pointerover", () => {
+            setCategoryHover(control.dataset.category);
+          });
+          control.addEventListener("pointerleave", clearHover);
+          control.addEventListener("focus", () => {
+            setCategoryHover(control.dataset.category);
+          });
+          control.addEventListener("blur", clearHover);
+          control.addEventListener("click", () => {
+            if (control.dataset.category) scrollToCategory(control.dataset.category);
+          });
+        });
         window.addEventListener("scroll", update, { passive: true });
         window.addEventListener("resize", update, { passive: true });
       });
@@ -177,7 +334,7 @@ function getLabelSizeClass(label: string) {
     position: absolute;
     top: calc(var(--cell-size) + var(--cell-gap) * 2);
     left: var(--row-head-size);
-    bottom: 0;
+    height: calc((var(--cell-size) + var(--cell-gap)) * 25);
     width: 14px;
     pointer-events: none;
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.28), transparent);
@@ -226,6 +383,22 @@ function getLabelSizeClass(label: string) {
     max-width: var(--cell-size);
     box-sizing: border-box;
     overflow: hidden;
+  }
+
+  [data-hover-cell] {
+    transition:
+      filter 120ms ease,
+      opacity 120ms ease;
+  }
+
+  .table-wrap[data-hovering="true"] [data-hover-cell].is-muted {
+    filter: saturate(0.55) brightness(0.96);
+    opacity: 0.96;
+  }
+
+  .table-wrap[data-hovering="true"] [data-hover-cell].is-highlight {
+    filter: saturate(1.08) brightness(1.08);
+    opacity: 1;
   }
 
   .corner {
@@ -327,24 +500,127 @@ function getLabelSizeClass(label: string) {
     background-color: var(--ink);
   }
 
+  .category-nav {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    z-index: 30;
+    width: min(100%, 1600px);
+    padding: 8px 0 max(6px, env(safe-area-inset-bottom));
+    background-color: color-mix(in oklab, var(--color-ink), transparent 6%);
+    box-shadow: 0 -14px 24px rgba(0, 0, 0, 0.28);
+    transform: translateX(-50%);
+  }
+
+  .category-strip {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .category-card {
+    appearance: none;
+    border: 0;
+    border-radius: 0;
+    min-height: 118px;
+    padding: clamp(10px, 1.2vw, 16px) clamp(8px, 1vw, 14px);
+    color: #080808;
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+    background-image: none;
+    transition:
+      filter 120ms ease,
+      transform 120ms ease;
+  }
+
+  .category-card:hover,
+  .category-card:focus-visible {
+    filter: brightness(1.05) saturate(1.05);
+  }
+
+  .category-card:active {
+    transform: translateY(1px);
+  }
+
+  .category-heading {
+    display: block;
+    margin: 0 0 10px;
+    color: #fff;
+    font-size: clamp(13px, 0.95vw, 16px);
+    font-weight: 800;
+    line-height: 1.05;
+  }
+
+  .category-card p {
+    margin: 0;
+    font-size: clamp(10px, 0.72vw, 12px);
+    line-height: 1.22;
+  }
+
+  .category-credit {
+    margin: 5px 8px 0;
+    color: var(--color-fg-mute);
+    font-size: 10px;
+    line-height: 1.3;
+    text-align: left;
+  }
+
+  .category-credit a {
+    color: var(--color-fg);
+    text-underline-offset: 3px;
+  }
+
   @media (max-width: 640px) {
     .table-wrap {
-      --cell-size: 30px;
+      --cell-size: 45px;
     }
+
+    .category-strip {
+      display: flex;
+      gap: 2px;
+      margin-inline: calc(var(--cell-gap) * -1);
+      padding: 0 20% 2px 0;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .category-card {
+      flex: 0 0 80%;
+      min-height: 122px;
+      padding: 14px 12px;
+      scroll-snap-align: start;
+    }
+
+    .category-heading {
+      font-size: 15px;
+    }
+
+    .category-card p {
+      font-size: 11px;
+    }
+
+    .category-credit {
+      text-align: left;
+    }
+
     .combos-table {
-      font-size: 10px;
+      font-size: 15px;
     }
 
     .label-xs .label-text {
-      font-size: 5px;
+      font-size: 7.5px;
     }
 
     .label-sm .label-text {
-      font-size: 5.8px;
+      font-size: 8.7px;
     }
 
     .label-md .label-text {
-      font-size: 6.8px;
+      font-size: 10.2px;
     }
   }
 </style>
