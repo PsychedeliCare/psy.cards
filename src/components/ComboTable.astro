@@ -62,14 +62,16 @@ function getLabelSizeClass(label: string) {
 }
 ---
 
-<section class="table-wrap" aria-label="Drug combinations" data-expanded="false">
+<section
+  class="table-wrap"
+  aria-label="Drug combinations"
+  data-expanded="false"
+  data-medication="false"
+  data-hover-enabled="true"
+>
   <div class="shadow-left" aria-hidden="true" data-table-shadow></div>
   <div class="table-head-stick">
-    <div class="corner" aria-hidden="true">
-      <button class="expand-toggle" type="button" data-expand-toggle aria-pressed="false">
-        <span class="expand-label" data-expand-label>Show all</span>
-      </button>
-    </div>
+    <div class="corner" aria-hidden="true"></div>
     <div class="table-head-scroll" data-head-scroll>
       <table class="combos-table combos-table--head" role="presentation">
         <thead>
@@ -178,19 +180,66 @@ function getLabelSizeClass(label: string) {
     {
       categorySummaries.map((category) => (
         <div class={`category-card group-${category.group} category-surface`} data-category={category.group}>
-          <label class="category-toggle">
-            <input
-              type="checkbox"
-              checked
-              data-category-checkbox={category.group}
-              class="category-checkbox"
-            />
+          <div class="category-header">
             <span class="category-heading">{groupLabels[category.group]}</span>
-          </label>
+            <label class="category-toggle" title={`Toggle ${groupLabels[category.group]}`}>
+              <input
+                type="checkbox"
+                checked
+                data-category-checkbox={category.group}
+                class="category-checkbox"
+                aria-label={`Show ${groupLabels[category.group]}`}
+              />
+              <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+              </svg>
+              <svg class="eye-icon eye-off" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 4.27 3.28 3 21 20.72 19.73 22l-3.04-3.04A11.6 11.6 0 0 1 12 19c-7 0-11-7-11-7a18.9 18.9 0 0 1 4.06-4.94L2 4.27zm6.5 6.5L9.94 12.2A2 2 0 0 0 12 14a2 2 0 0 0 1.43-.6l1.42 1.42A4 4 0 0 1 8.5 10.77zM12 5c7 0 11 7 11 7a18.7 18.7 0 0 1-3.07 3.95l-2.97-2.97A4 4 0 0 0 12 8a4 4 0 0 0-1.98.53L7.6 6.13A11.5 11.5 0 0 1 12 5z"/>
+              </svg>
+            </label>
+          </div>
           <p>{category.text}</p>
         </div>
       ))
     }
+    <div class="category-card category-settings" data-settings>
+      <div class="category-header">
+        <span class="category-heading">Settings</span>
+      </div>
+      <ul class="settings-list">
+        <li class="settings-row">
+          <span class="settings-label">View</span>
+          <div class="settings-segmented" role="group" aria-label="View">
+            <button type="button" class="seg-btn is-active" data-view="top" aria-pressed="true">Top 10</button>
+            <button type="button" class="seg-btn" data-view="all" aria-pressed="false">All</button>
+          </div>
+        </li>
+        <li class="settings-row">
+          <span class="settings-label">Medication</span>
+          <label class="settings-toggle" title="Show MAOIs and SSRIs">
+            <input type="checkbox" data-medication-toggle aria-label="Show medication" />
+            <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+            </svg>
+            <svg class="eye-icon eye-off" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 4.27 3.28 3 21 20.72 19.73 22l-3.04-3.04A11.6 11.6 0 0 1 12 19c-7 0-11-7-11-7a18.9 18.9 0 0 1 4.06-4.94L2 4.27zm6.5 6.5L9.94 12.2A2 2 0 0 0 12 14a2 2 0 0 0 1.43-.6l1.42 1.42A4 4 0 0 1 8.5 10.77zM12 5c7 0 11 7 11 7a18.7 18.7 0 0 1-3.07 3.95l-2.97-2.97A4 4 0 0 0 12 8a4 4 0 0 0-1.98.53L7.6 6.13A11.5 11.5 0 0 1 12 5z"/>
+            </svg>
+          </label>
+        </li>
+        <li class="settings-row">
+          <span class="settings-label">Highlight on hover</span>
+          <label class="settings-toggle" title="Toggle hover highlight effect">
+            <input type="checkbox" checked data-highlight-toggle aria-label="Highlight on hover" />
+            <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+            </svg>
+            <svg class="eye-icon eye-off" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 4.27 3.28 3 21 20.72 19.73 22l-3.04-3.04A11.6 11.6 0 0 1 12 19c-7 0-11-7-11-7a18.9 18.9 0 0 1 4.06-4.94L2 4.27zm6.5 6.5L9.94 12.2A2 2 0 0 0 12 14a2 2 0 0 0 1.43-.6l1.42 1.42A4 4 0 0 1 8.5 10.77zM12 5c7 0 11 7 11 7a18.7 18.7 0 0 1-3.07 3.95l-2.97-2.97A4 4 0 0 0 12 8a4 4 0 0 0-1.98.53L7.6 6.13A11.5 11.5 0 0 1 12 5z"/>
+            </svg>
+          </label>
+        </li>
+      </ul>
+    </div>
   </div>
 
   <p class="category-credit">
@@ -208,8 +257,6 @@ function getLabelSizeClass(label: string) {
 
         const bodyScroll = wrap.querySelector("[data-body-scroll]");
         const headScroll = wrap.querySelector("[data-head-scroll]");
-        const expandToggle = wrap.querySelector("[data-expand-toggle]");
-        const expandLabel = wrap.querySelector("[data-expand-label]");
         if (!(bodyScroll instanceof HTMLElement) || !(headScroll instanceof HTMLElement)) {
           return;
         }
@@ -247,6 +294,7 @@ function getLabelSizeClass(label: string) {
         };
 
         const setHover = (target) => {
+          if (wrap.dataset.hoverEnabled === "false") return;
           if (!(target instanceof Element)) return;
           const active = target.closest("[data-hover-cell]");
           if (!(active instanceof HTMLElement)) {
@@ -268,14 +316,16 @@ function getLabelSizeClass(label: string) {
         };
 
         const setCategoryHover = (category) => {
-          wrap.dataset.hovering = "true";
+          if (wrap.dataset.hoverEnabled !== "false") {
+            wrap.dataset.hovering = "true";
 
-          hoverCells.forEach((cell) => {
-            const highlighted =
-              cell.dataset.rowGroup === category || cell.dataset.colGroup === category;
-            cell.classList.toggle("is-highlight", highlighted);
-            cell.classList.toggle("is-muted", !highlighted);
-          });
+            hoverCells.forEach((cell) => {
+              const highlighted =
+                cell.dataset.rowGroup === category || cell.dataset.colGroup === category;
+              cell.classList.toggle("is-highlight", highlighted);
+              cell.classList.toggle("is-muted", !highlighted);
+            });
+          }
 
           scrollToCategory(category);
         };
@@ -302,15 +352,39 @@ function getLabelSizeClass(label: string) {
           }
         };
 
-        const toggleExpanded = () => {
-          const isExpanded = wrap.dataset.expanded === "true";
-          wrap.dataset.expanded = isExpanded ? "false" : "true";
-          if (expandToggle instanceof HTMLButtonElement) {
-            expandToggle.setAttribute("aria-pressed", isExpanded ? "false" : "true");
-          }
-          if (expandLabel instanceof HTMLElement) {
-            expandLabel.textContent = isExpanded ? "Show all" : "Top 10";
-          }
+        const viewButtons =
+          categoryNav instanceof HTMLElement
+            ? Array.from(categoryNav.querySelectorAll("[data-view]")).filter(
+                (b) => b instanceof HTMLButtonElement
+              )
+            : [];
+
+        const medicationToggle =
+          categoryNav instanceof HTMLElement
+            ? categoryNav.querySelector("[data-medication-toggle]")
+            : null;
+
+        const highlightToggle =
+          categoryNav instanceof HTMLElement
+            ? categoryNav.querySelector("[data-highlight-toggle]")
+            : null;
+
+        const setView = (view) => {
+          wrap.dataset.expanded = view === "all" ? "true" : "false";
+          viewButtons.forEach((btn) => {
+            const active = btn.dataset.view === view;
+            btn.classList.toggle("is-active", active);
+            btn.setAttribute("aria-pressed", active ? "true" : "false");
+          });
+        };
+
+        const setMedication = (visible) => {
+          wrap.dataset.medication = visible ? "true" : "false";
+        };
+
+        const setHighlightEnabled = (enabled) => {
+          wrap.dataset.hoverEnabled = enabled ? "true" : "false";
+          if (!enabled) clearHover();
         };
 
         const updateCategoryVisibility = () => {
@@ -355,8 +429,24 @@ function getLabelSizeClass(label: string) {
         wrap.addEventListener("focusin", (event) => setHover(event.target));
         wrap.addEventListener("focusout", clearHover);
 
-        if (expandToggle instanceof HTMLButtonElement) {
-          expandToggle.addEventListener("click", toggleExpanded);
+        viewButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            setView(btn.dataset.view);
+          });
+        });
+
+        if (medicationToggle instanceof HTMLInputElement) {
+          medicationToggle.addEventListener("change", () => {
+            setMedication(medicationToggle.checked);
+          });
+          setMedication(medicationToggle.checked);
+        }
+
+        if (highlightToggle instanceof HTMLInputElement) {
+          highlightToggle.addEventListener("change", () => {
+            setHighlightEnabled(highlightToggle.checked);
+          });
+          setHighlightEnabled(highlightToggle.checked);
         }
 
         categoryCheckboxes.forEach((cb) => {
@@ -472,7 +562,7 @@ function getLabelSizeClass(label: string) {
     border-collapse: separate;
     border-spacing: var(--cell-gap);
     background-color: var(--ink);
-    font-size: clamp(10px, 1.1vw, 13px);
+    font-size: clamp(13px, 1.6vw, 22px);
     table-layout: fixed;
     width: max-content;
     min-width: 100%;
@@ -518,49 +608,32 @@ function getLabelSizeClass(label: string) {
     width: var(--row-head-size);
     min-width: var(--row-head-size);
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
-  .expand-toggle {
-    appearance: none;
-    border: 0;
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--color-fg-mute);
-    font: inherit;
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 4px 6px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 120ms ease, color 120ms ease;
-  }
-
-  .expand-toggle:hover {
-    background: rgba(255, 255, 255, 0.14);
-    color: var(--color-fg);
-  }
-
-  .expand-toggle[aria-pressed="true"] {
-    background: rgba(255, 255, 255, 0.16);
-    color: var(--color-fg);
-  }
-
-  .table-wrap[data-expanded="false"] tr[data-is-top="false"] {
+  .table-wrap[data-expanded="false"] tr[data-is-top="false"]:not([data-row-substance="maois"]):not([data-row-substance="ssris"]) {
     display: none;
   }
 
-  .table-wrap[data-expanded="false"] th.col-head[data-is-top="false"] {
+  .table-wrap[data-expanded="false"] th.col-head[data-is-top="false"]:not([data-col-key="maois"]):not([data-col-key="ssris"]) {
     display: none;
   }
 
-  .table-wrap[data-expanded="false"] td[data-is-top-row="false"],
-  .table-wrap[data-expanded="false"] td[data-is-top-col="false"],
-  .table-wrap[data-expanded="false"] th.diag[data-is-top-row="false"],
-  .table-wrap[data-expanded="false"] th.diag[data-is-top-col="false"] {
+  .table-wrap[data-expanded="false"] td[data-is-top-row="false"]:not([data-row-key="maois"]):not([data-row-key="ssris"]),
+  .table-wrap[data-expanded="false"] td[data-is-top-col="false"]:not([data-col-key="maois"]):not([data-col-key="ssris"]),
+  .table-wrap[data-expanded="false"] th.diag[data-is-top-row="false"]:not([data-row-key="maois"]):not([data-row-key="ssris"]),
+  .table-wrap[data-expanded="false"] th.diag[data-is-top-col="false"]:not([data-col-key="maois"]):not([data-col-key="ssris"]) {
+    display: none;
+  }
+
+  .table-wrap[data-medication="false"] tr[data-row-substance="maois"],
+  .table-wrap[data-medication="false"] tr[data-row-substance="ssris"] {
+    display: none;
+  }
+
+  .table-wrap[data-medication="false"] th[data-col-key="maois"],
+  .table-wrap[data-medication="false"] th[data-col-key="ssris"],
+  .table-wrap[data-medication="false"] td[data-col-key="maois"],
+  .table-wrap[data-medication="false"] td[data-col-key="ssris"] {
     display: none;
   }
 
@@ -597,7 +670,7 @@ function getLabelSizeClass(label: string) {
   .row-head .label-text {
     display: inline-block;
     font-weight: 600;
-    font-size: 10px;
+    font-size: clamp(9px, 0.85vw, 12px);
     letter-spacing: 0.02em;
     line-height: 1.05;
     text-align: center;
@@ -617,7 +690,7 @@ function getLabelSizeClass(label: string) {
   }
 
   .row-head .row-link {
-    font-size: 10px;
+    font-size: clamp(9px, 0.85vw, 12px);
   }
 
   .row-head .row-link:hover,
@@ -640,23 +713,23 @@ function getLabelSizeClass(label: string) {
     display: inline-block;
     transform: rotate(-45deg);
     font-weight: 600;
-    font-size: 10px;
+    font-size: clamp(9px, 0.85vw, 12px);
     white-space: nowrap;
     line-height: 1;
     opacity: 0.9;
   }
 
   .label-xs .label-text {
-    font-size: 6px;
+    font-size: clamp(7px, 0.6vw, 9px);
     letter-spacing: 0;
   }
 
   .label-sm .label-text {
-    font-size: 7px;
+    font-size: clamp(8px, 0.7vw, 10px);
   }
 
   .label-md .label-text {
-    font-size: 8px;
+    font-size: clamp(9px, 0.85vw, 12px);
   }
 
   .cell-td {
@@ -678,7 +751,7 @@ function getLabelSizeClass(label: string) {
 
   .category-strip {
     display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-template-columns: repeat(8, minmax(0, 1fr));
     width: 100%;
     overflow: hidden;
   }
@@ -688,11 +761,12 @@ function getLabelSizeClass(label: string) {
     border-radius: 0;
     min-height: 118px;
     padding: clamp(10px, 1.2vw, 16px) clamp(8px, 1vw, 14px);
-    color: #080808;
+    color: #fff;
     cursor: pointer;
     font: inherit;
     text-align: left;
     background-image: none;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 0 8px rgba(0, 0, 0, 0.35);
     transition:
       filter 350ms ease,
       opacity 350ms ease,
@@ -714,47 +788,65 @@ function getLabelSizeClass(label: string) {
     opacity: 0.6;
   }
 
-  .category-toggle {
+  .category-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 6px;
-    cursor: pointer;
     margin-bottom: 8px;
   }
 
-  .category-checkbox {
-    appearance: none;
-    width: 14px;
-    height: 14px;
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    border-radius: 3px;
-    background: transparent;
+  .category-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     flex-shrink: 0;
-    position: relative;
-    transition: background 120ms ease, border-color 120ms ease;
+    color: #fff;
+    opacity: 0.85;
+    transition: opacity 120ms ease;
   }
 
-  .category-checkbox:checked {
-    background: rgba(255, 255, 255, 0.95);
-    border-color: rgba(255, 255, 255, 0.95);
+  .category-toggle:hover {
+    opacity: 1;
   }
 
-  .category-checkbox:checked::after {
-    content: "";
+  .category-checkbox,
+  .settings-toggle input {
     position: absolute;
-    top: 1px;
-    left: 4px;
-    width: 3px;
-    height: 6px;
-    border: solid #080808;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    height: 0;
   }
 
-  .category-checkbox:focus-visible {
+  .eye-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+  }
+
+  .category-toggle .eye-off,
+  .settings-toggle .eye-off {
+    display: none;
+  }
+
+  .category-toggle:has(.category-checkbox:not(:checked)) .eye-on,
+  .settings-toggle:has(input:not(:checked)) .eye-on {
+    display: none;
+  }
+
+  .category-toggle:has(.category-checkbox:not(:checked)) .eye-off,
+  .settings-toggle:has(input:not(:checked)) .eye-off {
+    display: inline-block;
+  }
+
+  .category-checkbox:focus-visible + .eye-icon,
+  .settings-toggle input:focus-visible + .eye-icon {
     outline: 2px solid #fff;
     outline-offset: 2px;
+    border-radius: 2px;
   }
 
   .category-heading {
@@ -768,8 +860,101 @@ function getLabelSizeClass(label: string) {
 
   .category-card p {
     margin: 0;
+    color: #fff;
     font-size: clamp(10px, 0.72vw, 12px);
     line-height: 1.22;
+  }
+
+  .category-settings {
+    background-color: var(--color-ink-3);
+    background-image: none;
+    cursor: default;
+    color: var(--color-fg);
+    text-shadow: none;
+  }
+
+  .category-settings:hover {
+    filter: none;
+  }
+
+  .category-settings:active {
+    transform: none;
+  }
+
+  .category-settings .category-heading {
+    color: var(--color-fg);
+  }
+
+  .settings-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .settings-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: clamp(10px, 0.72vw, 12px);
+    color: var(--color-fg);
+  }
+
+  .settings-label {
+    line-height: 1.2;
+  }
+
+  .settings-segmented {
+    display: inline-flex;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 3px;
+    padding: 2px;
+    gap: 2px;
+  }
+
+  .seg-btn {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--color-fg-mute);
+    font: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 7px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 120ms ease, color 120ms ease;
+  }
+
+  .seg-btn:hover {
+    color: var(--color-fg);
+  }
+
+  .seg-btn.is-active {
+    background: rgba(255, 255, 255, 0.14);
+    color: var(--color-fg);
+  }
+
+  .settings-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-fg);
+    opacity: 0.85;
+    transition: opacity 120ms ease;
+  }
+
+  .settings-toggle:hover {
+    opacity: 1;
+  }
+
+  .settings-toggle .eye-icon {
+    filter: none;
   }
 
   .category-credit {
@@ -788,11 +973,6 @@ function getLabelSizeClass(label: string) {
   @media (max-width: 640px) {
     .table-wrap {
       --cell-size: 45px;
-    }
-
-    .expand-toggle {
-      font-size: 7px;
-      padding: 3px 5px;
     }
 
     .category-strip {
@@ -817,18 +997,22 @@ function getLabelSizeClass(label: string) {
       font-size: 15px;
     }
 
-    .category-checkbox {
-      width: 16px;
-      height: 16px;
-    }
-
-    .category-checkbox:checked::after {
-      top: 2px;
-      left: 5px;
+    .eye-icon {
+      width: 22px;
+      height: 22px;
     }
 
     .category-card p {
-      font-size: 11px;
+      font-size: 12px;
+    }
+
+    .settings-row {
+      font-size: 13px;
+    }
+
+    .seg-btn {
+      font-size: 12px;
+      padding: 4px 8px;
     }
 
     .category-credit {
@@ -840,15 +1024,15 @@ function getLabelSizeClass(label: string) {
     }
 
     .label-xs .label-text {
-      font-size: 7.5px;
+      font-size: 9px;
     }
 
     .label-sm .label-text {
-      font-size: 8.7px;
+      font-size: 10.5px;
     }
 
     .label-md .label-text {
-      font-size: 10.2px;
+      font-size: 12px;
     }
   }
 

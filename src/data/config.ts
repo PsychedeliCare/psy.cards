@@ -47,7 +47,7 @@ export const visibleGroupOrder: GroupName[] = [
   "cannabinoid",
 ];
 
-const groupOrder: GroupName[] = [...visibleGroupOrder, "antidepressant"];
+const groupOrder: GroupName[] = ["antidepressant", ...visibleGroupOrder];
 
 const originalColumns: Column[] = combogenConfig.tableOrder.flatMap(
   (groupLabels, groupIndex) =>
