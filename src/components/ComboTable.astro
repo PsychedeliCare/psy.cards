@@ -9,16 +9,16 @@ import {
 
 const TOP_COUNT = 10;
 const topSubstances = new Set([
+  "mdma",
+  "caffeine",
+  "cocaine",
   "lsd",
   "mushrooms",
-  "cannabis",
-  "mdma",
-  "cocaine",
-  "alcohol",
-  "amphetamines",
+  "dmt",
+  "2c-x",
   "ketamine",
-  "benzodiazepines",
-  "opioids",
+  "alcohol",
+  "cannabis",
 ]);
 
 const topColumns = columns.filter((c) => topSubstances.has(c.key));
@@ -71,11 +71,11 @@ function getLabelSizeClass(label: string) {
 >
   <div class="shadow-left" aria-hidden="true" data-table-shadow></div>
   <div class="table-head-stick">
-    <div class="corner" aria-hidden="true"></div>
     <div class="table-head-scroll" data-head-scroll>
       <table class="combos-table combos-table--head" role="presentation">
         <thead>
           <tr>
+            <th class="corner-cell" aria-hidden="true"></th>
             {
               columns.map((col) => (
                 <th
@@ -177,31 +177,6 @@ function getLabelSizeClass(label: string) {
 
 <nav class="category-nav" aria-label="Drug categories">
   <div class="category-strip">
-    {
-      categorySummaries.map((category) => (
-        <div class={`category-card group-${category.group} category-surface`} data-category={category.group}>
-          <div class="category-header">
-            <span class="category-heading">{groupLabels[category.group]}</span>
-            <label class="category-toggle" title={`Toggle ${groupLabels[category.group]}`}>
-              <input
-                type="checkbox"
-                checked
-                data-category-checkbox={category.group}
-                class="category-checkbox"
-                aria-label={`Show ${groupLabels[category.group]}`}
-              />
-              <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
-              </svg>
-              <svg class="eye-icon eye-off" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M2 4.27 3.28 3 21 20.72 19.73 22l-3.04-3.04A11.6 11.6 0 0 1 12 19c-7 0-11-7-11-7a18.9 18.9 0 0 1 4.06-4.94L2 4.27zm6.5 6.5L9.94 12.2A2 2 0 0 0 12 14a2 2 0 0 0 1.43-.6l1.42 1.42A4 4 0 0 1 8.5 10.77zM12 5c7 0 11 7 11 7a18.7 18.7 0 0 1-3.07 3.95l-2.97-2.97A4 4 0 0 0 12 8a4 4 0 0 0-1.98.53L7.6 6.13A11.5 11.5 0 0 1 12 5z"/>
-              </svg>
-            </label>
-          </div>
-          <p>{category.text}</p>
-        </div>
-      ))
-    }
     <div class="category-card category-settings" data-settings>
       <div class="category-header">
         <span class="category-heading">Settings</span>
@@ -218,28 +193,38 @@ function getLabelSizeClass(label: string) {
           <span class="settings-label">Medication</span>
           <label class="settings-toggle" title="Show MAOIs and SSRIs">
             <input type="checkbox" data-medication-toggle aria-label="Show medication" />
-            <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
-            </svg>
-            <svg class="eye-icon eye-off" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M2 4.27 3.28 3 21 20.72 19.73 22l-3.04-3.04A11.6 11.6 0 0 1 12 19c-7 0-11-7-11-7a18.9 18.9 0 0 1 4.06-4.94L2 4.27zm6.5 6.5L9.94 12.2A2 2 0 0 0 12 14a2 2 0 0 0 1.43-.6l1.42 1.42A4 4 0 0 1 8.5 10.77zM12 5c7 0 11 7 11 7a18.7 18.7 0 0 1-3.07 3.95l-2.97-2.97A4 4 0 0 0 12 8a4 4 0 0 0-1.98.53L7.6 6.13A11.5 11.5 0 0 1 12 5z"/>
-            </svg>
+            <span class="toggle-icon"></span>
           </label>
         </li>
         <li class="settings-row">
-          <span class="settings-label">Highlight on hover</span>
+          <span class="settings-label">Highlight</span>
           <label class="settings-toggle" title="Toggle hover highlight effect">
             <input type="checkbox" checked data-highlight-toggle aria-label="Highlight on hover" />
-            <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
-            </svg>
-            <svg class="eye-icon eye-off" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M2 4.27 3.28 3 21 20.72 19.73 22l-3.04-3.04A11.6 11.6 0 0 1 12 19c-7 0-11-7-11-7a18.9 18.9 0 0 1 4.06-4.94L2 4.27zm6.5 6.5L9.94 12.2A2 2 0 0 0 12 14a2 2 0 0 0 1.43-.6l1.42 1.42A4 4 0 0 1 8.5 10.77zM12 5c7 0 11 7 11 7a18.7 18.7 0 0 1-3.07 3.95l-2.97-2.97A4 4 0 0 0 12 8a4 4 0 0 0-1.98.53L7.6 6.13A11.5 11.5 0 0 1 12 5z"/>
-            </svg>
+            <span class="toggle-icon"></span>
           </label>
         </li>
       </ul>
     </div>
+    {
+      categorySummaries.map((category) => (
+        <div class={`category-card group-${category.group} category-surface`} data-category={category.group}>
+          <div class="category-header">
+            <span class="category-heading">{groupLabels[category.group]}</span>
+            <label class="category-toggle" title={`Toggle ${groupLabels[category.group]}`}>
+              <input
+                type="checkbox"
+                checked
+                data-category-checkbox={category.group}
+                class="category-checkbox"
+                aria-label={`Show ${groupLabels[category.group]}`}
+              />
+              <span class="toggle-icon"></span>
+            </label>
+          </div>
+          <p>{category.text}</p>
+        </div>
+      ))
+    }
   </div>
 
   <p class="category-credit">
@@ -484,7 +469,7 @@ function getLabelSizeClass(label: string) {
   .table-wrap {
     --cell-size: clamp(28px, 4.2vw, 52px);
     --cell-gap: 2px;
-    --row-head-size: calc(var(--cell-size) + var(--cell-gap));
+    --row-head-size: var(--cell-size);
     --ink: var(--color-ink);
     --exit-duration: 350ms;
     --enter-duration: 0ms;
@@ -497,9 +482,6 @@ function getLabelSizeClass(label: string) {
     position: sticky;
     top: 0;
     z-index: 8;
-    display: grid;
-    grid-template-columns: var(--row-head-size) 1fr;
-    align-items: stretch;
     background-color: var(--ink);
   }
 
@@ -603,11 +585,13 @@ function getLabelSizeClass(label: string) {
     opacity: 1;
   }
 
-  .corner {
+  .corner-cell {
     background-color: var(--ink);
-    width: var(--row-head-size);
-    min-width: var(--row-head-size);
-    height: 100%;
+    width: var(--cell-size);
+    min-width: var(--cell-size);
+    position: sticky;
+    left: 0;
+    z-index: 4;
   }
 
   .table-wrap[data-expanded="false"] tr[data-is-top="false"]:not([data-row-substance="maois"]):not([data-row-substance="ssris"]) {
@@ -674,8 +658,9 @@ function getLabelSizeClass(label: string) {
     letter-spacing: 0.02em;
     line-height: 1.05;
     text-align: center;
-    white-space: normal;
-    overflow-wrap: anywhere;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     max-width: 100%;
   }
 
@@ -756,6 +741,27 @@ function getLabelSizeClass(label: string) {
     overflow: hidden;
   }
 
+  @media (max-width: 1200px) and (min-width: 641px) {
+    .category-strip {
+      display: flex;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      padding-right: 10%;
+    }
+
+    .category-card {
+      flex: 0 0 30%;
+      scroll-snap-align: start;
+    }
+
+    .category-settings {
+      flex: 0 0 10%;
+      min-width: 120px;
+    }
+  }
+
   .category-card {
     border: 0;
     border-radius: 0;
@@ -796,19 +802,13 @@ function getLabelSizeClass(label: string) {
     margin-bottom: 8px;
   }
 
-  .category-toggle {
+  .category-toggle,
+  .settings-toggle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     flex-shrink: 0;
-    color: #fff;
-    opacity: 0.85;
-    transition: opacity 120ms ease;
-  }
-
-  .category-toggle:hover {
-    opacity: 1;
   }
 
   .category-checkbox,
@@ -820,33 +820,64 @@ function getLabelSizeClass(label: string) {
     height: 0;
   }
 
-  .eye-icon {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+  .toggle-icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    position: relative;
+    transition: background 120ms ease, opacity 120ms ease;
   }
 
-  .category-toggle .eye-off,
-  .settings-toggle .eye-off {
-    display: none;
+  .toggle-icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background: #080808;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 120ms ease;
   }
 
-  .category-toggle:has(.category-checkbox:not(:checked)) .eye-on,
-  .settings-toggle:has(input:not(:checked)) .eye-on {
-    display: none;
+  .category-toggle:has(.category-checkbox:not(:checked)) .toggle-icon,
+  .settings-toggle:has(input:not(:checked)) .toggle-icon {
+    background: rgba(255, 255, 255, 0.3);
   }
 
-  .category-toggle:has(.category-checkbox:not(:checked)) .eye-off,
-  .settings-toggle:has(input:not(:checked)) .eye-off {
-    display: inline-block;
+  .category-toggle:has(.category-checkbox:not(:checked)) .toggle-icon::after,
+  .settings-toggle:has(input:not(:checked)) .toggle-icon::after {
+    background: transparent;
+    width: 10px;
+    height: 2px;
+    border-radius: 1px;
+    background: rgba(255, 255, 255, 0.7);
   }
 
-  .category-checkbox:focus-visible + .eye-icon,
-  .settings-toggle input:focus-visible + .eye-icon {
+  .category-checkbox:focus-visible + .toggle-icon,
+  .settings-toggle input:focus-visible + .toggle-icon {
     outline: 2px solid #fff;
     outline-offset: 2px;
-    border-radius: 2px;
+  }
+
+  .settings-toggle .toggle-icon {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .settings-toggle .toggle-icon::after {
+    background: var(--color-ink);
+  }
+
+  .settings-toggle:has(input:not(:checked)) .toggle-icon {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .settings-toggle:has(input:not(:checked)) .toggle-icon::after {
+    background: rgba(255, 255, 255, 0.5);
   }
 
   .category-heading {
@@ -938,24 +969,6 @@ function getLabelSizeClass(label: string) {
     color: var(--color-fg);
   }
 
-  .settings-toggle {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: var(--color-fg);
-    opacity: 0.85;
-    transition: opacity 120ms ease;
-  }
-
-  .settings-toggle:hover {
-    opacity: 1;
-  }
-
-  .settings-toggle .eye-icon {
-    filter: none;
-  }
 
   .category-credit {
     margin: 5px 8px 0;
@@ -997,9 +1010,20 @@ function getLabelSizeClass(label: string) {
       font-size: 15px;
     }
 
-    .eye-icon {
-      width: 22px;
-      height: 22px;
+    .toggle-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .toggle-icon::after {
+      width: 8px;
+      height: 8px;
+    }
+
+    .category-toggle:has(.category-checkbox:not(:checked)) .toggle-icon::after,
+    .settings-toggle:has(input:not(:checked)) .toggle-icon::after {
+      width: 12px;
+      height: 2px;
     }
 
     .category-card p {
