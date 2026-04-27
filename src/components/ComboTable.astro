@@ -185,7 +185,7 @@ function getLabelSizeClass(label: string) {
         <li class="settings-row">
           <span class="settings-label">View</span>
           <div class="settings-segmented" role="group" aria-label="View">
-            <button type="button" class="seg-btn is-active" data-view="top" aria-pressed="true">Top 10</button>
+            <button type="button" class="seg-btn is-active" data-view="top" aria-pressed="true">Most common</button>
             <button type="button" class="seg-btn" data-view="all" aria-pressed="false">All</button>
           </div>
         </li>
@@ -193,14 +193,24 @@ function getLabelSizeClass(label: string) {
           <span class="settings-label">Medication</span>
           <label class="settings-toggle" title="Show MAOIs and SSRIs">
             <input type="checkbox" data-medication-toggle aria-label="Show medication" />
-            <span class="toggle-icon"></span>
+            <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+            </svg>
+            <svg class="eye-icon eye-off" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 4.27 3.28 3 21 20.72 19.73 22l-3.04-3.04A11.6 11.6 0 0 1 12 19c-7 0-11-7-11-7a18.9 18.9 0 0 1 4.06-4.94L2 4.27zm6.5 6.5L9.94 12.2A2 2 0 0 0 12 14a2 2 0 0 0 1.43-.6l1.42 1.42A4 4 0 0 1 8.5 10.77zM12 5c7 0 11 7 11 7a18.7 18.7 0 0 1-3.07 3.95l-2.97-2.97A4 4 0 0 0 12 8a4 4 0 0 0-1.98.53L7.6 6.13A11.5 11.5 0 0 1 12 5z"/>
+            </svg>
           </label>
         </li>
         <li class="settings-row">
-          <span class="settings-label">Highlight</span>
+          <span class="settings-label">Highlight on hover</span>
           <label class="settings-toggle" title="Toggle hover highlight effect">
-            <input type="checkbox" checked data-highlight-toggle aria-label="Highlight on hover" />
-            <span class="toggle-icon"></span>
+            <input type="checkbox" data-highlight-toggle aria-label="Highlight on hover" />
+            <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+            </svg>
+            <svg class="eye-icon eye-off" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 4.27 3.28 3 21 20.72 19.73 22l-3.04-3.04A11.6 11.6 0 0 1 12 19c-7 0-11-7-11-7a18.9 18.9 0 0 1 4.06-4.94L2 4.27zm6.5 6.5L9.94 12.2A2 2 0 0 0 12 14a2 2 0 0 0 1.43-.6l1.42 1.42A4 4 0 0 1 8.5 10.77zM12 5c7 0 11 7 11 7a18.7 18.7 0 0 1-3.07 3.95l-2.97-2.97A4 4 0 0 0 12 8a4 4 0 0 0-1.98.53L7.6 6.13A11.5 11.5 0 0 1 12 5z"/>
+            </svg>
           </label>
         </li>
       </ul>
@@ -218,7 +228,12 @@ function getLabelSizeClass(label: string) {
                 class="category-checkbox"
                 aria-label={`Show ${groupLabels[category.group]}`}
               />
-              <span class="toggle-icon"></span>
+              <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+              </svg>
+              <svg class="eye-icon eye-off" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 4.27 3.28 3 21 20.72 19.73 22l-3.04-3.04A11.6 11.6 0 0 1 12 19c-7 0-11-7-11-7a18.9 18.9 0 0 1 4.06-4.94L2 4.27zm6.5 6.5L9.94 12.2A2 2 0 0 0 12 14a2 2 0 0 0 1.43-.6l1.42 1.42A4 4 0 0 1 8.5 10.77zM12 5c7 0 11 7 11 7a18.7 18.7 0 0 1-3.07 3.95l-2.97-2.97A4 4 0 0 0 12 8a4 4 0 0 0-1.98.53L7.6 6.13A11.5 11.5 0 0 1 12 5z"/>
+              </svg>
             </label>
           </div>
           <p>{category.text}</p>
@@ -428,6 +443,10 @@ function getLabelSizeClass(label: string) {
         }
 
         if (highlightToggle instanceof HTMLInputElement) {
+          const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+          if (isTouchDevice) {
+            highlightToggle.checked = false;
+          }
           highlightToggle.addEventListener("change", () => {
             setHighlightEnabled(highlightToggle.checked);
           });
@@ -755,11 +774,6 @@ function getLabelSizeClass(label: string) {
       flex: 0 0 30%;
       scroll-snap-align: start;
     }
-
-    .category-settings {
-      flex: 0 0 10%;
-      min-width: 120px;
-    }
   }
 
   .category-card {
@@ -809,6 +823,7 @@ function getLabelSizeClass(label: string) {
     justify-content: center;
     cursor: pointer;
     flex-shrink: 0;
+    color: #fff;
   }
 
   .category-checkbox,
@@ -820,64 +835,42 @@ function getLabelSizeClass(label: string) {
     height: 0;
   }
 
-  .toggle-icon {
-    display: block;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-    position: relative;
-    transition: background 120ms ease, opacity 120ms ease;
+  .eye-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+    flex-shrink: 0;
   }
 
-  .toggle-icon::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 6px;
-    height: 6px;
-    background: #080808;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: transform 120ms ease;
+  .category-toggle .eye-off,
+  .settings-toggle .eye-off {
+    display: none;
   }
 
-  .category-toggle:has(.category-checkbox:not(:checked)) .toggle-icon,
-  .settings-toggle:has(input:not(:checked)) .toggle-icon {
-    background: rgba(255, 255, 255, 0.3);
+  .category-toggle:has(.category-checkbox:not(:checked)) .eye-on,
+  .settings-toggle:has(input:not(:checked)) .eye-on {
+    display: none;
   }
 
-  .category-toggle:has(.category-checkbox:not(:checked)) .toggle-icon::after,
-  .settings-toggle:has(input:not(:checked)) .toggle-icon::after {
-    background: transparent;
-    width: 10px;
-    height: 2px;
-    border-radius: 1px;
-    background: rgba(255, 255, 255, 0.7);
+  .category-toggle:has(.category-checkbox:not(:checked)) .eye-off,
+  .settings-toggle:has(input:not(:checked)) .eye-off {
+    display: inline-block;
   }
 
-  .category-checkbox:focus-visible + .toggle-icon,
-  .settings-toggle input:focus-visible + .toggle-icon {
+  .category-checkbox:focus-visible ~ .eye-icon,
+  .settings-toggle input:focus-visible ~ .eye-icon {
     outline: 2px solid #fff;
     outline-offset: 2px;
+    border-radius: 2px;
   }
 
-  .settings-toggle .toggle-icon {
-    background: rgba(255, 255, 255, 0.7);
+  .settings-toggle {
+    color: var(--color-fg);
   }
 
-  .settings-toggle .toggle-icon::after {
-    background: var(--color-ink);
-  }
-
-  .settings-toggle:has(input:not(:checked)) .toggle-icon {
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-  .settings-toggle:has(input:not(:checked)) .toggle-icon::after {
-    background: rgba(255, 255, 255, 0.5);
+  .settings-toggle .eye-icon {
+    filter: none;
   }
 
   .category-heading {
@@ -1010,20 +1003,9 @@ function getLabelSizeClass(label: string) {
       font-size: 15px;
     }
 
-    .toggle-icon {
-      width: 20px;
-      height: 20px;
-    }
-
-    .toggle-icon::after {
-      width: 8px;
-      height: 8px;
-    }
-
-    .category-toggle:has(.category-checkbox:not(:checked)) .toggle-icon::after,
-    .settings-toggle:has(input:not(:checked)) .toggle-icon::after {
-      width: 12px;
-      height: 2px;
+    .eye-icon {
+      width: 22px;
+      height: 22px;
     }
 
     .category-card p {
