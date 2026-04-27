@@ -1,6 +1,28 @@
 ---
 import ComboCell from "./ComboCell.astro";
-import { columns, groupLabels, type GroupName } from "../data/config";
+import {
+  columns,
+  groupLabels,
+  visibleGroupOrder,
+  type GroupName,
+} from "../data/config";
+
+const TOP_COUNT = 10;
+const topSubstances = new Set([
+  "lsd",
+  "mushrooms",
+  "cannabis",
+  "mdma",
+  "cocaine",
+  "alcohol",
+  "amphetamines",
+  "ketamine",
+  "benzodiazepines",
+  "opioids",
+]);
+
+const topColumns = columns.filter((c) => topSubstances.has(c.key));
+const extraColumns = columns.filter((c) => !topSubstances.has(c.key));
 
 const categorySummaries: Array<{ group: GroupName; text: string }> = [
   {
@@ -40,10 +62,14 @@ function getLabelSizeClass(label: string) {
 }
 ---
 
-<section class="table-wrap" aria-label="Drug combinations">
+<section class="table-wrap" aria-label="Drug combinations" data-expanded="false">
   <div class="shadow-left" aria-hidden="true" data-table-shadow></div>
   <div class="table-head-stick">
-    <div class="corner" aria-hidden="true"></div>
+    <div class="corner" aria-hidden="true">
+      <button class="expand-toggle" type="button" data-expand-toggle aria-pressed="false">
+        <span class="expand-label" data-expand-label>Show all</span>
+      </button>
+    </div>
     <div class="table-head-scroll" data-head-scroll>
       <table class="combos-table combos-table--head" role="presentation">
         <thead>
@@ -56,6 +82,8 @@ function getLabelSizeClass(label: string) {
                   data-substance-slug={col.slug}
                   data-col-key={col.key}
                   data-col-group={col.group}
+                  data-is-top={topSubstances.has(col.key) ? "true" : "false"}
+                  data-hover-cell
                 >
                   <a
                     href={`/${col.slug}`}
@@ -78,13 +106,15 @@ function getLabelSizeClass(label: string) {
       <tbody>
         {
           columns.map((row) => (
-            <tr>
+            <tr data-row-substance={row.key} data-is-top={topSubstances.has(row.key) ? "true" : "false"}>
               <th
                 scope="row"
                 class={`row-head group-${row.group} category-surface cell-text ${getLabelSizeClass(row.label)}`}
                 data-substance-slug={row.slug}
                 data-row-key={row.key}
                 data-row-group={row.group}
+                data-is-top={topSubstances.has(row.key) ? "true" : "false"}
+                data-hover-cell
               >
                 <a
                   href={`/${row.slug}`}
@@ -103,6 +133,8 @@ function getLabelSizeClass(label: string) {
                     data-col-key={col.key}
                     data-row-group={row.group}
                     data-col-group={col.group}
+                    data-is-top-row={topSubstances.has(row.key) ? "true" : "false"}
+                    data-is-top-col={topSubstances.has(col.key) ? "true" : "false"}
                     data-hover-cell
                   >
                     <a
@@ -120,6 +152,8 @@ function getLabelSizeClass(label: string) {
                     data-col-key={col.key}
                     data-row-group={row.group}
                     data-col-group={col.group}
+                    data-is-top-row={topSubstances.has(row.key) ? "true" : "false"}
+                    data-is-top-col={topSubstances.has(col.key) ? "true" : "false"}
                     data-hover-cell
                   >
                     <ComboCell
@@ -143,14 +177,18 @@ function getLabelSizeClass(label: string) {
   <div class="category-strip">
     {
       categorySummaries.map((category) => (
-        <button
-          class={`category-card group-${category.group} category-surface`}
-          type="button"
-          data-category={category.group}
-        >
-          <span class="category-heading">{groupLabels[category.group]}</span>
+        <div class={`category-card group-${category.group} category-surface`} data-category={category.group}>
+          <label class="category-toggle">
+            <input
+              type="checkbox"
+              checked
+              data-category-checkbox={category.group}
+              class="category-checkbox"
+            />
+            <span class="category-heading">{groupLabels[category.group]}</span>
+          </label>
           <p>{category.text}</p>
-        </button>
+        </div>
       ))
     }
   </div>
@@ -170,6 +208,8 @@ function getLabelSizeClass(label: string) {
 
         const bodyScroll = wrap.querySelector("[data-body-scroll]");
         const headScroll = wrap.querySelector("[data-head-scroll]");
+        const expandToggle = wrap.querySelector("[data-expand-toggle]");
+        const expandLabel = wrap.querySelector("[data-expand-label]");
         if (!(bodyScroll instanceof HTMLElement) || !(headScroll instanceof HTMLElement)) {
           return;
         }
@@ -189,6 +229,13 @@ function getLabelSizeClass(label: string) {
           categoryNav instanceof HTMLElement
             ? Array.from(categoryNav.querySelectorAll("[data-category]")).filter(
                 (control) => control instanceof HTMLElement
+              )
+            : [];
+
+        const categoryCheckboxes =
+          categoryNav instanceof HTMLElement
+            ? Array.from(categoryNav.querySelectorAll("[data-category-checkbox]")).filter(
+                (cb) => cb instanceof HTMLInputElement
               )
             : [];
 
@@ -229,6 +276,8 @@ function getLabelSizeClass(label: string) {
             cell.classList.toggle("is-highlight", highlighted);
             cell.classList.toggle("is-muted", !highlighted);
           });
+
+          scrollToCategory(category);
         };
 
         const scrollToCategory = (category) => {
@@ -253,7 +302,51 @@ function getLabelSizeClass(label: string) {
           }
         };
 
+        const toggleExpanded = () => {
+          const isExpanded = wrap.dataset.expanded === "true";
+          wrap.dataset.expanded = isExpanded ? "false" : "true";
+          if (expandToggle instanceof HTMLButtonElement) {
+            expandToggle.setAttribute("aria-pressed", isExpanded ? "false" : "true");
+          }
+          if (expandLabel instanceof HTMLElement) {
+            expandLabel.textContent = isExpanded ? "Show all" : "Top 10";
+          }
+        };
+
+        const updateCategoryVisibility = () => {
+          const hiddenCategories = new Set();
+          categoryCheckboxes.forEach((cb) => {
+            if (!cb.checked) {
+              hiddenCategories.add(cb.dataset.categoryCheckbox);
+            }
+          });
+          wrap.dataset.hiddenCategories = Array.from(hiddenCategories).join(",");
+          hoverCells.forEach((cell) => {
+            const rowGroup = cell.dataset.rowGroup;
+            const colGroup = cell.dataset.colGroup;
+            const hidden = hiddenCategories.has(rowGroup) || hiddenCategories.has(colGroup);
+            cell.classList.toggle("is-category-hidden", hidden);
+          });
+          const rows = wrap.querySelectorAll("[data-row-substance]");
+          rows.forEach((row) => {
+            if (!(row instanceof HTMLElement)) return;
+            const rowHead = row.querySelector("[data-row-group]");
+            if (!(rowHead instanceof HTMLElement)) return;
+            const rowGroup = rowHead.dataset.rowGroup;
+            const hidden = hiddenCategories.has(rowGroup);
+            row.classList.toggle("is-row-hidden", hidden);
+          });
+          const colHeads = wrap.querySelectorAll("[data-col-key][data-col-group]");
+          colHeads.forEach((col) => {
+            if (!(col instanceof HTMLElement)) return;
+            const colGroup = col.dataset.colGroup;
+            const hidden = hiddenCategories.has(colGroup);
+            col.classList.toggle("is-col-hidden", hidden);
+          });
+        };
+
         wrap.dataset.shadowInit = "true";
+        wrap.dataset.expanded = "false";
         update();
 
         bodyScroll.addEventListener("scroll", update, { passive: true });
@@ -261,18 +354,28 @@ function getLabelSizeClass(label: string) {
         wrap.addEventListener("pointerleave", clearHover);
         wrap.addEventListener("focusin", (event) => setHover(event.target));
         wrap.addEventListener("focusout", clearHover);
+
+        if (expandToggle instanceof HTMLButtonElement) {
+          expandToggle.addEventListener("click", toggleExpanded);
+        }
+
+        categoryCheckboxes.forEach((cb) => {
+          cb.addEventListener("change", updateCategoryVisibility);
+        });
+
         categoryControls.forEach((control) => {
           control.addEventListener("pointerover", () => {
+            const checkbox = control.querySelector("[data-category-checkbox]");
+            if (checkbox instanceof HTMLInputElement && !checkbox.checked) return;
             setCategoryHover(control.dataset.category);
           });
           control.addEventListener("pointerleave", clearHover);
           control.addEventListener("focus", () => {
+            const checkbox = control.querySelector("[data-category-checkbox]");
+            if (checkbox instanceof HTMLInputElement && !checkbox.checked) return;
             setCategoryHover(control.dataset.category);
           });
           control.addEventListener("blur", clearHover);
-          control.addEventListener("click", () => {
-            if (control.dataset.category) scrollToCategory(control.dataset.category);
-          });
         });
         window.addEventListener("scroll", update, { passive: true });
         window.addEventListener("resize", update, { passive: true });
@@ -293,6 +396,8 @@ function getLabelSizeClass(label: string) {
     --cell-gap: 2px;
     --row-head-size: calc(var(--cell-size) + var(--cell-gap));
     --ink: var(--color-ink);
+    --exit-duration: 350ms;
+    --enter-duration: 0ms;
     width: 100%;
     padding: 0;
     position: relative;
@@ -387,17 +492,24 @@ function getLabelSizeClass(label: string) {
 
   [data-hover-cell] {
     transition:
-      filter 120ms ease,
-      opacity 120ms ease;
+      filter var(--exit-duration) ease,
+      opacity var(--exit-duration) ease;
+    will-change: filter, opacity;
+  }
+
+  .table-wrap[data-hovering="true"] [data-hover-cell] {
+    transition:
+      filter var(--enter-duration) ease,
+      opacity var(--enter-duration) ease;
   }
 
   .table-wrap[data-hovering="true"] [data-hover-cell].is-muted {
-    filter: saturate(0.55) brightness(0.96);
-    opacity: 0.96;
+    filter: saturate(0.25) brightness(0.75);
+    opacity: 0.7;
   }
 
   .table-wrap[data-hovering="true"] [data-hover-cell].is-highlight {
-    filter: saturate(1.08) brightness(1.08);
+    filter: saturate(1.12) brightness(1.1);
     opacity: 1;
   }
 
@@ -406,6 +518,58 @@ function getLabelSizeClass(label: string) {
     width: var(--row-head-size);
     min-width: var(--row-head-size);
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .expand-toggle {
+    appearance: none;
+    border: 0;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-fg-mute);
+    font: inherit;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 120ms ease, color 120ms ease;
+  }
+
+  .expand-toggle:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: var(--color-fg);
+  }
+
+  .expand-toggle[aria-pressed="true"] {
+    background: rgba(255, 255, 255, 0.16);
+    color: var(--color-fg);
+  }
+
+  .table-wrap[data-expanded="false"] tr[data-is-top="false"] {
+    display: none;
+  }
+
+  .table-wrap[data-expanded="false"] th.col-head[data-is-top="false"] {
+    display: none;
+  }
+
+  .table-wrap[data-expanded="false"] td[data-is-top-row="false"],
+  .table-wrap[data-expanded="false"] td[data-is-top-col="false"],
+  .table-wrap[data-expanded="false"] th.diag[data-is-top-row="false"],
+  .table-wrap[data-expanded="false"] th.diag[data-is-top-col="false"] {
+    display: none;
+  }
+
+  .is-row-hidden {
+    display: none !important;
+  }
+
+  .is-col-hidden {
+    display: none !important;
   }
 
   .col-head {
@@ -520,7 +684,6 @@ function getLabelSizeClass(label: string) {
   }
 
   .category-card {
-    appearance: none;
     border: 0;
     border-radius: 0;
     min-height: 118px;
@@ -531,22 +694,72 @@ function getLabelSizeClass(label: string) {
     text-align: left;
     background-image: none;
     transition:
-      filter 120ms ease,
+      filter 350ms ease,
+      opacity 350ms ease,
       transform 120ms ease;
   }
 
   .category-card:hover,
-  .category-card:focus-visible {
+  .category-card:focus-within {
     filter: brightness(1.05) saturate(1.05);
+    transition-duration: 0ms;
   }
 
   .category-card:active {
     transform: translateY(1px);
   }
 
+  .category-card:has(.category-checkbox:not(:checked)) {
+    filter: saturate(0.3) brightness(0.7);
+    opacity: 0.6;
+  }
+
+  .category-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    margin-bottom: 8px;
+  }
+
+  .category-checkbox {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    transition: background 120ms ease, border-color 120ms ease;
+  }
+
+  .category-checkbox:checked {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 255, 255, 0.95);
+  }
+
+  .category-checkbox:checked::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 4px;
+    width: 3px;
+    height: 6px;
+    border: solid #080808;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .category-checkbox:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+
   .category-heading {
-    display: block;
-    margin: 0 0 10px;
+    display: inline;
+    margin: 0;
     color: #fff;
     font-size: clamp(13px, 0.95vw, 16px);
     font-weight: 800;
@@ -577,6 +790,11 @@ function getLabelSizeClass(label: string) {
       --cell-size: 45px;
     }
 
+    .expand-toggle {
+      font-size: 7px;
+      padding: 3px 5px;
+    }
+
     .category-strip {
       display: flex;
       gap: 2px;
@@ -597,6 +815,16 @@ function getLabelSizeClass(label: string) {
 
     .category-heading {
       font-size: 15px;
+    }
+
+    .category-checkbox {
+      width: 16px;
+      height: 16px;
+    }
+
+    .category-checkbox:checked::after {
+      top: 2px;
+      left: 5px;
     }
 
     .category-card p {
@@ -621,6 +849,13 @@ function getLabelSizeClass(label: string) {
 
     .label-md .label-text {
       font-size: 10.2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-hover-cell],
+    .category-card {
+      transition: none !important;
     }
   }
 </style>
