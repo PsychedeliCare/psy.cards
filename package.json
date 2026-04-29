@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "preview:cloudflare": "WRANGLER_LOG_PATH=$PWD/.wrangler/logs wrangler pages dev $PWD/dist --cwd ${TMPDIR:-/tmp} --port 8788 --compatibility-date 2026-04-23 --show-interactive-dev-session false",
     "astro": "astro",
     "generate-types": "wrangler types"
   },

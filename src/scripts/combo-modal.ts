@@ -99,6 +99,10 @@ function normalizeRootRoute(route: string | undefined): string {
   return withLeadingSlash.length > 1 ? withLeadingSlash.replace(/\/+$/, "") : "/";
 }
 
+function normalizePathname(pathname: string): string {
+  return pathname.length > 1 ? pathname.replace(/\/+$/, "") : "/";
+}
+
 function comboUrl(slug: string): string {
   return `${rootRoute}?combo=${encodeURIComponent(slug)}`;
 }
@@ -107,7 +111,7 @@ function getSubstanceTargetFromHref(href: string): ModalTarget | null {
   try {
     const url = new URL(href, window.location.origin);
     if (url.origin !== window.location.origin) return null;
-    const path = url.pathname;
+    const path = normalizePathname(url.pathname);
     if (path === "/" || path === rootRoute) return null;
     // Must be a single-segment path (no nested slashes).
     const segments = path.split("/").filter(Boolean);
@@ -135,13 +139,14 @@ function getComboTargetFromSlug(slug: string): ModalTarget | null {
 
 function getInitialModalTarget(): ModalTarget | null {
   const url = new URL(window.location.href);
+  const path = normalizePathname(url.pathname);
   const combo = url.searchParams.get("combo");
-  if (url.pathname === rootRoute && combo) {
+  if (path === rootRoute && combo) {
     return getComboTargetFromSlug(combo);
   }
 
-  if (url.pathname === "/" || url.pathname === rootRoute) return null;
-  const segments = url.pathname.split("/").filter(Boolean);
+  if (path === "/" || path === rootRoute) return null;
+  const segments = path.split("/").filter(Boolean);
   if (segments.length !== 1) return null;
   const slug = segments[0];
   if (!slug) return null;
@@ -151,7 +156,7 @@ function getInitialModalTarget(): ModalTarget | null {
   return {
     kind: "substance",
     slug,
-    url: url.pathname,
+    url: path,
   };
 }
 
@@ -414,9 +419,10 @@ function handleClose(): void {
 
   // If the URL currently represents a card, restore the table URL.
   const currentUrl = new URL(window.location.href);
+  const currentPath = normalizePathname(currentUrl.pathname);
   const hasModalUrl =
-    (currentUrl.pathname === rootRoute && currentUrl.searchParams.has("combo")) ||
-    (currentUrl.pathname !== rootRoute && currentUrl.pathname !== "/");
+    (currentPath === rootRoute && currentUrl.searchParams.has("combo")) ||
+    (currentPath !== rootRoute && currentPath !== "/");
   if (hasModalUrl) {
     if (history.state && history.state.psyModalPushed) {
       history.back();
