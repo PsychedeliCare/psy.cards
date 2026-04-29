@@ -1,0 +1,417 @@
+---
+import { groupLabels, type GroupName } from "../data/config";
+
+interface Props {
+  initialSubstanceSet?: "common" | "full";
+}
+
+const { initialSubstanceSet = "full" } = Astro.props;
+const isCommonInitial = initialSubstanceSet === "common";
+
+const categorySummaries: Array<{ group: GroupName; text: string }> = [
+  {
+    group: "stimulant",
+    text: "Racing heartbeat, sweating, energy, confidence, well-being, arousal, euphoria, lowered appetite, clenched jaws, dilated pupils, paranoia, anxiety, mood swings, impotence",
+  },
+  {
+    group: "empathogen",
+    text: "Belonging, arousal, understanding, sweating, serotonin syndrome, erectile dysfunction, warmth, overheat, overdose, risk of dehydration or overhydration",
+  },
+  {
+    group: "psychedelic",
+    text: "Visual disturbance, spiritual connection, loss of control, heightened senses, opened doors of perception, panic, mood swings, arousal, fear, vomiting, mental health harms",
+  },
+  {
+    group: "dissociative",
+    text: "Euphoria, numb, safe, pain-free, floaty, relaxed, protected, happy, unaware, unconscious, in a 'hole', perceptual disturbances, scared, disconnected, vulnerable",
+  },
+  {
+    group: "depressant",
+    text: "Relaxed, confident, care-free, risk-taking, unconscious, coma, euphoria, death, disinhibited behaviours, blackouts, sleep, vomiting, nausea, aggression, dependence",
+  },
+  {
+    group: "opioid",
+    text: "Confident, pain-free, safe, sleepy, warm, feel invincible, itchy, constricted pupils, stop breathing, nausea, vomiting, euphoria, sweating, overdose, dependence, withdrawal",
+  },
+  {
+    group: "cannabinoid",
+    text: "Calm, relaxed, chilled out, floaty, reduced pain, paranoia, anxiety, loss of memory, bloodshot eyes, increased sensuality, dry mouth, overexcited, changes to appetite",
+  },
+];
+
+const eyeOnPath =
+  "M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z";
+const eyeOffPath =
+  "M2 4.27 3.28 3 21 20.72 19.73 22l-3.04-3.04A11.6 11.6 0 0 1 12 19c-7 0-11-7-11-7a18.9 18.9 0 0 1 4.06-4.94L2 4.27zm6.5 6.5L9.94 12.2A2 2 0 0 0 12 14a2 2 0 0 0 1.43-.6l1.42 1.42A4 4 0 0 1 8.5 10.77zM12 5c7 0 11 7 11 7a18.7 18.7 0 0 1-3.07 3.95l-2.97-2.97A4 4 0 0 0 12 8a4 4 0 0 0-1.98.53L7.6 6.13A11.5 11.5 0 0 1 12 5z";
+---
+
+<nav class="category-nav" aria-label="Drug categories">
+  <div class="category-strip">
+    <div class="category-card category-settings" data-settings>
+      <div class="category-header">
+        <span class="category-heading">Settings</span>
+      </div>
+      <ul class="settings-list">
+        <li class="settings-row">
+          <span class="settings-label">View</span>
+          <div class="settings-segmented" role="group" aria-label="View">
+            <button
+              type="button"
+              class:list={["seg-btn", isCommonInitial && "is-active"]}
+              data-view="common"
+              aria-pressed={isCommonInitial ? "true" : "false"}
+            >
+              Most common
+            </button>
+            <button
+              type="button"
+              class:list={["seg-btn", !isCommonInitial && "is-active"]}
+              data-view="full"
+              aria-pressed={isCommonInitial ? "false" : "true"}
+            >
+              All
+            </button>
+          </div>
+        </li>
+        <li class="settings-row">
+          <span class="settings-label">Medication</span>
+          <label class="settings-toggle" title="Show MAOIs and SSRIs">
+            <input type="checkbox" data-medication-toggle aria-label="Show medication" />
+            <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
+              <path d={eyeOnPath}></path>
+            </svg>
+            <svg class="eye-icon eye-off" viewBox="0 0 24 24" aria-hidden="true">
+              <path d={eyeOffPath}></path>
+            </svg>
+          </label>
+        </li>
+        <li class="settings-row">
+          <span class="settings-label">Highlight on hover</span>
+          <label class="settings-toggle" title="Toggle hover highlight effect">
+            <input type="checkbox" data-highlight-toggle aria-label="Highlight on hover" />
+            <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
+              <path d={eyeOnPath}></path>
+            </svg>
+            <svg class="eye-icon eye-off" viewBox="0 0 24 24" aria-hidden="true">
+              <path d={eyeOffPath}></path>
+            </svg>
+          </label>
+        </li>
+      </ul>
+    </div>
+    {
+      categorySummaries.map((category) => (
+        <div class={`category-card group-${category.group} category-surface`} data-category={category.group}>
+          <div class="category-header">
+            <span class="category-heading">{groupLabels[category.group]}</span>
+            <label class="category-toggle" title={`Toggle ${groupLabels[category.group]}`}>
+              <input
+                type="checkbox"
+                checked
+                data-category-checkbox={category.group}
+                class="category-checkbox"
+                aria-label={`Show ${groupLabels[category.group]}`}
+              />
+              <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
+                <path d={eyeOnPath}></path>
+              </svg>
+              <svg class="eye-icon eye-off" viewBox="0 0 24 24" aria-hidden="true">
+                <path d={eyeOffPath}></path>
+              </svg>
+            </label>
+          </div>
+          <p>{category.text}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <p class="category-credit">
+    Categories adapted from <a href="https://www.thedrugswheel.com/" target="_blank" rel="noreferrer noopener">The Drugs Wheel</a>.
+  </p>
+</nav>
+
+<style>
+  .category-nav {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    z-index: 30;
+    width: min(100%, 1600px);
+    padding: 8px 0 max(6px, env(safe-area-inset-bottom));
+    background-color: color-mix(in oklab, var(--color-ink), transparent 6%);
+    box-shadow: 0 -14px 24px rgba(0, 0, 0, 0.28);
+    transform: translateX(-50%);
+  }
+
+  .category-strip {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .category-card {
+    border: 0;
+    border-radius: 0;
+    min-height: 118px;
+    padding: clamp(10px, 1.2vw, 16px) clamp(8px, 1vw, 14px);
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+    background-image: none;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 0 8px rgba(0, 0, 0, 0.35);
+    transition:
+      filter 350ms ease,
+      opacity 350ms ease,
+      transform 120ms ease;
+  }
+
+  .category-card:hover,
+  .category-card:focus-within {
+    filter: brightness(1.05) saturate(1.05);
+    transition-duration: 0ms;
+  }
+
+  .category-card:active {
+    transform: translateY(1px);
+  }
+
+  .category-card:has(.category-checkbox:not(:checked)) {
+    filter: saturate(0.3) brightness(0.7);
+    opacity: 0.6;
+  }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .category-toggle,
+  .settings-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    color: #fff;
+  }
+
+  .category-checkbox,
+  .settings-toggle input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+  }
+
+  .eye-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+    flex-shrink: 0;
+  }
+
+  .category-toggle .eye-off,
+  .settings-toggle .eye-off {
+    display: none;
+  }
+
+  .category-toggle:has(.category-checkbox:not(:checked)) .eye-on,
+  .settings-toggle:has(input:not(:checked)) .eye-on {
+    display: none;
+  }
+
+  .category-toggle:has(.category-checkbox:not(:checked)) .eye-off,
+  .settings-toggle:has(input:not(:checked)) .eye-off {
+    display: inline-block;
+  }
+
+  .category-checkbox:focus-visible ~ .eye-icon,
+  .settings-toggle input:focus-visible ~ .eye-icon {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .settings-toggle {
+    color: var(--color-fg);
+  }
+
+  .settings-toggle .eye-icon {
+    filter: none;
+  }
+
+  .category-heading {
+    display: inline;
+    margin: 0;
+    color: #fff;
+    font-size: clamp(13px, 0.95vw, 16px);
+    font-weight: 800;
+    line-height: 1.05;
+  }
+
+  .category-card p {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(10px, 0.72vw, 12px);
+    line-height: 1.22;
+  }
+
+  .category-settings {
+    background-color: var(--color-ink-3);
+    background-image: none;
+    cursor: default;
+    color: var(--color-fg);
+    text-shadow: none;
+  }
+
+  .category-settings:hover {
+    filter: none;
+  }
+
+  .category-settings:active {
+    transform: none;
+  }
+
+  .category-settings .category-heading {
+    color: var(--color-fg);
+  }
+
+  .settings-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .settings-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: clamp(10px, 0.72vw, 12px);
+    color: var(--color-fg);
+  }
+
+  .settings-label {
+    line-height: 1.2;
+  }
+
+  .settings-segmented {
+    display: inline-flex;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 3px;
+    padding: 2px;
+    gap: 2px;
+  }
+
+  .seg-btn {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--color-fg-mute);
+    font: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 7px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition:
+      background 120ms ease,
+      color 120ms ease;
+  }
+
+  .seg-btn:hover {
+    color: var(--color-fg);
+  }
+
+  .seg-btn.is-active {
+    background: rgba(255, 255, 255, 0.14);
+    color: var(--color-fg);
+  }
+
+  .category-credit {
+    margin: 5px 8px 0;
+    color: var(--color-fg-mute);
+    font-size: 10px;
+    line-height: 1.3;
+    text-align: left;
+  }
+
+  .category-credit a {
+    color: var(--color-fg);
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 1200px) and (min-width: 641px) {
+    .category-strip {
+      display: flex;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      padding-right: 10%;
+    }
+
+    .category-card {
+      flex: 0 0 30%;
+      scroll-snap-align: start;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .category-strip {
+      display: flex;
+      gap: 2px;
+      padding: 0 10% 2px 0;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .category-card {
+      flex: 0 0 90%;
+      min-height: 122px;
+      padding: 14px 12px;
+      scroll-snap-align: start;
+    }
+
+    .category-heading {
+      font-size: 15px;
+    }
+
+    .eye-icon {
+      width: 22px;
+      height: 22px;
+    }
+
+    .category-card p {
+      font-size: 12px;
+    }
+
+    .settings-row {
+      font-size: 13px;
+    }
+
+    .seg-btn {
+      font-size: 12px;
+      padding: 4px 8px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .category-card {
+      transition: none !important;
+    }
+  }
+</style>

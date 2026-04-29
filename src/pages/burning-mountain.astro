@@ -397,7 +397,7 @@ const languages = ["en", "de", "fr", "it"] as const;
     --event-max: 1600px;
     --content-max: 1180px;
     min-height: 100dvh;
-    padding: 0 0 48px;
+    padding: 0 0 190px;
     color: var(--color-fg);
     background:
       radial-gradient(circle at 8% 0%, rgba(232, 144, 9, 0.22), transparent 30rem),
@@ -687,38 +687,6 @@ const languages = ["en", "de", "fr", "it"] as const;
     --cell-size: clamp(30px, 4vw, 48px);
   }
 
-  .event-page :global(.category-nav) {
-    position: static;
-    left: auto;
-    bottom: auto;
-    z-index: 1;
-    width: 100%;
-    padding: 2px 0 0;
-    background-color: rgba(255, 255, 255, 0.94);
-    box-shadow: none;
-    transform: none;
-  }
-
-  .event-page :global(.category-strip) {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 2px;
-    margin-inline: 0 !important;
-    padding: 0 !important;
-    overflow: visible !important;
-    scroll-snap-type: none !important;
-  }
-
-  .event-page :global(.category-card) {
-    flex: none !important;
-    min-height: 220px;
-    scroll-snap-align: none !important;
-  }
-
-  .event-page :global(.category-card p) {
-    display: block;
-  }
-
   .section-heading--chart {
     padding: 0 16px;
   }
@@ -781,16 +749,9 @@ const languages = ["en", "de", "fr", "it"] as const;
       min-height: 0;
     }
 
-    .event-page :global(.category-card) {
-      min-height: 0;
-    }
   }
 
   @media (max-width: 640px) {
-    .event-page {
-      padding-bottom: 40px;
-    }
-
     .event-header {
       padding: 8px 12px 20px;
     }
@@ -846,13 +807,5 @@ const languages = ["en", "de", "fr", "it"] as const;
       --cell-size: 41px;
     }
 
-    .event-page :global(.category-card) {
-      min-height: 0;
-      padding: 12px 10px;
-    }
-
-    .event-page :global(.category-strip) {
-      gap: 2px;
-    }
   }
 </style>
