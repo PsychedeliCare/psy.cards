@@ -5,29 +5,12 @@ import Legend from "../components/Legend.astro";
 import Footer from "../components/Footer.astro";
 import Modal from "../components/Modal.astro";
 import SubstanceCard from "../components/SubstanceCard.astro";
-import ComboCard from "../components/ComboCard.astro";
-import { columns, sortPair, columnBySlug } from "../data/config";
-import { pairSlug, parsePairSlug } from "../data/slug";
+import { columns, columnBySlug } from "../data/config";
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-  const paths: Array<{ params: { slug: string } }> = [];
-
-  for (const col of columns) {
-    paths.push({ params: { slug: col.slug } });
-  }
-
-  for (let i = 0; i < columns.length; i++) {
-    for (let j = i + 1; j < columns.length; j++) {
-      const a = columns[i]!;
-      const b = columns[j]!;
-      const [keyA, keyB] = sortPair(a.key, b.key);
-      paths.push({ params: { slug: pairSlug(keyA, keyB) } });
-    }
-  }
-
-  return paths;
+  return columns.map((col) => ({ params: { slug: col.slug } }));
 }
 
 const { slug } = Astro.params;
@@ -35,30 +18,14 @@ if (!slug) {
   return Astro.redirect("/combos");
 }
 
-const isPair = slug.includes("~");
-
 let title = "Drug combinations — psy.cards";
 let labelledBy = "card-heading";
 let substanceKey: string | undefined;
-let pair: [string, string] | undefined;
 
-if (isPair) {
-  const parsed = parsePairSlug(slug);
-  if (!parsed) return Astro.redirect("/combos");
-  const colA = columnBySlug.get(parsed[0]);
-  const colB = columnBySlug.get(parsed[1]);
-  if (!colA || !colB) return Astro.redirect("/combos");
-  const [a, b] = sortPair(colA.key, colB.key);
-  pair = [a, b];
-  const aLabel = columns.find((c) => c.key === a)?.label ?? a;
-  const bLabel = columns.find((c) => c.key === b)?.label ?? b;
-  title = `${aLabel} + ${bLabel} — psy.cards`;
-} else {
-  const col = columnBySlug.get(slug);
-  if (!col) return Astro.redirect("/combos");
-  substanceKey = col.key;
-  title = `${col.label} — psy.cards`;
-}
+const col = columnBySlug.get(slug);
+if (!col) return Astro.redirect("/combos");
+substanceKey = col.key;
+title = `${col.label} — psy.cards`;
 ---
 
 <Layout title={title}>
@@ -90,13 +57,7 @@ if (isPair) {
 
   <div id="modal-slot" data-modal-slot>
     <Modal open={true} labelledBy={labelledBy}>
-      {
-        isPair && pair ? (
-          <ComboCard keyA={pair[0]} keyB={pair[1]} />
-        ) : (
-          substanceKey && <SubstanceCard substanceKey={substanceKey} />
-        )
-      }
+      {substanceKey && <SubstanceCard substanceKey={substanceKey} />}
     </Modal>
   </div>
 

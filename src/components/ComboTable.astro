@@ -3,26 +3,32 @@ import ComboCell from "./ComboCell.astro";
 import {
   columns,
   groupLabels,
-  visibleGroupOrder,
   type GroupName,
 } from "../data/config";
 
-const TOP_COUNT = 10;
-const topSubstances = new Set([
-  "mdma",
-  "caffeine",
+interface Props {
+  comboRoute?: string;
+  initialSubstanceSet?: "common" | "full";
+}
+
+const { comboRoute = "/combos", initialSubstanceSet = "full" } = Astro.props;
+const isCommonInitial = initialSubstanceSet === "common";
+
+const commonSubstanceKeys = new Set([
+  "amphetamines",
   "cocaine",
+  "caffeine",
+  "mdma",
   "lsd",
   "mushrooms",
-  "dmt",
-  "2c-x",
   "ketamine",
   "alcohol",
+  "ghb/gbl",
+  "benzodiazepines",
   "cannabis",
 ]);
 
-const topColumns = columns.filter((c) => topSubstances.has(c.key));
-const extraColumns = columns.filter((c) => !topSubstances.has(c.key));
+const isCommonSubstance = (key: string) => commonSubstanceKeys.has(key);
 
 const categorySummaries: Array<{ group: GroupName; text: string }> = [
   {
@@ -65,17 +71,17 @@ function getLabelSizeClass(label: string) {
 <section
   class="table-wrap"
   aria-label="Drug combinations"
-  data-expanded="false"
   data-medication="false"
   data-hover-enabled="true"
+  data-substance-set={initialSubstanceSet}
 >
   <div class="shadow-left" aria-hidden="true" data-table-shadow></div>
   <div class="table-head-stick">
+    <div class="corner" aria-hidden="true"></div>
     <div class="table-head-scroll" data-head-scroll>
       <table class="combos-table combos-table--head" role="presentation">
         <thead>
           <tr>
-            <th class="corner-cell" aria-hidden="true"></th>
             {
               columns.map((col) => (
                 <th
@@ -84,7 +90,7 @@ function getLabelSizeClass(label: string) {
                   data-substance-slug={col.slug}
                   data-col-key={col.key}
                   data-col-group={col.group}
-                  data-is-top={topSubstances.has(col.key) ? "true" : "false"}
+                  data-col-common={String(isCommonSubstance(col.key))}
                   data-hover-cell
                 >
                   <a
@@ -108,14 +114,14 @@ function getLabelSizeClass(label: string) {
       <tbody>
         {
           columns.map((row) => (
-            <tr data-row-substance={row.key} data-is-top={topSubstances.has(row.key) ? "true" : "false"}>
+            <tr data-row-substance={row.key} data-row-common={String(isCommonSubstance(row.key))}>
               <th
                 scope="row"
                 class={`row-head group-${row.group} category-surface cell-text ${getLabelSizeClass(row.label)}`}
                 data-substance-slug={row.slug}
                 data-row-key={row.key}
                 data-row-group={row.group}
-                data-is-top={topSubstances.has(row.key) ? "true" : "false"}
+                data-row-common={String(isCommonSubstance(row.key))}
                 data-hover-cell
               >
                 <a
@@ -135,8 +141,8 @@ function getLabelSizeClass(label: string) {
                     data-col-key={col.key}
                     data-row-group={row.group}
                     data-col-group={col.group}
-                    data-is-top-row={topSubstances.has(row.key) ? "true" : "false"}
-                    data-is-top-col={topSubstances.has(col.key) ? "true" : "false"}
+                    data-row-common={String(isCommonSubstance(row.key))}
+                    data-col-common={String(isCommonSubstance(col.key))}
                     data-hover-cell
                   >
                     <a
@@ -154,8 +160,8 @@ function getLabelSizeClass(label: string) {
                     data-col-key={col.key}
                     data-row-group={row.group}
                     data-col-group={col.group}
-                    data-is-top-row={topSubstances.has(row.key) ? "true" : "false"}
-                    data-is-top-col={topSubstances.has(col.key) ? "true" : "false"}
+                    data-row-common={String(isCommonSubstance(row.key))}
+                    data-col-common={String(isCommonSubstance(col.key))}
                     data-hover-cell
                   >
                     <ComboCell
@@ -163,6 +169,7 @@ function getLabelSizeClass(label: string) {
                       colKey={col.key}
                       rowLabel={row.label}
                       colLabel={col.label}
+                      comboRoute={comboRoute}
                     />
                   </td>
                 )
@@ -185,8 +192,22 @@ function getLabelSizeClass(label: string) {
         <li class="settings-row">
           <span class="settings-label">View</span>
           <div class="settings-segmented" role="group" aria-label="View">
-            <button type="button" class="seg-btn is-active" data-view="top" aria-pressed="true">Most common</button>
-            <button type="button" class="seg-btn" data-view="all" aria-pressed="false">All</button>
+            <button
+              type="button"
+              class:list={["seg-btn", isCommonInitial && "is-active"]}
+              data-view="common"
+              aria-pressed={isCommonInitial ? "true" : "false"}
+            >
+              Most common
+            </button>
+            <button
+              type="button"
+              class:list={["seg-btn", !isCommonInitial && "is-active"]}
+              data-view="full"
+              aria-pressed={isCommonInitial ? "false" : "true"}
+            >
+              All
+            </button>
           </div>
         </li>
         <li class="settings-row">
@@ -370,12 +391,15 @@ function getLabelSizeClass(label: string) {
             : null;
 
         const setView = (view) => {
-          wrap.dataset.expanded = view === "all" ? "true" : "false";
+          const substanceSet = view === "full" ? "full" : "common";
+          wrap.dataset.substanceSet = substanceSet;
           viewButtons.forEach((btn) => {
-            const active = btn.dataset.view === view;
+            const active = btn.dataset.view === substanceSet;
             btn.classList.toggle("is-active", active);
             btn.setAttribute("aria-pressed", active ? "true" : "false");
           });
+          bodyScroll.scrollLeft = 0;
+          update();
         };
 
         const setMedication = (visible) => {
@@ -420,10 +444,14 @@ function getLabelSizeClass(label: string) {
         };
 
         wrap.dataset.shadowInit = "true";
-        wrap.dataset.expanded = "false";
+        setView(wrap.dataset.substanceSet === "common" ? "common" : "full");
         update();
 
         bodyScroll.addEventListener("scroll", update, { passive: true });
+        wrap.addEventListener("combo-table:viewchange", () => {
+          bodyScroll.scrollLeft = 0;
+          update();
+        });
         wrap.addEventListener("pointerover", (event) => setHover(event.target));
         wrap.addEventListener("pointerleave", clearHover);
         wrap.addEventListener("focusin", (event) => setHover(event.target));
@@ -486,21 +514,32 @@ function getLabelSizeClass(label: string) {
 
 <style>
   .table-wrap {
-    --cell-size: clamp(28px, 4.2vw, 52px);
     --cell-gap: 2px;
-    --row-head-size: var(--cell-size);
+    --fluid-cell-size: calc((100cqi - 56px) / 27);
+    --table-cell-size: max(64px, var(--fluid-cell-size));
+    --cell-size: var(--table-cell-size);
+    --row-head-size: calc(var(--table-cell-size) + var(--cell-gap));
     --ink: var(--color-ink);
     --exit-duration: 350ms;
     --enter-duration: 0ms;
     width: 100%;
     padding: 0;
     position: relative;
+    container-type: inline-size;
+  }
+
+  .table-wrap[data-substance-set="common"] {
+    --fluid-cell-size: calc((100cqi - 26px) / 12);
+    --table-cell-size: max(72px, var(--fluid-cell-size));
   }
 
   .table-head-stick {
     position: sticky;
     top: 0;
     z-index: 8;
+    display: grid;
+    grid-template-columns: var(--row-head-size) 1fr;
+    align-items: stretch;
     background-color: var(--ink);
   }
 
@@ -528,9 +567,9 @@ function getLabelSizeClass(label: string) {
 
   .shadow-left {
     position: absolute;
-    top: calc(var(--cell-size) + var(--cell-gap) * 2);
+    top: calc(var(--table-cell-size) + var(--cell-gap) * 2);
     left: var(--row-head-size);
-    height: calc((var(--cell-size) + var(--cell-gap)) * 25);
+    height: calc((var(--table-cell-size) + var(--cell-gap)) * 25);
     width: 14px;
     pointer-events: none;
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.28), transparent);
@@ -563,22 +602,27 @@ function getLabelSizeClass(label: string) {
     border-collapse: separate;
     border-spacing: var(--cell-gap);
     background-color: var(--ink);
-    font-size: clamp(13px, 1.6vw, 22px);
+    font-size: clamp(15px, calc(var(--table-cell-size) * 0.2), 28px);
     table-layout: fixed;
     width: max-content;
-    min-width: 100%;
+    min-width: max-content;
   }
 
   .combos-table th,
   .combos-table td {
     padding: 0;
     margin: 0;
-    width: var(--cell-size);
-    height: var(--cell-size);
-    min-width: var(--cell-size);
-    max-width: var(--cell-size);
+    width: var(--table-cell-size);
+    height: var(--table-cell-size);
+    min-width: var(--table-cell-size);
+    max-width: var(--table-cell-size);
     box-sizing: border-box;
     overflow: hidden;
+  }
+
+  .table-wrap[data-substance-set="common"] [data-col-common="false"],
+  .table-wrap[data-substance-set="common"] [data-row-common="false"] {
+    display: none;
   }
 
   [data-hover-cell] {
@@ -604,28 +648,11 @@ function getLabelSizeClass(label: string) {
     opacity: 1;
   }
 
-  .corner-cell {
+  .corner {
     background-color: var(--ink);
-    width: var(--cell-size);
-    min-width: var(--cell-size);
-    position: sticky;
-    left: 0;
-    z-index: 4;
-  }
-
-  .table-wrap[data-expanded="false"] tr[data-is-top="false"]:not([data-row-substance="maois"]):not([data-row-substance="ssris"]) {
-    display: none;
-  }
-
-  .table-wrap[data-expanded="false"] th.col-head[data-is-top="false"]:not([data-col-key="maois"]):not([data-col-key="ssris"]) {
-    display: none;
-  }
-
-  .table-wrap[data-expanded="false"] td[data-is-top-row="false"]:not([data-row-key="maois"]):not([data-row-key="ssris"]),
-  .table-wrap[data-expanded="false"] td[data-is-top-col="false"]:not([data-col-key="maois"]):not([data-col-key="ssris"]),
-  .table-wrap[data-expanded="false"] th.diag[data-is-top-row="false"]:not([data-row-key="maois"]):not([data-row-key="ssris"]),
-  .table-wrap[data-expanded="false"] th.diag[data-is-top-col="false"]:not([data-col-key="maois"]):not([data-col-key="ssris"]) {
-    display: none;
+    width: var(--row-head-size);
+    min-width: var(--row-head-size);
+    height: 100%;
   }
 
   .table-wrap[data-medication="false"] tr[data-row-substance="maois"],
@@ -649,20 +676,20 @@ function getLabelSizeClass(label: string) {
   }
 
   .col-head {
-    height: var(--cell-size);
-    min-height: var(--cell-size);
-    width: var(--cell-size);
-    min-width: var(--cell-size);
+    height: var(--table-cell-size);
+    min-height: var(--table-cell-size);
+    width: var(--table-cell-size);
+    min-width: var(--table-cell-size);
     padding: 0;
   }
 
   .label-link {
     display: flex;
-    width: var(--cell-size);
-    height: var(--cell-size);
+    width: 100%;
+    height: 100%;
     align-items: center;
     justify-content: center;
-    padding: 2px;
+    padding: clamp(6px, calc(var(--table-cell-size) * 0.09), 14px);
     text-decoration: none;
     color: inherit;
     overflow: hidden;
@@ -673,28 +700,32 @@ function getLabelSizeClass(label: string) {
   .row-head .label-text {
     display: inline-block;
     font-weight: 600;
-    font-size: clamp(9px, 0.85vw, 12px);
+    font-size: clamp(13px, calc(var(--table-cell-size) * 0.13), 18px);
     letter-spacing: 0.02em;
-    line-height: 1.05;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    line-height: 1.08;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: break-word;
     max-width: 100%;
+  }
+
+  .col-head .label-link,
+  .row-head .label-link {
+    justify-content: flex-start;
   }
 
   .row-head {
     position: sticky;
     left: 0;
     z-index: 3;
-    width: var(--cell-size);
-    min-width: var(--cell-size);
+    width: var(--table-cell-size);
+    min-width: var(--table-cell-size);
     background-clip: padding-box;
     box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.04);
   }
 
   .row-head .row-link {
-    font-size: clamp(9px, 0.85vw, 12px);
+    font-size: inherit;
   }
 
   .row-head .row-link:hover,
@@ -717,23 +748,23 @@ function getLabelSizeClass(label: string) {
     display: inline-block;
     transform: rotate(-45deg);
     font-weight: 600;
-    font-size: clamp(9px, 0.85vw, 12px);
+    font-size: clamp(11px, calc(var(--table-cell-size) * 0.115), 16px);
     white-space: nowrap;
     line-height: 1;
     opacity: 0.9;
   }
 
   .label-xs .label-text {
-    font-size: clamp(7px, 0.6vw, 9px);
+    font-size: clamp(10.5px, calc(var(--table-cell-size) * 0.09), 13.5px);
     letter-spacing: 0;
   }
 
   .label-sm .label-text {
-    font-size: clamp(8px, 0.7vw, 10px);
+    font-size: clamp(12px, calc(var(--table-cell-size) * 0.105), 15px);
   }
 
   .label-md .label-text {
-    font-size: clamp(9px, 0.85vw, 12px);
+    font-size: clamp(13px, calc(var(--table-cell-size) * 0.12), 16.5px);
   }
 
   .cell-td {
@@ -978,7 +1009,13 @@ function getLabelSizeClass(label: string) {
 
   @media (max-width: 640px) {
     .table-wrap {
-      --cell-size: 45px;
+      --fluid-cell-size: 54px;
+      --table-cell-size: 54px;
+    }
+
+    .table-wrap[data-substance-set="common"] {
+      --fluid-cell-size: 58px;
+      --table-cell-size: 58px;
     }
 
     .category-strip {
@@ -1026,11 +1063,11 @@ function getLabelSizeClass(label: string) {
     }
 
     .combos-table {
-      font-size: 15px;
+      font-size: 17px;
     }
 
     .label-xs .label-text {
-      font-size: 9px;
+      font-size: 9.5px;
     }
 
     .label-sm .label-text {
@@ -1038,7 +1075,7 @@ function getLabelSizeClass(label: string) {
     }
 
     .label-md .label-text {
-      font-size: 12px;
+      font-size: 11.5px;
     }
   }
 

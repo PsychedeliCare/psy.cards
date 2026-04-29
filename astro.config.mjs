@@ -2,7 +2,6 @@
 import { defineConfig } from 'astro/config';
 
 import mdx from '@astrojs/mdx';
-import cloudflare from '@astrojs/cloudflare';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -10,7 +9,6 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: "https://psy.cards",
   integrations: [mdx()],
-  adapter: cloudflare(),
 
   vite: {
     plugins: [tailwindcss()]

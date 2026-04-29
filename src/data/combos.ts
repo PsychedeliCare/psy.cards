@@ -1,7 +1,7 @@
 import combosData from "../../drugs/combos.json";
 import { resolveStatus, type Definition } from "./definitions";
 
-type Source = {
+export type Source = {
   author: string;
   title: string;
   url: string;

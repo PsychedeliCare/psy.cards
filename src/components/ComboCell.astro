@@ -9,20 +9,22 @@ interface Props {
   colKey: string;
   rowLabel: string;
   colLabel: string;
+  comboRoute?: string;
 }
 
-const { rowKey, colKey, rowLabel, colLabel } = Astro.props;
+const { rowKey, colKey, rowLabel, colLabel, comboRoute = "/combos" } = Astro.props;
 
 const { definition } = getInteraction(rowKey, colKey);
 const [aKey, bKey] = sortPair(rowKey, colKey);
-const href = `/${pairSlug(aKey, bKey)}`;
+const slug = pairSlug(aKey, bKey);
+const href = `${comboRoute}?combo=${slug}`;
 const ariaLabel = `${rowLabel} + ${colLabel}: ${definition.label}`;
 ---
 
 <a
   href={href}
   class={`combo-cell status-${definition.statusKey} status-surface cell-text`}
-  data-combo={href}
+  data-combo={slug}
   data-row={rowKey}
   data-col={colKey}
   aria-label={ariaLabel}

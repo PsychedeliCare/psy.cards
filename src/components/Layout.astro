@@ -5,11 +5,13 @@ import PreviewBanner from "./PreviewBanner.astro";
 interface Props {
   title?: string;
   description?: string;
+  colorScheme?: "dark" | "light" | "normal";
 }
 
 const {
   title = "psy.cards — Drug combinations",
-  description = "Responsive harm-reduction reference for drug interactions, sourced from TripSit.",
+  description = "A quick harm-reduction guide to common drug combinations, based on TripSit information.",
+  colorScheme = "dark",
 } = Astro.props;
 
 const ogImage = new URL("/assets/opengraph.jpg", Astro.site ?? Astro.url.origin).href;
@@ -20,7 +22,7 @@ const ogImage = new URL("/assets/opengraph.jpg", Astro.site ?? Astro.url.origin)
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="color-scheme" content={colorScheme} />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="description" content={description} />
     <title>{title}</title>

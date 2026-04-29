@@ -2,7 +2,7 @@
 	"compatibility_date": "2026-04-23",
 	"compatibility_flags": ["global_fetch_strictly_public"],
 	"name": "psy-cards",
-	"main": "@astrojs/cloudflare/entrypoints/server",
+	"main": "src/worker.js",
 	"routes": [
 		{
 			"pattern": "psy.cards",
@@ -11,10 +11,18 @@
 		{
 			"pattern": "www.psy.cards",
 			"custom_domain": true
+		},
+		{
+			"pattern": "burning-mountain.psy.cards",
+			"custom_domain": true
+		},
+		{
+			"pattern": "bm.psy.cards",
+			"custom_domain": true
 		}
 	],
 	"assets": {
-		"directory": "./dist/client",
+		"directory": "./dist",
 		"binding": "ASSETS"
 	},
 	"observability": {
