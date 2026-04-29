@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "preview:cloudflare": "WRANGLER_LOG_PATH=$PWD/.wrangler/logs wrangler pages dev $PWD/dist --cwd ${TMPDIR:-/tmp} --port 8788 --compatibility-date 2026-04-23 --show-interactive-dev-session false",
+    "preview:cloudflare": "WRANGLER_LOG_PATH=$PWD/.wrangler/logs wrangler dev --config $PWD/wrangler.jsonc --cwd ${TMPDIR:-/tmp} --local --port 8788 --compatibility-date 2026-04-23 --show-interactive-dev-session false",
+    "smoke:worker-routes": "node scripts/smoke-worker-routes.mjs",
     "astro": "astro",
     "generate-types": "wrangler types"
   },

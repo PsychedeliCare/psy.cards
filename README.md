@@ -46,16 +46,11 @@ All commands run from the project root:
 | `pnpm dev` | Start the local dev server |
 | `pnpm build` | Build the production site |
 | `pnpm preview` | Preview the production build locally |
-| `pnpm preview:cloudflare` | Preview the built `dist` directory with the Cloudflare Pages worker |
+| `pnpm preview:cloudflare` | Preview the built `dist` directory with the Cloudflare Worker and assets binding |
+| `pnpm smoke:worker-routes` | Check custom-domain Worker routing without starting a server |
 
-To debug custom-domain behavior locally, run `pnpm build` and then `pnpm preview:cloudflare`.
-You can exercise the deployed host routing with headers, for example:
-
-```sh
-curl -I -H 'Host: bm.psy.cards' http://127.0.0.1:8788/
-curl -I -H 'Host: burning-mountain.psy.cards' http://127.0.0.1:8788/
-curl -I -H 'Host: psy.cards' http://127.0.0.1:8788/burning-mountain/
-```
+To debug Cloudflare behavior locally, run `pnpm build` and then `pnpm preview:cloudflare`.
+For fast custom-domain routing checks, run `pnpm smoke:worker-routes`.
 
 ## Acknowledgements
 
