@@ -418,13 +418,10 @@ const languages = ["en", "de", "fr", "it"] as const;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     gap: 8px 12px;
     margin: 0 0 18px;
     padding: 8px 0;
-    background: color-mix(in oklab, #fffdf6, transparent 8%);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
   }
 
   .segmented-control {
@@ -799,7 +796,7 @@ const languages = ["en", "de", "fr", "it"] as const;
     }
 
     .event-controls {
-      justify-content: flex-end;
+      justify-content: flex-start;
       margin-bottom: 16px;
       padding: 6px 0;
     }
