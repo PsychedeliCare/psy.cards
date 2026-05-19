@@ -8,8 +8,8 @@ import { legendDefinitions } from "../data/definitions";
     {
       legendDefinitions.map((def) => (
         <li class={`status-${def.statusKey}`}>
-          <span class="chip status-surface">
-            <Icon name={def.icon} size="0.95em" />
+          <span class="chip status-icon-chip status-surface">
+            <Icon name={def.icon} size="1.05em" />
           </span>
           <span class="body">
             <span class="label">{def.label}</span>
@@ -46,20 +46,7 @@ import { legendDefinitions } from "../data/definitions";
   }
 
   .chip {
-    flex: 0 0 auto;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    color: currentColor;
-    color-scheme: dark;
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
-  }
-
-  .chip :global(svg) {
-    color: #fff;
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+    --status-icon-chip-size: 30px;
   }
 
   .body {

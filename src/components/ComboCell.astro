@@ -19,42 +19,156 @@ const [aKey, bKey] = sortPair(rowKey, colKey);
 const slug = pairSlug(aKey, bKey);
 const href = `${comboRoute}?combo=${slug}`;
 const ariaLabel = `${rowLabel} + ${colLabel}: ${definition.label}`;
+const tooltipId = `combo-tooltip-${slug}-${rowKey}-${colKey}`.replace(
+  /[^a-zA-Z0-9_-]/g,
+  "-"
+);
 ---
 
-<a
-  href={href}
-  class={`combo-cell status-${definition.statusKey} status-surface cell-text`}
-  data-combo={slug}
-  data-row={rowKey}
-  data-col={colKey}
-  aria-label={ariaLabel}
-  title={ariaLabel}
->
-  <Icon name={definition.icon} size="1.05em" />
-</a>
+<div class={`combo-cell status-${definition.statusKey} cell-text`}>
+  <a
+    href={href}
+    class="combo-cell__hit-area"
+    data-combo={slug}
+    data-row={rowKey}
+    data-col={colKey}
+    aria-label={ariaLabel}
+    aria-describedby={tooltipId}
+  >
+    <span class="combo-cell__icon status-icon-chip status-surface" aria-hidden="true">
+      <Icon name={definition.icon} size="1.05em" />
+    </span>
+  </a>
+  <span class="combo-tooltip" id={tooltipId} role="tooltip">
+    <span class="combo-tooltip__label">{definition.label}</span>
+    <a
+      href={href}
+      class="combo-tooltip__more"
+      data-combo={slug}
+      aria-label={`More about ${ariaLabel}`}
+    >
+      More…
+    </a>
+  </span>
+</div>
 
 <style>
   .combo-cell {
+    --status-icon-chip-size: clamp(30px, calc(var(--cell-size, 64px) * 0.5), 52px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: var(--cell-size, 32px);
+    aspect-ratio: 1 / 1;
+    box-sizing: border-box;
+    border: clamp(2px, calc(var(--cell-size, 64px) * 0.035), 3px) solid
+      color-mix(in oklab, var(--hue, var(--color-unknown)), transparent 42%);
+    background: transparent;
+    transition:
+      border-color 120ms ease,
+      filter 120ms ease;
+  }
+
+  .combo-cell__hit-area {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
-    min-height: var(--cell-size, 32px);
-    aspect-ratio: 1 / 1;
+    color: inherit;
     text-decoration: none;
-    transition:
-      filter 120ms ease,
-      transform 120ms ease;
   }
 
   .combo-cell:hover {
+    border-color: color-mix(in oklab, var(--hue, var(--color-unknown)), transparent 18%);
     filter: brightness(1.18) saturate(1.1);
   }
 
-  .combo-cell:focus-visible {
-    outline: 2px solid #fff;
-    outline-offset: -3px;
+  .combo-cell:hover .combo-cell__icon {
+    transform: scale(1.08);
+  }
+
+  .combo-cell:focus-within {
+    outline: 2px solid rgba(255, 255, 255, 0.88);
+    outline-offset: -5px;
+    border-color: color-mix(in oklab, var(--hue, var(--color-unknown)), white 10%);
     filter: brightness(1.18);
+  }
+
+  .combo-cell:focus-within .combo-cell__icon {
+    transform: scale(1.08);
+  }
+
+  .combo-cell__hit-area:focus-visible,
+  .combo-tooltip__more:focus-visible {
+    outline: none;
+  }
+
+  .combo-tooltip {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: max-content;
+    max-width: 220px;
+    padding: 8px 10px;
+    color: var(--color-fg);
+    background: color-mix(in oklab, var(--color-ink), transparent 5%);
+    border: 1px solid color-mix(in oklab, var(--hue, var(--color-unknown)), transparent 32%);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 4px);
+    transition:
+      opacity 120ms ease,
+      transform 120ms ease;
+  }
+
+  .combo-tooltip::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 8px;
+    height: 8px;
+    background: inherit;
+    border-right: 1px solid color-mix(in oklab, var(--hue, var(--color-unknown)), transparent 32%);
+    border-bottom: 1px solid color-mix(in oklab, var(--hue, var(--color-unknown)), transparent 32%);
+    transform: translate(-50%, -4px) rotate(45deg);
+  }
+
+  .combo-cell:hover .combo-tooltip,
+  .combo-cell:focus-within .combo-tooltip {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+  }
+
+  .combo-tooltip__label {
+    color: var(--color-fg);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.1;
+    text-shadow: none;
+    white-space: nowrap;
+  }
+
+  .combo-tooltip__more {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.1;
+    text-decoration-color: color-mix(in oklab, var(--hue, var(--color-unknown)), white 12%);
+    text-underline-offset: 3px;
+    text-shadow: none;
+    white-space: nowrap;
   }
 </style>

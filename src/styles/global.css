@@ -266,6 +266,27 @@
   );
 }
 
+.status-icon-chip {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--status-icon-chip-size, 30px);
+  height: var(--status-icon-chip-size, 30px);
+  border-radius: 999px;
+  color: #fff;
+  color-scheme: dark;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 1px 3px rgba(0, 0, 0, 0.18);
+  transition: transform 120ms ease;
+}
+
+.status-icon-chip svg {
+  color: #fff;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+}
+
 .category-surface {
   background-color: var(--hue, var(--color-unknown));
   background-image: linear-gradient(

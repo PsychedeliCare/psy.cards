@@ -653,6 +653,16 @@ function getLabelSizeClass(label: string) {
     background-color: var(--ink);
   }
 
+  .combos-table td.cell-td {
+    position: relative;
+    overflow: visible;
+  }
+
+  .combos-table td.cell-td:hover,
+  .combos-table td.cell-td:focus-within {
+    z-index: 6;
+  }
+
   @media (max-width: 640px) {
     .table-wrap {
       --fluid-cell-size: 54px;
