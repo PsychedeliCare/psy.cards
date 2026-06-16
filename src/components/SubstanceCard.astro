@@ -118,8 +118,14 @@ const hasStructure = Boolean(getSubstanceStructure(substanceKey));
   {
     (onsetVal || durationVal || afterVal) && (
       <section class="timings">
+        <h3>Timing</h3>
+        <TimingChart
+          formattedOnset={formattedOnset}
+          formattedDuration={formattedDuration}
+          peak={peakVal}
+          label={`${displayName} effect timeline`}
+        />
         <div class="timings-table">
-          <h3>Timing</h3>
           <dl>
             {onsetVal && (
               <div>
@@ -153,12 +159,6 @@ const hasStructure = Boolean(getSubstanceStructure(substanceKey));
             )}
           </dl>
         </div>
-        <TimingChart
-          formattedOnset={formattedOnset}
-          formattedDuration={formattedDuration}
-          peak={peakVal}
-          label={`${displayName} effect timeline`}
-        />
       </section>
     )
   }

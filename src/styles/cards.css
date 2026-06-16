@@ -268,11 +268,11 @@ html[data-color-scheme="light"] .smiles-citation {
 .substance-card h3,
 .combo-card h3 {
   margin: 0 0 8px;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-fg-mute);
+  letter-spacing: 0.06em;
+  color: var(--color-fg);
 }
 
 .substance-card .tags {
@@ -343,28 +343,199 @@ html[data-color-scheme="light"] .smiles-citation {
 
 .substance-card .timings {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(50%, 1.25fr);
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   align-items: end;
   gap: 10px 18px;
 }
 
+.substance-card .timings > h3 {
+  grid-column: 1 / -1;
+  margin-bottom: 2px;
+}
+
 .substance-card .timings-table {
   min-width: 0;
+  padding-bottom: 16px;
 }
 
 .timing-chart {
   --timing-chart-color: var(--color-fg);
-  align-self: end;
+  --timing-chart-axis-font-size: 9px;
+  align-self: stretch;
   width: 100%;
   min-width: 0;
   margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.timing-chart-axis-labels {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 14px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.timing-chart-axis-labels--top {
+  top: 4px;
+}
+
+.timing-chart-axis-labels--bottom {
+  bottom: 2px;
+}
+
+.timing-chart-axis-label-slot {
+  position: absolute;
+  bottom: 0;
+  max-width: 46%;
+  pointer-events: none;
+}
+
+.timing-chart-axis-label-slot--interactive {
+  pointer-events: auto;
+}
+
+.timing-chart-axis-label {
+  display: inline-block;
+  font-size: var(--timing-chart-axis-font-size);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--color-fg-mute);
+  white-space: nowrap;
+}
+
+.timing-chart-axis-start-btn {
+  padding: 1px 5px;
+  font-family: inherit;
+  font-size: var(--timing-chart-axis-font-size);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--color-fg-mute);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-fg) 20%, transparent);
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.timing-chart-axis-start-btn:hover,
+.timing-chart-axis-start-btn:focus-visible {
+  color: var(--color-fg);
+  border-color: color-mix(in srgb, var(--color-fg) 36%, transparent);
+  background: color-mix(in srgb, var(--color-fg) 6%, transparent);
+}
+
+.timing-chart-picker {
+  position: fixed;
+  z-index: 200;
+  min-width: min(240px, calc(100vw - 24px));
+  max-width: calc(100vw - 24px);
+}
+
+.timing-chart-picker[hidden] {
+  display: none !important;
+}
+
+.timing-chart-picker-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--color-fg) 18%, transparent);
+  border-radius: 10px;
+  background: var(--color-ink-2);
+  box-shadow: 0 10px 28px color-mix(in srgb, #000 28%, transparent);
+}
+
+.timing-chart-picker-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.timing-chart-picker-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-fg-mute);
+}
+
+.timing-chart-start-input,
+.timing-chart-timezone-select {
+  width: 100%;
+  padding: 6px 8px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--color-fg);
+  background: var(--color-ink-3);
+  border: 1px solid color-mix(in srgb, var(--color-fg) 16%, transparent);
+  border-radius: 6px;
+}
+
+.timing-chart-timezone-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.timing-chart-geolocate-label {
+  font-size: 10px;
+  color: var(--color-fg-mute);
+}
+
+.timing-chart-geolocate-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  color: var(--color-fg);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-fg) 20%, transparent);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.timing-chart-geolocate-btn:hover,
+.timing-chart-geolocate-btn:focus-visible {
+  border-color: color-mix(in srgb, var(--color-fg) 40%, transparent);
+  background: color-mix(in srgb, var(--color-fg) 6%, transparent);
+}
+
+.timing-chart-geolocate-btn:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.timing-chart-geolocate-hint,
+.timing-chart-geolocate-status {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.45;
+  color: var(--color-fg-mute);
+}
+
+.timing-chart-geolocate-status {
+  color: color-mix(in srgb, var(--color-safe) 72%, var(--color-fg-mute));
 }
 
 .timing-chart-svg {
   display: block;
   width: 100%;
-  height: 92px;
-  overflow: visible;
+  height: auto;
+  aspect-ratio: 228 / 98;
+  overflow: hidden;
 }
 
 .timing-chart-axis line {
@@ -372,14 +543,36 @@ html[data-color-scheme="light"] .smiles-citation {
   stroke-width: 1;
 }
 
-.timing-chart-tick text {
-  fill: var(--color-fg-mute);
-  font-size: 9px;
-  font-weight: 500;
-}
-
 .timing-chart-area {
   pointer-events: none;
+}
+
+.timing-chart-daynight-segment {
+  pointer-events: none;
+}
+
+.timing-chart-daynight-segment--day {
+  fill: color-mix(in srgb, var(--color-fg) 3.5%, transparent);
+}
+
+.timing-chart-daynight-segment--night {
+  fill: color-mix(in srgb, var(--color-fg) 8%, transparent);
+}
+
+.timing-chart-sun-event-line {
+  stroke: color-mix(in srgb, var(--color-fg) 18%, transparent);
+  stroke-width: 1;
+}
+
+.timing-chart-sun-icon,
+.timing-chart-moon-icon {
+  color: color-mix(in srgb, var(--color-fg) 58%, transparent);
+  pointer-events: visiblePainted;
+}
+
+.timing-chart-sun-icon path,
+.timing-chart-sun-icon circle {
+  vector-effect: non-scaling-stroke;
 }
 
 .timing-chart-line {
@@ -403,12 +596,17 @@ html[data-color-scheme="light"] .smiles-citation {
   stroke-width: 1.5;
 }
 
-.timing-chart-marker text {
-  fill: var(--color-fg-mute);
-  font-size: 8.5px;
+.timing-chart-marker text,
+.timing-chart-marker-label {
+  fill: #fff;
+  font-size: 7px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+}
+
+.timing-chart-marker-pill {
+  fill: rgb(0 0 0 / 0.55);
 }
 
 .timing-chart-sr {
@@ -423,9 +621,10 @@ html[data-color-scheme="light"] .smiles-citation {
   border: 0;
 }
 
-@media (max-width: 340px) {
+@media (max-width: 480px) {
   .substance-card .timings {
     grid-template-columns: 1fr;
+    align-items: stretch;
   }
 }
 

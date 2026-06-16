@@ -21,6 +21,8 @@ const chartData = buildTimingChartData({
   peak,
   duration: formattedDuration,
 });
+
+const pickerId = `timing-picker-${label.replace(/\s+/g, "-").toLowerCase()}`;
 ---
 
 {
@@ -32,12 +34,61 @@ const chartData = buildTimingChartData({
     >
       <svg
         class="timing-chart-svg"
-        viewBox="0 0 228 92"
+        viewBox="0 0 228 98"
         role="img"
         aria-hidden="true"
       />
+      <div
+        class="timing-chart-picker"
+        id={pickerId}
+        data-timing-picker
+        hidden
+      >
+        <div
+          class="timing-chart-picker-panel"
+          role="dialog"
+          aria-label="Choose start time"
+          data-timing-picker-panel
+        >
+          <label class="timing-chart-picker-field">
+            <span class="timing-chart-picker-label">Start time</span>
+            <input
+              type="datetime-local"
+              class="timing-chart-start-input"
+              data-timing-start-input
+            />
+          </label>
+          <label class="timing-chart-picker-field">
+            <span class="timing-chart-picker-label">Timezone</span>
+            <select
+              class="timing-chart-timezone-select"
+              data-timing-timezone-select
+            />
+          </label>
+          <div class="timing-chart-timezone-row">
+            <span class="timing-chart-geolocate-label">Sun times</span>
+            <button
+              type="button"
+              class="timing-chart-geolocate-btn"
+              data-timing-geolocate
+              aria-label="Use precise location for sunrise and sunset"
+            >
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7m0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5"
+                />
+              </svg>
+            </button>
+          </div>
+          <p class="timing-chart-geolocate-hint">
+            Use your location for more accurate sunrise and sunset times.
+          </p>
+          <p class="timing-chart-geolocate-status" data-timing-geolocate-status hidden />
+        </div>
+      </div>
       <figcaption class="timing-chart-sr">
-        Approximate effect intensity over time, starting now.
+        Approximate effect intensity over time from the chosen start time.
       </figcaption>
     </figure>
   )
