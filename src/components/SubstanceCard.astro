@@ -1,4 +1,6 @@
 ---
+import { Icon } from "@twodft/astro-icon/components";
+import DoseChart from "./DoseChart.astro";
 import {
   getDrugByKey,
   isDrugClass,
@@ -6,6 +8,8 @@ import {
   getDisplayName,
 } from "../data/drugs";
 import { columnByKey } from "../data/config";
+import { getEffectIcon } from "../data/effect-icons";
+import { toTitleCase } from "../lib/text";
 
 interface Props {
   substanceKey: string;
@@ -21,18 +25,6 @@ const classNote = getClassDescription(substanceKey);
 const categories = drug?.categories ?? drug?.properties?.categories ?? [];
 const props = drug?.properties ?? {};
 const summary = props.summary ?? classNote;
-
-type DoseRow = { route: string; level: string; amount: string };
-const doseRows: DoseRow[] = [];
-if (drug?.formatted_dose) {
-  for (const [route, dose] of Object.entries(drug.formatted_dose)) {
-    if (!dose) continue;
-    for (const [level, amount] of Object.entries(dose)) {
-      if (typeof amount !== "string") continue;
-      doseRows.push({ route, level, amount });
-    }
-  }
-}
 
 function firstDurationValue(
   d: Record<string, unknown> | undefined
@@ -65,6 +57,9 @@ const afterUnit = (
 const effects = drug?.formatted_effects ?? [];
 const links = drug?.links ?? undefined;
 const pweffects = drug?.pweffects ?? undefined;
+const pwEffectEntries =
+  pweffects ? Object.entries(pweffects) : [];
+const hasEffects = effects.length > 0 || pwEffectEntries.length > 0;
 ---
 
 <article
@@ -149,41 +144,13 @@ const pweffects = drug?.pweffects ?? undefined;
   }
 
   {
-    doseRows.length > 0 && (
+    drug?.formatted_dose && (
       <section class="doses">
         <h3>Doses</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Route</th>
-              <th>Level</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {doseRows.map((r) => (
-              <tr>
-                <td>{r.route}</td>
-                <td>{r.level}</td>
-                <td>{r.amount}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {drug?.dose_note && <p class="note">{drug.dose_note}</p>}
-      </section>
-    )
-  }
-
-  {
-    effects.length > 0 && (
-      <section class="effects">
-        <h3>Effects</h3>
-        <ul class="pills">
-          {effects.map((e) => (
-            <li>{e}</li>
-          ))}
-        </ul>
+        <DoseChart
+          formattedDose={drug.formatted_dose}
+          doseNote={drug.dose_note}
+        />
       </section>
     )
   }
@@ -217,18 +184,68 @@ const pweffects = drug?.pweffects ?? undefined;
   }
 
   {
-    pweffects && Object.keys(pweffects).length > 0 && (
-      <section class="pw">
-        <h3>PsychonautWiki effects</h3>
-        <ul class="inline-links">
-          {Object.entries(pweffects).map(([label, href]) => (
-            <li>
-              <a href={href} target="_blank" rel="noreferrer noopener">
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
+    hasEffects && (
+      <section class="effects">
+        <h3>Effects</h3>
+        {
+          effects.length > 0 && (
+            <ul class="pills">
+              {effects.map((e) => (
+                <li>
+                  <Icon
+                    name={`tabler:${getEffectIcon(e)}`}
+                    class="effect-icon"
+                    aria-hidden="true"
+                  />
+                  {toTitleCase(e)}
+                </li>
+              ))}
+            </ul>
+          )
+        }
+        {
+          pwEffectEntries.length > 0 && (
+            <div class="pw-effects-well">
+              <details class="pw-effects">
+                <summary class="pw-effects-toggle">
+                  <span class="pw-effects-toggle-main">
+                    <img
+                      src="/assets/psychonautwiki-logo.png"
+                      alt=""
+                      width="72"
+                      height="20"
+                      decoding="async"
+                    />
+                    <span class="pw-effects-label">
+                      View PsychonautWiki effects
+                    </span>
+                    <span class="pw-effects-count">
+                      ({pwEffectEntries.length})
+                    </span>
+                  </span>
+                  <Icon
+                    name="tabler:chevron-down"
+                    class="pw-effects-chevron"
+                    aria-hidden="true"
+                  />
+                </summary>
+                <ul class="pills">
+                  {pwEffectEntries.map(([label, href]) => (
+                    <li>
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        {label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </div>
+          )
+        }
       </section>
     )
   }

@@ -227,6 +227,347 @@
   letter-spacing: 0.06em;
 }
 
+/* ---------- Dose chart (PsychonautWiki-inspired) ---------- */
+
+.dose-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.dose-route {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dose-route-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dose-route-icon {
+  width: 15px;
+  height: 15px;
+  color: var(--color-fg-mute);
+  flex: none;
+}
+
+.dose-route-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-fg-mute);
+}
+
+.dose-route-unit {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--color-fg-mute);
+  opacity: 0.8;
+}
+
+/* Chart / table display toggle. */
+.dose-view-toggle {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dose-view-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dose-view-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 20px;
+  border-radius: 5px;
+  color: var(--color-fg-mute);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.dose-view-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.dose-view-btn:hover {
+  color: var(--color-fg);
+}
+
+.dose-view-radio:checked + .dose-view-btn {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-fg);
+}
+
+.dose-view-radio:focus-visible + .dose-view-btn {
+  outline: 2px solid var(--color-fg-mute);
+  outline-offset: 1px;
+}
+
+/* Toggle the chart vs the table view. */
+.dose-table {
+  display: none;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.dose-route:has(.dose-view-radio--table:checked) .dose-plot {
+  display: none;
+}
+
+.dose-route:has(.dose-view-radio--table:checked) .dose-table {
+  display: table;
+}
+
+.dose-table th,
+.dose-table td {
+  text-align: left;
+  padding: 5px 10px 5px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-weight: 400;
+}
+
+.dose-table th {
+  font-weight: 500;
+  text-transform: lowercase;
+}
+
+.dose-table td {
+  color: var(--color-fg);
+  text-align: right;
+}
+
+.dose-table-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 7px;
+  border-radius: 999px;
+  background: var(--bar-color);
+  vertical-align: baseline;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Plot: layered chart with a continuous track behind colored ranges. */
+.dose-plot {
+  position: relative;
+  height: 64px;
+  padding-inline: 16px;
+}
+
+/* Continuous track line behind every range. */
+.dose-line {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 24px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dose-segments {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 0;
+  bottom: 0;
+}
+
+.dose-segment {
+  position: absolute;
+  left: var(--left);
+  width: var(--width);
+  top: 0;
+  bottom: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* Hover a range -> fade the others. */
+.dose-segments:hover .dose-segment {
+  opacity: 0.25;
+}
+
+.dose-segments:hover .dose-segment:hover {
+  opacity: 1;
+}
+
+/* Category label, kept high so it never clashes with the numbers. */
+.dose-cat {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: lowercase;
+  white-space: nowrap;
+  line-height: 1;
+  color: var(--bar-color);
+}
+
+.dose-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 22px;
+  height: 10px;
+  background: var(--bar-color);
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+/* Open-ended ranges: solid, then chopped colour that fades out. */
+.dose-bar-open {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: none;
+  -webkit-mask-image: linear-gradient(to right, #000 50%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 50%, transparent 100%);
+}
+
+.dose-bar-open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 45%;
+  background: repeating-linear-gradient(
+    to right,
+    var(--bar-color) 0 4px,
+    transparent 4px 8px
+  );
+  -webkit-mask-image: linear-gradient(to right, #000, transparent);
+  mask-image: linear-gradient(to right, #000, transparent);
+}
+
+/* Dotted bracket spanning a range's start -> end. */
+.dose-range {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 34px;
+  height: 8px;
+  border: 1px dotted var(--bar-color);
+  border-top: 0;
+  border-radius: 0 0 3px 3px;
+  opacity: 0.55;
+}
+
+.dose-segment[data-open] .dose-range {
+  border-right: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Start / end numbers, anchored to the range edges. */
+.dose-bound {
+  position: absolute;
+  top: 46px;
+  left: 0;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-fg);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.dose-bound-end {
+  left: 100%;
+}
+
+.dose-segment:first-child .dose-bound-start {
+  transform: none;
+}
+
+.dose-segment:last-child .dose-bound-end {
+  transform: translateX(-100%);
+}
+
+.dose-bound-unit {
+  margin-left: 1px;
+  font-size: 9px;
+  color: var(--color-fg-mute);
+}
+
+.dose-bound-plus {
+  margin-left: 1px;
+  font-weight: 700;
+  color: var(--bar-color);
+}
+
+.dose-chart-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.dose-fallback-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.dose-fallback-table th,
+.dose-fallback-table td {
+  text-align: left;
+  padding: 5px 10px 5px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-weight: 400;
+}
+
+.dose-fallback-table th {
+  color: #6eb5e8;
+  text-transform: lowercase;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.dose-fallback-table thead th {
+  color: var(--color-fg-mute);
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+
+.dose-charts .note {
+  margin: 2px 0 0;
+}
+
 .substance-card .note {
   margin: 6px 0 0;
   font-size: 12.5px;
@@ -244,9 +585,115 @@
 }
 
 .substance-card .pills li {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   padding: 3px 9px;
   font-size: 12px;
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+.substance-card .pills .effect-icon {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  opacity: 0.5;
+  color: var(--color-fg-mute);
+}
+
+.substance-card .pw-effects-well {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.substance-card .pw-effects {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+}
+
+.substance-card .pw-effects:not([open]) {
+  gap: 0;
+}
+
+.substance-card .pw-effects-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  color: var(--color-fg);
+  font-size: 12.5px;
+  line-height: 1.3;
+}
+
+.substance-card .pw-effects-toggle-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.substance-card .pw-effects-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.substance-card .pw-effects-toggle:hover {
+  color: var(--color-safe);
+}
+
+.substance-card .pw-effects-toggle img {
+  display: block;
+  width: auto;
+  height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.substance-card .pw-effects-label {
+  font-weight: 500;
+}
+
+.substance-card .pw-effects-count {
+  color: var(--color-fg-mute);
+  font-weight: 400;
+}
+
+.substance-card .pw-effects-chevron {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: transform 0.15s ease;
+}
+
+.substance-card .pw-effects[open] .pw-effects-chevron {
+  transform: rotate(180deg);
+}
+
+.substance-card .pw-effects .pills {
+  margin: 0;
+}
+
+.substance-card .pills a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.substance-card .pills a:hover {
+  color: var(--color-safe);
 }
 
 .substance-card .inline-links,

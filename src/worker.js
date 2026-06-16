@@ -34,6 +34,12 @@ export default {
 			}
 		}
 
+		// Temporary: send main-site home to the combos chart.
+		if (url.pathname === "/" || url.pathname === "/index.html") {
+			url.pathname = "/combos";
+			return Response.redirect(url, 302);
+		}
+
 		return env.ASSETS.fetch(request);
 	},
 };

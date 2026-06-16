@@ -10,6 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "preview:cloudflare": "WRANGLER_LOG_PATH=$PWD/.wrangler/logs wrangler dev --config $PWD/wrangler.jsonc --cwd ${TMPDIR:-/tmp} --local --port 8788 --compatibility-date 2026-04-23 --show-interactive-dev-session false",
+    "import:wikipedia-combos": "node scripts/import-wikipedia-combos.mjs",
     "smoke:worker-routes": "node scripts/smoke-worker-routes.mjs",
     "astro": "astro",
     "generate-types": "wrangler types"
@@ -17,8 +18,11 @@
   "dependencies": {
     "@astrojs/cloudflare": "^13.2.0",
     "@astrojs/mdx": "^5.0.4",
+    "@iconify-json/tabler": "^1.2.35",
     "@tailwindcss/vite": "^4.2.4",
+    "@twodft/astro-icon": "^1.2.4",
     "astro": "^6.1.9",
+    "fuse.js": "^7.4.2",
     "tailwindcss": "^4.2.4",
     "wrangler": "^4.84.1"
   },

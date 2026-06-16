@@ -106,3 +106,20 @@ export const groupLabels: Record<GroupName, string> = {
   opioid: "Opioids",
   cannabinoid: "Cannabinoids",
 };
+
+/** Substances shown in the table's "common" set and search default results. */
+export const commonSubstanceKeys = [
+  "amphetamines",
+  "cocaine",
+  "caffeine",
+  "mdma",
+  "lsd",
+  "mushrooms",
+  "ketamine",
+  "alcohol",
+  "ghb/gbl",
+  "benzodiazepines",
+  "cannabis",
+] as const;
+
+export const commonSubstanceKeySet = new Set<string>(commonSubstanceKeys);

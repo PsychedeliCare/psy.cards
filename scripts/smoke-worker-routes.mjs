@@ -31,6 +31,16 @@ const checks = [
 		status: 200,
 		assetPath: "/burning-mountain/",
 	},
+	{
+		url: "https://psy.cards/",
+		status: 302,
+		location: "https://psy.cards/combos",
+	},
+	{
+		url: "https://www.psy.cards/index.html",
+		status: 302,
+		location: "https://www.psy.cards/combos",
+	},
 ];
 
 const assetPaths = [];

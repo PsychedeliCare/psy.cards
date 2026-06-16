@@ -1,0 +1,173 @@
+---
+import { Icon } from "@twodft/astro-icon/components";
+import type { Dose } from "../../drugs/types/tripsit";
+import {
+  buildDoseCharts,
+  formatDoseTick,
+  getRouteIcon,
+  getRouteLabel,
+  type DoseChart,
+} from "../lib/dose-chart";
+
+interface Props {
+  formattedDose: Dose;
+  doseNote?: string;
+}
+
+const { formattedDose, doseNote } = Astro.props;
+const charts = buildDoseCharts(formattedDose);
+const uid = crypto.randomUUID().slice(0, 8);
+
+function isChart(chart: (typeof charts)[number]): chart is DoseChart {
+  return chart.chartable;
+}
+---
+
+<div class="dose-charts">
+  {
+    charts.map((chart, index) =>
+      isChart(chart) ? (
+        <div class="dose-route">
+          <div class="dose-route-head">
+            <Icon
+              name={`tabler:${getRouteIcon(chart.route)}`}
+              class="dose-route-icon"
+              aria-hidden="true"
+            />
+            <span class="dose-route-label">{getRouteLabel(chart.route)}</span>
+            <span class="dose-route-unit">{chart.unit}</span>
+
+            <div class="dose-view-toggle" role="radiogroup" aria-label="Dose display">
+              <input
+                type="radio"
+                name={`dose-view-${uid}-${index}`}
+                id={`dose-view-chart-${uid}-${index}`}
+                class="dose-view-radio dose-view-radio--chart"
+                checked
+              />
+              <label
+                class="dose-view-btn"
+                for={`dose-view-chart-${uid}-${index}`}
+                title="Chart"
+              >
+                <Icon name="tabler:chart-bar" aria-hidden="true" />
+                <span class="sr-only">Chart</span>
+              </label>
+              <input
+                type="radio"
+                name={`dose-view-${uid}-${index}`}
+                id={`dose-view-table-${uid}-${index}`}
+                class="dose-view-radio dose-view-radio--table"
+              />
+              <label
+                class="dose-view-btn"
+                for={`dose-view-table-${uid}-${index}`}
+                title="Table"
+              >
+                <Icon name="tabler:table" aria-hidden="true" />
+                <span class="sr-only">Table</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="dose-plot" aria-hidden="true">
+            <span class="dose-line" />
+
+            <div class="dose-segments">
+              {chart.segments.map((segment) => (
+                <div
+                  class="dose-segment"
+                  data-level={segment.level}
+                  data-open={segment.openEnd ? "" : undefined}
+                  style={`--left: ${segment.left}%; --width: ${segment.width}%; --bar-color: ${segment.color}`}
+                  title={`${segment.label}: ${segment.amount}`}
+                >
+                  <span class="dose-cat">{segment.label}</span>
+                  <span
+                    class:list={[
+                      "dose-bar",
+                      { "dose-bar-open": segment.openEnd },
+                    ]}
+                  />
+                  <span class="dose-range" />
+                  <span class="dose-bound dose-bound-start">
+                    {formatDoseTick(segment.start)}
+                    <span class="dose-bound-unit">{chart.unit}</span>
+                  </span>
+                  <span class="dose-bound dose-bound-end">
+                    {formatDoseTick(segment.end)}
+                    <span class="dose-bound-unit">{chart.unit}</span>
+                    {segment.openEnd && <span class="dose-bound-plus">+</span>}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <table class="dose-table" aria-hidden="true">
+            <tbody>
+              {chart.segments.map((segment) => (
+                <tr>
+                  <th scope="row">
+                    <span
+                      class="dose-table-dot"
+                      style={`--bar-color: ${segment.color}`}
+                    />
+                    {segment.label}
+                  </th>
+                  <td>{segment.amount}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <table class="dose-chart-sr">
+            <caption>{getRouteLabel(chart.route)} dosage ranges</caption>
+            <thead>
+              <tr>
+                <th scope="col">Level</th>
+                <th scope="col">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {chart.segments.map((segment) => (
+                <tr>
+                  <th scope="row">{segment.label}</th>
+                  <td>{segment.amount}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div class="dose-route dose-route-fallback">
+          <div class="dose-route-head">
+            <Icon
+              name={`tabler:${getRouteIcon(chart.route)}`}
+              class="dose-route-icon"
+              aria-hidden="true"
+            />
+            <span class="dose-route-label">{getRouteLabel(chart.route)}</span>
+          </div>
+          <table class="dose-fallback-table">
+            <thead>
+              <tr>
+                <th scope="col">Level</th>
+                <th scope="col">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {chart.rows.map((row) => (
+                <tr>
+                  <th scope="row">{row.level}</th>
+                  <td>{row.amount}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )
+    )
+  }
+  {doseNote && <p class="note">{doseNote}</p>}
+</div>
