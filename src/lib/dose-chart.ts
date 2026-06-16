@@ -82,19 +82,15 @@ export type DoseSegment = {
   start: number;
   end: number;
   openEnd: boolean;
-};
-
-export type DoseTick = {
-  value: number;
-  left: number;
-  position: "above" | "below";
+  isPoint: boolean;
+  showStart: boolean;
+  showEnd: boolean;
 };
 
 export type DoseChart = {
   route: string;
   chartable: true;
   unit: string;
-  ticks: DoseTick[];
   scaleMin: number;
   scaleMax: number;
   segments: DoseSegment[];
@@ -243,7 +239,6 @@ function buildRouteChart(route: string, dosage: Dosage): DoseRouteChart {
   }
 
   const sortedBoundaries = [...boundaryValues].sort((a, b) => a - b);
-  const scaleMin = sortedBoundaries[0];
 
   let scaleMax = sortedBoundaries[sortedBoundaries.length - 1];
   for (const row of rows) {
@@ -251,29 +246,25 @@ function buildRouteChart(route: string, dosage: Dosage): DoseRouteChart {
       scaleMax = Math.max(scaleMax, niceScaleMax(row.parsed.min * 1.2));
     }
   }
-  scaleMax = niceScaleMax(Math.max(scaleMax, scaleMin * 1.5));
+  scaleMax = niceScaleMax(scaleMax);
 
-  const tickValues = [...boundaryValues].sort((a, b) => a - b);
-  if (
-    rows.some((r) => r.parsed.openEnd) &&
-    tickValues[tickValues.length - 1] < scaleMax
-  ) {
-    tickValues.push(scaleMax);
-  }
+  const scaleMin = 0;
 
-  const ticks: DoseTick[] = tickValues.map((value, index) => ({
-    value,
-    left: toPercent(value, scaleMin, scaleMax),
-    position: index % 2 === 0 ? "below" : "above",
-  }));
-
-  const segments: DoseSegment[] = rows.map((row) => {
+  const segments: DoseSegment[] = rows.map((row, index) => {
+    const start = row.parsed.min;
     const endValue = row.parsed.openEnd
       ? scaleMax
       : (row.parsed.max ?? row.parsed.min);
     const left = toPercent(row.parsed.min, scaleMin, scaleMax);
     const right = toPercent(endValue, scaleMin, scaleMax);
-    const width = Math.max(right - left, row.parsed.min === endValue ? 2 : 0.5);
+    const isPoint = start === endValue;
+    const width = isPoint ? 0 : Math.max(right - left, 0.5);
+    const prevRow = index > 0 ? rows[index - 1] : undefined;
+    const prevEnd = prevRow
+      ? prevRow.parsed.openEnd
+        ? scaleMax
+        : (prevRow.parsed.max ?? prevRow.parsed.min)
+      : undefined;
 
     return {
       level: row.level,
@@ -283,9 +274,12 @@ function buildRouteChart(route: string, dosage: Dosage): DoseRouteChart {
       left,
       width,
       center: left + width / 2,
-      start: row.parsed.min,
+      start,
       end: endValue,
       openEnd: row.parsed.openEnd,
+      isPoint,
+      showStart: prevEnd === undefined || start !== prevEnd,
+      showEnd: !isPoint,
     };
   });
 
@@ -293,7 +287,6 @@ function buildRouteChart(route: string, dosage: Dosage): DoseRouteChart {
     route,
     chartable: true,
     unit,
-    ticks,
     scaleMin,
     scaleMax,
     segments,

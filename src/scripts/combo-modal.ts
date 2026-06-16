@@ -11,6 +11,8 @@
  * - Handles Escape, backdrop click, and popstate.
  */
 
+import { initStatusTooltips } from "./status-tooltip.ts";
+
 const CARD_ROUTE_PREFIX = "/card";
 const COMBO_DATA_ROUTE_PREFIX = "/combo-data";
 const DEFAULT_ROOT_ROUTE = "/combos";
@@ -221,6 +223,45 @@ function createElement<K extends keyof HTMLElementTagNameMap>(
   return el;
 }
 
+function createMoleculeFigure(keys: [string, string]): HTMLElement {
+  const figure = createElement("div", "molecule-figure");
+  figure.setAttribute("aria-hidden", "true");
+  figure.dataset.moleculeLayout = "combo";
+  figure.dataset.substanceKeys = keys.join("|");
+
+  for (let index = 0; index < 2; index++) {
+    if (index > 0) {
+      const plus = createElement("span", "molecule-plus");
+      plus.setAttribute("aria-hidden", "true");
+      plus.textContent = "+";
+      figure.appendChild(plus);
+    }
+
+    const slot = createElement("div", "molecule-slot");
+    slot.dataset.moleculeSlot = "";
+    const frame = createElement("div", "molecule-frame");
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.classList.add("molecule-svg");
+    frame.appendChild(svg);
+    slot.appendChild(frame);
+    figure.appendChild(slot);
+  }
+
+  return figure;
+}
+
+function createSmilesCitation(): HTMLElement {
+  const citation = createElement("p", "smiles-citation");
+  appendText(citation, "Structure rendered with ");
+  const link = createElement("a");
+  link.href = "https://pubs.acs.org/doi/10.1021/acs.jcim.7b00425";
+  link.target = "_blank";
+  link.rel = "noreferrer noopener";
+  link.textContent = "SmilesDrawer";
+  citation.appendChild(link);
+  return citation;
+}
+
 function renderComboCard(data: ComboCardData): HTMLElement {
   const [a, b] = data.substances;
   const article = createElement(
@@ -230,7 +271,9 @@ function renderComboCard(data: ComboCardData): HTMLElement {
   article.dataset.cardType = "combo";
   article.dataset.comboKeys = `${a.key}|${b.key}`;
 
-  const header = createElement("header");
+  article.appendChild(createMoleculeFigure([a.key, b.key]));
+
+  const header = createElement("header", "card-header");
   const statusBar = createElement("div", "status-bar status-surface");
   statusBar.setAttribute("aria-hidden", "true");
   header.appendChild(statusBar);
@@ -247,20 +290,36 @@ function renderComboCard(data: ComboCardData): HTMLElement {
     }
 
     const chip = createElement(
-      "span",
+      "a",
       `chip group-${substance.group ?? "unknown"} category-surface cell-text`
     );
+    chip.href = `/${substance.slug}`;
+    chip.dataset.substance = `/${substance.slug}`;
     chip.textContent = substance.label;
     pair.appendChild(chip);
   }
 
   const statusLine = createElement("div", "status-line");
-  const statusChip = createElement("span", "status-chip status-surface cell-text");
+  const statusTip = createElement("span", "status-tip");
+  const tooltipId = `status-tooltip-${data.slug}`;
+
+  const statusChip = createElement("button", "status-chip status-surface cell-text");
+  statusChip.type = "button";
+  statusChip.title = data.definition.definition;
+  statusChip.setAttribute("aria-describedby", tooltipId);
   statusChip.appendChild(createSvgIcon(data.definition.icon));
   const statusLabel = createElement("span");
   statusLabel.textContent = data.definition.label;
   statusChip.appendChild(statusLabel);
-  statusLine.appendChild(statusChip);
+
+  const statusTooltip = createElement("span", "status-tooltip");
+  statusTooltip.id = tooltipId;
+  statusTooltip.setAttribute("role", "tooltip");
+  statusTooltip.textContent = data.definition.definition;
+
+  statusTip.appendChild(statusChip);
+  statusTip.appendChild(statusTooltip);
+  statusLine.appendChild(statusTip);
 
   heading.appendChild(pair);
   heading.appendChild(statusLine);
@@ -320,6 +379,8 @@ function renderComboCard(data: ComboCardData): HTMLElement {
     actions.appendChild(link);
   }
   article.appendChild(actions);
+
+  article.appendChild(createSmilesCitation());
 
   return article;
 }
@@ -499,6 +560,8 @@ export function initComboModal(options: ComboModalOptions = {}): void {
   if (initialTarget && root?.getAttribute("data-open") !== "true") {
     void navigateToModal(initialTarget, false);
   }
+
+  initStatusTooltips();
 
   document.addEventListener("click", handleDelegatedClick);
   document.addEventListener("click", handleCloseClick);

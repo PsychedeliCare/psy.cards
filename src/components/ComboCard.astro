@@ -2,7 +2,10 @@
 import Icon from "./Icon.astro";
 import { getInteraction } from "../data/combos";
 import { columnByKey, sortPair } from "../data/config";
+import { getSubstanceStructure } from "../data/substances";
 import { keyToSlug } from "../data/slug";
+import MoleculeFigure from "./MoleculeFigure.astro";
+import SmilesCitation from "./SmilesCitation.astro";
 
 interface Props {
   keyA: string;
@@ -18,6 +21,9 @@ const labelA = colA?.label ?? keyA;
 const labelB = colB?.label ?? keyB;
 
 const { definition, note, sources } = getInteraction(keyA, keyB);
+const hasStructure =
+  Boolean(getSubstanceStructure(keyA)) || Boolean(getSubstanceStructure(keyB));
+const statusTooltipId = `status-tooltip-${keyA}-${keyB}`;
 ---
 
 <article
@@ -25,22 +31,41 @@ const { definition, note, sources } = getInteraction(keyA, keyB);
   data-card-type="combo"
   data-combo-keys={`${keyA}|${keyB}`}
 >
-  <header>
+  <MoleculeFigure substanceKeys={[keyA, keyB]} />
+  <header class="card-header">
     <div class="status-bar status-surface" aria-hidden="true"></div>
     <div class="heading">
       <div class="pair">
-        <span class={`chip group-${colA?.group ?? "unknown"} category-surface cell-text`}>
+        <a
+          href={`/${keyToSlug(keyA)}`}
+          class={`chip group-${colA?.group ?? "unknown"} category-surface cell-text`}
+          data-substance={`/${keyToSlug(keyA)}`}
+        >
           {labelA}
-        </span>
+        </a>
         <span class="plus" aria-hidden="true">+</span>
-        <span class={`chip group-${colB?.group ?? "unknown"} category-surface cell-text`}>
+        <a
+          href={`/${keyToSlug(keyB)}`}
+          class={`chip group-${colB?.group ?? "unknown"} category-surface cell-text`}
+          data-substance={`/${keyToSlug(keyB)}`}
+        >
           {labelB}
-        </span>
+        </a>
       </div>
       <div class="status-line">
-        <span class={`status-chip status-surface cell-text`}>
-          <Icon name={definition.icon} size="0.95em" />
-          <span>{definition.label}</span>
+        <span class="status-tip">
+          <button
+            type="button"
+            class="status-chip status-surface cell-text"
+            title={definition.definition}
+            aria-describedby={statusTooltipId}
+          >
+            <Icon name={definition.icon} size="0.95em" />
+            <span>{definition.label}</span>
+          </button>
+          <span class="status-tooltip" id={statusTooltipId} role="tooltip">
+            {definition.definition}
+          </span>
         </span>
       </div>
     </div>
@@ -83,5 +108,7 @@ const { definition, note, sources } = getInteraction(keyA, keyB);
       About {labelB}
     </a>
   </section>
+
+  {hasStructure && <SmilesCitation />}
 </article>
 

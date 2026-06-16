@@ -17,6 +17,7 @@ interface Props {
 const { formattedDose, doseNote } = Astro.props;
 const charts = buildDoseCharts(formattedDose);
 const uid = crypto.randomUUID().slice(0, 8);
+const hasChartable = charts.some((chart) => chart.chartable);
 
 function isChart(chart: (typeof charts)[number]): chart is DoseChart {
   return chart.chartable;
@@ -24,8 +25,47 @@ function isChart(chart: (typeof charts)[number]): chart is DoseChart {
 ---
 
 <div class="dose-charts">
+  <div class="doses-head">
+    <h3>Doses</h3>
+    {
+      hasChartable && (
+        <div class="dose-view-toggle" role="radiogroup" aria-label="Dose display">
+          <input
+            type="radio"
+            name={`dose-view-${uid}`}
+            id={`dose-view-chart-${uid}`}
+            class="dose-view-radio dose-view-radio--chart"
+            checked
+          />
+          <label
+            class="dose-view-btn"
+            for={`dose-view-chart-${uid}`}
+            title="Chart"
+          >
+            <Icon name="tabler:chart-bar" aria-hidden="true" />
+            <span class="sr-only">Chart</span>
+          </label>
+          <input
+            type="radio"
+            name={`dose-view-${uid}`}
+            id={`dose-view-table-${uid}`}
+            class="dose-view-radio dose-view-radio--table"
+          />
+          <label
+            class="dose-view-btn"
+            for={`dose-view-table-${uid}`}
+            title="Table"
+          >
+            <Icon name="tabler:table" aria-hidden="true" />
+            <span class="sr-only">Table</span>
+          </label>
+        </div>
+      )
+    }
+  </div>
+
   {
-    charts.map((chart, index) =>
+    charts.map((chart) =>
       isChart(chart) ? (
         <div class="dose-route">
           <div class="dose-route-head">
@@ -36,69 +76,65 @@ function isChart(chart: (typeof charts)[number]): chart is DoseChart {
             />
             <span class="dose-route-label">{getRouteLabel(chart.route)}</span>
             <span class="dose-route-unit">{chart.unit}</span>
-
-            <div class="dose-view-toggle" role="radiogroup" aria-label="Dose display">
-              <input
-                type="radio"
-                name={`dose-view-${uid}-${index}`}
-                id={`dose-view-chart-${uid}-${index}`}
-                class="dose-view-radio dose-view-radio--chart"
-                checked
-              />
-              <label
-                class="dose-view-btn"
-                for={`dose-view-chart-${uid}-${index}`}
-                title="Chart"
-              >
-                <Icon name="tabler:chart-bar" aria-hidden="true" />
-                <span class="sr-only">Chart</span>
-              </label>
-              <input
-                type="radio"
-                name={`dose-view-${uid}-${index}`}
-                id={`dose-view-table-${uid}-${index}`}
-                class="dose-view-radio dose-view-radio--table"
-              />
-              <label
-                class="dose-view-btn"
-                for={`dose-view-table-${uid}-${index}`}
-                title="Table"
-              >
-                <Icon name="tabler:table" aria-hidden="true" />
-                <span class="sr-only">Table</span>
-              </label>
-            </div>
           </div>
 
           <div class="dose-plot" aria-hidden="true">
             <span class="dose-line" />
 
             <div class="dose-segments">
-              {chart.segments.map((segment) => (
+              {chart.segments.map((segment, segmentIndex) => (
                 <div
-                  class="dose-segment"
+                  class:list={[
+                    "dose-segment",
+                    { "dose-segment--point": segment.isPoint },
+                  ]}
                   data-level={segment.level}
                   data-open={segment.openEnd ? "" : undefined}
                   style={`--left: ${segment.left}%; --width: ${segment.width}%; --bar-color: ${segment.color}`}
                   title={`${segment.label}: ${segment.amount}`}
                 >
                   <span class="dose-cat">{segment.label}</span>
-                  <span
-                    class:list={[
-                      "dose-bar",
-                      { "dose-bar-open": segment.openEnd },
-                    ]}
-                  />
-                  <span class="dose-range" />
-                  <span class="dose-bound dose-bound-start">
-                    {formatDoseTick(segment.start)}
-                    <span class="dose-bound-unit">{chart.unit}</span>
-                  </span>
-                  <span class="dose-bound dose-bound-end">
-                    {formatDoseTick(segment.end)}
-                    <span class="dose-bound-unit">{chart.unit}</span>
-                    {segment.openEnd && <span class="dose-bound-plus">+</span>}
-                  </span>
+                  {segment.isPoint ? (
+                    <span class="dose-point" />
+                  ) : (
+                    <>
+                      <span
+                        class:list={[
+                          "dose-bar",
+                          { "dose-bar-open": segment.openEnd },
+                        ]}
+                      />
+                      <span class="dose-range" />
+                    </>
+                  )}
+                  {segment.showStart && (
+                    <span
+                      class:list={[
+                        "dose-bound dose-bound-start",
+                        { "dose-bound--first": segment.showStart && segment.start === 0 },
+                      ]}
+                    >
+                      {formatDoseTick(segment.start)}
+                      <span class="dose-bound-unit">{chart.unit}</span>
+                    </span>
+                  )}
+                  {segment.showEnd && (
+                    <span
+                      class:list={[
+                        "dose-bound dose-bound-end",
+                        {
+                          "dose-bound--last":
+                            segmentIndex === chart.segments.length - 1,
+                        },
+                      ]}
+                    >
+                      {formatDoseTick(segment.end)}
+                      <span class="dose-bound-unit">{chart.unit}</span>
+                      {segment.openEnd && (
+                        <span class="dose-bound-plus">+</span>
+                      )}
+                    </span>
+                  )}
                 </div>
               ))}
             </div>

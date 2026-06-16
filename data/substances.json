@@ -1,0 +1,112 @@
+{
+  "lsd": {
+    "smiles": "CCN(CC)C(=O)[C@H]1CN([C@@H]2CC3=CNC4=CC=CC(=C34)C2=C1)C",
+    "compound": "LSD"
+  },
+  "mushrooms": {
+    "smiles": "CN(C)CCC1=CNC2=C1C(=CC=C2)O",
+    "compound": "Psilocin"
+  },
+  "dmt": {
+    "smiles": "CN(C)CCC1=CNC2=CC=CC=C21",
+    "compound": "DMT"
+  },
+  "mescaline": {
+    "smiles": "COC1=CC(=CC(=C1OC)OC)CCN",
+    "compound": "Mescaline"
+  },
+  "dox": {
+    "smiles": "CC1=CC(=C(C=C1OC)CC(C)N)OC",
+    "compound": "DOM",
+    "representative": true
+  },
+  "nbomes": {
+    "smiles": "COC1=CC=CC=C1CNCCC2=CC(=C(C=C2OC)I)OC",
+    "compound": "25I-NBOMe",
+    "representative": true
+  },
+  "2c-x": {
+    "smiles": "COC1=CC(=C(C=C1CCN)OC)Br",
+    "compound": "2C-B",
+    "representative": true
+  },
+  "2c-t-x": {
+    "smiles": "CCSC1=C(C=C(C(=C1)OC)CCN)OC",
+    "compound": "2C-T-2",
+    "representative": true
+  },
+  "5-meo-xxt": {
+    "smiles": "CN(C)CCC1=CNC2=C1C=C(C=C2)OC",
+    "compound": "5-MeO-DMT",
+    "representative": true
+  },
+  "cannabis": {
+    "smiles": "CCCCCC1=CC(=C2[C@@H]3C=C(CC[C@H]3C(OC2=C1)(C)C)C)O",
+    "compound": "Δ9-THC"
+  },
+  "ketamine": {
+    "smiles": "CNC1(CCCCC1=O)C2=CC=CC=C2Cl",
+    "compound": "Ketamine"
+  },
+  "mxe": {
+    "smiles": "CCNC1(CCCCC1=O)C2=CC(=CC=C2)OC",
+    "compound": "MXE"
+  },
+  "dxm": {
+    "smiles": "CN1CC[C@@]23CCCC[C@@H]2[C@@H]1CC4=C3C=C(C=C4)OC",
+    "compound": "Dextromethorphan"
+  },
+  "nitrous": {
+    "smiles": "[N-]=[N+]=O",
+    "compound": "Nitrous oxide"
+  },
+  "amphetamines": {
+    "smiles": "CC(CC1=CC=CC=C1)N",
+    "compound": "Amphetamine",
+    "representative": true
+  },
+  "mdma": {
+    "smiles": "CC(CC1=CC2=C(C=C1)OCO2)NC",
+    "compound": "MDMA"
+  },
+  "cocaine": {
+    "smiles": "CN1[C@H]2CC[C@@H]1[C@H]([C@H](C2)OC(=O)C3=CC=CC=C3)C(=O)OC",
+    "compound": "Cocaine"
+  },
+  "caffeine": {
+    "smiles": "CN1C=NC2=C1C(=O)N(C(=O)N2C)C",
+    "compound": "Caffeine"
+  },
+  "alcohol": {
+    "smiles": "CCO",
+    "compound": "Ethanol"
+  },
+  "ghb/gbl": {
+    "smiles": "C(CC(=O)O)CO",
+    "compound": "GHB"
+  },
+  "opioids": {
+    "smiles": "CN1CC[C@]23[C@@H]4[C@H]1CC5=C2C(=C(C=C5)O)O[C@H]3[C@H](C=C4)O",
+    "compound": "Morphine",
+    "representative": true
+  },
+  "tramadol": {
+    "smiles": "CN(C)C[C@H]1CCCC[C@@]1(C2=CC(=CC=C2)OC)O",
+    "compound": "Tramadol"
+  },
+  "benzodiazepines": {
+    "smiles": "CN1C(=O)CN=C(C2=C1C=CC(=C2)Cl)C3=CC=CC=C3",
+    "compound": "Diazepam",
+    "representative": true
+  },
+  "maois": {
+    "smiles": "CC1=NC=CC2=C1NC3=C2C=CC(=C3)OC",
+    "compound": "Harmine",
+    "representative": true
+  },
+  "ssris": {
+    "smiles": "CNCCC(C1=CC=CC=C1)OC2=CC=C(C=C2)C(F)(F)F",
+    "compound": "Fluoxetine",
+    "representative": true
+  }
+}

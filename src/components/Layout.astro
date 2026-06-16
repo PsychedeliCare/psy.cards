@@ -40,5 +40,12 @@ const ogImage = new URL("/assets/opengraph.jpg", Astro.site ?? Astro.url.origin)
   <body>
     <slot />
     <PreviewBanner />
+    <script>
+      import { initSmilesDrawer } from "../scripts/smiles-drawer.ts";
+      import { initTimingCharts } from "../scripts/timing-chart.ts";
+
+      initSmilesDrawer();
+      initTimingCharts();
+    </script>
   </body>
 </html>

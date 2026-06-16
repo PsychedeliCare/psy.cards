@@ -16,17 +16,22 @@
     "generate-types": "wrangler types"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^13.2.0",
-    "@astrojs/mdx": "^5.0.4",
+    "@astrojs/cloudflare": "^13.7.0",
+    "@astrojs/mdx": "^6.0.3",
     "@iconify-json/tabler": "^1.2.35",
     "@tailwindcss/vite": "^4.2.4",
     "@twodft/astro-icon": "^1.2.4",
-    "astro": "^6.1.9",
+    "astro": "^6.4.7",
+    "d3-shape": "^3.2.0",
     "fuse.js": "^7.4.2",
+    "smiles-drawer": "^2.3.0",
     "tailwindcss": "^4.2.4",
     "wrangler": "^4.84.1"
   },
   "overrides": {
     "vite": "^7"
+  },
+  "devDependencies": {
+    "@types/d3-shape": "^3.1.8"
   }
 }

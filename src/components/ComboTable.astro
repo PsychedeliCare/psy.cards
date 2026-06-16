@@ -22,7 +22,7 @@ function getLabelSizeClass(label: string) {
 <section
   class="table-wrap"
   aria-label="Drug combinations"
-  data-medication="false"
+  data-medication="true"
   data-hover-enabled="true"
   data-substance-set={initialSubstanceSet}
 >
@@ -32,7 +32,7 @@ function getLabelSizeClass(label: string) {
       class="corner search-trigger"
       type="button"
       aria-label="Search substances and combinations"
-      title="Search substances and combinations (Cmd F)"
+      title="Search substances and combinations"
       data-search-trigger
     >
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -604,6 +604,12 @@ function getLabelSizeClass(label: string) {
 
   :global(html[data-mod-key="ctrl"]) .search-trigger-kbd__win {
     display: inline;
+  }
+
+  @media (pointer: coarse) {
+    .search-trigger-kbd {
+      display: none;
+    }
   }
 
   .search-trigger:hover svg,

@@ -1,0 +1,44 @@
+---
+import type { Duration } from "../../drugs/types/tripsit";
+import { buildTimingChartData } from "../lib/timing-chart";
+
+interface Props {
+  formattedOnset?: Duration | Record<string, unknown>;
+  formattedDuration?: Duration | Record<string, unknown>;
+  peak?: Duration | Record<string, unknown> | string;
+  label: string;
+}
+
+const {
+  formattedOnset,
+  formattedDuration,
+  peak,
+  label,
+} = Astro.props;
+
+const chartData = buildTimingChartData({
+  onset: formattedOnset,
+  peak,
+  duration: formattedDuration,
+});
+---
+
+{
+  chartData && (
+    <figure
+      class="timing-chart"
+      data-timing-chart={JSON.stringify(chartData)}
+      aria-label={label}
+    >
+      <svg
+        class="timing-chart-svg"
+        viewBox="0 0 228 92"
+        role="img"
+        aria-hidden="true"
+      />
+      <figcaption class="timing-chart-sr">
+        Approximate effect intensity over time, starting now.
+      </figcaption>
+    </figure>
+  )
+}

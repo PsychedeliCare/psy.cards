@@ -9,7 +9,11 @@ import {
 } from "../data/drugs";
 import { columnByKey } from "../data/config";
 import { getEffectIcon } from "../data/effect-icons";
+import { getSubstanceStructure } from "../data/substances";
 import { toTitleCase } from "../lib/text";
+import MoleculeFigure from "./MoleculeFigure.astro";
+import SmilesCitation from "./SmilesCitation.astro";
+import TimingChart from "./TimingChart.astro";
 
 interface Props {
   substanceKey: string;
@@ -37,22 +41,26 @@ function firstDurationValue(
   return entries.map(([k, v]) => (k === "value" ? v : `${v} (${k})`)).join(", ");
 }
 
-const onsetVal = firstDurationValue(
-  drug?.formatted_onset as Record<string, unknown> | undefined
-);
-const onsetUnit = (drug?.formatted_onset as { _unit?: string } | undefined)?._unit;
-const durationVal = firstDurationValue(
-  drug?.formatted_duration as Record<string, unknown> | undefined
-);
-const durationUnit = (
-  drug?.formatted_duration as { _unit?: string } | undefined
-)?._unit;
-const afterVal = firstDurationValue(
-  drug?.formatted_aftereffects as Record<string, unknown> | undefined
-);
-const afterUnit = (
-  drug?.formatted_aftereffects as { _unit?: string } | undefined
-)?._unit;
+const formattedOnset = drug?.formatted_onset as Record<string, unknown> | undefined;
+const formattedDuration = drug?.formatted_duration as
+  | Record<string, unknown>
+  | undefined;
+const formattedAftereffects = drug?.formatted_aftereffects as
+  | Record<string, unknown>
+  | undefined;
+
+const onsetVal = firstDurationValue(formattedOnset);
+const onsetUnit = formattedOnset?._unit;
+const durationVal = firstDurationValue(formattedDuration);
+const durationUnit = formattedDuration?._unit;
+const afterVal = firstDurationValue(formattedAftereffects);
+const afterUnit = formattedAftereffects?._unit;
+const rawPeakVal = (props as Record<string, unknown>).peak;
+const peakVal: string | Record<string, unknown> | undefined =
+  typeof rawPeakVal === "string" ||
+  (rawPeakVal !== null && typeof rawPeakVal === "object")
+    ? (rawPeakVal as string | Record<string, unknown>)
+    : undefined;
 
 const effects = drug?.formatted_effects ?? [];
 const links = drug?.links ?? undefined;
@@ -60,6 +68,7 @@ const pweffects = drug?.pweffects ?? undefined;
 const pwEffectEntries =
   pweffects ? Object.entries(pweffects) : [];
 const hasEffects = effects.length > 0 || pwEffectEntries.length > 0;
+const hasStructure = Boolean(getSubstanceStructure(substanceKey));
 ---
 
 <article
@@ -67,19 +76,22 @@ const hasEffects = effects.length > 0 || pwEffectEntries.length > 0;
   data-card-type="substance"
   data-substance-key={substanceKey}
 >
-  <header>
-    <div class="accent category-surface" aria-hidden="true"></div>
-    <div class="title">
-      <h2>{displayName}</h2>
-      {
-        categories.length > 0 && (
-          <ul class="tags">
-            {categories.map((c) => (
-              <li>{c}</li>
-            ))}
-          </ul>
-        )
-      }
+  <MoleculeFigure substanceKey={substanceKey} />
+  <header class="card-header">
+    <div class="card-header-body">
+      <div class="accent category-surface" aria-hidden="true"></div>
+      <div class="title">
+        <h2 id="card-heading">{displayName}</h2>
+        {
+          categories.length > 0 && (
+            <ul class="tags">
+              {categories.map((c) => (
+                <li>{c}</li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
     </div>
   </header>
 
@@ -106,39 +118,47 @@ const hasEffects = effects.length > 0 || pwEffectEntries.length > 0;
   {
     (onsetVal || durationVal || afterVal) && (
       <section class="timings">
-        <h3>Timing</h3>
-        <dl>
-          {onsetVal && (
-            <div>
-              <dt>Onset</dt>
-              <dd>
-                {onsetVal} <span class="unit">{onsetUnit}</span>
-              </dd>
-            </div>
-          )}
-          {durationVal && (
-            <div>
-              <dt>Duration</dt>
-              <dd>
-                {durationVal} <span class="unit">{durationUnit}</span>
-              </dd>
-            </div>
-          )}
-          {afterVal && (
-            <div>
-              <dt>After-effects</dt>
-              <dd>
-                {afterVal} <span class="unit">{afterUnit}</span>
-              </dd>
-            </div>
-          )}
-          {props["half-life"] && (
-            <div>
-              <dt>Half-life</dt>
-              <dd>{props["half-life"]}</dd>
-            </div>
-          )}
-        </dl>
+        <div class="timings-table">
+          <h3>Timing</h3>
+          <dl>
+            {onsetVal && (
+              <div>
+                <dt>Onset</dt>
+                <dd>
+                  {onsetVal} <span class="unit">{onsetUnit}</span>
+                </dd>
+              </div>
+            )}
+            {durationVal && (
+              <div>
+                <dt>Duration</dt>
+                <dd>
+                  {durationVal} <span class="unit">{durationUnit}</span>
+                </dd>
+              </div>
+            )}
+            {afterVal && (
+              <div>
+                <dt>After-effects</dt>
+                <dd>
+                  {afterVal} <span class="unit">{afterUnit}</span>
+                </dd>
+              </div>
+            )}
+            {props["half-life"] && (
+              <div>
+                <dt>Half-life</dt>
+                <dd>{props["half-life"]}</dd>
+              </div>
+            )}
+          </dl>
+        </div>
+        <TimingChart
+          formattedOnset={formattedOnset}
+          formattedDuration={formattedDuration}
+          peak={peakVal}
+          label={`${displayName} effect timeline`}
+        />
       </section>
     )
   }
@@ -146,7 +166,6 @@ const hasEffects = effects.length > 0 || pwEffectEntries.length > 0;
   {
     drug?.formatted_dose && (
       <section class="doses">
-        <h3>Doses</h3>
         <DoseChart
           formattedDose={drug.formatted_dose}
           doseNote={drug.dose_note}
@@ -280,5 +299,7 @@ const hasEffects = effects.length > 0 || pwEffectEntries.length > 0;
       </section>
     )
   }
+
+  {hasStructure && <SmilesCitation />}
 </article>
 

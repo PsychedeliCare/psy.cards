@@ -621,14 +621,22 @@ function createPaletteElements() {
   return { overlay, backdrop, panel, form, input, results };
 }
 
+function isCoarsePointerDevice(): boolean {
+  return window.matchMedia("(pointer: coarse)").matches;
+}
+
 function setModKeyHint(): void {
   const isMac = /Mac|iPhone|iPad|iPod/.test(navigator.platform);
   document.documentElement.dataset.modKey = isMac ? "cmd" : "ctrl";
 
   const shortcut = isMac ? "⌘F" : "Ctrl+F";
+  const title = isCoarsePointerDevice()
+    ? "Search substances and combinations"
+    : `Search substances and combinations (${shortcut})`;
+
   document.querySelectorAll("[data-search-trigger]").forEach((trigger) => {
     if (trigger instanceof HTMLButtonElement) {
-      trigger.title = `Search substances and combinations (${shortcut})`;
+      trigger.title = title;
     }
   });
 }
@@ -737,6 +745,14 @@ export function initSearchPalette(): void {
     if (previousFocus instanceof HTMLElement) previousFocus.focus();
   };
 
+  const focusSearchInput = () => {
+    const { input } = ensurePalette();
+    input.focus({ preventScroll: true });
+    if (input.value.length > 0) {
+      input.select();
+    }
+  };
+
   const open = (initialQuery = "") => {
     const { overlay, input } = ensurePalette();
     previousFocus = document.activeElement;
@@ -744,9 +760,12 @@ export function initSearchPalette(): void {
     document.documentElement.setAttribute("data-search-palette-open", "");
     input.value = initialQuery;
     renderResults();
+    // Focus synchronously so mobile browsers keep the user-gesture activation chain.
+    focusSearchInput();
     window.requestAnimationFrame(() => {
-      input.focus();
-      input.select();
+      if (document.activeElement !== input) {
+        focusSearchInput();
+      }
     });
   };
 

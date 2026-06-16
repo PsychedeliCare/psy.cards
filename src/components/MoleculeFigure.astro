@@ -1,0 +1,50 @@
+---
+import { getSubstanceStructure } from "../data/substances";
+
+interface Props {
+  /** Single substance column key. */
+  substanceKey?: string;
+  /** Two keys for combo cards, separated by `|`. */
+  substanceKeys?: [string, string];
+}
+
+const { substanceKey, substanceKeys } = Astro.props;
+
+const layout = substanceKeys ? "combo" : "single";
+const keys = substanceKeys ?? (substanceKey ? [substanceKey] : []);
+const dataAttr = keys.join("|");
+const hasStructure = keys.some((key) => getSubstanceStructure(key));
+---
+
+{
+  hasStructure && (
+    <div
+      class="molecule-figure"
+      data-molecule-layout={layout}
+      data-substance-keys={dataAttr}
+      aria-hidden="true"
+    >
+      {layout === "combo" ? (
+        <>
+          <div class="molecule-slot" data-molecule-slot>
+            <div class="molecule-frame">
+              <svg class="molecule-svg" />
+            </div>
+          </div>
+          <span class="molecule-plus" aria-hidden="true">
+            +
+          </span>
+          <div class="molecule-slot" data-molecule-slot>
+            <div class="molecule-frame">
+              <svg class="molecule-svg" />
+            </div>
+          </div>
+        </>
+      ) : (
+        <div class="molecule-frame">
+          <svg class="molecule-svg" />
+        </div>
+      )}
+    </div>
+  )
+}

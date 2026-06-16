@@ -49,9 +49,20 @@ const eyeOffPath =
   <div class="category-strip">
     <div class="category-card category-settings" data-settings>
       <div class="category-header">
-        <span class="category-heading">Settings</span>
+        <button
+          type="button"
+          class="settings-collapse"
+          data-settings-collapse
+          aria-expanded="true"
+          aria-controls="category-settings-panel"
+        >
+          <span class="category-heading">Settings</span>
+          <svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 10l5 5 5-5"></path>
+          </svg>
+        </button>
       </div>
-      <ul class="settings-list">
+      <ul class="settings-list" id="category-settings-panel">
         <li class="settings-row">
           <span class="settings-label">View</span>
           <div class="settings-segmented" role="group" aria-label="View">
@@ -76,7 +87,7 @@ const eyeOffPath =
         <li class="settings-row">
           <span class="settings-label">Medication</span>
           <label class="settings-toggle" title="Show MAOIs and SSRIs">
-            <input type="checkbox" data-medication-toggle aria-label="Show medication" />
+            <input type="checkbox" data-medication-toggle checked aria-label="Show medication" />
             <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
               <path d={eyeOnPath}></path>
             </svg>
@@ -284,6 +295,60 @@ const eyeOffPath =
     color: var(--color-fg);
   }
 
+  .settings-collapse {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .settings-collapse:focus-visible {
+    outline: 2px solid var(--color-fg);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .chevron-icon {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+    transition: transform 200ms ease;
+  }
+
+  .category-nav.is-collapsed .chevron-icon {
+    transform: rotate(-180deg);
+  }
+
+  .category-nav.is-collapsed .settings-list {
+    display: none;
+  }
+
+  .category-nav.is-collapsed .category-surface p {
+    display: none;
+  }
+
+  .category-nav.is-collapsed .category-card {
+    min-height: auto;
+  }
+
+  .category-nav.is-collapsed .category-header {
+    margin-bottom: 0;
+  }
+
   .settings-list {
     list-style: none;
     margin: 0;
@@ -413,5 +478,20 @@ const eyeOffPath =
     .category-card {
       transition: none !important;
     }
+
+    .chevron-icon {
+      transition: none;
+    }
   }
 </style>
+
+<script>
+  const nav = document.querySelector(".category-nav");
+  const collapseBtn = nav?.querySelector("[data-settings-collapse]");
+
+  collapseBtn?.addEventListener("click", () => {
+    nav?.classList.toggle("is-collapsed");
+    const collapsed = nav?.classList.contains("is-collapsed") ?? false;
+    collapseBtn.setAttribute("aria-expanded", collapsed ? "false" : "true");
+  });
+</script>
