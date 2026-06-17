@@ -11,6 +11,8 @@
   pointer-events: none;
   opacity: 0;
   transition: opacity 140ms ease;
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 .modal-root[data-open="true"] {

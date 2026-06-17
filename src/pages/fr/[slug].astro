@@ -1,0 +1,17 @@
+---
+import SubstancePage from "../../views/SubstancePage.astro";
+import { getColumns } from "../../data/config";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  return getColumns("fr").map((col) => ({ params: { slug: col.slug } }));
+}
+
+const { slug } = Astro.params;
+if (!slug) {
+  return Astro.redirect("/fr/combos");
+}
+---
+
+<SubstancePage locale="fr" slug={slug} />

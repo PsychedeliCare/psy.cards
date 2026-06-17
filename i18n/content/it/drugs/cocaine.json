@@ -1,0 +1,54 @@
+{
+  "pretty_name": {
+    "_source": "Cocaine",
+    "text": "Cocaina"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A highly popular, short-acting CNS stimulant that works by blocking the reuptake of dopamine, serotonin, and norepinephrine. It is known to increase euphoria, confidence, sex-drive, focus, body temperature, and heart rate. Cocaine can cause severe vasoconstriction and is known to be cardiotoxic and have a high potential for compulsive redosing and addiction.",
+      "text": "Uno stimolante del SNC molto popolare e a breve durata d'azione che agisce bloccando la ricaptazione di dopamina, serotonina e noradrenalina. È noto per aumentare euforia, sicurezza in sé, desiderio sessuale, concentrazione, temperatura corporea e frequenza cardiaca. La cocaina può causare grave vasocostrizione ed è nota per essere cardiotossica e avere un alto potenziale di riassunzione compulsiva e dipendenza."
+    },
+    "effects": {
+      "_source": "Elevated mood. Increase in irritability, hyper-inflated ego, euphoria, stimulation, raised heartrate, numbing effects depending on ROA, nausea (particularly at high doses)",
+      "text": "Umore elevato. Aumento dell'irritabilità, ego ipertrofico, euforia, stimolazione, frequenza cardiaca aumentata, effetti anestetizzanti a seconda della via di somministrazione, nausea (in particolare a dosi elevate)"
+    }
+  },
+  "dose_note": {
+    "_source": "Rapid onset. Depending on purity, dosage will vary",
+    "text": "Insorgenza rapida. A seconda della purezza, il dosaggio varierà"
+  },
+  "formatted_effects": [
+    {
+      "_source": "Elevated mood",
+      "text": "Umore elevato"
+    },
+    {
+      "_source": "Increase in irritability",
+      "text": "Aumento dell'irritabilità"
+    },
+    {
+      "_source": "hyper-inflated ego",
+      "text": "ego ipertrofico"
+    },
+    {
+      "_source": "euphoria",
+      "text": "euforia"
+    },
+    {
+      "_source": "stimulation",
+      "text": "stimolazione"
+    },
+    {
+      "_source": "raised heartrate",
+      "text": "frequenza cardiaca aumentata"
+    },
+    {
+      "_source": "numbing effects depending on ROA",
+      "text": "effetti anestetizzanti a seconda della via di somministrazione"
+    },
+    {
+      "_source": "nausea (particularly at high doses)",
+      "text": "nausea (in particolare a dosi elevate)"
+    }
+  ]
+}

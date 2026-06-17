@@ -1,0 +1,70 @@
+{
+  "pretty_name": {
+    "_source": "Alcohol",
+    "text": "Alcohol"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Alcohol is a CNS depressant that acts through the GABAₐ receptor, and is one of the most common strong psychoactives used by humans. It has a long history of use and its intoxicating effects are well-studied and documented. It remains legal in most parts of the world.",
+      "text": "L'alcool est un dépresseur du SNC qui agit via le récepteur GABAₐ, et l'une des substances psychoactives fortes les plus couramment utilisées par les humains. Son usage a une longue histoire et ses effets intoxicants sont bien étudiés et documentés. Il reste légal dans la plupart des régions du monde."
+    },
+    "effects": {
+      "_source": "relaxation, mood lift, happiness, sociability, lowered inhibitions, analgesia, slurred speech, flushed skin, drowsiness, tolerance, euphoria, amnesia",
+      "text": "relaxation, amélioration de l'humeur, bonheur, sociabilité, baisse des inhibitions, analgésie, élocution pâteuse, rougeur de la peau, somnolence, tolérance, euphorie, amnésie"
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: Alcohol consumption should be spread out over a few hours and ideally separated by water breaks. Check the label on alcohol for unit content",
+    "text": " REMARQUE : La consommation d'alcool devrait être répartie sur quelques heures et, idéalement, séparée par des pauses avec de l'eau. Vérifiez l'étiquette de la boisson alcoolisée pour connaître sa teneur en unités"
+  },
+  "formatted_effects": [
+    {
+      "_source": "relaxation",
+      "text": "relaxation"
+    },
+    {
+      "_source": "mood lift",
+      "text": "amélioration de l'humeur"
+    },
+    {
+      "_source": "happiness",
+      "text": "bonheur"
+    },
+    {
+      "_source": "sociability",
+      "text": "sociability"
+    },
+    {
+      "_source": "lowered inhibitions",
+      "text": "baisse des inhibitions"
+    },
+    {
+      "_source": "analgesia",
+      "text": "analgesia"
+    },
+    {
+      "_source": "slurred speech",
+      "text": "élocution pâteuse"
+    },
+    {
+      "_source": "flushed skin",
+      "text": "rougeur de la peau"
+    },
+    {
+      "_source": "drowsiness",
+      "text": "somnolence"
+    },
+    {
+      "_source": "tolerance",
+      "text": "tolerance"
+    },
+    {
+      "_source": "euphoria",
+      "text": "euphorie"
+    },
+    {
+      "_source": "amnesia",
+      "text": "amnésie"
+    }
+  ]
+}

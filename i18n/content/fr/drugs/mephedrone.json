@@ -1,0 +1,22 @@
+{
+  "pretty_name": {
+    "_source": "Mephedrone",
+    "text": "Méphédrone"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A short-lived euphoric stimulant that was developed as an analogue of MDMA. Reports indicate a strong urge to compulsively redose.",
+      "text": "Un stimulant euphorisant de courte durée qui a été développé comme analogue de la MDMA. Des témoignages indiquent une forte envie de reprendre compulsivement."
+    },
+    "effects": {
+      "_source": "The drug is reported as being more of an intense stimulant than MDMA but with less of an empathogenic feel.",
+      "text": "La substance est rapportée comme étant davantage un stimulant intense que la MDMA, mais avec un ressenti empathogène moins marqué."
+    }
+  },
+  "formatted_effects": [
+    {
+      "_source": "The drug is reported as being more of an intense stimulant than MDMA but with less of an empathogenic feel.",
+      "text": "La substance est rapportée comme étant davantage un stimulant intense que la MDMA, mais avec un ressenti empathogène moins marqué."
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "pretty_name": {
+    "_source": "N2O",
+    "text": "N2O"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Nitrous oxide, also known as laughing gas, is often inhaled through balloons filled with canisters of the gas. The drug is a short-acting dissociative inhalant with strong visual, mental, and auditory effects. The drug is extremely popular especially in combination with other drugs.",
+      "text": "Nitrous oxide, also known as laughing gas, is often inhaled through balloons filled with canisters of the gas. The drug is a short-acting dissociative inhalant with strong visual, mental, and auditory effects. The drug is extremely popular especially in combination with other drugs."
+    },
+    "effects": {
+      "_source": "giggling, mood lift, euphoria, sound distortion, dream like state, minor to strong hallucinations, reduction of external stimuli, analgesia, buzzing sensation in nerve, clumsiness, nausea, headaches, numbness in extremities",
+      "text": "giggling, mood lift, euphoria, sound distortion, dream like state, minor to strong hallucinations, reduction of external stimuli, analgesia, buzzing sensation in nerve, clumsiness, nausea, headaches, numbness in extremities"
+    }
+  },
+  "formatted_effects": [
+    {
+      "_source": "giggling",
+      "text": "giggling"
+    },
+    {
+      "_source": "mood lift",
+      "text": "mood lift"
+    },
+    {
+      "_source": "euphoria",
+      "text": "euphoria"
+    },
+    {
+      "_source": "sound distortion",
+      "text": "sound distortion"
+    },
+    {
+      "_source": "dream like state",
+      "text": "dream like state"
+    },
+    {
+      "_source": "minor to strong hallucinations",
+      "text": "minor to strong hallucinations"
+    },
+    {
+      "_source": "reduction of external stimuli",
+      "text": "reduction of external stimuli"
+    },
+    {
+      "_source": "analgesia",
+      "text": "analgesia"
+    },
+    {
+      "_source": "buzzing sensation in nerve",
+      "text": "buzzing sensation in nerve"
+    },
+    {
+      "_source": "clumsiness",
+      "text": "clumsiness"
+    },
+    {
+      "_source": "nausea",
+      "text": "nausea"
+    },
+    {
+      "_source": "headaches",
+      "text": "headaches"
+    },
+    {
+      "_source": "numbness in extremities",
+      "text": "numbness in extremities"
+    }
+  ]
+}

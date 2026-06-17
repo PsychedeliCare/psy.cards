@@ -1,0 +1,42 @@
+{
+  "pretty_name": {
+    "_source": "Mushrooms",
+    "text": "Mushrooms"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Fungi containing psilocybin, a prototypical psychedelic. It should be noted there are multiple kinds of psychoactive mushrooms and proper identification is essential for safety. The dosages listed are in respects to psilocybe cubensis, one of the most common and popular psilocybin mushroom species.",
+      "text": "Fungi containing psilocybin, a prototypical psychedelic. It should be noted there are multiple kinds of psychoactive mushrooms and proper identification is essential for safety. The dosages listed are in respects to psilocybe cubensis, one of the most common and popular psilocybin mushroom species."
+    },
+    "effects": {
+      "_source": "visual distortion, color enhancement, sense of connectedness with nature, sense of well-being, sense of wonder",
+      "text": "visual distortion, color enhancement, sense of connectedness with nature, sense of well-being, sense of wonder"
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: Dosage ranges will vary between fungus strains. The doses given are for *dried* psilocybe cubensis mushrooms. The mushrooms are substantially more potent per-weight when dry.",
+    "text": " NOTE: Dosage ranges will vary between fungus strains. The doses given are for *dried* psilocybe cubensis mushrooms. The mushrooms are substantially more potent per-weight when dry."
+  },
+  "formatted_effects": [
+    {
+      "_source": "visual distortion",
+      "text": "visual distortion"
+    },
+    {
+      "_source": "color enhancement",
+      "text": "color enhancement"
+    },
+    {
+      "_source": "sense of connectedness with nature",
+      "text": "sense of connectedness with nature"
+    },
+    {
+      "_source": "sense of well-being",
+      "text": "sense of well-being"
+    },
+    {
+      "_source": "sense of wonder",
+      "text": "sense of wonder"
+    }
+  ]
+}

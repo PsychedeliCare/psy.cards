@@ -1,0 +1,54 @@
+{
+  "pretty_name": {
+    "_source": "Cocaine",
+    "text": "Kokain"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A highly popular, short-acting CNS stimulant that works by blocking the reuptake of dopamine, serotonin, and norepinephrine. It is known to increase euphoria, confidence, sex-drive, focus, body temperature, and heart rate. Cocaine can cause severe vasoconstriction and is known to be cardiotoxic and have a high potential for compulsive redosing and addiction.",
+      "text": "Ein sehr verbreitetes, kurz wirkendes ZNS-Stimulans, das durch Blockade der Wiederaufnahme von Dopamin, Serotonin und Noradrenalin wirkt. Es ist dafür bekannt, Euphorie, Selbstvertrauen, Sexualtrieb, Fokus, Körpertemperatur und Herzfrequenz zu erhöhen. Kokain kann starke Vasokonstriktion verursachen und gilt als kardiotoxisch; außerdem hat es ein hohes Potenzial für zwanghaftes Nachlegen und Abhängigkeit."
+    },
+    "effects": {
+      "_source": "Elevated mood. Increase in irritability, hyper-inflated ego, euphoria, stimulation, raised heartrate, numbing effects depending on ROA, nausea (particularly at high doses)",
+      "text": "Gehobene Stimmung. Zunahme von Reizbarkeit, übersteigertes Ego, Euphorie, Stimulation, erhöhte Herzfrequenz, betäubende Effekte je nach ROA, Übelkeit (besonders bei hohen Dosen)"
+    }
+  },
+  "dose_note": {
+    "_source": "Rapid onset. Depending on purity, dosage will vary",
+    "text": "Schneller Wirkungseintritt. Je nach Reinheit variiert die Dosierung"
+  },
+  "formatted_effects": [
+    {
+      "_source": "Elevated mood",
+      "text": "Gehobene Stimmung"
+    },
+    {
+      "_source": "Increase in irritability",
+      "text": "Zunahme von Reizbarkeit"
+    },
+    {
+      "_source": "hyper-inflated ego",
+      "text": "übersteigertes Ego"
+    },
+    {
+      "_source": "euphoria",
+      "text": "Euphorie"
+    },
+    {
+      "_source": "stimulation",
+      "text": "Stimulation"
+    },
+    {
+      "_source": "raised heartrate",
+      "text": "erhöhte Herzfrequenz"
+    },
+    {
+      "_source": "numbing effects depending on ROA",
+      "text": "betäubende Effekte je nach ROA"
+    },
+    {
+      "_source": "nausea (particularly at high doses)",
+      "text": "Übelkeit (besonders bei hohen Dosen)"
+    }
+  ]
+}

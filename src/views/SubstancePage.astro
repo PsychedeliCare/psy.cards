@@ -1,0 +1,62 @@
+---
+import Layout from "../components/Layout.astro";
+import ComboTable from "../components/ComboTable.astro";
+import Legend from "../components/Legend.astro";
+import Footer from "../components/Footer.astro";
+import Disclaimer from "../components/Disclaimer.astro";
+import Modal from "../components/Modal.astro";
+import SubstanceCard from "../components/SubstanceCard.astro";
+import type { Locale } from "../i18n/locales";
+import { getColumnBySlug } from "../data/config";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
+import { localePath } from "../i18n/locales";
+
+interface Props {
+  locale?: Locale;
+  slug: string;
+}
+
+const { locale = "en", slug } = Astro.props;
+const ui = getUiMessages(locale);
+const comboRoute = localePath(locale, "/combos");
+
+const col = getColumnBySlug(locale, slug);
+if (!col) {
+  return Astro.redirect(comboRoute);
+}
+
+const substanceKey = col.key;
+const title = `${col.label} — psy.cards`;
+---
+
+<Layout locale={locale} title={title}>
+  <main class="page">
+    <ComboTable locale={locale} comboRoute={comboRoute} />
+
+    <Legend locale={locale} />
+
+    <Disclaimer locale={locale} />
+
+    <Footer locale={locale} variant="wide" />
+  </main>
+
+  <div id="modal-slot" data-modal-slot>
+    <Modal open={true} labelledBy="card-heading" locale={locale}>
+      <SubstanceCard substanceKey={substanceKey} locale={locale} />
+    </Modal>
+  </div>
+
+  <script>
+    import { initComboModal } from "../scripts/combo-modal.ts";
+    initComboModal();
+  </script>
+</Layout>
+
+<style>
+  .page {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px 0 190px;
+  }
+</style>

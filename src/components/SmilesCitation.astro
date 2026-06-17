@@ -1,10 +1,20 @@
 ---
 import { SMILES_DRAWER_DOI } from "../data/substances";
+import type { Locale } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
+const ui = getUiMessages(locale);
 ---
 
 <p class="smiles-citation">
-  Structure rendered with
+  {t(locale, ui, "smilesCitation.prefix")}
   <a href={SMILES_DRAWER_DOI} target="_blank" rel="noreferrer noopener">
-    SmilesDrawer
+    {t(locale, ui, "smilesCitation.tool")}
   </a>
 </p>

@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "siteTitle": "psy.cards",
+    "siteDescription": "Un guide rapide de réduction des risques sur les combinaisons de drogues courantes, basé sur les informations TripSit.",
+    "combosTitle": "Combinaisons de drogues — psy.cards",
+    "landingDescription": "Des cartes de réduction des risques claires et multilingues qui facilitent la lecture, le partage et l'utilisation d'informations fiables sur les substances."
+  },
+  "layout": {
+    "close": "Fermer",
+    "language": "Langue",
+    "preview": "Aperçu",
+    "previewBuild": "Version d'aperçu",
+    "previewDisclaimer": "Avertissement version de développement",
+    "previewBody1": "Ceci est une version de développement de psy.cards et n'est pas destinée à une large diffusion pour le moment.",
+    "previewBody2": "Aucune information sur ce site n'a été vérifiée pour son exactitude. Le site et ses auteurs ne peuvent être tenus responsables d'informations inexactes.",
+    "previewCloseAria": "Fermer l'avertissement d'aperçu"
+  },
+  "landing": {
+    "eyebrow": "psy.cards",
+    "title": "Des informations sur les substances plus claires, là où les gens en ont besoin.",
+    "lede": "psy.cards transforme des informations fiables de réduction des risques en cartes simples et multilingues pour l'impression, le web et les réseaux sociaux.",
+    "cta": "Explorer les combinaisons de drogues",
+    "about": "L'objectif est de rendre les conseils pratiques sur les substances plus faciles à trouver, à comprendre, à traduire et à partager de manière responsable. Chaque carte garde l'essentiel à portée de main, que ce soit en version imprimée, dans un carrousel ou via un code QR."
+  },
+  "footer": {
+    "projectBy": "Un projet de",
+    "enabledBy": "Rendu possible grâce au travail remarquable de",
+    "contributeOn": "Contribuer sur",
+    "builtWith": "Construit avec"
+  },
+  "acknowledgements": {
+    "ariaLabel": "Remerciements",
+    "title": "Remerciements",
+    "drugsWheelCredit": "Cadre de catégories adapté de {link}.",
+    "drugsWheel": "The Drugs Wheel"
+  },
+  "comboTable": {
+    "ariaLabel": "Combinaisons de drogues",
+    "search": "Rechercher",
+    "searchAriaLabel": "Rechercher des substances et des combinaisons",
+    "searchTitle": "Rechercher des substances et des combinaisons"
+  },
+  "categoryNav": {
+    "ariaLabel": "Catégories de drogues",
+    "settings": "Paramètres",
+    "view": "Affichage",
+    "mostCommon": "Les plus courantes",
+    "all": "Toutes",
+    "medication": "Médicaments",
+    "medicationTitle": "Afficher les IMAO et les ISRS",
+    "medicationAriaLabel": "Afficher les médicaments",
+    "highlightOnHover": "Surligner au survol",
+    "highlightTitle": "Activer l'effet de surbrillance au survol",
+    "showGroup": "Afficher {group}",
+    "toggleGroup": "Basculer {group}"
+  },
+  "groups": {
+    "psychedelic": "Psychédéliques",
+    "dissociative": "Dissociatifs",
+    "stimulant": "Stimulants",
+    "depressant": "Dépresseurs",
+    "antidepressant": "Antidépresseurs",
+    "empathogen": "Empathogènes",
+    "opioid": "Opioïdes",
+    "cannabinoid": "Cannabinoïdes"
+  },
+  "groupSummaries": {
+    "stimulant": "Accélération du rythme cardiaque, transpiration, énergie, confiance, bien-être, excitation, euphorie, perte d'appétit, mâchoires serrées, pupilles dilatées, paranoïa, anxiété, sautes d'humeur, impuissance",
+    "empathogen": "Sentiment d'appartenance, excitation, compréhension, transpiration, syndrome sérotoninergique, dysfonction érectile, chaleur, surchauffe, surdose, risque de déshydratation ou d'hyperhydratation",
+    "psychedelic": "Perturbations visuelles, connexion spirituelle, perte de contrôle, sens exacerbés, portes de la perception ouvertes, panique, sautes d'humeur, excitation, peur, vomissements, atteintes à la santé mentale",
+    "dissociative": "Euphorie, engourdissement, sentiment de sécurité, absence de douleur, sensation de flottement, détente, protection, bonheur, inconscience, perte de conscience, « trou », perturbations perceptives, peur, déconnexion, vulnérabilité",
+    "depressant": "Détente, confiance, insouciance, prise de risques, inconscience, coma, euphorie, décès, comportements désinhibés, black-out, sommeil, vomissements, nausées, agressivité, dépendance",
+    "opioid": "Confiance, absence de douleur, sentiment de sécurité, somnolence, chaleur, sentiment d'invincibilité, démangeaisons, pupilles contractées, arrêt respiratoire, nausées, vomissements, euphorie, transpiration, surdose, dépendance, sevrage",
+    "cannabinoid": "Calme, détente, relaxation, sensation de flottement, réduction de la douleur, paranoïa, anxiété, perte de mémoire, yeux injectés de sang, sensualité accrue, bouche sèche, surexcitation, changements d'appétit"
+  },
+  "legend": {
+    "ariaLabel": "Légende"
+  },
+  "comboCell": {
+    "more": "Plus…",
+    "interactionAriaLabel": "Interaction entre {row} et {col}"
+  },
+  "substanceCard": {
+    "timing": "Chronologie",
+    "onset": "Début d'action",
+    "duration": "Durée",
+    "afterEffects": "Effets résiduels",
+    "halfLife": "Demi-vie",
+    "doses": "Doses",
+    "safety": "Sécurité",
+    "warning": "Avertissement",
+    "avoidCombining": "Éviter de combiner avec",
+    "testKits": "Kits de test",
+    "effects": "Effets",
+    "pwEffects": "Voir les effets sur PsychonautWiki",
+    "more": "Plus",
+    "tripReports": "Récits d'expérience",
+    "effectTimeline": "Chronologie des effets de {name}",
+    "classFallback": "Cette colonne représente une classe de drogues plutôt qu'un composé unique ; les données précises sur les doses et la durée ne sont donc pas disponibles ici.",
+    "missingDataFallback": "Les données détaillées sur cette substance ne sont pas disponibles dans le jeu de données TripSit. Les données de combinaison restent exactes."
+  },
+  "comboCard": {
+    "noteOnPair": "Note sur cette paire",
+    "sources": "Sources",
+    "about": "À propos de {label}"
+  },
+  "doseChart": {
+    "title": "Doses",
+    "chart": "Graphique",
+    "table": "Tableau",
+    "threshold": "Seuil",
+    "light": "Légère",
+    "common": "Courante",
+    "strong": "Forte",
+    "heavy": "Très forte"
+  },
+  "timingChart": {
+    "startTime": "Heure de début",
+    "timezone": "Fuseau horaire",
+    "sunTimes": "Horaires du soleil",
+    "onset": "début",
+    "peak": "pic",
+    "locationUnavailable": "La localisation n'est pas disponible dans ce navigateur.",
+    "determiningLocation": "Détermination de votre position…",
+    "locationDenied": "L'accès à la localisation a été refusé.",
+    "locationError": "Impossible de déterminer votre position."
+  },
+  "smilesCitation": {
+    "prefix": "Structure rendue avec",
+    "tool": "SmilesDrawer"
+  },
+  "search": {
+    "placeholder": "Rechercher des substances et des combinaisons…",
+    "empty": "Aucun résultat trouvé.",
+    "substance": "Substance",
+    "combo": "Combo",
+    "comboName": "Nom du combo",
+    "substanceCard": "Fiche substance",
+    "navigate": "Naviguer",
+    "open": "Ouvrir",
+    "close": "Fermer"
+  },
+  "modal": {
+    "noteOnPair": "Note sur cette paire",
+    "smilesCitation": "Structure rendue avec SmilesDrawer"
+  },
+  "status": {
+    "unknown": "Inconnu",
+    "unknownDefinition": "Les données d'interaction ne sont pas disponibles pour cette paire. Renseignez-vous davantage avant de combiner."
+  },
+  "burningMountain": {
+    "title": "ALPS Psycare — psy.cards",
+    "description": "Tableau de combinaisons de réduction des risques Burning Mountain avec les ressources ALPS PsyCare pour les contextes festivaliers.",
+    "eyebrow": "Burning Mountain Festival · Zernez",
+    "pageTitle": "ALPS Psycare",
+    "intro": "ALPS PsyCare apporte une éducation psychédélique fondée sur la science et un soutien psychologique sans jugement dans les festivals suisses. En combinant une réduction des risques fondée sur les preuves, des soins communautaires et un accompagnement bienveillant sur place, l'initiative aide les personnes à demander de l'aide tôt et empêche les difficultés mineures de devenir des incidents graves.",
+    "mapLabel": "Plan du festival",
+    "mapTitle": "Plan du site Burning Mountain",
+    "mapText": "Utilisez le plan du festival pour vous orienter sur place. Consultez la signalisation la plus récente et demandez au point info, à l'équipe médicale, à la sécurité ou à PsyCare si vous avez besoin d'aide pour trouver du soutien.",
+    "resourcesEyebrow": "Soutien en festival",
+    "resourcesTitle": "Ressources utiles sur le moment",
+    "chartEyebrow": "Référence des combinaisons",
+    "chartTitle": "Tableau des combinaisons de drogues",
+    "chartText": "Utilisez ce tableau des substances courantes en festival comme référence rapide, puis parlez à PsyCare, au personnel médical ou à une autre personne de confiance si quelque chose ne va pas.",
+    "resources": {
+      "emergency": {
+        "label": "Urgence",
+        "title": "Besoin d'une aide médicale urgente ?",
+        "text": "Rendez-vous auprès du membre médical, de sécurité ou PsyCare le plus proche. En cas de situation mettant la vie en danger en Suisse, appelez l'ambulance au 144 ou les urgences européennes au 112.",
+        "action": "Appeler le 144"
+      },
+      "festival": {
+        "label": "Festival",
+        "title": "Informations Burning Mountain",
+        "text": "Actualités officielles, billets, détails du lieu, camping, installations et informations de voyage pour le festival à Zernez.",
+        "action": "Ouvrir le site du festival"
+      },
+      "saferUse": {
+        "label": "Usage plus sûr",
+        "title": "Analyse de drogues et alertes",
+        "text": "Saferparty partage des informations suisses sur l'analyse de drogues, les alertes et les ressources de conseil avant et après le festival.",
+        "action": "Ouvrir Saferparty"
+      }
+    }
+  }
+}

@@ -1,5 +1,11 @@
 import combogenConfig from "../../combogen/config.json";
 import comboDefs from "../../drugs/combo_definitions.json";
+import type { Locale } from "../i18n/locales";
+import {
+  getInteractionLabel,
+  getLocaleBundle,
+  getStatusDefinition,
+} from "../i18n/load-locale";
 
 export type StatusKey =
   | "synergy"
@@ -24,9 +30,7 @@ export type IconName =
 export type Definition = {
   statusKey: StatusKey;
   icon: IconName;
-  /** Raw status string as it appears in `combos.json`. */
   rawStatus: string;
-  /** Human-readable label (e.g. "Low Risk & Synergy"). */
   label: string;
   emoji: string;
   definition: string;
@@ -70,16 +74,30 @@ for (const def of comboDefs) {
   definitionByRaw[key] = def.definition;
 }
 
-export function resolveStatus(raw: string | undefined): Definition {
+export function resolveStatus(
+  raw: string | undefined,
+  locale: Locale = "en"
+): Definition {
   const normalised = normalise(raw);
   const [statusKey, faIcon] =
     interactionClass[normalised] ?? interactionClass["fallback"]!;
+  const bundle = getLocaleBundle(locale);
+  const statusUi = bundle.ui as {
+    status?: { unknown?: string; unknownDefinition?: string };
+  };
+  const localizedLabel = getInteractionLabel(locale, normalised);
   const rawLabel =
+    localizedLabel ??
     labelByRaw[normalised] ??
-    (normalised === "fallback" ? "Unknown" : normalised);
+    (normalised === "fallback"
+      ? statusUi.status?.unknown ?? "Unknown"
+      : normalised);
   const emoji = emojiByRaw[normalised] ?? "";
   const definition =
+    getStatusDefinition(locale, normalised) ??
     definitionByRaw[normalised] ??
+    getStatusDefinition(locale, "fallback") ??
+    statusUi.status?.unknownDefinition ??
     "Interaction data is unavailable for this pair. Research further before combining.";
   return {
     statusKey,
@@ -91,7 +109,6 @@ export function resolveStatus(raw: string | undefined): Definition {
   };
 }
 
-/** All status keys in display order for the legend. */
 export const legendOrder: StatusKey[] = [
   "dangerous",
   "unsafe",
@@ -101,11 +118,15 @@ export const legendOrder: StatusKey[] = [
   "decrease",
 ];
 
-export const legendDefinitions: Definition[] = [
-  resolveStatus("Dangerous"),
-  resolveStatus("Unsafe"),
-  resolveStatus("Caution"),
-  resolveStatus("Low Risk & Synergy"),
-  resolveStatus("Low Risk & No Synergy"),
-  resolveStatus("Low Risk & Decrease"),
-];
+export function getLegendDefinitions(locale: Locale = "en"): Definition[] {
+  return [
+    resolveStatus("Dangerous", locale),
+    resolveStatus("Unsafe", locale),
+    resolveStatus("Caution", locale),
+    resolveStatus("Low Risk & Synergy", locale),
+    resolveStatus("Low Risk & No Synergy", locale),
+    resolveStatus("Low Risk & Decrease", locale),
+  ];
+}
+
+export const legendDefinitions = getLegendDefinitions("en");

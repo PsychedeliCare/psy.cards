@@ -1,0 +1,46 @@
+{
+  "pretty_name": {
+    "_source": "Caffeine",
+    "text": "Caffeine"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Caffeine is a CNS stimulant and the most widely used psychoactive substance in the world. It is legal and unregulated in most parts of the world, and is found in many commonly sold products. It has a good safety profile, though regular heavy use can cause physical dependence and contribute to certain medical conditions.",
+      "text": "Caffeine is a CNS stimulant and the most widely used psychoactive substance in the world. It is legal and unregulated in most parts of the world, and is found in many commonly sold products. It has a good safety profile, though regular heavy use can cause physical dependence and contribute to certain medical conditions."
+    },
+    "effects": {
+      "_source": "elevated heartrate, increase in cognitive abilities, physical agitation, panicked thinking, racing thoughts, uncomfortable bodyload",
+      "text": "elevated heartrate, increase in cognitive abilities, physical agitation, panicked thinking, racing thoughts, uncomfortable bodyload"
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: The lethal dose for caffeine starts at approximately 3g. The average cup of coffee contains roughly 75-150mg of caffeine.",
+    "text": " NOTE: The lethal dose for caffeine starts at approximately 3g. The average cup of coffee contains roughly 75-150mg of caffeine."
+  },
+  "formatted_effects": [
+    {
+      "_source": "elevated heartrate",
+      "text": "elevated heartrate"
+    },
+    {
+      "_source": "increase in cognitive abilities",
+      "text": "increase in cognitive abilities"
+    },
+    {
+      "_source": "physical agitation",
+      "text": "physical agitation"
+    },
+    {
+      "_source": "panicked thinking",
+      "text": "panicked thinking"
+    },
+    {
+      "_source": "racing thoughts",
+      "text": "racing thoughts"
+    },
+    {
+      "_source": "uncomfortable bodyload",
+      "text": "uncomfortable bodyload"
+    }
+  ]
+}

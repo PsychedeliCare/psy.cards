@@ -3,175 +3,93 @@ import Layout from "../components/Layout.astro";
 import ComboTable from "../components/ComboTable.astro";
 import Legend from "../components/Legend.astro";
 import Footer from "../components/Footer.astro";
+import Disclaimer from "../components/Disclaimer.astro";
+import { getUiMessages } from "../i18n/load-locale";
+import type { Locale } from "../i18n/locales";
 
 export const prerender = true;
 
-const localizedContent = {
-  en: {
-    eyebrow: "Burning Mountain Festival · Zernez",
-    title: "ALPS Psycare",
-    intro:
-      "ALPS PsyCare brings science-based psychedelic education and non-judgmental psychological support into Swiss festival settings. By combining evidence-informed harm reduction, community care, and compassionate on-site support, the initiative helps people seek help early and prevents small difficulties from becoming serious incidents.",
-    mapLabel: "Festival map",
-    mapTitle: "Burning Mountain site map",
-    mapText:
-      "Use the festival map to orient yourself on site. Check the latest signage and ask the info point, medical team, security, or PsyCare if you need help finding support.",
-    resourcesEyebrow: "Festival support",
-    resourcesTitle: "Useful resources in the moment",
-    chartEyebrow: "Combination reference",
-    chartTitle: "Drug combinations chart",
-    chartText:
-      "Use this common festival-substance chart as a quick reference, then speak with PsyCare, medical staff, or another trusted support person if something feels off.",
-  },
-  de: {
-    eyebrow: "Burning Mountain Festival · Zernez",
-    title: "ALPS Psycare",
-    intro:
-      "ALPS PsyCare bringt wissenschaftsbasierte psychedelische Bildung und nicht-wertende psychologische Unterstuetzung in Schweizer Festivalumgebungen. Durch evidenzinformierte Schadensminderung, Gemeinschaftsfuerorge und mitfuehlende Hilfe vor Ort ermutigt die Initiative Menschen, frueh Unterstuetzung zu suchen, bevor kleine Schwierigkeiten zu ernsten Vorfaellen werden.",
-    mapLabel: "Festivalplan",
-    mapTitle: "Burning-Mountain-Gelaendeplan",
-    mapText:
-      "Nutze den Festivalplan zur Orientierung vor Ort. Achte auf die aktuelle Beschilderung und frage Infopunkt, Sanitaet, Security oder PsyCare, wenn du Unterstuetzung suchst.",
-    resourcesEyebrow: "Festival-Support",
-    resourcesTitle: "Nuetzliche Hilfe im Moment",
-    chartEyebrow: "Kombinationsreferenz",
-    chartTitle: "Drug combinations chart",
-    chartText:
-      "Nutze diese Tabelle mit haeufigen Festival-Substanzen als schnelle Orientierung und sprich mit PsyCare, Sanitaet oder einer vertrauten Person, wenn sich etwas falsch anfuehlt.",
-  },
-  fr: {
-    eyebrow: "Burning Mountain Festival · Zernez",
-    title: "ALPS Psycare",
-    intro:
-      "ALPS PsyCare apporte une education psychedelique fondee sur la science et un soutien psychologique sans jugement dans les festivals suisses. En combinant reduction des risques, soin communautaire et accompagnement bienveillant sur place, l'initiative aide les personnes a demander du soutien tot, avant que de petites difficultes ne deviennent des incidents graves.",
-    mapLabel: "Plan du festival",
-    mapTitle: "Plan du site Burning Mountain",
-    mapText:
-      "Utilise le plan du festival pour t'orienter sur place. Verifie la signaletique actuelle et demande au point info, a l'equipe medicale, a la securite ou a PsyCare si tu cherches du soutien.",
-    resourcesEyebrow: "Soutien festival",
-    resourcesTitle: "Ressources utiles sur le moment",
-    chartEyebrow: "Reference des combinaisons",
-    chartTitle: "Drug combinations chart",
-    chartText:
-      "Utilise ce tableau des substances frequentes en festival comme reference rapide, puis parle a PsyCare, a l'equipe medicale ou a une personne de confiance si quelque chose ne va pas.",
-  },
-  it: {
-    eyebrow: "Burning Mountain Festival · Zernez",
-    title: "ALPS Psycare",
-    intro:
-      "ALPS PsyCare porta nei festival svizzeri educazione psichedelica basata sulla scienza e supporto psicologico non giudicante. Unendo riduzione del danno, cura della comunita e presenza compassionevole sul posto, l'iniziativa aiuta le persone a chiedere sostegno presto, prima che piccole difficolta diventino incidenti seri.",
-    mapLabel: "Mappa del festival",
-    mapTitle: "Mappa dell'area Burning Mountain",
-    mapText:
-      "Usa la mappa del festival per orientarti sul posto. Controlla la segnaletica aggiornata e chiedi al punto informazioni, al team medico, alla sicurezza o a PsyCare se cerchi supporto.",
-    resourcesEyebrow: "Supporto festival",
-    resourcesTitle: "Risorse utili nel momento",
-    chartEyebrow: "Riferimento combinazioni",
-    chartTitle: "Drug combinations chart",
-    chartText:
-      "Usa questa tabella delle sostanze comuni nei festival come riferimento rapido, poi parla con PsyCare, con il team medico o con una persona fidata se qualcosa non va.",
-  },
+const uiByLocale = {
+  en: getUiMessages("en"),
+  de: getUiMessages("de"),
+  fr: getUiMessages("fr"),
+  it: getUiMessages("it"),
 } as const;
+
+const localizedContent = Object.fromEntries(
+  (["en", "de", "fr", "it"] as const).map((locale) => {
+    const ui = uiByLocale[locale].burningMountain as Record<string, string>;
+    return [
+      locale,
+      {
+        eyebrow: ui.eyebrow,
+        title: ui.pageTitle,
+        intro: ui.intro,
+        mapLabel: ui.mapLabel,
+        mapTitle: ui.mapTitle,
+        mapText: ui.mapText,
+        resourcesEyebrow: ui.resourcesEyebrow,
+        resourcesTitle: ui.resourcesTitle,
+        chartEyebrow: ui.chartEyebrow,
+        chartTitle: ui.chartTitle,
+        chartText: ui.chartText,
+      },
+    ];
+  })
+) as Record<Locale, Record<string, string>>;
+
+const resourcesConfig = uiByLocale.en.burningMountain.resources as Record<
+  string,
+  Record<string, string>
+>;
 
 const resources = [
   {
     key: "emergency",
     iconPath:
       "M12 2.25 3.25 6.1v5.9c0 5.05 3.5 8.22 8.75 9.75 5.25-1.53 8.75-4.7 8.75-9.75V6.1L12 2.25Zm1 5.75v3h3v2h-3v3h-2v-3H8v-2h3V8h2Z",
-    label: "Emergency",
-    title: "Need urgent medical help?",
-    text: "Go to the nearest medical, security, or PsyCare team member. For life-threatening situations in Switzerland call ambulance 144 or European emergency 112.",
     href: "tel:144",
-    action: "Call 144",
     translations: {
-      de: {
-        label: "Notfall",
-        title: "Brauchst du dringend medizinische Hilfe?",
-        text: "Geh zum naechsten Sanitaets-, Sicherheits- oder PsyCare-Teammitglied. Bei lebensbedrohlichen Situationen in der Schweiz rufe die Ambulanz 144 oder den europaeischen Notruf 112.",
-        action: "144 anrufen",
-      },
-      fr: {
-        label: "Urgence",
-        title: "Besoin d'une aide medicale urgente ?",
-        text: "Adresse-toi a l'equipe medicale, a la securite ou a PsyCare la plus proche. En cas de danger vital en Suisse, appelle l'ambulance au 144 ou le numero europeen 112.",
-        action: "Appeler 144",
-      },
-      it: {
-        label: "Emergenza",
-        title: "Hai bisogno di aiuto medico urgente?",
-        text: "Vai dal team medico, di sicurezza o PsyCare piu vicino. In situazioni di pericolo di vita in Svizzera chiama l'ambulanza al 144 o il numero europeo 112.",
-        action: "Chiama 144",
-      },
+      de: resourcesConfig.emergency,
+      fr: (uiByLocale.fr.burningMountain.resources as typeof resourcesConfig).emergency,
+      it: (uiByLocale.it.burningMountain.resources as typeof resourcesConfig).emergency,
     },
+    ...resourcesConfig.emergency,
   },
   {
     key: "festival",
     iconPath:
       "M4 4h16v12H5.5L4 18.5V4Zm3 3v2h10V7H7Zm0 4v2h7v-2H7Zm-1 10h12v-2H6v2Z",
-    label: "Festival",
-    title: "Burning Mountain information",
-    text: "Official updates, tickets, venue details, camping, facilities, and travel information for the festival in Zernez.",
     href: "https://www.burning-mountain.ch/",
-    action: "Open festival site",
     translations: {
-      de: {
-        label: "Festival",
-        title: "Burning-Mountain-Informationen",
-        text: "Offizielle Updates, Tickets, Details zum Gelaende, Camping, Infrastruktur und Anreiseinformationen fuer das Festival in Zernez.",
-        action: "Festival-Website oeffnen",
-      },
-      fr: {
-        label: "Festival",
-        title: "Informations Burning Mountain",
-        text: "Actualites officielles, billets, details du site, camping, infrastructures et informations de voyage pour le festival a Zernez.",
-        action: "Ouvrir le site du festival",
-      },
-      it: {
-        label: "Festival",
-        title: "Informazioni Burning Mountain",
-        text: "Aggiornamenti ufficiali, biglietti, dettagli dell'area, campeggio, servizi e informazioni di viaggio per il festival a Zernez.",
-        action: "Apri il sito del festival",
-      },
+      de: (uiByLocale.de.burningMountain.resources as typeof resourcesConfig).festival,
+      fr: (uiByLocale.fr.burningMountain.resources as typeof resourcesConfig).festival,
+      it: (uiByLocale.it.burningMountain.resources as typeof resourcesConfig).festival,
     },
+    ...(uiByLocale.en.burningMountain.resources as typeof resourcesConfig).festival,
   },
   {
-    key: "safer-use",
+    key: "saferUse",
     iconPath:
       "M9 3h6v2l-1.5 1.5v3.15l4.88 7.82A2.3 2.3 0 0 1 16.42 21H7.58a2.3 2.3 0 0 1-1.96-3.53l4.88-7.82V6.5L9 5V3Zm3.5 7.22V6.05L13.05 5h-2.1l.55 1.05v4.17l-4.18 6.7h9.36l-4.18-6.7ZM8 19h8l-.62-1H8.62L8 19Z",
-    label: "Safer use",
-    title: "Drug checking and alerts",
-    text: "Saferparty shares Swiss drug checking information, alerts, and counselling resources before and after the festival.",
     href: "https://en.saferparty.ch/angebote/drug-checking",
-    action: "Open Saferparty",
     translations: {
-      de: {
-        label: "Safer Use",
-        title: "Drug Checking und Warnungen",
-        text: "Saferparty bietet Schweizer Informationen zu Drug Checking, Warnungen und Beratungsangeboten vor und nach dem Festival.",
-        action: "Saferparty oeffnen",
-      },
-      fr: {
-        label: "Usage plus sur",
-        title: "Drug checking et alertes",
-        text: "Saferparty partage des informations suisses sur le drug checking, les alertes et les ressources de conseil avant et apres le festival.",
-        action: "Ouvrir Saferparty",
-      },
-      it: {
-        label: "Uso piu sicuro",
-        title: "Drug checking e allerte",
-        text: "Saferparty condivide informazioni svizzere su drug checking, allerte e risorse di consulenza prima e dopo il festival.",
-        action: "Apri Saferparty",
-      },
+      de: (uiByLocale.de.burningMountain.resources as typeof resourcesConfig).saferUse,
+      fr: (uiByLocale.fr.burningMountain.resources as typeof resourcesConfig).saferUse,
+      it: (uiByLocale.it.burningMountain.resources as typeof resourcesConfig).saferUse,
     },
+    ...(uiByLocale.en.burningMountain.resources as typeof resourcesConfig).saferUse,
   },
 ] as const;
 
 const languages = ["en", "de", "fr", "it"] as const;
+const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
 ---
 
 <Layout
-  title="ALPS Psycare — psy.cards"
-  description="Burning Mountain harm-reduction combo chart with ALPS PsyCare resources for festival contexts."
+  locale="en"
+  title={bmUi.title}
+  description={bmUi.description}
   colorScheme="light"
 >
   <main class="event-page">
@@ -299,28 +217,13 @@ const languages = ["en", "de", "fr", "it"] as const;
         </p>
       </div>
 
-      <ComboTable comboRoute="" initialSubstanceSet="common" />
-      <Legend />
+      <ComboTable locale="en" comboRoute="" initialSubstanceSet="common" />
+      <Legend locale="en" />
     </section>
 
-    <footer class="disclaimer">
-      <p>
-        This table was compiled by TripSit using the best information available.
-        <strong>Accuracy is not guaranteed.</strong> This table is only as valid
-        as the labels on your drugs: <strong>always use a test kit.</strong>
-        Absence of a warning does not imply an absence of danger. <strong
-          >Further research is necessary.</strong
-        >
-      </p>
-      <p>
-        Do not rely solely on this chart. <strong
-          >While taking certain medications,</strong
-        > your risk is higher. Do your homework now to avoid problems later.
-        <strong>Be safe out there.</strong> No one is invincible.
-      </p>
-    </footer>
+    <Disclaimer locale="en" />
 
-    <Footer variant="wide" />
+    <Footer locale="en" variant="wide" />
   </main>
 
   <div id="modal-slot" data-modal-slot></div>

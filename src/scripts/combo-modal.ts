@@ -12,11 +12,22 @@
  */
 
 import { initStatusTooltips } from "./status-tooltip.ts";
+import { getPageI18n, getUiString } from "../i18n/client";
 
-const CARD_ROUTE_PREFIX = "/card";
-const COMBO_DATA_ROUTE_PREFIX = "/combo-data";
 const DEFAULT_ROOT_ROUTE = "/combos";
 let rootRoute = DEFAULT_ROOT_ROUTE;
+let cardRoutePrefix = "/card";
+let comboDataRoutePrefix = "/combo-data";
+let substancePathPrefix = "/";
+
+function configureLocaleRoutes(): void {
+  const pageI18n = getPageI18n();
+  const localePrefix =
+    pageI18n && pageI18n.locale !== "en" ? `/${pageI18n.locale}` : "";
+  cardRoutePrefix = `${localePrefix}/card`;
+  comboDataRoutePrefix = `${localePrefix}/combo-data`;
+  substancePathPrefix = localePrefix ? `${localePrefix}/` : "/";
+}
 
 type ComboModalOptions = {
   rootRoute?: string;
@@ -115,10 +126,15 @@ function getSubstanceTargetFromHref(href: string): ModalTarget | null {
     if (url.origin !== window.location.origin) return null;
     const path = normalizePathname(url.pathname);
     if (path === "/" || path === rootRoute) return null;
-    // Must be a single-segment path (no nested slashes).
     const segments = path.split("/").filter(Boolean);
-    if (segments.length !== 1) return null;
-    const slug = segments[0];
+    let slug: string | undefined;
+    if (segments.length === 1) {
+      slug = segments[0];
+    } else if (segments.length === 2 && ["fr", "de", "it"].includes(segments[0]!)) {
+      slug = segments[1];
+    } else {
+      return null;
+    }
     if (!slug || slug.includes("~") || !isSafeSlug(slug)) return null;
     return {
       kind: "substance",
@@ -149,8 +165,14 @@ function getInitialModalTarget(): ModalTarget | null {
 
   if (path === "/" || path === rootRoute) return null;
   const segments = path.split("/").filter(Boolean);
-  if (segments.length !== 1) return null;
-  const slug = segments[0];
+  let slug: string | undefined;
+  if (segments.length === 1) {
+    slug = segments[0];
+  } else if (segments.length === 2 && ["fr", "de", "it"].includes(segments[0]!)) {
+    slug = segments[1];
+  } else {
+    return null;
+  }
   if (!slug) return null;
   if (slug.includes("~")) return getComboTargetFromSlug(slug);
   if (!isSafeSlug(slug)) return null;
@@ -172,7 +194,7 @@ function getModalTargetFromAnchor(anchor: HTMLAnchorElement): ModalTarget | null
 }
 
 async function fetchSubstanceCardFragment(slug: string): Promise<Node | null> {
-  const res = await fetch(`${CARD_ROUTE_PREFIX}/${slug}`, {
+  const res = await fetch(`${cardRoutePrefix}/${slug}`, {
     headers: { Accept: "text/html" },
   });
   if (!res.ok) return null;
@@ -188,7 +210,7 @@ async function fetchSubstanceCardFragment(slug: string): Promise<Node | null> {
 }
 
 async function fetchComboData(slug: string): Promise<ComboCardData | null> {
-  const res = await fetch(`${COMBO_DATA_ROUTE_PREFIX}/${slug}.json`, {
+  const res = await fetch(`${comboDataRoutePrefix}/${slug}.json`, {
     headers: { Accept: "application/json" },
   });
   if (!res.ok) return null;
@@ -252,12 +274,12 @@ function createMoleculeFigure(keys: [string, string]): HTMLElement {
 
 function createSmilesCitation(): HTMLElement {
   const citation = createElement("p", "smiles-citation");
-  appendText(citation, "Structure rendered with ");
+  appendText(citation, `${getUiString("smilesCitation.prefix", "Structure rendered with ")} `);
   const link = createElement("a");
   link.href = "https://pubs.acs.org/doi/10.1021/acs.jcim.7b00425";
   link.target = "_blank";
   link.rel = "noreferrer noopener";
-  link.textContent = "SmilesDrawer";
+  link.textContent = getUiString("smilesCitation.tool", "SmilesDrawer");
   citation.appendChild(link);
   return citation;
 }
@@ -293,8 +315,8 @@ function renderComboCard(data: ComboCardData): HTMLElement {
       "a",
       `chip group-${substance.group ?? "unknown"} category-surface cell-text`
     );
-    chip.href = `/${substance.slug}`;
-    chip.dataset.substance = `/${substance.slug}`;
+    chip.href = `${substancePathPrefix}${substance.slug}`;
+    chip.dataset.substance = `${substancePathPrefix}${substance.slug}`;
     chip.textContent = substance.label;
     pair.appendChild(chip);
   }
@@ -333,7 +355,7 @@ function renderComboCard(data: ComboCardData): HTMLElement {
   if (data.note) {
     const note = createElement("section", "note");
     const heading = createElement("h3");
-    heading.textContent = "Note on this pair";
+    heading.textContent = getUiString("comboCard.noteOnPair", "Note on this pair");
     const text = createElement("p");
     text.textContent = data.note;
     note.appendChild(heading);
@@ -344,7 +366,7 @@ function renderComboCard(data: ComboCardData): HTMLElement {
   if (data.sources?.length) {
     const sources = createElement("section", "sources");
     const heading = createElement("h3");
-    heading.textContent = "Sources";
+    heading.textContent = getUiString("comboCard.sources", "Sources");
     const list = createElement("ul");
 
     for (const source of data.sources) {
@@ -373,9 +395,12 @@ function renderComboCard(data: ComboCardData): HTMLElement {
   const actions = createElement("section", "actions");
   for (const substance of [a, b]) {
     const link = createElement("a", "action-link");
-    link.href = `/${substance.slug}`;
-    link.dataset.substance = `/${substance.slug}`;
-    link.textContent = `About ${substance.label}`;
+    link.href = `${substancePathPrefix}${substance.slug}`;
+    link.dataset.substance = `${substancePathPrefix}${substance.slug}`;
+    link.textContent = getUiString("comboCard.about", "About {label}").replace(
+      "{label}",
+      substance.label
+    );
     actions.appendChild(link);
   }
   article.appendChild(actions);
@@ -545,7 +570,10 @@ function handleCloseClick(event: MouseEvent): void {
 let initialised = false;
 
 export function initComboModal(options: ComboModalOptions = {}): void {
-  rootRoute = normalizeRootRoute(options.rootRoute);
+  configureLocaleRoutes();
+  rootRoute = normalizeRootRoute(
+    options.rootRoute ?? getPageI18n()?.comboRoute ?? DEFAULT_ROOT_ROUTE
+  );
   if (initialised) return;
   initialised = true;
 

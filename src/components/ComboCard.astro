@@ -1,26 +1,33 @@
 ---
 import Icon from "./Icon.astro";
 import { getInteraction } from "../data/combos";
-import { columnByKey, sortPair } from "../data/config";
+import { getColumnByKey, sortPair } from "../data/config";
 import { getSubstanceStructure } from "../data/substances";
 import { keyToSlug } from "../data/slug";
+import { localePath } from "../i18n/locales";
 import MoleculeFigure from "./MoleculeFigure.astro";
 import SmilesCitation from "./SmilesCitation.astro";
+import type { Locale } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t, tFormat } from "../i18n/ui";
 
 interface Props {
   keyA: string;
   keyB: string;
+  locale?: Locale;
 }
 
-const { keyA: rawA, keyB: rawB } = Astro.props;
-const [keyA, keyB] = sortPair(rawA, rawB);
+const { keyA: rawA, keyB: rawB, locale = "en" } = Astro.props;
+const ui = getUiMessages(locale);
+const substanceBase = localePath(locale, "/");
+const [keyA, keyB] = sortPair(locale, rawA, rawB);
 
-const colA = columnByKey.get(keyA);
-const colB = columnByKey.get(keyB);
+const colA = getColumnByKey(locale, keyA);
+const colB = getColumnByKey(locale, keyB);
 const labelA = colA?.label ?? keyA;
 const labelB = colB?.label ?? keyB;
 
-const { definition, note, sources } = getInteraction(keyA, keyB);
+const { definition, note, sources } = getInteraction(keyA, keyB, locale);
 const hasStructure =
   Boolean(getSubstanceStructure(keyA)) || Boolean(getSubstanceStructure(keyB));
 const statusTooltipId = `status-tooltip-${keyA}-${keyB}`;
@@ -37,17 +44,17 @@ const statusTooltipId = `status-tooltip-${keyA}-${keyB}`;
     <div class="heading">
       <div class="pair">
         <a
-          href={`/${keyToSlug(keyA)}`}
+          href={`${substanceBase}${keyToSlug(keyA)}`}
           class={`chip group-${colA?.group ?? "unknown"} category-surface cell-text`}
-          data-substance={`/${keyToSlug(keyA)}`}
+          data-substance={`${substanceBase}${keyToSlug(keyA)}`}
         >
           {labelA}
         </a>
         <span class="plus" aria-hidden="true">+</span>
         <a
-          href={`/${keyToSlug(keyB)}`}
+          href={`${substanceBase}${keyToSlug(keyB)}`}
           class={`chip group-${colB?.group ?? "unknown"} category-surface cell-text`}
-          data-substance={`/${keyToSlug(keyB)}`}
+          data-substance={`${substanceBase}${keyToSlug(keyB)}`}
         >
           {labelB}
         </a>
@@ -76,7 +83,7 @@ const statusTooltipId = `status-tooltip-${keyA}-${keyB}`;
   {
     note && (
       <section class="note">
-        <h3>Note on this pair</h3>
+        <h3>{t(locale, ui, "comboCard.noteOnPair")}</h3>
         <p>{note}</p>
       </section>
     )
@@ -85,7 +92,7 @@ const statusTooltipId = `status-tooltip-${keyA}-${keyB}`;
   {
     sources && sources.length > 0 && (
       <section class="sources">
-        <h3>Sources</h3>
+        <h3>{t(locale, ui, "comboCard.sources")}</h3>
         <ul>
           {sources.map((s) => (
             <li>
@@ -101,14 +108,13 @@ const statusTooltipId = `status-tooltip-${keyA}-${keyB}`;
   }
 
   <section class="actions">
-    <a class="action-link" href={`/${keyToSlug(keyA)}`} data-substance={`/${keyToSlug(keyA)}`}>
-      About {labelA}
+    <a class="action-link" href={`${substanceBase}${keyToSlug(keyA)}`} data-substance={`${substanceBase}${keyToSlug(keyA)}`}>
+      {tFormat(locale, ui, "comboCard.about", { label: labelA })}
     </a>
-    <a class="action-link" href={`/${keyToSlug(keyB)}`} data-substance={`/${keyToSlug(keyB)}`}>
-      About {labelB}
+    <a class="action-link" href={`${substanceBase}${keyToSlug(keyB)}`} data-substance={`${substanceBase}${keyToSlug(keyB)}`}>
+      {tFormat(locale, ui, "comboCard.about", { label: labelB })}
     </a>
   </section>
 
-  {hasStructure && <SmilesCitation />}
+  {hasStructure && <SmilesCitation locale={locale} />}
 </article>
-

@@ -11,6 +11,9 @@
     "preview": "astro preview",
     "preview:cloudflare": "WRANGLER_LOG_PATH=$PWD/.wrangler/logs wrangler dev --config $PWD/wrangler.jsonc --cwd ${TMPDIR:-/tmp} --local --port 8788 --compatibility-date 2026-04-23 --show-interactive-dev-session false",
     "import:wikipedia-combos": "node scripts/import-wikipedia-combos.mjs",
+    "i18n:extract": "node scripts/i18n-extract.mjs",
+    "i18n:fill": "node scripts/i18n-fill-translations.mjs --notes --drugs",
+    "i18n:check": "node scripts/i18n-check.mjs",
     "smoke:worker-routes": "node scripts/smoke-worker-routes.mjs",
     "astro": "astro",
     "generate-types": "wrangler types"

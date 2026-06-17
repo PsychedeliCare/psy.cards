@@ -1,0 +1,16 @@
+{
+  "pretty_name": {
+    "_source": "Dextromethorphan",
+    "text": "Destrometorfano"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Commonly found in certain over the counter cough medicines. Has dissociative effects similar to ketamine or MXE, though also shares properties with opioids and alcohol. It is recommended to dose DXM through direct ingestion of the drug, without other active ingrediants such as guaifenesin or doxylamine.",
+      "text": "Si trova comunemente in alcuni farmaci da banco contro la tosse. Ha effetti dissociativi simili alla ketamina o all'MXE, sebbene condivida anche proprietà con oppioidi e alcol. Si raccomanda di assumere DXM tramite ingestione diretta della sostanza, senza altri principi attivi come guaifenesina o doxilamina."
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: See http://dxm.tripsit.me for mg/weight doses, among other things. Deaths have been reported at 25mg/kg",
+    "text": " NOTA: Vedi http://dxm.tripsit.me per dosi in mg/peso, tra le altre informazioni. Sono stati riportati decessi a 25mg/kg"
+  }
+}

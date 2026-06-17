@@ -1,3 +1,16 @@
+---
+import type { Locale } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
+const ui = getUiMessages(locale);
+---
+
 <button
   type="button"
   class="preview-banner"
@@ -5,7 +18,7 @@
   aria-haspopup="dialog"
   aria-controls="preview-disclaimer"
 >
-  Preview
+  {t(locale, ui, "layout.preview")}
 </button>
 
 <div
@@ -19,7 +32,7 @@
     type="button"
     class="preview-modal__backdrop"
     data-preview-close
-    aria-label="Close preview disclaimer"
+    aria-label={t(locale, ui, "layout.previewCloseAria")}
   ></button>
   <section
     class="preview-modal__panel"
@@ -33,24 +46,17 @@
       type="button"
       class="preview-modal__close"
       data-preview-close
-      aria-label="Close preview disclaimer"
+      aria-label={t(locale, ui, "layout.previewCloseAria")}
     >
       <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
         <path d="M18.3 5.71 12 12.01l-6.3-6.3-1.41 1.41L10.59 13.4l-6.3 6.3 1.41 1.41 6.3-6.3 6.3 6.3 1.41-1.41-6.3-6.3 6.3-6.3z"></path>
       </svg>
     </button>
     <div class="preview-modal__content">
-      <p class="preview-modal__eyebrow">Preview build</p>
-      <h2 id="preview-disclaimer-title">Development version disclaimer</h2>
-      <p>
-        This is a development version of psy.cards and is not meant for wide
-        distribution just yet.
-      </p>
-      <p>
-        None of the information on this site has been verified for accuracy.
-        The site and its authors cannot be held liable for any inaccurate
-        information.
-      </p>
+      <p class="preview-modal__eyebrow">{t(locale, ui, "layout.previewBuild")}</p>
+      <h2 id="preview-disclaimer-title">{t(locale, ui, "layout.previewDisclaimer")}</h2>
+      <p>{t(locale, ui, "layout.previewBody1")}</p>
+      <p>{t(locale, ui, "layout.previewBody2")}</p>
     </div>
   </section>
 </div>
@@ -87,4 +93,3 @@
     setPreviewModalOpen(false);
   });
 </script>
-

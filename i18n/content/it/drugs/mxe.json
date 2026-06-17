@@ -1,0 +1,16 @@
+{
+  "pretty_name": {
+    "_source": "MXE",
+    "text": "MXE"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A dissociative drug which is an analogue of ketamine. It is reported to be less sedating and more potent by weight. Anectodal reports indicate it has a subjectively more 'complicated' set of effects.",
+      "text": "Una sostanza dissociativa analoga alla ketamina. Viene riportata come meno sedativa e più potente per peso. Resoconti aneddotici indicano che abbia un insieme di effetti soggettivamente più 'complicato'."
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: Bodyweight plays a slight factor in MXE dosing, these are values for a 175lb (80kg) male",
+    "text": " NOTA: Il peso corporeo influisce leggermente sul dosaggio di MXE; questi sono valori per un maschio di 175 lb (80 kg)"
+  }
+}

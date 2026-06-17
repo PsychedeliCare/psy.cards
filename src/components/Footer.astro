@@ -1,18 +1,22 @@
 ---
 import PartnerLogos from "./PartnerLogos.astro";
+import type { Locale } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
 
 interface Props {
-  /** Constrains footer width. Defaults to wide layout used on combo pages. */
+  locale?: Locale;
   variant?: "wide" | "narrow";
 }
 
-const { variant = "wide" } = Astro.props;
+const { locale = "en", variant = "wide" } = Astro.props;
+const ui = getUiMessages(locale);
 ---
 
 <footer class:list={["site-footer", `site-footer--${variant}`]}>
   <div class="site-footer__inner">
     <section class="footer-block project">
-      <p class="footer-label">A project by</p>
+      <p class="footer-label">{t(locale, ui, "footer.projectBy")}</p>
       <a
         class="project-link"
         href="https://psychedelicare.eu"
@@ -31,7 +35,7 @@ const { variant = "wide" } = Astro.props;
     </section>
 
     <section class="footer-block partners">
-      <p class="footer-label">Enabled by the amazing work from</p>
+      <p class="footer-label">{t(locale, ui, "footer.enabledBy")}</p>
       <PartnerLogos variant={variant === "narrow" ? "inline" : "wide"} />
     </section>
 
@@ -43,7 +47,7 @@ const { variant = "wide" } = Astro.props;
         rel="noreferrer noopener"
         aria-label="Contribute on GitHub"
       >
-        <span>Contribute on</span>
+        <span>{t(locale, ui, "footer.contributeOn")}</span>
         <img
           src="/assets/github-logo.png"
           alt="GitHub"
@@ -56,7 +60,7 @@ const { variant = "wide" } = Astro.props;
 
     <section class="footer-block credits" aria-label="Site credits">
       <p class="credit-links">
-        <span>Built with</span>
+        <span>{t(locale, ui, "footer.builtWith")}</span>
         <a
           href="https://www.fontshare.com"
           target="_blank"

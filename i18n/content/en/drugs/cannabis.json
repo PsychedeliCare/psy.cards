@@ -1,0 +1,78 @@
+{
+  "pretty_name": {
+    "_source": "Cannabis",
+    "text": "Cannabis"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A common and widely used psychoactive plant, which is beginning to gain legal status for medical and even recreational use in some parts of the world. Usually smoked or eaten, primary effects are relaxation and an affinity towards food - a state described as being 'stoned.'",
+      "text": "A common and widely used psychoactive plant, which is beginning to gain legal status for medical and even recreational use in some parts of the world. Usually smoked or eaten, primary effects are relaxation and an affinity towards food - a state described as being 'stoned.'"
+    },
+    "effects": {
+      "_source": "Sedation, Appetite enhancement, Muscle relaxation, Muscle spasms, Nausea, Pain relief, Vasodilation, Creativity Enhancement, Anxiety suppression, Anxiety, Dream suppression, Emotion enhancement, Mindfulness, Paranoia, Sleepiness.",
+      "text": "Sedation, Appetite enhancement, Muscle relaxation, Muscle spasms, Nausea, Pain relief, Vasodilation, Creativity Enhancement, Anxiety suppression, Anxiety, Dream suppression, Emotion enhancement, Mindfulness, Paranoia, Sleepiness."
+    }
+  },
+  "formatted_effects": [
+    {
+      "_source": "Sedation",
+      "text": "Sedation"
+    },
+    {
+      "_source": "Appetite enhancement",
+      "text": "Appetite enhancement"
+    },
+    {
+      "_source": "Muscle relaxation",
+      "text": "Muscle relaxation"
+    },
+    {
+      "_source": "Muscle spasms",
+      "text": "Muscle spasms"
+    },
+    {
+      "_source": "Nausea",
+      "text": "Nausea"
+    },
+    {
+      "_source": "Pain relief",
+      "text": "Pain relief"
+    },
+    {
+      "_source": "Vasodilation",
+      "text": "Vasodilation"
+    },
+    {
+      "_source": "Creativity Enhancement",
+      "text": "Creativity Enhancement"
+    },
+    {
+      "_source": "Anxiety suppression",
+      "text": "Anxiety suppression"
+    },
+    {
+      "_source": "Anxiety",
+      "text": "Anxiety"
+    },
+    {
+      "_source": "Dream suppression",
+      "text": "Dream suppression"
+    },
+    {
+      "_source": "Emotion enhancement",
+      "text": "Emotion enhancement"
+    },
+    {
+      "_source": "Mindfulness",
+      "text": "Mindfulness"
+    },
+    {
+      "_source": "Paranoia",
+      "text": "Paranoia"
+    },
+    {
+      "_source": "Sleepiness",
+      "text": "Sleepiness"
+    }
+  ]
+}

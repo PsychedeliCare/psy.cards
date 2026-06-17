@@ -1,0 +1,70 @@
+{
+  "pretty_name": {
+    "_source": "Alcohol",
+    "text": "Alcohol"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Alcohol is a CNS depressant that acts through the GABAₐ receptor, and is one of the most common strong psychoactives used by humans. It has a long history of use and its intoxicating effects are well-studied and documented. It remains legal in most parts of the world.",
+      "text": "Alcohol is a CNS depressant that acts through the GABAₐ receptor, and is one of the most common strong psychoactives used by humans. It has a long history of use and its intoxicating effects are well-studied and documented. It remains legal in most parts of the world."
+    },
+    "effects": {
+      "_source": "relaxation, mood lift, happiness, sociability, lowered inhibitions, analgesia, slurred speech, flushed skin, drowsiness, tolerance, euphoria, amnesia",
+      "text": "relaxation, mood lift, happiness, sociability, lowered inhibitions, analgesia, slurred speech, flushed skin, drowsiness, tolerance, euphoria, amnesia"
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: Alcohol consumption should be spread out over a few hours and ideally separated by water breaks. Check the label on alcohol for unit content",
+    "text": " NOTE: Alcohol consumption should be spread out over a few hours and ideally separated by water breaks. Check the label on alcohol for unit content"
+  },
+  "formatted_effects": [
+    {
+      "_source": "relaxation",
+      "text": "relaxation"
+    },
+    {
+      "_source": "mood lift",
+      "text": "mood lift"
+    },
+    {
+      "_source": "happiness",
+      "text": "happiness"
+    },
+    {
+      "_source": "sociability",
+      "text": "sociability"
+    },
+    {
+      "_source": "lowered inhibitions",
+      "text": "lowered inhibitions"
+    },
+    {
+      "_source": "analgesia",
+      "text": "analgesia"
+    },
+    {
+      "_source": "slurred speech",
+      "text": "slurred speech"
+    },
+    {
+      "_source": "flushed skin",
+      "text": "flushed skin"
+    },
+    {
+      "_source": "drowsiness",
+      "text": "drowsiness"
+    },
+    {
+      "_source": "tolerance",
+      "text": "tolerance"
+    },
+    {
+      "_source": "euphoria",
+      "text": "euphoria"
+    },
+    {
+      "_source": "amnesia",
+      "text": "amnesia"
+    }
+  ]
+}

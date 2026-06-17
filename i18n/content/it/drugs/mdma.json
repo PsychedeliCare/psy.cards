@@ -1,0 +1,16 @@
+{
+  "pretty_name": {
+    "_source": "MDMA",
+    "text": "MDMA"
+  },
+  "properties": {
+    "summary": {
+      "_source": "The drug has been associated with cognitive decline when taken in excess. The drug is used in a variety of ways, such as parties, music festivals, psychedelic therapy, and more. The drug often sold as powder or in pressed pills, and may be adulterated with other similar chemicals.",
+      "text": "La sostanza è stata associata a declino cognitivo quando assunta in eccesso. Viene usata in vari contesti, come feste, festival musicali, terapia psichedelica e altro. È spesso venduta in polvere o in pasticche pressate, e può essere adulterata con altre sostanze chimiche simili."
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: Higher dosages may increase neurotoxic effects",
+    "text": " NOTA: Dosaggi più elevati possono aumentare gli effetti neurotossici"
+  }
+}

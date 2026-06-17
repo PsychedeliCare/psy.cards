@@ -4,27 +4,32 @@ import DoseChart from "./DoseChart.astro";
 import {
   getDrugByKey,
   isDrugClass,
-  getClassDescription,
+  getClassDescriptionText,
   getDisplayName,
 } from "../data/drugs";
-import { columnByKey } from "../data/config";
+import { getColumnByKey } from "../data/config";
 import { getEffectIcon } from "../data/effect-icons";
 import { getSubstanceStructure } from "../data/substances";
 import { toTitleCase } from "../lib/text";
 import MoleculeFigure from "./MoleculeFigure.astro";
 import SmilesCitation from "./SmilesCitation.astro";
 import TimingChart from "./TimingChart.astro";
+import type { Locale } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t, tFormat } from "../i18n/ui";
 
 interface Props {
   substanceKey: string;
+  locale?: Locale;
 }
 
-const { substanceKey } = Astro.props;
+const { substanceKey, locale = "en" } = Astro.props;
+const ui = getUiMessages(locale);
 
-const column = columnByKey.get(substanceKey);
-const drug = getDrugByKey(substanceKey);
-const displayName = drug?.pretty_name ?? getDisplayName(substanceKey);
-const classNote = getClassDescription(substanceKey);
+const column = getColumnByKey(locale, substanceKey);
+const drug = getDrugByKey(substanceKey, locale);
+const displayName = drug?.pretty_name ?? getDisplayName(substanceKey, locale);
+const classNote = getClassDescriptionText(substanceKey, locale);
 
 const categories = drug?.categories ?? drug?.properties?.categories ?? [];
 const props = drug?.properties ?? {};
@@ -99,37 +104,32 @@ const hasStructure = Boolean(getSubstanceStructure(substanceKey));
 
   {
     !drug && isDrugClass(substanceKey) && (
-      <p class="fallback-note">
-        This column represents a drug class rather than a single compound, so
-        specific dose and duration data isn't available here.
-      </p>
+      <p class="fallback-note">{t(locale, ui, "substanceCard.classFallback")}</p>
     )
   }
 
   {
     !drug && !classNote && (
-      <p class="fallback-note">
-        Detailed substance data isn't available in the TripSit dataset for this
-        entry. Combination data is still accurate.
-      </p>
+      <p class="fallback-note">{t(locale, ui, "substanceCard.missingDataFallback")}</p>
     )
   }
 
   {
     (onsetVal || durationVal || afterVal) && (
       <section class="timings">
-        <h3>Timing</h3>
+        <h3>{t(locale, ui, "substanceCard.timing")}</h3>
         <TimingChart
           formattedOnset={formattedOnset}
           formattedDuration={formattedDuration}
           peak={peakVal}
-          label={`${displayName} effect timeline`}
+          label={tFormat(locale, ui, "substanceCard.effectTimeline", { name: displayName })}
+          locale={locale}
         />
         <div class="timings-table">
           <dl>
             {onsetVal && (
               <div>
-                <dt>Onset</dt>
+                <dt>{t(locale, ui, "substanceCard.onset")}</dt>
                 <dd>
                   {onsetVal} <span class="unit">{onsetUnit}</span>
                 </dd>
@@ -137,7 +137,7 @@ const hasStructure = Boolean(getSubstanceStructure(substanceKey));
             )}
             {durationVal && (
               <div>
-                <dt>Duration</dt>
+                <dt>{t(locale, ui, "substanceCard.duration")}</dt>
                 <dd>
                   {durationVal} <span class="unit">{durationUnit}</span>
                 </dd>
@@ -145,7 +145,7 @@ const hasStructure = Boolean(getSubstanceStructure(substanceKey));
             )}
             {afterVal && (
               <div>
-                <dt>After-effects</dt>
+                <dt>{t(locale, ui, "substanceCard.afterEffects")}</dt>
                 <dd>
                   {afterVal} <span class="unit">{afterUnit}</span>
                 </dd>
@@ -153,7 +153,7 @@ const hasStructure = Boolean(getSubstanceStructure(substanceKey));
             )}
             {props["half-life"] && (
               <div>
-                <dt>Half-life</dt>
+                <dt>{t(locale, ui, "substanceCard.halfLife")}</dt>
                 <dd>{props["half-life"]}</dd>
               </div>
             )}
@@ -169,6 +169,7 @@ const hasStructure = Boolean(getSubstanceStructure(substanceKey));
         <DoseChart
           formattedDose={drug.formatted_dose}
           doseNote={drug.dose_note}
+          locale={locale}
         />
       </section>
     )
@@ -177,23 +178,23 @@ const hasStructure = Boolean(getSubstanceStructure(substanceKey));
   {
     (props.avoid || props.warning || props["test-kits"]) && (
       <section class="advice">
-        <h3>Safety</h3>
+        <h3>{t(locale, ui, "substanceCard.safety")}</h3>
         <dl>
           {props.warning && (
             <div>
-              <dt>Warning</dt>
+              <dt>{t(locale, ui, "substanceCard.warning")}</dt>
               <dd>{props.warning}</dd>
             </div>
           )}
           {props.avoid && (
             <div>
-              <dt>Avoid combining with</dt>
+              <dt>{t(locale, ui, "substanceCard.avoidCombining")}</dt>
               <dd>{props.avoid}</dd>
             </div>
           )}
           {props["test-kits"] && (
             <div>
-              <dt>Test kits</dt>
+              <dt>{t(locale, ui, "substanceCard.testKits")}</dt>
               <dd>{props["test-kits"]}</dd>
             </div>
           )}
@@ -205,7 +206,7 @@ const hasStructure = Boolean(getSubstanceStructure(substanceKey));
   {
     hasEffects && (
       <section class="effects">
-        <h3>Effects</h3>
+        <h3>{t(locale, ui, "substanceCard.effects")}</h3>
         {
           effects.length > 0 && (
             <ul class="pills">
@@ -236,7 +237,7 @@ const hasStructure = Boolean(getSubstanceStructure(substanceKey));
                       decoding="async"
                     />
                     <span class="pw-effects-label">
-                      View PsychonautWiki effects
+                      {t(locale, ui, "substanceCard.pwEffects")}
                     </span>
                     <span class="pw-effects-count">
                       ({pwEffectEntries.length})
@@ -272,12 +273,12 @@ const hasStructure = Boolean(getSubstanceStructure(substanceKey));
   {
     links && (
       <section class="links">
-        <h3>More</h3>
+        <h3>{t(locale, ui, "substanceCard.more")}</h3>
         <ul class="inline-links">
           {links.experiences && (
             <li>
               <a href={links.experiences} target="_blank" rel="noreferrer noopener">
-                Trip reports
+                {t(locale, ui, "substanceCard.tripReports")}
               </a>
             </li>
           )}
@@ -300,6 +301,6 @@ const hasStructure = Boolean(getSubstanceStructure(substanceKey));
     )
   }
 
-  {hasStructure && <SmilesCitation />}
+  {hasStructure && <SmilesCitation locale={locale} />}
 </article>
 

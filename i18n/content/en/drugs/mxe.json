@@ -1,0 +1,16 @@
+{
+  "pretty_name": {
+    "_source": "MXE",
+    "text": "MXE"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A dissociative drug which is an analogue of ketamine. It is reported to be less sedating and more potent by weight. Anectodal reports indicate it has a subjectively more 'complicated' set of effects.",
+      "text": "A dissociative drug which is an analogue of ketamine. It is reported to be less sedating and more potent by weight. Anectodal reports indicate it has a subjectively more 'complicated' set of effects."
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: Bodyweight plays a slight factor in MXE dosing, these are values for a 175lb (80kg) male",
+    "text": " NOTE: Bodyweight plays a slight factor in MXE dosing, these are values for a 175lb (80kg) male"
+  }
+}

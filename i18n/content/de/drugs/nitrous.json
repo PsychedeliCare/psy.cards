@@ -1,0 +1,70 @@
+{
+  "pretty_name": {
+    "_source": "N2O",
+    "text": "N2O"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Nitrous oxide, also known as laughing gas, is often inhaled through balloons filled with canisters of the gas. The drug is a short-acting dissociative inhalant with strong visual, mental, and auditory effects. The drug is extremely popular especially in combination with other drugs.",
+      "text": "Distickstoffmonoxid, auch als Lachgas bekannt, wird oft über Ballons inhaliert, die mit Kartuschen des Gases gefüllt sind. Die Substanz ist ein kurz wirkendes dissoziatives Inhalationsmittel mit starken visuellen, mentalen und auditiven Effekten. Sie ist besonders in Kombination mit anderen Substanzen sehr beliebt."
+    },
+    "effects": {
+      "_source": "giggling, mood lift, euphoria, sound distortion, dream like state, minor to strong hallucinations, reduction of external stimuli, analgesia, buzzing sensation in nerve, clumsiness, nausea, headaches, numbness in extremities",
+      "text": "Kichern, Stimmungsaufhellung, Euphorie, Klangverzerrung, traumähnlicher Zustand, leichte bis starke Halluzinationen, Reduktion äußerer Reize, Analgesie, summendes Gefühl in Nerven, Ungeschicklichkeit, Übelkeit, Kopfschmerzen, Taubheitsgefühl in den Extremitäten"
+    }
+  },
+  "formatted_effects": [
+    {
+      "_source": "giggling",
+      "text": "Kichern"
+    },
+    {
+      "_source": "mood lift",
+      "text": "Stimmungsaufhellung"
+    },
+    {
+      "_source": "euphoria",
+      "text": "Euphorie"
+    },
+    {
+      "_source": "sound distortion",
+      "text": "Klangverzerrung"
+    },
+    {
+      "_source": "dream like state",
+      "text": "traumähnlicher Zustand"
+    },
+    {
+      "_source": "minor to strong hallucinations",
+      "text": "leichte bis starke Halluzinationen"
+    },
+    {
+      "_source": "reduction of external stimuli",
+      "text": "Reduktion äußerer Reize"
+    },
+    {
+      "_source": "analgesia",
+      "text": "Analgesie"
+    },
+    {
+      "_source": "buzzing sensation in nerve",
+      "text": "summendes Gefühl in Nerven"
+    },
+    {
+      "_source": "clumsiness",
+      "text": "Ungeschicklichkeit"
+    },
+    {
+      "_source": "nausea",
+      "text": "Übelkeit"
+    },
+    {
+      "_source": "headaches",
+      "text": "Kopfschmerzen"
+    },
+    {
+      "_source": "numbness in extremities",
+      "text": "Taubheitsgefühl in den Extremitäten"
+    }
+  ]
+}

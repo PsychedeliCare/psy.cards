@@ -1,0 +1,16 @@
+{
+  "pretty_name": {
+    "_source": "Dextromethorphan",
+    "text": "Dextromethorphan"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Commonly found in certain over the counter cough medicines. Has dissociative effects similar to ketamine or MXE, though also shares properties with opioids and alcohol. It is recommended to dose DXM through direct ingestion of the drug, without other active ingrediants such as guaifenesin or doxylamine.",
+      "text": "Commonly found in certain over the counter cough medicines. Has dissociative effects similar to ketamine or MXE, though also shares properties with opioids and alcohol. It is recommended to dose DXM through direct ingestion of the drug, without other active ingrediants such as guaifenesin or doxylamine."
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: See http://dxm.tripsit.me for mg/weight doses, among other things. Deaths have been reported at 25mg/kg",
+    "text": " NOTE: See http://dxm.tripsit.me for mg/weight doses, among other things. Deaths have been reported at 25mg/kg"
+  }
+}

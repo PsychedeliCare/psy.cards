@@ -1,0 +1,86 @@
+{
+  "pretty_name": {
+    "_source": "Mescaline",
+    "text": "Mescaline"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A psychedelic of the phenethylamine family. The drug is found in many cacti, such as Peyote and San Pedro, and has a long history of use. Mescaline can be found naturally and is often syntheized as a synthetic compound.",
+      "text": "Un psychédélique de la famille des phénéthylamines. Cette substance se trouve dans de nombreux cactus, comme le peyotl et le San Pedro, et possède une longue histoire d'utilisation. La mescaline peut être présente naturellement et est souvent synthétisée sous forme de composé synthétique."
+    },
+    "effects": {
+      "_source": "Euphoria, empathy, insight, brightened colour, Closed/Open eye visuals, enhanced tactile sensation, mental/physical stimulation, decreased appetite, pupil dilation, restlessness, change in perception, ego softening, sweating/chills, muscle tension, confusion, insomnia.",
+      "text": "Euphorie, empathie, introspection, couleurs plus vives, visuels yeux fermés/ouverts, sensation tactile amplifiée, stimulation mentale/physique, diminution de l'appétit, dilatation des pupilles, agitation, changement de perception, adoucissement de l'ego, sueurs/frissons, tension musculaire, confusion, insomnie."
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: Doses are for Mescaline HCl",
+    "text": " REMARQUE : Les doses concernent la mescaline HCl"
+  },
+  "formatted_effects": [
+    {
+      "_source": "Euphoria",
+      "text": "Euphorie"
+    },
+    {
+      "_source": "empathy",
+      "text": "empathy"
+    },
+    {
+      "_source": "insight",
+      "text": "introspection"
+    },
+    {
+      "_source": "brightened colour",
+      "text": "couleurs plus vives"
+    },
+    {
+      "_source": "Closed/Open eye visuals",
+      "text": "visuels yeux fermés/ouverts"
+    },
+    {
+      "_source": "enhanced tactile sensation",
+      "text": "sensation tactile amplifiée"
+    },
+    {
+      "_source": "mental/physical stimulation",
+      "text": "stimulation mentale/physique"
+    },
+    {
+      "_source": "decreased appetite",
+      "text": "diminution de l'appétit"
+    },
+    {
+      "_source": "pupil dilation",
+      "text": "dilatation des pupilles"
+    },
+    {
+      "_source": "restlessness",
+      "text": "agitation"
+    },
+    {
+      "_source": "change in perception",
+      "text": "changement de perception"
+    },
+    {
+      "_source": "ego softening",
+      "text": "adoucissement de l'ego"
+    },
+    {
+      "_source": "sweating/chills",
+      "text": "sueurs/frissons"
+    },
+    {
+      "_source": "muscle tension",
+      "text": "tension musculaire"
+    },
+    {
+      "_source": "confusion",
+      "text": "confusion"
+    },
+    {
+      "_source": "insomnia",
+      "text": "insomnie"
+    }
+  ]
+}

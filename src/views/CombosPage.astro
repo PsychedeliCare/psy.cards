@@ -1,0 +1,52 @@
+---
+import Layout from "../components/Layout.astro";
+import ComboTable from "../components/ComboTable.astro";
+import Legend from "../components/Legend.astro";
+import Footer from "../components/Footer.astro";
+import Disclaimer from "../components/Disclaimer.astro";
+import Acknowledgements from "../components/Acknowledgements.astro";
+import type { Locale } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
+import { localePath } from "../i18n/locales";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
+const ui = getUiMessages(locale);
+const comboRoute = localePath(locale, "/combos");
+---
+
+<Layout
+  locale={locale}
+  title={t(locale, ui, "meta.combosTitle")}
+>
+  <main class="page">
+    <ComboTable locale={locale} comboRoute={comboRoute} />
+
+    <Legend locale={locale} />
+
+    <Disclaimer locale={locale} />
+
+    <Acknowledgements locale={locale} />
+
+    <Footer locale={locale} variant="wide" />
+  </main>
+
+  <div id="modal-slot" data-modal-slot></div>
+
+  <script>
+    import { initComboModal } from "../scripts/combo-modal.ts";
+    initComboModal();
+  </script>
+</Layout>
+
+<style>
+  .page {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px 0 0;
+  }
+</style>

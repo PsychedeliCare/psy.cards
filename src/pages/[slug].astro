@@ -1,93 +1,17 @@
 ---
-import Layout from "../components/Layout.astro";
-import ComboTable from "../components/ComboTable.astro";
-import Legend from "../components/Legend.astro";
-import Footer from "../components/Footer.astro";
-import Modal from "../components/Modal.astro";
-import SubstanceCard from "../components/SubstanceCard.astro";
-import { columns, columnBySlug } from "../data/config";
+import SubstancePage from "../views/SubstancePage.astro";
+import { getColumns } from "../data/config";
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-  return columns.map((col) => ({ params: { slug: col.slug } }));
+  return getColumns("en").map((col) => ({ params: { slug: col.slug } }));
 }
 
 const { slug } = Astro.params;
 if (!slug) {
   return Astro.redirect("/combos");
 }
-
-let title = "Drug combinations — psy.cards";
-let labelledBy = "card-heading";
-let substanceKey: string | undefined;
-
-const col = columnBySlug.get(slug);
-if (!col) return Astro.redirect("/combos");
-substanceKey = col.key;
-title = `${col.label} — psy.cards`;
 ---
 
-<Layout title={title}>
-  <main class="page">
-    <ComboTable />
-
-    <Legend />
-
-    <footer class="disclaimer">
-      <p>
-        This table was compiled by TripSit using the best information available.
-        <strong>Accuracy is not guaranteed.</strong> This table is only as valid
-        as the labels on your drugs: <strong>always use a test kit.</strong> Absence
-        of a warning does not imply an absence of danger. <strong
-          >Further research is necessary.</strong
-        >
-      </p>
-      <p>
-        Do not rely solely on this chart. <strong
-          >While taking certain medications,</strong
-        > your risk is higher. Do your homework now to avoid problems later. <strong
-          >Be safe out there.</strong
-        > No one is invincible.
-      </p>
-    </footer>
-
-    <Footer variant="wide" />
-  </main>
-
-  <div id="modal-slot" data-modal-slot>
-    <Modal open={true} labelledBy={labelledBy}>
-      {substanceKey && <SubstanceCard substanceKey={substanceKey} />}
-    </Modal>
-  </div>
-
-  <script>
-    import { initComboModal } from "../scripts/combo-modal.ts";
-    initComboModal();
-  </script>
-</Layout>
-
-<style>
-  .page {
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 0 0 190px;
-  }
-
-  .disclaimer {
-    padding: 20px 16px 0;
-    font-size: 12.5px;
-    line-height: 1.6;
-    color: var(--color-fg-mute);
-    max-width: 860px;
-  }
-
-  .disclaimer p {
-    margin: 0 0 10px;
-  }
-
-  .disclaimer strong {
-    color: var(--color-fg);
-    font-weight: 600;
-  }
-</style>
+<SubstancePage locale="en" slug={slug} />

@@ -1,5 +1,8 @@
 import combosData from "../../drugs/combos.json";
+import type { Locale } from "../i18n/locales";
+import { getComboNote } from "../i18n/load-locale";
 import { resolveStatus, type Definition } from "./definitions";
+import { sortPair } from "./config";
 
 export type Source = {
   author: string;
@@ -23,7 +26,11 @@ export type Interaction = {
   sources?: Source[];
 };
 
-export function getInteraction(keyA: string, keyB: string): Interaction {
+export function getInteraction(
+  keyA: string,
+  keyB: string,
+  locale: Locale = "en"
+): Interaction {
   const ab = combos[keyA]?.[keyB];
   const ba = combos[keyB]?.[keyA];
 
@@ -38,14 +45,18 @@ export function getInteraction(keyA: string, keyB: string): Interaction {
     entry = ab ?? ba;
   }
 
+  const [sortedA, sortedB] = sortPair(locale, keyA, keyB);
+  const pairKey = `${sortedA}|${sortedB}`;
+  const localizedNote =
+    getComboNote(locale, pairKey) ?? entry?.note;
+
   return {
-    definition: resolveStatus(entry?.status),
-    note: entry?.note,
+    definition: resolveStatus(entry?.status, locale),
+    note: localizedNote,
     sources: entry?.sources,
   };
 }
 
-/** All pairs where the interaction is known (not Unknown), de-duplicated. */
 export function listKnownPairs(keys: string[]): Array<[string, string]> {
   const seen = new Set<string>();
   const out: Array<[string, string]> = [];

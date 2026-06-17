@@ -1,0 +1,16 @@
+{
+  "pretty_name": {
+    "_source": "Dextromethorphan",
+    "text": "Dextromethorphan"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Commonly found in certain over the counter cough medicines. Has dissociative effects similar to ketamine or MXE, though also shares properties with opioids and alcohol. It is recommended to dose DXM through direct ingestion of the drug, without other active ingrediants such as guaifenesin or doxylamine.",
+      "text": "Kommt häufig in bestimmten rezeptfreien Hustenmitteln vor. Hat dissoziative Effekte ähnlich wie Ketamin oder MXE, teilt aber auch Eigenschaften mit Opioiden und Alkohol. Es wird empfohlen, DXM durch direkte Einnahme der Substanz zu dosieren, ohne andere Wirkstoffe wie Guaifenesin oder Doxylamin."
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: See http://dxm.tripsit.me for mg/weight doses, among other things. Deaths have been reported at 25mg/kg",
+    "text": " HINWEIS: Siehe http://dxm.tripsit.me unter anderem für mg/kg-Dosierungen. Todesfälle wurden bei 25 mg/kg berichtet"
+  }
+}

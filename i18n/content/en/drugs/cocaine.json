@@ -1,0 +1,54 @@
+{
+  "pretty_name": {
+    "_source": "Cocaine",
+    "text": "Cocaine"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A highly popular, short-acting CNS stimulant that works by blocking the reuptake of dopamine, serotonin, and norepinephrine. It is known to increase euphoria, confidence, sex-drive, focus, body temperature, and heart rate. Cocaine can cause severe vasoconstriction and is known to be cardiotoxic and have a high potential for compulsive redosing and addiction.",
+      "text": "A highly popular, short-acting CNS stimulant that works by blocking the reuptake of dopamine, serotonin, and norepinephrine. It is known to increase euphoria, confidence, sex-drive, focus, body temperature, and heart rate. Cocaine can cause severe vasoconstriction and is known to be cardiotoxic and have a high potential for compulsive redosing and addiction."
+    },
+    "effects": {
+      "_source": "Elevated mood. Increase in irritability, hyper-inflated ego, euphoria, stimulation, raised heartrate, numbing effects depending on ROA, nausea (particularly at high doses)",
+      "text": "Elevated mood. Increase in irritability, hyper-inflated ego, euphoria, stimulation, raised heartrate, numbing effects depending on ROA, nausea (particularly at high doses)"
+    }
+  },
+  "dose_note": {
+    "_source": "Rapid onset. Depending on purity, dosage will vary",
+    "text": "Rapid onset. Depending on purity, dosage will vary"
+  },
+  "formatted_effects": [
+    {
+      "_source": "Elevated mood",
+      "text": "Elevated mood"
+    },
+    {
+      "_source": "Increase in irritability",
+      "text": "Increase in irritability"
+    },
+    {
+      "_source": "hyper-inflated ego",
+      "text": "hyper-inflated ego"
+    },
+    {
+      "_source": "euphoria",
+      "text": "euphoria"
+    },
+    {
+      "_source": "stimulation",
+      "text": "stimulation"
+    },
+    {
+      "_source": "raised heartrate",
+      "text": "raised heartrate"
+    },
+    {
+      "_source": "numbing effects depending on ROA",
+      "text": "numbing effects depending on ROA"
+    },
+    {
+      "_source": "nausea (particularly at high doses)",
+      "text": "nausea (particularly at high doses)"
+    }
+  ]
+}

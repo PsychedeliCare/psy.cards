@@ -1,0 +1,70 @@
+{
+  "pretty_name": {
+    "_source": "DMT",
+    "text": "DMT"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A popular and powerful psychedelic, typically used in two ways: either it is vapourised for a short 'breakthrough' experience, or it is taken in combination with an enzyme inhibitor for a long, intense trip (this is also known as ayahuasca or pharmahuasca).",
+      "text": "Un psychédélique populaire et puissant, généralement utilisé de deux façons : soit il est vaporisé pour une courte expérience de 'breakthrough', soit il est pris en association avec un inhibiteur enzymatique pour un trip long et intense (aussi connu sous le nom d'ayahuasca ou de pharmahuasca)."
+    },
+    "effects": {
+      "_source": "immersive experience, open eye visuals, radical perspective shifting, profound life-changing spiritual experiences, powerful rushing of sensation, change in perception of time, auditory hallucinations, color shifting, hard on lungs when smoking, stomach discomfort, difficulty integrating experiences, overwhelming fear",
+      "text": "expérience immersive, visuels yeux ouverts, changement radical de perspective, expériences spirituelles profondes pouvant changer la vie, puissant afflux de sensations, changement de la perception du temps, hallucinations auditives, changement des couleurs, dur pour les poumons lorsqu'il est fumé, inconfort gastrique, difficulté à intégrer les expériences, peur envahissante"
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: These figures are for 100% effective vaporization methods. Typical methods of vaporization are not 100% effective. The likelihood of having a \"breakthrough\" experience increases with dosages. Caution is advised.",
+    "text": " REMARQUE : Ces chiffres concernent des méthodes de vaporisation efficaces à 100 %. Les méthodes de vaporisation habituelles ne sont pas efficaces à 100 %. La probabilité d'avoir une expérience de \"breakthrough\" augmente avec les dosages. La prudence est recommandée."
+  },
+  "formatted_effects": [
+    {
+      "_source": "immersive experience",
+      "text": "expérience immersive"
+    },
+    {
+      "_source": "open eye visuals",
+      "text": "visuels yeux ouverts"
+    },
+    {
+      "_source": "radical perspective shifting",
+      "text": "changement radical de perspective"
+    },
+    {
+      "_source": "profound life-changing spiritual experiences",
+      "text": "expériences spirituelles profondes pouvant changer la vie"
+    },
+    {
+      "_source": "powerful rushing of sensation",
+      "text": "puissant afflux de sensations"
+    },
+    {
+      "_source": "change in perception of time",
+      "text": "changement de la perception du temps"
+    },
+    {
+      "_source": "auditory hallucinations",
+      "text": "hallucinations auditives"
+    },
+    {
+      "_source": "color shifting",
+      "text": "changement des couleurs"
+    },
+    {
+      "_source": "hard on lungs when smoking",
+      "text": "dur pour les poumons lorsqu'il est fumé"
+    },
+    {
+      "_source": "stomach discomfort",
+      "text": "inconfort gastrique"
+    },
+    {
+      "_source": "difficulty integrating experiences",
+      "text": "difficulté à intégrer les expériences"
+    },
+    {
+      "_source": "overwhelming fear",
+      "text": "peur envahissante"
+    }
+  ]
+}

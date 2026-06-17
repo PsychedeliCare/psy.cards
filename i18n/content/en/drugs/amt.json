@@ -1,0 +1,82 @@
+{
+  "pretty_name": {
+    "_source": "αMT",
+    "text": "αMT"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A long-acting psychedelic-empathogen with a broad method of action in the brain. Not suitable for combination with many other substances. Used as an anti-depressant in the Soviet Union, but later found popularity in the RC scene, mainly in the UK.",
+      "text": "A long-acting psychedelic-empathogen with a broad method of action in the brain. Not suitable for combination with many other substances. Used as an anti-depressant in the Soviet Union, but later found popularity in the RC scene, mainly in the UK."
+    },
+    "effects": {
+      "_source": "Euphoria, empathy, insight, brightened colour, Closed/Open eye visuals, enhanced tactile sensation, mental/physical stimulation, decreased appetite, pupil dilation, restlessness, change in perception, ego softening, sweating/chills, muscle tension, confusion, insomnia.",
+      "text": "Euphoria, empathy, insight, brightened colour, Closed/Open eye visuals, enhanced tactile sensation, mental/physical stimulation, decreased appetite, pupil dilation, restlessness, change in perception, ego softening, sweating/chills, muscle tension, confusion, insomnia."
+    }
+  },
+  "formatted_effects": [
+    {
+      "_source": "Euphoria",
+      "text": "Euphoria"
+    },
+    {
+      "_source": "empathy",
+      "text": "empathy"
+    },
+    {
+      "_source": "insight",
+      "text": "insight"
+    },
+    {
+      "_source": "brightened colour",
+      "text": "brightened colour"
+    },
+    {
+      "_source": "Closed/Open eye visuals",
+      "text": "Closed/Open eye visuals"
+    },
+    {
+      "_source": "enhanced tactile sensation",
+      "text": "enhanced tactile sensation"
+    },
+    {
+      "_source": "mental/physical stimulation",
+      "text": "mental/physical stimulation"
+    },
+    {
+      "_source": "decreased appetite",
+      "text": "decreased appetite"
+    },
+    {
+      "_source": "pupil dilation",
+      "text": "pupil dilation"
+    },
+    {
+      "_source": "restlessness",
+      "text": "restlessness"
+    },
+    {
+      "_source": "change in perception",
+      "text": "change in perception"
+    },
+    {
+      "_source": "ego softening",
+      "text": "ego softening"
+    },
+    {
+      "_source": "sweating/chills",
+      "text": "sweating/chills"
+    },
+    {
+      "_source": "muscle tension",
+      "text": "muscle tension"
+    },
+    {
+      "_source": "confusion",
+      "text": "confusion"
+    },
+    {
+      "_source": "insomnia",
+      "text": "insomnia"
+    }
+  ]
+}

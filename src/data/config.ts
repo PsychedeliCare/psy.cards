@@ -1,3 +1,5 @@
+import type { Locale } from "../i18n/locales";
+import { getDrugLabel, getLocaleBundle } from "../i18n/load-locale";
 import combogenConfig from "../../combogen/config.json";
 import enTranslations from "../../drugs/translations/en.json";
 import { keyToSlug } from "./slug";
@@ -13,13 +15,9 @@ export type GroupName =
   | "cannabinoid";
 
 export type Column = {
-  /** Key used in `drugs/combos.json` (e.g. "benzodiazepines", "ghb/gbl"). */
   key: string;
-  /** Display label matching the original table (e.g. "Benzos"). */
   label: string;
-  /** URL-safe slug (e.g. "ghb-gbl"). */
   slug: string;
-  /** Category used for colour + header styling. */
   group: GroupName;
 };
 
@@ -49,65 +47,80 @@ export const visibleGroupOrder: GroupName[] = [
 
 const groupOrder: GroupName[] = ["antidepressant", ...visibleGroupOrder];
 
-const originalColumns: Column[] = combogenConfig.tableOrder.flatMap(
-  (groupLabels, groupIndex) =>
-    groupLabels.map((label) => {
-      const key = labelToKey[label] ?? label.toLowerCase();
-      return {
-        key,
-        label,
-        slug: keyToSlug(key),
-        group: groupOverrides[key] ?? groupNames[groupIndex]!,
-      } satisfies Column;
-    })
-);
+function buildColumns(locale: Locale): Column[] {
+  const bundle = getLocaleBundle(locale);
+  const originalColumns: Column[] = combogenConfig.tableOrder.flatMap(
+    (groupLabels, groupIndex) =>
+      groupLabels.map((label) => {
+        const key = labelToKey[label] ?? label.toLowerCase();
+        const localizedLabel = bundle.drugLabels[key] ?? label;
+        return {
+          key,
+          label: localizedLabel,
+          slug: keyToSlug(key),
+          group: groupOverrides[key] ?? groupNames[groupIndex]!,
+        } satisfies Column;
+      })
+  );
 
-const originalOrder = new Map<string, number>(
-  originalColumns.map((column, index) => [column.key, index])
-);
+  const originalOrder = new Map<string, number>(
+    originalColumns.map((column, index) => [column.key, index])
+  );
 
-export const columns: Column[] = [...originalColumns].sort((a, b) => {
-  const groupA = groupOrder.indexOf(a.group);
-  const groupB = groupOrder.indexOf(b.group);
-  const safeGroupA = groupA === -1 ? groupOrder.length : groupA;
-  const safeGroupB = groupB === -1 ? groupOrder.length : groupB;
+  return [...originalColumns].sort((a, b) => {
+    const groupA = groupOrder.indexOf(a.group);
+    const groupB = groupOrder.indexOf(b.group);
+    const safeGroupA = groupA === -1 ? groupOrder.length : groupA;
+    const safeGroupB = groupB === -1 ? groupOrder.length : groupB;
 
-  if (safeGroupA !== safeGroupB) return safeGroupA - safeGroupB;
-  return (originalOrder.get(a.key) ?? 0) - (originalOrder.get(b.key) ?? 0);
-});
-
-export const columnBySlug = new Map<string, Column>(
-  columns.map((c) => [c.slug, c])
-);
-
-export const columnByKey = new Map<string, Column>(
-  columns.map((c) => [c.key, c])
-);
-
-export function getColumnIndex(key: string): number {
-  return columns.findIndex((c) => c.key === key);
+    if (safeGroupA !== safeGroupB) return safeGroupA - safeGroupB;
+    return (originalOrder.get(a.key) ?? 0) - (originalOrder.get(b.key) ?? 0);
+  });
 }
 
-/** Canonical sort order: lower tableOrder index first. */
-export function sortPair(keyA: string, keyB: string): [string, string] {
-  const ia = getColumnIndex(keyA);
-  const ib = getColumnIndex(keyB);
+const columnsCache = new Map<Locale, Column[]>();
+
+export function getColumns(locale: Locale = "en"): Column[] {
+  if (!columnsCache.has(locale)) {
+    columnsCache.set(locale, buildColumns(locale));
+  }
+  return columnsCache.get(locale)!;
+}
+
+/** @deprecated Use getColumns(locale) */
+export const columns = getColumns("en");
+
+export function getColumnBySlug(locale: Locale, slug: string): Column | undefined {
+  return getColumns(locale).find((c) => c.slug === slug);
+}
+
+export function getColumnByKey(locale: Locale, key: string): Column | undefined {
+  return getColumns(locale).find((c) => c.key === key);
+}
+
+export const columnBySlug = new Map(columns.map((c) => [c.slug, c]));
+export const columnByKey = new Map(columns.map((c) => [c.key, c]));
+
+export function getColumnIndex(locale: Locale, key: string): number {
+  return getColumns(locale).findIndex((c) => c.key === key);
+}
+
+export function sortPair(locale: Locale, keyA: string, keyB: string): [string, string] {
+  const ia = getColumnIndex(locale, keyA);
+  const ib = getColumnIndex(locale, keyB);
   if (ia === -1 || ib === -1) return [keyA, keyB];
   return ia <= ib ? [keyA, keyB] : [keyB, keyA];
 }
 
-export const groupLabels: Record<GroupName, string> = {
-  psychedelic: "Psychedelics",
-  dissociative: "Dissociatives",
-  stimulant: "Stimulants",
-  depressant: "Depressants",
-  antidepressant: "Antidepressants",
-  empathogen: "Empathogens",
-  opioid: "Opioids",
-  cannabinoid: "Cannabinoids",
-};
+export function getGroupLabels(locale: Locale): Record<GroupName, string> {
+  const ui = getLocaleBundle(locale).ui as {
+    groups: Record<GroupName, string>;
+  };
+  return ui.groups;
+}
 
-/** Substances shown in the table's "common" set and search default results. */
+export const groupLabels: Record<GroupName, string> = getGroupLabels("en");
+
 export const commonSubstanceKeys = [
   "amphetamines",
   "cocaine",
@@ -123,3 +136,7 @@ export const commonSubstanceKeys = [
 ] as const;
 
 export const commonSubstanceKeySet = new Set<string>(commonSubstanceKeys);
+
+export function getDisplayLabel(locale: Locale, key: string): string {
+  return getDrugLabel(locale, key) ?? getColumnByKey(locale, key)?.label ?? key;
+}

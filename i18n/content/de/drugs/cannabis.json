@@ -1,0 +1,78 @@
+{
+  "pretty_name": {
+    "_source": "Cannabis",
+    "text": "Cannabis"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A common and widely used psychoactive plant, which is beginning to gain legal status for medical and even recreational use in some parts of the world. Usually smoked or eaten, primary effects are relaxation and an affinity towards food - a state described as being 'stoned.'",
+      "text": "Eine verbreitete und häufig verwendete psychoaktive Pflanze, die in einigen Teilen der Welt zunehmend legalen Status für medizinische und sogar freizeitbezogene Nutzung erhält. Sie wird gewöhnlich geraucht oder gegessen; Hauptwirkungen sind Entspannung und eine stärkere Neigung zu Essen - ein Zustand, der als 'stoned' beschrieben wird."
+    },
+    "effects": {
+      "_source": "Sedation, Appetite enhancement, Muscle relaxation, Muscle spasms, Nausea, Pain relief, Vasodilation, Creativity Enhancement, Anxiety suppression, Anxiety, Dream suppression, Emotion enhancement, Mindfulness, Paranoia, Sleepiness.",
+      "text": "Sedierung, Appetitsteigerung, Muskelentspannung, Muskelkrämpfe, Übelkeit, Schmerzlinderung, Vasodilatation, Kreativitätssteigerung, Angstunterdrückung, Angst, Traumunterdrückung, Emotionsverstärkung, Achtsamkeit, Paranoia, Schläfrigkeit."
+    }
+  },
+  "formatted_effects": [
+    {
+      "_source": "Sedation",
+      "text": "Sedierung"
+    },
+    {
+      "_source": "Appetite enhancement",
+      "text": "Appetitsteigerung"
+    },
+    {
+      "_source": "Muscle relaxation",
+      "text": "Muskelentspannung"
+    },
+    {
+      "_source": "Muscle spasms",
+      "text": "Muskelkrämpfe"
+    },
+    {
+      "_source": "Nausea",
+      "text": "Übelkeit"
+    },
+    {
+      "_source": "Pain relief",
+      "text": "Schmerzlinderung"
+    },
+    {
+      "_source": "Vasodilation",
+      "text": "Vasodilatation"
+    },
+    {
+      "_source": "Creativity Enhancement",
+      "text": "Kreativitätssteigerung"
+    },
+    {
+      "_source": "Anxiety suppression",
+      "text": "Angstunterdrückung"
+    },
+    {
+      "_source": "Anxiety",
+      "text": "Angst"
+    },
+    {
+      "_source": "Dream suppression",
+      "text": "Traumunterdrückung"
+    },
+    {
+      "_source": "Emotion enhancement",
+      "text": "Emotionsverstärkung"
+    },
+    {
+      "_source": "Mindfulness",
+      "text": "Achtsamkeit"
+    },
+    {
+      "_source": "Paranoia",
+      "text": "Paranoia"
+    },
+    {
+      "_source": "Sleepiness",
+      "text": "Schläfrigkeit"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "pretty_name": {
+    "_source": "PCP",
+    "text": "PCP"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A strong dissociative drug.  PCP works primarily as an NMDA receptor antagonist. It is also referred to as \"wet\" or \"angel dust\". The drug is best known for stories of  strange and sometimes violent behaviour of those under its influence, though it is likely these are only in overdose cases. Caution is recommended due to reports of mania and psychosis.",
+      "text": "Une substance dissociative puissante. Le PCP agit principalement comme antagoniste des récepteurs NMDA. Il est aussi appelé \"wet\" ou \"angel dust\". Cette substance est surtout connue pour des récits de comportements étranges et parfois violents chez les personnes sous son influence, bien qu'il soit probable que cela concerne seulement des cas de surdosage. La prudence est recommandée en raison de rapports de manie et de psychose."
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: Caution is strongly recommended, there are a high amount of reports for the drug inducing manic episodes and or related psychosis.",
+    "text": " REMARQUE : Une grande prudence est recommandée ; il existe de nombreux rapports indiquant que cette substance induit des épisodes maniaques et/ou une psychose associée."
+  }
+}

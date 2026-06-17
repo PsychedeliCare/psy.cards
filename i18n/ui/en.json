@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "siteTitle": "psy.cards",
+    "siteDescription": "A quick harm-reduction guide to common drug combinations, based on TripSit information.",
+    "combosTitle": "Drug combinations — psy.cards",
+    "landingDescription": "Clear, multilingual harm-reduction cards that make trusted substance information easier to read, share, and use."
+  },
+  "layout": {
+    "close": "Close",
+    "language": "Language",
+    "preview": "Preview",
+    "previewBuild": "Preview build",
+    "previewDisclaimer": "Development version disclaimer",
+    "previewBody1": "This is a development version of psy.cards and is not meant for wide distribution just yet.",
+    "previewBody2": "None of the information on this site has been verified for accuracy. The site and its authors cannot be held liable for any inaccurate information.",
+    "previewCloseAria": "Close preview disclaimer"
+  },
+  "landing": {
+    "eyebrow": "psy.cards",
+    "title": "Clearer substance information, wherever people need it.",
+    "lede": "psy.cards turns trusted harm-reduction information into simple, multilingual cards for print, web, and social media.",
+    "cta": "Explore drug combinations",
+    "about": "The goal is to make practical substance guidance easier to find, understand, translate, and share responsibly. Each card keeps the essentials close at hand, whether someone sees it in print, in a carousel post, or through a QR code."
+  },
+  "footer": {
+    "projectBy": "A project by",
+    "enabledBy": "Enabled by the amazing work from",
+    "contributeOn": "Contribute on",
+    "builtWith": "Built with"
+  },
+  "acknowledgements": {
+    "ariaLabel": "Acknowledgements",
+    "title": "Acknowledgements",
+    "drugsWheelCredit": "Drug category framework adapted from {link}.",
+    "drugsWheel": "The Drugs Wheel"
+  },
+  "comboTable": {
+    "ariaLabel": "Drug combinations",
+    "search": "Search",
+    "searchAriaLabel": "Search substances and combinations",
+    "searchTitle": "Search substances and combinations"
+  },
+  "categoryNav": {
+    "ariaLabel": "Drug categories",
+    "settings": "Settings",
+    "view": "View",
+    "mostCommon": "Most common",
+    "all": "All",
+    "medication": "Medication",
+    "medicationTitle": "Show MAOIs and SSRIs",
+    "medicationAriaLabel": "Show medication",
+    "highlightOnHover": "Highlight on hover",
+    "highlightTitle": "Toggle hover highlight effect",
+    "showGroup": "Show {group}",
+    "toggleGroup": "Toggle {group}"
+  },
+  "groups": {
+    "psychedelic": "Psychedelics",
+    "dissociative": "Dissociatives",
+    "stimulant": "Stimulants",
+    "depressant": "Depressants",
+    "antidepressant": "Antidepressants",
+    "empathogen": "Empathogens",
+    "opioid": "Opioids",
+    "cannabinoid": "Cannabinoids"
+  },
+  "groupSummaries": {
+    "stimulant": "Racing heartbeat, sweating, energy, confidence, well-being, arousal, euphoria, lowered appetite, clenched jaws, dilated pupils, paranoia, anxiety, mood swings, impotence",
+    "empathogen": "Belonging, arousal, understanding, sweating, serotonin syndrome, erectile dysfunction, warmth, overheat, overdose, risk of dehydration or overhydration",
+    "psychedelic": "Visual disturbance, spiritual connection, loss of control, heightened senses, opened doors of perception, panic, mood swings, arousal, fear, vomiting, mental health harms",
+    "dissociative": "Euphoria, numb, safe, pain-free, floaty, relaxed, protected, happy, unaware, unconscious, in a 'hole', perceptual disturbances, scared, disconnected, vulnerable",
+    "depressant": "Relaxed, confident, care-free, risk-taking, unconscious, coma, euphoria, death, disinhibited behaviours, blackouts, sleep, vomiting, nausea, aggression, dependence",
+    "opioid": "Confident, pain-free, safe, sleepy, warm, feel invincible, itchy, constricted pupils, stop breathing, nausea, vomiting, euphoria, sweating, overdose, dependence, withdrawal",
+    "cannabinoid": "Calm, relaxed, chilled out, floaty, reduced pain, paranoia, anxiety, loss of memory, bloodshot eyes, increased sensuality, dry mouth, overexcited, changes to appetite"
+  },
+  "legend": {
+    "ariaLabel": "Legend"
+  },
+  "comboCell": {
+    "more": "More…",
+    "interactionAriaLabel": "{row} and {col} interaction"
+  },
+  "substanceCard": {
+    "timing": "Timing",
+    "onset": "Onset",
+    "duration": "Duration",
+    "afterEffects": "After-effects",
+    "halfLife": "Half-life",
+    "doses": "Doses",
+    "safety": "Safety",
+    "warning": "Warning",
+    "avoidCombining": "Avoid combining with",
+    "testKits": "Test kits",
+    "effects": "Effects",
+    "pwEffects": "View PsychonautWiki effects",
+    "more": "More",
+    "tripReports": "Trip reports",
+    "effectTimeline": "{name} effect timeline",
+    "classFallback": "This column represents a drug class rather than a single compound, so specific dose and duration data isn't available here.",
+    "missingDataFallback": "Detailed substance data isn't available in the TripSit dataset for this entry. Combination data is still accurate."
+  },
+  "comboCard": {
+    "noteOnPair": "Note on this pair",
+    "sources": "Sources",
+    "about": "About {label}"
+  },
+  "doseChart": {
+    "title": "Doses",
+    "chart": "Chart",
+    "table": "Table",
+    "threshold": "Threshold",
+    "light": "Light",
+    "common": "Common",
+    "strong": "Strong",
+    "heavy": "Heavy"
+  },
+  "timingChart": {
+    "startTime": "Start time",
+    "timezone": "Timezone",
+    "sunTimes": "Sun times",
+    "onset": "onset",
+    "peak": "peak",
+    "locationUnavailable": "Location is not available in this browser.",
+    "determiningLocation": "Determining your location…",
+    "locationDenied": "Location access was denied.",
+    "locationError": "Could not determine your location."
+  },
+  "smilesCitation": {
+    "prefix": "Structure rendered with",
+    "tool": "SmilesDrawer"
+  },
+  "search": {
+    "placeholder": "Search substances and combinations…",
+    "empty": "No results found.",
+    "substance": "Substance",
+    "combo": "Combo",
+    "comboName": "Combo name",
+    "substanceCard": "Substance card",
+    "navigate": "Navigate",
+    "open": "Open",
+    "close": "Close"
+  },
+  "modal": {
+    "noteOnPair": "Note on this pair",
+    "smilesCitation": "Structure rendered with SmilesDrawer"
+  },
+  "status": {
+    "unknown": "Unknown",
+    "unknownDefinition": "Interaction data is unavailable for this pair. Research further before combining."
+  },
+  "burningMountain": {
+    "title": "ALPS Psycare — psy.cards",
+    "description": "Burning Mountain harm-reduction combo chart with ALPS PsyCare resources for festival contexts.",
+    "eyebrow": "Burning Mountain Festival · Zernez",
+    "pageTitle": "ALPS Psycare",
+    "intro": "ALPS PsyCare brings science-based psychedelic education and non-judgmental psychological support into Swiss festival settings. By combining evidence-informed harm reduction, community care, and compassionate on-site support, the initiative helps people seek help early and prevents small difficulties from becoming serious incidents.",
+    "mapLabel": "Festival map",
+    "mapTitle": "Burning Mountain site map",
+    "mapText": "Use the festival map to orient yourself on site. Check the latest signage and ask the info point, medical team, security, or PsyCare if you need help finding support.",
+    "resourcesEyebrow": "Festival support",
+    "resourcesTitle": "Useful resources in the moment",
+    "chartEyebrow": "Combination reference",
+    "chartTitle": "Drug combinations chart",
+    "chartText": "Use this common festival-substance chart as a quick reference, then speak with PsyCare, medical staff, or another trusted support person if something feels off.",
+    "resources": {
+      "emergency": {
+        "label": "Emergency",
+        "title": "Need urgent medical help?",
+        "text": "Go to the nearest medical, security, or PsyCare team member. For life-threatening situations in Switzerland call ambulance 144 or European emergency 112.",
+        "action": "Call 144"
+      },
+      "festival": {
+        "label": "Festival",
+        "title": "Burning Mountain information",
+        "text": "Official updates, tickets, venue details, camping, facilities, and travel information for the festival in Zernez.",
+        "action": "Open festival site"
+      },
+      "saferUse": {
+        "label": "Safer use",
+        "title": "Drug checking and alerts",
+        "text": "Saferparty shares Swiss drug checking information, alerts, and counselling resources before and after the festival.",
+        "action": "Open Saferparty"
+      }
+    }
+  }
+}

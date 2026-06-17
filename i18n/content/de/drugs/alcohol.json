@@ -1,0 +1,70 @@
+{
+  "pretty_name": {
+    "_source": "Alcohol",
+    "text": "Alkohol"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Alcohol is a CNS depressant that acts through the GABAₐ receptor, and is one of the most common strong psychoactives used by humans. It has a long history of use and its intoxicating effects are well-studied and documented. It remains legal in most parts of the world.",
+      "text": "Alkohol ist ein ZNS-Depressivum, das über den GABAₐ-Rezeptor wirkt, und gehört zu den am häufigsten vom Menschen verwendeten starken psychoaktiven Substanzen. Er hat eine lange Nutzungsgeschichte, und seine berauschenden Wirkungen sind gut untersucht und dokumentiert. In den meisten Teilen der Welt bleibt er legal."
+    },
+    "effects": {
+      "_source": "relaxation, mood lift, happiness, sociability, lowered inhibitions, analgesia, slurred speech, flushed skin, drowsiness, tolerance, euphoria, amnesia",
+      "text": "Entspannung, Stimmungsaufhellung, Glücksgefühl, Geselligkeit, verringerte Hemmungen, Analgesie, verwaschene Sprache, Hautrötung, Benommenheit, Toleranz, Euphorie, Amnesie"
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: Alcohol consumption should be spread out over a few hours and ideally separated by water breaks. Check the label on alcohol for unit content",
+    "text": " HINWEIS: Alkoholkonsum sollte über einige Stunden verteilt und idealerweise durch Wasserpausen unterbrochen werden. Prüfe das Etikett des alkoholischen Getränks auf den Einheitengehalt"
+  },
+  "formatted_effects": [
+    {
+      "_source": "relaxation",
+      "text": "Entspannung"
+    },
+    {
+      "_source": "mood lift",
+      "text": "Stimmungsaufhellung"
+    },
+    {
+      "_source": "happiness",
+      "text": "Glücksgefühl"
+    },
+    {
+      "_source": "sociability",
+      "text": "Geselligkeit"
+    },
+    {
+      "_source": "lowered inhibitions",
+      "text": "verringerte Hemmungen"
+    },
+    {
+      "_source": "analgesia",
+      "text": "Analgesie"
+    },
+    {
+      "_source": "slurred speech",
+      "text": "verwaschene Sprache"
+    },
+    {
+      "_source": "flushed skin",
+      "text": "Hautrötung"
+    },
+    {
+      "_source": "drowsiness",
+      "text": "Benommenheit"
+    },
+    {
+      "_source": "tolerance",
+      "text": "Toleranz"
+    },
+    {
+      "_source": "euphoria",
+      "text": "Euphorie"
+    },
+    {
+      "_source": "amnesia",
+      "text": "Amnesie"
+    }
+  ]
+}

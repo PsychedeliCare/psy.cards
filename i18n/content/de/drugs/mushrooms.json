@@ -1,0 +1,42 @@
+{
+  "pretty_name": {
+    "_source": "Mushrooms",
+    "text": "Pilze"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Fungi containing psilocybin, a prototypical psychedelic. It should be noted there are multiple kinds of psychoactive mushrooms and proper identification is essential for safety. The dosages listed are in respects to psilocybe cubensis, one of the most common and popular psilocybin mushroom species.",
+      "text": "Pilze, die Psilocybin enthalten, ein prototypisches Psychedelikum. Es sollte beachtet werden, dass es mehrere Arten psychoaktiver Pilze gibt und eine korrekte Identifikation für die Sicherheit wesentlich ist. Die aufgeführten Dosierungen beziehen sich auf Psilocybe cubensis, eine der häufigsten und beliebtesten psilocybinhaltigen Pilzarten."
+    },
+    "effects": {
+      "_source": "visual distortion, color enhancement, sense of connectedness with nature, sense of well-being, sense of wonder",
+      "text": "visuelle Verzerrung, Farbverstärkung, Gefühl der Verbundenheit mit der Natur, Wohlbefinden, Staunen"
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: Dosage ranges will vary between fungus strains. The doses given are for *dried* psilocybe cubensis mushrooms. The mushrooms are substantially more potent per-weight when dry.",
+    "text": " HINWEIS: Dosierungsbereiche variieren zwischen Pilzstämmen. Die angegebenen Dosen gelten für *getrocknete* Psilocybe-cubensis-Pilze. Die Pilze sind trocken bezogen auf das Gewicht deutlich potenter."
+  },
+  "formatted_effects": [
+    {
+      "_source": "visual distortion",
+      "text": "visuelle Verzerrung"
+    },
+    {
+      "_source": "color enhancement",
+      "text": "Farbverstärkung"
+    },
+    {
+      "_source": "sense of connectedness with nature",
+      "text": "Gefühl der Verbundenheit mit der Natur"
+    },
+    {
+      "_source": "sense of well-being",
+      "text": "Wohlbefinden"
+    },
+    {
+      "_source": "sense of wonder",
+      "text": "Staunen"
+    }
+  ]
+}

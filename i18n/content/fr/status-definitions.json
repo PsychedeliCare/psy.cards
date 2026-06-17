@@ -1,0 +1,34 @@
+{
+  "dangerous": {
+    "_source": "These combinations are considered extremely harmful and should always be avoided. Reactions to these drugs taken in combination are highly unpredictable and have a potential to cause death.",
+    "text": "Ces combinaisons sont considérées comme extrêmement dangereuses et doivent toujours être évitées. Les réactions à ces substances prises ensemble sont très imprévisibles et peuvent entraîner la mort."
+  },
+  "unsafe": {
+    "_source": "There is considerable risk of physical harm when taking these combinations, they  should be avoided where possible.",
+    "text": "Ces combinaisons comportent un risque important d'atteinte physique ; elles doivent être évitées dans la mesure du possible."
+  },
+  "caution": {
+    "_source": "These combinations are not usually physically harmful, but may produce undesirable  effects, such as physical discomfort or overstimulation. Extreme use may cause physical health issues. Synergistic effects may be unpredictable. Care should be taken when choosing to use this combination.",
+    "text": "Ces combinaisons ne sont généralement pas dangereuses pour le corps, mais peuvent produire des effets indésirables, comme un inconfort physique ou une surstimulation. Un usage très intensif peut entraîner des problèmes de santé physique. Les effets synergiques peuvent être imprévisibles. La prudence est nécessaire si vous choisissez d'utiliser cette combinaison."
+  },
+  "low risk & decrease": {
+    "_source": "Effects are subtractive. The combination is unlikely to cause any adverse or  undesirable reaction beyond those that might ordinarily be expected from these drugs.",
+    "text": "Les effets se réduisent mutuellement. La combinaison est peu susceptible de provoquer une réaction indésirable au-delà de ce qui pourrait normalement être attendu de ces substances."
+  },
+  "low risk & no synergy": {
+    "_source": "Effects are additive. The combination is unlikely to cause any adverse or undesirable reaction beyond those that might ordinarily be expected from these drugs.",
+    "text": "Les effets s'additionnent. La combinaison est peu susceptible de provoquer une réaction indésirable au-delà de ce qui pourrait normalement être attendu de ces substances."
+  },
+  "low risk & synergy": {
+    "_source": "These drugs work together to cause an effect greater than the sum of its parts, and they aren't likely to cause an adverse or undesirable reaction when used carefully. Additional research should always be done before combining drugs.",
+    "text": "Ces substances agissent ensemble pour produire un effet supérieur à la somme de leurs effets, et elles sont peu susceptibles de provoquer une réaction indésirable lorsqu'elles sont utilisées avec précaution. Il faut toujours se renseigner davantage avant de combiner des substances."
+  },
+  "unknown": {
+    "_source": "Effects are unknown.",
+    "text": "Les effets sont inconnus."
+  },
+  "fallback": {
+    "_source": "Interaction data is unavailable for this pair. Research further before combining.",
+    "text": "Les données d'interaction ne sont pas disponibles pour cette paire. Renseignez-vous davantage avant de les combiner."
+  }
+}

@@ -3,6 +3,9 @@ import Icon from "./Icon.astro";
 import { getInteraction } from "../data/combos";
 import { pairSlug } from "../data/slug";
 import { sortPair } from "../data/config";
+import type { Locale } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t, tFormat } from "../i18n/ui";
 
 interface Props {
   rowKey: string;
@@ -10,12 +13,21 @@ interface Props {
   rowLabel: string;
   colLabel: string;
   comboRoute?: string;
+  locale?: Locale;
 }
 
-const { rowKey, colKey, rowLabel, colLabel, comboRoute = "/combos" } = Astro.props;
+const {
+  rowKey,
+  colKey,
+  rowLabel,
+  colLabel,
+  comboRoute = "/combos",
+  locale = "en",
+} = Astro.props;
 
-const { definition } = getInteraction(rowKey, colKey);
-const [aKey, bKey] = sortPair(rowKey, colKey);
+const ui = getUiMessages(locale);
+const { definition } = getInteraction(rowKey, colKey, locale);
+const [aKey, bKey] = sortPair(locale, rowKey, colKey);
 const slug = pairSlug(aKey, bKey);
 const href = `${comboRoute}?combo=${slug}`;
 const ariaLabel = `${rowLabel} + ${colLabel}: ${definition.label}`;
@@ -23,6 +35,7 @@ const tooltipId = `combo-tooltip-${slug}-${rowKey}-${colKey}`.replace(
   /[^a-zA-Z0-9_-]/g,
   "-"
 );
+const moreLabel = t(locale, ui, "comboCell.more");
 ---
 
 <div class={`combo-cell status-${definition.statusKey} cell-text`}>
@@ -45,9 +58,12 @@ const tooltipId = `combo-tooltip-${slug}-${rowKey}-${colKey}`.replace(
       href={href}
       class="combo-tooltip__more"
       data-combo={slug}
-      aria-label={`More about ${ariaLabel}`}
+      aria-label={tFormat(locale, ui, "comboCell.interactionAriaLabel", {
+        row: rowLabel,
+        col: colLabel,
+      })}
     >
-      More…
+      {moreLabel}
     </a>
   </span>
 </div>

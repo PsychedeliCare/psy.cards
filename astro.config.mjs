@@ -10,6 +10,13 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: "https://psy.cards",
   integrations: [mdx(), icon()],
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "fr", "de", "it"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 
   vite: {
     plugins: [tailwindcss()]

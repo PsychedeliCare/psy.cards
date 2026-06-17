@@ -1,0 +1,886 @@
+{
+  "2c-t-x|5-meo-xxt": {
+    "_source": "Both classes of compounds can be unpredictable alone",
+    "text": "Both classes of compounds can be unpredictable alone"
+  },
+  "2c-t-x|alcohol": {
+    "_source": "Both these classes of compound can interact unpredictably. Caution should be exercised.",
+    "text": "Both these classes of compound can interact unpredictably. Caution should be exercised."
+  },
+  "2c-t-x|amphetamines": {
+    "_source": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences. In extreme cases, they can result in severe vasoconstriction, tachycardia, hypertension, and heart failure.",
+    "text": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences. In extreme cases, they can result in severe vasoconstriction, tachycardia, hypertension, and heart failure."
+  },
+  "2c-t-x|caffeine": {
+    "_source": "High doses of caffeine may cause anxiety which is less manageable when tripping, and since both are stimulating the combination may cause some physical discomfort.",
+    "text": "High doses of caffeine may cause anxiety which is less manageable when tripping, and since both are stimulating the combination may cause some physical discomfort."
+  },
+  "2c-t-x|cannabis": {
+    "_source": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics.",
+    "text": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics."
+  },
+  "2c-t-x|cocaine": {
+    "_source": "Cocaine and 2c-t-x both provide considerable stimulation. When combined they can result in severe vasoconstriction, tachycardia, hypertension, and in extreme cases heart failure.",
+    "text": "Cocaine and 2c-t-x both provide considerable stimulation. When combined they can result in severe vasoconstriction, tachycardia, hypertension, and in extreme cases heart failure."
+  },
+  "2c-t-x|lithium": {
+    "_source": "There are a large number of reports indicating a high seizure and psychosis risk from this combination.",
+    "text": "There are a large number of reports indicating a high seizure and psychosis risk from this combination."
+  },
+  "2c-t-x|maois": {
+    "_source": "MAO-B inhibitors can increase the potency and duration of phenethylamines unpredictably, which could be dangerous given the unpredictability of the 2C-T-x series",
+    "text": "MAO-B inhibitors can increase the potency and duration of phenethylamines unpredictably, which could be dangerous given the unpredictability of the 2C-T-x series"
+  },
+  "2c-t-x|opioids": {
+    "_source": "No expected interactions, some opioids have serotonin action, and could lead to Serotonin Syndrome or a seizure. These are pretty much only to Pentazocine, Methadone, Tramadol, Tapenatdol.",
+    "text": "No expected interactions, some opioids have serotonin action, and could lead to Serotonin Syndrome or a seizure. These are pretty much only to Pentazocine, Methadone, Tramadol, Tapenatdol."
+  },
+  "2c-x|5-meo-xxt": {
+    "_source": "The 5-MeO psychedelics can interact unpredictably to potentiate other psychedelics",
+    "text": "The 5-MeO psychedelics can interact unpredictably to potentiate other psychedelics"
+  },
+  "2c-x|amphetamines": {
+    "_source": "The anxiogenic and focusing effects of stimulants increase the chance of unpleasant thought loops. The combination is generally unnecessary because of the stimulating effects of psychedelics. Combination of the stimulating effects may be uncomfortable.",
+    "text": "The anxiogenic and focusing effects of stimulants increase the chance of unpleasant thought loops. The combination is generally unnecessary because of the stimulating effects of psychedelics. Combination of the stimulating effects may be uncomfortable."
+  },
+  "2c-x|caffeine": {
+    "_source": "High doses of caffeine may cause anxiety which is less manageable when tripping, and since both are stimulating the combination may cause some physical discomfort.",
+    "text": "High doses of caffeine may cause anxiety which is less manageable when tripping, and since both are stimulating the combination may cause some physical discomfort."
+  },
+  "2c-x|cannabis": {
+    "_source": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics.",
+    "text": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics."
+  },
+  "2c-x|cocaine": {
+    "_source": "The anxiogenic and focusing effects of stimulants increase the chance of unpleasant thought loops. The combination is generally unnecessary because of the stimulating effects of psychedelics. Combination of the stimulating effects may be uncomfortable.",
+    "text": "The anxiogenic and focusing effects of stimulants increase the chance of unpleasant thought loops. The combination is generally unnecessary because of the stimulating effects of psychedelics. Combination of the stimulating effects may be uncomfortable."
+  },
+  "2c-x|lithium": {
+    "_source": "There are a large number of reports indicating a high seizure and psychosis risk from this combination.",
+    "text": "There are a large number of reports indicating a high seizure and psychosis risk from this combination."
+  },
+  "2c-x|maois": {
+    "_source": "MAO-B inhibitors can increase the potency and duration of phenethylamines unpredictably",
+    "text": "MAO-B inhibitors can increase the potency and duration of phenethylamines unpredictably"
+  },
+  "2c-x|pregabalin": {
+    "_source": "Pregabalin may reduce the anxiety and other possible side effects of 2C-X drugs. Additionally, the combination may increase inhibition, dizziness, and risk of injury.",
+    "text": "Pregabalin may reduce the anxiety and other possible side effects of 2C-X drugs. Additionally, the combination may increase inhibition, dizziness, and risk of injury."
+  },
+  "2c-x|tramadol": {
+    "_source": "Tramadol is well known to lower seizure threshold and psychedelics raise the risk of seizures.",
+    "text": "Tramadol is well known to lower seizure threshold and psychedelics raise the risk of seizures."
+  },
+  "5-meo-xxt|amphetamines": {
+    "_source": "The anxiogenic and focusing effects of stimulants increase the chance of unpleasant thought loops. The combination is generally unnecessary because of the stimulating effects of psychedelics. ",
+    "text": "The anxiogenic and focusing effects of stimulants increase the chance of unpleasant thought loops. The combination is generally unnecessary because of the stimulating effects of psychedelics. "
+  },
+  "5-meo-xxt|caffeine": {
+    "_source": "High doses of caffeine may cause anxiety which is less manageable when tripping, and since both are stimulating the combination may cause some physical discomfort.",
+    "text": "High doses of caffeine may cause anxiety which is less manageable when tripping, and since both are stimulating the combination may cause some physical discomfort."
+  },
+  "5-meo-xxt|cannabis": {
+    "_source": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics.",
+    "text": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics."
+  },
+  "5-meo-xxt|cocaine": {
+    "_source": "The anxiogenic and focusing effects of stimulants increase the chance of unpleasant thought loops. The combination is generally unnecessary because of the stimulating effects of psychedelics. ",
+    "text": "The anxiogenic and focusing effects of stimulants increase the chance of unpleasant thought loops. The combination is generally unnecessary because of the stimulating effects of psychedelics. "
+  },
+  "5-meo-xxt|dextromethorphan": {
+    "_source": "Little information exists about this combination.",
+    "text": "Little information exists about this combination."
+  },
+  "5-meo-xxt|dox": {
+    "_source": "The 5-MeO class of tryptamines can be unpredictable in their interactions, particularly increasing the risk of unpleasant physical side effects.",
+    "text": "The 5-MeO class of tryptamines can be unpredictable in their interactions, particularly increasing the risk of unpleasant physical side effects."
+  },
+  "5-meo-xxt|mdma": {
+    "_source": "Some of the 5-MeO tryptamines are a bit unpredictable and should be mixed with MDMA with care",
+    "text": "Some of the 5-MeO tryptamines are a bit unpredictable and should be mixed with MDMA with care"
+  },
+  "5-meo-xxt|mescaline": {
+    "_source": "The 5-MeO class of tryptamines can be unpredictable in their interactions",
+    "text": "The 5-MeO class of tryptamines can be unpredictable in their interactions"
+  },
+  "5-meo-xxt|mxe": {
+    "_source": "Little information exists about this combination.",
+    "text": "Little information exists about this combination."
+  },
+  "5-meo-xxt|nbomes": {
+    "_source": "The 5-MeO class of tryptamines can be unpredictable in their interactions and the NBOMes are known to be unpredictable even alone. This combination is best avoided",
+    "text": "The 5-MeO class of tryptamines can be unpredictable in their interactions and the NBOMes are known to be unpredictable even alone. This combination is best avoided"
+  },
+  "5-meo-xxt|pregabalin": {
+    "_source": "Caution should be given due to 5-MeO-xxT drugs stimulating effects and pregabalin’s seizure concerns at higher dosages. Pregabalin may reduce the vasoconstriction, anxiety, and other side effects of 5-MeO-xxT drugs. Additionally, Pregabalin may increase 5-MeO-xxT drugs inhibition and risk of injury.",
+    "text": "Caution should be given due to 5-MeO-xxT drugs stimulating effects and pregabalin’s seizure concerns at higher dosages. Pregabalin may reduce the vasoconstriction, anxiety, and other side effects of 5-MeO-xxT drugs. Additionally, Pregabalin may increase 5-MeO-xxT drugs inhibition and risk of injury."
+  },
+  "alcohol|amphetamines": {
+    "_source": "Drinking on stimulants is risky because the sedative effects of the alcohol are reduced, and these are what the body uses to gauge drunkenness. This typically leads to excessive drinking with greatly reduced inhibitions, high risk of liver damage and increased dehydration. They will also allow you to drink past a point where you might normally pass out, increasing the risk. If you do decide to do this then you should set a limit of how much you will drink each hour and stick to it, bearing in mind that you will feel the alcohol and the stimulant less. Extended release formulations may severely impede sleep, further worsening the hangover.",
+    "text": "Drinking on stimulants is risky because the sedative effects of the alcohol are reduced, and these are what the body uses to gauge drunkenness. This typically leads to excessive drinking with greatly reduced inhibitions, high risk of liver damage and increased dehydration. They will also allow you to drink past a point where you might normally pass out, increasing the risk. If you do decide to do this then you should set a limit of how much you will drink each hour and stick to it, bearing in mind that you will feel the alcohol and the stimulant less. Extended release formulations may severely impede sleep, further worsening the hangover."
+  },
+  "alcohol|amt": {
+    "_source": "aMT has a broad mechanism of action in the brain and so does alcohol so the combination can be unpredictable",
+    "text": "aMT has a broad mechanism of action in the brain and so does alcohol so the combination can be unpredictable"
+  },
+  "alcohol|benzodiazepines": {
+    "_source": "Ethanol ingestion may potentiate the CNS effects of many benzodiazepines. The two substances potentiate each other strongly and unpredictably, very rapidly leading to unconsciousness. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Blacking out and memory loss is almost certain.",
+    "text": "Ethanol ingestion may potentiate the CNS effects of many benzodiazepines. The two substances potentiate each other strongly and unpredictably, very rapidly leading to unconsciousness. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Blacking out and memory loss is almost certain."
+  },
+  "alcohol|cannabis": {
+    "_source": "In excess, this combination can cause nausea.",
+    "text": "In excess, this combination can cause nausea."
+  },
+  "alcohol|cocaine": {
+    "_source": "Cocaine can decrease some of the intoxicating effects of alcohol, causing some people to drink more than they otherwise would, which leads to greater behavioral and physical health risks. There is also some debate about cocaethylene, a metabolite produced when combining alcohol and cocaine, with some researchers positing that it is more cardiotoxic than cocaine on its own. Use moderation when combining these substances.",
+    "text": "Cocaine can decrease some of the intoxicating effects of alcohol, causing some people to drink more than they otherwise would, which leads to greater behavioral and physical health risks. There is also some debate about cocaethylene, a metabolite produced when combining alcohol and cocaine, with some researchers positing that it is more cardiotoxic than cocaine on its own. Use moderation when combining these substances."
+  },
+  "alcohol|dextromethorphan": {
+    "_source": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. Place the affected individual in the recovery position to prevent vomit aspiration from excess. Additionally, CNS depression can lead to difficulty breathing. Avoid on anything higher than 1st plateau.",
+    "text": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. Place the affected individual in the recovery position to prevent vomit aspiration from excess. Additionally, CNS depression can lead to difficulty breathing. Avoid on anything higher than 1st plateau."
+  },
+  "alcohol|diphenhydramine": {
+    "_source": "The two substances potentiate each other strongly and unpredictably, and may rapidly lead to unconsciousness. They both increase each other's side effects such as ataxia, sedation, and CNS depression. Blackouts and memory loss are significantly increased. If the user falls unconscious while under the influence there is a severe risk of vomit aspiration if they are not placed in the recovery position. Alcohol may also increase the deliriant effects of diphenhydramine. It should also be noted if the individual consuming alcohol typically has a flushing response to alcohol, diphenhydramine may reduce the reaction and mask some of the effects of the alcohol.",
+    "text": "The two substances potentiate each other strongly and unpredictably, and may rapidly lead to unconsciousness. They both increase each other's side effects such as ataxia, sedation, and CNS depression. Blackouts and memory loss are significantly increased. If the user falls unconscious while under the influence there is a severe risk of vomit aspiration if they are not placed in the recovery position. Alcohol may also increase the deliriant effects of diphenhydramine. It should also be noted if the individual consuming alcohol typically has a flushing response to alcohol, diphenhydramine may reduce the reaction and mask some of the effects of the alcohol."
+  },
+  "alcohol|dox": {
+    "_source": "Drinking on stimulants is risky because the sedative effects of the alcohol are reduced, and these are what the body uses to gauge drunkenness. This typically leads to excessive drinking with greatly reduced inhibitions, high risk of liver damage and increased dehydration. They will also  allow you to drink past a point where you might normally pass out, increasing the risk.",
+    "text": "Drinking on stimulants is risky because the sedative effects of the alcohol are reduced, and these are what the body uses to gauge drunkenness. This typically leads to excessive drinking with greatly reduced inhibitions, high risk of liver damage and increased dehydration. They will also  allow you to drink past a point where you might normally pass out, increasing the risk."
+  },
+  "alcohol|ghb/gbl": {
+    "_source": "Even in very low doses this combination rapidly leads to memory loss, severe ataxia and unconsciousness. There is a high risk of vomit aspiration while unconscious.",
+    "text": "Even in very low doses this combination rapidly leads to memory loss, severe ataxia and unconsciousness. There is a high risk of vomit aspiration while unconscious."
+  },
+  "alcohol|ketamine": {
+    "_source": "Both substances cause ataxia and bring a very high risk of vomiting and unconsciousness. If the user falls unconscious while under the influence there is a severe risk of vomit aspiration if they are not placed in the recovery position.",
+    "text": "Both substances cause ataxia and bring a very high risk of vomiting and unconsciousness. If the user falls unconscious while under the influence there is a severe risk of vomit aspiration if they are not placed in the recovery position."
+  },
+  "alcohol|maois": {
+    "_source": "Tyramine found in many alcoholic beverages can have dangerous reactions with MAOIs, causing an increase in blood pressure.",
+    "text": "Tyramine found in many alcoholic beverages can have dangerous reactions with MAOIs, causing an increase in blood pressure."
+  },
+  "alcohol|mdma": {
+    "_source": "The combination of MDMA and alcohol may increase strain on the cardiovascular system and lead to increased alcohol consumption. MDMA may also impair one's ability to recognize their level of drunkenness, leading to increased alcohol consumption and poor decision-making. Alcohol may also increase the risk of dehydration and hyperthermia (increased body temperature) when combined with MDMA.",
+    "text": "The combination of MDMA and alcohol may increase strain on the cardiovascular system and lead to increased alcohol consumption. MDMA may also impair one's ability to recognize their level of drunkenness, leading to increased alcohol consumption and poor decision-making. Alcohol may also increase the risk of dehydration and hyperthermia (increased body temperature) when combined with MDMA."
+  },
+  "alcohol|mxe": {
+    "_source": "There is a high risk of memory loss, vomiting and severe ataxia from this combination.",
+    "text": "There is a high risk of memory loss, vomiting and severe ataxia from this combination."
+  },
+  "alcohol|nitrous": {
+    "_source": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Memory blackouts are likely.",
+    "text": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Memory blackouts are likely."
+  },
+  "alcohol|opioids": {
+    "_source": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. Place the affected individual in the recovery position to prevent vomit aspiration from excess. Memory blackouts are likely",
+    "text": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. Place the affected individual in the recovery position to prevent vomit aspiration from excess. Memory blackouts are likely"
+  },
+  "alcohol|pcp": {
+    "_source": "Details of this combination are not well understood but PCP generally interacts in an unpredictable manner.",
+    "text": "Details of this combination are not well understood but PCP generally interacts in an unpredictable manner."
+  },
+  "alcohol|ssris": {
+    "_source": "Alcohol may potentiate some of the pharmacologic effects of CNS-active agents. Use in combination may result in additive central nervous system depression and/or impairment of judgment, thinking, and  psychomotor skills.",
+    "text": "Alcohol may potentiate some of the pharmacologic effects of CNS-active agents. Use in combination may result in additive central nervous system depression and/or impairment of judgment, thinking, and  psychomotor skills."
+  },
+  "alcohol|tramadol": {
+    "_source": "Heavy CNS depressants, risk of seizures. Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. Place the affected individual in the recovery position to prevent vomit aspiration from excess. Memory blackouts are likely.",
+    "text": "Heavy CNS depressants, risk of seizures. Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. Place the affected individual in the recovery position to prevent vomit aspiration from excess. Memory blackouts are likely."
+  },
+  "amphetamines|benzodiazepines": {
+    "_source": "Both can dull each other's effects, so if one wears off before the other it's possible to overdose due to the lack of counteraction",
+    "text": "Both can dull each other's effects, so if one wears off before the other it's possible to overdose due to the lack of counteraction"
+  },
+  "amphetamines|caffeine": {
+    "_source": "This combination of stimulants is not generally necessary and may increase strain on the heart, as well as potentially causing anxiety and greater physical discomfort.",
+    "text": "This combination of stimulants is not generally necessary and may increase strain on the heart, as well as potentially causing anxiety and greater physical discomfort."
+  },
+  "amphetamines|cannabis": {
+    "_source": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences",
+    "text": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences"
+  },
+  "amphetamines|cocaine": {
+    "_source": "This combination of stimulants will increase strain on the heart. It is not generally worth it as cocaine has a mild blocking effect on dopamine releasers like amphetamine",
+    "text": "This combination of stimulants will increase strain on the heart. It is not generally worth it as cocaine has a mild blocking effect on dopamine releasers like amphetamine"
+  },
+  "amphetamines|dextromethorphan": {
+    "_source": "Both substances raise heart rate, in extreme cases, panic attacks caused by these drugs have led to more serious heart issues.",
+    "text": "Both substances raise heart rate, in extreme cases, panic attacks caused by these drugs have led to more serious heart issues."
+  },
+  "amphetamines|diphenhydramine": {
+    "_source": "Amphetamines as a stimulant may mask some of the negative side effects of DPH, leading to delusions of sobriety which has additional concern in states of delirium. The combination of stimulants will increase strain on the heart and may cause some physical discomfort, and has the chance to cause life-threatening cardiovascular issues. The combination may also increase each other's neurotoxicity at higher dosages. The combination may increase anxiety levels and risks of thought loops on higher dosages, in addition to increasing each others negative side effects. Medical and common dosages of each substances are reported to not be a concern. Additionally, it is suggested that DPH potentiates amphetamine psychomotor activation, in addition to other interactions such as potentiation through inhibition of CYP2D6 and histamine H1 and H2 receptors, among other alterations.",
+    "text": "Amphetamines as a stimulant may mask some of the negative side effects of DPH, leading to delusions of sobriety which has additional concern in states of delirium. The combination of stimulants will increase strain on the heart and may cause some physical discomfort, and has the chance to cause life-threatening cardiovascular issues. The combination may also increase each other's neurotoxicity at higher dosages. The combination may increase anxiety levels and risks of thought loops on higher dosages, in addition to increasing each others negative side effects. Medical and common dosages of each substances are reported to not be a concern. Additionally, it is suggested that DPH potentiates amphetamine psychomotor activation, in addition to other interactions such as potentiation through inhibition of CYP2D6 and histamine H1 and H2 receptors, among other alterations."
+  },
+  "amphetamines|dmt": {
+    "_source": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences",
+    "text": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences"
+  },
+  "amphetamines|dox": {
+    "_source": "The combined stimulating effects of the two can lead to an uncomfortable body-load, while the focusing effects of amphetamine can easily lead to thought loops. Coming down from amphetamines while the DOx is still active can be quite anxiogenic. ",
+    "text": "The combined stimulating effects of the two can lead to an uncomfortable body-load, while the focusing effects of amphetamine can easily lead to thought loops. Coming down from amphetamines while the DOx is still active can be quite anxiogenic. "
+  },
+  "amphetamines|ghb/gbl": {
+    "_source": "Stimulants increase respiration rate allowing for a higher dose of sedatives. If the stimulant wears off first then the opiate may overcome the individual and cause respiratory arrest.",
+    "text": "Stimulants increase respiration rate allowing for a higher dose of sedatives. If the stimulant wears off first then the opiate may overcome the individual and cause respiratory arrest."
+  },
+  "amphetamines|ketamine": {
+    "_source": "No unexpected interactions, though likely to increase blood pressure but not an issue with sensible doses. Moving around on high doses of this combination may be ill advised due to risk of physical injury.",
+    "text": "No unexpected interactions, though likely to increase blood pressure but not an issue with sensible doses. Moving around on high doses of this combination may be ill advised due to risk of physical injury."
+  },
+  "amphetamines|lithium": {
+    "_source": "Lithium may be neuroprotective when taken with amphetamines and lithium may decrease the hyperactive and euphoric effects of amphetamines. Lithium may also decrease some negative side effects of amphetamines. Studies indicate this combination is safe.",
+    "text": "Lithium may be neuroprotective when taken with amphetamines and lithium may decrease the hyperactive and euphoric effects of amphetamines. Lithium may also decrease some negative side effects of amphetamines. Studies indicate this combination is safe."
+  },
+  "amphetamines|lsd": {
+    "_source": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences",
+    "text": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences"
+  },
+  "amphetamines|maois": {
+    "_source": "MAO-B inhibitors can increase the potency and duration of phenethylamines unpredictably. MAO-A inhibitors with amphetamine can lead to hypertensive crises.",
+    "text": "MAO-B inhibitors can increase the potency and duration of phenethylamines unpredictably. MAO-A inhibitors with amphetamine can lead to hypertensive crises."
+  },
+  "amphetamines|mdma": {
+    "_source": "This combination of stimulants will increase strain on the heart, may cause some physical discomfort, and has the chance to cause cardiovascular issues. The anxiogenic and focusing effects of stimulants can increase the chance of unpleasant thought loops and make the experience more uncomfortable, this combination raises these chances. Amphetamines will increase the neurotoxic effects of MDMA, in addition to causing further concerns of hyperthermia due to the inherent nature of the combination. It will also raise one's body temperature, also likely making the combination more neurotoxic.",
+    "text": "This combination of stimulants will increase strain on the heart, may cause some physical discomfort, and has the chance to cause cardiovascular issues. The anxiogenic and focusing effects of stimulants can increase the chance of unpleasant thought loops and make the experience more uncomfortable, this combination raises these chances. Amphetamines will increase the neurotoxic effects of MDMA, in addition to causing further concerns of hyperthermia due to the inherent nature of the combination. It will also raise one's body temperature, also likely making the combination more neurotoxic."
+  },
+  "amphetamines|mescaline": {
+    "_source": "The focus and anxiety caused by stimulants is magnified by psychedelics and results in an increased risk of thought loops",
+    "text": "The focus and anxiety caused by stimulants is magnified by psychedelics and results in an increased risk of thought loops"
+  },
+  "amphetamines|mushrooms": {
+    "_source": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences",
+    "text": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences"
+  },
+  "amphetamines|mxe": {
+    "_source": "Risk of tachycardia, hypertension, and manic states",
+    "text": "Risk of tachycardia, hypertension, and manic states"
+  },
+  "amphetamines|nbomes": {
+    "_source": "Amphetamines and NBOMes both provide considerable stimulation. When combined they can result in tachycardia, hypertension, vasoconstriction and in extreme cases heart failure. The anxiogenic and focusing effects of stimulants are also not good in combination with psychedelics as they can lead to unpleasant thought loops. NBOMes are known to cause seizures and stimulants can increase this risk.",
+    "text": "Amphetamines and NBOMes both provide considerable stimulation. When combined they can result in tachycardia, hypertension, vasoconstriction and in extreme cases heart failure. The anxiogenic and focusing effects of stimulants are also not good in combination with psychedelics as they can lead to unpleasant thought loops. NBOMes are known to cause seizures and stimulants can increase this risk."
+  },
+  "amphetamines|opioids": {
+    "_source": "Stimulants increase respiration rate, which can allow for a higher dose of opiates normal . If the stimulant wears off first then the opiate may overcome the individual and cause respiratory arrest.",
+    "text": "Stimulants increase respiration rate, which can allow for a higher dose of opiates normal . If the stimulant wears off first then the opiate may overcome the individual and cause respiratory arrest."
+  },
+  "amphetamines|pcp": {
+    "_source": "This combination can easily lead to hypermanic states",
+    "text": "This combination can easily lead to hypermanic states"
+  },
+  "amphetamines|pregabalin": {
+    "_source": "There is a significant risk of seizures from this combination. Amphetamines increase respiration rate allowing for a higher dose of sedatives than normal. If amphetamines wears off first, recreational dosages of pregabalin may overcome the individual and cause respiratory arrest. Both substances at recreational dosages cause strain of the heart and may lead to further dangerous heart complications.",
+    "text": "There is a significant risk of seizures from this combination. Amphetamines increase respiration rate allowing for a higher dose of sedatives than normal. If amphetamines wears off first, recreational dosages of pregabalin may overcome the individual and cause respiratory arrest. Both substances at recreational dosages cause strain of the heart and may lead to further dangerous heart complications."
+  },
+  "amphetamines|tramadol": {
+    "_source": "Tramadol and stimulants both increase the risk of seizures.",
+    "text": "Tramadol and stimulants both increase the risk of seizures."
+  },
+  "amt|caffeine": {
+    "_source": "High doses of caffeine may cause anxiety which is less manageable when tripping, and since both are stimulating the combination may cause some physical discomfort.",
+    "text": "High doses of caffeine may cause anxiety which is less manageable when tripping, and since both are stimulating the combination may cause some physical discomfort."
+  },
+  "amt|cannabis": {
+    "_source": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics. Small amounts can reduce nausea with aMT but take care.",
+    "text": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics. Small amounts can reduce nausea with aMT but take care."
+  },
+  "amt|maois": {
+    "_source": "aMT is an MAOI on its own. Using enzyme inhibitors can greatly reduce predictability of effects.",
+    "text": "aMT is an MAOI on its own. Using enzyme inhibitors can greatly reduce predictability of effects."
+  },
+  "amt|opioids": {
+    "_source": "No unexpected interactions",
+    "text": "No unexpected interactions"
+  },
+  "benzodiazepines|dextromethorphan": {
+    "_source": "Small doses of benzos can end a bad trip, but both substances potentiate the ataxia and sedation caused by the other and this can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position.",
+    "text": "Small doses of benzos can end a bad trip, but both substances potentiate the ataxia and sedation caused by the other and this can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position."
+  },
+  "benzodiazepines|diphenhydramine": {
+    "_source": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Memory blackouts are likely. Low medical doses are unlikely to be of concern.",
+    "text": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Memory blackouts are likely. Low medical doses are unlikely to be of concern."
+  },
+  "benzodiazepines|ghb/gbl": {
+    "_source": "The two substances potentiate each other strongly and unpredictably, very rapidly leading to unconsciousness. While unconscious, vomit aspiration is a risk if not placed in the recovery position.",
+    "text": "The two substances potentiate each other strongly and unpredictably, very rapidly leading to unconsciousness. While unconscious, vomit aspiration is a risk if not placed in the recovery position."
+  },
+  "benzodiazepines|ketamine": {
+    "_source": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position.",
+    "text": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position."
+  },
+  "benzodiazepines|mxe": {
+    "_source": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. Place the affected individual in the recovery position to prevent vomit aspiration from excess.",
+    "text": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. Place the affected individual in the recovery position to prevent vomit aspiration from excess."
+  },
+  "benzodiazepines|opioids": {
+    "_source": "Central nervous system and/or respiratory-depressant effects may be additively or synergistically present. The two substances potentiate each other strongly and unpredictably, very rapidly leading to unconsciousness. While unconscious, vomit aspiration is a risk if not placed in the recovery position Blackouts/memory loss likely",
+    "text": "Central nervous system and/or respiratory-depressant effects may be additively or synergistically present. The two substances potentiate each other strongly and unpredictably, very rapidly leading to unconsciousness. While unconscious, vomit aspiration is a risk if not placed in the recovery position Blackouts/memory loss likely"
+  },
+  "benzodiazepines|pcp": {
+    "_source": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Memory blackouts are likely",
+    "text": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Memory blackouts are likely"
+  },
+  "benzodiazepines|tramadol": {
+    "_source": "Central nervous system- and/or respiratory-depressant effects may be additively or synergistically present. Vomit aspiration is a risk when passed out, lay down in recovery position if ingested.",
+    "text": "Central nervous system- and/or respiratory-depressant effects may be additively or synergistically present. Vomit aspiration is a risk when passed out, lay down in recovery position if ingested."
+  },
+  "caffeine|cocaine": {
+    "_source": "Both stimulants, risk of tachycardia, hypertension, and in extreme cases heart failure.",
+    "text": "Both stimulants, risk of tachycardia, hypertension, and in extreme cases heart failure."
+  },
+  "caffeine|dextromethorphan": {
+    "_source": "High doses of caffeine can potentially exacerbate anxiety, especially during a dissociative experience, due to its stimulating effects. This combination might also lead to physical discomfort. However, individual responses to caffeine can vary significantly, often influenced by factors like habitual versus occasional usage.",
+    "text": "High doses of caffeine can potentially exacerbate anxiety, especially during a dissociative experience, due to its stimulating effects. This combination might also lead to physical discomfort. However, individual responses to caffeine can vary significantly, often influenced by factors like habitual versus occasional usage."
+  },
+  "caffeine|diphenhydramine": {
+    "_source": "Caffeine as a stimulant may mask some negative side effects of DPH, leading to delusions of sobriety, which has additional concerns in states of delirium. The combination of stimulants will increase strain on the heart and may cause some physical discomfort, and has the chance to cause cardiovascular issues such as complex tachycardia. The combination may increase anxiety levels and risks of thought loops at higher dosages, in addition to increasing each other's negative side effects. Medical dosages are reported to not be a concern.",
+    "text": "Caffeine as a stimulant may mask some negative side effects of DPH, leading to delusions of sobriety, which has additional concerns in states of delirium. The combination of stimulants will increase strain on the heart and may cause some physical discomfort, and has the chance to cause cardiovascular issues such as complex tachycardia. The combination may increase anxiety levels and risks of thought loops at higher dosages, in addition to increasing each other's negative side effects. Medical dosages are reported to not be a concern."
+  },
+  "caffeine|dox": {
+    "_source": "High doses of caffeine may cause anxiety which is less manageable when tripping, and since both are stimulating it may cause some physical discomfort.",
+    "text": "High doses of caffeine may cause anxiety which is less manageable when tripping, and since both are stimulating it may cause some physical discomfort."
+  },
+  "caffeine|ketamine": {
+    "_source": "No unexpected interactions.",
+    "text": "No unexpected interactions."
+  },
+  "caffeine|mdma": {
+    "_source": "Caffeine is not really necessary with MDMA and increases any neurotoxic effects from MDMA",
+    "text": "Caffeine is not really necessary with MDMA and increases any neurotoxic effects from MDMA"
+  },
+  "caffeine|mephedrone": {
+    "_source": "This combination of stimulants is not generally necessary and may increase strain on the heart, as well as potentially causing anxiety and great physical discomfort. However, individual responses to caffeine can vary significantly, often influenced by factors like habitual versus occasional usage.",
+    "text": "This combination of stimulants is not generally necessary and may increase strain on the heart, as well as potentially causing anxiety and great physical discomfort. However, individual responses to caffeine can vary significantly, often influenced by factors like habitual versus occasional usage."
+  },
+  "caffeine|mescaline": {
+    "_source": "High doses of caffeine are uncomfortable and this will be magnified by psychedelics",
+    "text": "High doses of caffeine are uncomfortable and this will be magnified by psychedelics"
+  },
+  "caffeine|mxe": {
+    "_source": "No likely interactions",
+    "text": "No likely interactions"
+  },
+  "caffeine|nbomes": {
+    "_source": "Caffeine can bring out the natural stimulation from psychedelic drugs to make it uncomfortable. High doses can cause anxiety which is hard to handle while tripping",
+    "text": "Caffeine can bring out the natural stimulation from psychedelic drugs to make it uncomfortable. High doses can cause anxiety which is hard to handle while tripping"
+  },
+  "caffeine|pcp": {
+    "_source": "Details of this combination are not well understood but PCP generally interacts in an unpredictable manner.",
+    "text": "Details of this combination are not well understood but PCP generally interacts in an unpredictable manner."
+  },
+  "caffeine|pregabalin": {
+    "_source": "There is a risk of seizures from this combination, especially at higher dosages. Caffeine additionally reduces pregabalin’s anticonvulsant effects found in lower dosages. Caffeine increases respiration rate allowing for a higher dose of sedatives than normal. If amphetamines wears off first, recreational dosages of pregabalin may overcome the individual and cause respiratory arrest. Both substances at recreational dosages cause strain of the heart and may lead to further dangerous heart complications. Medical dosages are unlikely to be of concern.",
+    "text": "There is a risk of seizures from this combination, especially at higher dosages. Caffeine additionally reduces pregabalin’s anticonvulsant effects found in lower dosages. Caffeine increases respiration rate allowing for a higher dose of sedatives than normal. If amphetamines wears off first, recreational dosages of pregabalin may overcome the individual and cause respiratory arrest. Both substances at recreational dosages cause strain of the heart and may lead to further dangerous heart complications. Medical dosages are unlikely to be of concern."
+  },
+  "cannabis|cocaine": {
+    "_source": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences",
+    "text": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences"
+  },
+  "cannabis|dmt": {
+    "_source": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics.",
+    "text": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics."
+  },
+  "cannabis|dox": {
+    "_source": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics.",
+    "text": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics."
+  },
+  "cannabis|lsd": {
+    "_source": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics.",
+    "text": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics."
+  },
+  "cannabis|mdma": {
+    "_source": "Large amounts of cannabis may cause strong and somewhat unpredictable experiences in combination with MDMA. Cannabis should be saved for towards the end of the experience if possible.",
+    "text": "Large amounts of cannabis may cause strong and somewhat unpredictable experiences in combination with MDMA. Cannabis should be saved for towards the end of the experience if possible."
+  },
+  "cannabis|mescaline": {
+    "_source": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics.",
+    "text": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics."
+  },
+  "cannabis|mushrooms": {
+    "_source": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics.",
+    "text": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics."
+  },
+  "cannabis|nbomes": {
+    "_source": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics.",
+    "text": "Cannabis has an unexpectedly strong and somewhat unpredictable synergy with psychedelics."
+  },
+  "cannabis|pregabalin": {
+    "_source": "Both substances may increase each other's side effects, such as sedation, lowered blood pressure, and raised heart rate.",
+    "text": "Both substances may increase each other's side effects, such as sedation, lowered blood pressure, and raised heart rate."
+  },
+  "cocaine|dextromethorphan": {
+    "_source": "Both substances raise heart rate, in extreme cases, panic attacks caused by these drugs have led to more serious heart issues",
+    "text": "Both substances raise heart rate, in extreme cases, panic attacks caused by these drugs have led to more serious heart issues"
+  },
+  "cocaine|diphenhydramine": {
+    "_source": "Stimulants increase respiration rate allowing for a higher dose of sedatives than normal. If cocaine wears off first, recreational dosages of DPH may overcome the individual and cause respiratory arrest. Both substances at recreational dosages strain the heart and may lead to further dangerous heart complications. When taken together, both substances can potentially be more reinforcing and have greater risk of methemoglobinemia when higher dosages of DPH are combined with cocaine.",
+    "text": "Stimulants increase respiration rate allowing for a higher dose of sedatives than normal. If cocaine wears off first, recreational dosages of DPH may overcome the individual and cause respiratory arrest. Both substances at recreational dosages strain the heart and may lead to further dangerous heart complications. When taken together, both substances can potentially be more reinforcing and have greater risk of methemoglobinemia when higher dosages of DPH are combined with cocaine."
+  },
+  "cocaine|dmt": {
+    "_source": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences",
+    "text": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences"
+  },
+  "cocaine|dox": {
+    "_source": "The combined stimulating effects of the two can lead to an uncomfortable body-load, while the focusing effects of cocaine can easily lead to thought loops. Coming down from cocaine while the DOx is still active can be quite anxiogenic",
+    "text": "The combined stimulating effects of the two can lead to an uncomfortable body-load, while the focusing effects of cocaine can easily lead to thought loops. Coming down from cocaine while the DOx is still active can be quite anxiogenic"
+  },
+  "cocaine|ghb/gbl": {
+    "_source": "Stimulants increase respiration rate allowing for a higher dose of sedatives than normal. If the stimulant wears off first the opiate may overcome the individual and cause respiratory arrest. Likewise the ghb/gbl can wear off and leave a dangerous concentration of cocaine behind",
+    "text": "Stimulants increase respiration rate allowing for a higher dose of sedatives than normal. If the stimulant wears off first the opiate may overcome the individual and cause respiratory arrest. Likewise the ghb/gbl can wear off and leave a dangerous concentration of cocaine behind"
+  },
+  "cocaine|ketamine": {
+    "_source": "No unexpected interactions, though likely to increase blood pressure but not an issue with sensible doses. Moving around on high doses of this combination may be ill advised due to risk of physical injury.",
+    "text": "No unexpected interactions, though likely to increase blood pressure but not an issue with sensible doses. Moving around on high doses of this combination may be ill advised due to risk of physical injury."
+  },
+  "cocaine|lithium": {
+    "_source": "Lithium may inhibit some of the recreational effects of cocaine.",
+    "text": "Lithium may inhibit some of the recreational effects of cocaine."
+  },
+  "cocaine|lsd": {
+    "_source": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences",
+    "text": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences"
+  },
+  "cocaine|maois": {
+    "_source": "This combination is poorly explored",
+    "text": "This combination is poorly explored"
+  },
+  "cocaine|mdma": {
+    "_source": "Cocaine blocks some of the desirable effects of MDMA while increasing the risk of heart attack.",
+    "text": "Cocaine blocks some of the desirable effects of MDMA while increasing the risk of heart attack."
+  },
+  "cocaine|mescaline": {
+    "_source": "The focus and anxiety caused by stimulants is magnified by psychedelics and results in an increased risk of thought loops",
+    "text": "The focus and anxiety caused by stimulants is magnified by psychedelics and results in an increased risk of thought loops"
+  },
+  "cocaine|mushrooms": {
+    "_source": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences",
+    "text": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences"
+  },
+  "cocaine|mxe": {
+    "_source": "Stimulants taken with MXE can lead to hypermanic states much more easily, especially if sleep is avoided.",
+    "text": "Stimulants taken with MXE can lead to hypermanic states much more easily, especially if sleep is avoided."
+  },
+  "cocaine|nbomes": {
+    "_source": "Cocaine and NBOMes both provide considerable stimulation. When combined they can result in severe vasoconstriction, tachycardia, hypertension, and in extreme cases heart failure.",
+    "text": "Cocaine and NBOMes both provide considerable stimulation. When combined they can result in severe vasoconstriction, tachycardia, hypertension, and in extreme cases heart failure."
+  },
+  "cocaine|opioids": {
+    "_source": "Stimulants increase respiration rate allowing for a higher dose of opiates than normal. If the stimulant wears off first then the opiate may overcome the individual and cause respiratory arrest.",
+    "text": "Stimulants increase respiration rate allowing for a higher dose of opiates than normal. If the stimulant wears off first then the opiate may overcome the individual and cause respiratory arrest."
+  },
+  "cocaine|pcp": {
+    "_source": "This combination can easily lead to hypermanic states",
+    "text": "This combination can easily lead to hypermanic states"
+  },
+  "cocaine|pregabalin": {
+    "_source": "There is a significant risk of seizures from this combination. Stimulants increase respiration rate, allowing for a higher dose of sedatives than normal. If cocaine wears off first, recreational dosages of pregabalin may overcome the individual and cause respiratory arrest. Both substances at recreational dosages strain the heart and may lead to further dangerous heart complications. The combination has a greater risk of methemoglobinemia when higher dosages are combined.",
+    "text": "There is a significant risk of seizures from this combination. Stimulants increase respiration rate, allowing for a higher dose of sedatives than normal. If cocaine wears off first, recreational dosages of pregabalin may overcome the individual and cause respiratory arrest. Both substances at recreational dosages strain the heart and may lead to further dangerous heart complications. The combination has a greater risk of methemoglobinemia when higher dosages are combined."
+  },
+  "cocaine|ssris": {
+    "_source": "May reduce each others' effectiveness. Cocaine can reduce mental stability and therefore exacerbate conditions which SSRIs are used to treat.",
+    "text": "May reduce each others' effectiveness. Cocaine can reduce mental stability and therefore exacerbate conditions which SSRIs are used to treat."
+  },
+  "cocaine|tramadol": {
+    "_source": "Tramadol and stimulants both increase the risk of seizures.",
+    "text": "Tramadol and stimulants both increase the risk of seizures."
+  },
+  "dextromethorphan|diphenhydramine": {
+    "_source": "The combination is reported to reduce the side effects of each drug and potentiate many of the recreational effects. There is a significant risk of serotonin syndrome, increased delirium, CNS depression, cognitive inhibition, risk of physical injury, hyperthermia, mania, paranoia, and psychosis, especially at higher dosages. There is an additional concern of tachycardia, hypertension, and in extreme cases, heart failure. Diphenhydramine is reported to inhibit the CYP2D6 enzyme which can increase levels of DXM. Medical dosages are not reported to be a concern. Caution is strongly recommended with this combination.",
+    "text": "The combination is reported to reduce the side effects of each drug and potentiate many of the recreational effects. There is a significant risk of serotonin syndrome, increased delirium, CNS depression, cognitive inhibition, risk of physical injury, hyperthermia, mania, paranoia, and psychosis, especially at higher dosages. There is an additional concern of tachycardia, hypertension, and in extreme cases, heart failure. Diphenhydramine is reported to inhibit the CYP2D6 enzyme which can increase levels of DXM. Medical dosages are not reported to be a concern. Caution is strongly recommended with this combination."
+  },
+  "dextromethorphan|dox": {
+    "_source": "The DOx class as psychedelic stimulants have the potential to mask the effects of DXM and could lead to redosing to an unsafe level. DXM can also potentiate DOx resulting in an unpleasantly intense experience.",
+    "text": "The DOx class as psychedelic stimulants have the potential to mask the effects of DXM and could lead to redosing to an unsafe level. DXM can also potentiate DOx resulting in an unpleasantly intense experience."
+  },
+  "dextromethorphan|ghb/gbl": {
+    "_source": "Both substances cause ataxia and bring a risk of vomiting and unconsciousness. If the individual falls unconscious while under the influence there is a severe risk of vomit aspiration if they are not placed in the recovery position. This combination is hard to predict",
+    "text": "Both substances cause ataxia and bring a risk of vomiting and unconsciousness. If the individual falls unconscious while under the influence there is a severe risk of vomit aspiration if they are not placed in the recovery position. This combination is hard to predict"
+  },
+  "dextromethorphan|ketamine": {
+    "_source": "Both substances primarily exert their effects through NMDA antagonism. Currently, there is no evidence regarding mechanisms that might reduce these effects.",
+    "text": "Both substances primarily exert their effects through NMDA antagonism. Currently, there is no evidence regarding mechanisms that might reduce these effects."
+  },
+  "dextromethorphan|lithium": {
+    "_source": "There is a risk of serotonin syndrome when combining Lithium with DXM.",
+    "text": "There is a risk of serotonin syndrome when combining Lithium with DXM."
+  },
+  "dextromethorphan|maois": {
+    "_source": "High risk of serotonin syndrome",
+    "text": "High risk of serotonin syndrome"
+  },
+  "dextromethorphan|mephedrone": {
+    "_source": "Risk of serotonin syndrome as both drugs raise serotonin levels. In addition to concerns of high blood pressure and unnecessary strain on the heart. As well as potentially causing anxiety and greater physical discomfort due to the combination.",
+    "text": "Risk of serotonin syndrome as both drugs raise serotonin levels. In addition to concerns of high blood pressure and unnecessary strain on the heart. As well as potentially causing anxiety and greater physical discomfort due to the combination."
+  },
+  "dextromethorphan|mxe": {
+    "_source": "There is a risk of serotonin syndrome when combining DXM with MXE, due to DXM and MXE both being SRI’s. MXE and DXM having notable affinities for the serotonin transporter.",
+    "text": "There is a risk of serotonin syndrome when combining DXM with MXE, due to DXM and MXE both being SRI’s. MXE and DXM having notable affinities for the serotonin transporter."
+  },
+  "dextromethorphan|opioids": {
+    "_source": "CNS depression, difficult breathing, heart issues, hepatoxic, just very unsafe combination all around. Additionally if one takes DXM, their tolerance of opiates goes down slightly, thus causing additional synergistic effects.",
+    "text": "CNS depression, difficult breathing, heart issues, hepatoxic, just very unsafe combination all around. Additionally if one takes DXM, their tolerance of opiates goes down slightly, thus causing additional synergistic effects."
+  },
+  "dextromethorphan|pregabalin": {
+    "_source": "Pregabalin and DXM may increase each other’s effects such as inhibition, dizziness, sedation. At higher doses this can lead to unexpected loss of consciousness. Both drugs have seizure concerns which is greatly increased in combination.",
+    "text": "Pregabalin and DXM may increase each other’s effects such as inhibition, dizziness, sedation. At higher doses this can lead to unexpected loss of consciousness. Both drugs have seizure concerns which is greatly increased in combination."
+  },
+  "dextromethorphan|ssris": {
+    "_source": "High risk of serotonin syndrome.",
+    "text": "High risk of serotonin syndrome."
+  },
+  "diphenhydramine|dmt": {
+    "_source": "At 25-50mg, DPH may assist with side effects of the DMT such as nausea and anxiety. At higher dosages, the combination of a deliriant (DPH) and DMT is cautioned against. DMT is likely to increase the deliriant and negative effects of DPH, in addition to increasing the risk of severe injury and mental trauma.",
+    "text": "At 25-50mg, DPH may assist with side effects of the DMT such as nausea and anxiety. At higher dosages, the combination of a deliriant (DPH) and DMT is cautioned against. DMT is likely to increase the deliriant and negative effects of DPH, in addition to increasing the risk of severe injury and mental trauma."
+  },
+  "diphenhydramine|dox": {
+    "_source": "At 25-50mg, DPH may assist with side effects of DOx drugs such as nausea and anxiety. At higher dosages, the combination of a deliriant (DPH) and DOx drugs is cautioned against. DOx drugs are likely to increase the deliriant and negative effects of DPH, in addition to increasing the risk of severe injury and mental trauma. DOx drugs and DPH at recreational dosages have additional cardiac concerns such as vasoconstriction, tachycardia, hypertension, which in combination may be exacerbated.",
+    "text": "At 25-50mg, DPH may assist with side effects of DOx drugs such as nausea and anxiety. At higher dosages, the combination of a deliriant (DPH) and DOx drugs is cautioned against. DOx drugs are likely to increase the deliriant and negative effects of DPH, in addition to increasing the risk of severe injury and mental trauma. DOx drugs and DPH at recreational dosages have additional cardiac concerns such as vasoconstriction, tachycardia, hypertension, which in combination may be exacerbated."
+  },
+  "diphenhydramine|ghb/gbl": {
+    "_source": "Both substances are CNS depressants, potentiating each other strongly and unpredictably, raising the chances of memory loss, severe ataxia, and unconsciousness. The interaction will cause greater inhibition and risk of injury. If the user falls unconscious it is strongly recommended to put them into the recovery position and monitor breathing.",
+    "text": "Both substances are CNS depressants, potentiating each other strongly and unpredictably, raising the chances of memory loss, severe ataxia, and unconsciousness. The interaction will cause greater inhibition and risk of injury. If the user falls unconscious it is strongly recommended to put them into the recovery position and monitor breathing."
+  },
+  "diphenhydramine|ketamine": {
+    "_source": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Ketamine has a high likelihood of increasing DPH's deliriant effects at higher dosages and can greatly increase the risk of injury, mania, and psychosis. Medical dosages of both substances are unlikely to cause concern.",
+    "text": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Ketamine has a high likelihood of increasing DPH's deliriant effects at higher dosages and can greatly increase the risk of injury, mania, and psychosis. Medical dosages of both substances are unlikely to cause concern."
+  },
+  "diphenhydramine|lithium": {
+    "_source": "There is a concern of serotonin syndrome at higher dosages of this combination. Caution is recommended in restricting diphenhydramine to medical dosages (25-50mg). Lithium and diphenhydramine both have concerns of QT prolongation which may be increased when taken in combination; risks increase due to a variety of factors such as the health of the user and drug dosages. Additionally, the combination may increase each drug's side effects, such as dizziness and loss of consciousness.",
+    "text": "There is a concern of serotonin syndrome at higher dosages of this combination. Caution is recommended in restricting diphenhydramine to medical dosages (25-50mg). Lithium and diphenhydramine both have concerns of QT prolongation which may be increased when taken in combination; risks increase due to a variety of factors such as the health of the user and drug dosages. Additionally, the combination may increase each drug's side effects, such as dizziness and loss of consciousness."
+  },
+  "diphenhydramine|lsd": {
+    "_source": "At 25-50mg, DPH may assist with side effects of the LSD such as nausea and anxiety. At higher dosages, the combination of a deliriant (DPH) and LSD is cautioned against. LSD is likely to increase the deliriant and negative effects of DPH, in addition to increasing the risk of severe injury and mental trauma. LSD and DPH at recreational dosages have additional cardiac concerns such as vasoconstriction, tachycardia, hypertension, which in combination may be exacerbated.",
+    "text": "At 25-50mg, DPH may assist with side effects of the LSD such as nausea and anxiety. At higher dosages, the combination of a deliriant (DPH) and LSD is cautioned against. LSD is likely to increase the deliriant and negative effects of DPH, in addition to increasing the risk of severe injury and mental trauma. LSD and DPH at recreational dosages have additional cardiac concerns such as vasoconstriction, tachycardia, hypertension, which in combination may be exacerbated."
+  },
+  "diphenhydramine|maois": {
+    "_source": "There is a significant risk of serotonin syndrome with this combination. Monoamine oxidase A inhibitors may extend and increase the anticholinergic effects of DPH. The combination increases each other’s side effects, such as drowsiness, dizziness, dry mouth, and headaches. Medical dosages are not reported to be of concern.",
+    "text": "There is a significant risk of serotonin syndrome with this combination. Monoamine oxidase A inhibitors may extend and increase the anticholinergic effects of DPH. The combination increases each other’s side effects, such as drowsiness, dizziness, dry mouth, and headaches. Medical dosages are not reported to be of concern."
+  },
+  "diphenhydramine|mephedrone": {
+    "_source": "There is a high risk of serotonin syndrome at recreational dosages. Both can dull each other's effects, so if one wears off before the other it's possible to overdose due to the lack of counteraction. Medical dosages are reported not to be a concern for the general population. Both substances affect the heart and may lead to further dangerous heart complications at higher dosages. The combination may increase each other's side effects, such as dizziness and drowsiness. At higher dosages, the combination may increase each other's side effects, such as delirium, mania, and psychosis.",
+    "text": "There is a high risk of serotonin syndrome at recreational dosages. Both can dull each other's effects, so if one wears off before the other it's possible to overdose due to the lack of counteraction. Medical dosages are reported not to be a concern for the general population. Both substances affect the heart and may lead to further dangerous heart complications at higher dosages. The combination may increase each other's side effects, such as dizziness and drowsiness. At higher dosages, the combination may increase each other's side effects, such as delirium, mania, and psychosis."
+  },
+  "diphenhydramine|mescaline": {
+    "_source": "At 25-50mg, DPH may assist with side effects of the mescaline such as nausea and anxiety. At higher dosages, the combination of a deliriant (DPH) and mescaline is cautioned against. Mescaline is likely to increase the deliriant and negative effects of DPH, in addition to increasing the risk of severe injury and mental trauma.",
+    "text": "At 25-50mg, DPH may assist with side effects of the mescaline such as nausea and anxiety. At higher dosages, the combination of a deliriant (DPH) and mescaline is cautioned against. Mescaline is likely to increase the deliriant and negative effects of DPH, in addition to increasing the risk of severe injury and mental trauma."
+  },
+  "diphenhydramine|mushrooms": {
+    "_source": "At 25-50mg, DPH may assist with side effects of the psilocybin such as nausea and anxiety. At higher dosages, the combination of a deliriant (DPH) and psilocybin is cautioned against. Psilocybin is likely to increase the deliriant and negative effects of DPH, in addition to increasing the risk of severe injury and mental trauma.",
+    "text": "At 25-50mg, DPH may assist with side effects of the psilocybin such as nausea and anxiety. At higher dosages, the combination of a deliriant (DPH) and psilocybin is cautioned against. Psilocybin is likely to increase the deliriant and negative effects of DPH, in addition to increasing the risk of severe injury and mental trauma."
+  },
+  "diphenhydramine|mxe": {
+    "_source": "There is a high risk of serotonin syndrome from this combination. Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. MXE has a high likelihood of increasing DPH's deliriant effects at higher dosages and can greatly increase the risk of injury, mania, and psychosis. Medical dosages are unlikely to be of concern.",
+    "text": "There is a high risk of serotonin syndrome from this combination. Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. MXE has a high likelihood of increasing DPH's deliriant effects at higher dosages and can greatly increase the risk of injury, mania, and psychosis. Medical dosages are unlikely to be of concern."
+  },
+  "diphenhydramine|nbomes": {
+    "_source": "At 25-50mg, DPH may assist with side effects of the NBOMe drugs such as nausea and anxiety. At higher dosages, the combination of a deliriant (DPH) and NBOMe drugs is cautioned against. NBOMes are likely to increase the deliriant and negative effects of DPH, in addition to increasing the risk of severe injury and mental trauma. NBOMes and DPH at recreational dosages have additional cardiac concerns such as vasoconstriction, tachycardia, hypertension, which in combination may be exacerbated.",
+    "text": "At 25-50mg, DPH may assist with side effects of the NBOMe drugs such as nausea and anxiety. At higher dosages, the combination of a deliriant (DPH) and NBOMe drugs is cautioned against. NBOMes are likely to increase the deliriant and negative effects of DPH, in addition to increasing the risk of severe injury and mental trauma. NBOMes and DPH at recreational dosages have additional cardiac concerns such as vasoconstriction, tachycardia, hypertension, which in combination may be exacerbated."
+  },
+  "diphenhydramine|opioids": {
+    "_source": "Both substances are CNS depressants, potentiating each other strongly and unpredictably, raising the chances of memory loss, severe ataxia, and unconsciousness. The interaction will cause greater inhibition and risk of injury. DPH reduces histamine release by opioids, which reduces the itching side effect from opioids. DPH may reduce the nausea caused by opioids. DPH inhibits CYP2D6 activity which can lead to a reduction of effects in some opioids and potentiation of effects in others.",
+    "text": "Both substances are CNS depressants, potentiating each other strongly and unpredictably, raising the chances of memory loss, severe ataxia, and unconsciousness. The interaction will cause greater inhibition and risk of injury. DPH reduces histamine release by opioids, which reduces the itching side effect from opioids. DPH may reduce the nausea caused by opioids. DPH inhibits CYP2D6 activity which can lead to a reduction of effects in some opioids and potentiation of effects in others."
+  },
+  "diphenhydramine|pregabalin": {
+    "_source": "There is a significant risk of seizures from this combination. The combination is likely to increase each other’s negative side effects, such as nausea, dizziness, and loss of consciousness. At higher dosages, pregabalin is likely to increase diphenhydramine’s deliriant effects, inhibition, and risk of injury. Medical dosages are not reported to be a concern.",
+    "text": "There is a significant risk of seizures from this combination. The combination is likely to increase each other’s negative side effects, such as nausea, dizziness, and loss of consciousness. At higher dosages, pregabalin is likely to increase diphenhydramine’s deliriant effects, inhibition, and risk of injury. Medical dosages are not reported to be a concern."
+  },
+  "diphenhydramine|ssris": {
+    "_source": "There is a high risk of serotonin syndrome at recreational dosages. Medical dosages are reported not to be a concern for the general population. The combination may increase each other's side effects, such as dizziness and drowsiness.",
+    "text": "There is a high risk of serotonin syndrome at recreational dosages. Medical dosages are reported not to be a concern for the general population. The combination may increase each other's side effects, such as dizziness and drowsiness."
+  },
+  "diphenhydramine|tramadol": {
+    "_source": "Both drugs increase the risk of serotonin syndrome. While at medical dosages, this is unlikely to be of concern, recreational doses should be avoided. Diphenhydramine may increase tramadol’s seizure risk.",
+    "text": "Both drugs increase the risk of serotonin syndrome. While at medical dosages, this is unlikely to be of concern, recreational doses should be avoided. Diphenhydramine may increase tramadol’s seizure risk."
+  },
+  "dmt|lithium": {
+    "_source": "There are a large number of reports indicating a high seizure and psychosis risk from this combination.",
+    "text": "There are a large number of reports indicating a high seizure and psychosis risk from this combination."
+  },
+  "dmt|mephedrone": {
+    "_source": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences",
+    "text": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences"
+  },
+  "dmt|pregabalin": {
+    "_source": "Pregabalin may reduce the anxiety and other possible side effects of DMT. Additionally, the combination may increase inhibition, dizziness, and risk of injury.",
+    "text": "Pregabalin may reduce the anxiety and other possible side effects of DMT. Additionally, the combination may increase inhibition, dizziness, and risk of injury."
+  },
+  "dmt|tramadol": {
+    "_source": "Tramadol is well known to lower seizure threshold and psychedelics also cause occasional seizures.",
+    "text": "Tramadol is well known to lower seizure threshold and psychedelics also cause occasional seizures."
+  },
+  "dox|ketamine": {
+    "_source": "Ketamine and psychedelics tend to potentiate each other - go slowly.",
+    "text": "Ketamine and psychedelics tend to potentiate each other - go slowly."
+  },
+  "dox|lithium": {
+    "_source": "There are a large number of reports indicating a high seizure and psychosis risk from this combination.",
+    "text": "There are a large number of reports indicating a high seizure and psychosis risk from this combination."
+  },
+  "dox|maois": {
+    "_source": "MAO-B inhibitors can increase the potency and duration of phenethylamines unpredictably",
+    "text": "MAO-B inhibitors can increase the potency and duration of phenethylamines unpredictably"
+  },
+  "dox|mdma": {
+    "_source": "The combined stimulating effects of the two can be uncomfortable. Coming down on the MDMA while the DOx is still active can be quite anxiogenic. ",
+    "text": "The combined stimulating effects of the two can be uncomfortable. Coming down on the MDMA while the DOx is still active can be quite anxiogenic. "
+  },
+  "dox|mephedrone": {
+    "_source": "The anxiogenic and focusing effects of stimulants increase the chance of unpleasant thought loops, in addition to the possible negative side effects of coming down from said stimulant while on a psychedelic. In extreme cases, stimulants, especially in combination can result in severe vasoconstriction, tachycardia, hypertension, and heart failure.",
+    "text": "The anxiogenic and focusing effects of stimulants increase the chance of unpleasant thought loops, in addition to the possible negative side effects of coming down from said stimulant while on a psychedelic. In extreme cases, stimulants, especially in combination can result in severe vasoconstriction, tachycardia, hypertension, and heart failure."
+  },
+  "dox|mxe": {
+    "_source": "As an NMDA antagonist MXE potentiates DOx which can be unpleasantly intense",
+    "text": "As an NMDA antagonist MXE potentiates DOx which can be unpleasantly intense"
+  },
+  "dox|opioids": {
+    "_source": "No unexpected interactions.",
+    "text": "No unexpected interactions."
+  },
+  "dox|pcp": {
+    "_source": "Details of this combination are not well understood but PCP generally interacts in an unpredictable manner.",
+    "text": "Details of this combination are not well understood but PCP generally interacts in an unpredictable manner."
+  },
+  "dox|pregabalin": {
+    "_source": "Caution should be given due to DOx drugs stimulating effects and pregabalin’s seizure concerns at higher dosages. Pregabalin may reduce the vasoconstriction, anxiety, and other side effects of DOx drugs. Additionally, Pregabalin may increase DOx drugs inhibition and risk of injury.",
+    "text": "Caution should be given due to DOx drugs stimulating effects and pregabalin’s seizure concerns at higher dosages. Pregabalin may reduce the vasoconstriction, anxiety, and other side effects of DOx drugs. Additionally, Pregabalin may increase DOx drugs inhibition and risk of injury."
+  },
+  "dox|tramadol": {
+    "_source": "Tramadol is well known to lower seizure threshold and psychedelics also cause occasional seizures.",
+    "text": "Tramadol is well known to lower seizure threshold and psychedelics also cause occasional seizures."
+  },
+  "ghb/gbl|ketamine": {
+    "_source": "Both substances cause ataxia and bring a risk of vomiting and unconsciousness. If the user falls unconscious while under the influence there is a severe risk of vomit aspiration if they are not placed in the recovery position.",
+    "text": "Both substances cause ataxia and bring a risk of vomiting and unconsciousness. If the user falls unconscious while under the influence there is a severe risk of vomit aspiration if they are not placed in the recovery position."
+  },
+  "ghb/gbl|mdma": {
+    "_source": "Large amounts of GHB/GBL may overwhelm the effects of MDMA on the comedown.",
+    "text": "Large amounts of GHB/GBL may overwhelm the effects of MDMA on the comedown."
+  },
+  "ghb/gbl|mephedrone": {
+    "_source": "Both can dull each other's effects, so if one wears off before the other it's possible to overdose due to the lack of counteraction. Both substances affect the heart and may lead to further dangerous heart complications at higher dosages. Additionally, the combination may increase the negative side effects of each other.",
+    "text": "Both can dull each other's effects, so if one wears off before the other it's possible to overdose due to the lack of counteraction. Both substances affect the heart and may lead to further dangerous heart complications at higher dosages. Additionally, the combination may increase the negative side effects of each other."
+  },
+  "ghb/gbl|mxe": {
+    "_source": "Both substances cause ataxia and bring a risk of vomiting and unconsciousness. If the individual falls unconscious while under the influence there is a severe risk of vomit aspiration if they are not placed in the recovery position.",
+    "text": "Both substances cause ataxia and bring a risk of vomiting and unconsciousness. If the individual falls unconscious while under the influence there is a severe risk of vomit aspiration if they are not placed in the recovery position."
+  },
+  "ghb/gbl|nitrous": {
+    "_source": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Memory blackouts are likely.",
+    "text": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Memory blackouts are likely."
+  },
+  "ghb/gbl|opioids": {
+    "_source": "The two substances potentiate each other strongly and unpredictably, very rapidly leading to unconsciousness. While unconscious, vomit aspiration is a risk if not placed in the recovery position",
+    "text": "The two substances potentiate each other strongly and unpredictably, very rapidly leading to unconsciousness. While unconscious, vomit aspiration is a risk if not placed in the recovery position"
+  },
+  "ghb/gbl|pcp": {
+    "_source": "Details of this combination are not well understood but PCP generally interacts in an unpredictable manner.",
+    "text": "Details of this combination are not well understood but PCP generally interacts in an unpredictable manner."
+  },
+  "ghb/gbl|pregabalin": {
+    "_source": "The two substances potentiate each other strongly and unpredictably, and may rapidly lead to unconsciousness. They both increase each other's side effects such as ataxia, sedation, and CNS depression. Blackout and memory loss risk is significantly increased. If the user falls unconscious while under the influence there is a severe risk of vomit aspiration if they are not placed in the recovery position. There is an increased risk of seizures from this combination.",
+    "text": "The two substances potentiate each other strongly and unpredictably, and may rapidly lead to unconsciousness. They both increase each other's side effects such as ataxia, sedation, and CNS depression. Blackout and memory loss risk is significantly increased. If the user falls unconscious while under the influence there is a severe risk of vomit aspiration if they are not placed in the recovery position. There is an increased risk of seizures from this combination."
+  },
+  "ghb/gbl|tramadol": {
+    "_source": "The sedative effects of this combination can lead to dangerous respiratory depression.",
+    "text": "The sedative effects of this combination can lead to dangerous respiratory depression."
+  },
+  "ketamine|lithium": {
+    "_source": "Lithium may enhance and prolong the antidepressant effects of ketamine.",
+    "text": "Lithium may enhance and prolong the antidepressant effects of ketamine."
+  },
+  "ketamine|maois": {
+    "_source": "MAO-B inhibitors appear to increase the potency of Ketamine. MAO-A inhbitors have some negative reports associated with the combination but there isn't much information available",
+    "text": "MAO-B inhibitors appear to increase the potency of Ketamine. MAO-A inhbitors have some negative reports associated with the combination but there isn't much information available"
+  },
+  "ketamine|mdma": {
+    "_source": "No unexpected interactions, though likely to increase blood pressure but not an issue with sensible doses. Moving around on high doses of  this combination may be ill advised due to risk of physical injury.",
+    "text": "No unexpected interactions, though likely to increase blood pressure but not an issue with sensible doses. Moving around on high doses of  this combination may be ill advised due to risk of physical injury."
+  },
+  "ketamine|opioids": {
+    "_source": "Both substances bring a risk of vomiting and unconsciousness. If the user falls unconscious while under the influence there is a severe risk of vomit aspiration if they are not placed in the recovery position.",
+    "text": "Both substances bring a risk of vomiting and unconsciousness. If the user falls unconscious while under the influence there is a severe risk of vomit aspiration if they are not placed in the recovery position."
+  },
+  "ketamine|pregabalin": {
+    "_source": "Pregabalin and ketamine may synergize and increase each other's negative side effects such as nausea, dizziness, and loss of consciousness. Caution is advised for beyond medical dosages due to seizure concerns, and medical dosages for individuals with higher risk seizure profiles and or behavior.",
+    "text": "Pregabalin and ketamine may synergize and increase each other's negative side effects such as nausea, dizziness, and loss of consciousness. Caution is advised for beyond medical dosages due to seizure concerns, and medical dosages for individuals with higher risk seizure profiles and or behavior."
+  },
+  "lithium|lsd": {
+    "_source": "There are a large number of reports indicating a high seizure and psychosis risk from this combination.",
+    "text": "There are a large number of reports indicating a high seizure and psychosis risk from this combination."
+  },
+  "lithium|mdma": {
+    "_source": "High risk of serotonin syndrome",
+    "text": "High risk of serotonin syndrome"
+  },
+  "lithium|mescaline": {
+    "_source": "There are a large number of reports indicating a high seizure and psychosis risk from this combination.",
+    "text": "There are a large number of reports indicating a high seizure and psychosis risk from this combination."
+  },
+  "lithium|mushrooms": {
+    "_source": "There are a large number of reports indicating a high seizure and psychosis risk from this combination.",
+    "text": "There are a large number of reports indicating a high seizure and psychosis risk from this combination."
+  },
+  "lithium|mxe": {
+    "_source": "There is a risk of serotonin syndrome when combining Lithium with MXE, as Lithium can induce serotonin syndrome in conjunction with other serotonergic drugs, and MXE has shown a notable affinity for the serotonin transporter.",
+    "text": "There is a risk of serotonin syndrome when combining Lithium with MXE, as Lithium can induce serotonin syndrome in conjunction with other serotonergic drugs, and MXE has shown a notable affinity for the serotonin transporter."
+  },
+  "lithium|nbomes": {
+    "_source": "There are a large number of reports indicating a high seizure and psychosis risk from this combination.",
+    "text": "There are a large number of reports indicating a high seizure and psychosis risk from this combination."
+  },
+  "lithium|nitrous": {
+    "_source": "We are unable to find a report of concerns for CNS depression caused by Lithium.",
+    "text": "We are unable to find a report of concerns for CNS depression caused by Lithium."
+  },
+  "lithium|ssris": {
+    "_source": "This interaction is used in medical settings without reported issues. If this combination is taken, caution would be recommended if any other drugs are planned to be taken on top of these that may have serotonergic activity.",
+    "text": "This interaction is used in medical settings without reported issues. If this combination is taken, caution would be recommended if any other drugs are planned to be taken on top of these that may have serotonergic activity."
+  },
+  "lithium|tramadol": {
+    "_source": "Tramadol and Lithium both increase the risk of seizures and serotonin syndrome.",
+    "text": "Tramadol and Lithium both increase the risk of seizures and serotonin syndrome."
+  },
+  "lsd|mephedrone": {
+    "_source": "The anxiogenic and focusing effects of stimulants increase the chance of unpleasant thought loops, in addition to the possible negative side effects of coming down from said stimulant while on a psychedelic. In extreme cases, stimulants, especially in combination can result in severe vasoconstriction, tachycardia, hypertension, and heart failure.",
+    "text": "The anxiogenic and focusing effects of stimulants increase the chance of unpleasant thought loops, in addition to the possible negative side effects of coming down from said stimulant while on a psychedelic. In extreme cases, stimulants, especially in combination can result in severe vasoconstriction, tachycardia, hypertension, and heart failure."
+  },
+  "lsd|pregabalin": {
+    "_source": "Caution should be given due to LSD’s stimulating effects and pregabalin’s seizure concerns at higher dosages. Pregabalin may reduce the vasoconstriction, anxiety, and other side effects of LSD. Additionally, Pregabalin may increase LSD’s inhibition and risk of injury.",
+    "text": "Caution should be given due to LSD’s stimulating effects and pregabalin’s seizure concerns at higher dosages. Pregabalin may reduce the vasoconstriction, anxiety, and other side effects of LSD. Additionally, Pregabalin may increase LSD’s inhibition and risk of injury."
+  },
+  "lsd|tramadol": {
+    "_source": "Tramadol is well known to lower seizure threshold and psychedelics also cause occasional seizures.",
+    "text": "Tramadol is well known to lower seizure threshold and psychedelics also cause occasional seizures."
+  },
+  "maois|mdma": {
+    "_source": "MAO-B inhibitors can increase the potency and duration of phenethylamines unpredictably. MAO-A inhibitors with MDMA will lead to hypertensive crises.",
+    "text": "MAO-B inhibitors can increase the potency and duration of phenethylamines unpredictably. MAO-A inhibitors with MDMA will lead to hypertensive crises."
+  },
+  "maois|mxe": {
+    "_source": "MAO-B inhibitors appear to increase the potency of MXE. MAO-A inhbitors have some negative reports associated with the combination but there isn't much information available",
+    "text": "MAO-B inhibitors appear to increase the potency of MXE. MAO-A inhbitors have some negative reports associated with the combination but there isn't much information available"
+  },
+  "maois|nbomes": {
+    "_source": "MAO-B inhibitors can increase the potency and duration of phenethylamines unpredictably",
+    "text": "MAO-B inhibitors can increase the potency and duration of phenethylamines unpredictably"
+  },
+  "maois|opioids": {
+    "_source": "Coadministration of monoamine oxidase inhibitors (MAOIs) with certain opioids has been associated with rare reports of severe and fatal adverse reactions. There appear to be two types of interaction, an excitatory and a depressive one. Symptoms of the excitatory reaction may include agitation, headache, diaphoresis, hyperpyrexia, flushing, shivering, myoclonus, rigidity, tremor, diarrhea, hypertension, tachycardia, seizures, and coma. Death has occurred in some cases.",
+    "text": "Coadministration of monoamine oxidase inhibitors (MAOIs) with certain opioids has been associated with rare reports of severe and fatal adverse reactions. There appear to be two types of interaction, an excitatory and a depressive one. Symptoms of the excitatory reaction may include agitation, headache, diaphoresis, hyperpyrexia, flushing, shivering, myoclonus, rigidity, tremor, diarrhea, hypertension, tachycardia, seizures, and coma. Death has occurred in some cases."
+  },
+  "maois|pcp": {
+    "_source": "This combination is very poorly explored",
+    "text": "This combination is very poorly explored"
+  },
+  "mdma|mephedrone": {
+    "_source": "Risk of serotonin syndrome as both drugs raise serotonin levels. Stimulants also increase the neurotoxic effects of MDMA, in addition to concerns of high blood pressure and unnecessary strain on the heart. As well as potentially causing anxiety and greater physical discomfort due to the combination.",
+    "text": "Risk of serotonin syndrome as both drugs raise serotonin levels. Stimulants also increase the neurotoxic effects of MDMA, in addition to concerns of high blood pressure and unnecessary strain on the heart. As well as potentially causing anxiety and greater physical discomfort due to the combination."
+  },
+  "mdma|mxe": {
+    "_source": "There have been reports of risky serotonergic interactions when the two are taken at the same time, but MXE taken to the end of an MDMA experience does not appear to cause the same issues.",
+    "text": "There have been reports of risky serotonergic interactions when the two are taken at the same time, but MXE taken to the end of an MDMA experience does not appear to cause the same issues."
+  },
+  "mdma|pcp": {
+    "_source": "This combination can easily lead to hypermanic states",
+    "text": "This combination can easily lead to hypermanic states"
+  },
+  "mdma|pregabalin": {
+    "_source": "There is a significant risk of seizures from this combination. Amphetamines increase respiration rate allowing for a higher dose of sedatives than normal. If amphetamines wears off first, recreational dosages of pregabalin may overcome the individual and cause respiratory arrest. Both substances at recreational dosages cause strain of the heart and may lead to further dangerous heart complications. Medical dosages are not reported to be a concern",
+    "text": "There is a significant risk of seizures from this combination. Amphetamines increase respiration rate allowing for a higher dose of sedatives than normal. If amphetamines wears off first, recreational dosages of pregabalin may overcome the individual and cause respiratory arrest. Both substances at recreational dosages cause strain of the heart and may lead to further dangerous heart complications. Medical dosages are not reported to be a concern"
+  },
+  "mdma|tramadol": {
+    "_source": "Tramadol and stimulants both increase the risk of seizures.",
+    "text": "Tramadol and stimulants both increase the risk of seizures."
+  },
+  "mephedrone|mushrooms": {
+    "_source": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences",
+    "text": "Stimulants increase anxiety levels and the risk of thought loops which can lead to negative experiences"
+  },
+  "mephedrone|opioids": {
+    "_source": "Stimulants increase respiration rate allowing a higher dose of opiates. If the stimulant wears off first then the opiate may overcome the patient and cause respiratory arrest.",
+    "text": "Stimulants increase respiration rate allowing a higher dose of opiates. If the stimulant wears off first then the opiate may overcome the patient and cause respiratory arrest."
+  },
+  "mephedrone|pregabalin": {
+    "_source": "There is a significant risk of seizures from this combination. Mephedrone increases respiration rate allowing for a higher dose of sedatives than normal. If mephedrone wears off first, recreational dosages of pregabalin may overcome the individual and cause respiratory arrest. Both substances at recreational dosages cause strain of the heart and may lead to further dangerous heart complications.",
+    "text": "There is a significant risk of seizures from this combination. Mephedrone increases respiration rate allowing for a higher dose of sedatives than normal. If mephedrone wears off first, recreational dosages of pregabalin may overcome the individual and cause respiratory arrest. Both substances at recreational dosages cause strain of the heart and may lead to further dangerous heart complications."
+  },
+  "mephedrone|tramadol": {
+    "_source": "There is a high risk of serotonin syndrome and seizures at recreational dosages. Both substances affect the heart and may lead to further dangerous heart complications at higher dosages. Both can dull each other's effects, so if one wears off before the other it's possible to overdose due to the lack of counteraction. The combination may increase each other's side effects, such as dizziness and drowsiness. At higher dosages, the combination may increase each other’s side effects, such as delirium, mania, and psychosis.",
+    "text": "There is a high risk of serotonin syndrome and seizures at recreational dosages. Both substances affect the heart and may lead to further dangerous heart complications at higher dosages. Both can dull each other's effects, so if one wears off before the other it's possible to overdose due to the lack of counteraction. The combination may increase each other's side effects, such as dizziness and drowsiness. At higher dosages, the combination may increase each other’s side effects, such as delirium, mania, and psychosis."
+  },
+  "mescaline|pregabalin": {
+    "_source": "Caution should be given due to mescaline’s stimulating effects and pregabalin’s seizure concerns at higher dosages. Pregabalin may reduce the vasoconstriction, anxiety, and other side effects of mescaline. Additionally, Pregabalin may increase mescaline’s inhibition and risk of injury.",
+    "text": "Caution should be given due to mescaline’s stimulating effects and pregabalin’s seizure concerns at higher dosages. Pregabalin may reduce the vasoconstriction, anxiety, and other side effects of mescaline. Additionally, Pregabalin may increase mescaline’s inhibition and risk of injury."
+  },
+  "mescaline|tramadol": {
+    "_source": "This combination can cause seizures due to the lowering of the threshold by tramadol and the potential of mescaline to cause seziures.",
+    "text": "This combination can cause seizures due to the lowering of the threshold by tramadol and the potential of mescaline to cause seziures."
+  },
+  "mushrooms|pregabalin": {
+    "_source": "Pregabalin may reduce the anxiety and other possible side effects of Psilocybin Mushrooms. Additionally, the combination may increase inhibition, dizziness, and risk of injury.",
+    "text": "Pregabalin may reduce the anxiety and other possible side effects of Psilocybin Mushrooms. Additionally, the combination may increase inhibition, dizziness, and risk of injury."
+  },
+  "mushrooms|tramadol": {
+    "_source": "Tramadol is well known to lower seizure threshold and psychedelics also cause occasional seizures.",
+    "text": "Tramadol is well known to lower seizure threshold and psychedelics also cause occasional seizures."
+  },
+  "mxe|nbomes": {
+    "_source": "As an NMDA antagonist MXE potentiates NBOMes which can be unpleasantly intense",
+    "text": "As an NMDA antagonist MXE potentiates NBOMes which can be unpleasantly intense"
+  },
+  "mxe|opioids": {
+    "_source": "This combination can potentiate the effects of the opioid",
+    "text": "This combination can potentiate the effects of the opioid"
+  },
+  "mxe|pcp": {
+    "_source": "There are no reports available about this combination",
+    "text": "There are no reports available about this combination"
+  },
+  "mxe|pregabalin": {
+    "_source": "Pregabalin and MXE may synergize and increase each other’s negative side effects such as nausea, dizziness, and loss of consciousness. Caution is advised for anything above low dosages due to seizure concerns, and all dosages for individuals with higher risk seizure profiles and or behavior.",
+    "text": "Pregabalin and MXE may synergize and increase each other’s negative side effects such as nausea, dizziness, and loss of consciousness. Caution is advised for anything above low dosages due to seizure concerns, and all dosages for individuals with higher risk seizure profiles and or behavior."
+  },
+  "mxe|ssris": {
+    "_source": "Depending on the SSRI this combination can be unpredictable",
+    "text": "Depending on the SSRI this combination can be unpredictable"
+  },
+  "nbomes|pregabalin": {
+    "_source": "NBOMes and pregabalin are reported to have significant seizure concerns that are likely to increase in combination. Therapeutic dosages of pregabalin are unlikely to be of concern and may decrease NBOMes side effects such as vasoconstriction and anxiety.",
+    "text": "NBOMes and pregabalin are reported to have significant seizure concerns that are likely to increase in combination. Therapeutic dosages of pregabalin are unlikely to be of concern and may decrease NBOMes side effects such as vasoconstriction and anxiety."
+  },
+  "nbomes|tramadol": {
+    "_source": "Tramadol is well known to lower seizure threshold and NBOMes have also shown a tendency to cause severe seizures",
+    "text": "Tramadol is well known to lower seizure threshold and NBOMes have also shown a tendency to cause severe seizures"
+  },
+  "nitrous|opioids": {
+    "_source": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Memory blackouts are likely.",
+    "text": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Memory blackouts are likely."
+  },
+  "nitrous|pregabalin": {
+    "_source": "Both substances potentiate the ataxia and sedation caused by the other, and may increase the risk of loss of consciousness at higher dosages. While unconscious, vomit aspiration is a risk if not placed in the recovery position. The combination may increase inhibition and risk of injury. Additionally, abuse of nitrous while under the influence of pregabalin may increase the risk of seizures. Medical dosages are unlikely to be a concern.",
+    "text": "Both substances potentiate the ataxia and sedation caused by the other, and may increase the risk of loss of consciousness at higher dosages. While unconscious, vomit aspiration is a risk if not placed in the recovery position. The combination may increase inhibition and risk of injury. Additionally, abuse of nitrous while under the influence of pregabalin may increase the risk of seizures. Medical dosages are unlikely to be a concern."
+  },
+  "nitrous|tramadol": {
+    "_source": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Memory blackouts are likely.",
+    "text": "Both substances potentiate the ataxia and sedation caused by the other and can lead to unexpected loss of consciousness at high doses. While unconscious, vomit aspiration is a risk if not placed in the recovery position. Memory blackouts are likely."
+  },
+  "opioids|pcp": {
+    "_source": "PCP can reduce opioid tolerance, increasing the risk of overdose",
+    "text": "PCP can reduce opioid tolerance, increasing the risk of overdose"
+  },
+  "opioids|ssris": {
+    "_source": "There have been some case reports of serotonin syndrome in individuals who were given a combination of opioids and SSRIs. Other research has indicated a small increase in overdose risk for people who are prescribed CYP2D6-inhibiting SSRIs (e.g. fluoxetine and paroxetine) with oxycodone. Overall, risk is low with this combination but, as always, be mindful of your consumption.",
+    "text": "There have been some case reports of serotonin syndrome in individuals who were given a combination of opioids and SSRIs. Other research has indicated a small increase in overdose risk for people who are prescribed CYP2D6-inhibiting SSRIs (e.g. fluoxetine and paroxetine) with oxycodone. Overall, risk is low with this combination but, as always, be mindful of your consumption."
+  },
+  "opioids|tramadol": {
+    "_source": "Concomitant use of tramadol increases the seizure risk in individuals taking other opioids. These agents are often individually epileptogenic and may have additive effects on seizure threshold during coadministration. Central nervous system- and/or respiratory-depressant effects may be additively or synergistically present",
+    "text": "Concomitant use of tramadol increases the seizure risk in individuals taking other opioids. These agents are often individually epileptogenic and may have additive effects on seizure threshold during coadministration. Central nervous system- and/or respiratory-depressant effects may be additively or synergistically present"
+  },
+  "pcp|ssris": {
+    "_source": "Details of this combination are not well understood but PCP generally interacts in an unpredictable manner.",
+    "text": "Details of this combination are not well understood but PCP generally interacts in an unpredictable manner."
+  },
+  "pregabalin|tramadol": {
+    "_source": "There is a significant risk of seizures. Both substances are CNS depressants, potentiating each other strongly and unpredictably, raising the chances of memory loss, severe ataxia, and unconsciousness. The interaction will cause greater inhibition and risk of injury. If the user falls unconscious it is strongly recommended to put them into the recovery position and monitor breathing. Medical dosages are not reported to be a concern.",
+    "text": "There is a significant risk of seizures. Both substances are CNS depressants, potentiating each other strongly and unpredictably, raising the chances of memory loss, severe ataxia, and unconsciousness. The interaction will cause greater inhibition and risk of injury. If the user falls unconscious it is strongly recommended to put them into the recovery position and monitor breathing. Medical dosages are not reported to be a concern."
+  }
+}

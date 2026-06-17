@@ -1,0 +1,46 @@
+{
+  "pretty_name": {
+    "_source": "Caffeine",
+    "text": "Koffein"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Caffeine is a CNS stimulant and the most widely used psychoactive substance in the world. It is legal and unregulated in most parts of the world, and is found in many commonly sold products. It has a good safety profile, though regular heavy use can cause physical dependence and contribute to certain medical conditions.",
+      "text": "Koffein ist ein ZNS-Stimulans und die weltweit am häufigsten verwendete psychoaktive Substanz. Es ist in den meisten Teilen der Welt legal und unreguliert und kommt in vielen gängigen Verkaufsprodukten vor. Es hat ein gutes Sicherheitsprofil, wobei regelmäßiger starker Gebrauch körperliche Abhängigkeit verursachen und zu bestimmten Erkrankungen beitragen kann."
+    },
+    "effects": {
+      "_source": "elevated heartrate, increase in cognitive abilities, physical agitation, panicked thinking, racing thoughts, uncomfortable bodyload",
+      "text": "erhöhte Herzfrequenz, Zunahme kognitiver Fähigkeiten, körperliche Unruhe, panisches Denken, rasende Gedanken, unangenehmer Bodyload"
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: The lethal dose for caffeine starts at approximately 3g. The average cup of coffee contains roughly 75-150mg of caffeine.",
+    "text": " HINWEIS: Die tödliche Dosis für Koffein beginnt bei etwa 3 g. Eine durchschnittliche Tasse Kaffee enthält ungefähr 75-150 mg Koffein."
+  },
+  "formatted_effects": [
+    {
+      "_source": "elevated heartrate",
+      "text": "erhöhte Herzfrequenz"
+    },
+    {
+      "_source": "increase in cognitive abilities",
+      "text": "Zunahme kognitiver Fähigkeiten"
+    },
+    {
+      "_source": "physical agitation",
+      "text": "körperliche Unruhe"
+    },
+    {
+      "_source": "panicked thinking",
+      "text": "panisches Denken"
+    },
+    {
+      "_source": "racing thoughts",
+      "text": "rasende Gedanken"
+    },
+    {
+      "_source": "uncomfortable bodyload",
+      "text": "unangenehmer Bodyload"
+    }
+  ]
+}

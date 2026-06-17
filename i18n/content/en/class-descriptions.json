@@ -1,0 +1,46 @@
+{
+  "dox": {
+    "_source": "DOx is a family of substituted amphetamine psychedelics (e.g. DOM, DOI, DOB, DOC) with long durations and strong stimulation.",
+    "text": "DOx is a family of substituted amphetamine psychedelics (e.g. DOM, DOI, DOB, DOC) with long durations and strong stimulation."
+  },
+  "nbomes": {
+    "_source": "NBOMes (N-Bomb) are extremely potent psychedelics active at microgram doses (25I-, 25C-, 25B-NBOMe). Narrow safety margin; deaths reported.",
+    "text": "NBOMes (N-Bomb) are extremely potent psychedelics active at microgram doses (25I-, 25C-, 25B-NBOMe). Narrow safety margin; deaths reported."
+  },
+  "2c-x": {
+    "_source": "2C-x is the 2C family of phenethylamine psychedelics (e.g. 2C-B, 2C-E, 2C-I). Varying profiles; most are active in the 10-25 mg range.",
+    "text": "2C-x is the 2C family of phenethylamine psychedelics (e.g. 2C-B, 2C-E, 2C-I). Varying profiles; most are active in the 10-25 mg range."
+  },
+  "2c-t-x": {
+    "_source": "2C-T-x is the sulfur-substituted 2C subfamily (e.g. 2C-T-2, 2C-T-7, 2C-T-21). Unpredictable and MAOI-sensitive.",
+    "text": "2C-T-x is the sulfur-substituted 2C subfamily (e.g. 2C-T-2, 2C-T-7, 2C-T-21). Unpredictable and MAOI-sensitive."
+  },
+  "5-meo-xxt": {
+    "_source": "5-MeO-xxT covers 5-MeO tryptamines (5-MeO-DMT, 5-MeO-MiPT, 5-MeO-DiPT). Extremely potent, short and intense.",
+    "text": "5-MeO-xxT covers 5-MeO tryptamines (5-MeO-DMT, 5-MeO-MiPT, 5-MeO-DiPT). Extremely potent, short and intense."
+  },
+  "amphetamines": {
+    "_source": "Amphetamines are a class of stimulants including amphetamine, dextroamphetamine, methamphetamine, and related analogues.",
+    "text": "Amphetamines are a class of stimulants including amphetamine, dextroamphetamine, methamphetamine, and related analogues."
+  },
+  "opioids": {
+    "_source": "Opioids act on mu-opioid receptors, producing analgesia, sedation, and respiratory depression. Includes heroin, morphine, oxycodone, fentanyl, and others.",
+    "text": "Opioids act on mu-opioid receptors, producing analgesia, sedation, and respiratory depression. Includes heroin, morphine, oxycodone, fentanyl, and others."
+  },
+  "benzodiazepines": {
+    "_source": "Benzodiazepines are GABA-A positive allosteric modulators used as anxiolytics, sedatives, and anticonvulsants (e.g. diazepam, alprazolam, clonazepam).",
+    "text": "Benzodiazepines are GABA-A positive allosteric modulators used as anxiolytics, sedatives, and anticonvulsants (e.g. diazepam, alprazolam, clonazepam)."
+  },
+  "maois": {
+    "_source": "Monoamine oxidase inhibitors prevent the breakdown of serotonin, dopamine, and noradrenaline. Includes harmala alkaloids, phenelzine, selegiline.",
+    "text": "Monoamine oxidase inhibitors prevent the breakdown of serotonin, dopamine, and noradrenaline. Includes harmala alkaloids, phenelzine, selegiline."
+  },
+  "ssris": {
+    "_source": "Selective serotonin reuptake inhibitors are antidepressants that raise synaptic serotonin (e.g. fluoxetine, sertraline, citalopram).",
+    "text": "Selective serotonin reuptake inhibitors are antidepressants that raise synaptic serotonin (e.g. fluoxetine, sertraline, citalopram)."
+  },
+  "ghb/gbl": {
+    "_source": "GHB and its prodrug GBL are GABA-B agonists with a very narrow dose-response curve. GBL converts rapidly into GHB in the body.",
+    "text": "GHB and its prodrug GBL are GABA-B agonists with a very narrow dose-response curve. GBL converts rapidly into GHB in the body."
+  }
+}

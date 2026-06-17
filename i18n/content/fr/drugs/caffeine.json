@@ -1,0 +1,46 @@
+{
+  "pretty_name": {
+    "_source": "Caffeine",
+    "text": "Caféine"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Caffeine is a CNS stimulant and the most widely used psychoactive substance in the world. It is legal and unregulated in most parts of the world, and is found in many commonly sold products. It has a good safety profile, though regular heavy use can cause physical dependence and contribute to certain medical conditions.",
+      "text": "La caféine est un stimulant du SNC et la substance psychoactive la plus utilisée au monde. Elle est légale et non réglementée dans la plupart des régions du monde, et se trouve dans de nombreux produits couramment vendus. Elle présente un bon profil de sécurité, bien qu'un usage régulier et important puisse entraîner une dépendance physique et contribuer à certaines affections médicales."
+    },
+    "effects": {
+      "_source": "elevated heartrate, increase in cognitive abilities, physical agitation, panicked thinking, racing thoughts, uncomfortable bodyload",
+      "text": "fréquence cardiaque élevée, augmentation des capacités cognitives, agitation physique, pensées paniquées, pensées qui défilent, charge corporelle inconfortable"
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: The lethal dose for caffeine starts at approximately 3g. The average cup of coffee contains roughly 75-150mg of caffeine.",
+    "text": " REMARQUE : La dose létale de caféine commence à environ 3 g. Une tasse de café moyenne contient environ 75 à 150 mg de caféine."
+  },
+  "formatted_effects": [
+    {
+      "_source": "elevated heartrate",
+      "text": "fréquence cardiaque élevée"
+    },
+    {
+      "_source": "increase in cognitive abilities",
+      "text": "augmentation des capacités cognitives"
+    },
+    {
+      "_source": "physical agitation",
+      "text": "agitation physique"
+    },
+    {
+      "_source": "panicked thinking",
+      "text": "pensées paniquées"
+    },
+    {
+      "_source": "racing thoughts",
+      "text": "pensées qui défilent"
+    },
+    {
+      "_source": "uncomfortable bodyload",
+      "text": "charge corporelle inconfortable"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "pretty_name": {
+    "_source": "DMT",
+    "text": "DMT"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A popular and powerful psychedelic, typically used in two ways: either it is vapourised for a short 'breakthrough' experience, or it is taken in combination with an enzyme inhibitor for a long, intense trip (this is also known as ayahuasca or pharmahuasca).",
+      "text": "Uno psichedelico popolare e potente, usato tipicamente in due modi: viene vaporizzato per una breve esperienza di 'breakthrough', oppure assunto in combinazione con un inibitore enzimatico per un trip lungo e intenso (noto anche come ayahuasca o pharmahuasca)."
+    },
+    "effects": {
+      "_source": "immersive experience, open eye visuals, radical perspective shifting, profound life-changing spiritual experiences, powerful rushing of sensation, change in perception of time, auditory hallucinations, color shifting, hard on lungs when smoking, stomach discomfort, difficulty integrating experiences, overwhelming fear",
+      "text": "esperienza immersiva, visioni a occhi aperti, cambiamento radicale della prospettiva, esperienze spirituali profonde e trasformative, potente ondata di sensazioni, cambiamento della percezione del tempo, allucinazioni uditive, cambiamento dei colori, pesante per i polmoni se fumato, fastidio allo stomaco, difficoltà a integrare le esperienze, paura travolgente"
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: These figures are for 100% effective vaporization methods. Typical methods of vaporization are not 100% effective. The likelihood of having a \"breakthrough\" experience increases with dosages. Caution is advised.",
+    "text": " NOTA: Questi valori sono per metodi di vaporizzazione efficaci al 100%. I metodi tipici di vaporizzazione non sono efficaci al 100%. La probabilità di avere un'esperienza di \"breakthrough\" aumenta con i dosaggi. Si consiglia cautela."
+  },
+  "formatted_effects": [
+    {
+      "_source": "immersive experience",
+      "text": "esperienza immersiva"
+    },
+    {
+      "_source": "open eye visuals",
+      "text": "visioni a occhi aperti"
+    },
+    {
+      "_source": "radical perspective shifting",
+      "text": "cambiamento radicale della prospettiva"
+    },
+    {
+      "_source": "profound life-changing spiritual experiences",
+      "text": "esperienze spirituali profonde e trasformative"
+    },
+    {
+      "_source": "powerful rushing of sensation",
+      "text": "potente ondata di sensazioni"
+    },
+    {
+      "_source": "change in perception of time",
+      "text": "cambiamento della percezione del tempo"
+    },
+    {
+      "_source": "auditory hallucinations",
+      "text": "allucinazioni uditive"
+    },
+    {
+      "_source": "color shifting",
+      "text": "cambiamento dei colori"
+    },
+    {
+      "_source": "hard on lungs when smoking",
+      "text": "pesante per i polmoni se fumato"
+    },
+    {
+      "_source": "stomach discomfort",
+      "text": "fastidio allo stomaco"
+    },
+    {
+      "_source": "difficulty integrating experiences",
+      "text": "difficoltà a integrare le esperienze"
+    },
+    {
+      "_source": "overwhelming fear",
+      "text": "paura travolgente"
+    }
+  ]
+}

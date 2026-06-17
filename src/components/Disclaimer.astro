@@ -1,0 +1,46 @@
+---
+import type { Locale } from "../i18n/locales";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
+
+const disclaimerModules = import.meta.glob(
+  "../../drugs/translations/disclaimer-*.html",
+  { query: "?raw", import: "default", eager: true }
+) as Record<string, string>;
+
+const disclaimerHtml =
+  disclaimerModules[`../../drugs/translations/disclaimer-${locale}.html`] ??
+  disclaimerModules["../../drugs/translations/disclaimer-en.html"] ??
+  "";
+---
+
+<footer class="disclaimer" set:html={disclaimerHtml} />
+
+<style>
+  .disclaimer {
+    padding: 20px 16px 0;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--color-fg-mute);
+    max-width: 860px;
+  }
+
+  .disclaimer :global(p),
+  .disclaimer :global(h4) {
+    margin: 0 0 10px;
+  }
+
+  .disclaimer :global(strong),
+  .disclaimer :global(b) {
+    color: var(--color-fg);
+    font-weight: 600;
+  }
+
+  .disclaimer :global(a) {
+    color: var(--color-fg);
+  }
+</style>

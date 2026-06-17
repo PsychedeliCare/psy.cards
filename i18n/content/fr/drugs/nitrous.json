@@ -1,0 +1,70 @@
+{
+  "pretty_name": {
+    "_source": "N2O",
+    "text": "N2O"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Nitrous oxide, also known as laughing gas, is often inhaled through balloons filled with canisters of the gas. The drug is a short-acting dissociative inhalant with strong visual, mental, and auditory effects. The drug is extremely popular especially in combination with other drugs.",
+      "text": "Le protoxyde d'azote, aussi connu comme gaz hilarant, est souvent inhalé à travers des ballons remplis à partir de cartouches de gaz. Cette substance est un inhalant dissociatif à courte durée d'action avec de forts effets visuels, mentaux et auditifs. Elle est extrêmement populaire, surtout en association avec d'autres substances."
+    },
+    "effects": {
+      "_source": "giggling, mood lift, euphoria, sound distortion, dream like state, minor to strong hallucinations, reduction of external stimuli, analgesia, buzzing sensation in nerve, clumsiness, nausea, headaches, numbness in extremities",
+      "text": "rires, amélioration de l'humeur, euphorie, distorsion sonore, état semblable au rêve, hallucinations légères à fortes, réduction des stimuli externes, analgésie, sensation de bourdonnement dans les nerfs, maladresse, nausées, maux de tête, engourdissement des extrémités"
+    }
+  },
+  "formatted_effects": [
+    {
+      "_source": "giggling",
+      "text": "rires"
+    },
+    {
+      "_source": "mood lift",
+      "text": "amélioration de l'humeur"
+    },
+    {
+      "_source": "euphoria",
+      "text": "euphorie"
+    },
+    {
+      "_source": "sound distortion",
+      "text": "distorsion sonore"
+    },
+    {
+      "_source": "dream like state",
+      "text": "état semblable au rêve"
+    },
+    {
+      "_source": "minor to strong hallucinations",
+      "text": "hallucinations légères à fortes"
+    },
+    {
+      "_source": "reduction of external stimuli",
+      "text": "réduction des stimuli externes"
+    },
+    {
+      "_source": "analgesia",
+      "text": "analgesia"
+    },
+    {
+      "_source": "buzzing sensation in nerve",
+      "text": "sensation de bourdonnement dans les nerfs"
+    },
+    {
+      "_source": "clumsiness",
+      "text": "maladresse"
+    },
+    {
+      "_source": "nausea",
+      "text": "nausées"
+    },
+    {
+      "_source": "headaches",
+      "text": "maux de tête"
+    },
+    {
+      "_source": "numbness in extremities",
+      "text": "engourdissement des extrémités"
+    }
+  ]
+}

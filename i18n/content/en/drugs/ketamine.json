@@ -1,0 +1,34 @@
+{
+  "pretty_name": {
+    "_source": "Ketamine",
+    "text": "Ketamine"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A short-acting dissociative anaesthetic and hallucinogen commonly used in medicine. It is the prototypical dissociative, and is widely used at sub-anesthetic doses recreationally. Small doses are comparable with alcohol, while larger doses are immobilising and lead to psychedelic experiences: the \"K-Hole.\"",
+      "text": "A short-acting dissociative anaesthetic and hallucinogen commonly used in medicine. It is the prototypical dissociative, and is widely used at sub-anesthetic doses recreationally. Small doses are comparable with alcohol, while larger doses are immobilising and lead to psychedelic experiences: the \"K-Hole.\""
+    },
+    "effects": {
+      "_source": "A feeling of drunkenness and well being at low doses. As dose increases the user may begin to feel a disconnection from their body. At 'khole' doses the user may become completely disconnected from both body and mind.",
+      "text": "A feeling of drunkenness and well being at low doses. As dose increases the user may begin to feel a disconnection from their body. At 'khole' doses the user may become completely disconnected from both body and mind."
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: Ketamine is based on weight. These are figures for the average 150 pound male There is no concrete dose for the \"K-Hole\" as each user is different.",
+    "text": " NOTE: Ketamine is based on weight. These are figures for the average 150 pound male There is no concrete dose for the \"K-Hole\" as each user is different."
+  },
+  "formatted_effects": [
+    {
+      "_source": "A feeling of drunkenness and well being at low doses",
+      "text": "A feeling of drunkenness and well being at low doses"
+    },
+    {
+      "_source": "As dose increases the user may begin to feel a disconnection from their body",
+      "text": "As dose increases the user may begin to feel a disconnection from their body"
+    },
+    {
+      "_source": "At 'khole' doses the user may become completely disconnected from both body and mind",
+      "text": "At 'khole' doses the user may become completely disconnected from both body and mind"
+    }
+  ]
+}

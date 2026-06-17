@@ -1,0 +1,46 @@
+{
+  "pretty_name": {
+    "_source": "Caffeine",
+    "text": "Caffeina"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Caffeine is a CNS stimulant and the most widely used psychoactive substance in the world. It is legal and unregulated in most parts of the world, and is found in many commonly sold products. It has a good safety profile, though regular heavy use can cause physical dependence and contribute to certain medical conditions.",
+      "text": "La caffeina è uno stimolante del SNC e la sostanza psicoattiva più usata al mondo. È legale e non regolamentata nella maggior parte del mondo, e si trova in molti prodotti comunemente venduti. Ha un buon profilo di sicurezza, anche se un uso regolare intenso può causare dipendenza fisica e contribuire a determinate condizioni mediche."
+    },
+    "effects": {
+      "_source": "elevated heartrate, increase in cognitive abilities, physical agitation, panicked thinking, racing thoughts, uncomfortable bodyload",
+      "text": "frequenza cardiaca elevata, aumento delle capacità cognitive, agitazione fisica, pensiero ansioso, pensieri accelerati, bodyload sgradevole"
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: The lethal dose for caffeine starts at approximately 3g. The average cup of coffee contains roughly 75-150mg of caffeine.",
+    "text": " NOTA: La dose letale di caffeina inizia a circa 3 g. Una tazza media di caffè contiene circa 75-150 mg di caffeina."
+  },
+  "formatted_effects": [
+    {
+      "_source": "elevated heartrate",
+      "text": "frequenza cardiaca elevata"
+    },
+    {
+      "_source": "increase in cognitive abilities",
+      "text": "aumento delle capacità cognitive"
+    },
+    {
+      "_source": "physical agitation",
+      "text": "agitazione fisica"
+    },
+    {
+      "_source": "panicked thinking",
+      "text": "pensiero ansioso"
+    },
+    {
+      "_source": "racing thoughts",
+      "text": "pensieri accelerati"
+    },
+    {
+      "_source": "uncomfortable bodyload",
+      "text": "bodyload sgradevole"
+    }
+  ]
+}

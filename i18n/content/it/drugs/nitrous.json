@@ -1,0 +1,70 @@
+{
+  "pretty_name": {
+    "_source": "N2O",
+    "text": "N2O"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Nitrous oxide, also known as laughing gas, is often inhaled through balloons filled with canisters of the gas. The drug is a short-acting dissociative inhalant with strong visual, mental, and auditory effects. The drug is extremely popular especially in combination with other drugs.",
+      "text": "Il protossido di azoto, noto anche come gas esilarante, viene spesso inalato tramite palloncini riempiti con cartucce del gas. La sostanza è un inalante dissociativo a breve durata d'azione con forti effetti visivi, mentali e uditivi. È estremamente popolare, soprattutto in combinazione con altre sostanze."
+    },
+    "effects": {
+      "_source": "giggling, mood lift, euphoria, sound distortion, dream like state, minor to strong hallucinations, reduction of external stimuli, analgesia, buzzing sensation in nerve, clumsiness, nausea, headaches, numbness in extremities",
+      "text": "risatine, miglioramento dell'umore, euforia, distorsione del suono, stato simile al sogno, allucinazioni da lievi a forti, riduzione degli stimoli esterni, analgesia, sensazione di formicolio nei nervi, goffaggine, nausea, mal di testa, intorpidimento alle estremità"
+    }
+  },
+  "formatted_effects": [
+    {
+      "_source": "giggling",
+      "text": "risatine"
+    },
+    {
+      "_source": "mood lift",
+      "text": "miglioramento dell'umore"
+    },
+    {
+      "_source": "euphoria",
+      "text": "euforia"
+    },
+    {
+      "_source": "sound distortion",
+      "text": "distorsione del suono"
+    },
+    {
+      "_source": "dream like state",
+      "text": "stato simile al sogno"
+    },
+    {
+      "_source": "minor to strong hallucinations",
+      "text": "allucinazioni da lievi a forti"
+    },
+    {
+      "_source": "reduction of external stimuli",
+      "text": "riduzione degli stimoli esterni"
+    },
+    {
+      "_source": "analgesia",
+      "text": "analgesia"
+    },
+    {
+      "_source": "buzzing sensation in nerve",
+      "text": "sensazione di formicolio nei nervi"
+    },
+    {
+      "_source": "clumsiness",
+      "text": "goffaggine"
+    },
+    {
+      "_source": "nausea",
+      "text": "nausea"
+    },
+    {
+      "_source": "headaches",
+      "text": "mal di testa"
+    },
+    {
+      "_source": "numbness in extremities",
+      "text": "intorpidimento alle estremità"
+    }
+  ]
+}

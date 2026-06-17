@@ -1,0 +1,76 @@
+---
+import type { Locale } from "../i18n/locales";
+import { locales, localeLabels, defaultLocale } from "../i18n/locales";
+import { switchLocalePath } from "../i18n/paths";
+
+interface Props {
+  locale?: Locale;
+  currentPath?: string;
+}
+
+const { locale = defaultLocale, currentPath = "/" } = Astro.props;
+
+const targets = locales.map((code) => ({
+  code,
+  label: localeLabels[code],
+  href: switchLocalePath(locale, code, currentPath),
+  active: code === locale,
+}));
+---
+
+<nav class="lang-switcher" aria-label="Language">
+  <ul>
+    {
+      targets.map((target) => (
+        <li>
+          <a
+            href={target.href}
+            hreflang={target.code}
+            lang={target.code}
+            aria-current={target.active ? "page" : undefined}
+            class:list={["lang-link", target.active && "is-active"]}
+          >
+            {target.code.toUpperCase()}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .lang-switcher ul {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+    background: color-mix(in oklab, var(--color-ink-2), transparent 8%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+  }
+
+  .lang-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    padding: 4px 8px;
+    color: var(--color-fg-mute);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border-radius: 999px;
+  }
+
+  .lang-link:hover,
+  .lang-link:focus-visible {
+    color: var(--color-fg);
+  }
+
+  .lang-link.is-active {
+    color: var(--color-ink);
+    background: var(--color-fg);
+  }
+</style>

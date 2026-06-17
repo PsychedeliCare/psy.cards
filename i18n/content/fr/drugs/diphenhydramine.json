@@ -1,0 +1,62 @@
+{
+  "pretty_name": {
+    "_source": "Diphenhydramine",
+    "text": "Diphénhydramine"
+  },
+  "properties": {
+    "summary": {
+      "_source": "An antihistamine which, when taken in smaller doses relieves allergies and insomnia. In larger doses works as a deliriant and can actually keep the user awake. Generally the 'high' of this drug is reported as dysphoric, potentially causing hallucinations indistinguishable from reality.",
+      "text": "Un antihistaminique qui, à petites doses, soulage les allergies et l'insomnie. À doses plus élevées, il agit comme un délirant et peut en réalité maintenir l'utilisateur éveillé. Le 'high' de cette substance est généralement rapporté comme dysphorique, pouvant provoquer des hallucinations indiscernables de la réalité."
+    },
+    "effects": {
+      "_source": "Delirium, dream-like experiences, paranoia, visual and audio distortions, dry mouth, muscle cramps, nausea, dysphoria, tremors. Often described as a pretty negative experience.",
+      "text": "Délire, expériences semblables à des rêves, paranoïa, distorsions visuelles et auditives, bouche sèche, crampes musculaires, nausées, dysphorie, tremblements. Souvent décrit comme une expérience plutôt négative."
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: The doses provided are for recreational usage. For use as a sleep aid the dose ranges from 25-100mg, or as specified on the product packaging.",
+    "text": " REMARQUE : Les doses fournies sont destinées à un usage récréatif. Pour une utilisation comme aide au sommeil, la dose varie de 25 à 100 mg, ou selon les indications figurant sur l'emballage du produit."
+  },
+  "formatted_effects": [
+    {
+      "_source": "Delirium",
+      "text": "Délire"
+    },
+    {
+      "_source": "dream-like experiences",
+      "text": "expériences semblables à des rêves"
+    },
+    {
+      "_source": "paranoia",
+      "text": "paranoïa"
+    },
+    {
+      "_source": "visual and audio distortions",
+      "text": "distorsions visuelles et auditives"
+    },
+    {
+      "_source": "dry mouth",
+      "text": "bouche sèche"
+    },
+    {
+      "_source": "muscle cramps",
+      "text": "crampes musculaires"
+    },
+    {
+      "_source": "nausea",
+      "text": "nausées"
+    },
+    {
+      "_source": "dysphoria",
+      "text": "dysphorie"
+    },
+    {
+      "_source": "tremors",
+      "text": "tremblements"
+    },
+    {
+      "_source": "Often described as a pretty negative experience",
+      "text": "Souvent décrit comme une expérience plutôt négative"
+    }
+  ]
+}

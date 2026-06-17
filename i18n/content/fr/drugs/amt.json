@@ -1,0 +1,82 @@
+{
+  "pretty_name": {
+    "_source": "αMT",
+    "text": "αMT"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A long-acting psychedelic-empathogen with a broad method of action in the brain. Not suitable for combination with many other substances. Used as an anti-depressant in the Soviet Union, but later found popularity in the RC scene, mainly in the UK.",
+      "text": "Un psychédélique-empathogène de longue durée d'action avec un mécanisme d'action large dans le cerveau. Ne convient pas à l'association avec de nombreuses autres substances. Utilisé comme antidépresseur en Union soviétique, il a ensuite gagné en popularité dans le milieu des RC, principalement au Royaume-Uni."
+    },
+    "effects": {
+      "_source": "Euphoria, empathy, insight, brightened colour, Closed/Open eye visuals, enhanced tactile sensation, mental/physical stimulation, decreased appetite, pupil dilation, restlessness, change in perception, ego softening, sweating/chills, muscle tension, confusion, insomnia.",
+      "text": "Euphorie, empathie, introspection, couleurs plus vives, visuels yeux fermés/ouverts, sensation tactile amplifiée, stimulation mentale/physique, diminution de l'appétit, dilatation des pupilles, agitation, changement de perception, adoucissement de l'ego, sueurs/frissons, tension musculaire, confusion, insomnie."
+    }
+  },
+  "formatted_effects": [
+    {
+      "_source": "Euphoria",
+      "text": "Euphorie"
+    },
+    {
+      "_source": "empathy",
+      "text": "empathy"
+    },
+    {
+      "_source": "insight",
+      "text": "introspection"
+    },
+    {
+      "_source": "brightened colour",
+      "text": "couleurs plus vives"
+    },
+    {
+      "_source": "Closed/Open eye visuals",
+      "text": "visuels yeux fermés/ouverts"
+    },
+    {
+      "_source": "enhanced tactile sensation",
+      "text": "sensation tactile amplifiée"
+    },
+    {
+      "_source": "mental/physical stimulation",
+      "text": "stimulation mentale/physique"
+    },
+    {
+      "_source": "decreased appetite",
+      "text": "diminution de l'appétit"
+    },
+    {
+      "_source": "pupil dilation",
+      "text": "dilatation des pupilles"
+    },
+    {
+      "_source": "restlessness",
+      "text": "agitation"
+    },
+    {
+      "_source": "change in perception",
+      "text": "changement de perception"
+    },
+    {
+      "_source": "ego softening",
+      "text": "adoucissement de l'ego"
+    },
+    {
+      "_source": "sweating/chills",
+      "text": "sueurs/frissons"
+    },
+    {
+      "_source": "muscle tension",
+      "text": "tension musculaire"
+    },
+    {
+      "_source": "confusion",
+      "text": "confusion"
+    },
+    {
+      "_source": "insomnia",
+      "text": "insomnie"
+    }
+  ]
+}

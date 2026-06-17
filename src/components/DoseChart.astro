@@ -8,13 +8,18 @@ import {
   getRouteLabel,
   type DoseChart,
 } from "../lib/dose-chart";
+import type { Locale } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
 
 interface Props {
   formattedDose: Dose;
   doseNote?: string;
+  locale?: Locale;
 }
 
-const { formattedDose, doseNote } = Astro.props;
+const { formattedDose, doseNote, locale = "en" } = Astro.props;
+const ui = getUiMessages(locale);
 const charts = buildDoseCharts(formattedDose);
 const uid = crypto.randomUUID().slice(0, 8);
 const hasChartable = charts.some((chart) => chart.chartable);
@@ -26,10 +31,10 @@ function isChart(chart: (typeof charts)[number]): chart is DoseChart {
 
 <div class="dose-charts">
   <div class="doses-head">
-    <h3>Doses</h3>
+    <h3>{t(locale, ui, "doseChart.title")}</h3>
     {
       hasChartable && (
-        <div class="dose-view-toggle" role="radiogroup" aria-label="Dose display">
+        <div class="dose-view-toggle" role="radiogroup" aria-label={t(locale, ui, "doseChart.title")}>
           <input
             type="radio"
             name={`dose-view-${uid}`}
@@ -40,10 +45,10 @@ function isChart(chart: (typeof charts)[number]): chart is DoseChart {
           <label
             class="dose-view-btn"
             for={`dose-view-chart-${uid}`}
-            title="Chart"
+            title={t(locale, ui, "doseChart.chart")}
           >
             <Icon name="tabler:chart-bar" aria-hidden="true" />
-            <span class="sr-only">Chart</span>
+            <span class="sr-only">{t(locale, ui, "doseChart.chart")}</span>
           </label>
           <input
             type="radio"
@@ -54,10 +59,10 @@ function isChart(chart: (typeof charts)[number]): chart is DoseChart {
           <label
             class="dose-view-btn"
             for={`dose-view-table-${uid}`}
-            title="Table"
+            title={t(locale, ui, "doseChart.table")}
           >
             <Icon name="tabler:table" aria-hidden="true" />
-            <span class="sr-only">Table</span>
+            <span class="sr-only">{t(locale, ui, "doseChart.table")}</span>
           </label>
         </div>
       )

@@ -3,27 +3,32 @@ import {
   getComboCardDataBySlug,
   listComboSlugs,
 } from "../../data/combo-card-data";
+import type { Locale } from "../../i18n/locales";
 
 export const prerender = true;
 
-export function getStaticPaths() {
-  return listComboSlugs().map((slug) => ({ params: { slug } }));
+function createGet(locale: Locale): APIRoute {
+  return ({ params }) => {
+    const slug = params.slug;
+    if (!slug) {
+      return new Response("Not found", { status: 404 });
+    }
+
+    const data = getComboCardDataBySlug(slug, locale);
+    if (!data) {
+      return new Response("Not found", { status: 404 });
+    }
+
+    return new Response(JSON.stringify(data), {
+      headers: {
+        "content-type": "application/json; charset=utf-8",
+      },
+    });
+  };
 }
 
-export const GET: APIRoute = ({ params }) => {
-  const slug = params.slug;
-  if (!slug) {
-    return new Response("Not found", { status: 404 });
-  }
+export function getStaticPaths() {
+  return listComboSlugs("en").map((slug) => ({ params: { slug } }));
+}
 
-  const data = getComboCardDataBySlug(slug);
-  if (!data) {
-    return new Response("Not found", { status: 404 });
-  }
-
-  return new Response(JSON.stringify(data), {
-    headers: {
-      "content-type": "application/json; charset=utf-8",
-    },
-  });
-};
+export const GET = createGet("en");

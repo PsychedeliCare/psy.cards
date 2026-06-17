@@ -1,0 +1,54 @@
+{
+  "pretty_name": {
+    "_source": "LSD",
+    "text": "LSD"
+  },
+  "properties": {
+    "summary": {
+      "_source": "LSD is a popular psychedelic drug with a relatively long history of use and research. It is the archetypical psychedelic and remains in popular usage.",
+      "text": "LSD is a popular psychedelic drug with a relatively long history of use and research. It is the archetypical psychedelic and remains in popular usage."
+    },
+    "effects": {
+      "_source": "visual distortions, a sense of childlike wonder, brightening of colors, racing thoughts, hue shifts, euphoria, anxiety, confusion",
+      "text": "visual distortions, a sense of childlike wonder, brightening of colors, racing thoughts, hue shifts, euphoria, anxiety, confusion"
+    }
+  },
+  "dose_note": {
+    "_source": " Note: These doses are for pure LSD, note that tabs are often rather a lot weaker than they are advertised.",
+    "text": " Note: These doses are for pure LSD, note that tabs are often rather a lot weaker than they are advertised."
+  },
+  "formatted_effects": [
+    {
+      "_source": "visual distortions",
+      "text": "visual distortions"
+    },
+    {
+      "_source": "a sense of childlike wonder",
+      "text": "a sense of childlike wonder"
+    },
+    {
+      "_source": "brightening of colors",
+      "text": "brightening of colors"
+    },
+    {
+      "_source": "racing thoughts",
+      "text": "racing thoughts"
+    },
+    {
+      "_source": "hue shifts",
+      "text": "hue shifts"
+    },
+    {
+      "_source": "euphoria",
+      "text": "euphoria"
+    },
+    {
+      "_source": "anxiety",
+      "text": "anxiety"
+    },
+    {
+      "_source": "confusion",
+      "text": "confusion"
+    }
+  ]
+}

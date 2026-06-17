@@ -1,42 +1,28 @@
 ---
-import { groupLabels, type GroupName } from "../data/config";
+import { getGroupLabels, type GroupName } from "../data/config";
+import type { Locale } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t, tFormat } from "../i18n/ui";
 
 interface Props {
+  locale?: Locale;
   initialSubstanceSet?: "common" | "full";
 }
 
-const { initialSubstanceSet = "full" } = Astro.props;
+const { locale = "en", initialSubstanceSet = "full" } = Astro.props;
 const isCommonInitial = initialSubstanceSet === "common";
+const ui = getUiMessages(locale);
+const groupLabels = getGroupLabels(locale);
+const groupSummaries = ui.groupSummaries as Record<GroupName, string>;
 
 const categorySummaries: Array<{ group: GroupName; text: string }> = [
-  {
-    group: "stimulant",
-    text: "Racing heartbeat, sweating, energy, confidence, well-being, arousal, euphoria, lowered appetite, clenched jaws, dilated pupils, paranoia, anxiety, mood swings, impotence",
-  },
-  {
-    group: "empathogen",
-    text: "Belonging, arousal, understanding, sweating, serotonin syndrome, erectile dysfunction, warmth, overheat, overdose, risk of dehydration or overhydration",
-  },
-  {
-    group: "psychedelic",
-    text: "Visual disturbance, spiritual connection, loss of control, heightened senses, opened doors of perception, panic, mood swings, arousal, fear, vomiting, mental health harms",
-  },
-  {
-    group: "dissociative",
-    text: "Euphoria, numb, safe, pain-free, floaty, relaxed, protected, happy, unaware, unconscious, in a 'hole', perceptual disturbances, scared, disconnected, vulnerable",
-  },
-  {
-    group: "depressant",
-    text: "Relaxed, confident, care-free, risk-taking, unconscious, coma, euphoria, death, disinhibited behaviours, blackouts, sleep, vomiting, nausea, aggression, dependence",
-  },
-  {
-    group: "opioid",
-    text: "Confident, pain-free, safe, sleepy, warm, feel invincible, itchy, constricted pupils, stop breathing, nausea, vomiting, euphoria, sweating, overdose, dependence, withdrawal",
-  },
-  {
-    group: "cannabinoid",
-    text: "Calm, relaxed, chilled out, floaty, reduced pain, paranoia, anxiety, loss of memory, bloodshot eyes, increased sensuality, dry mouth, overexcited, changes to appetite",
-  },
+  { group: "stimulant", text: groupSummaries.stimulant },
+  { group: "empathogen", text: groupSummaries.empathogen },
+  { group: "psychedelic", text: groupSummaries.psychedelic },
+  { group: "dissociative", text: groupSummaries.dissociative },
+  { group: "depressant", text: groupSummaries.depressant },
+  { group: "opioid", text: groupSummaries.opioid },
+  { group: "cannabinoid", text: groupSummaries.cannabinoid },
 ];
 
 const eyeOnPath =
@@ -45,7 +31,7 @@ const eyeOffPath =
   "M2 4.27 3.28 3 21 20.72 19.73 22l-3.04-3.04A11.6 11.6 0 0 1 12 19c-7 0-11-7-11-7a18.9 18.9 0 0 1 4.06-4.94L2 4.27zm6.5 6.5L9.94 12.2A2 2 0 0 0 12 14a2 2 0 0 0 1.43-.6l1.42 1.42A4 4 0 0 1 8.5 10.77zM12 5c7 0 11 7 11 7a18.7 18.7 0 0 1-3.07 3.95l-2.97-2.97A4 4 0 0 0 12 8a4 4 0 0 0-1.98.53L7.6 6.13A11.5 11.5 0 0 1 12 5z";
 ---
 
-<nav class="category-nav" aria-label="Drug categories">
+<nav class="category-nav" aria-label={t(locale, ui, "categoryNav.ariaLabel")}>
   <div class="category-strip">
     <div class="category-card category-settings" data-settings>
       <div class="category-header">
@@ -56,7 +42,7 @@ const eyeOffPath =
           aria-expanded="true"
           aria-controls="category-settings-panel"
         >
-          <span class="category-heading">Settings</span>
+          <span class="category-heading">{t(locale, ui, "categoryNav.settings")}</span>
           <svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M7 10l5 5 5-5"></path>
           </svg>
@@ -64,15 +50,15 @@ const eyeOffPath =
       </div>
       <ul class="settings-list" id="category-settings-panel">
         <li class="settings-row">
-          <span class="settings-label">View</span>
-          <div class="settings-segmented" role="group" aria-label="View">
+          <span class="settings-label">{t(locale, ui, "categoryNav.view")}</span>
+          <div class="settings-segmented" role="group" aria-label={t(locale, ui, "categoryNav.view")}>
             <button
               type="button"
               class:list={["seg-btn", isCommonInitial && "is-active"]}
               data-view="common"
               aria-pressed={isCommonInitial ? "true" : "false"}
             >
-              Most common
+              {t(locale, ui, "categoryNav.mostCommon")}
             </button>
             <button
               type="button"
@@ -80,14 +66,14 @@ const eyeOffPath =
               data-view="full"
               aria-pressed={isCommonInitial ? "false" : "true"}
             >
-              All
+              {t(locale, ui, "categoryNav.all")}
             </button>
           </div>
         </li>
         <li class="settings-row">
-          <span class="settings-label">Medication</span>
-          <label class="settings-toggle" title="Show MAOIs and SSRIs">
-            <input type="checkbox" data-medication-toggle checked aria-label="Show medication" />
+          <span class="settings-label">{t(locale, ui, "categoryNav.medication")}</span>
+          <label class="settings-toggle" title={t(locale, ui, "categoryNav.medicationTitle")}>
+            <input type="checkbox" data-medication-toggle checked aria-label={t(locale, ui, "categoryNav.medicationAriaLabel")} />
             <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
               <path d={eyeOnPath}></path>
             </svg>
@@ -97,9 +83,9 @@ const eyeOffPath =
           </label>
         </li>
         <li class="settings-row">
-          <span class="settings-label">Highlight on hover</span>
-          <label class="settings-toggle" title="Toggle hover highlight effect">
-            <input type="checkbox" data-highlight-toggle aria-label="Highlight on hover" />
+          <span class="settings-label">{t(locale, ui, "categoryNav.highlightOnHover")}</span>
+          <label class="settings-toggle" title={t(locale, ui, "categoryNav.highlightTitle")}>
+            <input type="checkbox" data-highlight-toggle aria-label={t(locale, ui, "categoryNav.highlightOnHover")} />
             <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
               <path d={eyeOnPath}></path>
             </svg>
@@ -115,50 +101,55 @@ const eyeOffPath =
         <div class={`category-card group-${category.group} category-surface`} data-category={category.group}>
           <div class="category-header">
             <span class="category-heading">{groupLabels[category.group]}</span>
-            <label class="category-toggle" title={`Toggle ${groupLabels[category.group]}`}>
-              <input
-                type="checkbox"
-                checked
-                data-category-checkbox={category.group}
-                class="category-checkbox"
-                aria-label={`Show ${groupLabels[category.group]}`}
-              />
+            <button
+              type="button"
+              class="category-toggle"
+              data-category-toggle={category.group}
+              aria-pressed="true"
+              title={tFormat(locale, ui, "categoryNav.toggleGroup", { group: groupLabels[category.group] })}
+              aria-label={tFormat(locale, ui, "categoryNav.showGroup", { group: groupLabels[category.group] })}
+            >
               <svg class="eye-icon eye-on" viewBox="0 0 24 24" aria-hidden="true">
                 <path d={eyeOnPath}></path>
               </svg>
               <svg class="eye-icon eye-off" viewBox="0 0 24 24" aria-hidden="true">
                 <path d={eyeOffPath}></path>
               </svg>
-            </label>
+            </button>
           </div>
           <p>{category.text}</p>
         </div>
       ))
     }
   </div>
-
-  <p class="category-credit">
-    Categories adapted from <a href="https://www.thedrugswheel.com/" target="_blank" rel="noreferrer noopener">The Drugs Wheel</a>.
-  </p>
 </nav>
 
 <style>
   .category-nav {
     position: fixed;
-    left: 50%;
+    inset-inline: 0;
     bottom: 0;
     z-index: 30;
-    width: min(100%, 1600px);
-    padding: 8px 0 max(6px, env(safe-area-inset-bottom));
-    background-color: color-mix(in oklab, var(--color-ink), transparent 6%);
-    box-shadow: 0 -14px 24px rgba(0, 0, 0, 0.28);
-    transform: translateX(-50%);
+    margin: 0;
+    padding: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    user-select: none;
+    -webkit-user-select: none;
+    box-shadow:
+      0 -4px 16px rgba(0, 0, 0, 0.2),
+      0 -14px 32px rgba(0, 0, 0, 0.32);
+  }
+
+  .category-nav.is-docked {
+    position: absolute;
   }
 
   .category-strip {
     display: grid;
     grid-template-columns: repeat(8, minmax(0, 1fr));
-    width: 100%;
+    gap: 0;
+    width: min(100%, 1600px);
+    margin: 0 auto;
     overflow: hidden;
   }
 
@@ -189,9 +180,9 @@ const eyeOffPath =
     transform: translateY(1px);
   }
 
-  .category-card:has(.category-checkbox:not(:checked)) {
-    filter: saturate(0.3) brightness(0.7);
-    opacity: 0.6;
+  .category-card:has(.category-toggle[aria-pressed="false"]) {
+    filter: saturate(0.85) brightness(0.92);
+    opacity: 0.9;
   }
 
   .category-header {
@@ -210,9 +201,18 @@ const eyeOffPath =
     cursor: pointer;
     flex-shrink: 0;
     color: #fff;
+    touch-action: manipulation;
   }
 
-  .category-checkbox,
+  .category-toggle {
+    margin: 0;
+    padding: 6px;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   .settings-toggle input {
     position: absolute;
     opacity: 0;
@@ -234,17 +234,17 @@ const eyeOffPath =
     display: none;
   }
 
-  .category-toggle:has(.category-checkbox:not(:checked)) .eye-on,
+  .category-toggle[aria-pressed="false"] .eye-on,
   .settings-toggle:has(input:not(:checked)) .eye-on {
     display: none;
   }
 
-  .category-toggle:has(.category-checkbox:not(:checked)) .eye-off,
+  .category-toggle[aria-pressed="false"] .eye-off,
   .settings-toggle:has(input:not(:checked)) .eye-off {
     display: inline-block;
   }
 
-  .category-checkbox:focus-visible ~ .eye-icon,
+  .category-toggle:focus-visible,
   .settings-toggle input:focus-visible ~ .eye-icon {
     outline: 2px solid #fff;
     outline-offset: 2px;
@@ -276,11 +276,25 @@ const eyeOffPath =
   }
 
   .category-settings {
-    background-color: var(--color-ink-3);
+    background-color: color-mix(in oklab, var(--color-ink-2), transparent 28%);
     background-image: none;
+    backdrop-filter: blur(16px) saturate(1.1);
+    -webkit-backdrop-filter: blur(16px) saturate(1.1);
     cursor: default;
     color: var(--color-fg);
     text-shadow: none;
+  }
+
+  .category-card.category-surface {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: color-mix(in oklab, var(--hue, var(--color-unknown)), transparent 35%);
+    background-image: linear-gradient(
+      180deg,
+      color-mix(in oklab, color-mix(in oklab, var(--hue, var(--color-unknown)), white 4%), transparent 35%) 0%,
+      color-mix(in oklab, var(--hue, var(--color-unknown)), transparent 35%) 60%,
+      color-mix(in oklab, color-mix(in oklab, var(--hue, var(--color-unknown)), black 10%), transparent 35%) 100%
+    );
   }
 
   .category-settings:hover {
@@ -404,27 +418,14 @@ const eyeOffPath =
     color: var(--color-fg);
   }
 
-  .category-credit {
-    margin: 5px 8px 0;
-    color: var(--color-fg-mute);
-    font-size: 10px;
-    line-height: 1.3;
-    text-align: left;
-  }
-
-  .category-credit a {
-    color: var(--color-fg);
-    text-underline-offset: 3px;
-  }
-
   @media (max-width: 1200px) and (min-width: 641px) {
     .category-strip {
       display: flex;
+      gap: 0;
       overflow-x: auto;
       overscroll-behavior-x: contain;
       -webkit-overflow-scrolling: touch;
       scroll-snap-type: x mandatory;
-      padding-right: 10%;
     }
 
     .category-card {
@@ -436,8 +437,8 @@ const eyeOffPath =
   @media (max-width: 640px) {
     .category-strip {
       display: flex;
-      gap: 2px;
-      padding: 0 10% 2px 0;
+      gap: 0;
+      padding: 0;
       overflow-x: auto;
       overscroll-behavior-x: contain;
       scroll-snap-type: x mandatory;
@@ -487,11 +488,42 @@ const eyeOffPath =
 
 <script>
   const nav = document.querySelector(".category-nav");
+  const block = nav?.closest(".combo-table-block");
   const collapseBtn = nav?.querySelector("[data-settings-collapse]");
+
+  const syncNavHeight = () => {
+    if (!(block instanceof HTMLElement) || !(nav instanceof HTMLElement)) return;
+    block.style.setProperty("--category-nav-height", `${nav.offsetHeight}px`);
+  };
+
+  const syncDock = () => {
+    if (!(block instanceof HTMLElement) || !(nav instanceof HTMLElement)) return;
+    const blockBottom = block.getBoundingClientRect().bottom;
+    nav.classList.toggle("is-docked", blockBottom <= window.innerHeight);
+  };
+
+  if (nav instanceof HTMLElement && block instanceof HTMLElement) {
+    syncNavHeight();
+    syncDock();
+
+    const resizeObserver = new ResizeObserver(() => {
+      syncNavHeight();
+      syncDock();
+    });
+    resizeObserver.observe(nav);
+
+    window.addEventListener("scroll", syncDock, { passive: true });
+    window.addEventListener("resize", () => {
+      syncNavHeight();
+      syncDock();
+    }, { passive: true });
+  }
 
   collapseBtn?.addEventListener("click", () => {
     nav?.classList.toggle("is-collapsed");
     const collapsed = nav?.classList.contains("is-collapsed") ?? false;
     collapseBtn.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    syncNavHeight();
+    syncDock();
   });
 </script>

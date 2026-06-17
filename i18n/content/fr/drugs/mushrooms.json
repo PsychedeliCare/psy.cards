@@ -1,0 +1,42 @@
+{
+  "pretty_name": {
+    "_source": "Mushrooms",
+    "text": "Champignons"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Fungi containing psilocybin, a prototypical psychedelic. It should be noted there are multiple kinds of psychoactive mushrooms and proper identification is essential for safety. The dosages listed are in respects to psilocybe cubensis, one of the most common and popular psilocybin mushroom species.",
+      "text": "Des champignons contenant de la psilocybine, un psychédélique prototypique. Il convient de noter qu'il existe plusieurs types de champignons psychoactifs et qu'une identification correcte est essentielle pour la sécurité. Les dosages indiqués concernent Psilocybe cubensis, l'une des espèces de champignons à psilocybine les plus courantes et populaires."
+    },
+    "effects": {
+      "_source": "visual distortion, color enhancement, sense of connectedness with nature, sense of well-being, sense of wonder",
+      "text": "distorsion visuelle, intensification des couleurs, sentiment de connexion avec la nature, sentiment de bien-être, sentiment d'émerveillement"
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: Dosage ranges will vary between fungus strains. The doses given are for *dried* psilocybe cubensis mushrooms. The mushrooms are substantially more potent per-weight when dry.",
+    "text": " REMARQUE : Les plages de dosage varient selon les souches de champignons. Les doses données concernent des champignons Psilocybe cubensis *séchés*. Les champignons sont nettement plus puissants par poids lorsqu'ils sont secs."
+  },
+  "formatted_effects": [
+    {
+      "_source": "visual distortion",
+      "text": "distorsion visuelle"
+    },
+    {
+      "_source": "color enhancement",
+      "text": "intensification des couleurs"
+    },
+    {
+      "_source": "sense of connectedness with nature",
+      "text": "sentiment de connexion avec la nature"
+    },
+    {
+      "_source": "sense of well-being",
+      "text": "sentiment de bien-être"
+    },
+    {
+      "_source": "sense of wonder",
+      "text": "sentiment d'émerveillement"
+    }
+  ]
+}

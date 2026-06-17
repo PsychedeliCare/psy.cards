@@ -1,9 +1,46 @@
 import Fuse from "fuse.js";
 import extendedCombosData from "../../data/combos-extended.json";
 import drugsData from "../../drugs/drugs.json";
-import { columns, columnByKey, commonSubstanceKeys, sortPair, type GroupName } from "../data/config";
+import { getPageI18n, getUiString } from "../i18n/client";
+import type { GroupName } from "../data/config";
 import { getInteraction } from "../data/combos";
 import { pairSlug } from "../data/slug";
+
+type PageColumn = {
+  key: string;
+  label: string;
+  slug: string;
+  group: GroupName;
+};
+
+function getPageColumns(): PageColumn[] {
+  return getPageI18n()?.columns ?? [];
+}
+
+function getComboRoute(): string {
+  return getPageI18n()?.comboRoute ?? "/combos";
+}
+
+function getSubstanceBase(): string {
+  const base = getPageI18n()?.substanceBase ?? "/";
+  return base.endsWith("/") ? base : `${base}/`;
+}
+
+function getPageLocale(): string {
+  return getPageI18n()?.locale ?? "en";
+}
+
+function getColumnMap(): Map<string, PageColumn> {
+  return new Map(getPageColumns().map((column) => [column.key, column]));
+}
+
+function sortPairKeys(keyA: string, keyB: string): [string, string] {
+  const pageColumns = getPageColumns();
+  const ia = pageColumns.findIndex((column) => column.key === keyA);
+  const ib = pageColumns.findIndex((column) => column.key === keyB);
+  if (ia === -1 || ib === -1) return [keyA, keyB];
+  return ia <= ib ? [keyA, keyB] : [keyB, keyA];
+}
 
 type DrugRecord = {
   aliases?: string[];
@@ -81,8 +118,21 @@ type SearchResult = {
 
 function getDefaultResults(): SearchItem[] {
   const byId = new Map(getSearchItems().map((item) => [item.id, item]));
+  const commonKeys = [
+    "amphetamines",
+    "cocaine",
+    "caffeine",
+    "mdma",
+    "lsd",
+    "mushrooms",
+    "ketamine",
+    "alcohol",
+    "ghb/gbl",
+    "benzodiazepines",
+    "cannabis",
+  ];
 
-  return commonSubstanceKeys
+  return commonKeys
     .map((key) => byId.get(`substance:${key}`))
     .filter((item): item is SearchItem => item !== undefined);
 }
@@ -100,8 +150,8 @@ function getResultClass(item: SearchItem): string {
 }
 
 function getPairGroups(pairKeys: [string, string]): [GroupName, GroupName] {
-  const columnA = columnByKey.get(pairKeys[0]);
-  const columnB = columnByKey.get(pairKeys[1]);
+  const columnA = getColumnMap().get(pairKeys[0]!);
+  const columnB = getColumnMap().get(pairKeys[1]!);
   return [
     columnA?.group ?? "psychedelic",
     columnB?.group ?? "psychedelic",
@@ -292,7 +342,7 @@ function getPairKeyForExtendedIndex(keyA: string, keyB: string): string {
 }
 
 function getRouteSlug(keyA: string, keyB: string): string {
-  const [a, b] = sortPair(keyA, keyB);
+  const [a, b] = sortPairKeys(keyA, keyB);
   return pairSlug(a, b);
 }
 
@@ -327,20 +377,24 @@ function getEntryKeywords(entry: ExtendedEntry): string[] {
 
 function buildPairMeta(): Map<string, PairMeta> {
   const pairMeta = new Map<string, PairMeta>();
+  const pageColumns = getPageColumns();
+  const columnMap = getColumnMap();
+  const comboRoute = getComboRoute();
+  const locale = getPageLocale() as import("../i18n/locales").Locale;
 
-  for (let i = 0; i < columns.length; i++) {
-    for (let j = i + 1; j < columns.length; j++) {
-      const columnA = columns[i];
-      const columnB = columns[j];
+  for (let i = 0; i < pageColumns.length; i++) {
+    for (let j = i + 1; j < pageColumns.length; j++) {
+      const columnA = pageColumns[i];
+      const columnB = pageColumns[j];
       if (!columnA || !columnB) continue;
 
-      const [routeKeyA, routeKeyB] = sortPair(columnA.key, columnB.key);
-      const routeColumnA = columnByKey.get(routeKeyA);
-      const routeColumnB = columnByKey.get(routeKeyB);
+      const [routeKeyA, routeKeyB] = sortPairKeys(columnA.key, columnB.key);
+      const routeColumnA = columnMap.get(routeKeyA);
+      const routeColumnB = columnMap.get(routeKeyB);
       if (!routeColumnA || !routeColumnB) continue;
 
       const pairKey = getPairKeyForExtendedIndex(columnA.key, columnB.key);
-      const interaction = getInteraction(routeKeyA, routeKeyB);
+      const interaction = getInteraction(routeKeyA, routeKeyB, locale);
       const title = `${routeColumnA.label} + ${routeColumnB.label}`;
       const slug = getRouteSlug(routeKeyA, routeKeyB);
 
@@ -349,7 +403,7 @@ function buildPairMeta(): Map<string, PairMeta> {
         slug,
         title,
         subtitle: interaction.definition.label,
-        href: `/combos?combo=${encodeURIComponent(slug)}`,
+        href: `${comboRoute}?combo=${encodeURIComponent(slug)}`,
         statusKey: interaction.definition.statusKey,
         keys: [routeKeyA, routeKeyB],
       });
@@ -391,7 +445,7 @@ function buildSearchItems(): SearchItem[] {
           title: label,
           subtitle: meta.subtitle,
           href: meta.href,
-          typeLabel: "Combo name",
+          typeLabel: getUiString("search.comboName", "Combo name"),
           aliases: [meta.title],
           keywords: uniqueStrings([
             ...keywords,
@@ -424,13 +478,13 @@ function buildSearchItems(): SearchItem[] {
     const sourceKeys = doc.sourceTermTripSitKeys ?? [];
     if (doc.kind === "source-term" && sourceKeys.length === 1) {
       const key = sourceKeys[0];
-      if (key && columnByKey.has(key)) {
+      if (key && getColumnMap().has(key)) {
         addToMapSet(substanceAliases, key, values);
       }
     }
   }
 
-  const items: SearchItem[] = columns.map((column) => {
+  const items: SearchItem[] = getPageColumns().map((column) => {
     const drug = getDrugByComboKey(column.key);
     const aliases = uniqueStrings([
       column.key,
@@ -445,9 +499,9 @@ function buildSearchItems(): SearchItem[] {
       id: `substance:${column.key}`,
       kind: "substance",
       title: column.label,
-      subtitle: "Substance card",
-      href: `/${column.slug}`,
-      typeLabel: "Substance",
+      subtitle: getUiString("search.substanceCard", "Substance card"),
+      href: `${getSubstanceBase()}${column.slug}`,
+      typeLabel: getUiString("search.substance", "Substance"),
       aliases,
       keywords: uniqueStrings([
         column.key,
@@ -473,7 +527,7 @@ function buildSearchItems(): SearchItem[] {
       title: meta.title,
       subtitle: meta.subtitle,
       href: meta.href,
-      typeLabel: "Combo",
+      typeLabel: getUiString("search.combo", "Combo"),
       aliases,
       keywords: uniqueStrings([
         ...meta.keys,
@@ -574,7 +628,7 @@ function createPaletteElements() {
   overlay.className = "search-palette";
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
-  overlay.setAttribute("aria-label", "Search substances and combinations");
+  overlay.setAttribute("aria-label", getUiString("comboTable.searchAriaLabel", "Search substances and combinations"));
   overlay.dataset.open = "false";
 
   const backdrop = document.createElement("button");
@@ -597,8 +651,8 @@ function createPaletteElements() {
   input.type = "search";
   input.autocomplete = "off";
   input.spellcheck = false;
-  input.placeholder = "Search substances, combos, slang names…";
-  input.setAttribute("aria-label", "Search substances and combinations");
+  input.placeholder = getUiString("search.placeholder", "Search substances and combinations…");
+  input.setAttribute("aria-label", getUiString("comboTable.searchAriaLabel", "Search substances and combinations"));
   input.setAttribute("aria-controls", "search-palette-results");
   input.setAttribute("aria-autocomplete", "list");
 
@@ -692,7 +746,7 @@ export function initSearchPalette(): void {
     if (currentResults.length === 0) {
       const empty = document.createElement("p");
       empty.className = "search-palette__empty";
-      empty.textContent = "No results yet. Try a substance, combination, or slang name.";
+      empty.textContent = getUiString("search.empty", "No results found.");
       results.appendChild(empty);
       input.removeAttribute("aria-activedescendant");
       return;

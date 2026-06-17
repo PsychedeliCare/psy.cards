@@ -1,0 +1,32 @@
+---
+import SubstanceCard from "../../../components/SubstanceCard.astro";
+import { getColumnBySlug } from "../../../data/config";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const { getColumns } = await import("../../../data/config");
+  return getColumns("fr").map((col) => ({ params: { slug: col.slug } }));
+}
+
+const { slug } = Astro.params;
+if (!slug) {
+  return new Response("Not found", { status: 404 });
+}
+
+const col = getColumnBySlug("fr", slug);
+if (!col) return new Response("Not found", { status: 404 });
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>card</title>
+  </head>
+  <body>
+    <div data-card-fragment>
+      <SubstanceCard substanceKey={col.key} locale="fr" />
+    </div>
+  </body>
+</html>

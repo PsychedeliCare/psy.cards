@@ -1,14 +1,27 @@
 ---
 import CategoryNav from "./CategoryNav.astro";
 import ComboCell from "./ComboCell.astro";
-import { columns, commonSubstanceKeySet } from "../data/config";
+import type { Locale } from "../i18n/locales";
+import { getColumns, commonSubstanceKeySet } from "../data/config";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
+import { localePath } from "../i18n/locales";
 
 interface Props {
+  locale?: Locale;
   comboRoute?: string;
   initialSubstanceSet?: "common" | "full";
 }
 
-const { comboRoute = "/combos", initialSubstanceSet = "full" } = Astro.props;
+const {
+  locale = "en",
+  comboRoute = localePath(locale, "/combos"),
+  initialSubstanceSet = "full",
+} = Astro.props;
+
+const columns = getColumns(locale);
+const ui = getUiMessages(locale);
+const substanceBase = localePath(locale, "/");
 
 const isCommonSubstance = (key: string) => commonSubstanceKeySet.has(key);
 
@@ -19,9 +32,10 @@ function getLabelSizeClass(label: string) {
 }
 ---
 
+<div class="combo-table-block">
 <section
   class="table-wrap"
-  aria-label="Drug combinations"
+  aria-label={t(locale, ui, "comboTable.ariaLabel")}
   data-medication="true"
   data-hover-enabled="true"
   data-substance-set={initialSubstanceSet}
@@ -31,8 +45,8 @@ function getLabelSizeClass(label: string) {
     <button
       class="corner search-trigger"
       type="button"
-      aria-label="Search substances and combinations"
-      title="Search substances and combinations"
+      aria-label={t(locale, ui, "comboTable.searchAriaLabel")}
+      title={t(locale, ui, "comboTable.searchTitle")}
       data-search-trigger
     >
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -40,7 +54,7 @@ function getLabelSizeClass(label: string) {
           d="M10.75 4a6.75 6.75 0 1 0 4.16 12.06l3.52 3.51 1.41-1.41-3.51-3.52A6.75 6.75 0 0 0 10.75 4Zm0 2a4.75 4.75 0 1 1 0 9.5 4.75 4.75 0 0 1 0-9.5Z"
         ></path>
       </svg>
-      <span class="search-trigger-label">Search</span>
+      <span class="search-trigger-label">{t(locale, ui, "comboTable.search")}</span>
       <kbd class="search-trigger-kbd" aria-hidden="true">
         <span class="search-trigger-kbd__mac">⌘F</span>
         <span class="search-trigger-kbd__win">Ctrl+F</span>
@@ -62,9 +76,9 @@ function getLabelSizeClass(label: string) {
                   data-hover-cell
                 >
                   <a
-                    href={`/${col.slug}`}
+                    href={`${substanceBase}${col.slug}`}
                     class="label-link col-link"
-                    data-substance={`/${col.slug}`}
+                    data-substance={`${substanceBase}${col.slug}`}
                   >
                     <span class="label-text">{col.label}</span>
                   </a>
@@ -93,9 +107,9 @@ function getLabelSizeClass(label: string) {
                 data-hover-cell
               >
                 <a
-                  href={`/${row.slug}`}
+                  href={`${substanceBase}${row.slug}`}
                   class="label-link row-link"
-                  data-substance={`/${row.slug}`}
+                  data-substance={`${substanceBase}${row.slug}`}
                 >
                   <span class="label-text">{row.label}</span>
                 </a>
@@ -114,9 +128,9 @@ function getLabelSizeClass(label: string) {
                     data-hover-cell
                   >
                     <a
-                      href={`/${row.slug}`}
+                      href={`${substanceBase}${row.slug}`}
                       class="label-link diag-link"
-                      data-substance={`/${row.slug}`}
+                      data-substance={`${substanceBase}${row.slug}`}
                     >
                       <span class="label-text">{row.label}</span>
                     </a>
@@ -138,6 +152,7 @@ function getLabelSizeClass(label: string) {
                       rowLabel={row.label}
                       colLabel={col.label}
                       comboRoute={comboRoute}
+                      locale={locale}
                     />
                   </td>
                 )
@@ -150,7 +165,8 @@ function getLabelSizeClass(label: string) {
   </div>
 </section>
 
-<CategoryNav initialSubstanceSet={initialSubstanceSet} />
+<CategoryNav locale={locale} initialSubstanceSet={initialSubstanceSet} />
+</div>
 
 <script>
   import { initSearchPalette } from "../scripts/search-palette";
@@ -175,7 +191,14 @@ function getLabelSizeClass(label: string) {
           wrap.querySelectorAll("[data-hover-cell]")
         ).filter((cell) => cell instanceof HTMLElement);
 
+        const getHeadScrollMax = () =>
+          headScroll.scrollWidth - headScroll.clientWidth;
+
         const update = () => {
+          const headMax = getHeadScrollMax();
+          if (bodyScroll.scrollLeft > headMax) {
+            bodyScroll.scrollLeft = headMax;
+          }
           headScroll.scrollLeft = bodyScroll.scrollLeft;
           wrap.dataset.scrolledX = bodyScroll.scrollLeft > 2 ? "true" : "false";
           wrap.dataset.scrolledY =
@@ -190,10 +213,10 @@ function getLabelSizeClass(label: string) {
               )
             : [];
 
-        const categoryCheckboxes =
+        const categoryToggles =
           categoryNav instanceof HTMLElement
-            ? Array.from(categoryNav.querySelectorAll("[data-category-checkbox]")).filter(
-                (cb) => cb instanceof HTMLInputElement
+            ? Array.from(categoryNav.querySelectorAll("[data-category-toggle]")).filter(
+                (btn) => btn instanceof HTMLButtonElement
               )
             : [];
 
@@ -235,30 +258,6 @@ function getLabelSizeClass(label: string) {
                 cell.dataset.rowGroup === category || cell.dataset.colGroup === category;
               cell.classList.toggle("is-highlight", highlighted);
               cell.classList.toggle("is-muted", !highlighted);
-            });
-          }
-
-          scrollToCategory(category);
-        };
-
-        const scrollToCategory = (category) => {
-          const col = wrap.querySelector(`[data-col-group="${category}"]`);
-          const row = wrap.querySelector(`[data-row-group="${category}"]`);
-          if (col instanceof HTMLElement) {
-            bodyScroll.scrollTo({
-              left: Math.max(0, col.offsetLeft - bodyScroll.clientWidth * 0.08),
-              behavior: "smooth",
-            });
-          }
-
-          if (row instanceof HTMLElement) {
-            const stickyOffset =
-              wrap.querySelector(".table-head-stick") instanceof HTMLElement
-                ? wrap.querySelector(".table-head-stick").getBoundingClientRect().height
-                : 0;
-            window.scrollTo({
-              top: window.scrollY + row.getBoundingClientRect().top - stickyOffset - 4,
-              behavior: "smooth",
             });
           }
         };
@@ -303,9 +302,9 @@ function getLabelSizeClass(label: string) {
 
         const updateCategoryVisibility = () => {
           const hiddenCategories = new Set();
-          categoryCheckboxes.forEach((cb) => {
-            if (!cb.checked) {
-              hiddenCategories.add(cb.dataset.categoryCheckbox);
+          categoryToggles.forEach((btn) => {
+            if (btn.getAttribute("aria-pressed") === "false") {
+              hiddenCategories.add(btn.dataset.categoryToggle);
             }
           });
           wrap.dataset.hiddenCategories = Array.from(hiddenCategories).join(",");
@@ -371,24 +370,37 @@ function getLabelSizeClass(label: string) {
           setHighlightEnabled(highlightToggle.checked);
         }
 
-        categoryCheckboxes.forEach((cb) => {
-          cb.addEventListener("change", updateCategoryVisibility);
+        categoryToggles.forEach((btn) => {
+          btn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const pressed = btn.getAttribute("aria-pressed") === "true";
+            btn.setAttribute("aria-pressed", pressed ? "false" : "true");
+            updateCategoryVisibility();
+          });
         });
 
-        categoryControls.forEach((control) => {
-          control.addEventListener("pointerover", () => {
-            const checkbox = control.querySelector("[data-category-checkbox]");
-            if (checkbox instanceof HTMLInputElement && !checkbox.checked) return;
-            setCategoryHover(control.dataset.category);
+        const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+
+        if (!isCoarsePointer) {
+          categoryControls.forEach((control) => {
+            control.addEventListener("pointerover", () => {
+              const toggle = control.querySelector("[data-category-toggle]");
+              if (toggle instanceof HTMLButtonElement && toggle.getAttribute("aria-pressed") === "false") {
+                return;
+              }
+              setCategoryHover(control.dataset.category);
+            });
+            control.addEventListener("pointerleave", clearHover);
+            control.addEventListener("focus", () => {
+              const toggle = control.querySelector("[data-category-toggle]");
+              if (toggle instanceof HTMLButtonElement && toggle.getAttribute("aria-pressed") === "false") {
+                return;
+              }
+              setCategoryHover(control.dataset.category);
+            });
+            control.addEventListener("blur", clearHover);
           });
-          control.addEventListener("pointerleave", clearHover);
-          control.addEventListener("focus", () => {
-            const checkbox = control.querySelector("[data-category-checkbox]");
-            if (checkbox instanceof HTMLInputElement && !checkbox.checked) return;
-            setCategoryHover(control.dataset.category);
-          });
-          control.addEventListener("blur", clearHover);
-        });
+        }
         window.addEventListener("scroll", update, { passive: true });
         window.addEventListener("resize", update, { passive: true });
       });
@@ -403,6 +415,14 @@ function getLabelSizeClass(label: string) {
 </script>
 
 <style>
+  .combo-table-block {
+    position: relative;
+    --category-nav-height: 118px;
+    padding-bottom: var(--category-nav-height);
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
   .table-wrap {
     --cell-gap: 2px;
     --fluid-cell-size: calc((100cqi - 56px) / 27);

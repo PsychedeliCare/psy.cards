@@ -1,45 +1,67 @@
 ---
 import "../styles/global.css";
 import PreviewBanner from "./PreviewBanner.astro";
+import SiteHeader from "./SiteHeader.astro";
+import type { Locale } from "../i18n/locales";
+import { getUiMessages, getLocaleBundle } from "../i18n/load-locale";
+import { localePath } from "../i18n/locales";
+import { getColumns } from "../data/config";
+import { stripLocalePrefix } from "../i18n/paths";
 
 interface Props {
+  locale?: Locale;
   title?: string;
   description?: string;
   colorScheme?: "dark" | "light" | "normal";
 }
 
 const {
-  title = "psy.cards — Drug combinations",
-  description = "A quick harm-reduction guide to common drug combinations, based on TripSit information.",
+  locale = "en",
+  title,
+  description,
   colorScheme = "dark",
 } = Astro.props;
 
+const ui = getUiMessages(locale);
+const meta = ui.meta as Record<string, string>;
+const resolvedTitle = title ?? meta.siteTitle;
+const resolvedDescription = description ?? meta.siteDescription;
 const ogImage = new URL("/assets/opengraph.jpg", Astro.site ?? Astro.url.origin).href;
+const currentPath = stripLocalePrefix(Astro.url.pathname);
+const i18nPayload = JSON.stringify({
+  locale,
+  ui,
+  columns: getColumns(locale),
+  comboRoute: localePath(locale, "/combos"),
+  substanceBase: localePath(locale, "/"),
+});
 ---
 
 <!doctype html>
-<html lang="en" data-color-scheme={colorScheme}>
+<html lang={locale} data-color-scheme={colorScheme}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content={colorScheme} />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="description" content={description} />
-    <title>{title}</title>
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta name="description" content={resolvedDescription} />
+    <title>{resolvedTitle}</title>
+    <meta property="og:title" content={resolvedTitle} />
+    <meta property="og:description" content={resolvedDescription} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={resolvedTitle} />
+    <meta name="twitter:description" content={resolvedDescription} />
     <meta name="twitter:image" content={ogImage} />
+    <script id="psy-i18n" type="application/json" set:html={i18nPayload}></script>
   </head>
   <body>
+    <SiteHeader locale={locale} currentPath={currentPath} />
     <slot />
-    <PreviewBanner />
+    <PreviewBanner locale={locale} />
     <script>
       import { initSmilesDrawer } from "../scripts/smiles-drawer.ts";
       import { initTimingCharts } from "../scripts/timing-chart.ts";

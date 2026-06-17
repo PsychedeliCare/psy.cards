@@ -1,0 +1,42 @@
+{
+  "pretty_name": {
+    "_source": "Pregabalin",
+    "text": "Pregabalin"
+  },
+  "properties": {
+    "summary": {
+      "_source": "Pregabalin (Lyrica) is a GABA derivative that is used to treat neuropathic pain, seizures, and anxiety. Pregabalin independently has seizure concerns at higher dosages and concerns at lower dosages with preexisting risk factors and conditions.",
+      "text": "Pregabalin (Lyrica) is a GABA derivative that is used to treat neuropathic pain, seizures, and anxiety. Pregabalin independently has seizure concerns at higher dosages and concerns at lower dosages with preexisting risk factors and conditions."
+    },
+    "effects": {
+      "_source": "Anxiolytic, Sedative, Muscle Relaxant, Amnesia, Dystaxia, Hypnotic.",
+      "text": "Anxiolytic, Sedative, Muscle Relaxant, Amnesia, Dystaxia, Hypnotic."
+    }
+  },
+  "formatted_effects": [
+    {
+      "_source": "Anxiolytic",
+      "text": "Anxiolytic"
+    },
+    {
+      "_source": "Sedative",
+      "text": "Sedative"
+    },
+    {
+      "_source": "Muscle Relaxant",
+      "text": "Muscle Relaxant"
+    },
+    {
+      "_source": "Amnesia",
+      "text": "Amnesia"
+    },
+    {
+      "_source": "Dystaxia",
+      "text": "Dystaxia"
+    },
+    {
+      "_source": "Hypnotic",
+      "text": "Hypnotic"
+    }
+  ]
+}

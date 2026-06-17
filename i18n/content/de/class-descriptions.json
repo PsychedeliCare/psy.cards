@@ -1,0 +1,46 @@
+{
+  "dox": {
+    "_source": "DOx is a family of substituted amphetamine psychedelics (e.g. DOM, DOI, DOB, DOC) with long durations and strong stimulation.",
+    "text": "DOx ist eine Familie substituierter Amphetamin-Psychedelika (z. B. DOM, DOI, DOB, DOC) mit langer Wirkdauer und starker Stimulation."
+  },
+  "nbomes": {
+    "_source": "NBOMes (N-Bomb) are extremely potent psychedelics active at microgram doses (25I-, 25C-, 25B-NBOMe). Narrow safety margin; deaths reported.",
+    "text": "NBOMes (N-Bomb) sind extrem potente Psychedelika, die bereits im Mikrogrammbereich wirksam sind (25I-, 25C-, 25B-NBOMe). Geringe therapeutische Breite; Todesfälle wurden berichtet."
+  },
+  "2c-x": {
+    "_source": "2C-x is the 2C family of phenethylamine psychedelics (e.g. 2C-B, 2C-E, 2C-I). Varying profiles; most are active in the 10-25 mg range.",
+    "text": "2C-x bezeichnet die 2C-Familie der Phenethylamin-Psychedelika (z. B. 2C-B, 2C-E, 2C-I). Unterschiedliche Wirkprofile; die meisten sind im Bereich von 10-25 mg aktiv."
+  },
+  "2c-t-x": {
+    "_source": "2C-T-x is the sulfur-substituted 2C subfamily (e.g. 2C-T-2, 2C-T-7, 2C-T-21). Unpredictable and MAOI-sensitive.",
+    "text": "2C-T-x ist die schwefelsubstituierte 2C-Unterfamilie (z. B. 2C-T-2, 2C-T-7, 2C-T-21). Unvorhersehbar und empfindlich gegenüber MAO-Hemmern."
+  },
+  "5-meo-xxt": {
+    "_source": "5-MeO-xxT covers 5-MeO tryptamines (5-MeO-DMT, 5-MeO-MiPT, 5-MeO-DiPT). Extremely potent, short and intense.",
+    "text": "5-MeO-xxT umfasst 5-MeO-Tryptamine (5-MeO-DMT, 5-MeO-MiPT, 5-MeO-DiPT). Extrem potent, kurz wirksam und intensiv."
+  },
+  "amphetamines": {
+    "_source": "Amphetamines are a class of stimulants including amphetamine, dextroamphetamine, methamphetamine, and related analogues.",
+    "text": "Amphetamine sind eine Klasse von Stimulanzien, zu der Amphetamin, Dextroamphetamin, Methamphetamin und verwandte Analoga gehören."
+  },
+  "opioids": {
+    "_source": "Opioids act on mu-opioid receptors, producing analgesia, sedation, and respiratory depression. Includes heroin, morphine, oxycodone, fentanyl, and others.",
+    "text": "Opioide wirken an Mu-Opioid-Rezeptoren und führen zu Analgesie, Sedierung und Atemdepression. Dazu gehören unter anderem Heroin, Morphin, Oxycodon und Fentanyl."
+  },
+  "benzodiazepines": {
+    "_source": "Benzodiazepines are GABA-A positive allosteric modulators used as anxiolytics, sedatives, and anticonvulsants (e.g. diazepam, alprazolam, clonazepam).",
+    "text": "Benzodiazepine sind positive allosterische Modulatoren an GABA-A-Rezeptoren und werden als Anxiolytika, Sedativa und Antikonvulsiva eingesetzt (z. B. Diazepam, Alprazolam, Clonazepam)."
+  },
+  "maois": {
+    "_source": "Monoamine oxidase inhibitors prevent the breakdown of serotonin, dopamine, and noradrenaline. Includes harmala alkaloids, phenelzine, selegiline.",
+    "text": "Monoaminoxidase-Hemmer verhindern den Abbau von Serotonin, Dopamin und Noradrenalin. Dazu gehören Harmala-Alkaloide, Phenelzin und Selegilin."
+  },
+  "ssris": {
+    "_source": "Selective serotonin reuptake inhibitors are antidepressants that raise synaptic serotonin (e.g. fluoxetine, sertraline, citalopram).",
+    "text": "Selektive Serotonin-Wiederaufnahmehemmer sind Antidepressiva, die das synaptische Serotonin erhöhen (z. B. Fluoxetin, Sertralin, Citalopram)."
+  },
+  "ghb/gbl": {
+    "_source": "GHB and its prodrug GBL are GABA-B agonists with a very narrow dose-response curve. GBL converts rapidly into GHB in the body.",
+    "text": "GHB und sein Prodrug GBL sind GABA-B-Agonisten mit einer sehr engen Dosis-Wirkungs-Kurve. GBL wird im Körper rasch zu GHB umgewandelt."
+  }
+}

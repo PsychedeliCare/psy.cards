@@ -1,0 +1,78 @@
+{
+  "pretty_name": {
+    "_source": "Cannabis",
+    "text": "Cannabis"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A common and widely used psychoactive plant, which is beginning to gain legal status for medical and even recreational use in some parts of the world. Usually smoked or eaten, primary effects are relaxation and an affinity towards food - a state described as being 'stoned.'",
+      "text": "Une plante psychoactive courante et largement utilisée, qui commence à obtenir un statut légal pour un usage médical, voire récréatif, dans certaines régions du monde. Généralement fumée ou ingérée, ses effets principaux sont la relaxation et un attrait pour la nourriture - un état décrit comme étant 'stoned'."
+    },
+    "effects": {
+      "_source": "Sedation, Appetite enhancement, Muscle relaxation, Muscle spasms, Nausea, Pain relief, Vasodilation, Creativity Enhancement, Anxiety suppression, Anxiety, Dream suppression, Emotion enhancement, Mindfulness, Paranoia, Sleepiness.",
+      "text": "Sédation, augmentation de l'appétit, relaxation musculaire, spasmes musculaires, nausées, soulagement de la douleur, vasodilatation, augmentation de la créativité, suppression de l'anxiété, anxiété, suppression des rêves, amplification des émotions, pleine conscience, paranoïa, somnolence."
+    }
+  },
+  "formatted_effects": [
+    {
+      "_source": "Sedation",
+      "text": "Sédation"
+    },
+    {
+      "_source": "Appetite enhancement",
+      "text": "augmentation de l'appétit"
+    },
+    {
+      "_source": "Muscle relaxation",
+      "text": "relaxation musculaire"
+    },
+    {
+      "_source": "Muscle spasms",
+      "text": "spasmes musculaires"
+    },
+    {
+      "_source": "Nausea",
+      "text": "Nausées"
+    },
+    {
+      "_source": "Pain relief",
+      "text": "soulagement de la douleur"
+    },
+    {
+      "_source": "Vasodilation",
+      "text": "Vasodilatation"
+    },
+    {
+      "_source": "Creativity Enhancement",
+      "text": "augmentation de la créativité"
+    },
+    {
+      "_source": "Anxiety suppression",
+      "text": "suppression de l'anxiété"
+    },
+    {
+      "_source": "Anxiety",
+      "text": "Anxiété"
+    },
+    {
+      "_source": "Dream suppression",
+      "text": "suppression des rêves"
+    },
+    {
+      "_source": "Emotion enhancement",
+      "text": "amplification des émotions"
+    },
+    {
+      "_source": "Mindfulness",
+      "text": "pleine conscience"
+    },
+    {
+      "_source": "Paranoia",
+      "text": "Paranoïa"
+    },
+    {
+      "_source": "Sleepiness",
+      "text": "somnolence"
+    }
+  ]
+}

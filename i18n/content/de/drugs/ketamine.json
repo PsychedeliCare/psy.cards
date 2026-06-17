@@ -1,0 +1,34 @@
+{
+  "pretty_name": {
+    "_source": "Ketamine",
+    "text": "Ketamin"
+  },
+  "properties": {
+    "summary": {
+      "_source": "A short-acting dissociative anaesthetic and hallucinogen commonly used in medicine. It is the prototypical dissociative, and is widely used at sub-anesthetic doses recreationally. Small doses are comparable with alcohol, while larger doses are immobilising and lead to psychedelic experiences: the \"K-Hole.\"",
+      "text": "Ein kurz wirkendes dissoziatives Anästhetikum und Halluzinogen, das häufig in der Medizin verwendet wird. Es ist das prototypische Dissoziativum und wird in subanästhetischen Dosen verbreitet freizeitbezogen genutzt. Kleine Dosen sind mit Alkohol vergleichbar, während höhere Dosen immobilisierend wirken und zu psychedelischen Erfahrungen führen: dem \"K-Hole\"."
+    },
+    "effects": {
+      "_source": "A feeling of drunkenness and well being at low doses. As dose increases the user may begin to feel a disconnection from their body. At 'khole' doses the user may become completely disconnected from both body and mind.",
+      "text": "Ein Gefühl von Betrunkenheit und Wohlbefinden bei niedrigen Dosen. Mit steigender Dosis kann die konsumierende Person beginnen, eine Trennung vom eigenen Körper zu spüren. Bei 'K-Hole'-Dosen kann sie vollständig von Körper und Geist getrennt wirken."
+    }
+  },
+  "dose_note": {
+    "_source": " NOTE: Ketamine is based on weight. These are figures for the average 150 pound male There is no concrete dose for the \"K-Hole\" as each user is different.",
+    "text": " HINWEIS: Ketamin wird gewichtsbezogen dosiert. Diese Angaben gelten für einen durchschnittlichen 150-Pfund-Mann. Es gibt keine konkrete Dosis für das \"K-Hole\", da jede konsumierende Person unterschiedlich ist."
+  },
+  "formatted_effects": [
+    {
+      "_source": "A feeling of drunkenness and well being at low doses",
+      "text": "Ein Gefühl von Betrunkenheit und Wohlbefinden bei niedrigen Dosen"
+    },
+    {
+      "_source": "As dose increases the user may begin to feel a disconnection from their body",
+      "text": "Mit steigender Dosis kann die konsumierende Person beginnen, eine Trennung vom eigenen Körper zu spüren"
+    },
+    {
+      "_source": "At 'khole' doses the user may become completely disconnected from both body and mind",
+      "text": "Bei 'K-Hole'-Dosen kann die konsumierende Person vollständig von Körper und Geist getrennt wirken"
+    }
+  ]
+}
