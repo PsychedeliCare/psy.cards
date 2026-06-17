@@ -12,6 +12,7 @@ import { getEffectIcon } from "../data/effect-icons";
 import { getSubstanceStructure } from "../data/substances";
 import { toTitleCase } from "../lib/text";
 import MoleculeFigure from "./MoleculeFigure.astro";
+import CardContribute from "./CardContribute.astro";
 import SmilesCitation from "./SmilesCitation.astro";
 import TimingChart from "./TimingChart.astro";
 import type { Locale } from "../i18n/locales";
@@ -302,5 +303,7 @@ const hasStructure = Boolean(getSubstanceStructure(substanceKey));
   }
 
   {hasStructure && <SmilesCitation locale={locale} />}
+
+  <CardContribute locale={locale} />
 </article>
 

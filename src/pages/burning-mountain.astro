@@ -4,10 +4,32 @@ import ComboTable from "../components/ComboTable.astro";
 import Legend from "../components/Legend.astro";
 import Footer from "../components/Footer.astro";
 import Disclaimer from "../components/Disclaimer.astro";
+import Modal from "../components/Modal.astro";
+import SubstanceCard from "../components/SubstanceCard.astro";
 import { getUiMessages } from "../i18n/load-locale";
 import type { Locale } from "../i18n/locales";
 
 export const prerender = true;
+
+interface Props {
+  locale?: Locale;
+  modalSubstanceKey?: string;
+}
+
+const { locale = "en", modalSubstanceKey } = Astro.props;
+
+type ResourceCopy = {
+  label: string;
+  title: string;
+  text: string;
+  action: string;
+};
+
+type EventResource = ResourceCopy & {
+  key: string;
+  iconPath: string;
+  href: string;
+};
 
 const uiByLocale = {
   en: getUiMessages("en"),
@@ -16,32 +38,14 @@ const uiByLocale = {
   it: getUiMessages("it"),
 } as const;
 
-const localizedContent = Object.fromEntries(
-  (["en", "de", "fr", "it"] as const).map((locale) => {
-    const ui = uiByLocale[locale].burningMountain as Record<string, string>;
-    return [
-      locale,
-      {
-        eyebrow: ui.eyebrow,
-        title: ui.pageTitle,
-        intro: ui.intro,
-        mapLabel: ui.mapLabel,
-        mapTitle: ui.mapTitle,
-        mapText: ui.mapText,
-        resourcesEyebrow: ui.resourcesEyebrow,
-        resourcesTitle: ui.resourcesTitle,
-        chartEyebrow: ui.chartEyebrow,
-        chartTitle: ui.chartTitle,
-        chartText: ui.chartText,
-      },
-    ];
-  })
-) as Record<Locale, Record<string, string>>;
-
-const resourcesConfig = uiByLocale.en.burningMountain.resources as Record<
+const bmMessages = uiByLocale[locale].burningMountain as Record<string, unknown>;
+const bmUi = bmMessages as Record<string, string>;
+const resourcesConfig = bmMessages.resources as Record<
   string,
-  Record<string, string>
+  ResourceCopy
 >;
+const eventRoute = locale === "en" ? "/burning-mountain" : `/${locale}/burning-mountain`;
+const eventSubstanceBase = `${eventRoute}/`;
 
 const resources = [
   {
@@ -49,11 +53,6 @@ const resources = [
     iconPath:
       "M12 2.25 3.25 6.1v5.9c0 5.05 3.5 8.22 8.75 9.75 5.25-1.53 8.75-4.7 8.75-9.75V6.1L12 2.25Zm1 5.75v3h3v2h-3v3h-2v-3H8v-2h3V8h2Z",
     href: "tel:144",
-    translations: {
-      de: resourcesConfig.emergency,
-      fr: (uiByLocale.fr.burningMountain.resources as typeof resourcesConfig).emergency,
-      it: (uiByLocale.it.burningMountain.resources as typeof resourcesConfig).emergency,
-    },
     ...resourcesConfig.emergency,
   },
   {
@@ -61,56 +60,29 @@ const resources = [
     iconPath:
       "M4 4h16v12H5.5L4 18.5V4Zm3 3v2h10V7H7Zm0 4v2h7v-2H7Zm-1 10h12v-2H6v2Z",
     href: "https://www.burning-mountain.ch/",
-    translations: {
-      de: (uiByLocale.de.burningMountain.resources as typeof resourcesConfig).festival,
-      fr: (uiByLocale.fr.burningMountain.resources as typeof resourcesConfig).festival,
-      it: (uiByLocale.it.burningMountain.resources as typeof resourcesConfig).festival,
-    },
-    ...(uiByLocale.en.burningMountain.resources as typeof resourcesConfig).festival,
+    ...resourcesConfig.festival,
   },
   {
     key: "saferUse",
     iconPath:
       "M9 3h6v2l-1.5 1.5v3.15l4.88 7.82A2.3 2.3 0 0 1 16.42 21H7.58a2.3 2.3 0 0 1-1.96-3.53l4.88-7.82V6.5L9 5V3Zm3.5 7.22V6.05L13.05 5h-2.1l.55 1.05v4.17l-4.18 6.7h9.36l-4.18-6.7ZM8 19h8l-.62-1H8.62L8 19Z",
     href: "https://en.saferparty.ch/angebote/drug-checking",
-    translations: {
-      de: (uiByLocale.de.burningMountain.resources as typeof resourcesConfig).saferUse,
-      fr: (uiByLocale.fr.burningMountain.resources as typeof resourcesConfig).saferUse,
-      it: (uiByLocale.it.burningMountain.resources as typeof resourcesConfig).saferUse,
-    },
-    ...(uiByLocale.en.burningMountain.resources as typeof resourcesConfig).saferUse,
+    ...resourcesConfig.saferUse,
   },
-] as const;
-
-const languages = ["en", "de", "fr", "it"] as const;
-const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
+] satisfies EventResource[];
 ---
 
 <Layout
-  locale="en"
+  locale={locale}
   title={bmUi.title}
   description={bmUi.description}
   colorScheme="light"
+  headerVariant="event"
+  comboRoute={eventRoute}
+  substanceBase={eventSubstanceBase}
 >
   <main class="event-page">
     <header class="event-header">
-      <nav class="event-controls" aria-label="Language selector">
-        <div class="segmented-control">
-          {
-            languages.map((language) => (
-              <button
-                type="button"
-                data-language={language}
-                class:list={["control-button", language === "en" && "is-active"]}
-                aria-pressed={language === "en" ? "true" : "false"}
-              >
-                {language.toUpperCase()}
-              </button>
-            ))
-          }
-        </div>
-      </nav>
-
       <section class="hero" aria-labelledby="page-title">
         <div class="hero__copy">
           <div class="event-logos" aria-label="Event partners">
@@ -143,16 +115,9 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
             </a>
           </div>
 
-          <p class="eyebrow" data-i18n="eyebrow">Burning Mountain Festival · Zernez</p>
-          <h1 id="page-title" data-i18n="title">ALPS Psycare</h1>
-          <p class="intro" data-i18n="intro">
-            ALPS PsyCare brings science-based psychedelic education and
-            non-judgmental psychological support into Swiss festival settings.
-            By combining evidence-informed harm reduction, community care, and
-            compassionate on-site support, the initiative helps people seek help
-            early and prevents small difficulties from becoming serious
-            incidents.
-          </p>
+          <p class="eyebrow">{bmUi.eyebrow}</p>
+          <h1 id="page-title">{bmUi.pageTitle}</h1>
+          <p class="intro">{bmUi.intro}</p>
         </div>
 
         <aside class="map-panel" aria-labelledby="map-title">
@@ -166,13 +131,9 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
             />
           </div>
           <div class="map-copy">
-            <p class="map-label" data-i18n="mapLabel">Festival map</p>
-            <h2 id="map-title" data-i18n="mapTitle">Burning Mountain site map</h2>
-            <p data-i18n="mapText">
-              Use the festival map to orient yourself on site. Check the latest
-              signage and ask the info point, medical team, security, or PsyCare
-              if you need help finding support.
-            </p>
+            <p class="map-label">{bmUi.mapLabel}</p>
+            <h2 id="map-title">{bmUi.mapTitle}</h2>
+            <p>{bmUi.mapText}</p>
           </div>
         </aside>
       </section>
@@ -180,8 +141,8 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
 
     <section class="resources" aria-labelledby="resources-title">
       <div class="section-heading">
-        <p class="eyebrow" data-i18n="resourcesEyebrow">Festival support</p>
-        <h2 id="resources-title" data-i18n="resourcesTitle">Useful resources in the moment</h2>
+        <p class="eyebrow">{bmUi.resourcesEyebrow}</p>
+        <h2 id="resources-title">{bmUi.resourcesTitle}</h2>
       </div>
 
       <div class="resource-grid">
@@ -209,155 +170,65 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
 
     <section id="combo-chart" class="chart-section" aria-labelledby="chart-title">
       <div class="section-heading section-heading--chart">
-        <p class="eyebrow" data-i18n="chartEyebrow">Combination reference</p>
-        <h2 id="chart-title" data-i18n="chartTitle">Drug combinations chart</h2>
-        <p data-i18n="chartText">
-          Use this as a quick reference, then speak with PsyCare, medical staff,
-          or another trusted support person if something feels off.
-        </p>
+        <p class="eyebrow">{bmUi.chartEyebrow}</p>
+        <h2 id="chart-title">{bmUi.chartTitle}</h2>
+        <p>{bmUi.chartText}</p>
       </div>
 
-      <ComboTable locale="en" comboRoute="" initialSubstanceSet="common" />
-      <Legend locale="en" />
+      <ComboTable
+        locale={locale}
+        comboRoute={eventRoute}
+        substanceBase={eventSubstanceBase}
+        initialSubstanceSet="common"
+      />
+      <Legend locale={locale} />
     </section>
 
-    <Disclaimer locale="en" />
+    <Disclaimer locale={locale} />
 
-    <Footer locale="en" variant="wide" />
+    <Footer locale={locale} variant="wide" />
   </main>
 
-  <div id="modal-slot" data-modal-slot></div>
+  <div id="modal-slot" data-modal-slot>
+    {
+      modalSubstanceKey && (
+        <Modal open={true} labelledBy="card-heading" locale={locale}>
+          <SubstanceCard substanceKey={modalSubstanceKey} locale={locale} />
+        </Modal>
+      )
+    }
+  </div>
 
   <script>
     import { initComboModal } from "../scripts/combo-modal.ts";
-    initComboModal({
-      rootRoute: window.location.pathname === "/" ? "/" : "/burning-mountain",
-    });
-  </script>
-
-  <script define:vars={{ localizedContent, resources }}>
-    const resourceCopy = Object.fromEntries(
-      resources.map((resource) => [
-        resource.key,
-        {
-          en: {
-            label: resource.label,
-            title: resource.title,
-            text: resource.text,
-            action: resource.action,
-          },
-          ...resource.translations,
-        },
-      ])
-    );
-
-    const setLanguage = (language) => {
-      const copy = localizedContent[language] ?? localizedContent.en;
-      document.documentElement.lang = language;
-
-      document.querySelectorAll("[data-i18n]").forEach((element) => {
-        const key = element.getAttribute("data-i18n");
-        if (key && copy[key]) element.textContent = copy[key];
-      });
-
-      document.querySelectorAll("[data-resource]").forEach((card) => {
-        const key = card.getAttribute("data-resource");
-        const data = key ? resourceCopy[key]?.[language] ?? resourceCopy[key]?.en : null;
-        if (!data) return;
-
-        card.querySelectorAll("[data-resource-field]").forEach((element) => {
-          const field = element.getAttribute("data-resource-field");
-          if (field && data[field]) element.textContent = data[field];
-        });
-      });
-
-      document.querySelectorAll("[data-language]").forEach((button) => {
-        const isActive = button.getAttribute("data-language") === language;
-        button.classList.toggle("is-active", isActive);
-        button.setAttribute("aria-pressed", String(isActive));
-      });
-    };
-
-    document.querySelectorAll("[data-language]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const language = button.getAttribute("data-language") ?? "en";
-        setLanguage(language);
-      });
-    });
-
+    initComboModal();
   </script>
 </Layout>
 
 <style>
   .event-page {
-    --event-accent: rgb(232, 144, 9);
-    --event-accent-soft: rgba(232, 144, 9, 0.13);
+    --event-accent: #f5a71d;
+    --event-accent-strong: #df6330;
+    --event-accent-deep: #372f4c;
+    --event-cream: #fff0d2;
+    --event-surface: #fffaf1;
+    --event-line: rgba(55, 47, 76, 0.15);
+    --event-accent-soft: rgba(245, 167, 29, 0.16);
     --event-max: 1600px;
     --content-max: 1180px;
     min-height: 100dvh;
-    padding: 0 0 190px;
     color: var(--color-fg);
     background:
-      radial-gradient(circle at 8% 0%, rgba(232, 144, 9, 0.22), transparent 30rem),
-      radial-gradient(circle at 88% 7%, rgba(232, 144, 9, 0.1), transparent 26rem),
-      linear-gradient(180deg, #fffdf6 0%, #ffffff 560px);
+      radial-gradient(circle at 10% 0%, rgba(245, 167, 29, 0.32), transparent 30rem),
+      radial-gradient(circle at 88% 4%, rgba(223, 99, 48, 0.2), transparent 28rem),
+      radial-gradient(circle at 52% -10%, rgba(55, 47, 76, 0.16), transparent 24rem),
+      linear-gradient(180deg, var(--event-cream) 0%, var(--event-surface) 460px, #ffffff 980px);
   }
 
   .event-header {
     max-width: var(--event-max);
     margin: 0 auto;
-    padding: 12px 16px 24px;
-  }
-
-  .event-controls {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8px 12px;
-    margin: 0 0 18px;
-    padding: 8px 0;
-  }
-
-  .segmented-control {
-    display: inline-flex;
-    flex: 0 0 auto;
-    overflow: hidden;
-    border: 1px solid rgba(23, 24, 19, 0.12);
-    background: rgba(255, 255, 255, 0.76);
-  }
-
-  .control-button {
-    appearance: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 36px;
-    min-height: 32px;
-    padding: 0 10px;
-    color: var(--color-fg-mute);
-    font-size: 12px;
-    font-weight: 800;
-    line-height: 1;
-    text-decoration: none;
-    border: 0;
-    border-left: 1px solid rgba(23, 24, 19, 0.1);
-    background: transparent;
-    cursor: pointer;
-  }
-
-  .control-button:first-child {
-    border-left: 0;
-  }
-
-  .control-button:hover,
-  .control-button:focus-visible,
-  .control-button.is-active {
-    color: var(--color-fg);
-    background: var(--event-accent-soft);
+    padding: 20px 16px 24px;
   }
 
   .hero {
@@ -393,7 +264,7 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
     width: auto;
     max-width: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 12px 24px rgba(24, 25, 20, 0.13));
+    filter: drop-shadow(0 14px 24px rgba(55, 47, 76, 0.17));
   }
 
   .event-logos a:first-child img {
@@ -407,14 +278,14 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
   .logo-divider {
     width: 1px;
     height: 48px;
-    background: rgba(23, 24, 19, 0.14);
+    background: var(--event-line);
   }
 
   .eyebrow,
   .map-label,
   .resource-label {
     margin: 0;
-    color: var(--event-accent);
+    color: var(--event-accent-strong);
     font-size: 11px;
     font-weight: 900;
     letter-spacing: 0.14em;
@@ -432,6 +303,7 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
   h1 {
     max-width: 760px;
     margin: 8px 0 14px;
+    color: var(--event-accent-deep);
     font-size: clamp(36px, 6vw, 72px);
     font-weight: 900;
     letter-spacing: 0;
@@ -452,16 +324,19 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
     display: grid;
     grid-template-rows: auto auto;
     overflow: hidden;
-    border: 1px solid rgba(23, 24, 19, 0.13);
-    background: #ffffff;
-    box-shadow: 0 20px 54px rgba(24, 25, 20, 0.1);
+    border: 1px solid var(--event-line);
+    border-radius: 24px;
+    background: var(--event-surface);
+    box-shadow: 0 22px 58px rgba(55, 47, 76, 0.13);
   }
 
   .map-frame {
     position: relative;
     min-height: 0;
     overflow: hidden;
-    background: #f1f0e7;
+    background:
+      linear-gradient(135deg, rgba(245, 167, 29, 0.14), rgba(55, 47, 76, 0.08)),
+      #f4ead8;
   }
 
   .festival-map {
@@ -474,7 +349,7 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
 
   .map-copy {
     padding: 18px;
-    border-top: 1px solid rgba(23, 24, 19, 0.1);
+    border-top: 1px solid var(--event-line);
   }
 
   .map-copy h2 {
@@ -528,14 +403,27 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
   }
 
   .resource-card {
+    position: relative;
     display: flex;
     min-height: 210px;
     flex-direction: column;
     align-items: flex-start;
+    overflow: hidden;
     padding: 18px;
-    border: 1px solid rgba(23, 24, 19, 0.11);
-    background: #ffffff;
-    box-shadow: 0 14px 40px rgba(24, 25, 20, 0.07);
+    border: 1px solid var(--event-line);
+    border-radius: 20px;
+    background:
+      linear-gradient(145deg, rgba(245, 167, 29, 0.12), rgba(255, 250, 241, 0) 42%),
+      #ffffff;
+    box-shadow: 0 16px 42px rgba(55, 47, 76, 0.09);
+  }
+
+  .resource-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: linear-gradient(90deg, var(--event-accent), var(--event-accent-strong), var(--event-accent-deep));
   }
 
   .resource-card h3 {
@@ -558,12 +446,15 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
     gap: 9px;
     min-height: 38px;
     padding: 0 14px;
-    color: var(--color-fg);
+    color: var(--event-accent-deep);
     font-size: 13px;
     font-weight: 800;
     text-decoration: none;
-    border: 1px solid rgba(23, 24, 19, 0.18);
-    background: var(--event-accent-soft);
+    border: 1px solid rgba(55, 47, 76, 0.2);
+    border-radius: 999px;
+    background:
+      linear-gradient(135deg, rgba(245, 167, 29, 0.22), rgba(223, 99, 48, 0.1)),
+      #fff8e8;
   }
 
   .resource-card a svg {
@@ -573,8 +464,10 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
 
   .resource-card a:hover,
   .resource-card a:focus-visible {
-    border-color: rgba(23, 24, 19, 0.32);
-    background: rgba(232, 144, 9, 0.2);
+    border-color: rgba(55, 47, 76, 0.36);
+    background:
+      linear-gradient(135deg, rgba(245, 167, 29, 0.3), rgba(223, 99, 48, 0.16)),
+      #fff3d5;
   }
 
   .chart-section {
@@ -591,7 +484,6 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
 
   .chart-section :global(.table-wrap) {
     margin-top: 20px;
-    border-top: 1px solid rgba(23, 24, 19, 0.1);
   }
 
   .disclaimer {
@@ -612,7 +504,7 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
   }
 
   .event-page :global(.site-footer) {
-    border-top-color: rgba(23, 24, 19, 0.12);
+    border-top-color: var(--event-line);
   }
 
   .event-page :global(.project-link),
@@ -627,6 +519,28 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
   .event-page :global(.partner-link:focus-visible img) {
     filter: grayscale(100%) contrast(1);
     opacity: 0.94;
+  }
+
+  .event-page :global(.contribute-link) {
+    color: var(--event-accent-deep);
+    border-color: rgba(55, 47, 76, 0.2);
+    background:
+      linear-gradient(135deg, rgba(245, 167, 29, 0.2), rgba(223, 99, 48, 0.1)),
+      #fff8e8;
+    box-shadow: 0 10px 24px rgba(55, 47, 76, 0.08);
+  }
+
+  .event-page :global(.contribute-link:hover),
+  .event-page :global(.contribute-link:focus-visible) {
+    border-color: rgba(55, 47, 76, 0.34);
+    background:
+      linear-gradient(135deg, rgba(245, 167, 29, 0.28), rgba(223, 99, 48, 0.15)),
+      #fff2d6;
+  }
+
+  .event-page :global(.contribute-link img) {
+    filter: none;
+    opacity: 0.88;
   }
 
   @media (max-width: 920px) {
@@ -652,12 +566,6 @@ const bmUi = uiByLocale.en.burningMountain as Record<string, string>;
   @media (max-width: 640px) {
     .event-header {
       padding: 8px 12px 20px;
-    }
-
-    .event-controls {
-      justify-content: flex-start;
-      margin-bottom: 16px;
-      padding: 6px 0;
     }
 
     .event-logos {

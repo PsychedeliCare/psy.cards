@@ -129,6 +129,11 @@
     "prefix": "Structure rendue avec",
     "tool": "SmilesDrawer"
   },
+  "cardContribute": {
+    "communityNote": "Les données sur les substances et les interactions sont contribuées et maintenues par la communauté TripSit.",
+    "chartIssuePrefix": "Les problèmes concernant le tableau des combinaisons peuvent être signalés sur ",
+    "chartIssueLink": "psy.cards sur GitHub"
+  },
   "search": {
     "placeholder": "Rechercher des substances et des combinaisons…",
     "empty": "Aucun résultat trouvé.",

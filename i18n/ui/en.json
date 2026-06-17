@@ -129,6 +129,11 @@
     "prefix": "Structure rendered with",
     "tool": "SmilesDrawer"
   },
+  "cardContribute": {
+    "communityNote": "Substance and interaction data is contributed and maintained by the TripSit community.",
+    "chartIssuePrefix": "Issues with the combo chart itself can be reported on ",
+    "chartIssueLink": "psy.cards on GitHub"
+  },
   "search": {
     "placeholder": "Search substances and combinations…",
     "empty": "No results found.",

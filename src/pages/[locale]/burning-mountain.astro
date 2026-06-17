@@ -1,0 +1,18 @@
+---
+import BurningMountainPage from "../burning-mountain.astro";
+import { defaultLocale, locales, type Locale } from "../../i18n/locales";
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  const localizedLocales = locales.filter((locale) => locale !== defaultLocale);
+  return localizedLocales.map((locale) => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
+---
+
+<BurningMountainPage locale={locale} />

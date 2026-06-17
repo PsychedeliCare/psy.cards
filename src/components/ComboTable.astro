@@ -10,18 +10,22 @@ import { localePath } from "../i18n/locales";
 interface Props {
   locale?: Locale;
   comboRoute?: string;
+  substanceBase?: string;
   initialSubstanceSet?: "common" | "full";
 }
 
 const {
   locale = "en",
   comboRoute = localePath(locale, "/combos"),
+  substanceBase: substanceBaseProp = localePath(locale, "/"),
   initialSubstanceSet = "full",
 } = Astro.props;
 
 const columns = getColumns(locale);
 const ui = getUiMessages(locale);
-const substanceBase = localePath(locale, "/");
+const substanceBase = substanceBaseProp.endsWith("/")
+  ? substanceBaseProp
+  : `${substanceBaseProp}/`;
 
 const isCommonSubstance = (key: string) => commonSubstanceKeySet.has(key);
 

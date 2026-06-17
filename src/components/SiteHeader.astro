@@ -6,15 +6,19 @@ import { localePath } from "../i18n/locales";
 interface Props {
   locale?: Locale;
   currentPath?: string;
+  variant?: "default" | "event";
 }
 
-const { locale = "en", currentPath = "/" } = Astro.props;
+const { locale = "en", currentPath = "/", variant = "default" } = Astro.props;
 const homeHref = localePath(locale, "/");
 ---
 
-<header class="site-header">
+<header class:list={["site-header", variant === "event" && "site-header--event"]}>
   <h1 class="site-header__title">
-    <a href={homeHref}>PSY.CARDS</a>
+    <a class="site-header__brand" href={homeHref}>
+      <img src="/favicon.png" alt="" width="28" height="28" aria-hidden="true" />
+      <span>PSY.CARDS</span>
+    </a>
   </h1>
   <div class="site-header__actions">
     <LanguageSwitcher locale={locale} currentPath={currentPath} />
@@ -46,13 +50,23 @@ const homeHref = localePath(locale, "/");
     line-height: 1;
   }
 
-  .site-header__title a {
+  .site-header__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
     color: var(--color-fg);
     text-decoration: none;
   }
 
-  .site-header__title a:hover,
-  .site-header__title a:focus-visible {
+  .site-header__brand img {
+    display: block;
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  .site-header__brand:hover,
+  .site-header__brand:focus-visible {
     color: var(--color-fg-mute);
   }
 
@@ -64,5 +78,42 @@ const homeHref = localePath(locale, "/");
     .site-header__actions {
       padding-right: 48px;
     }
+  }
+
+  .site-header--event {
+    background:
+      radial-gradient(circle at 12% 0%, rgba(245, 167, 29, 0.22), transparent 52%),
+      radial-gradient(circle at 88% 0%, rgba(223, 99, 48, 0.14), transparent 48%),
+      linear-gradient(180deg, #f2ddb8 0%, #e8cfa0 100%);
+    border-bottom: 1px solid rgba(223, 99, 48, 0.16);
+    box-shadow: 0 6px 24px rgba(223, 99, 48, 0.07);
+  }
+
+  .site-header--event .site-header__brand {
+    color: #372f4c;
+  }
+
+  .site-header--event .site-header__brand:hover,
+  .site-header--event .site-header__brand:focus-visible {
+    color: #df6330;
+  }
+
+  .site-header--event :global(.lang-switcher ul) {
+    background: rgba(255, 250, 241, 0.72);
+    border-color: rgba(55, 47, 76, 0.12);
+  }
+
+  .site-header--event :global(.lang-link) {
+    color: rgba(55, 47, 76, 0.58);
+  }
+
+  .site-header--event :global(.lang-link:hover),
+  .site-header--event :global(.lang-link:focus-visible) {
+    color: #372f4c;
+  }
+
+  .site-header--event :global(.lang-link.is-active) {
+    color: #372f4c;
+    background: #fff0d2;
   }
 </style>

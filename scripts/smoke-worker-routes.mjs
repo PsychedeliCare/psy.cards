@@ -4,27 +4,42 @@ const checks = [
 	{
 		url: "http://bm.psy.cards/",
 		status: 308,
-		location: "https://burning-mountain.psy.cards/",
+		location: "https://bm.psy.cards/",
 	},
 	{
-		url: "https://bm.psy.cards/foo?x=1",
-		status: 308,
-		location: "https://burning-mountain.psy.cards/foo?x=1",
-	},
-	{
-		url: "https://burning-mountain.psy.cards/",
+		url: "https://bm.psy.cards/",
 		status: 200,
 		assetPath: "/burning-mountain/",
 	},
 	{
-		url: "https://burning-mountain.psy.cards/index.html",
+		url: "https://bm.psy.cards/fr/",
 		status: 200,
-		assetPath: "/burning-mountain/",
+		assetPath: "/fr/burning-mountain/",
 	},
 	{
-		url: "https://burning-mountain.psy.cards/burning-mountain/",
+		url: "https://bm.psy.cards/fr/lsd",
+		status: 200,
+		assetPath: "/fr/burning-mountain/lsd",
+	},
+	{
+		url: "https://bm.psy.cards/fr/card/lsd",
+		status: 200,
+		assetPath: "/fr/card/lsd",
+	},
+	{
+		url: "https://bm.psy.cards/assets/burningmountain-logo.png",
+		status: 200,
+		assetPath: "/assets/burningmountain-logo.png",
+	},
+	{
+		url: "https://bm.psy.cards/fr/burning-mountain/lsd?x=1",
 		status: 308,
-		location: "https://burning-mountain.psy.cards/",
+		location: "https://bm.psy.cards/fr/lsd?x=1",
+	},
+	{
+		url: "https://burning-mountain.psy.cards/fr/burning-mountain/",
+		status: 308,
+		location: "https://bm.psy.cards/fr/",
 	},
 	{
 		url: "https://psy.cards/burning-mountain/",

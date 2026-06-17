@@ -18,13 +18,14 @@ const targets = locales.map((code) => ({
 }));
 ---
 
-<nav class="lang-switcher" aria-label="Language">
+<nav class="lang-switcher" aria-label="Language" data-language-switcher>
   <ul>
     {
       targets.map((target) => (
         <li>
           <a
             href={target.href}
+            data-locale={target.code}
             hreflang={target.code}
             lang={target.code}
             aria-current={target.active ? "page" : undefined}
@@ -37,6 +38,40 @@ const targets = locales.map((code) => ({
     }
   </ul>
 </nav>
+
+<script is:inline>
+  (() => {
+    const LOCALE_RE = /^\/(fr|de|it)(?=\/|$)/;
+
+    const stripLocalePrefix = (pathname) => {
+      const stripped = pathname.replace(LOCALE_RE, "");
+      return stripped || "/";
+    };
+
+    const localePath = (locale, path) => {
+      const normalized = path.startsWith("/") ? path : `/${path}`;
+      if (locale === "en") return normalized;
+      return `/${locale}${normalized === "/" ? "/" : normalized}`;
+    };
+
+    const updateSwitcher = (switcher) => {
+      const path = stripLocalePrefix(window.location.pathname);
+      const suffix = `${window.location.search}${window.location.hash}`;
+      switcher.querySelectorAll("a[data-locale]").forEach((link) => {
+        const locale = link.dataset.locale;
+        if (!locale) return;
+        link.href = `${localePath(locale, path)}${suffix}`;
+      });
+    };
+
+    document.querySelectorAll("[data-language-switcher]").forEach((switcher) => {
+      updateSwitcher(switcher);
+      switcher.addEventListener("click", () => updateSwitcher(switcher), {
+        capture: true,
+      });
+    });
+  })();
+</script>
 
 <style>
   .lang-switcher ul {

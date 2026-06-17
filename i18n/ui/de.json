@@ -129,6 +129,11 @@
     "prefix": "Struktur dargestellt mit",
     "tool": "SmilesDrawer"
   },
+  "cardContribute": {
+    "communityNote": "Substanz- und Interaktionsdaten werden von der TripSit-Community beigesteuert und gepflegt.",
+    "chartIssuePrefix": "Probleme mit dem Kombinationschart selbst können gemeldet werden unter ",
+    "chartIssueLink": "psy.cards auf GitHub"
+  },
   "search": {
     "placeholder": "Substanzen und Kombinationen suchen…",
     "empty": "Keine Ergebnisse gefunden.",

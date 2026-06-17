@@ -1,0 +1,43 @@
+---
+import type { Locale } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
+const ui = getUiMessages(locale);
+
+const tripsitIssuesUrl = "https://github.com/TripSit/drugs/issues";
+const psyCardsRepoUrl = "https://github.com/psychedelicare/psy.cards";
+---
+
+<section class="card-contribute">
+  <a
+    class="card-contribute-link"
+    href={tripsitIssuesUrl}
+    target="_blank"
+    rel="noreferrer noopener"
+    aria-label={`${t(locale, ui, "footer.contributeOn")} GitHub`}
+  >
+    <span>{t(locale, ui, "footer.contributeOn")}</span>
+    <img
+      src="/assets/github-logo.png"
+      alt="GitHub"
+      width="70"
+      height="16"
+      loading="lazy"
+    />
+  </a>
+  <p class="card-contribute-note">
+    {t(locale, ui, "cardContribute.communityNote")}
+  </p>
+  <p class="card-contribute-note">
+    {t(locale, ui, "cardContribute.chartIssuePrefix")}
+    <a href={psyCardsRepoUrl} target="_blank" rel="noreferrer noopener">
+      {t(locale, ui, "cardContribute.chartIssueLink")}
+    </a>.
+  </p>
+</section>

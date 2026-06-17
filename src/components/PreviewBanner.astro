@@ -62,6 +62,8 @@ const ui = getUiMessages(locale);
 </div>
 
 <script>
+  import { lockPageScroll, unlockPageScroll } from "../scripts/scroll-lock.ts";
+
   const modal = document.querySelector<HTMLElement>("[data-preview-modal]");
   const panel = document.querySelector<HTMLElement>("[data-preview-panel]");
   const openButton = document.querySelector<HTMLButtonElement>("[data-preview-open]");
@@ -71,11 +73,11 @@ const ui = getUiMessages(locale);
     if (!modal) return;
     modal.setAttribute("data-open", open ? "true" : "false");
     modal.setAttribute("aria-hidden", open ? "false" : "true");
-    document.documentElement.toggleAttribute("data-preview-modal-open", open);
-
     if (open) {
+      lockPageScroll();
       panel?.focus({ preventScroll: true });
     } else {
+      unlockPageScroll();
       openButton?.focus({ preventScroll: true });
     }
   }

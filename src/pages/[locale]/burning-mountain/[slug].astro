@@ -1,0 +1,24 @@
+---
+import BurningMountainPage from "../../burning-mountain.astro";
+import { getColumns } from "../../../data/config";
+import { defaultLocale, locales, type Locale } from "../../../i18n/locales";
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  const localizedLocales = locales.filter((locale) => locale !== defaultLocale);
+  return localizedLocales.flatMap((locale) =>
+    getColumns(locale).map((column) => ({
+      params: { locale, slug: column.slug },
+      props: { locale, modalSubstanceKey: column.key },
+    }))
+  );
+}
+
+const { locale, modalSubstanceKey } = Astro.props as {
+  locale: Locale;
+  modalSubstanceKey: string;
+};
+---
+
+<BurningMountainPage locale={locale} modalSubstanceKey={modalSubstanceKey} />

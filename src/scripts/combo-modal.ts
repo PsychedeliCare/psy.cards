@@ -12,9 +12,12 @@
  */
 
 import { initStatusTooltips } from "./status-tooltip.ts";
+import { lockPageScroll, unlockPageScroll } from "./scroll-lock.ts";
 import { getPageI18n, getUiString } from "../i18n/client";
 
 const DEFAULT_ROOT_ROUTE = "/combos";
+const BURNING_MOUNTAIN_HOSTS = new Set(["bm.psy.cards", "burning-mountain.psy.cards"]);
+const BURNING_MOUNTAIN_SEGMENT = "burning-mountain";
 let rootRoute = DEFAULT_ROOT_ROUTE;
 let cardRoutePrefix = "/card";
 let comboDataRoutePrefix = "/combo-data";
@@ -116,6 +119,32 @@ function normalizePathname(pathname: string): string {
   return pathname.length > 1 ? pathname.replace(/\/+$/, "") : "/";
 }
 
+function isBurningMountainHost(): boolean {
+  return typeof window !== "undefined" && BURNING_MOUNTAIN_HOSTS.has(window.location.hostname);
+}
+
+function stripBurningMountainSegment(pathname: string): string {
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments[0] === BURNING_MOUNTAIN_SEGMENT) {
+    segments.shift();
+  } else if (["fr", "de", "it"].includes(segments[0] ?? "") && segments[1] === BURNING_MOUNTAIN_SEGMENT) {
+    segments.splice(1, 1);
+  }
+
+  if (segments.length === 0) return "/";
+  if (segments.length === 1 && ["fr", "de", "it"].includes(segments[0] ?? "")) {
+    return `/${segments[0]}/`;
+  }
+  return `/${segments.join("/")}`;
+}
+
+function toPublicPathname(pathname: string): string {
+  const normalized = normalizePathname(pathname);
+  return isBurningMountainHost()
+    ? normalizePathname(stripBurningMountainSegment(normalized))
+    : normalized;
+}
+
 function comboUrl(slug: string): string {
   return `${rootRoute}?combo=${encodeURIComponent(slug)}`;
 }
@@ -124,7 +153,7 @@ function getSubstanceTargetFromHref(href: string): ModalTarget | null {
   try {
     const url = new URL(href, window.location.origin);
     if (url.origin !== window.location.origin) return null;
-    const path = normalizePathname(url.pathname);
+    const path = toPublicPathname(url.pathname);
     if (path === "/" || path === rootRoute) return null;
     const segments = path.split("/").filter(Boolean);
     let slug: string | undefined;
@@ -284,6 +313,58 @@ function createSmilesCitation(): HTMLElement {
   return citation;
 }
 
+function createCardContribute(): HTMLElement {
+  const section = createElement("section", "card-contribute");
+
+  const contributeLink = createElement("a", "card-contribute-link");
+  contributeLink.href = "https://github.com/TripSit/drugs/issues";
+  contributeLink.target = "_blank";
+  contributeLink.rel = "noreferrer noopener";
+  contributeLink.setAttribute(
+    "aria-label",
+    `${getUiString("footer.contributeOn", "Contribute on")} GitHub`
+  );
+
+  const contributeLabel = createElement("span");
+  contributeLabel.textContent = getUiString("footer.contributeOn", "Contribute on");
+  contributeLink.appendChild(contributeLabel);
+
+  const githubLogo = document.createElement("img");
+  githubLogo.src = "/assets/github-logo.png";
+  githubLogo.alt = "GitHub";
+  githubLogo.width = 70;
+  githubLogo.height = 16;
+  githubLogo.loading = "lazy";
+  contributeLink.appendChild(githubLogo);
+
+  const communityNote = createElement("p", "card-contribute-note");
+  communityNote.textContent = getUiString(
+    "cardContribute.communityNote",
+    "Substance and interaction data is contributed and maintained by the TripSit community."
+  );
+
+  const chartNote = createElement("p", "card-contribute-note");
+  appendText(
+    chartNote,
+    getUiString(
+      "cardContribute.chartIssuePrefix",
+      "Issues with the combo chart itself can be reported on "
+    )
+  );
+  const chartLink = createElement("a");
+  chartLink.href = "https://github.com/psychedelicare/psy.cards";
+  chartLink.target = "_blank";
+  chartLink.rel = "noreferrer noopener";
+  chartLink.textContent = getUiString("cardContribute.chartIssueLink", "psy.cards on GitHub");
+  chartNote.appendChild(chartLink);
+  appendText(chartNote, ".");
+
+  section.appendChild(contributeLink);
+  section.appendChild(communityNote);
+  section.appendChild(chartNote);
+  return section;
+}
+
 function renderComboCard(data: ComboCardData): HTMLElement {
   const [a, b] = data.substances;
   const article = createElement(
@@ -406,6 +487,7 @@ function renderComboCard(data: ComboCardData): HTMLElement {
   article.appendChild(actions);
 
   article.appendChild(createSmilesCitation());
+  article.appendChild(createCardContribute());
 
   return article;
 }
@@ -439,26 +521,10 @@ function ensureModal(): HTMLElement | null {
   return root;
 }
 
-let savedScrollY = 0;
-
-function lockScroll() {
-  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-  document.documentElement.style.setProperty("overflow", "hidden");
-  if (scrollbarWidth > 0) {
-    document.documentElement.style.setProperty("padding-right", `${scrollbarWidth}px`);
-  }
-}
-
-function unlockScroll() {
-  document.documentElement.style.removeProperty("overflow");
-  document.documentElement.style.removeProperty("padding-right");
-}
-
 function openModal(root: HTMLElement) {
-  savedScrollY = window.scrollY;
   root.setAttribute("data-open", "true");
   root.setAttribute("aria-hidden", "false");
-  lockScroll();
+  lockPageScroll();
   const panel = root.querySelector<HTMLElement>("[data-modal-panel]");
   panel?.focus({ preventScroll: true });
 }
@@ -466,8 +532,7 @@ function openModal(root: HTMLElement) {
 function closeModal(root: HTMLElement) {
   root.setAttribute("data-open", "false");
   root.setAttribute("aria-hidden", "true");
-  unlockScroll();
-  window.scrollTo(0, savedScrollY);
+  unlockPageScroll();
 }
 
 async function navigateToModal(target: ModalTarget, push: boolean): Promise<void> {
@@ -574,6 +639,9 @@ export function initComboModal(options: ComboModalOptions = {}): void {
   rootRoute = normalizeRootRoute(
     options.rootRoute ?? getPageI18n()?.comboRoute ?? DEFAULT_ROOT_ROUTE
   );
+  if (isBurningMountainHost()) {
+    rootRoute = normalizeRootRoute(stripBurningMountainSegment(rootRoute));
+  }
   if (initialised) return;
   initialised = true;
 
@@ -581,7 +649,7 @@ export function initComboModal(options: ComboModalOptions = {}): void {
 
   const root = ensureModal();
   if (root && root.getAttribute("data-open") === "true") {
-    lockScroll();
+    lockPageScroll();
   }
 
   const initialTarget = getInitialModalTarget();
