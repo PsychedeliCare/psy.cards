@@ -31,13 +31,15 @@ const psyCardsRepoUrl = "https://github.com/psychedelicare/psy.cards";
       loading="lazy"
     />
   </a>
-  <p class="card-contribute-note">
-    {t(locale, ui, "cardContribute.communityNote")}
-  </p>
-  <p class="card-contribute-note">
-    {t(locale, ui, "cardContribute.chartIssuePrefix")}
-    <a href={psyCardsRepoUrl} target="_blank" rel="noreferrer noopener">
-      {t(locale, ui, "cardContribute.chartIssueLink")}
-    </a>.
-  </p>
+  <div class="card-contribute-notes">
+    <p class="card-contribute-note">
+      {t(locale, ui, "cardContribute.communityNote")}
+    </p>
+    <p class="card-contribute-note">
+      {t(locale, ui, "cardContribute.chartIssuePrefix")}
+      <a href={psyCardsRepoUrl} target="_blank" rel="noreferrer noopener">
+        {t(locale, ui, "cardContribute.chartIssueLink")}
+      </a>.
+    </p>
+  </div>
 </section>

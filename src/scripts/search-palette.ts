@@ -1,6 +1,8 @@
 import Fuse from "fuse.js";
 import extendedCombosData from "../../data/combos-extended.json";
 import drugsData from "../../drugs/drugs.json";
+import { openModalFromHref } from "./combo-modal.ts";
+import { lockPageScroll, unlockPageScroll } from "./scroll-lock.ts";
 import { getPageI18n, getUiString } from "../i18n/client";
 import type { GroupName } from "../data/config";
 import { getInteraction } from "../data/combos";
@@ -759,6 +761,16 @@ export function initSearchPalette(): void {
       link.className = getResultClass(item);
       link.href = item.href;
       link.dataset.searchResult = String(index);
+      if (item.kind === "substance") {
+        link.dataset.substance = item.href;
+      } else {
+        try {
+          const combo = new URL(item.href, window.location.origin).searchParams.get("combo");
+          if (combo) link.dataset.combo = combo;
+        } catch {
+          // ignore malformed href
+        }
+      }
       link.setAttribute("role", "option");
       link.setAttribute("aria-selected", index === activeIndex ? "true" : "false");
 
@@ -792,11 +804,19 @@ export function initSearchPalette(): void {
     setActive(0);
   };
 
-  const close = () => {
+  const close = (options: { restoreFocus?: boolean; unlockScroll?: boolean } = {}) => {
     const { overlay } = ensurePalette();
     overlay.dataset.open = "false";
     document.documentElement.removeAttribute("data-search-palette-open");
-    if (previousFocus instanceof HTMLElement) previousFocus.focus();
+    if (options.unlockScroll !== false) {
+      unlockPageScroll();
+    }
+    if (
+      options.restoreFocus !== false &&
+      previousFocus instanceof HTMLElement
+    ) {
+      previousFocus.focus({ preventScroll: true });
+    }
   };
 
   const focusSearchInput = () => {
@@ -810,6 +830,7 @@ export function initSearchPalette(): void {
   const open = (initialQuery = "") => {
     const { overlay, input } = ensurePalette();
     previousFocus = document.activeElement;
+    lockPageScroll();
     overlay.dataset.open = "true";
     document.documentElement.setAttribute("data-search-palette-open", "");
     input.value = initialQuery;
@@ -823,10 +844,15 @@ export function initSearchPalette(): void {
     });
   };
 
-  const navigateToActive = () => {
+  const navigateToActive = async () => {
     const result = currentResults[activeIndex];
     if (!result) return;
-    window.location.assign(result.item.href);
+    close({ restoreFocus: false, unlockScroll: false });
+    const opened = await openModalFromHref(result.item.href);
+    if (!opened) {
+      unlockPageScroll();
+      window.location.assign(result.item.href);
+    }
   };
 
   const selectedText = () => {

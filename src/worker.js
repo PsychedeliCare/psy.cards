@@ -47,6 +47,18 @@ function canonicalBmPathname(pathname) {
 	return `/${segments.join("/")}`;
 }
 
+// Astro builds pages as `<route>/index.html` (directory format). The Cloudflare
+// asset server redirects a slash-less directory request to its trailing-slash
+// form, which would leak the internal `/burning-mountain/` prefix back to the
+// client and cause a redirect loop. Request the trailing-slash form directly so
+// the asset server returns `index.html` (200) instead of a redirect. Files with
+// an extension (e.g. `lsd.png`) are left untouched.
+function ensureDirectorySlash(path) {
+	const lastSegment = path.split("/").pop();
+	if (!lastSegment || lastSegment.includes(".")) return path;
+	return path.endsWith("/") ? path : `${path}/`;
+}
+
 function burningMountainAssetPath(pathname) {
 	const segments = pathname.split("/").filter(Boolean);
 	if (segments.length === 0) return `${BURNING_MOUNTAIN_ROUTE}/`;
@@ -56,10 +68,12 @@ function burningMountainAssetPath(pathname) {
 	if (LOCALES.has(first)) {
 		if (!second) return `/${first}${BURNING_MOUNTAIN_ROUTE}/`;
 		if (PASSTHROUGH_SEGMENTS.has(second)) return pathname;
-		return `/${first}${BURNING_MOUNTAIN_ROUTE}/${[second, ...rest].join("/")}`;
+		return ensureDirectorySlash(
+			`/${first}${BURNING_MOUNTAIN_ROUTE}/${[second, ...rest].join("/")}`
+		);
 	}
 
-	return `${BURNING_MOUNTAIN_ROUTE}/${segments.join("/")}`;
+	return ensureDirectorySlash(`${BURNING_MOUNTAIN_ROUTE}/${segments.join("/")}`);
 }
 
 export default {

@@ -19,7 +19,12 @@ const checks = [
 	{
 		url: "https://bm.psy.cards/fr/lsd",
 		status: 200,
-		assetPath: "/fr/burning-mountain/lsd",
+		assetPath: "/fr/burning-mountain/lsd/",
+	},
+	{
+		url: "https://bm.psy.cards/ketamine",
+		status: 200,
+		assetPath: "/burning-mountain/ketamine/",
 	},
 	{
 		url: "https://bm.psy.cards/fr/card/lsd",

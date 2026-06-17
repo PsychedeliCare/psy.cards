@@ -32,6 +32,16 @@ function configureLocaleRoutes(): void {
   substancePathPrefix = localePrefix ? `${localePrefix}/` : "/";
 }
 
+function ensureRoutesConfigured(options: ComboModalOptions = {}): void {
+  configureLocaleRoutes();
+  rootRoute = normalizeRootRoute(
+    options.rootRoute ?? getPageI18n()?.comboRoute ?? DEFAULT_ROOT_ROUTE
+  );
+  if (isBurningMountainHost()) {
+    rootRoute = normalizeRootRoute(stripBurningMountainSegment(rootRoute));
+  }
+}
+
 type ComboModalOptions = {
   rootRoute?: string;
 };
@@ -213,13 +223,31 @@ function getInitialModalTarget(): ModalTarget | null {
   };
 }
 
+function getComboTargetFromHref(href: string): ModalTarget | null {
+  try {
+    const url = new URL(href, window.location.origin);
+    if (url.origin !== window.location.origin) return null;
+    const path = toPublicPathname(url.pathname);
+    if (path !== rootRoute) return null;
+    const combo = url.searchParams.get("combo");
+    if (!combo) return null;
+    return getComboTargetFromSlug(combo);
+  } catch {
+    return null;
+  }
+}
+
+function getModalTargetFromHref(href: string): ModalTarget | null {
+  return getComboTargetFromHref(href) ?? getSubstanceTargetFromHref(href);
+}
+
 function getModalTargetFromAnchor(anchor: HTMLAnchorElement): ModalTarget | null {
   const comboSlug = anchor.dataset.combo;
   if (comboSlug) return getComboTargetFromSlug(comboSlug);
 
   const href = anchor.getAttribute("href");
   if (!href) return null;
-  return getSubstanceTargetFromHref(href);
+  return getModalTargetFromHref(href);
 }
 
 async function fetchSubstanceCardFragment(slug: string): Promise<Node | null> {
@@ -337,6 +365,8 @@ function createCardContribute(): HTMLElement {
   githubLogo.loading = "lazy";
   contributeLink.appendChild(githubLogo);
 
+  const notes = createElement("div", "card-contribute-notes");
+
   const communityNote = createElement("p", "card-contribute-note");
   communityNote.textContent = getUiString(
     "cardContribute.communityNote",
@@ -359,9 +389,11 @@ function createCardContribute(): HTMLElement {
   chartNote.appendChild(chartLink);
   appendText(chartNote, ".");
 
+  notes.appendChild(communityNote);
+  notes.appendChild(chartNote);
+
   section.appendChild(contributeLink);
-  section.appendChild(communityNote);
-  section.appendChild(chartNote);
+  section.appendChild(notes);
   return section;
 }
 
@@ -544,20 +576,37 @@ async function navigateToModal(target: ModalTarget, push: boolean): Promise<void
   const content = root.querySelector<HTMLElement>("[data-modal-content]");
   if (!content) return;
 
+  const wasOpen = root.getAttribute("data-open") === "true";
+  if (!wasOpen) {
+    lockPageScroll();
+  }
+
+  const scrollY = window.scrollY;
+
   if (push) {
     history.pushState({ psyModal: target.url, psyModalPushed: true }, "", target.url);
   } else {
     history.replaceState({ psyModal: target.url }, "", target.url);
   }
+  window.scrollTo(0, scrollY);
 
   content.innerHTML = "";
   const fragment = await fetchModalContent(target);
   if (!fragment) {
+    if (!wasOpen) unlockPageScroll();
     window.location.assign(target.url);
     return;
   }
   content.appendChild(fragment);
   openModal(root);
+}
+
+export async function openModalFromHref(href: string, push = true): Promise<boolean> {
+  ensureRoutesConfigured();
+  const target = getModalTargetFromHref(href);
+  if (!target) return false;
+  await navigateToModal(target, push);
+  return true;
 }
 
 function handleClose(): void {
@@ -635,13 +684,7 @@ function handleCloseClick(event: MouseEvent): void {
 let initialised = false;
 
 export function initComboModal(options: ComboModalOptions = {}): void {
-  configureLocaleRoutes();
-  rootRoute = normalizeRootRoute(
-    options.rootRoute ?? getPageI18n()?.comboRoute ?? DEFAULT_ROOT_ROUTE
-  );
-  if (isBurningMountainHost()) {
-    rootRoute = normalizeRootRoute(stripBurningMountainSegment(rootRoute));
-  }
+  ensureRoutesConfigured(options);
   if (initialised) return;
   initialised = true;
 
