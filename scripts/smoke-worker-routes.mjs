@@ -29,7 +29,17 @@ const checks = [
 	{
 		url: "https://bm.psy.cards/fr/card/lsd",
 		status: 200,
-		assetPath: "/fr/card/lsd",
+		assetPath: "/fr/card/lsd/",
+	},
+	{
+		url: "https://bm.psy.cards/card/lsd",
+		status: 200,
+		assetPath: "/card/lsd/",
+	},
+	{
+		url: "https://bm.psy.cards/combo-data/lsd~mdma.json",
+		status: 200,
+		assetPath: "/combo-data/lsd~mdma.json",
 	},
 	{
 		url: "https://bm.psy.cards/assets/burningmountain-logo.png",

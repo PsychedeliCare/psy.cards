@@ -62,12 +62,12 @@ function ensureDirectorySlash(path) {
 function burningMountainAssetPath(pathname) {
 	const segments = pathname.split("/").filter(Boolean);
 	if (segments.length === 0) return `${BURNING_MOUNTAIN_ROUTE}/`;
-	if (PASSTHROUGH_SEGMENTS.has(segments[0])) return pathname;
+	if (PASSTHROUGH_SEGMENTS.has(segments[0])) return ensureDirectorySlash(pathname);
 
 	const [first, second, ...rest] = segments;
 	if (LOCALES.has(first)) {
 		if (!second) return `/${first}${BURNING_MOUNTAIN_ROUTE}/`;
-		if (PASSTHROUGH_SEGMENTS.has(second)) return pathname;
+		if (PASSTHROUGH_SEGMENTS.has(second)) return ensureDirectorySlash(pathname);
 		return ensureDirectorySlash(
 			`/${first}${BURNING_MOUNTAIN_ROUTE}/${[second, ...rest].join("/")}`
 		);
