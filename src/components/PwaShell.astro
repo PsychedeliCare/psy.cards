@@ -1,0 +1,57 @@
+---
+import type { Locale } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
+const ui = getUiMessages(locale);
+---
+
+<div class="pwa-shell" data-pwa-shell hidden>
+  <div class="pwa-banner pwa-banner--offline" data-pwa-offline hidden role="status">
+    <p class="pwa-banner__message" data-pwa-offline-message>
+      {t(locale, ui, "layout.pwaOffline")}
+    </p>
+  </div>
+
+  <div class="pwa-banner pwa-banner--ready" data-pwa-ready hidden role="status">
+    <p class="pwa-banner__message" data-pwa-ready-message>
+      {t(locale, ui, "layout.pwaOfflineReady")}
+    </p>
+    <button type="button" class="pwa-banner__action" data-pwa-ready-dismiss>
+      {t(locale, ui, "layout.pwaOfflineReadyDismiss")}
+    </button>
+  </div>
+
+  <div class="pwa-banner pwa-banner--update" data-pwa-update hidden role="alert">
+    <p class="pwa-banner__message" data-pwa-update-message>
+      {t(locale, ui, "layout.pwaUpdateAvailable")}
+    </p>
+    <div class="pwa-banner__actions">
+      <button type="button" class="pwa-banner__action pwa-banner__action--primary" data-pwa-update-reload>
+        {t(locale, ui, "layout.pwaUpdateReload")}
+      </button>
+      <button type="button" class="pwa-banner__action" data-pwa-update-later>
+        {t(locale, ui, "layout.pwaUpdateLater")}
+      </button>
+    </div>
+  </div>
+
+  <div class="pwa-banner pwa-banner--install" data-pwa-install hidden role="region" aria-label={t(locale, ui, "layout.pwaInstall")}>
+    <p class="pwa-banner__message" data-pwa-install-message>
+      {t(locale, ui, "layout.pwaInstallBody")}
+    </p>
+    <div class="pwa-banner__actions">
+      <button type="button" class="pwa-banner__action pwa-banner__action--primary" data-pwa-install-action>
+        {t(locale, ui, "layout.pwaInstall")}
+      </button>
+      <button type="button" class="pwa-banner__action" data-pwa-install-dismiss>
+        {t(locale, ui, "layout.pwaInstallDismiss")}
+      </button>
+    </div>
+  </div>
+</div>

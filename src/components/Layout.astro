@@ -1,9 +1,12 @@
 ---
 import "../styles/global.css";
 import PreviewBanner from "./PreviewBanner.astro";
+import PwaShell from "./PwaShell.astro";
 import SiteHeader from "./SiteHeader.astro";
+import { PWA_THEME_COLOR } from "../pwa-config";
+import { pwaInfo } from "virtual:pwa-info";
 import type { Locale } from "../i18n/locales";
-import { getUiMessages, getLocaleBundle } from "../i18n/load-locale";
+import { getUiMessages } from "../i18n/load-locale";
 import { localePath } from "../i18n/locales";
 import { getColumns } from "../data/config";
 import { stripLocalePrefix } from "../i18n/paths";
@@ -50,6 +53,13 @@ const i18nPayload = JSON.stringify({
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content={colorScheme} />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/appicon.png" />
+    <meta name="theme-color" content={PWA_THEME_COLOR} />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="psy.cards" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="application-name" content="psy.cards" />
     <meta name="description" content={resolvedDescription} />
     <title>{resolvedTitle}</title>
     <meta property="og:title" content={resolvedTitle} />
@@ -62,12 +72,15 @@ const i18nPayload = JSON.stringify({
     <meta name="twitter:title" content={resolvedTitle} />
     <meta name="twitter:description" content={resolvedDescription} />
     <meta name="twitter:image" content={ogImage} />
+    {pwaInfo ? <Fragment set:html={pwaInfo.webManifest.linkTag} /> : null}
     <script id="psy-i18n" type="application/json" set:html={i18nPayload}></script>
   </head>
   <body>
     <SiteHeader locale={locale} currentPath={currentPath} variant={headerVariant} />
     <slot />
     <PreviewBanner locale={locale} />
+    <PwaShell locale={locale} />
+    <script src="../scripts/pwa.ts"></script>
     <script>
       import { initSmilesDrawer } from "../scripts/smiles-drawer.ts";
       import { initTimingCharts } from "../scripts/timing-chart.ts";

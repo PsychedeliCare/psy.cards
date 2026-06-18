@@ -13,7 +13,16 @@
     "previewDisclaimer": "Avviso versione di sviluppo",
     "previewBody1": "Questa è una versione di sviluppo di psy.cards e non è ancora destinata a una diffusione ampia.",
     "previewBody2": "Nessuna informazione su questo sito è stata verificata per accuratezza. Il sito e i suoi autori non possono essere ritenuti responsabili per informazioni inesatte.",
-    "previewCloseAria": "Chiudi avviso anteprima"
+    "previewCloseAria": "Chiudi avviso anteprima",
+    "pwaOffline": "Sei offline. I contenuti memorizzati restano disponibili.",
+    "pwaOfflineReady": "psy.cards è pronto per l'uso offline.",
+    "pwaOfflineReadyDismiss": "Chiudi",
+    "pwaUpdateAvailable": "È disponibile una nuova versione.",
+    "pwaUpdateReload": "Aggiorna ora",
+    "pwaUpdateLater": "Più tardi",
+    "pwaInstall": "Installa app",
+    "pwaInstallBody": "Aggiungi psy.cards alla schermata Home per l'accesso offline.",
+    "pwaInstallDismiss": "Non ora"
   },
   "landing": {
     "eyebrow": "psy.cards",
@@ -27,6 +36,20 @@
     "enabledBy": "Reso possibile dal lavoro straordinario di",
     "contributeOn": "Contribuisci su",
     "builtWith": "Realizzato con"
+  },
+  "offlineCache": {
+    "ariaLabel": "Dati offline",
+    "title": "Supporto offline",
+    "description": "Scarica le schede delle sostanze e i dati sulle combinazioni per usare psy.cards senza connessione.",
+    "preload": "Scarica per l'uso offline",
+    "refresh": "Aggiorna i dati offline",
+    "lastSynced": "Ultima sincronizzazione: {date}",
+    "progress": "{percent}% completato",
+    "success": "I dati offline sono pronti.",
+    "partialFailure": "Dati offline salvati, ma {count} elementi non sono stati scaricati.",
+    "failure": "Impossibile scaricare i dati offline. Riprova quando la connessione è stabile.",
+    "offlineWarning": "Connettiti a internet per scaricare i dati offline.",
+    "unavailable": "I dati offline non sono stati preparati per questa pagina."
   },
   "acknowledgements": {
     "ariaLabel": "Riconoscimenti",

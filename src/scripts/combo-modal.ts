@@ -14,10 +14,15 @@
 import { initStatusTooltips } from "./status-tooltip.ts";
 import { lockPageScroll, unlockPageScroll } from "./scroll-lock.ts";
 import { getPageI18n, getUiString } from "../i18n/client";
+import {
+  getComboCardDataBySlug,
+  type ComboCardData as BundledComboCardData,
+} from "../data/combo-card-data";
 
 const DEFAULT_ROOT_ROUTE = "/combos";
 const BURNING_MOUNTAIN_HOSTS = new Set(["bm.psy.cards", "burning-mountain.psy.cards"]);
 const BURNING_MOUNTAIN_SEGMENT = "burning-mountain";
+const LOCALIZED_LOCALES = ["fr", "de", "it"] as const;
 let rootRoute = DEFAULT_ROOT_ROUTE;
 let cardRoutePrefix = "/card";
 let comboDataRoutePrefix = "/combo-data";
@@ -68,35 +73,7 @@ type IconName =
   | "flash"
   | "question";
 
-type ComboCardData = {
-  slug: string;
-  substances: [
-    {
-      key: string;
-      label: string;
-      slug: string;
-      group: string;
-    },
-    {
-      key: string;
-      label: string;
-      slug: string;
-      group: string;
-    },
-  ];
-  definition: {
-    statusKey: string;
-    icon: IconName;
-    label: string;
-    definition: string;
-  };
-  note?: string;
-  sources?: Array<{
-    author?: string;
-    title: string;
-    url: string;
-  }>;
-};
+type ComboCardData = BundledComboCardData;
 
 const ICON_PATHS: Record<IconName, string> = {
   "arrow-up": "M11 20V7.83l-5.17 5.17L4 11l8-8 8 8-1.83 1.83L13 7.83V20z",
@@ -137,12 +114,12 @@ function stripBurningMountainSegment(pathname: string): string {
   const segments = pathname.split("/").filter(Boolean);
   if (segments[0] === BURNING_MOUNTAIN_SEGMENT) {
     segments.shift();
-  } else if (["fr", "de", "it"].includes(segments[0] ?? "") && segments[1] === BURNING_MOUNTAIN_SEGMENT) {
+  } else if (LOCALIZED_LOCALES.includes(segments[0] as (typeof LOCALIZED_LOCALES)[number]) && segments[1] === BURNING_MOUNTAIN_SEGMENT) {
     segments.splice(1, 1);
   }
 
   if (segments.length === 0) return "/";
-  if (segments.length === 1 && ["fr", "de", "it"].includes(segments[0] ?? "")) {
+  if (segments.length === 1 && LOCALIZED_LOCALES.includes(segments[0] as (typeof LOCALIZED_LOCALES)[number])) {
     return `/${segments[0]}/`;
   }
   return `/${segments.join("/")}`;
@@ -159,27 +136,63 @@ function comboUrl(slug: string): string {
   return `${rootRoute}?combo=${encodeURIComponent(slug)}`;
 }
 
+function getSubstanceSlugFromPath(pathname: string): string | null {
+  const path = toPublicPathname(normalizePathname(pathname));
+  if (path === "/" || path === rootRoute) return null;
+
+  const segments = path.split("/").filter(Boolean);
+  if (segments.length === 0) return null;
+
+  if (segments[0] === BURNING_MOUNTAIN_SEGMENT && segments.length === 2) {
+    const slug = segments[1];
+    return slug && isSafeSlug(slug) ? slug : null;
+  }
+
+  if (
+    segments.length === 3 &&
+    LOCALIZED_LOCALES.includes(segments[0] as (typeof LOCALIZED_LOCALES)[number]) &&
+    segments[1] === BURNING_MOUNTAIN_SEGMENT
+  ) {
+    const slug = segments[2];
+    return slug && isSafeSlug(slug) ? slug : null;
+  }
+
+  if (segments.length === 1) {
+    const slug = segments[0];
+    if (!slug || LOCALIZED_LOCALES.includes(slug as (typeof LOCALIZED_LOCALES)[number])) {
+      return null;
+    }
+    return isSafeSlug(slug) ? slug : null;
+  }
+
+  if (
+    segments.length === 2 &&
+    LOCALIZED_LOCALES.includes(segments[0] as (typeof LOCALIZED_LOCALES)[number])
+  ) {
+    const slug = segments[1];
+    return slug && isSafeSlug(slug) ? slug : null;
+  }
+
+  return null;
+}
+
+function getSubstanceTargetFromSlug(slug: string, path: string): ModalTarget {
+  return {
+    kind: "substance",
+    slug,
+    url: path,
+  };
+}
+
 function getSubstanceTargetFromHref(href: string): ModalTarget | null {
   try {
     const url = new URL(href, window.location.origin);
     if (url.origin !== window.location.origin) return null;
     const path = toPublicPathname(url.pathname);
     if (path === "/" || path === rootRoute) return null;
-    const segments = path.split("/").filter(Boolean);
-    let slug: string | undefined;
-    if (segments.length === 1) {
-      slug = segments[0];
-    } else if (segments.length === 2 && ["fr", "de", "it"].includes(segments[0]!)) {
-      slug = segments[1];
-    } else {
-      return null;
-    }
-    if (!slug || slug.includes("~") || !isSafeSlug(slug)) return null;
-    return {
-      kind: "substance",
-      slug,
-      url: path,
-    };
+    const slug = getSubstanceSlugFromPath(path);
+    if (!slug) return null;
+    return getSubstanceTargetFromSlug(slug, path);
   } catch {
     return null;
   }
@@ -202,25 +215,11 @@ function getInitialModalTarget(): ModalTarget | null {
     return getComboTargetFromSlug(combo);
   }
 
-  if (path === "/" || path === rootRoute) return null;
-  const segments = path.split("/").filter(Boolean);
-  let slug: string | undefined;
-  if (segments.length === 1) {
-    slug = segments[0];
-  } else if (segments.length === 2 && ["fr", "de", "it"].includes(segments[0]!)) {
-    slug = segments[1];
-  } else {
-    return null;
-  }
+  const slug = getSubstanceSlugFromPath(path);
   if (!slug) return null;
   if (slug.includes("~")) return getComboTargetFromSlug(slug);
-  if (!isSafeSlug(slug)) return null;
 
-  return {
-    kind: "substance",
-    slug,
-    url: path,
-  };
+  return getSubstanceTargetFromSlug(slug, path);
 }
 
 function getComboTargetFromHref(href: string): ModalTarget | null {
@@ -251,27 +250,39 @@ function getModalTargetFromAnchor(anchor: HTMLAnchorElement): ModalTarget | null
 }
 
 async function fetchSubstanceCardFragment(slug: string): Promise<Node | null> {
-  const res = await fetch(`${cardRoutePrefix}/${slug}`, {
-    headers: { Accept: "text/html" },
-  });
-  if (!res.ok) return null;
-  const html = await res.text();
-  const doc = new DOMParser().parseFromString(html, "text/html");
-  const fragment = doc.querySelector("[data-card-fragment]");
-  if (!fragment) return null;
-  const wrapper = document.createDocumentFragment();
-  for (const child of Array.from(fragment.childNodes)) {
-    wrapper.appendChild(child);
+  try {
+    const res = await fetch(`${cardRoutePrefix}/${slug}`, {
+      headers: { Accept: "text/html" },
+    });
+    if (!res.ok) return null;
+    const html = await res.text();
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const fragment = doc.querySelector("[data-card-fragment]");
+    if (!fragment) return null;
+    const wrapper = document.createDocumentFragment();
+    for (const child of Array.from(fragment.childNodes)) {
+      wrapper.appendChild(child);
+    }
+    return wrapper;
+  } catch {
+    return null;
   }
-  return wrapper;
 }
 
 async function fetchComboData(slug: string): Promise<ComboCardData | null> {
-  const res = await fetch(`${comboDataRoutePrefix}/${slug}.json`, {
-    headers: { Accept: "application/json" },
-  });
-  if (!res.ok) return null;
-  return (await res.json()) as ComboCardData;
+  const locale = getPageI18n()?.locale ?? "en";
+  const bundled = getComboCardDataBySlug(slug, locale);
+  if (bundled) return bundled;
+
+  try {
+    const res = await fetch(`${comboDataRoutePrefix}/${slug}.json`, {
+      headers: { Accept: "application/json" },
+    });
+    if (!res.ok) return null;
+    return (await res.json()) as ComboCardData;
+  } catch {
+    return null;
+  }
 }
 
 function createSvgIcon(name: IconName): SVGSVGElement {

@@ -13,7 +13,16 @@
     "previewDisclaimer": "Development version disclaimer",
     "previewBody1": "This is a development version of psy.cards and is not meant for wide distribution just yet.",
     "previewBody2": "None of the information on this site has been verified for accuracy. The site and its authors cannot be held liable for any inaccurate information.",
-    "previewCloseAria": "Close preview disclaimer"
+    "previewCloseAria": "Close preview disclaimer",
+    "pwaOffline": "You're offline. Cached content is still available.",
+    "pwaOfflineReady": "psy.cards is ready to use offline.",
+    "pwaOfflineReadyDismiss": "Dismiss",
+    "pwaUpdateAvailable": "A new version is available.",
+    "pwaUpdateReload": "Update now",
+    "pwaUpdateLater": "Later",
+    "pwaInstall": "Install app",
+    "pwaInstallBody": "Add psy.cards to your home screen for offline access.",
+    "pwaInstallDismiss": "Not now"
   },
   "landing": {
     "eyebrow": "psy.cards",
@@ -27,6 +36,20 @@
     "enabledBy": "Enabled by the amazing work from",
     "contributeOn": "Contribute on",
     "builtWith": "Built with"
+  },
+  "offlineCache": {
+    "ariaLabel": "Offline data",
+    "title": "Offline support",
+    "description": "Download substance cards and combination data so psy.cards keeps working without a connection.",
+    "preload": "Download for offline use",
+    "refresh": "Refresh offline data",
+    "lastSynced": "Last synced {date}",
+    "progress": "{percent}% complete",
+    "success": "Offline data is ready.",
+    "partialFailure": "Offline data saved, but {count} items could not be downloaded.",
+    "failure": "Could not download offline data. Try again when your connection is stable.",
+    "offlineWarning": "Connect to the internet to download offline data.",
+    "unavailable": "Offline data could not be prepared for this page."
   },
   "acknowledgements": {
     "ariaLabel": "Acknowledgements",

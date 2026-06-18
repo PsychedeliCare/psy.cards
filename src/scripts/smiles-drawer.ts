@@ -3,9 +3,9 @@
  * Watches for dynamically injected modal content (combo + substance cards).
  */
 
-type SmilesDrawerModule = typeof import("smiles-drawer").default;
+import substancesData from "../../data/substances.json";
 
-const SMILES_DATA_URL = "/data/substances.json";
+type SmilesDrawerModule = typeof import("smiles-drawer").default;
 
 type SubstanceEntry = {
   smiles: string;
@@ -62,7 +62,6 @@ const DRAW_OPTIONS = {
 
 let drawerModule: SmilesDrawerModule | null = null;
 let substancesMap: SubstancesMap | null = null;
-let substancesPromise: Promise<SubstancesMap> | null = null;
 let themeObserver: MutationObserver | null = null;
 let contentObserver: MutationObserver | null = null;
 let initialised = false;
@@ -86,20 +85,8 @@ async function loadDrawer(): Promise<SmilesDrawerModule> {
 
 async function loadSubstances(): Promise<SubstancesMap> {
   if (substancesMap) return substancesMap;
-  if (!substancesPromise) {
-    substancesPromise = fetch(SMILES_DATA_URL)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Failed to load substances data (${response.status})`);
-        }
-        return response.json() as Promise<SubstancesMap>;
-      })
-      .then((data) => {
-        substancesMap = data;
-        return data;
-      });
-  }
-  return substancesPromise;
+  substancesMap = substancesData as SubstancesMap;
+  return substancesMap;
 }
 
 function parseSubstanceKeys(root: HTMLElement): string[] {
