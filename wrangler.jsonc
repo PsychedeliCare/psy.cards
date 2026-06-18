@@ -3,6 +3,8 @@
 	"compatibility_flags": ["global_fetch_strictly_public"],
 	"name": "psy-cards",
 	"main": "src/worker.js",
+	// Keep versioned preview URLs enabled on workers.dev (required when workers.dev route is off).
+	"preview_urls": true,
 	"routes": [
 		{
 			"pattern": "psy.cards",
