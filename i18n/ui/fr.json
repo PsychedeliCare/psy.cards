@@ -37,6 +37,20 @@
     "contributeOn": "Contribuer sur",
     "builtWith": "Construit avec"
   },
+  "offlineCache": {
+    "ariaLabel": "Données hors ligne",
+    "title": "Support hors ligne",
+    "description": "Téléchargez les cartes de substances et les données de combinaisons pour utiliser psy.cards sans connexion.",
+    "preload": "Télécharger pour l'usage hors ligne",
+    "refresh": "Actualiser les données hors ligne",
+    "lastSynced": "Dernière synchronisation : {date}",
+    "progress": "{percent} % terminé",
+    "success": "Les données hors ligne sont prêtes.",
+    "partialFailure": "Données hors ligne enregistrées, mais {count} éléments n'ont pas pu être téléchargés.",
+    "failure": "Impossible de télécharger les données hors ligne. Réessayez lorsque votre connexion est stable.",
+    "offlineWarning": "Connectez-vous à internet pour télécharger les données hors ligne.",
+    "unavailable": "Les données hors ligne n'ont pas pu être préparées pour cette page."
+  },
   "acknowledgements": {
     "ariaLabel": "Remerciements",
     "title": "Remerciements",

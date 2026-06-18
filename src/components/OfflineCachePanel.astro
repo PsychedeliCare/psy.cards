@@ -1,0 +1,175 @@
+---
+import type { Locale } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
+
+interface Props {
+  locale?: Locale;
+  variant?: "wide" | "narrow";
+}
+
+const { locale = "en", variant = "wide" } = Astro.props;
+const ui = getUiMessages(locale);
+---
+
+<section
+  class:list={["offline-cache-panel", `offline-cache-panel--${variant}`]}
+  data-offline-cache-panel
+  aria-label={t(locale, ui, "offlineCache.ariaLabel")}
+>
+  <div class="offline-cache-panel__inner">
+    <div class="offline-cache-panel__copy">
+      <p class="offline-cache-panel__title">{t(locale, ui, "offlineCache.title")}</p>
+      <p class="offline-cache-panel__description">
+        {t(locale, ui, "offlineCache.description")}
+      </p>
+      <p class="offline-cache-panel__last-sync" data-offline-cache-last-sync hidden></p>
+    </div>
+
+    <button
+      type="button"
+      class="offline-cache-panel__action"
+      data-offline-cache-action
+    >
+      {t(locale, ui, "offlineCache.preload")}
+    </button>
+
+    <div class="offline-cache-panel__progress" data-offline-cache-progress hidden>
+      <div class="offline-cache-panel__progress-track" aria-hidden="true">
+        <div class="offline-cache-panel__progress-bar" data-offline-cache-progress-bar></div>
+      </div>
+      <p class="offline-cache-panel__progress-label" data-offline-cache-progress-label></p>
+    </div>
+  </div>
+</section>
+
+<script src="../scripts/offline-cache.ts"></script>
+
+<style>
+  .offline-cache-panel {
+    padding: 20px 16px 40px;
+  }
+
+  .offline-cache-panel__inner {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .offline-cache-panel--wide .offline-cache-panel__inner {
+    max-width: 1200px;
+  }
+
+  .offline-cache-panel--narrow .offline-cache-panel__inner {
+    max-width: 720px;
+  }
+
+  .offline-cache-panel__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 42rem;
+  }
+
+  .offline-cache-panel__title {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-fg-mute);
+  }
+
+  .offline-cache-panel__description {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-fg-mute);
+  }
+
+  .offline-cache-panel__last-sync {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--color-fg-mute);
+  }
+
+  .offline-cache-panel__action {
+    padding: 8px 14px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--color-fg);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    cursor: pointer;
+    transition:
+      border-color 0.15s ease,
+      background-color 0.15s ease,
+      opacity 0.15s ease;
+  }
+
+  .offline-cache-panel__action:hover,
+  .offline-cache-panel__action:focus-visible {
+    border-color: rgba(255, 255, 255, 0.28);
+    background-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .offline-cache-panel__action:disabled {
+    opacity: 0.55;
+    cursor: wait;
+  }
+
+  :global(html[data-color-scheme="light"]) .offline-cache-panel__action {
+    border-color: rgba(23, 24, 19, 0.18);
+    background-color: rgba(23, 24, 19, 0.04);
+  }
+
+  :global(html[data-color-scheme="light"]) .offline-cache-panel__action:hover,
+  :global(html[data-color-scheme="light"]) .offline-cache-panel__action:focus-visible {
+    border-color: rgba(23, 24, 19, 0.32);
+    background-color: rgba(23, 24, 19, 0.07);
+  }
+
+  .offline-cache-panel__progress {
+    width: min(100%, 320px);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .offline-cache-panel__progress-track {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+
+  :global(html[data-color-scheme="light"]) .offline-cache-panel__progress-track {
+    background: rgba(23, 24, 19, 0.08);
+  }
+
+  .offline-cache-panel__progress-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: inherit;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-safe), white 8%),
+      var(--color-safe)
+    );
+    transition: width 0.18s ease;
+  }
+
+  .offline-cache-panel__progress-label {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--color-fg-mute);
+  }
+</style>

@@ -37,6 +37,20 @@
     "contributeOn": "Mitwirken auf",
     "builtWith": "Erstellt mit"
   },
+  "offlineCache": {
+    "ariaLabel": "Offline-Daten",
+    "title": "Offline-Unterstützung",
+    "description": "Lade Substanzkarten und Kombinationsdaten herunter, damit psy.cards auch ohne Verbindung funktioniert.",
+    "preload": "Für Offline-Nutzung herunterladen",
+    "refresh": "Offline-Daten aktualisieren",
+    "lastSynced": "Zuletzt synchronisiert: {date}",
+    "progress": "{percent} % abgeschlossen",
+    "success": "Offline-Daten sind bereit.",
+    "partialFailure": "Offline-Daten gespeichert, aber {count} Elemente konnten nicht heruntergeladen werden.",
+    "failure": "Offline-Daten konnten nicht heruntergeladen werden. Versuche es erneut, wenn deine Verbindung stabil ist.",
+    "offlineWarning": "Verbinde dich mit dem Internet, um Offline-Daten herunterzuladen.",
+    "unavailable": "Offline-Daten konnten für diese Seite nicht vorbereitet werden."
+  },
   "acknowledgements": {
     "ariaLabel": "Danksagungen",
     "title": "Danksagungen",

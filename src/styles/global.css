@@ -334,6 +334,76 @@ html[data-color-scheme="light"] .pwa-banner__action:hover {
   }
 }
 
+.toast-region {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: min(92vw, 420px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.toast {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--color-fg);
+  background: color-mix(in oklab, var(--color-bg), white 6%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+  animation: toast-enter 0.24s ease;
+}
+
+html[data-color-scheme="light"] .toast {
+  background: #fff;
+  border-color: rgba(23, 24, 19, 0.12);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.toast--success {
+  border-color: color-mix(in oklab, var(--color-safe), transparent 45%);
+}
+
+.toast--warning {
+  border-color: color-mix(in oklab, var(--color-caution), transparent 45%);
+}
+
+.toast--leaving {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .toast-region {
+    bottom: 12px;
+    width: min(94vw, 420px);
+  }
+}
+
 /* Colour hue per status / category is carried by the CSS variable `--hue`
    so the gradient utilities below can derive lighter/darker stops from it
    without conflicting with the `color` of the text inside. */

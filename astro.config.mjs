@@ -64,6 +64,25 @@ export default defineConfig({
         navigateFallbackDenylist: PWA_NAVIGATE_FALLBACK_DENYLIST,
         cleanupOutdatedCaches: true,
         maximumFileSizeToCacheInBytes: PWA_MAX_CACHE_BYTES,
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) =>
+              /^\/(?:(?:fr|de|it)\/)?(?:card|combo-data|data)\//.test(
+                url.pathname
+              ),
+            handler: "CacheFirst",
+            options: {
+              cacheName: "psy-cards-content",
+              expiration: {
+                maxEntries: 2000,
+                maxAgeSeconds: 60 * 60 * 24 * 365,
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+        ],
       },
       devOptions: {
         enabled: false,

@@ -37,6 +37,20 @@
     "contributeOn": "Contribute on",
     "builtWith": "Built with"
   },
+  "offlineCache": {
+    "ariaLabel": "Offline data",
+    "title": "Offline support",
+    "description": "Download substance cards and combination data so psy.cards keeps working without a connection.",
+    "preload": "Download for offline use",
+    "refresh": "Refresh offline data",
+    "lastSynced": "Last synced {date}",
+    "progress": "{percent}% complete",
+    "success": "Offline data is ready.",
+    "partialFailure": "Offline data saved, but {count} items could not be downloaded.",
+    "failure": "Could not download offline data. Try again when your connection is stable.",
+    "offlineWarning": "Connect to the internet to download offline data.",
+    "unavailable": "Offline data could not be prepared for this page."
+  },
   "acknowledgements": {
     "ariaLabel": "Acknowledgements",
     "title": "Acknowledgements",

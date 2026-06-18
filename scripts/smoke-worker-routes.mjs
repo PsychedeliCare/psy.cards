@@ -19,12 +19,12 @@ const checks = [
 	{
 		url: "https://bm.psy.cards/fr/lsd",
 		status: 200,
-		assetPath: "/fr/burning-mountain/lsd/",
+		assetPath: "/fr/burning-mountain/",
 	},
 	{
 		url: "https://bm.psy.cards/ketamine",
 		status: 200,
-		assetPath: "/burning-mountain/ketamine/",
+		assetPath: "/burning-mountain/",
 	},
 	{
 		url: "https://bm.psy.cards/fr/card/lsd",
@@ -83,6 +83,11 @@ const checks = [
 	},
 	{
 		url: "https://psy.cards/burning-mountain/",
+		status: 200,
+		assetPath: "/burning-mountain/",
+	},
+	{
+		url: "https://psy.cards/burning-mountain/ketamine/",
 		status: 200,
 		assetPath: "/burning-mountain/",
 	},
