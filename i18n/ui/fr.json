@@ -158,33 +158,33 @@
     "description": "Tableau de combinaisons de réduction des risques Burning Mountain avec les ressources ALPS PsyCare pour les contextes festivaliers.",
     "eyebrow": "Burning Mountain Festival · Zernez",
     "pageTitle": "ALPS Psycare",
-    "intro": "ALPS PsyCare apporte une éducation psychédélique fondée sur la science et un soutien psychologique sans jugement dans les festivals suisses. En combinant une réduction des risques fondée sur les preuves, des soins communautaires et un accompagnement bienveillant sur place, l'initiative aide les personnes à demander de l'aide tôt et empêche les difficultés mineures de devenir des incidents graves.",
+    "intro": "Éducation psychédélique fondée sur la science et soutien psychologique sans jugement dans les festivals suisses. Parlez à PsyCare tôt si quelque chose ne va pas.",
     "mapLabel": "Plan du festival",
     "mapTitle": "Plan du site Burning Mountain",
-    "mapText": "Utilisez le plan du festival pour vous orienter sur place. Consultez la signalisation la plus récente et demandez au point info, à l'équipe médicale, à la sécurité ou à PsyCare si vous avez besoin d'aide pour trouver du soutien.",
+    "mapText": "Utilisez le plan pour trouver l'équipe médicale, la sécurité, PsyCare et le point info sur place.",
     "resourcesEyebrow": "Soutien en festival",
-    "resourcesTitle": "Ressources utiles sur le moment",
+    "resourcesTitle": "Ressources utiles",
     "chartEyebrow": "Référence des combinaisons",
     "chartTitle": "Tableau des combinaisons de drogues",
-    "chartText": "Utilisez ce tableau des substances courantes en festival comme référence rapide, puis parlez à PsyCare, au personnel médical ou à une autre personne de confiance si quelque chose ne va pas.",
+    "chartText": "Référence rapide pour les substances courantes en festival. Parlez à PsyCare ou au personnel médical si quelque chose ne va pas.",
     "resources": {
       "emergency": {
         "label": "Urgence",
-        "title": "Besoin d'une aide médicale urgente ?",
-        "text": "Rendez-vous auprès du membre médical, de sécurité ou PsyCare le plus proche. En cas de situation mettant la vie en danger en Suisse, appelez l'ambulance au 144 ou les urgences européennes au 112.",
+        "title": "Besoin d'aide urgente ?",
+        "text": "Trouvez l'équipe médicale, la sécurité ou PsyCare à proximité. En Suisse, appelez le 144 ou le 112.",
         "action": "Appeler le 144"
       },
       "festival": {
         "label": "Festival",
-        "title": "Informations Burning Mountain",
-        "text": "Actualités officielles, billets, détails du lieu, camping, installations et informations de voyage pour le festival à Zernez.",
-        "action": "Ouvrir le site du festival"
+        "title": "Infos festival",
+        "text": "Billets, camping, installations et infos voyage pour Zernez.",
+        "action": "Ouvrir le site"
       },
       "saferUse": {
         "label": "Usage plus sûr",
-        "title": "Analyse de drogues et alertes",
-        "text": "Saferparty partage des informations suisses sur l'analyse de drogues, les alertes et les ressources de conseil avant et après le festival.",
-        "action": "Ouvrir Saferparty"
+        "title": "Analyse de drogues",
+        "text": "Services suisses d'analyse, alertes et conseils de Saferparty.",
+        "action": "Saferparty"
       }
     }
   }

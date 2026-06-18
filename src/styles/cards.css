@@ -256,6 +256,17 @@ html[data-color-scheme="light"] .card-contribute {
   border-top-color: rgba(23, 24, 19, 0.08);
 }
 
+html[data-color-scheme="light"] .card-contribute-link {
+  border-color: rgba(23, 24, 19, 0.18);
+  background-color: rgba(23, 24, 19, 0.04);
+}
+
+html[data-color-scheme="light"] .card-contribute-link:hover,
+html[data-color-scheme="light"] .card-contribute-link:focus-visible {
+  border-color: rgba(23, 24, 19, 0.32);
+  background-color: rgba(23, 24, 19, 0.07);
+}
+
 .card-contribute-link {
   display: inline-flex;
   align-items: center;
@@ -293,7 +304,7 @@ html[data-color-scheme="light"] .card-contribute {
 
 html[data-color-scheme="light"] .card-contribute-link img {
   filter: none;
-  opacity: 0.72;
+  opacity: 0.88;
 }
 
 .card-contribute-note {
@@ -1145,6 +1156,22 @@ html[data-color-scheme="light"] .card-contribute-link img {
   padding: 3px 9px;
   font-size: 12px;
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+html[data-color-scheme="light"] .substance-card .pills li {
+  background-color: rgba(23, 24, 19, 0.07);
+  border: 1px solid rgba(23, 24, 19, 0.12);
+  color: var(--color-fg);
+}
+
+html[data-color-scheme="light"] .substance-card .pills .effect-icon {
+  opacity: 0.72;
+  color: var(--color-fg-mute);
+}
+
+html[data-color-scheme="light"] .substance-card .pw-effects-well {
+  background-color: rgba(23, 24, 19, 0.04);
+  border-color: rgba(23, 24, 19, 0.1);
 }
 
 .substance-card .pills .effect-icon {

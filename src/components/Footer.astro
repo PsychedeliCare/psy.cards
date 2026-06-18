@@ -195,6 +195,22 @@ const ui = getUiMessages(locale);
     opacity: 0.85;
   }
 
+  :global(html[data-color-scheme="light"]) .contribute-link {
+    border-color: rgba(23, 24, 19, 0.18);
+    background-color: rgba(23, 24, 19, 0.04);
+  }
+
+  :global(html[data-color-scheme="light"]) .contribute-link:hover,
+  :global(html[data-color-scheme="light"]) .contribute-link:focus-visible {
+    border-color: rgba(23, 24, 19, 0.32);
+    background-color: rgba(23, 24, 19, 0.07);
+  }
+
+  :global(html[data-color-scheme="light"]) .contribute-link img {
+    filter: none;
+    opacity: 0.88;
+  }
+
   .credit-links {
     margin: 0;
     display: flex;

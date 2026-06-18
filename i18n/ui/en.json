@@ -158,33 +158,33 @@
     "description": "Burning Mountain harm-reduction combo chart with ALPS PsyCare resources for festival contexts.",
     "eyebrow": "Burning Mountain Festival · Zernez",
     "pageTitle": "ALPS Psycare",
-    "intro": "ALPS PsyCare brings science-based psychedelic education and non-judgmental psychological support into Swiss festival settings. By combining evidence-informed harm reduction, community care, and compassionate on-site support, the initiative helps people seek help early and prevents small difficulties from becoming serious incidents.",
+    "intro": "Science-based psychedelic education and non-judgmental psychological support at Swiss festivals. Ask PsyCare early if something feels off.",
     "mapLabel": "Festival map",
     "mapTitle": "Burning Mountain site map",
-    "mapText": "Use the festival map to orient yourself on site. Check the latest signage and ask the info point, medical team, security, or PsyCare if you need help finding support.",
+    "mapText": "Use the map to find medical, security, PsyCare, and info points on site.",
     "resourcesEyebrow": "Festival support",
-    "resourcesTitle": "Useful resources in the moment",
+    "resourcesTitle": "Useful resources",
     "chartEyebrow": "Combination reference",
     "chartTitle": "Drug combinations chart",
-    "chartText": "Use this common festival-substance chart as a quick reference, then speak with PsyCare, medical staff, or another trusted support person if something feels off.",
+    "chartText": "Quick reference for common festival substances. Talk to PsyCare or medical staff if something feels wrong.",
     "resources": {
       "emergency": {
         "label": "Emergency",
-        "title": "Need urgent medical help?",
-        "text": "Go to the nearest medical, security, or PsyCare team member. For life-threatening situations in Switzerland call ambulance 144 or European emergency 112.",
+        "title": "Need urgent help?",
+        "text": "Find medical, security, or PsyCare nearby. In Switzerland call 144 or 112.",
         "action": "Call 144"
       },
       "festival": {
         "label": "Festival",
-        "title": "Burning Mountain information",
-        "text": "Official updates, tickets, venue details, camping, facilities, and travel information for the festival in Zernez.",
-        "action": "Open festival site"
+        "title": "Festival info",
+        "text": "Tickets, camping, facilities, and travel details for Zernez.",
+        "action": "Open site"
       },
       "saferUse": {
         "label": "Safer use",
-        "title": "Drug checking and alerts",
-        "text": "Saferparty shares Swiss drug checking information, alerts, and counselling resources before and after the festival.",
-        "action": "Open Saferparty"
+        "title": "Drug checking",
+        "text": "Swiss checking services, alerts, and counselling from Saferparty.",
+        "action": "Saferparty"
       }
     }
   }

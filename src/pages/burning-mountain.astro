@@ -115,7 +115,6 @@ const resources = [
             </a>
           </div>
 
-          <p class="eyebrow">{bmUi.eyebrow}</p>
           <h1 id="page-title">{bmUi.pageTitle}</h1>
           <p class="intro">{bmUi.intro}</p>
         </div>
@@ -131,7 +130,6 @@ const resources = [
             />
           </div>
           <div class="map-copy">
-            <p class="map-label">{bmUi.mapLabel}</p>
             <h2 id="map-title">{bmUi.mapTitle}</h2>
             <p>{bmUi.mapText}</p>
           </div>
@@ -141,7 +139,6 @@ const resources = [
 
     <section class="resources" aria-labelledby="resources-title">
       <div class="section-heading">
-        <p class="eyebrow">{bmUi.resourcesEyebrow}</p>
         <h2 id="resources-title">{bmUi.resourcesTitle}</h2>
       </div>
 
@@ -149,19 +146,20 @@ const resources = [
         {
           resources.map((resource) => (
             <article class="resource-card" data-resource={resource.key}>
-              <p class="resource-label" data-resource-field="label">{resource.label}</p>
-              <h3 data-resource-field="title">{resource.title}</h3>
+              <div class="resource-card__head">
+                <h3 data-resource-field="title">{resource.title}</h3>
+                <a
+                  href={resource.href}
+                  target={resource.href.startsWith("http") ? "_blank" : undefined}
+                  rel={resource.href.startsWith("http") ? "noreferrer noopener" : undefined}
+                >
+                  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <path d={resource.iconPath}></path>
+                  </svg>
+                  <span data-resource-field="action">{resource.action}</span>
+                </a>
+              </div>
               <p data-resource-field="text">{resource.text}</p>
-              <a
-                href={resource.href}
-                target={resource.href.startsWith("http") ? "_blank" : undefined}
-                rel={resource.href.startsWith("http") ? "noreferrer noopener" : undefined}
-              >
-                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                  <path d={resource.iconPath}></path>
-                </svg>
-                <span data-resource-field="action">{resource.action}</span>
-              </a>
             </article>
           ))
         }
@@ -170,7 +168,6 @@ const resources = [
 
     <section id="combo-chart" class="chart-section" aria-labelledby="chart-title">
       <div class="section-heading section-heading--chart">
-        <p class="eyebrow">{bmUi.chartEyebrow}</p>
         <h2 id="chart-title">{bmUi.chartTitle}</h2>
         <p>{bmUi.chartText}</p>
       </div>
@@ -228,13 +225,13 @@ const resources = [
   .event-header {
     max-width: var(--event-max);
     margin: 0 auto;
-    padding: 20px 16px 24px;
+    padding: 12px 16px 18px;
   }
 
   .hero {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
-    gap: clamp(20px, 4vw, 52px);
+    grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.85fr);
+    gap: clamp(16px, 3vw, 36px);
     align-items: center;
     max-width: var(--content-max);
     margin: 0 auto;
@@ -248,8 +245,8 @@ const resources = [
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 14px 20px;
-    margin: 0 0 24px;
+    gap: 12px 16px;
+    margin: 0 0 14px;
   }
 
   .event-logos a {
@@ -268,29 +265,17 @@ const resources = [
   }
 
   .event-logos a:first-child img {
-    height: clamp(42px, 6vw, 74px);
+    height: clamp(36px, 5vw, 58px);
   }
 
   .event-logos a:last-child img {
-    height: clamp(48px, 7vw, 82px);
+    height: clamp(40px, 5.5vw, 64px);
   }
 
   .logo-divider {
     width: 1px;
-    height: 48px;
+    height: 36px;
     background: var(--event-line);
-  }
-
-  .eyebrow,
-  .map-label,
-  .resource-label {
-    margin: 0;
-    color: var(--event-accent-strong);
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 0.14em;
-    line-height: 1.25;
-    text-transform: uppercase;
   }
 
   h1,
@@ -301,21 +286,21 @@ const resources = [
   }
 
   h1 {
-    max-width: 760px;
-    margin: 8px 0 14px;
+    max-width: 640px;
+    margin: 0 0 10px;
     color: var(--event-accent-deep);
-    font-size: clamp(36px, 6vw, 72px);
+    font-size: clamp(28px, 4.5vw, 48px);
     font-weight: 900;
     letter-spacing: 0;
-    line-height: 0.94;
+    line-height: 1;
   }
 
   .intro {
-    max-width: 720px;
+    max-width: 620px;
     margin: 0;
     color: color-mix(in oklab, var(--color-fg), var(--color-fg-mute) 22%);
-    font-size: clamp(15px, 1.5vw, 19px);
-    line-height: 1.46;
+    font-size: clamp(14px, 1.3vw, 16px);
+    line-height: 1.45;
   }
 
   .map-panel {
@@ -348,14 +333,14 @@ const resources = [
   }
 
   .map-copy {
-    padding: 18px;
+    padding: 14px 16px;
     border-top: 1px solid var(--event-line);
   }
 
   .map-copy h2 {
-    margin: 8px 0 8px;
-    font-size: clamp(20px, 2vw, 28px);
-    line-height: 1.05;
+    margin: 0 0 6px;
+    font-size: clamp(17px, 1.8vw, 22px);
+    line-height: 1.1;
   }
 
   .map-copy p:last-child {
@@ -372,18 +357,18 @@ const resources = [
   }
 
   .resources {
-    padding: 22px 16px 32px;
+    padding: 18px 16px 28px;
   }
 
   .section-heading {
     max-width: var(--content-max);
-    margin: 0 auto 14px;
+    margin: 0 auto 12px;
   }
 
   .section-heading h2 {
-    margin: 8px 0 0;
-    font-size: clamp(24px, 2.7vw, 38px);
-    line-height: 1;
+    margin: 0;
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.05;
   }
 
   .section-heading p:last-child {
@@ -405,11 +390,12 @@ const resources = [
   .resource-card {
     position: relative;
     display: flex;
-    min-height: 210px;
+    min-height: 0;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 8px;
     overflow: hidden;
-    padding: 18px;
+    padding: 16px;
     border: 1px solid var(--event-line);
     border-radius: 20px;
     background:
@@ -426,35 +412,42 @@ const resources = [
     background: linear-gradient(90deg, var(--event-accent), var(--event-accent-strong), var(--event-accent-deep));
   }
 
-  .resource-card h3 {
-    margin: 12px 0 10px;
-    font-size: clamp(20px, 2vw, 26px);
-    line-height: 1.05;
+  .resource-card__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 4px;
   }
 
-  .resource-card p:not(.resource-label) {
-    margin: 0 0 20px;
+  .resource-card h3 {
+    margin: 0;
+    min-width: 0;
+    font-size: clamp(16px, 1.6vw, 20px);
+    line-height: 1.15;
+  }
+
+  .resource-card p {
+    margin: 0;
     color: var(--color-fg-mute);
-    font-size: 14px;
-    line-height: 1.55;
+    font-size: 13px;
+    line-height: 1.45;
   }
 
   .resource-card a {
-    margin-top: auto;
+    flex: 0 0 auto;
     display: inline-flex;
     align-items: center;
-    gap: 9px;
-    min-height: 38px;
-    padding: 0 14px;
+    gap: 7px;
+    min-height: 34px;
+    padding: 0 12px;
     color: var(--event-accent-deep);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
     text-decoration: none;
-    border: 1px solid rgba(55, 47, 76, 0.2);
+    border: 1px solid rgba(55, 47, 76, 0.28);
     border-radius: 999px;
-    background:
-      linear-gradient(135deg, rgba(245, 167, 29, 0.22), rgba(223, 99, 48, 0.1)),
-      #fff8e8;
+    background: #fff4dc;
   }
 
   .resource-card a svg {
@@ -464,10 +457,8 @@ const resources = [
 
   .resource-card a:hover,
   .resource-card a:focus-visible {
-    border-color: rgba(55, 47, 76, 0.36);
-    background:
-      linear-gradient(135deg, rgba(245, 167, 29, 0.3), rgba(223, 99, 48, 0.16)),
-      #fff3d5;
+    border-color: rgba(55, 47, 76, 0.42);
+    background: #ffecc0;
   }
 
   .chart-section {
@@ -506,24 +497,20 @@ const resources = [
 
   .event-page :global(.contribute-link) {
     color: var(--event-accent-deep);
-    border-color: rgba(55, 47, 76, 0.2);
-    background:
-      linear-gradient(135deg, rgba(245, 167, 29, 0.2), rgba(223, 99, 48, 0.1)),
-      #fff8e8;
-    box-shadow: 0 10px 24px rgba(55, 47, 76, 0.08);
+    border-color: rgba(55, 47, 76, 0.32);
+    background: #fff4dc;
+    box-shadow: none;
   }
 
   .event-page :global(.contribute-link:hover),
   .event-page :global(.contribute-link:focus-visible) {
-    border-color: rgba(55, 47, 76, 0.34);
-    background:
-      linear-gradient(135deg, rgba(245, 167, 29, 0.28), rgba(223, 99, 48, 0.15)),
-      #fff2d6;
+    border-color: rgba(55, 47, 76, 0.48);
+    background: #ffecc0;
   }
 
   .event-page :global(.contribute-link img) {
     filter: none;
-    opacity: 0.88;
+    opacity: 1;
   }
 
   @media (max-width: 920px) {
@@ -554,24 +541,24 @@ const resources = [
     .event-logos {
       align-items: flex-start;
       gap: 10px 14px;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
     }
 
     .event-logos a:first-child img {
-      height: 42px;
+      height: 36px;
     }
 
     .event-logos a:last-child img {
-      height: 50px;
+      height: 42px;
     }
 
     h1 {
-      margin-bottom: 10px;
-      font-size: clamp(34px, 14vw, 54px);
+      margin-bottom: 8px;
+      font-size: clamp(26px, 10vw, 40px);
     }
 
     .intro {
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.42;
     }
 
@@ -589,7 +576,13 @@ const resources = [
 
     .map-copy,
     .resource-card {
-      padding: 14px;
+      padding: 12px 14px;
+    }
+
+    .resource-card__head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
     }
 
     .event-page :global(.table-wrap) {

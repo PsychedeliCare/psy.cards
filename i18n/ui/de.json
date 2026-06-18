@@ -158,33 +158,33 @@
     "description": "Burning-Mountain-Risikominimierungs-Kombinationstabelle mit ALPS-PsyCare-Ressourcen für Festivalkontexte.",
     "eyebrow": "Burning Mountain Festival · Zernez",
     "pageTitle": "ALPS Psycare",
-    "intro": "ALPS PsyCare bringt wissenschaftlich fundierte psychedelische Aufklärung und wertfreie psychologische Unterstützung in Schweizer Festivals. Durch die Verbindung von evidenzbasierter Risikominimierung, gemeinschaftlicher Fürsorge und mitfühlender Betreuung vor Ort hilft die Initiative Menschen, frühzeitig Hilfe zu suchen, und verhindert, dass kleine Schwierigkeiten zu ernsten Vorfällen werden.",
+    "intro": "Wissenschaftlich fundierte psychedelische Aufklärung und wertfreie psychologische Unterstützung an Schweizer Festivals. Sprich PsyCare früh an, wenn etwas nicht stimmt.",
     "mapLabel": "Festivalplan",
     "mapTitle": "Geländeplan Burning Mountain",
-    "mapText": "Nutze den Festivalplan zur Orientierung vor Ort. Achte auf die aktuelle Beschilderung und frage am Infopoint, beim medizinischen Team, bei der Security oder bei PsyCare, wenn du Hilfe bei der Suche nach Unterstützung brauchst.",
+    "mapText": "Mit dem Plan findest du Sanität, Security, PsyCare und Infopunkte vor Ort.",
     "resourcesEyebrow": "Festival-Unterstützung",
-    "resourcesTitle": "Hilfreiche Ressourcen im Moment",
+    "resourcesTitle": "Hilfreiche Ressourcen",
     "chartEyebrow": "Kombinationsreferenz",
     "chartTitle": "Drogenkombinationstabelle",
-    "chartText": "Nutze diese Tabelle gängiger Festival-Substanzen als schnelle Referenz und sprich mit PsyCare, dem medizinischen Personal oder einer anderen vertrauenswürdigen Person, wenn sich etwas nicht richtig anfühlt.",
+    "chartText": "Schnelle Referenz für gängige Festival-Substanzen. Sprich mit PsyCare oder dem medizinischen Team, wenn etwas nicht stimmt.",
     "resources": {
       "emergency": {
         "label": "Notfall",
-        "title": "Dringende medizinische Hilfe nötig?",
-        "text": "Gehe zum nächsten medizinischen, Security- oder PsyCare-Teammitglied. Bei lebensbedrohlichen Situationen in der Schweiz Rettungsdienst 144 oder europäischen Notruf 112 wählen.",
+        "title": "Dringende Hilfe nötig?",
+        "text": "Sanität, Security oder PsyCare in der Nähe suchen. In der Schweiz 144 oder 112 wählen.",
         "action": "144 anrufen"
       },
       "festival": {
         "label": "Festival",
-        "title": "Burning-Mountain-Informationen",
-        "text": "Offizielle Updates, Tickets, Geländedetails, Camping, Einrichtungen und Reiseinformationen für das Festival in Zernez.",
-        "action": "Festival-Website öffnen"
+        "title": "Festival-Infos",
+        "text": "Tickets, Camping, Einrichtungen und Reiseinfos für Zernez.",
+        "action": "Website öffnen"
       },
       "saferUse": {
         "label": "Safer Use",
-        "title": "Drogenchecks und Warnungen",
-        "text": "Saferparty teilt Schweizer Informationen zu Drogenchecks, Warnungen und Beratungsangeboten vor und nach dem Festival.",
-        "action": "Saferparty öffnen"
+        "title": "Drogenchecks",
+        "text": "Schweizer Check-Angebote, Warnungen und Beratung von Saferparty.",
+        "action": "Saferparty"
       }
     }
   }
