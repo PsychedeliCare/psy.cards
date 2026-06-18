@@ -12,11 +12,27 @@ const PASSTHROUGH_SEGMENTS = new Set([
 	"card",
 	"combo-data",
 	"data",
+	"fontshare",
 	"favicon.png",
 	"robots.txt",
 	"sitemap-index.xml",
 	"sitemap.xml",
 ]);
+
+/** Root-level files that must not be prefixed with /burning-mountain on bm.psy.cards. */
+function isRootPassthroughAsset(pathname) {
+	const segments = pathname.split("/").filter(Boolean);
+	if (segments.length !== 1) return false;
+	const name = segments[0];
+	return (
+		name === "sw.js" ||
+		name === "manifest.webmanifest" ||
+		name === "registerSW.js" ||
+		name === "favicon.png" ||
+		name === "appicon.png" ||
+		(name.startsWith("workbox-") && name.endsWith(".js"))
+	);
+}
 
 function withPath(request, pathname) {
 	const url = new URL(request.url);
@@ -62,6 +78,7 @@ function ensureDirectorySlash(path) {
 function burningMountainAssetPath(pathname) {
 	const segments = pathname.split("/").filter(Boolean);
 	if (segments.length === 0) return `${BURNING_MOUNTAIN_ROUTE}/`;
+	if (isRootPassthroughAsset(pathname)) return pathname;
 	if (PASSTHROUGH_SEGMENTS.has(segments[0])) return ensureDirectorySlash(pathname);
 
 	const [first, second, ...rest] = segments;

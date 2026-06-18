@@ -13,7 +13,16 @@
     "previewDisclaimer": "Development version disclaimer",
     "previewBody1": "This is a development version of psy.cards and is not meant for wide distribution just yet.",
     "previewBody2": "None of the information on this site has been verified for accuracy. The site and its authors cannot be held liable for any inaccurate information.",
-    "previewCloseAria": "Close preview disclaimer"
+    "previewCloseAria": "Close preview disclaimer",
+    "pwaOffline": "You're offline. Cached content is still available.",
+    "pwaOfflineReady": "psy.cards is ready to use offline.",
+    "pwaOfflineReadyDismiss": "Dismiss",
+    "pwaUpdateAvailable": "A new version is available.",
+    "pwaUpdateReload": "Update now",
+    "pwaUpdateLater": "Later",
+    "pwaInstall": "Install app",
+    "pwaInstallBody": "Add psy.cards to your home screen for offline access.",
+    "pwaInstallDismiss": "Not now"
   },
   "landing": {
     "eyebrow": "psy.cards",

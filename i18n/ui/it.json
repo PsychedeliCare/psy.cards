@@ -13,7 +13,16 @@
     "previewDisclaimer": "Avviso versione di sviluppo",
     "previewBody1": "Questa è una versione di sviluppo di psy.cards e non è ancora destinata a una diffusione ampia.",
     "previewBody2": "Nessuna informazione su questo sito è stata verificata per accuratezza. Il sito e i suoi autori non possono essere ritenuti responsabili per informazioni inesatte.",
-    "previewCloseAria": "Chiudi avviso anteprima"
+    "previewCloseAria": "Chiudi avviso anteprima",
+    "pwaOffline": "Sei offline. I contenuti memorizzati restano disponibili.",
+    "pwaOfflineReady": "psy.cards è pronto per l'uso offline.",
+    "pwaOfflineReadyDismiss": "Chiudi",
+    "pwaUpdateAvailable": "È disponibile una nuova versione.",
+    "pwaUpdateReload": "Aggiorna ora",
+    "pwaUpdateLater": "Più tardi",
+    "pwaInstall": "Installa app",
+    "pwaInstallBody": "Aggiungi psy.cards alla schermata Home per l'accesso offline.",
+    "pwaInstallDismiss": "Non ora"
   },
   "landing": {
     "eyebrow": "psy.cards",

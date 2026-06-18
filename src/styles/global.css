@@ -213,6 +213,127 @@
   }
 }
 
+.pwa-shell {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 12px calc(12px + env(safe-area-inset-bottom, 0px));
+  pointer-events: none;
+}
+
+.pwa-shell[hidden] {
+  display: none;
+}
+
+.pwa-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+  width: min(720px, 100%);
+  margin: 0 auto;
+  padding: 12px 14px;
+  color: var(--color-fg);
+  background: color-mix(in oklab, var(--color-ink-2), black 8%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+}
+
+html[data-color-scheme="light"] .pwa-banner {
+  background: color-mix(in oklab, var(--color-ink-2), white 4%);
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.pwa-banner[hidden] {
+  display: none;
+}
+
+.pwa-banner__message {
+  flex: 1 1 220px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.pwa-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pwa-banner__action {
+  padding: 8px 12px;
+  color: var(--color-fg);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+html[data-color-scheme="light"] .pwa-banner__action {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.pwa-banner__action:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+html[data-color-scheme="light"] .pwa-banner__action:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.pwa-banner__action--primary {
+  color: #fff;
+  background: var(--color-safe);
+  border-color: color-mix(in oklab, var(--color-safe), white 18%);
+}
+
+.pwa-banner__action--primary:hover {
+  background: color-mix(in oklab, var(--color-safe), white 10%);
+}
+
+.pwa-banner--offline {
+  border-color: color-mix(in oklab, var(--color-caution), transparent 55%);
+}
+
+.pwa-banner--update {
+  border-color: color-mix(in oklab, var(--color-safe), transparent 45%);
+}
+
+.pwa-banner--ready,
+.pwa-banner--install {
+  border-color: color-mix(in oklab, var(--color-psychedelic), transparent 50%);
+}
+
+@media (max-width: 480px) {
+  .pwa-shell {
+    padding-inline: 8px;
+  }
+
+  .pwa-banner {
+    padding: 12px;
+  }
+
+  .pwa-banner__actions {
+    width: 100%;
+  }
+
+  .pwa-banner__action {
+    flex: 1 1 auto;
+  }
+}
+
 /* Colour hue per status / category is carried by the CSS variable `--hue`
    so the gradient utilities below can derive lighter/darker stops from it
    without conflicting with the `color` of the text inside. */

@@ -14,6 +14,10 @@
 import { initStatusTooltips } from "./status-tooltip.ts";
 import { lockPageScroll, unlockPageScroll } from "./scroll-lock.ts";
 import { getPageI18n, getUiString } from "../i18n/client";
+import {
+  getComboCardDataBySlug,
+  type ComboCardData as BundledComboCardData,
+} from "../data/combo-card-data";
 
 const DEFAULT_ROOT_ROUTE = "/combos";
 const BURNING_MOUNTAIN_HOSTS = new Set(["bm.psy.cards", "burning-mountain.psy.cards"]);
@@ -68,35 +72,7 @@ type IconName =
   | "flash"
   | "question";
 
-type ComboCardData = {
-  slug: string;
-  substances: [
-    {
-      key: string;
-      label: string;
-      slug: string;
-      group: string;
-    },
-    {
-      key: string;
-      label: string;
-      slug: string;
-      group: string;
-    },
-  ];
-  definition: {
-    statusKey: string;
-    icon: IconName;
-    label: string;
-    definition: string;
-  };
-  note?: string;
-  sources?: Array<{
-    author?: string;
-    title: string;
-    url: string;
-  }>;
-};
+type ComboCardData = BundledComboCardData;
 
 const ICON_PATHS: Record<IconName, string> = {
   "arrow-up": "M11 20V7.83l-5.17 5.17L4 11l8-8 8 8-1.83 1.83L13 7.83V20z",
@@ -251,27 +227,39 @@ function getModalTargetFromAnchor(anchor: HTMLAnchorElement): ModalTarget | null
 }
 
 async function fetchSubstanceCardFragment(slug: string): Promise<Node | null> {
-  const res = await fetch(`${cardRoutePrefix}/${slug}`, {
-    headers: { Accept: "text/html" },
-  });
-  if (!res.ok) return null;
-  const html = await res.text();
-  const doc = new DOMParser().parseFromString(html, "text/html");
-  const fragment = doc.querySelector("[data-card-fragment]");
-  if (!fragment) return null;
-  const wrapper = document.createDocumentFragment();
-  for (const child of Array.from(fragment.childNodes)) {
-    wrapper.appendChild(child);
+  try {
+    const res = await fetch(`${cardRoutePrefix}/${slug}`, {
+      headers: { Accept: "text/html" },
+    });
+    if (!res.ok) return null;
+    const html = await res.text();
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const fragment = doc.querySelector("[data-card-fragment]");
+    if (!fragment) return null;
+    const wrapper = document.createDocumentFragment();
+    for (const child of Array.from(fragment.childNodes)) {
+      wrapper.appendChild(child);
+    }
+    return wrapper;
+  } catch {
+    return null;
   }
-  return wrapper;
 }
 
 async function fetchComboData(slug: string): Promise<ComboCardData | null> {
-  const res = await fetch(`${comboDataRoutePrefix}/${slug}.json`, {
-    headers: { Accept: "application/json" },
-  });
-  if (!res.ok) return null;
-  return (await res.json()) as ComboCardData;
+  const locale = getPageI18n()?.locale ?? "en";
+  const bundled = getComboCardDataBySlug(slug, locale);
+  if (bundled) return bundled;
+
+  try {
+    const res = await fetch(`${comboDataRoutePrefix}/${slug}.json`, {
+      headers: { Accept: "application/json" },
+    });
+    if (!res.ok) return null;
+    return (await res.json()) as ComboCardData;
+  } catch {
+    return null;
+  }
 }
 
 function createSvgIcon(name: IconName): SVGSVGElement {

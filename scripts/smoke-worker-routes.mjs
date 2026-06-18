@@ -47,6 +47,31 @@ const checks = [
 		assetPath: "/assets/burningmountain-logo.png",
 	},
 	{
+		url: "https://bm.psy.cards/sw.js",
+		status: 200,
+		assetPath: "/sw.js",
+	},
+	{
+		url: "https://bm.psy.cards/manifest.webmanifest",
+		status: 200,
+		assetPath: "/manifest.webmanifest",
+	},
+	{
+		url: "https://bm.psy.cards/workbox-2fbc6a65.js",
+		status: 200,
+		assetPath: "/workbox-2fbc6a65.js",
+	},
+	{
+		url: "https://bm.psy.cards/appicon.png",
+		status: 200,
+		assetPath: "/appicon.png",
+	},
+	{
+		url: "https://bm.psy.cards/fontshare/css/satoshi.css",
+		status: 200,
+		assetPath: "/fontshare/css/satoshi.css",
+	},
+	{
 		url: "https://bm.psy.cards/fr/burning-mountain/lsd?x=1",
 		status: 308,
 		location: "https://bm.psy.cards/fr/lsd?x=1",
