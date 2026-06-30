@@ -1,0 +1,112 @@
+---
+import { getPrintCardData } from "../../lib/print-card";
+import { qrCodeSvg } from "../../lib/qr-code";
+import { toTitleCase } from "../../lib/text";
+import type { Locale } from "../../i18n/locales";
+import { getUiMessages } from "../../i18n/load-locale";
+import { t } from "../../i18n/ui";
+import PrintMolecule from "./PrintMolecule.astro";
+
+interface Props {
+  substanceKey: string;
+  locale?: Locale;
+  siteOrigin?: string;
+  showSideLabel?: boolean;
+}
+
+const {
+  substanceKey,
+  locale = "en",
+  siteOrigin,
+  showSideLabel = false,
+} = Astro.props;
+
+const ui = getUiMessages(locale);
+const data = getPrintCardData(substanceKey, locale, siteOrigin);
+const qrSvg = await qrCodeSvg(data.cardUrl, 96);
+---
+
+<article
+  class={`print-face group-${data.group}`}
+  data-print-side="front"
+  data-substance-key={substanceKey}
+>
+  <div class="print-face-accent category-surface" aria-hidden="true"></div>
+  <PrintMolecule substanceKey={substanceKey} />
+
+  <div class="print-face-body">
+    <header>
+      <p class="print-kicker">psy.cards</p>
+      <h1 class="print-title">{data.displayName}</h1>
+      {
+        data.categories.length > 0 && (
+          <ul class="print-tags">
+            {data.categories.map((category) => (
+              <li>{category}</li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
+
+    {data.summary && <p class="print-summary">{data.summary}</p>}
+
+    {
+      data.effects.length > 0 && (
+        <section>
+          <h2 class="print-section-title">
+            {t(locale, ui, "substanceCard.effects")}
+          </h2>
+          <ul class="print-effects">
+            {data.effects.map((effect) => (
+              <li>{toTitleCase(effect)}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      (data.warning || data.avoid) && (
+        <section class="print-safety">
+          <h2 class="print-section-title">
+            {t(locale, ui, "substanceCard.safety")}
+          </h2>
+          {
+            data.warning && (
+              <p class="print-safety-item print-safety-item--warning">
+                <strong>{t(locale, ui, "substanceCard.warning")}</strong>
+                {data.warning}
+              </p>
+            )
+          }
+          {
+            data.avoid && (
+              <p class="print-safety-item">
+                <strong>{t(locale, ui, "substanceCard.avoidCombining")}</strong>
+                {data.avoid}
+              </p>
+            )
+          }
+        </section>
+      )
+    }
+
+    <footer class="print-face-footer">
+      <div class="print-brand">
+        <p class="print-brand-name">
+          <img src="/favicon.png" alt="" width="14" height="14" aria-hidden="true" />
+          psy.cards
+        </p>
+        <p class="print-brand-url">{data.cardUrl.replace(/^https?:\/\//, "")}</p>
+      </div>
+      <div class="print-qr" set:html={qrSvg} aria-hidden="true" />
+    </footer>
+  </div>
+
+  {
+    showSideLabel && (
+      <span class="print-side-label">{t(locale, ui, "print.front")}</span>
+    )
+  }
+</article>

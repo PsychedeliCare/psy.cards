@@ -176,6 +176,17 @@
     "unknown": "Unknown",
     "unknownDefinition": "Interaction data is unavailable for this pair. Research further before combining."
   },
+  "print": {
+    "pageTitle": "Print cards",
+    "pageDescription": "A6 two-sided substance cards for print. Preview all cards below or generate PDFs from the command line.",
+    "front": "Front",
+    "back": "Back",
+    "selectLocale": "Language",
+    "cliHint": "Generate PDFs:",
+    "openPrintView": "Print view",
+    "webCard": "Web card",
+    "disclaimer": "Harm reduction info only — not medical advice. Verify doses and risks before use. Data from TripSit."
+  },
   "burningMountain": {
     "title": "ALPS Psycare — psy.cards",
     "description": "Burning Mountain harm-reduction combo chart with ALPS PsyCare resources for festival contexts.",

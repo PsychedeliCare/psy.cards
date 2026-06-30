@@ -1,0 +1,36 @@
+---
+import PrintCardBack from "./PrintCardBack.astro";
+import PrintCardFront from "./PrintCardFront.astro";
+import type { Locale } from "../../i18n/locales";
+
+interface Props {
+  substanceKey: string;
+  locale?: Locale;
+  siteOrigin?: string;
+  spread?: boolean;
+  showSideLabels?: boolean;
+}
+
+const {
+  substanceKey,
+  locale = "en",
+  siteOrigin,
+  spread = false,
+  showSideLabels = false,
+} = Astro.props;
+---
+
+<div class:list={["print-sheet", { "print-sheet--spread": spread }]}>
+  <PrintCardFront
+    substanceKey={substanceKey}
+    locale={locale}
+    siteOrigin={siteOrigin}
+    showSideLabel={showSideLabels}
+  />
+  <PrintCardBack
+    substanceKey={substanceKey}
+    locale={locale}
+    siteOrigin={siteOrigin}
+    showSideLabel={showSideLabels}
+  />
+</div>

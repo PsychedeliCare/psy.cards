@@ -1,0 +1,73 @@
+---
+import type { DoseChart } from "../../lib/dose-chart";
+import { formatDoseTick, getRouteLabel } from "../../lib/dose-chart";
+
+interface Props {
+  chart: DoseChart;
+}
+
+const { chart } = Astro.props;
+---
+
+<div class="print-dose">
+  <div class="print-dose-route">
+    <span>{getRouteLabel(chart.route)}</span>
+    <span>{chart.unit}</span>
+  </div>
+
+  <div class="print-dose-plot" aria-hidden="true">
+    <span class="print-dose-line"></span>
+    <div class="print-dose-segments">
+      {
+        chart.segments.map((segment) => (
+          <div
+            class="print-dose-segment"
+            style={`--left: ${segment.left}%; --width: ${segment.width}%; --bar-color: ${segment.color}`}
+          >
+            <span class="print-dose-cat">{segment.label}</span>
+            {segment.isPoint ? (
+              <span class="print-dose-point"></span>
+            ) : (
+              <span
+                class:list={[
+                  "print-dose-bar",
+                  { "print-dose-bar-open": segment.openEnd },
+                ]}
+              ></span>
+            )}
+            {segment.showStart && (
+              <span class="print-dose-bound">
+                {formatDoseTick(segment.start)}
+              </span>
+            )}
+            {segment.showEnd && (
+              <span class="print-dose-bound print-dose-bound-end">
+                {formatDoseTick(segment.end)}
+                {segment.openEnd && "+"}
+              </span>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <table class="print-dose-table">
+    <tbody>
+      {
+        chart.segments.map((segment) => (
+          <tr>
+            <th scope="row">
+              <span
+                class="print-dose-dot"
+                style={`--bar-color: ${segment.color}`}
+              ></span>
+              {segment.label}
+            </th>
+            <td>{segment.amount}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

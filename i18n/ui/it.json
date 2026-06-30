@@ -176,6 +176,17 @@
     "unknown": "Sconosciuto",
     "unknownDefinition": "I dati sull'interazione non sono disponibili per questa coppia. Informati ulteriormente prima di combinare."
   },
+  "print": {
+    "pageTitle": "Schede da stampa",
+    "pageDescription": "Schede sostanza fronte-retro in formato A6 per la stampa. Anteprima di tutte le schede qui sotto o genera PDF da riga di comando.",
+    "front": "Fronte",
+    "back": "Retro",
+    "selectLocale": "Lingua",
+    "cliHint": "Genera PDF:",
+    "openPrintView": "Vista stampa",
+    "webCard": "Scheda web",
+    "disclaimer": "Solo informazioni di riduzione del rischio — non consiglio medico. Verifica dosi e rischi prima dell'uso. Dati TripSit."
+  },
   "burningMountain": {
     "title": "ALPS Psycare — psy.cards",
     "description": "Tabella delle combinazioni per la riduzione del rischio Burning Mountain con risorse ALPS PsyCare per contesti festivalieri.",

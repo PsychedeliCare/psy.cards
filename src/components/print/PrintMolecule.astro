@@ -1,0 +1,25 @@
+---
+import { getSubstanceStructure } from "../../data/substances";
+
+interface Props {
+  substanceKey: string;
+}
+
+const { substanceKey } = Astro.props;
+const hasStructure = Boolean(getSubstanceStructure(substanceKey));
+---
+
+{
+  hasStructure && (
+    <div
+      class="print-molecule molecule-figure"
+      data-molecule-layout="single"
+      data-substance-keys={substanceKey}
+      aria-hidden="true"
+    >
+      <div class="molecule-frame">
+        <svg class="molecule-svg" />
+      </div>
+    </div>
+  )
+}

@@ -1,0 +1,31 @@
+---
+import PrintLayout from "../../../components/print/PrintLayout.astro";
+import PrintCardPair from "../../../components/print/PrintCardPair.astro";
+import { getColumnBySlug } from "../../../data/config";
+import { getUiMessages } from "../../../i18n/load-locale";
+import { t } from "../../../i18n/ui";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const { getColumns } = await import("../../../data/config");
+  return getColumns("it").map((col) => ({ params: { slug: col.slug } }));
+}
+
+const { slug } = Astro.params;
+if (!slug) return new Response("Not found", { status: 404 });
+
+const col = getColumnBySlug("it", slug);
+if (!col) return new Response("Not found", { status: 404 });
+
+const ui = getUiMessages("it");
+const siteOrigin = Astro.site?.href ?? "https://psy.cards";
+---
+
+<PrintLayout
+  locale="it"
+  title={`${col.label} — ${t("it", ui, "print.pageTitle")}`}
+  mode="single"
+>
+  <PrintCardPair substanceKey={col.key} locale="it" siteOrigin={siteOrigin} />
+</PrintLayout>

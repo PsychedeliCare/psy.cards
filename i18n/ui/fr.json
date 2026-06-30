@@ -176,6 +176,17 @@
     "unknown": "Inconnu",
     "unknownDefinition": "Les données d'interaction ne sont pas disponibles pour cette paire. Renseignez-vous davantage avant de combiner."
   },
+  "print": {
+    "pageTitle": "Cartes à imprimer",
+    "pageDescription": "Cartes substances recto-verso au format A6 pour l'impression. Prévisualisez toutes les cartes ci-dessous ou générez des PDF en ligne de commande.",
+    "front": "Recto",
+    "back": "Verso",
+    "selectLocale": "Langue",
+    "cliHint": "Générer des PDF :",
+    "openPrintView": "Vue impression",
+    "webCard": "Carte web",
+    "disclaimer": "Information de réduction des risques uniquement — pas un avis médical. Vérifiez doses et risques avant usage. Données TripSit."
+  },
   "burningMountain": {
     "title": "ALPS Psycare — psy.cards",
     "description": "Tableau de combinaisons de réduction des risques Burning Mountain avec les ressources ALPS PsyCare pour les contextes festivaliers.",

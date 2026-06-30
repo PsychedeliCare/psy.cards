@@ -1,0 +1,705 @@
+/* A6 print card system — 105mm × 148mm per side */
+
+.print-root {
+  --print-w: 105mm;
+  --print-h: 148mm;
+  --print-pad: 5.5mm;
+  --print-ink: #171813;
+  --print-paper: #f8f6f1;
+  --print-paper-edge: #ebe8e0;
+  --print-mute: #5c6056;
+  --print-rule: rgba(23, 24, 19, 0.1);
+  color: var(--print-ink);
+  font-family:
+    "Satoshi-Variable",
+    "Satoshi-Regular",
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Single card face ---------- */
+
+.print-face {
+  position: relative;
+  box-sizing: border-box;
+  width: var(--print-w);
+  height: var(--print-h);
+  overflow: hidden;
+  background:
+    radial-gradient(
+      120% 90% at 100% 0%,
+      color-mix(in srgb, var(--hue, #888) 6%, transparent) 0%,
+      transparent 55%
+    ),
+    linear-gradient(165deg, #fffefb 0%, var(--print-paper) 42%, #f3f0e8 100%);
+  border: 0.2mm solid var(--print-paper-edge);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 12px 36px -12px rgba(0, 0, 0, 0.22);
+  isolation: isolate;
+}
+
+.print-face::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle at 20% 80%,
+    rgba(23, 24, 19, 0.025) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.print-face-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3.2mm;
+  background-image: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--hue, #888), black 8%) 0%,
+    var(--hue, #888) 35%,
+    color-mix(in oklab, var(--hue, #888), white 12%) 100%
+  );
+}
+
+.print-face-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: calc(var(--print-pad) + 2mm) var(--print-pad) var(--print-pad);
+  gap: 2.8mm;
+}
+
+.print-face-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3mm;
+  padding-top: 2mm;
+  border-top: 0.15mm solid var(--print-rule);
+}
+
+/* ---------- Typography ---------- */
+
+.print-kicker {
+  margin: 0;
+  font-size: 6.5pt;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--print-mute);
+}
+
+.print-title {
+  margin: 0;
+  font-size: 17pt;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--print-ink);
+}
+
+.print-section-title {
+  margin: 0 0 1.2mm;
+  font-size: 6.5pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--print-mute);
+}
+
+.print-summary {
+  margin: 0;
+  font-size: 8pt;
+  line-height: 1.45;
+  color: var(--print-ink);
+  max-width: 92%;
+}
+
+.print-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2mm;
+}
+
+.print-tags li {
+  padding: 0.6mm 2mm;
+  font-size: 6pt;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--hue, #888);
+  border-radius: 999px;
+}
+
+/* ---------- Effects ---------- */
+
+.print-effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2mm;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.print-effects li {
+  padding: 0.8mm 2.2mm;
+  font-size: 6.5pt;
+  line-height: 1.2;
+  background: rgba(23, 24, 19, 0.05);
+  border: 0.12mm solid rgba(23, 24, 19, 0.08);
+  border-radius: 2mm;
+}
+
+/* ---------- Safety ---------- */
+
+.print-safety {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8mm;
+}
+
+.print-safety-item {
+  margin: 0;
+  padding: 1.8mm 2.4mm;
+  font-size: 6.8pt;
+  line-height: 1.4;
+  border-left: 0.8mm solid var(--hue, #888);
+  background: rgba(23, 24, 19, 0.03);
+}
+
+.print-safety-item strong {
+  display: block;
+  margin-bottom: 0.4mm;
+  font-size: 6pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--print-mute);
+}
+
+.print-safety-item--warning {
+  border-left-color: var(--color-dangerous, #d12128);
+  background: color-mix(in srgb, var(--color-dangerous, #d12128) 6%, transparent);
+}
+
+/* ---------- Molecule watermark ---------- */
+
+.print-molecule {
+  --molecule-frame-size: 34mm;
+  position: absolute;
+  top: 2mm;
+  right: 1mm;
+  z-index: 0;
+  width: var(--molecule-frame-size);
+  height: var(--molecule-frame-size);
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.print-molecule .molecule-frame {
+  width: 100%;
+  height: 100%;
+}
+
+.print-molecule .molecule-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Branding / QR ---------- */
+
+.print-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6mm;
+  min-width: 0;
+}
+
+.print-brand-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2mm;
+  margin: 0;
+  font-size: 8pt;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.print-brand-name img {
+  display: block;
+  width: 3.5mm;
+  height: 3.5mm;
+}
+
+.print-brand-url {
+  margin: 0;
+  font-size: 5.5pt;
+  color: var(--print-mute);
+  word-break: break-all;
+  line-height: 1.25;
+}
+
+.print-qr {
+  flex: none;
+  width: 13mm;
+  height: 13mm;
+}
+
+.print-qr svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.print-side-label {
+  position: absolute;
+  bottom: 2mm;
+  right: var(--print-pad);
+  font-size: 5pt;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--print-mute);
+  opacity: 0.55;
+}
+
+/* ---------- Back: timing grid ---------- */
+
+.print-timing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2mm;
+  margin: 0;
+}
+
+.print-timing-grid > div {
+  padding: 2mm 2.4mm;
+  background: rgba(23, 24, 19, 0.04);
+  border: 0.12mm solid var(--print-rule);
+  border-radius: 1.6mm;
+}
+
+.print-timing-grid dt {
+  margin: 0 0 0.5mm;
+  font-size: 5.8pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--print-mute);
+}
+
+.print-timing-grid dd {
+  margin: 0;
+  font-size: 8.5pt;
+  font-weight: 700;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.print-timing-grid .unit {
+  font-size: 6.5pt;
+  font-weight: 500;
+  color: var(--print-mute);
+}
+
+/* ---------- Back: compact dose chart ---------- */
+
+.print-dose {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5mm;
+}
+
+.print-dose-route {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5mm;
+  font-size: 6pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--print-mute);
+}
+
+.print-dose-plot {
+  position: relative;
+  height: 14mm;
+  margin-top: 1mm;
+}
+
+.print-dose-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 5.5mm;
+  height: 1.2mm;
+  border-radius: 999px;
+  background: rgba(23, 24, 19, 0.08);
+}
+
+.print-dose-segments {
+  position: absolute;
+  inset: 0;
+}
+
+.print-dose-segment {
+  position: absolute;
+  left: var(--left);
+  width: var(--width);
+  top: 0;
+  bottom: 0;
+}
+
+.print-dose-cat {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 5.5pt;
+  font-weight: 700;
+  text-transform: lowercase;
+  white-space: nowrap;
+  color: var(--bar-color);
+}
+
+.print-dose-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 4.8mm;
+  height: 2.4mm;
+  background: var(--bar-color);
+  border-radius: 999px;
+}
+
+.print-dose-bar-open {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  -webkit-mask-image: linear-gradient(to right, #000 50%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 50%, transparent 100%);
+}
+
+.print-dose-point {
+  position: absolute;
+  left: 0;
+  top: 5.8mm;
+  width: 2mm;
+  height: 2mm;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--bar-color);
+}
+
+.print-dose-bound {
+  position: absolute;
+  top: 9.5mm;
+  left: 0;
+  transform: translateX(-50%);
+  font-size: 5.5pt;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.print-dose-bound-end {
+  left: 100%;
+}
+
+.print-dose-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 6.5pt;
+}
+
+.print-dose-table th,
+.print-dose-table td {
+  padding: 1mm 0;
+  border-bottom: 0.12mm solid var(--print-rule);
+  text-align: left;
+  font-weight: 400;
+}
+
+.print-dose-table th {
+  font-weight: 600;
+  text-transform: lowercase;
+}
+
+.print-dose-table td {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.print-dose-dot {
+  display: inline-block;
+  width: 1.8mm;
+  height: 1.8mm;
+  margin-right: 1.2mm;
+  border-radius: 50%;
+  background: var(--bar-color);
+  vertical-align: middle;
+}
+
+.print-note {
+  margin: 0;
+  font-size: 6.5pt;
+  line-height: 1.4;
+  color: var(--print-mute);
+  font-style: italic;
+}
+
+.print-disclaimer {
+  margin: 0;
+  font-size: 5.5pt;
+  line-height: 1.35;
+  color: var(--print-mute);
+}
+
+/* ---------- Sheet (front + back pair) ---------- */
+
+.print-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  break-inside: avoid;
+}
+
+.print-sheet--spread {
+  flex-direction: row;
+  gap: 6mm;
+  align-items: flex-start;
+}
+
+/* ---------- Gallery page ---------- */
+
+.print-gallery {
+  min-height: 100dvh;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(153, 198, 89, 0.08), transparent),
+    var(--color-ink);
+  color: var(--color-fg);
+  padding: 32px 20px 64px;
+}
+
+.print-gallery-header {
+  max-width: 1100px;
+  margin: 0 auto 32px;
+}
+
+.print-gallery-header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.print-gallery-header p {
+  margin: 0;
+  max-width: 52ch;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--color-fg-mute);
+}
+
+.print-gallery-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin-top: 20px;
+}
+
+.print-gallery-locales {
+  display: inline-flex;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.print-gallery-locales a {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 7px;
+  color: var(--color-fg-mute);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.print-gallery-locales a:hover {
+  color: var(--color-fg);
+}
+
+.print-gallery-locales a[aria-current="page"] {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-fg);
+}
+
+.print-gallery-cli {
+  font-size: 12px;
+  color: var(--color-fg-mute);
+}
+
+.print-gallery-cli code {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 11px;
+}
+
+.print-gallery-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px 24px;
+}
+
+.print-gallery-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.print-gallery-item h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.print-gallery-item h2 span {
+  color: var(--color-fg-mute);
+  font-weight: 500;
+}
+
+.print-gallery-preview {
+  display: flex;
+  gap: 8px;
+  transform-origin: top left;
+  transform: scale(0.72);
+  width: calc((105mm * 2 + 8px) * 0.72);
+  height: calc(148mm * 0.72);
+}
+
+.print-gallery-preview .print-face {
+  flex: none;
+  box-shadow: 0 8px 28px -8px rgba(0, 0, 0, 0.45);
+}
+
+.print-gallery-links {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.print-gallery-links a {
+  color: var(--color-safe);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(53, 175, 255, 0.3);
+}
+
+/* ---------- Print / PDF output ---------- */
+
+@media print {
+  @page {
+    size: 105mm 148mm;
+    margin: 0;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fff !important;
+  }
+
+  .print-gallery,
+  .print-gallery-header,
+  .site-header,
+  .preview-banner {
+    display: none !important;
+  }
+
+  .print-output .print-face {
+    box-shadow: none;
+    border: none;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .print-output .print-face:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+}
+
+.print-output {
+  background: #e8e6e0;
+  padding: 0;
+  margin: 0;
+}
+
+.print-output--batch .print-sheet {
+  page-break-after: always;
+  break-after: page;
+}
+
+.print-output--batch .print-sheet:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+.print-output--batch .print-face {
+  box-shadow: none;
+}
+
+.print-output--batch .print-sheet--spread {
+  flex-direction: column;
+  gap: 0;
+}
+
+@media screen {
+  .print-output--single {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8mm;
+    padding: 12mm;
+    background: #d8d5cd;
+  }
+
+  .print-output--batch {
+    padding: 12mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10mm;
+  }
+}
+
+/* Category hue bindings for print faces */
+.print-face.group-psychedelic { --hue: var(--color-psychedelic); }
+.print-face.group-dissociative { --hue: var(--color-dissociative); }
+.print-face.group-stimulant { --hue: var(--color-stimulant); }
+.print-face.group-empathogen { --hue: var(--color-empathogen); }
+.print-face.group-depressant { --hue: var(--color-depressant); }
+.print-face.group-opioid { --hue: var(--color-opioid); }
+.print-face.group-cannabinoid { --hue: var(--color-cannabinoid); }
+.print-face.group-antidepressant { --hue: var(--color-antidepressant); }

@@ -1,0 +1,83 @@
+---
+import Layout from "../components/Layout.astro";
+import PrintCardPair from "../components/print/PrintCardPair.astro";
+import { getColumns } from "../data/config";
+import type { Locale } from "../i18n/locales";
+import { localeLabels, localePath, locales } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
+import "../styles/print.css";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
+const ui = getUiMessages(locale);
+const columns = getColumns(locale);
+const siteOrigin = Astro.site?.href ?? Astro.url.origin;
+const galleryPath = localePath(locale, "/print-cards");
+---
+
+<Layout
+  locale={locale}
+  title={t(locale, ui, "print.pageTitle")}
+  description={t(locale, ui, "print.pageDescription")}
+  colorScheme="dark"
+>
+  <main class="print-gallery">
+    <header class="print-gallery-header">
+      <h1>{t(locale, ui, "print.pageTitle")}</h1>
+      <p>{t(locale, ui, "print.pageDescription")}</p>
+
+      <div class="print-gallery-toolbar">
+        <nav class="print-gallery-locales" aria-label={t(locale, ui, "print.selectLocale")}>
+          {
+            locales.map((code) => (
+              <a
+                href={localePath(code, "/print-cards")}
+                aria-current={code === locale ? "page" : undefined}
+              >
+                {localeLabels[code]}
+              </a>
+            ))
+          }
+        </nav>
+        <p class="print-gallery-cli">
+          {t(locale, ui, "print.cliHint")}{" "}
+          <code>pnpm print:pdf --locale {locale}</code>
+        </p>
+      </div>
+    </header>
+
+    <div class="print-gallery-grid">
+      {
+        columns.map((column) => (
+          <article class="print-gallery-item">
+            <h2>
+              {column.label}
+              <span> · {column.group}</span>
+            </h2>
+            <div class="print-gallery-preview print-root">
+              <PrintCardPair
+                substanceKey={column.key}
+                locale={locale}
+                siteOrigin={siteOrigin}
+                spread={true}
+                showSideLabels={true}
+              />
+            </div>
+            <div class="print-gallery-links">
+              <a href={localePath(locale, `/print/${column.slug}`)}>
+                {t(locale, ui, "print.openPrintView")}
+              </a>
+              <a href={localePath(locale, `/${column.slug}`)}>
+                {t(locale, ui, "print.webCard")}
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </main>
+</Layout>

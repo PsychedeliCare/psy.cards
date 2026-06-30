@@ -1,0 +1,135 @@
+---
+import { getPrintCardData } from "../../lib/print-card";
+import { qrCodeSvg } from "../../lib/qr-code";
+import type { Locale } from "../../i18n/locales";
+import { getUiMessages } from "../../i18n/load-locale";
+import { t } from "../../i18n/ui";
+import DoseChartPrint from "./DoseChartPrint.astro";
+
+interface Props {
+  substanceKey: string;
+  locale?: Locale;
+  siteOrigin?: string;
+  showSideLabel?: boolean;
+}
+
+const {
+  substanceKey,
+  locale = "en",
+  siteOrigin,
+  showSideLabel = false,
+} = Astro.props;
+
+const ui = getUiMessages(locale);
+const data = getPrintCardData(substanceKey, locale, siteOrigin);
+const qrSvg = await qrCodeSvg(data.cardUrl, 96);
+const { timing } = data;
+const hasTiming =
+  timing.onset || timing.duration || timing.afterEffects || timing.halfLife;
+---
+
+<article
+  class={`print-face group-${data.group}`}
+  data-print-side="back"
+  data-substance-key={substanceKey}
+>
+  <div class="print-face-accent category-surface" aria-hidden="true"></div>
+
+  <div class="print-face-body">
+    <header>
+      <p class="print-kicker">{data.displayName}</p>
+      <h1 class="print-title">{t(locale, ui, "substanceCard.doses")}</h1>
+    </header>
+
+    {
+      data.primaryChart ? (
+        <DoseChartPrint chart={data.primaryChart} />
+      ) : (
+        <p class="print-note">{t(locale, ui, "substanceCard.classFallback")}</p>
+      )
+    }
+
+    {
+      hasTiming && (
+        <section>
+          <h2 class="print-section-title">
+            {t(locale, ui, "substanceCard.timing")}
+          </h2>
+          <dl class="print-timing-grid">
+            {
+              timing.onset && (
+                <div>
+                  <dt>{t(locale, ui, "substanceCard.onset")}</dt>
+                  <dd>
+                    {timing.onset.value}
+                    {timing.onset.unit && (
+                      <span class="unit"> {timing.onset.unit}</span>
+                    )}
+                  </dd>
+                </div>
+              )
+            }
+            {
+              timing.duration && (
+                <div>
+                  <dt>{t(locale, ui, "substanceCard.duration")}</dt>
+                  <dd>
+                    {timing.duration.value}
+                    {timing.duration.unit && (
+                      <span class="unit"> {timing.duration.unit}</span>
+                    )}
+                  </dd>
+                </div>
+              )
+            }
+            {
+              timing.afterEffects && (
+                <div>
+                  <dt>{t(locale, ui, "substanceCard.afterEffects")}</dt>
+                  <dd>
+                    {timing.afterEffects.value}
+                    {timing.afterEffects.unit && (
+                      <span class="unit"> {timing.afterEffects.unit}</span>
+                    )}
+                  </dd>
+                </div>
+              )
+            }
+            {
+              timing.halfLife && (
+                <div>
+                  <dt>{t(locale, ui, "substanceCard.halfLife")}</dt>
+                  <dd>{timing.halfLife}</dd>
+                </div>
+              )
+            }
+          </dl>
+        </section>
+      )
+    }
+
+    {
+      data.testKits && (
+        <section>
+          <h2 class="print-section-title">
+            {t(locale, ui, "substanceCard.testKits")}
+          </h2>
+          <p class="print-note">{data.testKits}</p>
+        </section>
+      )
+    }
+
+    {data.doseNote && <p class="print-note">{data.doseNote}</p>}
+
+    <footer class="print-face-footer">
+      <p class="print-disclaimer">{t(locale, ui, "print.disclaimer")}</p>
+      <div class="print-qr" set:html={qrSvg} aria-hidden="true" />
+    </footer>
+  </div>
+
+  {
+    showSideLabel && (
+      <span class="print-side-label">{t(locale, ui, "print.back")}</span>
+    )
+  }
+</article>

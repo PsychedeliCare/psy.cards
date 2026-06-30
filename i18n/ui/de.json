@@ -176,6 +176,17 @@
     "unknown": "Unbekannt",
     "unknownDefinition": "Wechselwirkungsdaten für dieses Paar sind nicht verfügbar. Informiere dich weiter, bevor du kombinierst."
   },
+  "print": {
+    "pageTitle": "Druckkarten",
+    "pageDescription": "Zweiseitige Substanzkarten im A6-Format zum Drucken. Alle Karten unten ansehen oder PDFs über die Kommandozeile erzeugen.",
+    "front": "Vorderseite",
+    "back": "Rückseite",
+    "selectLocale": "Sprache",
+    "cliHint": "PDFs erzeugen:",
+    "openPrintView": "Druckansicht",
+    "webCard": "Webkarte",
+    "disclaimer": "Nur Risikominimierungs-Info — keine medizinische Beratung. Dosen und Risiken vor Gebrauch prüfen. Daten von TripSit."
+  },
   "burningMountain": {
     "title": "ALPS Psycare — psy.cards",
     "description": "Burning-Mountain-Risikominimierungs-Kombinationstabelle mit ALPS-PsyCare-Ressourcen für Festivalkontexte.",
