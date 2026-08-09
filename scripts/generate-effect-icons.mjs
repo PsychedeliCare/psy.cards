@@ -215,16 +215,22 @@ for (const effect of [...effects].sort()) {
 const outPath = path.join(root, "src/data/effect-icons.json");
 fs.writeFileSync(outPath, JSON.stringify(mapping, null, 2) + "\n");
 
-const tabler = JSON.parse(
+const phosphor = JSON.parse(
   fs.readFileSync(
-    path.join(root, "node_modules/@iconify-json/tabler/icons.json"),
+    path.join(root, "node_modules/@iconify-json/ph/icons.json"),
     "utf8"
   )
 );
-const valid = new Set(Object.keys(tabler.icons));
+const aliases = JSON.parse(
+  fs.readFileSync(
+    path.join(root, "src/data/phosphor-icon-aliases.json"),
+    "utf8"
+  )
+);
+const valid = new Set(Object.keys(phosphor.icons));
 const invalid = Object.entries(mapping)
-  .filter(([k, v]) => k !== "_default" && !valid.has(v))
-  .map(([k, v]) => `${k}: ${v}`);
+  .filter(([k, v]) => k !== "_default" && !valid.has(`${aliases[v] ?? v}-fill`))
+  .map(([k, v]) => `${k}: ${aliases[v] ?? v}-fill`);
 if (invalid.length) {
   console.error("Invalid icons:", invalid.join("\n"));
   process.exit(1);

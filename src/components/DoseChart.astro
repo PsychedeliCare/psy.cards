@@ -47,7 +47,7 @@ function isChart(chart: (typeof charts)[number]): chart is DoseChart {
             for={`dose-view-chart-${uid}`}
             title={t(locale, ui, "doseChart.chart")}
           >
-            <Icon name="tabler:chart-bar" aria-hidden="true" />
+            <Icon name="ph:chart-bar-fill" aria-hidden="true" />
             <span class="sr-only">{t(locale, ui, "doseChart.chart")}</span>
           </label>
           <input
@@ -61,7 +61,7 @@ function isChart(chart: (typeof charts)[number]): chart is DoseChart {
             for={`dose-view-table-${uid}`}
             title={t(locale, ui, "doseChart.table")}
           >
-            <Icon name="tabler:table" aria-hidden="true" />
+            <Icon name="ph:table-fill" aria-hidden="true" />
             <span class="sr-only">{t(locale, ui, "doseChart.table")}</span>
           </label>
         </div>
@@ -75,7 +75,7 @@ function isChart(chart: (typeof charts)[number]): chart is DoseChart {
         <div class="dose-route">
           <div class="dose-route-head">
             <Icon
-              name={`tabler:${getRouteIcon(chart.route)}`}
+              name={`ph:${getRouteIcon(chart.route)}`}
               class="dose-route-icon"
               aria-hidden="true"
             />
@@ -184,7 +184,7 @@ function isChart(chart: (typeof charts)[number]): chart is DoseChart {
         <div class="dose-route dose-route-fallback">
           <div class="dose-route-head">
             <Icon
-              name={`tabler:${getRouteIcon(chart.route)}`}
+              name={`ph:${getRouteIcon(chart.route)}`}
               class="dose-route-icon"
               aria-hidden="true"
             />

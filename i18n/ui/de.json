@@ -25,11 +25,17 @@
     "pwaInstallDismiss": "Nicht jetzt"
   },
   "landing": {
-    "eyebrow": "psy.cards",
-    "title": "Klarere Substanzinformationen, überall dort, wo Menschen sie brauchen.",
-    "lede": "psy.cards verwandelt vertrauenswürdige Risikominimierungs-Informationen in einfache, mehrsprachige Karten für Druck, Web und soziale Medien.",
+    "title": "Informationen zu psychoaktiven Substanzen",
+    "lede": "Etablierte Quellen zur Risikominimierung, zusammengeführt und übersetzt. Heute im Web, später als gedrucktes Kartenset in allen europäischen Sprachen.",
+    "disclaimer": "Nur Risikominimierungs-Info — keine medizinische Beratung. Dosen und Risiken vor Gebrauch prüfen. Daten von TripSit.",
     "cta": "Drogenkombinationen erkunden",
-    "about": "Das Ziel ist, praktische Substanzberatung leichter auffindbar, verständlich, übersetzbar und verantwortungsvoll teilbar zu machen. Jede Karte hält das Wesentliche griffbereit – ob in gedruckter Form, in einem Karussell-Post oder über einen QR-Code."
+    "about": "Das Ziel ist, praktische Substanzberatung leichter auffindbar, verständlich, übersetzbar und verantwortungsvoll teilbar zu machen. Jede Karte hält das Wesentliche griffbereit – ob in gedruckter Form, in einem Karussell-Post oder über einen QR-Code.",
+    "tabAll": "Alle",
+    "navList": "Substanzen",
+    "navCombos": "Combos",
+    "closeCard": "Karte schließen",
+    "categoriesAria": "Substanzkategorien",
+    "viewSwitchAria": "Zwischen Substanzen und Kombinationen wechseln"
   },
   "footer": {
     "projectBy": "Ein Projekt von",
@@ -104,12 +110,19 @@
     "interactionAriaLabel": "Wechselwirkung zwischen {row} und {col}"
   },
   "substanceCard": {
+    "alsoKnownAs": "Auch bekannt als",
     "timing": "Zeitverlauf",
     "onset": "Wirkungseintritt",
     "duration": "Dauer",
     "afterEffects": "Nachwirkungen",
     "halfLife": "Halbwertszeit",
     "doses": "Dosen",
+    "combos": "Kombinationen",
+    "comboSubstance": "Substanz",
+    "comboRisk": "Risiko",
+    "comboAlsoKnownAs": "Auch bekannt als",
+    "comboShowAll": "Alle anzeigen ({count} weitere)",
+    "comboShowLess": "Weniger anzeigen",
     "safety": "Sicherheit",
     "warning": "Warnung",
     "avoidCombining": "Nicht kombinieren mit",

@@ -25,11 +25,17 @@
     "pwaInstallDismiss": "Pas maintenant"
   },
   "landing": {
-    "eyebrow": "psy.cards",
-    "title": "Des informations sur les substances plus claires, là où les gens en ont besoin.",
-    "lede": "psy.cards transforme des informations fiables de réduction des risques en cartes simples et multilingues pour l'impression, le web et les réseaux sociaux.",
+    "title": "Informations sur les substances psychoactives",
+    "lede": "Des sources reconnues de réduction des risques, regroupées et traduites. Sur le web dès aujourd'hui, puis en jeu de cartes imprimé dans toutes les langues européennes.",
+    "disclaimer": "Information de réduction des risques uniquement — pas un avis médical. Vérifiez doses et risques avant usage. Données TripSit.",
     "cta": "Explorer les combinaisons de drogues",
-    "about": "L'objectif est de rendre les conseils pratiques sur les substances plus faciles à trouver, à comprendre, à traduire et à partager de manière responsable. Chaque carte garde l'essentiel à portée de main, que ce soit en version imprimée, dans un carrousel ou via un code QR."
+    "about": "L'objectif est de rendre les conseils pratiques sur les substances plus faciles à trouver, à comprendre, à traduire et à partager de manière responsable. Chaque carte garde l'essentiel à portée de main, que ce soit en version imprimée, dans un carrousel ou via un code QR.",
+    "tabAll": "Tous",
+    "navList": "Substances",
+    "navCombos": "Combos",
+    "closeCard": "Fermer la carte",
+    "categoriesAria": "Catégories de substances",
+    "viewSwitchAria": "Basculer entre substances et combinaisons"
   },
   "footer": {
     "projectBy": "Un projet de",
@@ -104,12 +110,19 @@
     "interactionAriaLabel": "Interaction entre {row} et {col}"
   },
   "substanceCard": {
+    "alsoKnownAs": "Aussi connue sous",
     "timing": "Chronologie",
     "onset": "Début d'action",
     "duration": "Durée",
     "afterEffects": "Effets résiduels",
     "halfLife": "Demi-vie",
     "doses": "Doses",
+    "combos": "Combinaisons",
+    "comboSubstance": "Substance",
+    "comboRisk": "Risque",
+    "comboAlsoKnownAs": "Aussi connue sous",
+    "comboShowAll": "Tout afficher ({count} de plus)",
+    "comboShowLess": "Afficher moins",
     "safety": "Sécurité",
     "warning": "Avertissement",
     "avoidCombining": "Éviter de combiner avec",

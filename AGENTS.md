@@ -23,6 +23,17 @@ psy.cards is a multilingual harm reduction card project that turns verified subs
 | `pnpm preview` | Preview production build locally |
 | `pnpm generate-types` | Generate Cloudflare worker types via wrangler |
 
+## Dev servers — do not start new ones
+
+**Never start a new `pnpm dev` / Astro / Vite server unless the user explicitly asks you to.** Multiple concurrent servers (especially on ports 4321–4323) break Astro/Vite caching and can serve stale builds.
+
+Before using a local URL:
+
+1. Check whether a server is already listening (typically `4321`, then `4322` / `4323` if Astro auto-incremented).
+2. Reuse that existing server and its URL.
+3. Only start a new server if nothing is listening **and** the user asked you to run the app / start the dev server.
+4. Do not kill or restart an existing healthy server just to “use a preferred port.”
+
 ## Architecture
 
 - `src/pages/` — Astro page routes (file-based routing)

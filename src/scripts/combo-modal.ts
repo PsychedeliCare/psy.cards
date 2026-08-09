@@ -18,6 +18,8 @@ import {
   getComboCardDataBySlug,
   type ComboCardData as BundledComboCardData,
 } from "../data/combo-card-data";
+import type { IconName } from "../data/definitions";
+import { statusIcons } from "../data/status-icons";
 
 const DEFAULT_ROOT_ROUTE = "/combos";
 const BURNING_MOUNTAIN_HOSTS = new Set(["bm.psy.cards", "burning-mountain.psy.cards"]);
@@ -63,34 +65,7 @@ type ModalTarget =
       url: string;
     };
 
-type IconName =
-  | "arrow-up"
-  | "dot-circle"
-  | "arrow-down"
-  | "warning"
-  | "heartbeat"
-  | "times"
-  | "flash"
-  | "question";
-
 type ComboCardData = BundledComboCardData;
-
-const ICON_PATHS: Record<IconName, string> = {
-  "arrow-up": "M11 20V7.83l-5.17 5.17L4 11l8-8 8 8-1.83 1.83L13 7.83V20z",
-  "arrow-down": "M13 4v12.17l5.17-5.17L20 13l-8 8-8-8 1.83-1.83L11 16.17V4z",
-  "dot-circle":
-    "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm0-12a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z",
-  warning:
-    "M12 2 1 21h22L12 2Zm0 4.53L19.53 19H4.47L12 6.53ZM11 10v5h2v-5h-2Zm0 6v2h2v-2h-2Z",
-  heartbeat:
-    "M12 21s-7-4.35-9.5-9.09C1 8.35 3.2 5 6.5 5c1.74 0 3.41.81 4.5 2.09C12.09 5.81 13.76 5 15.5 5c1.65 0 3.1.83 4 2.09H17l-1.5 2-2-4-2 6-2-3H2.3c.19.31.4.61.62.91H8l1.5 2 2-4 2 4 1.5-2h6.58c.22-.3.43-.6.62-.91-.72 3.22-4.72 6.7-9.7 9.42l-.5.27V21Z",
-  times:
-    "M18.3 5.71 12 12.01l-6.3-6.3-1.41 1.41L10.59 13.4l-6.3 6.3 1.41 1.41 6.3-6.3 6.3 6.3 1.41-1.41-6.3-6.3 6.3-6.3z",
-  flash:
-    "M11 21h-1l1-7H7.5c-.88 0-.33-.75-.31-.78C8.48 10.94 10.42 7.54 13.01 3h1l-1 7h3.51c.4 0 .62.19.4.66C12.97 17.55 11 21 11 21z",
-  question:
-    "M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8Zm.75-5.5H11v-1a2.5 2.5 0 0 1 1.25-2.17A2 2 0 1 0 10 9.5H8.25a3.75 3.75 0 1 1 5.5 3.33 1 1 0 0 0-.5.83v.84Zm-1.75 2.5a1.25 1.25 0 1 1 1.25 1.25A1.25 1.25 0 0 1 11 17Z",
-};
 
 function isSafeSlug(slug: string): boolean {
   return /^[a-z0-9-]+(?:~[a-z0-9-]+)?$/.test(slug);
@@ -287,15 +262,19 @@ async function fetchComboData(slug: string): Promise<ComboCardData | null> {
 
 function createSvgIcon(name: IconName): SVGSVGElement {
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("viewBox", "0 0 256 256");
   svg.setAttribute("width", "0.95em");
   svg.setAttribute("height", "0.95em");
   svg.setAttribute("fill", "currentColor");
   svg.setAttribute("aria-hidden", "true");
 
-  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  path.setAttribute("d", ICON_PATHS[name] ?? ICON_PATHS.question);
-  svg.appendChild(path);
+  const icon = statusIcons[name] ?? statusIcons.question;
+  const secondary = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  secondary.setAttribute("d", icon.secondary);
+  secondary.setAttribute("opacity", "0.28");
+  const primary = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  primary.setAttribute("d", icon.primary);
+  svg.append(secondary, primary);
 
   return svg;
 }

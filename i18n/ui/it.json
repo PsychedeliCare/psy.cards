@@ -25,11 +25,17 @@
     "pwaInstallDismiss": "Non ora"
   },
   "landing": {
-    "eyebrow": "psy.cards",
-    "title": "Informazioni sulle sostanze più chiare, ovunque servano.",
-    "lede": "psy.cards trasforma informazioni affidabili sulla riduzione del rischio in schede semplici e multilingue per stampa, web e social media.",
+    "title": "Informazioni sulle sostanze psicoattive",
+    "lede": "Fonti consolidate di riduzione del rischio, riunite e tradotte. Sul web da oggi, poi come set di schede stampate in tutte le lingue europee.",
+    "disclaimer": "Solo informazioni di riduzione del rischio — non consiglio medico. Verifica dosi e rischi prima dell'uso. Dati TripSit.",
     "cta": "Esplora le combinazioni di droghe",
-    "about": "L'obiettivo è rendere le indicazioni pratiche sulle sostanze più facili da trovare, capire, tradurre e condividere in modo responsabile. Ogni scheda tiene l'essenziale a portata di mano, che sia in stampa, in un carosello o tramite un codice QR."
+    "about": "L'obiettivo è rendere le indicazioni pratiche sulle sostanze più facili da trovare, capire, tradurre e condividere in modo responsabile. Ogni scheda tiene l'essenziale a portata di mano, che sia in stampa, in un carosello o tramite un codice QR.",
+    "tabAll": "Tutti",
+    "navList": "Sostanze",
+    "navCombos": "Combo",
+    "closeCard": "Chiudi scheda",
+    "categoriesAria": "Categorie di sostanze",
+    "viewSwitchAria": "Passa tra sostanze e combinazioni"
   },
   "footer": {
     "projectBy": "Un progetto di",
@@ -104,12 +110,19 @@
     "interactionAriaLabel": "Interazione tra {row} e {col}"
   },
   "substanceCard": {
+    "alsoKnownAs": "Conosciuta anche come",
     "timing": "Tempistica",
     "onset": "Insorgenza",
     "duration": "Durata",
     "afterEffects": "Effetti residui",
     "halfLife": "Emivita",
     "doses": "Dosaggi",
+    "combos": "Combinazioni",
+    "comboSubstance": "Sostanza",
+    "comboRisk": "Rischio",
+    "comboAlsoKnownAs": "Conosciuta anche come",
+    "comboShowAll": "Mostra tutte ({count} in più)",
+    "comboShowLess": "Mostra meno",
     "safety": "Sicurezza",
     "warning": "Avvertenza",
     "avoidCombining": "Evitare di combinare con",

@@ -754,6 +754,172 @@ html[data-color-scheme="light"] .card-contribute-link img {
   letter-spacing: 0.06em;
 }
 
+.substance-card .also-known-as {
+  gap: 8px;
+}
+
+.substance-card .alias-pills li {
+  text-transform: lowercase;
+}
+
+.substance-combos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.substance-combos-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.substance-combos-table-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.substance-combos-expand-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.substance-combos-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.substance-combos-table th,
+.substance-combos-table td {
+  text-align: left;
+  padding: 7px 10px 7px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: middle;
+}
+
+.substance-combos-table th:last-child,
+.substance-combos-table td:last-child {
+  padding-right: 0;
+}
+
+.substance-combos-table th {
+  color: var(--color-fg-mute);
+  font-weight: 500;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.substance-combos-table th:nth-child(2),
+.substance-combos-table td:nth-child(2) {
+  width: 42%;
+}
+
+.substance-combos-table th:nth-child(3),
+.substance-combos-table td:nth-child(3) {
+  width: 28%;
+  text-align: right;
+}
+
+.substance-combos-name {
+  color: var(--color-fg);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.substance-combos-name:hover,
+.substance-combos-name:focus-visible {
+  color: var(--hue, var(--color-safe));
+}
+
+.substance-combos-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  padding: 3px 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.substance-combos-status span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.substance-combos-slang {
+  color: var(--color-fg-mute);
+  font-size: 12px;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-fg-mute) 45%, transparent);
+  text-underline-offset: 2px;
+}
+
+.substance-combos-slang:hover,
+.substance-combos-slang:focus-visible {
+  color: var(--color-safe);
+  text-decoration-color: color-mix(in srgb, var(--color-safe) 55%, transparent);
+}
+
+.substance-combos-slang-empty {
+  color: color-mix(in srgb, var(--color-fg-mute) 55%, transparent);
+}
+
+.substance-combos-expand {
+  align-self: flex-start;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-safe);
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+}
+
+.substance-combos-expand:hover,
+.substance-combos-expand:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.substance-combos-expand-hide {
+  display: none;
+}
+
+.substance-combos-expand-toggle:not(:checked) ~ .substance-combos-table .substance-combos-row-extra {
+  display: none;
+}
+
+.substance-combos-expand-toggle:checked ~ .substance-combos-expand .substance-combos-expand-show {
+  display: none;
+}
+
+.substance-combos-expand-toggle:checked ~ .substance-combos-expand .substance-combos-expand-hide {
+  display: inline;
+}
+
+html[data-color-scheme="light"] .substance-combos-table th,
+html[data-color-scheme="light"] .substance-combos-table td {
+  border-bottom-color: rgba(23, 24, 19, 0.1);
+}
+
 /* ---------- Dose chart (PsychonautWiki-inspired) ---------- */
 
 .dose-charts {

@@ -18,12 +18,12 @@ export type StatusKey =
   | "unknown";
 
 export type IconName =
-  | "arrow-up"
-  | "dot-circle"
-  | "arrow-down"
+  | "arrow-fat-line-up"
+  | "arrow-fat-line-right"
+  | "arrow-fat-line-down"
   | "warning"
   | "heartbeat"
-  | "times"
+  | "warning-octagon"
   | "flash"
   | "question";
 
@@ -37,12 +37,12 @@ export type Definition = {
 };
 
 const faToIcon: Record<string, IconName> = {
-  "fa-arrow-up": "arrow-up",
-  "fa-dot-circle-o": "dot-circle",
-  "fa-arrow-down": "arrow-down",
+  "fa-arrow-up": "arrow-fat-line-up",
+  "fa-dot-circle-o": "arrow-fat-line-right",
+  "fa-arrow-down": "arrow-fat-line-down",
   "fa-warning": "warning",
   "fa-heartbeat": "heartbeat",
-  "fa-times": "times",
+  "fa-times": "warning-octagon",
   "fa-flash": "flash",
   "fa-question": "question",
 };

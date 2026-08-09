@@ -17,6 +17,8 @@ interface Props {
   description?: string;
   colorScheme?: "dark" | "light" | "normal";
   headerVariant?: "default" | "event";
+  /** Show Substances / Combos switcher in the sticky header center. */
+  headerView?: "list" | "combos";
   comboRoute?: string;
   substanceBase?: string;
 }
@@ -27,6 +29,7 @@ const {
   description,
   colorScheme = "dark",
   headerVariant = "default",
+  headerView,
   comboRoute = localePath(locale, "/combos"),
   substanceBase = localePath(locale, "/"),
 } = Astro.props;
@@ -76,7 +79,12 @@ const i18nPayload = JSON.stringify({
     <script id="psy-i18n" type="application/json" set:html={i18nPayload}></script>
   </head>
   <body>
-    <SiteHeader locale={locale} currentPath={currentPath} variant={headerVariant} />
+    <SiteHeader
+      locale={locale}
+      currentPath={currentPath}
+      variant={headerVariant}
+      activeView={headerView}
+    />
     <slot />
     <PreviewBanner locale={locale} />
     <PwaShell locale={locale} />

@@ -22,6 +22,7 @@ const comboRoute = localePath(locale, "/combos");
 <Layout
   locale={locale}
   title={t(locale, ui, "meta.combosTitle")}
+  headerView="combos"
 >
   <main class="page">
     <ComboTable locale={locale} comboRoute={comboRoute} />

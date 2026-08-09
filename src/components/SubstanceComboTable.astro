@@ -1,0 +1,203 @@
+---
+import Icon from "./Icon.astro";
+import {
+  commonSubstanceKeys,
+  getColumnByKey,
+  getColumns,
+  sortPair,
+} from "../data/config";
+import { getInteraction } from "../data/combos";
+import { getPrimaryComboSlang } from "../data/combo-slang";
+import { pairSlug } from "../data/slug";
+import type { Locale } from "../i18n/locales";
+import { localePath } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t, tFormat } from "../i18n/ui";
+
+interface Props {
+  substanceKey: string;
+  locale?: Locale;
+}
+
+const { substanceKey, locale = "en" } = Astro.props;
+const ui = getUiMessages(locale);
+const comboRoute = localePath(locale, "/combos");
+const expandId = `substance-combos-expand-${substanceKey.replace(/[^a-z0-9_-]+/gi, "-")}`;
+
+type InteractionRow = {
+  otherKey: string;
+  label: string;
+  group: string;
+  slug: string;
+  href: string;
+  statusKey: string;
+  statusLabel: string;
+  icon: ReturnType<typeof getInteraction>["definition"]["icon"];
+  slang?: string;
+};
+
+function buildRow(otherKey: string): InteractionRow | null {
+  const column = getColumnByKey(locale, otherKey);
+  if (!column || column.key === substanceKey) return null;
+
+  const { definition } = getInteraction(substanceKey, otherKey, locale);
+  const [a, b] = sortPair(locale, substanceKey, otherKey);
+  const slug = pairSlug(a, b);
+
+  return {
+    otherKey: column.key,
+    label: column.label,
+    group: column.group,
+    slug,
+    href: `${comboRoute}?combo=${slug}`,
+    statusKey: definition.statusKey,
+    statusLabel: definition.label,
+    icon: definition.icon,
+    slang: getPrimaryComboSlang(substanceKey, otherKey),
+  };
+}
+
+const commonRows = commonSubstanceKeys
+  .map((key) => buildRow(key))
+  .filter((row): row is InteractionRow => Boolean(row));
+
+const commonKeySet = new Set(commonRows.map((row) => row.otherKey));
+const extraRows = getColumns(locale)
+  .map((column) => column.key)
+  .filter((key) => key !== substanceKey && !commonKeySet.has(key))
+  .map((key) => buildRow(key))
+  .filter((row): row is InteractionRow => Boolean(row));
+
+const allRows = [...commonRows, ...extraRows];
+const hasExtra = extraRows.length > 0;
+const previewRows = commonRows.length > 0 ? commonRows : allRows.slice(0, 10);
+const remainingRows =
+  commonRows.length > 0 ? extraRows : allRows.slice(previewRows.length);
+const showExpand = remainingRows.length > 0;
+---
+
+{
+  allRows.length > 0 && (
+    <section class="substance-combos" aria-labelledby={`${expandId}-heading`}>
+      <div class="substance-combos-head">
+        <h3 id={`${expandId}-heading`}>
+          {t(locale, ui, "substanceCard.combos")}
+        </h3>
+      </div>
+
+      <div class="substance-combos-table-wrap">
+        {showExpand && (
+          <input
+            type="checkbox"
+            id={expandId}
+            class="substance-combos-expand-toggle"
+            aria-controls={`${expandId}-rows`}
+          />
+        )}
+
+        <table class="substance-combos-table">
+          <thead>
+            <tr>
+              <th scope="col">{t(locale, ui, "substanceCard.comboSubstance")}</th>
+              <th scope="col">{t(locale, ui, "substanceCard.comboRisk")}</th>
+              <th scope="col">{t(locale, ui, "substanceCard.comboAlsoKnownAs")}</th>
+            </tr>
+          </thead>
+          <tbody id={`${expandId}-rows`}>
+            {previewRows.map((row) => (
+              <tr>
+                <td>
+                  <a
+                    href={row.href}
+                    class={`substance-combos-name group-${row.group}`}
+                    data-combo={row.slug}
+                  >
+                    {row.label}
+                  </a>
+                </td>
+                <td>
+                  <a
+                    href={row.href}
+                    class={`substance-combos-status status-${row.statusKey} status-surface cell-text`}
+                    data-combo={row.slug}
+                    title={row.statusLabel}
+                  >
+                    <Icon name={row.icon} size="0.95em" />
+                    <span>{row.statusLabel}</span>
+                  </a>
+                </td>
+                <td>
+                  {row.slang ? (
+                    <a
+                      href={row.href}
+                      class="substance-combos-slang"
+                      data-combo={row.slug}
+                    >
+                      {row.slang}
+                    </a>
+                  ) : (
+                    <span class="substance-combos-slang-empty" aria-hidden="true">
+                      —
+                    </span>
+                  )}
+                </td>
+              </tr>
+            ))}
+            {remainingRows.map((row) => (
+              <tr class="substance-combos-row-extra">
+                <td>
+                  <a
+                    href={row.href}
+                    class={`substance-combos-name group-${row.group}`}
+                    data-combo={row.slug}
+                  >
+                    {row.label}
+                  </a>
+                </td>
+                <td>
+                  <a
+                    href={row.href}
+                    class={`substance-combos-status status-${row.statusKey} status-surface cell-text`}
+                    data-combo={row.slug}
+                    title={row.statusLabel}
+                  >
+                    <Icon name={row.icon} size="0.95em" />
+                    <span>{row.statusLabel}</span>
+                  </a>
+                </td>
+                <td>
+                  {row.slang ? (
+                    <a
+                      href={row.href}
+                      class="substance-combos-slang"
+                      data-combo={row.slug}
+                    >
+                      {row.slang}
+                    </a>
+                  ) : (
+                    <span class="substance-combos-slang-empty" aria-hidden="true">
+                      —
+                    </span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {showExpand && (
+          <label class="substance-combos-expand" for={expandId}>
+            <span class="substance-combos-expand-show">
+              {tFormat(locale, ui, "substanceCard.comboShowAll", {
+                count: String(remainingRows.length),
+              })}
+            </span>
+            <span class="substance-combos-expand-hide">
+              {t(locale, ui, "substanceCard.comboShowLess")}
+            </span>
+          </label>
+        )}
+      </div>
+    </section>
+  )
+}

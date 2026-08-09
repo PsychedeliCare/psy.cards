@@ -2,7 +2,9 @@
 import CategoryNav from "./CategoryNav.astro";
 import ComboCell from "./ComboCell.astro";
 import type { Locale } from "../i18n/locales";
-import { getColumns, commonSubstanceKeySet } from "../data/config";
+import { getColumns, commonSubstanceKeySet, sortPair } from "../data/config";
+import { getInteraction } from "../data/combos";
+import { pairSlug } from "../data/slug";
 import { getUiMessages } from "../i18n/load-locale";
 import { t } from "../i18n/ui";
 import { localePath } from "../i18n/locales";
@@ -26,6 +28,21 @@ const ui = getUiMessages(locale);
 const substanceBase = substanceBaseProp.endsWith("/")
   ? substanceBaseProp
   : `${substanceBaseProp}/`;
+const tooltipNotes: Record<string, string> = {};
+
+for (let rowIndex = 0; rowIndex < columns.length; rowIndex += 1) {
+  for (let colIndex = rowIndex + 1; colIndex < columns.length; colIndex += 1) {
+    const rowKey = columns[rowIndex]!.key;
+    const colKey = columns[colIndex]!.key;
+    const note = getInteraction(rowKey, colKey, locale).note;
+    if (!note) continue;
+
+    const [keyA, keyB] = sortPair(locale, rowKey, colKey);
+    tooltipNotes[pairSlug(keyA, keyB)] = note;
+  }
+}
+
+const tooltipNotesJson = JSON.stringify(tooltipNotes).replaceAll("<", "\\u003c");
 
 const isCommonSubstance = (key: string) => commonSubstanceKeySet.has(key);
 
@@ -33,6 +50,10 @@ function getLabelSizeClass(label: string) {
   if (label.length >= 11) return "label-xs";
   if (label.length >= 8) return "label-sm";
   return "label-md";
+}
+
+function getDisplayLabel(label: string) {
+  return label.replaceAll("-", "\u2011");
 }
 ---
 
@@ -44,6 +65,12 @@ function getLabelSizeClass(label: string) {
   data-hover-enabled="true"
   data-substance-set={initialSubstanceSet}
 >
+  <script
+    is:inline
+    type="application/json"
+    data-combo-tooltip-notes
+    set:html={tooltipNotesJson}
+  ></script>
   <div class="shadow-left" aria-hidden="true" data-table-shadow></div>
   <div class="table-head-stick">
     <button
@@ -84,7 +111,7 @@ function getLabelSizeClass(label: string) {
                     class="label-link col-link"
                     data-substance={`${substanceBase}${col.slug}`}
                   >
-                    <span class="label-text">{col.label}</span>
+                    <span class="label-text">{getDisplayLabel(col.label)}</span>
                   </a>
                 </th>
               ))
@@ -115,7 +142,7 @@ function getLabelSizeClass(label: string) {
                   class="label-link row-link"
                   data-substance={`${substanceBase}${row.slug}`}
                 >
-                  <span class="label-text">{row.label}</span>
+                  <span class="label-text">{getDisplayLabel(row.label)}</span>
                 </a>
               </th>
               {columns.map((col) =>
@@ -136,7 +163,7 @@ function getLabelSizeClass(label: string) {
                       class="label-link diag-link"
                       data-substance={`${substanceBase}${row.slug}`}
                     >
-                      <span class="label-text">{row.label}</span>
+                      <span class="label-text">{getDisplayLabel(row.label)}</span>
                     </a>
                   </th>
                 ) : (
@@ -173,249 +200,11 @@ function getLabelSizeClass(label: string) {
 </div>
 
 <script>
+  import { initComboTables } from "../scripts/combo-table";
   import { initSearchPalette } from "../scripts/search-palette";
 
+  initComboTables();
   initSearchPalette();
-</script>
-
-<script is:inline>
-  (() => {
-    const init = () => {
-      document.querySelectorAll(".table-wrap").forEach((wrap) => {
-        if (!(wrap instanceof HTMLElement) || wrap.dataset.shadowInit === "true") {
-          return;
-        }
-
-        const bodyScroll = wrap.querySelector("[data-body-scroll]");
-        const headScroll = wrap.querySelector("[data-head-scroll]");
-        if (!(bodyScroll instanceof HTMLElement) || !(headScroll instanceof HTMLElement)) {
-          return;
-        }
-        const hoverCells = Array.from(
-          wrap.querySelectorAll("[data-hover-cell]")
-        ).filter((cell) => cell instanceof HTMLElement);
-
-        const getHeadScrollMax = () =>
-          headScroll.scrollWidth - headScroll.clientWidth;
-
-        const update = () => {
-          const headMax = getHeadScrollMax();
-          if (bodyScroll.scrollLeft > headMax) {
-            bodyScroll.scrollLeft = headMax;
-          }
-          headScroll.scrollLeft = bodyScroll.scrollLeft;
-          wrap.dataset.scrolledX = bodyScroll.scrollLeft > 2 ? "true" : "false";
-          wrap.dataset.scrolledY =
-            wrap.getBoundingClientRect().top < 0 ? "true" : "false";
-        };
-
-        const categoryNav = wrap.nextElementSibling;
-        const categoryControls =
-          categoryNav instanceof HTMLElement
-            ? Array.from(categoryNav.querySelectorAll("[data-category]")).filter(
-                (control) => control instanceof HTMLElement
-              )
-            : [];
-
-        const categoryToggles =
-          categoryNav instanceof HTMLElement
-            ? Array.from(categoryNav.querySelectorAll("[data-category-toggle]")).filter(
-                (btn) => btn instanceof HTMLButtonElement
-              )
-            : [];
-
-        const clearHover = () => {
-          wrap.dataset.hovering = "false";
-          hoverCells.forEach((cell) => {
-            cell.classList.remove("is-highlight", "is-muted");
-          });
-        };
-
-        const setHover = (target) => {
-          if (wrap.dataset.hoverEnabled === "false") return;
-          if (!(target instanceof Element)) return;
-          const active = target.closest("[data-hover-cell]");
-          if (!(active instanceof HTMLElement)) {
-            clearHover();
-            return;
-          }
-
-          const row = active.dataset.rowKey;
-          const col = active.dataset.colKey;
-          wrap.dataset.hovering = "true";
-
-          hoverCells.forEach((cell) => {
-            const rowMatches = row && cell.dataset.rowKey === row;
-            const colMatches = col && cell.dataset.colKey === col;
-            const highlighted = Boolean(rowMatches || colMatches);
-            cell.classList.toggle("is-highlight", highlighted);
-            cell.classList.toggle("is-muted", !highlighted);
-          });
-        };
-
-        const setCategoryHover = (category) => {
-          if (wrap.dataset.hoverEnabled !== "false") {
-            wrap.dataset.hovering = "true";
-
-            hoverCells.forEach((cell) => {
-              const highlighted =
-                cell.dataset.rowGroup === category || cell.dataset.colGroup === category;
-              cell.classList.toggle("is-highlight", highlighted);
-              cell.classList.toggle("is-muted", !highlighted);
-            });
-          }
-        };
-
-        const viewButtons =
-          categoryNav instanceof HTMLElement
-            ? Array.from(categoryNav.querySelectorAll("[data-view]")).filter(
-                (b) => b instanceof HTMLButtonElement
-              )
-            : [];
-
-        const medicationToggle =
-          categoryNav instanceof HTMLElement
-            ? categoryNav.querySelector("[data-medication-toggle]")
-            : null;
-
-        const highlightToggle =
-          categoryNav instanceof HTMLElement
-            ? categoryNav.querySelector("[data-highlight-toggle]")
-            : null;
-
-        const setView = (view) => {
-          const substanceSet = view === "full" ? "full" : "common";
-          wrap.dataset.substanceSet = substanceSet;
-          viewButtons.forEach((btn) => {
-            const active = btn.dataset.view === substanceSet;
-            btn.classList.toggle("is-active", active);
-            btn.setAttribute("aria-pressed", active ? "true" : "false");
-          });
-          bodyScroll.scrollLeft = 0;
-          update();
-        };
-
-        const setMedication = (visible) => {
-          wrap.dataset.medication = visible ? "true" : "false";
-        };
-
-        const setHighlightEnabled = (enabled) => {
-          wrap.dataset.hoverEnabled = enabled ? "true" : "false";
-          if (!enabled) clearHover();
-        };
-
-        const updateCategoryVisibility = () => {
-          const hiddenCategories = new Set();
-          categoryToggles.forEach((btn) => {
-            if (btn.getAttribute("aria-pressed") === "false") {
-              hiddenCategories.add(btn.dataset.categoryToggle);
-            }
-          });
-          wrap.dataset.hiddenCategories = Array.from(hiddenCategories).join(",");
-          hoverCells.forEach((cell) => {
-            const rowGroup = cell.dataset.rowGroup;
-            const colGroup = cell.dataset.colGroup;
-            const hidden = hiddenCategories.has(rowGroup) || hiddenCategories.has(colGroup);
-            cell.classList.toggle("is-category-hidden", hidden);
-          });
-          const rows = wrap.querySelectorAll("[data-row-substance]");
-          rows.forEach((row) => {
-            if (!(row instanceof HTMLElement)) return;
-            const rowHead = row.querySelector("[data-row-group]");
-            if (!(rowHead instanceof HTMLElement)) return;
-            const rowGroup = rowHead.dataset.rowGroup;
-            const hidden = hiddenCategories.has(rowGroup);
-            row.classList.toggle("is-row-hidden", hidden);
-          });
-          const colHeads = wrap.querySelectorAll("[data-col-key][data-col-group]");
-          colHeads.forEach((col) => {
-            if (!(col instanceof HTMLElement)) return;
-            const colGroup = col.dataset.colGroup;
-            const hidden = hiddenCategories.has(colGroup);
-            col.classList.toggle("is-col-hidden", hidden);
-          });
-        };
-
-        wrap.dataset.shadowInit = "true";
-        setView(wrap.dataset.substanceSet === "common" ? "common" : "full");
-        update();
-
-        bodyScroll.addEventListener("scroll", update, { passive: true });
-        wrap.addEventListener("combo-table:viewchange", () => {
-          bodyScroll.scrollLeft = 0;
-          update();
-        });
-        wrap.addEventListener("pointerover", (event) => setHover(event.target));
-        wrap.addEventListener("pointerleave", clearHover);
-        wrap.addEventListener("focusin", (event) => setHover(event.target));
-        wrap.addEventListener("focusout", clearHover);
-
-        viewButtons.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            setView(btn.dataset.view);
-          });
-        });
-
-        if (medicationToggle instanceof HTMLInputElement) {
-          medicationToggle.addEventListener("change", () => {
-            setMedication(medicationToggle.checked);
-          });
-          setMedication(medicationToggle.checked);
-        }
-
-        if (highlightToggle instanceof HTMLInputElement) {
-          const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
-          if (isTouchDevice) {
-            highlightToggle.checked = false;
-          }
-          highlightToggle.addEventListener("change", () => {
-            setHighlightEnabled(highlightToggle.checked);
-          });
-          setHighlightEnabled(highlightToggle.checked);
-        }
-
-        categoryToggles.forEach((btn) => {
-          btn.addEventListener("click", (event) => {
-            event.stopPropagation();
-            const pressed = btn.getAttribute("aria-pressed") === "true";
-            btn.setAttribute("aria-pressed", pressed ? "false" : "true");
-            updateCategoryVisibility();
-          });
-        });
-
-        const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
-
-        if (!isCoarsePointer) {
-          categoryControls.forEach((control) => {
-            control.addEventListener("pointerover", () => {
-              const toggle = control.querySelector("[data-category-toggle]");
-              if (toggle instanceof HTMLButtonElement && toggle.getAttribute("aria-pressed") === "false") {
-                return;
-              }
-              setCategoryHover(control.dataset.category);
-            });
-            control.addEventListener("pointerleave", clearHover);
-            control.addEventListener("focus", () => {
-              const toggle = control.querySelector("[data-category-toggle]");
-              if (toggle instanceof HTMLButtonElement && toggle.getAttribute("aria-pressed") === "false") {
-                return;
-              }
-              setCategoryHover(control.dataset.category);
-            });
-            control.addEventListener("blur", clearHover);
-          });
-        }
-        window.addEventListener("scroll", update, { passive: true });
-        window.addEventListener("resize", update, { passive: true });
-      });
-    };
-
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", init, { once: true });
-    } else {
-      init();
-    }
-  })();
 </script>
 
 <style>
@@ -429,13 +218,14 @@ function getLabelSizeClass(label: string) {
 
   .table-wrap {
     --cell-gap: 2px;
-    --fluid-cell-size: calc((100cqi - 56px) / 27);
-    --table-cell-size: max(64px, var(--fluid-cell-size));
-    --cell-size: var(--table-cell-size);
-    --row-head-size: calc(var(--table-cell-size) + var(--cell-gap));
+    --fluid-cell-width: calc((100cqi - 56px) / 27);
+    --table-cell-width: max(92px, var(--fluid-cell-width));
+    --table-cell-height: clamp(48px, calc(var(--table-cell-width) * 0.55), 58px);
+    --table-header-height: calc(var(--table-cell-height) + var(--cell-gap) * 2);
+    --table-cell-size: var(--table-cell-width);
+    --cell-size: var(--table-cell-height);
+    --row-head-size: calc(var(--table-cell-width) + var(--cell-gap));
     --ink: var(--color-ink);
-    --exit-duration: 350ms;
-    --enter-duration: 0ms;
     width: 100%;
     padding: 0;
     position: relative;
@@ -443,8 +233,8 @@ function getLabelSizeClass(label: string) {
   }
 
   .table-wrap[data-substance-set="common"] {
-    --fluid-cell-size: calc((100cqi - 26px) / 12);
-    --table-cell-size: max(72px, var(--fluid-cell-size));
+    --fluid-cell-width: calc((100cqi - 26px) / 12);
+    --table-cell-width: max(104px, var(--fluid-cell-width));
   }
 
   .table-head-stick {
@@ -454,6 +244,7 @@ function getLabelSizeClass(label: string) {
     display: grid;
     grid-template-columns: var(--row-head-size) 1fr;
     align-items: stretch;
+    height: var(--table-header-height);
     background-color: var(--ink);
   }
 
@@ -466,24 +257,30 @@ function getLabelSizeClass(label: string) {
     height: 14px;
     pointer-events: none;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.28), transparent);
-    opacity: 0;
-    transition: opacity 140ms ease;
-  }
-
-  .table-wrap[data-scrolled-y="true"] .table-head-stick::after {
-    opacity: 1;
+    opacity: 0.55;
   }
 
   .table-head-scroll {
-    overflow: hidden;
+    height: var(--table-header-height);
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: auto;
+    touch-action: pan-x pan-y pinch-zoom;
     background-color: var(--ink);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-head-scroll::-webkit-scrollbar {
+    display: none;
   }
 
   .shadow-left {
     position: absolute;
-    top: calc(var(--table-cell-size) + var(--cell-gap) * 2);
+    top: var(--table-header-height);
     left: var(--row-head-size);
-    height: calc((var(--table-cell-size) + var(--cell-gap)) * 25);
+    height: calc((var(--table-cell-height) + var(--cell-gap)) * 25);
     width: 14px;
     pointer-events: none;
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.28), transparent);
@@ -503,7 +300,7 @@ function getLabelSizeClass(label: string) {
     overflow-y: visible;
     overscroll-behavior-x: contain;
     overscroll-behavior-y: auto;
-    touch-action: pan-x pan-y;
+    touch-action: pan-x pan-y pinch-zoom;
     background-color: var(--ink);
     -webkit-overflow-scrolling: touch;
   }
@@ -526,10 +323,10 @@ function getLabelSizeClass(label: string) {
   .combos-table td {
     padding: 0;
     margin: 0;
-    width: var(--table-cell-size);
-    height: var(--table-cell-size);
-    min-width: var(--table-cell-size);
-    max-width: var(--table-cell-size);
+    width: var(--table-cell-width);
+    height: var(--table-cell-height);
+    min-width: var(--table-cell-width);
+    max-width: var(--table-cell-width);
     box-sizing: border-box;
     overflow: hidden;
   }
@@ -540,25 +337,15 @@ function getLabelSizeClass(label: string) {
   }
 
   [data-hover-cell] {
-    transition:
-      filter var(--exit-duration) ease,
-      opacity var(--exit-duration) ease;
-    will-change: filter, opacity;
+    transition: opacity 160ms ease;
   }
 
   .table-wrap[data-hovering="true"] [data-hover-cell] {
-    transition:
-      filter var(--enter-duration) ease,
-      opacity var(--enter-duration) ease;
-  }
-
-  .table-wrap[data-hovering="true"] [data-hover-cell].is-muted {
-    filter: saturate(0.25) brightness(0.75);
-    opacity: 0.7;
+    opacity: 0.42;
+    transition-duration: 0ms;
   }
 
   .table-wrap[data-hovering="true"] [data-hover-cell].is-highlight {
-    filter: saturate(1.12) brightness(1.1);
     opacity: 1;
   }
 
@@ -570,12 +357,16 @@ function getLabelSizeClass(label: string) {
     background-color: var(--ink);
     width: var(--row-head-size);
     min-width: var(--row-head-size);
-    height: 100%;
+    height: var(--table-header-height);
+    min-height: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    touch-action: pan-y pinch-zoom;
   }
 
   .search-trigger {
     flex-direction: column;
-    padding: 8px 5px;
+    padding: 4px 5px;
     color: var(--color-fg);
     border: 0;
     border-right: 1px solid rgba(255, 255, 255, 0.08);
@@ -583,8 +374,8 @@ function getLabelSizeClass(label: string) {
   }
 
   .search-trigger svg {
-    width: clamp(19px, calc(var(--table-cell-size) * 0.3), 26px);
-    height: clamp(19px, calc(var(--table-cell-size) * 0.3), 26px);
+    width: clamp(18px, calc(var(--table-cell-size) * 0.23), 22px);
+    height: clamp(18px, calc(var(--table-cell-size) * 0.23), 22px);
     fill: currentColor;
     opacity: 0.85;
   }
@@ -604,7 +395,7 @@ function getLabelSizeClass(label: string) {
   }
 
   .search-trigger-kbd {
-    display: block;
+    display: none;
     margin-top: 3px;
     padding: 0;
     color: rgba(255, 255, 255, 0.38);
@@ -654,241 +445,6 @@ function getLabelSizeClass(label: string) {
     color: rgba(23, 24, 19, 0.42);
   }
 
-  :global(.search-palette) {
-    position: fixed;
-    inset: 0;
-    z-index: 90;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 120ms ease;
-    --search-surface-border: rgba(255, 255, 255, 0.1);
-    --search-divider: rgba(255, 255, 255, 0.08);
-    --search-hover: rgba(255, 255, 255, 0.06);
-    --search-input-border: rgba(255, 255, 255, 0.1);
-    --search-input-focus: rgba(255, 255, 255, 0.22);
-    --search-match-separator: rgba(255, 255, 255, 0.22);
-    --search-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
-    --search-border-strength: 62%;
-    --search-border-strength-active: 38%;
-  }
-
-  :global(html[data-color-scheme="light"] .search-palette) {
-    --search-surface-border: rgba(23, 24, 19, 0.12);
-    --search-divider: rgba(23, 24, 19, 0.08);
-    --search-hover: rgba(23, 24, 19, 0.04);
-    --search-input-border: rgba(23, 24, 19, 0.12);
-    --search-input-focus: rgba(23, 24, 19, 0.28);
-    --search-match-separator: rgba(23, 24, 19, 0.18);
-    --search-shadow: 0 24px 64px rgba(24, 25, 20, 0.14);
-    --search-border-strength: 48%;
-    --search-border-strength-active: 24%;
-  }
-
-  :global(.search-palette[data-open="true"]) {
-    pointer-events: auto;
-    opacity: 1;
-  }
-
-  :global(.search-palette__backdrop) {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    background: rgba(0, 0, 0, 0.52);
-    border: 0;
-    cursor: pointer;
-  }
-
-  :global(html[data-color-scheme="light"] .search-palette__backdrop) {
-    background: rgba(23, 24, 19, 0.36);
-  }
-
-  :global(.search-palette__panel) {
-    position: absolute;
-    top: clamp(36px, 11dvh, 110px);
-    left: 50%;
-    display: flex;
-    flex-direction: column;
-    width: min(640px, calc(100vw - 32px));
-    max-height: min(560px, calc(100dvh - 48px));
-    transform: translateX(-50%);
-    color: var(--color-fg);
-    background: var(--color-ink-2);
-    border: 1px solid var(--search-surface-border);
-    border-radius: 12px;
-    box-shadow: var(--search-shadow);
-    transition: opacity 120ms ease;
-  }
-
-  :global(.search-palette__form) {
-    position: relative;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 0;
-    padding: 12px 14px;
-    border-bottom: 1px solid var(--search-divider);
-  }
-
-  :global(.search-palette__search-icon) {
-    position: absolute;
-    left: 26px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-    color: var(--color-fg-mute);
-    pointer-events: none;
-  }
-
-  :global(.search-palette__search-icon svg) {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
-  }
-
-  :global(.search-palette__input) {
-    width: 100%;
-    height: 44px;
-    padding: 0 14px 0 40px;
-    color: var(--color-fg);
-    background: var(--color-ink-3);
-    border: 1px solid var(--search-input-border);
-    border-radius: 8px;
-    font: inherit;
-    font-size: 16px;
-    font-weight: 500;
-    outline: none;
-  }
-
-  :global(.search-palette__input::placeholder) {
-    color: var(--color-fg-mute);
-    opacity: 0.7;
-  }
-
-  :global(.search-palette__input:focus) {
-    border-color: var(--search-input-focus);
-  }
-
-  :global(.search-palette__results) {
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    padding: 4px 0;
-    scroll-padding-block: 4px;
-  }
-
-  :global(.search-palette__result) {
-    position: relative;
-    display: block;
-    padding: 10px 16px 10px 20px;
-    color: inherit;
-    text-decoration: none;
-    transition: background 80ms ease;
-  }
-
-  :global(.search-palette__result--combo) {
-    padding-left: 24px;
-  }
-
-  :global(.search-palette__result-borders) {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    gap: 1px;
-    width: 3px;
-  }
-
-  :global(.search-palette__result-borders--combo) {
-    width: 7px;
-  }
-
-  :global(.search-palette__result-border) {
-    flex: 1;
-    min-width: 3px;
-    background: color-mix(in oklab, var(--hue), transparent var(--search-border-strength));
-  }
-
-  :global(.search-palette__result:hover),
-  :global(.search-palette__result.is-active) {
-    background: var(--search-hover);
-  }
-
-  :global(.search-palette__result.is-active .search-palette__result-border) {
-    background: color-mix(in oklab, var(--hue), transparent var(--search-border-strength-active));
-  }
-
-  :global(.search-palette__result-title) {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    min-width: 0;
-    overflow: hidden;
-    line-height: 1.25;
-  }
-
-  :global(.search-palette__result-name) {
-    flex: 0 1 auto;
-    overflow: hidden;
-    font-size: 15px;
-    font-weight: 600;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  :global(.search-palette__result-match) {
-    flex: 0 0 auto;
-    color: var(--color-fg-mute);
-    font-size: 13px;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  :global(.search-palette__result-match::before) {
-    content: "·";
-    margin-right: 8px;
-    color: var(--search-match-separator);
-  }
-
-  :global(.search-palette__result-subtitle) {
-    display: block;
-    margin-top: 2px;
-    overflow: hidden;
-    color: var(--color-fg-mute);
-    font-size: 13px;
-    font-weight: 450;
-    line-height: 1.3;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  :global(.search-palette__empty) {
-    margin: 0;
-    padding: 32px 16px;
-    color: var(--color-fg-mute);
-    font-size: 14px;
-    line-height: 1.5;
-    text-align: center;
-  }
-
-  :global(.search-palette__footer) {
-    flex-shrink: 0;
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    padding: 10px 16px;
-    color: var(--color-fg-mute);
-    border-top: 1px solid var(--search-divider);
-    font-size: 11px;
-    font-weight: 500;
-    line-height: 1.2;
-  }
-
   .table-wrap[data-medication="false"] tr[data-row-substance="maois"],
   .table-wrap[data-medication="false"] tr[data-row-substance="ssris"] {
     display: none;
@@ -910,10 +466,10 @@ function getLabelSizeClass(label: string) {
   }
 
   .col-head {
-    height: var(--table-cell-size);
-    min-height: var(--table-cell-size);
-    width: var(--table-cell-size);
-    min-width: var(--table-cell-size);
+    height: var(--table-cell-height);
+    min-height: var(--table-cell-height);
+    width: var(--table-cell-width);
+    min-width: var(--table-cell-width);
     padding: 0;
   }
 
@@ -923,7 +479,7 @@ function getLabelSizeClass(label: string) {
     height: 100%;
     align-items: center;
     justify-content: center;
-    padding: clamp(6px, calc(var(--table-cell-size) * 0.09), 14px);
+    padding: clamp(5px, calc(var(--table-cell-size) * 0.075), 12px);
     text-decoration: none;
     color: inherit;
     overflow: hidden;
@@ -933,13 +489,16 @@ function getLabelSizeClass(label: string) {
   .col-head .label-text,
   .row-head .label-text {
     display: inline-block;
-    font-weight: 600;
-    font-size: clamp(13px, calc(var(--table-cell-size) * 0.13), 18px);
+    font-weight: 750;
+    font-size: clamp(14px, calc(var(--table-cell-size) * 0.155), 20px);
     letter-spacing: 0.02em;
-    line-height: 1.08;
+    line-height: 1.02;
     text-align: left;
     white-space: normal;
-    overflow-wrap: break-word;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    -webkit-hyphens: none;
     max-width: 100%;
   }
 
@@ -952,8 +511,8 @@ function getLabelSizeClass(label: string) {
     position: sticky;
     left: 0;
     z-index: 3;
-    width: var(--table-cell-size);
-    min-width: var(--table-cell-size);
+    width: var(--table-cell-width);
+    min-width: var(--table-cell-width);
     background-clip: padding-box;
     box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.04);
   }
@@ -981,24 +540,24 @@ function getLabelSizeClass(label: string) {
   .diag .label-text {
     display: inline-block;
     transform: rotate(-45deg);
-    font-weight: 600;
-    font-size: clamp(11px, calc(var(--table-cell-size) * 0.115), 16px);
+    font-weight: 700;
+    font-size: clamp(12px, calc(var(--table-cell-size) * 0.13), 17px);
     white-space: nowrap;
     line-height: 1;
     opacity: 0.9;
   }
 
   .label-xs .label-text {
-    font-size: clamp(10.5px, calc(var(--table-cell-size) * 0.09), 13.5px);
+    font-size: clamp(11.5px, calc(var(--table-cell-size) * 0.115), 15px);
     letter-spacing: 0;
   }
 
   .label-sm .label-text {
-    font-size: clamp(12px, calc(var(--table-cell-size) * 0.105), 15px);
+    font-size: clamp(13px, calc(var(--table-cell-size) * 0.135), 17px);
   }
 
   .label-md .label-text {
-    font-size: clamp(13px, calc(var(--table-cell-size) * 0.12), 16.5px);
+    font-size: clamp(14px, calc(var(--table-cell-size) * 0.15), 19px);
   }
 
   .cell-td {
@@ -1008,23 +567,19 @@ function getLabelSizeClass(label: string) {
 
   .combos-table td.cell-td {
     position: relative;
-    overflow: visible;
-  }
-
-  .combos-table td.cell-td:hover,
-  .combos-table td.cell-td:focus-within {
-    z-index: 6;
   }
 
   @media (max-width: 640px) {
     .table-wrap {
-      --fluid-cell-size: 54px;
-      --table-cell-size: 54px;
+      --fluid-cell-width: 80px;
+      --table-cell-width: 80px;
+      --table-cell-height: 44px;
     }
 
     .table-wrap[data-substance-set="common"] {
-      --fluid-cell-size: 58px;
-      --table-cell-size: 58px;
+      --fluid-cell-width: 90px;
+      --table-cell-width: 90px;
+      --table-cell-height: 48px;
     }
 
     .combos-table {
@@ -1032,19 +587,19 @@ function getLabelSizeClass(label: string) {
     }
 
     .label-xs .label-text {
-      font-size: 9.5px;
-    }
-
-    .label-sm .label-text {
       font-size: 10.5px;
     }
 
+    .label-sm .label-text {
+      font-size: 12px;
+    }
+
     .label-md .label-text {
-      font-size: 11.5px;
+      font-size: 13.5px;
     }
 
     .search-trigger {
-      padding: 7px 4px;
+      padding: 3px 4px;
     }
 
     .search-trigger-label {
@@ -1055,35 +610,6 @@ function getLabelSizeClass(label: string) {
       margin-top: 2px;
       font-size: 7px;
     }
-
-    :global(.search-palette__panel) {
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100dvh;
-      max-height: 100dvh;
-      transform: none;
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    :global(.search-palette__form) {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      padding: 12px 14px;
-      background: var(--color-ink-2);
-    }
-
-    :global(.search-palette__input) {
-      height: 48px;
-      font-size: 16px;
-    }
-
-    :global(.search-palette__footer) {
-      display: none;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1091,9 +617,7 @@ function getLabelSizeClass(label: string) {
       transition: none !important;
     }
 
-    .search-trigger,
-    :global(.search-palette),
-    :global(.search-palette__result) {
+    .search-trigger {
       transition: none !important;
     }
   }

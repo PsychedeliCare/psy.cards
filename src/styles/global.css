@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "../../public/fontshare/css/satoshi.css";
 @import "./cards.css";
+@import "./landing.css";
+@import "./search-palette.css";
 
 @theme {
   --color-stimulant: #f47a42;
@@ -410,52 +412,80 @@ html[data-color-scheme="light"] .toast {
 
 .status-synergy {
   --hue: var(--color-synergy);
+  --hue-ink: #0b0b0c;
+  --hue-ink-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 .status-safe {
   --hue: var(--color-safe);
+  --hue-ink: #0b0b0c;
+  --hue-ink-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 .status-decrease {
   --hue: var(--color-decrease);
+  --hue-ink: #fff;
 }
 .status-caution {
   --hue: var(--color-caution);
+  --hue-ink: #0b0b0c;
+  --hue-ink-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 .status-unsafe {
   --hue: var(--color-unsafe);
+  --hue-ink: #0b0b0c;
+  --hue-ink-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 .status-dangerous {
   --hue: var(--color-dangerous);
+  --hue-ink: #fff;
 }
 .status-serotoninsyndrome {
   --hue: var(--color-serotoninsyndrome);
+  --hue-ink: #fff;
 }
 .status-unknown {
   --hue: var(--color-unknown);
+  --hue-ink: #fff;
 }
 
 .group-psychedelic {
   --hue: var(--color-psychedelic);
+  --hue-ink: #0b0b0c;
+  --hue-ink-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 .group-dissociative {
   --hue: var(--color-dissociative);
+  --hue-ink: #0b0b0c;
+  --hue-ink-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 .group-stimulant {
   --hue: var(--color-stimulant);
+  --hue-ink: #0b0b0c;
+  --hue-ink-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 .group-empathogen {
   --hue: var(--color-empathogen);
+  --hue-ink: #0b0b0c;
+  --hue-ink-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 .group-depressant {
   --hue: var(--color-depressant);
+  --hue-ink: #0b0b0c;
+  --hue-ink-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 .group-opioid {
   --hue: var(--color-opioid);
+  --hue-ink: #0b0b0c;
+  --hue-ink-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 .group-cannabinoid {
   --hue: var(--color-cannabinoid);
+  --hue-ink: #0b0b0c;
+  --hue-ink-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 .group-antidepressant {
   --hue: var(--color-antidepressant);
+  --hue-ink: #0b0b0c;
+  --hue-ink-shadow: 0 1px 0 rgba(255, 255, 255, 0.24);
 }
 
 .status-surface {
@@ -476,8 +506,7 @@ html[data-color-scheme="light"] .toast {
   width: var(--status-icon-chip-size, 30px);
   height: var(--status-icon-chip-size, 30px);
   border-radius: 999px;
-  color: #fff;
-  color-scheme: dark;
+  color: var(--hue-ink, #fff);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
     0 1px 3px rgba(0, 0, 0, 0.18);
@@ -485,8 +514,139 @@ html[data-color-scheme="light"] .toast {
 }
 
 .status-icon-chip svg {
-  color: #fff;
-  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+  color: var(--hue-ink, #fff);
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.24));
+}
+
+.legend__icon {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  color: var(--hue, var(--color-unknown));
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+}
+
+.combo-cell[data-has-note="true"]::before,
+.combo-cell[data-has-sources="true"]::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  bottom: 3px;
+  z-index: 1;
+  width: 10px;
+  height: 10px;
+  background-color: color-mix(in oklab, var(--color-fg), var(--hue) 34%);
+  opacity: 0.62;
+  pointer-events: none;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+}
+
+.combo-cell[data-has-note="true"]::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M216 40H40a16 16 0 0 0-16 16v128a16 16 0 0 0 16 16h60.43l13.68 23.94a16 16 0 0 0 27.78 0L155.57 200H216a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16M84 132a12 12 0 1 1 12-12a12 12 0 0 1-12 12m44 0a12 12 0 1 1 12-12a12 12 0 0 1-12 12m44 0a12 12 0 1 1 12-12a12 12 0 0 1-12 12'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M216 40H40a16 16 0 0 0-16 16v128a16 16 0 0 0 16 16h60.43l13.68 23.94a16 16 0 0 0 27.78 0L155.57 200H216a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16M84 132a12 12 0 1 1 12-12a12 12 0 0 1-12 12m44 0a12 12 0 1 1 12-12a12 12 0 0 1-12 12m44 0a12 12 0 1 1 12-12a12 12 0 0 1-12 12'/%3E%3C/svg%3E");
+}
+
+.combo-cell[data-has-sources="true"]::after {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M232 48h-64a32 32 0 0 0-32 32v87.73a8.17 8.17 0 0 1-7.47 8.25a8 8 0 0 1-8.53-8V80a32 32 0 0 0-32-32H24a8 8 0 0 0-8 8v144a8 8 0 0 0 8 8h72a24 24 0 0 1 24 23.94a7.9 7.9 0 0 0 5.12 7.55A8 8 0 0 0 136 232a24 24 0 0 1 24-24h72a8 8 0 0 0 8-8V56a8 8 0 0 0-8-8m-24 120h-39.73a8.17 8.17 0 0 1-8.25-7.47a8 8 0 0 1 8-8.53h39.73a8.17 8.17 0 0 1 8.25 7.47a8 8 0 0 1-8 8.53m0-32h-39.73a8.17 8.17 0 0 1-8.25-7.47a8 8 0 0 1 8-8.53h39.73a8.17 8.17 0 0 1 8.25 7.47a8 8 0 0 1-8 8.53m0-32h-39.73a8.17 8.17 0 0 1-8.27-7.47a8 8 0 0 1 8-8.53h39.73a8.17 8.17 0 0 1 8.27 7.47a8 8 0 0 1-8 8.53'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M232 48h-64a32 32 0 0 0-32 32v87.73a8.17 8.17 0 0 1-7.47 8.25a8 8 0 0 1-8.53-8V80a32 32 0 0 0-32-32H24a8 8 0 0 0-8 8v144a8 8 0 0 0 8 8h72a24 24 0 0 1 24 23.94a7.9 7.9 0 0 0 5.12 7.55A8 8 0 0 0 136 232a24 24 0 0 1 24-24h72a8 8 0 0 0 8-8V56a8 8 0 0 0-8-8m-24 120h-39.73a8.17 8.17 0 0 1-8.25-7.47a8 8 0 0 1 8-8.53h39.73a8.17 8.17 0 0 1 8.25 7.47a8 8 0 0 1-8 8.53m0-32h-39.73a8.17 8.17 0 0 1-8.25-7.47a8 8 0 0 1 8-8.53h39.73a8.17 8.17 0 0 1 8.25 7.47a8 8 0 0 1-8 8.53m0-32h-39.73a8.17 8.17 0 0 1-8.27-7.47a8 8 0 0 1 8-8.53h39.73a8.17 8.17 0 0 1 8.27 7.47a8 8 0 0 1-8 8.53'/%3E%3C/svg%3E");
+}
+
+.combo-cell[data-has-note="true"][data-has-sources="true"]::before {
+  right: 16px;
+}
+
+.combo-tooltip {
+  --tooltip-accent: var(--hue, var(--color-unknown));
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 80;
+  contain: layout paint style;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  width: max-content;
+  max-width: min(340px, calc(100vw - 16px));
+  padding: 9px 11px 10px;
+  color: var(--color-fg);
+  background: color-mix(in oklab, var(--color-ink), transparent 3%);
+  border: 1px solid color-mix(in oklab, var(--tooltip-accent), transparent 28%);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate3d(-50%, calc(-100% + 3px), 0);
+  transition:
+    opacity 80ms ease,
+    transform 80ms ease;
+}
+
+.combo-tooltip[data-placement="bottom"] {
+  transform: translate3d(-50%, -3px, 0);
+}
+
+.combo-tooltip[data-open="true"][data-positioned="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translate3d(-50%, -100%, 0);
+}
+
+.combo-tooltip[data-open="true"][data-positioned="true"][data-placement="bottom"] {
+  transform: translate3d(-50%, 0, 0);
+}
+
+.combo-tooltip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+  border-right: 1px solid color-mix(in oklab, var(--tooltip-accent), transparent 28%);
+  border-bottom: 1px solid color-mix(in oklab, var(--tooltip-accent), transparent 28%);
+  transform: translate(-50%, -4px) rotate(45deg);
+}
+
+.combo-tooltip[data-placement="bottom"]::after {
+  top: auto;
+  bottom: 100%;
+  border: 0;
+  border-top: 1px solid color-mix(in oklab, var(--tooltip-accent), transparent 28%);
+  border-left: 1px solid color-mix(in oklab, var(--tooltip-accent), transparent 28%);
+  transform: translate(-50%, 4px) rotate(45deg);
+}
+
+.combo-tooltip__title {
+  color: var(--color-fg);
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.25;
+  text-shadow: none;
+}
+
+.combo-tooltip__note {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--color-fg-mute);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-shadow: none;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .combo-tooltip {
+    transition: none;
+  }
 }
 
 .category-surface {
@@ -500,6 +660,6 @@ html[data-color-scheme="light"] .toast {
 }
 
 .cell-text {
-  color: #fff;
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+  color: var(--hue-ink, #fff);
+  text-shadow: var(--hue-ink-shadow, 0 0 3px rgba(0, 0, 0, 0.6));
 }

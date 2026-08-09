@@ -25,11 +25,17 @@
     "pwaInstallDismiss": "Not now"
   },
   "landing": {
-    "eyebrow": "psy.cards",
-    "title": "Clearer substance information, wherever people need it.",
-    "lede": "psy.cards turns trusted harm-reduction information into simple, multilingual cards for print, web, and social media.",
+    "title": "Psychoactive substance information",
+    "lede": "Established harm-reduction sources, consolidated and translated. On the web today, as a printed card set in all European languages later.",
+    "disclaimer": "Harm reduction info only — not medical advice. Verify doses and risks before use. Data from TripSit.",
     "cta": "Explore drug combinations",
-    "about": "The goal is to make practical substance guidance easier to find, understand, translate, and share responsibly. Each card keeps the essentials close at hand, whether someone sees it in print, in a carousel post, or through a QR code."
+    "about": "The goal is to make practical substance guidance easier to find, understand, translate, and share responsibly. Each card keeps the essentials close at hand, whether someone sees it in print, in a carousel post, or through a QR code.",
+    "tabAll": "All",
+    "navList": "Substances",
+    "navCombos": "Combos",
+    "closeCard": "Close card",
+    "categoriesAria": "Substance categories",
+    "viewSwitchAria": "Switch between substances and combinations"
   },
   "footer": {
     "projectBy": "A project by",
@@ -104,12 +110,19 @@
     "interactionAriaLabel": "{row} and {col} interaction"
   },
   "substanceCard": {
+    "alsoKnownAs": "Also known as",
     "timing": "Timing",
     "onset": "Onset",
     "duration": "Duration",
     "afterEffects": "After-effects",
     "halfLife": "Half-life",
     "doses": "Doses",
+    "combos": "Combinations",
+    "comboSubstance": "Substance",
+    "comboRisk": "Risk",
+    "comboAlsoKnownAs": "Also known as",
+    "comboShowAll": "Show all ({count} more)",
+    "comboShowLess": "Show less",
     "safety": "Safety",
     "warning": "Warning",
     "avoidCombining": "Avoid combining with",

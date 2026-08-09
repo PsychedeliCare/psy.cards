@@ -32,23 +32,23 @@ const LEVEL_COLORS: Record<DoseLevel, string> = {
 const CHARTABLE_UNITS = new Set(["µg", "mg", "g", "ml", "units", "seeds"]);
 
 const ROUTE_ICONS: Record<string, string> = {
-  oral: "pill",
-  insufflated: "wind",
-  rectal: "medical-cross",
-  vapourized: "cloud",
-  vaporized: "cloud",
-  intravenous: "needle",
-  intramuscular: "vaccine",
-  smoked: "smoking",
-  sublingual: "mood-tongue",
-  buccal: "mood-tongue",
-  transdermal: "bandage",
-  hbwr: "grain",
-  morning_glory: "plant",
-  dried: "plant-2",
-  fresh: "plant-2",
-  dry: "plant-2",
-  wet: "droplet",
+  oral: "pill-fill",
+  insufflated: "wind-fill",
+  rectal: "first-aid-fill",
+  vapourized: "cloud-fill",
+  vaporized: "cloud-fill",
+  intravenous: "syringe-fill",
+  intramuscular: "syringe-fill",
+  smoked: "cigarette-fill",
+  sublingual: "smiley-fill",
+  buccal: "smiley-fill",
+  transdermal: "bandaids-fill",
+  hbwr: "grains-fill",
+  morning_glory: "plant-fill",
+  dried: "leaf-fill",
+  fresh: "leaf-fill",
+  dry: "leaf-fill",
+  wet: "drop-fill",
 };
 
 function routeKey(route: string): string {
@@ -56,7 +56,7 @@ function routeKey(route: string): string {
 }
 
 export function getRouteIcon(route: string): string {
-  return ROUTE_ICONS[routeKey(route)] ?? "circle-dot";
+  return ROUTE_ICONS[routeKey(route)] ?? "record-fill";
 }
 
 export function getRouteLabel(route: string): string {

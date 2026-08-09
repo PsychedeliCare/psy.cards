@@ -1,0 +1,127 @@
+---
+import { Icon } from "@twodft/astro-icon/components";
+import MoleculeFigure from "./MoleculeFigure.astro";
+import {
+  getDrugByKey,
+  getClassDescriptionText,
+  getDisplayName,
+} from "../data/drugs";
+import { getSubstanceStructure } from "../data/substances";
+import type { Column } from "../data/config";
+import type { Locale } from "../i18n/locales";
+import { localePath } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
+
+interface Props {
+  column: Column;
+  locale?: Locale;
+}
+
+const { column, locale = "en" } = Astro.props;
+const ui = getUiMessages(locale);
+
+const drug = getDrugByKey(column.key, locale);
+const displayName = drug?.pretty_name ?? getDisplayName(column.key, locale);
+const summary =
+  drug?.properties?.summary ?? getClassDescriptionText(column.key, locale) ?? "";
+const aliases = (drug?.aliases ?? []).slice(0, 4);
+const href = localePath(locale, `/${column.slug}`);
+const hasStructure = Boolean(getSubstanceStructure(column.key));
+
+function firstDurationValue(
+  d: Record<string, unknown> | undefined
+): string | undefined {
+  if (!d) return undefined;
+  const entries = Object.entries(d).filter(
+    ([k, v]) => k !== "_unit" && typeof v === "string" && v
+  );
+  if (!entries.length) return undefined;
+  const [, first] = entries[0]!;
+  return String(first);
+}
+
+const formattedOnset = drug?.formatted_onset as Record<string, unknown> | undefined;
+const formattedDuration = drug?.formatted_duration as
+  | Record<string, unknown>
+  | undefined;
+const onsetVal = firstDurationValue(formattedOnset);
+const onsetUnit = formattedOnset?._unit;
+const durationVal = firstDurationValue(formattedDuration);
+const durationUnit = formattedDuration?._unit;
+
+const doseMap = drug?.formatted_dose as
+  | Record<string, Record<string, string> | undefined>
+  | undefined;
+const oralDose = doseMap?.Oral ?? doseMap?.oral;
+const commonDose = oralDose?.Common ?? oralDose?.common;
+---
+
+<li
+  class:list={["list-card", `group-${column.group}`]}
+  data-list-card
+  data-layout-id={column.slug}
+  data-substance-key={column.key}
+  data-slug={column.slug}
+  data-group={column.group}
+>
+  <div class="list-card-shell">
+    <a
+      class:list={["list-card-compact", !hasStructure && "no-molecule"]}
+      href={href}
+      data-substance={href}
+      data-list-card-open
+    >
+      {
+        hasStructure && (
+          <div class={`list-card-molecule group-${column.group}`}>
+            <MoleculeFigure substanceKey={column.key} />
+          </div>
+        )
+      }
+      <div class="list-card-body">
+        <h2 class="list-card-name">
+          {displayName}
+          {
+            aliases.length > 0 && (
+              <span class="list-card-aliases">
+                {" "}({aliases.join(" · ")})
+              </span>
+            )
+          }
+        </h2>
+        {summary && <p class="list-card-summary">{summary}</p>}
+        {
+          (onsetVal || durationVal || commonDose) && (
+            <div class="list-card-meta">
+              {onsetVal && (
+                <span class="list-card-meta-item" title={t(locale, ui, "substanceCard.onset")}>
+                  <Icon name="ph:timer" class="list-card-meta-icon" aria-hidden="true" />
+                  <strong>
+                    {onsetVal}
+                    {onsetUnit ? ` ${onsetUnit}` : ""}
+                  </strong>
+                </span>
+              )}
+              {durationVal && (
+                <span class="list-card-meta-item" title={t(locale, ui, "substanceCard.duration")}>
+                  <Icon name="ph:hourglass-medium" class="list-card-meta-icon" aria-hidden="true" />
+                  <strong>
+                    {durationVal}
+                    {durationUnit ? ` ${durationUnit}` : ""}
+                  </strong>
+                </span>
+              )}
+              {commonDose && (
+                <span class="list-card-meta-item" title={t(locale, ui, "doseChart.common")}>
+                  <Icon name="ph:pill" class="list-card-meta-icon" aria-hidden="true" />
+                  <strong>{commonDose}</strong>
+                </span>
+              )}
+            </div>
+          )
+        }
+      </div>
+    </a>
+  </div>
+</li>

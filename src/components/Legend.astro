@@ -19,9 +19,7 @@ const legendDefinitions = getLegendDefinitions(locale);
     {
       legendDefinitions.map((def) => (
         <li class={`status-${def.statusKey}`}>
-          <span class="chip status-icon-chip status-surface">
-            <Icon name={def.icon} size="1.05em" />
-          </span>
+          <Icon name={def.icon} size="2.35em" class="legend__icon" />
           <span class="body">
             <span class="label">{def.label}</span>
             <span class="definition">{def.definition}</span>
@@ -54,10 +52,6 @@ const legendDefinitions = getLegendDefinitions(locale);
     font-size: 12px;
     line-height: 1.45;
     color: var(--color-fg);
-  }
-
-  .chip {
-    --status-icon-chip-size: 30px;
   }
 
   .body {

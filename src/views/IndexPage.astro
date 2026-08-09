@@ -1,10 +1,13 @@
 ---
 import Layout from "../components/Layout.astro";
 import Footer from "../components/Footer.astro";
+import LandingNav from "../components/LandingNav.astro";
+import SubstanceListCard from "../components/SubstanceListCard.astro";
 import type { Locale } from "../i18n/locales";
 import { getUiMessages } from "../i18n/load-locale";
 import { t } from "../i18n/ui";
 import { localePath } from "../i18n/locales";
+import { getColumns, visibleGroupOrder } from "../data/config";
 
 interface Props {
   locale?: Locale;
@@ -12,101 +15,92 @@ interface Props {
 
 const { locale = "en" } = Astro.props;
 const ui = getUiMessages(locale);
+const visibleGroups = new Set(visibleGroupOrder);
+const columns = getColumns(locale).filter((column) =>
+  visibleGroups.has(column.group)
+);
+const homeRoute = localePath(locale, "/");
 ---
 
 <Layout
   locale={locale}
   title={t(locale, ui, "meta.siteTitle")}
   description={t(locale, ui, "meta.landingDescription")}
+  headerView="list"
 >
   <main class="landing">
     <section class="hero">
-      <p class="eyebrow">{t(locale, ui, "landing.eyebrow")}</p>
       <h1>{t(locale, ui, "landing.title")}</h1>
       <p class="lede">{t(locale, ui, "landing.lede")}</p>
-      <p class="cta">
-        <a href={localePath(locale, "/combos")} class="primary">
-          {t(locale, ui, "landing.cta")}
-        </a>
-      </p>
+      <p class="hero-disclaimer">{t(locale, ui, "landing.disclaimer")}</p>
     </section>
 
-    <section class="about">
-      <p>{t(locale, ui, "landing.about")}</p>
-    </section>
+    <LandingNav locale={locale} />
+
+    <ul class="substance-list" data-substance-list>
+      {columns.map((column) => (
+        <SubstanceListCard column={column} locale={locale} />
+      ))}
+    </ul>
   </main>
 
   <Footer locale={locale} variant="narrow" />
+
+  <div id="modal-slot" data-modal-slot data-landing-root={homeRoute}></div>
+
+  <script>
+    import { initLandingCards } from "../scripts/landing-cards.ts";
+    import { initComboModal } from "../scripts/combo-modal.ts";
+    import { initSearchPalette } from "../scripts/search-palette.ts";
+
+    initLandingCards();
+    initSearchPalette();
+    const root =
+      document
+        .querySelector<HTMLElement>("[data-modal-slot]")
+        ?.dataset.landingRoot ?? "/";
+    initComboModal({ rootRoute: root });
+  </script>
 </Layout>
 
 <style>
   .landing {
-    max-width: 720px;
+    max-width: 880px;
     margin: 0 auto;
-    padding: 64px 20px 80px;
+    padding: 28px 20px 96px;
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    gap: 20px;
   }
 
   .hero {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-  }
-
-  .eyebrow {
-    margin: 0;
-    font-size: 12px;
-    color: var(--color-fg-mute);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    gap: 10px;
+    max-width: 52ch;
+    padding-bottom: 4px;
   }
 
   h1 {
     margin: 0;
-    font-size: clamp(28px, 5vw, 40px);
+    font-size: clamp(22px, 4vw, 30px);
     font-weight: 700;
-    line-height: 1.15;
+    line-height: 1.2;
     letter-spacing: -0.01em;
-    max-width: 14ch;
   }
 
   .lede {
     margin: 0;
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--color-fg);
-    max-width: 52ch;
-  }
-
-  .cta {
-    margin: 6px 0 0;
-  }
-
-  .primary {
-    display: inline-block;
-    padding: 10px 18px;
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.01em;
-    color: var(--color-ink);
-    background-color: var(--color-safe);
-    text-decoration: none;
-    transition:
-      filter 140ms ease,
-      transform 140ms ease;
-  }
-
-  .primary:hover {
-    filter: brightness(1.1);
-  }
-
-  .about p {
-    margin: 0;
     font-size: 14.5px;
-    line-height: 1.6;
-    color: var(--color-fg);
-    max-width: 58ch;
+    line-height: 1.55;
+    color: var(--color-fg-mute);
+  }
+
+  .hero-disclaimer {
+    margin: 2px 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--color-fg-mute);
+    opacity: 0.78;
   }
 </style>
