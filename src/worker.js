@@ -165,12 +165,6 @@ export default {
 			);
 		}
 
-		// Temporary: send main-site home to the combos chart.
-		if (url.pathname === "/" || url.pathname === "/index.html") {
-			url.pathname = "/combos";
-			return redirectTo(url, 302);
-		}
-
 		const mainSiteBmIndex = mainSiteBurningMountainIndexPath(url.pathname);
 		if (mainSiteBmIndex) {
 			return env.ASSETS.fetch(withPath(request, mainSiteBmIndex));

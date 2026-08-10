@@ -10,6 +10,7 @@ import {
   PWA_BACKGROUND_COLOR,
   PWA_GLOB_IGNORES,
   PWA_GLOB_PATTERNS,
+  PWA_IGNORE_URL_PARAMETERS,
   PWA_MAX_CACHE_BYTES,
   PWA_NAVIGATE_FALLBACK_DENYLIST,
   PWA_START_URL,
@@ -62,6 +63,7 @@ export default defineConfig({
         globIgnores: PWA_GLOB_IGNORES,
         navigateFallback: "/combos/index.html",
         navigateFallbackDenylist: PWA_NAVIGATE_FALLBACK_DENYLIST,
+        ignoreURLParametersMatching: PWA_IGNORE_URL_PARAMETERS,
         cleanupOutdatedCaches: true,
         maximumFileSizeToCacheInBytes: PWA_MAX_CACHE_BYTES,
         runtimeCaching: [

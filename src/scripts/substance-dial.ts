@@ -87,7 +87,9 @@ export function initSubstanceDial(): void {
   const locale = pageI18n?.locale ?? "en";
   const localePrefix = locale === "en" ? "" : `/${locale}`;
   const substanceBase = pageI18n?.substanceBase ?? "/";
-  const basePath = window.location.pathname;
+  // Always use a trailing slash so CF/SW trailing-slash redirects don't fight
+  // the dial's history updates (`/wheel` ↔ `/wheel/?s=…`).
+  const basePath = window.location.pathname.replace(/\/?$/, "/") || "/";
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const mobileQuery = window.matchMedia(MOBILE_MEDIA_QUERY);
 

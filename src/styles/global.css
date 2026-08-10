@@ -80,7 +80,9 @@
   position: fixed;
   top: 22px;
   right: -44px;
-  z-index: 55;
+  /* Below .site-header (50) so the ribbon cannot steal taps from Substances /
+     Combos / language controls — its rotated hit box is much larger than it looks. */
+  z-index: 45;
   width: 168px;
   padding: 8px 0;
   transform: rotate(45deg);

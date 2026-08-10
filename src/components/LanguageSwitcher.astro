@@ -16,10 +16,12 @@ const targets = locales.map((code) => ({
   href: switchLocalePath(locale, code, currentPath),
   active: code === locale,
 }));
+
+const active = targets.find((target) => target.active) ?? targets[0]!;
 ---
 
 <nav class="lang-switcher" aria-label="Language" data-language-switcher>
-  <ul>
+  <ul class="lang-switcher__list">
     {
       targets.map((target) => (
         <li>
@@ -37,6 +39,40 @@ const targets = locales.map((code) => ({
       ))
     }
   </ul>
+
+  <details class="lang-switcher__dropdown">
+    <summary class="lang-switcher__summary">
+      <span data-lang-current>{active.code.toUpperCase()}</span>
+      <svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true">
+        <path
+          d="M2.5 4.25 6 7.75l3.5-3.5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </summary>
+    <ul class="lang-switcher__menu">
+      {
+        targets.map((target) => (
+          <li>
+            <a
+              href={target.href}
+              data-locale={target.code}
+              hreflang={target.code}
+              lang={target.code}
+              aria-current={target.active ? "page" : undefined}
+              class:list={["lang-link", target.active && "is-active"]}
+            >
+              {target.code.toUpperCase()}
+              <span class="lang-switcher__name">{target.label}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </details>
 </nav>
 
 <script is:inline>
@@ -69,12 +105,29 @@ const targets = locales.map((code) => ({
       switcher.addEventListener("click", () => updateSwitcher(switcher), {
         capture: true,
       });
+
+      const dropdown = switcher.querySelector("details");
+      if (!dropdown) return;
+
+      document.addEventListener("click", (event) => {
+        if (!(event.target instanceof Node)) return;
+        if (!dropdown.open || dropdown.contains(event.target)) return;
+        dropdown.open = false;
+      });
+
+      dropdown.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") dropdown.open = false;
+      });
     });
   })();
 </script>
 
 <style>
-  .lang-switcher ul {
+  .lang-switcher {
+    position: relative;
+  }
+
+  .lang-switcher__list {
     display: flex;
     gap: 4px;
     list-style: none;
@@ -83,6 +136,66 @@ const targets = locales.map((code) => ({
     background: color-mix(in oklab, var(--color-ink-2), transparent 8%);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 999px;
+  }
+
+  .lang-switcher__dropdown {
+    display: none;
+    position: relative;
+  }
+
+  .lang-switcher__summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 28px;
+    padding: 4px 8px 4px 10px;
+    list-style: none;
+    color: var(--color-ink);
+    background: var(--color-fg);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .lang-switcher__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .lang-switcher__summary::marker {
+    content: "";
+  }
+
+  .lang-switcher__summary svg {
+    display: block;
+    opacity: 0.7;
+    transition: transform 140ms ease;
+  }
+
+  .lang-switcher__dropdown[open] .lang-switcher__summary svg {
+    transform: rotate(180deg);
+  }
+
+  .lang-switcher__menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 20;
+    display: grid;
+    gap: 2px;
+    min-width: 7.5rem;
+    margin: 0;
+    padding: 4px;
+    list-style: none;
+    background: color-mix(in oklab, var(--color-ink-2) 94%, transparent);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
   }
 
   .lang-link {
@@ -99,6 +212,23 @@ const targets = locales.map((code) => ({
     border-radius: 999px;
   }
 
+  .lang-switcher__menu .lang-link {
+    justify-content: flex-start;
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
+    padding: 8px 10px;
+    border-radius: 8px;
+  }
+
+  .lang-switcher__name {
+    color: var(--color-fg-mute);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
   .lang-link:hover,
   .lang-link:focus-visible {
     color: var(--color-fg);
@@ -107,5 +237,25 @@ const targets = locales.map((code) => ({
   .lang-link.is-active {
     color: var(--color-ink);
     background: var(--color-fg);
+  }
+
+  .lang-switcher__menu .lang-link.is-active .lang-switcher__name {
+    color: color-mix(in oklab, var(--color-ink) 70%, transparent);
+  }
+
+  @media (max-width: 640px) {
+    .lang-switcher__list {
+      display: none;
+    }
+
+    .lang-switcher__dropdown {
+      display: block;
+    }
+
+    .lang-switcher__summary {
+      min-height: 24px;
+      padding: 3px 7px 3px 8px;
+      font-size: 10px;
+    }
   }
 </style>

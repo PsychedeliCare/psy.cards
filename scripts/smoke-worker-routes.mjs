@@ -93,13 +93,18 @@ const checks = [
 	},
 	{
 		url: "https://psy.cards/",
-		status: 302,
-		location: "https://psy.cards/combos",
+		status: 200,
+		assetPath: "/",
 	},
 	{
 		url: "https://www.psy.cards/index.html",
-		status: 302,
-		location: "https://www.psy.cards/combos",
+		status: 200,
+		assetPath: "/index.html",
+	},
+	{
+		url: "https://psy.cards/wheel",
+		status: 200,
+		assetPath: "/wheel",
 	},
 ];
 

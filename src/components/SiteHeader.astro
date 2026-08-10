@@ -87,6 +87,7 @@ const combosHref = localePath(locale, "/combos");
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    isolation: isolate;
   }
 
   html[data-color-scheme="light"] .site-header {
@@ -173,7 +174,7 @@ const combosHref = localePath(locale, "/combos");
 
   .site-header__actions {
     justify-self: end;
-    padding-right: 56px;
+    padding-right: 40px;
   }
 
   @media (max-width: 640px) {
@@ -216,18 +217,7 @@ const combosHref = localePath(locale, "/combos");
     }
 
     .site-header__actions {
-      padding-right: 34px;
-    }
-
-    .site-header__actions :global(.lang-switcher ul) {
-      gap: 2px;
-      padding: 3px;
-    }
-
-    .site-header__actions :global(.lang-link) {
-      min-width: 26px;
-      padding: 3px 6px;
-      font-size: 10px;
+      padding-right: 22px;
     }
   }
 
@@ -247,7 +237,7 @@ const combosHref = localePath(locale, "/combos");
     .site-header__actions {
       flex: 0 0 auto;
       margin-left: auto;
-      padding-right: 28px;
+      padding-right: 18px;
     }
 
     .site-header__view {
@@ -257,6 +247,8 @@ const combosHref = localePath(locale, "/combos");
       justify-content: center;
       grid-column: unset;
       justify-self: unset;
+      position: relative;
+      z-index: 1;
     }
   }
 
@@ -278,8 +270,9 @@ const combosHref = localePath(locale, "/combos");
     color: #df6330;
   }
 
-  .site-header--event :global(.lang-switcher ul) {
-    background: rgba(255, 250, 241, 0.72);
+  .site-header--event :global(.lang-switcher__list),
+  .site-header--event :global(.lang-switcher__menu) {
+    background: rgba(255, 250, 241, 0.92);
     border-color: rgba(55, 47, 76, 0.12);
   }
 
@@ -292,9 +285,14 @@ const combosHref = localePath(locale, "/combos");
     color: #372f4c;
   }
 
-  .site-header--event :global(.lang-link.is-active) {
+  .site-header--event :global(.lang-link.is-active),
+  .site-header--event :global(.lang-switcher__summary) {
     color: #372f4c;
     background: #fff0d2;
+  }
+
+  .site-header--event :global(.lang-switcher__name) {
+    color: rgba(55, 47, 76, 0.55);
   }
 
   .site-header--event .site-header__view ul {
