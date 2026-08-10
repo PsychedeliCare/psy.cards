@@ -24,6 +24,9 @@ const ui = getUiMessages(locale);
         {t(locale, ui, "offlineCache.description")}
       </p>
       <p class="offline-cache-panel__last-sync" data-offline-cache-last-sync hidden></p>
+      <p class="offline-cache-panel__manage">
+        <a href="/cache/">{t(locale, ui, "offlineCache.manageLink")}</a>
+      </p>
     </div>
 
     <button
@@ -95,6 +98,23 @@ const ui = getUiMessages(locale);
     font-size: 12px;
     line-height: 1.4;
     color: var(--color-fg-mute);
+  }
+
+  .offline-cache-panel__manage {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .offline-cache-panel__manage a {
+    color: var(--color-fg-mute);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .offline-cache-panel__manage a:hover,
+  .offline-cache-panel__manage a:focus-visible {
+    color: var(--color-fg);
   }
 
   .offline-cache-panel__action {

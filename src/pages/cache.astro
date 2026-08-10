@@ -1,0 +1,281 @@
+---
+import Layout from "../components/Layout.astro";
+
+export const prerender = true;
+---
+
+<Layout
+  title="Cache — psy.cards"
+  description="Inspect and clear the psy.cards service worker cache."
+>
+  <main class="cache-page" data-cache-page>
+    <header class="cache-hero">
+      <p class="cache-kicker">Diagnostics</p>
+      <h1>Cache</h1>
+      <p class="cache-lede">
+        Inspect what this browser has stored for psy.cards, then clear service
+        workers and Cache Storage if Mobile Safari (or another browser) is stuck
+        on an old build.
+      </p>
+    </header>
+
+    <section class="cache-actions" aria-label="Cache actions">
+      <button type="button" class="cache-btn cache-btn--primary" data-cache-clear>
+        Clear everything
+      </button>
+      <button type="button" class="cache-btn" data-cache-refresh>
+        Refresh inventory
+      </button>
+      <p class="cache-status" data-cache-status data-tone="info">
+        Reading caches…
+      </p>
+    </section>
+
+    <section class="cache-section" aria-labelledby="cache-sw-heading">
+      <h2 id="cache-sw-heading">Service workers</h2>
+      <div data-cache-sw-list>
+        <p class="cache-empty">Loading…</p>
+      </div>
+    </section>
+
+    <section class="cache-section" aria-labelledby="cache-storage-heading">
+      <div class="cache-section__header">
+        <h2 id="cache-storage-heading">Cache Storage</h2>
+        <p data-cache-summary>Loading…</p>
+      </div>
+      <p class="cache-local" data-cache-local>Offline sync marker: …</p>
+      <div class="cache-grid" data-cache-list>
+        <p class="cache-empty">Loading…</p>
+      </div>
+    </section>
+
+    <section class="cache-section cache-notes">
+      <h2>If Safari is still stuck</h2>
+      <ol>
+        <li>Tap <strong>Clear everything</strong> above.</li>
+        <li>Close every psy.cards tab and the home-screen app if installed.</li>
+        <li>Reopen <code>/cache</code>, confirm the inventory is empty, then go home.</li>
+        <li>
+          As a last resort on iOS: Settings → Apps → Safari → Advanced → Website
+          Data → remove psy.cards.
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <script src="../scripts/cache-debug.ts"></script>
+</Layout>
+
+<style>
+  .cache-page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 28px 20px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .cache-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 58ch;
+  }
+
+  .cache-kicker {
+    margin: 0;
+    color: var(--color-fg-mute);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .cache-hero h1 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .cache-lede {
+    margin: 0;
+    color: var(--color-fg-mute);
+    line-height: 1.5;
+  }
+
+  .cache-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .cache-btn {
+    appearance: none;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: transparent;
+    color: var(--color-fg);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .cache-btn:hover,
+  .cache-btn:focus-visible {
+    border-color: rgba(255, 255, 255, 0.32);
+  }
+
+  .cache-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .cache-btn--primary {
+    background: var(--color-fg);
+    color: var(--color-ink);
+    border-color: transparent;
+  }
+
+  .cache-btn--primary:hover,
+  .cache-btn--primary:focus-visible {
+    opacity: 0.92;
+  }
+
+  :global(html[data-color-scheme="light"]) .cache-btn {
+    border-color: rgba(0, 0, 0, 0.14);
+  }
+
+  .cache-status {
+    margin: 0;
+    width: 100%;
+    color: var(--color-fg-mute);
+    font-size: 0.95rem;
+  }
+
+  .cache-status[data-tone="ok"] {
+    color: var(--color-safe);
+  }
+
+  .cache-status[data-tone="warn"] {
+    color: var(--color-caution);
+  }
+
+  .cache-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cache-section h2 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 650;
+  }
+
+  .cache-section__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 16px;
+  }
+
+  .cache-section__header p,
+  .cache-local {
+    margin: 0;
+    color: var(--color-fg-mute);
+    font-size: 0.92rem;
+  }
+
+  .cache-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  :global(.cache-card) {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--color-ink-2);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+
+  :global(html[data-color-scheme="light"] .cache-card) {
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  :global(.cache-card h3) {
+    margin: 0 0 8px;
+    font-size: 1rem;
+    font-weight: 650;
+    word-break: break-word;
+  }
+
+  :global(.cache-card__header p) {
+    margin: 0 0 10px;
+    color: var(--color-fg-mute);
+    font-size: 0.9rem;
+  }
+
+  :global(.cache-card dl) {
+    margin: 0;
+    display: grid;
+    gap: 8px;
+  }
+
+  :global(.cache-card dl div) {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 8px;
+  }
+
+  :global(.cache-card dt) {
+    color: var(--color-fg-mute);
+  }
+
+  :global(.cache-card dd) {
+    margin: 0;
+    word-break: break-word;
+  }
+
+  :global(.cache-url-list) {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 240px;
+    overflow: auto;
+  }
+
+  :global(.cache-url-list code),
+  .cache-notes code {
+    font-size: 0.82rem;
+    word-break: break-all;
+  }
+
+  :global(.cache-url-more),
+  :global(.cache-empty) {
+    margin: 0;
+    color: var(--color-fg-mute);
+  }
+
+  .cache-notes ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--color-fg-mute);
+    line-height: 1.45;
+  }
+
+  .cache-notes strong {
+    color: var(--color-fg);
+    font-weight: 650;
+  }
+</style>

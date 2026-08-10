@@ -59,7 +59,8 @@
     "partialFailure": "Offline-Daten gespeichert, aber {count} Elemente konnten nicht heruntergeladen werden.",
     "failure": "Offline-Daten konnten nicht heruntergeladen werden. Versuche es erneut, wenn deine Verbindung stabil ist.",
     "offlineWarning": "Verbinde dich mit dem Internet, um Offline-Daten herunterzuladen.",
-    "unavailable": "Offline-Daten konnten für diese Seite nicht vorbereitet werden."
+    "unavailable": "Offline-Daten konnten für diese Seite nicht vorbereitet werden.",
+    "manageLink": "Cache verwalten"
   },
   "acknowledgements": {
     "ariaLabel": "Danksagungen",

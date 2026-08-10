@@ -59,7 +59,8 @@
     "partialFailure": "Données hors ligne enregistrées, mais {count} éléments n'ont pas pu être téléchargés.",
     "failure": "Impossible de télécharger les données hors ligne. Réessayez lorsque votre connexion est stable.",
     "offlineWarning": "Connectez-vous à internet pour télécharger les données hors ligne.",
-    "unavailable": "Les données hors ligne n'ont pas pu être préparées pour cette page."
+    "unavailable": "Les données hors ligne n'ont pas pu être préparées pour cette page.",
+    "manageLink": "Gérer le cache"
   },
   "acknowledgements": {
     "ariaLabel": "Remerciements",

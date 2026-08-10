@@ -59,7 +59,8 @@
     "partialFailure": "Dati offline salvati, ma {count} elementi non sono stati scaricati.",
     "failure": "Impossibile scaricare i dati offline. Riprova quando la connessione è stabile.",
     "offlineWarning": "Connettiti a internet per scaricare i dati offline.",
-    "unavailable": "I dati offline non sono stati preparati per questa pagina."
+    "unavailable": "I dati offline non sono stati preparati per questa pagina.",
+    "manageLink": "Gestisci cache"
   },
   "acknowledgements": {
     "ariaLabel": "Riconoscimenti",

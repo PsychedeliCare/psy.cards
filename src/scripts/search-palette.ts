@@ -610,20 +610,23 @@ function search(query: string): SearchResult[] {
     .map((item) => toSearchResult(item, trimmed));
 }
 
-function createSvgIcon(): SVGSVGElement {
+function createSvgIcon(pathD: string): SVGSVGElement {
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("viewBox", "0 0 24 24");
   svg.setAttribute("aria-hidden", "true");
 
-  const circle = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  circle.setAttribute(
-    "d",
-    "M10.75 4a6.75 6.75 0 1 0 4.16 12.06l3.52 3.51 1.41-1.41-3.51-3.52A6.75 6.75 0 0 0 10.75 4Zm0 2a4.75 4.75 0 1 1 0 9.5 4.75 4.75 0 0 1 0-9.5Z"
-  );
-  svg.appendChild(circle);
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", pathD);
+  svg.appendChild(path);
 
   return svg;
 }
+
+const SEARCH_ICON_PATH =
+  "M10.75 4a6.75 6.75 0 1 0 4.16 12.06l3.52 3.51 1.41-1.41-3.51-3.52A6.75 6.75 0 0 0 10.75 4Zm0 2a4.75 4.75 0 1 1 0 9.5 4.75 4.75 0 0 1 0-9.5Z";
+
+const CLOSE_ICON_PATH =
+  "M18.3 5.71 12 12.01l-6.3-6.3-1.41 1.41L10.59 13.4l-6.3 6.3 1.41 1.41 6.3-6.3 6.3 6.3 1.41-1.41-6.3-6.3 6.3-6.3z";
 
 function createPaletteElements() {
   const overlay = document.createElement("div");
@@ -646,7 +649,7 @@ function createPaletteElements() {
 
   const icon = document.createElement("span");
   icon.className = "search-palette__search-icon";
-  icon.appendChild(createSvgIcon());
+  icon.appendChild(createSvgIcon(SEARCH_ICON_PATH));
 
   const input = document.createElement("input");
   input.className = "search-palette__input";
@@ -658,7 +661,13 @@ function createPaletteElements() {
   input.setAttribute("aria-controls", "search-palette-results");
   input.setAttribute("aria-autocomplete", "list");
 
-  form.append(icon, input);
+  const closeButton = document.createElement("button");
+  closeButton.className = "search-palette__close";
+  closeButton.type = "button";
+  closeButton.setAttribute("aria-label", getUiString("search.close", "Close"));
+  closeButton.appendChild(createSvgIcon(CLOSE_ICON_PATH));
+
+  form.append(icon, input, closeButton);
 
   const results = document.createElement("div");
   results.id = "search-palette-results";
@@ -674,7 +683,7 @@ function createPaletteElements() {
   overlay.append(backdrop, panel);
   document.body.appendChild(overlay);
 
-  return { overlay, backdrop, panel, form, input, results };
+  return { overlay, backdrop, panel, form, input, closeButton, results };
 }
 
 function isCoarsePointerDevice(): boolean {
@@ -943,8 +952,9 @@ export function initSearchPalette(): void {
     }
   });
 
-  const { backdrop, form, input, results } = ensurePalette();
+  const { backdrop, form, input, closeButton, results } = ensurePalette();
   backdrop.addEventListener("click", close);
+  closeButton.addEventListener("click", close);
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     navigateToActive();

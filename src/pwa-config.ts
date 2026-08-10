@@ -19,6 +19,8 @@ export const PWA_NAVIGATE_FALLBACK_DENYLIST = [
   // Wheel uses ?s= query state; never substitute the combos shell for it.
   /^\/wheel(?:\/|$)/,
   /^\/(?:fr|de|it)\/wheel(?:\/|$)/,
+  // Cache inspector must hit the network so a stuck SW can still be cleared.
+  /^\/cache(?:\/|$)/,
 ];
 
 /**

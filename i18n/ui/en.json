@@ -59,7 +59,8 @@
     "partialFailure": "Offline data saved, but {count} items could not be downloaded.",
     "failure": "Could not download offline data. Try again when your connection is stable.",
     "offlineWarning": "Connect to the internet to download offline data.",
-    "unavailable": "Offline data could not be prepared for this page."
+    "unavailable": "Offline data could not be prepared for this page.",
+    "manageLink": "Manage cache"
   },
   "acknowledgements": {
     "ariaLabel": "Acknowledgements",
