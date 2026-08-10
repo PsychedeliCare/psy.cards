@@ -5,6 +5,10 @@
     "combosTitle": "Drug combinations — psy.cards",
     "landingDescription": "Clear, multilingual harm-reduction cards that make trusted substance information easier to read, share, and use."
   },
+  "dial": {
+    "ariaLabel": "Substance dial",
+    "pageTitle": "Substance wheel — psy.cards"
+  },
   "layout": {
     "close": "Close",
     "language": "Language",

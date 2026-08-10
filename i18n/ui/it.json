@@ -5,6 +5,10 @@
     "combosTitle": "Combinazioni di droghe — psy.cards",
     "landingDescription": "Schede chiare e multilingue per la riduzione del rischio che rendono le informazioni affidabili sulle sostanze più facili da leggere, condividere e usare."
   },
+  "dial": {
+    "ariaLabel": "Selettore delle sostanze",
+    "pageTitle": "Ruota delle sostanze — psy.cards"
+  },
   "layout": {
     "close": "Chiudi",
     "language": "Lingua",

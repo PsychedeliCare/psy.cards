@@ -1,0 +1,149 @@
+---
+/**
+ * Persistent circular "thumb jog dial" substance navigator.
+ *
+ * The full SVG (wedges, labels, hub, rim) is server-rendered so the dial is
+ * visible and correct — a static ring of substance links — with JS disabled.
+ * `src/scripts/substance-dial.ts` only adds rotation and interaction.
+ *
+ * Desktop: anchored bottom-left, detent at 90° (east).
+ * Mobile:  anchored bottom-right, detent at 270° (west).
+ */
+import "../styles/dial.css";
+import type { Locale } from "../i18n/locales";
+import { localePath } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
+import {
+  DESKTOP_DETENT,
+  DIAL,
+  buildDialLayout,
+  categoryLabelReversed,
+  rotationForSubstance,
+  substanceLabelOrientation,
+  type DialCategoryInput,
+} from "../lib/dial-geometry";
+
+interface Props {
+  locale?: Locale;
+  categories: DialCategoryInput[];
+  /** Substance sitting under the detent on first paint. */
+  initialKey: string;
+}
+
+const { locale = "en", categories, initialKey } = Astro.props;
+const ui = getUiMessages(locale);
+
+const layout = buildDialLayout(categories);
+const initialSub =
+  layout.substances.find((s) => s.key === initialKey) ?? layout.substances[0]!;
+const activeGroup = initialSub.group;
+
+// SSR assumes the desktop detent; the client script re-seats the rotation
+// instantly on mount for the mobile breakpoint (no tween, no layout shift —
+// the dial is position: fixed).
+const initialRotation = rotationForSubstance(initialSub.midAngle, DESKTOP_DETENT, 0);
+
+const uid = `dial-${Math.random().toString(36).slice(2, 8)}`;
+const optionId = (slug: string) => `${uid}-opt-${slug}`;
+
+const ariaLabel = t(locale, ui, "dial.ariaLabel");
+const substanceBase = localePath(locale, "/");
+---
+
+<div
+  class="dial-shell"
+  data-dial-shell
+  data-uid={uid}
+>
+  <div
+    class="dial-disc"
+    data-dial-disc
+    tabindex="0"
+    role="listbox"
+    aria-label={ariaLabel}
+    aria-activedescendant={optionId(initialSub.slug)}
+  >
+    <svg
+      viewBox="-100 -100 200 200"
+      data-dial-svg
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g data-dial-rotor data-initial-rotation={initialRotation} transform={`rotate(${initialRotation})`}>
+        {
+          layout.categories.map((cat, i) => {
+            const reversed = categoryLabelReversed(cat.midAngle, initialRotation);
+            const arcId = `${uid}-cat-${i}`;
+            return (
+              <g
+                class={`dial-category group-${cat.group}`}
+                data-dial-category
+                data-group={cat.group}
+                data-mid-angle={cat.midAngle}
+                data-active={cat.group === activeGroup ? "true" : "false"}
+              >
+                <path class="dial-category-wedge" d={cat.path} />
+                <defs>
+                  <path
+                    id={arcId}
+                    d={reversed ? cat.labelArcReverse : cat.labelArcForward}
+                    data-dial-cat-arc
+                    data-forward={cat.labelArcForward}
+                    data-reverse={cat.labelArcReverse}
+                  />
+                </defs>
+                <text
+                  class="dial-category-label"
+                  font-size={cat.labelFontSize.toFixed(2)}
+                >
+                  <textPath href={`#${arcId}`} startOffset="50%">
+                    {cat.label.toLocaleUpperCase(locale)}
+                  </textPath>
+                </text>
+              </g>
+            );
+          })
+        }
+        {
+          layout.substances.map((sub) => {
+            const o = substanceLabelOrientation(sub.midAngle, initialRotation);
+            const isActive = sub.key === initialSub.key;
+            return (
+              <a
+                href={`${substanceBase}${sub.slug}`}
+                id={optionId(sub.slug)}
+                class={`dial-substance group-${sub.group}`}
+                role="option"
+                aria-selected={isActive ? "true" : "false"}
+                data-dial-substance
+                data-key={sub.key}
+                data-slug={sub.slug}
+                data-label={sub.label}
+                data-group={sub.group}
+                data-mid-angle={sub.midAngle}
+                data-active={isActive ? "true" : "false"}
+                data-in-active-group={sub.group === activeGroup ? "true" : "false"}
+              >
+                <path class="dial-substance-wedge" data-dial-wedge d={sub.path} />
+                <text
+                  class="dial-substance-label"
+                  data-dial-substance-label
+                  transform={o.transform}
+                  text-anchor={o.anchor}
+                  font-size={sub.fontSize.toFixed(2)}
+                >
+                  {sub.label}
+                </text>
+              </a>
+            );
+          })
+        }
+      </g>
+      <circle class="dial-hub" r={DIAL.hubRadius} />
+      <circle class="dial-rim" r={DIAL.rimRadius} />
+      <circle class="dial-focus-ring" r={DIAL.rimRadius - 5} />
+    </svg>
+  </div>
+  <div class="dial-marker" aria-hidden="true"></div>
+  <div class="sr-only" aria-live="polite" data-dial-live></div>
+</div>

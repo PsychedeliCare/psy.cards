@@ -198,11 +198,25 @@
   margin-top: 12px;
 }
 
+@media (max-width: 640px) {
+  .preview-banner {
+    top: 10px;
+    right: -50px;
+    width: 112px;
+    padding: 5px 0;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  }
+}
+
 @media (max-width: 480px) {
   .preview-banner {
-    top: 16px;
-    right: -48px;
-    width: 164px;
+    top: 8px;
+    right: -52px;
+    width: 104px;
+    padding: 4px 0;
+    font-size: 8px;
   }
 
   .preview-modal__panel {

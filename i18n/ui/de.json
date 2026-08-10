@@ -5,6 +5,10 @@
     "combosTitle": "Drogenkombinationen — psy.cards",
     "landingDescription": "Klare, mehrsprachige Risikominimierungs-Karten, die vertrauenswürdige Substanzinformationen leichter lesbar, teilbar und nutzbar machen."
   },
+  "dial": {
+    "ariaLabel": "Substanz-Wählrad",
+    "pageTitle": "Substanzrad — psy.cards"
+  },
   "layout": {
     "close": "Schließen",
     "language": "Sprache",

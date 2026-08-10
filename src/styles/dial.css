@@ -1,0 +1,191 @@
+/* Substance jog dial — placement, rim, clip, marker, scrim, focus ring.
+   Geometry (radii, angles, labels) lives in src/lib/dial-geometry.ts. */
+
+/* ---------- Shell placement ----------
+   Outer div carries the drop shadow and is pointer-events: none; the inner
+   disc carries a circular clip so pointer events only land on the disc — a
+   square hit box would swallow card scrolling. */
+
+.dial-shell {
+  position: fixed;
+  z-index: 40;
+  pointer-events: none;
+  /* Desktop: 520 box; horizontal centre sits on the left viewport edge. */
+  --dial-size: 520px;
+  width: var(--dial-size);
+  height: var(--dial-size);
+  left: calc(var(--dial-size) / -2);
+  bottom: calc(var(--dial-size) / -2 + 120px);
+  filter: drop-shadow(0 -6px 26px rgba(0, 0, 0, 0.55));
+}
+
+.dial-disc {
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  clip-path: circle(49.5% at 50% 50%);
+  cursor: grab;
+  touch-action: none;
+  outline: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dial-disc:active {
+  cursor: grabbing;
+}
+
+.dial-disc svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Static parts (never spin) ---------- */
+
+.dial-hub {
+  fill: var(--color-ink);
+}
+
+.dial-rim {
+  fill: none;
+  stroke: #000;
+  stroke-width: 2;
+}
+
+/* Visible focus ring for keyboard users (a box outline would be clipped
+   away by the circular clip-path, so it is drawn inside the SVG). */
+.dial-focus-ring {
+  fill: none;
+  stroke: var(--color-safe);
+  stroke-width: 1.6;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dial-disc:focus-visible .dial-focus-ring {
+  opacity: 1;
+}
+
+/* ---------- Rings ---------- */
+
+.dial-category {
+  cursor: pointer;
+}
+
+.dial-category-wedge {
+  fill: var(--hue, var(--color-unknown));
+  stroke: var(--color-ink);
+  stroke-width: 0.5;
+}
+
+.dial-substance {
+  text-decoration: none;
+  outline: none;
+}
+
+.dial-substance-wedge {
+  fill: var(--hue, var(--color-unknown));
+  stroke: var(--color-ink);
+  stroke-width: 0.5;
+}
+
+/* ---------- Labels (dark on the coloured wedge reads better than white) ---------- */
+
+.dial-substance-label {
+  fill: #0b0b0c;
+  font-weight: 500;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+
+.dial-substance[data-active="true"] .dial-substance-label {
+  font-weight: 800;
+}
+
+.dial-category-label {
+  fill: #0b0b0c;
+  font-weight: 700;
+  letter-spacing: 0.45px;
+  pointer-events: none;
+}
+
+/* ---------- Detent marker ----------
+   Desktop: 9px triangle just outside the disc at 90° (east), pointing left. */
+
+.dial-marker {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + var(--dial-size) * 0.49 + 3px);
+  width: 0;
+  height: 0;
+  transform: translateY(-50%);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 9px solid var(--color-fg);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+}
+
+/* ---------- Mobile: bottom-right, detent 270° (west), heavy rim, no panel ----------
+   Half the previous mobile size; horizontal centre sits on the right viewport
+   edge, 75px up from the bottom safe-area inset. */
+
+@media (max-width: 768px) {
+  .dial-shell {
+    --dial-size: clamp(160px, 67.5vw, 310px);
+    left: auto;
+    right: calc(var(--dial-size) / -2);
+    bottom: calc(var(--dial-size) / -2 + 75px + env(safe-area-inset-bottom, 0px));
+    filter: drop-shadow(0 0 44px rgba(0, 0, 0, 0.92));
+  }
+
+  .dial-rim {
+    stroke-width: 4.5;
+  }
+
+  .dial-marker {
+    left: auto;
+    right: calc(50% + var(--dial-size) * 0.49 + 3px);
+    border-right: 0;
+    border-left: 9px solid var(--color-fg);
+  }
+}
+
+/* ---------- Wheel page layout ---------- */
+
+.wheel-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 180px;
+}
+
+.wheel-card .substance-card {
+  box-shadow:
+    0 30px 80px -20px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+/* Soft scrim separating card content from the floating mobile dial. */
+.wheel-scrim {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 130px;
+  z-index: 30;
+  background: linear-gradient(transparent, rgba(11, 11, 12, 0.92));
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .wheel-page {
+    /* Card scrolls full-bleed under the floating disc. */
+    padding: 16px 12px calc(160px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .wheel-scrim {
+    display: block;
+  }
+}

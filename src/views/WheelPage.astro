@@ -1,0 +1,65 @@
+---
+/**
+ * /wheel — substance-card experience driven by the circular jog dial.
+ *
+ * The dial is a supplementary navigator: the search palette stays reachable,
+ * every wedge is a plain link with JS off, and the card behind the dial is
+ * the same server-rendered SubstanceCard used everywhere else.
+ */
+import Layout from "../components/Layout.astro";
+import SubstanceCard from "../components/SubstanceCard.astro";
+import SubstanceDial from "../components/SubstanceDial.astro";
+import Footer from "../components/Footer.astro";
+import type { Locale } from "../i18n/locales";
+import { getColumns, getGroupLabels, visibleGroupOrder } from "../data/config";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
+import type { DialCategoryInput } from "../lib/dial-geometry";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
+const ui = getUiMessages(locale);
+const title = t(locale, ui, "dial.pageTitle");
+
+/** Cap per category so the arc stays legible (columns are already in curated
+ *  table order, so "first N" is the curated pick). */
+const MAX_SUBSTANCES_PER_CATEGORY = 4;
+
+const columns = getColumns(locale);
+const groupLabels = getGroupLabels(locale);
+
+const categories: DialCategoryInput[] = visibleGroupOrder.map((group) => ({
+  group,
+  label: groupLabels[group],
+  substances: columns
+    .filter((column) => column.group === group)
+    .slice(0, MAX_SUBSTANCES_PER_CATEGORY)
+    .map(({ key, label, slug, group: g }) => ({ key, label, slug, group: g })),
+}));
+
+const initial = categories[0]!.substances[0]!;
+---
+
+<Layout locale={locale} title={title}>
+  <main class="wheel-page">
+    <div class="wheel-card" data-dial-card data-initial-slug={initial.slug}>
+      <SubstanceCard substanceKey={initial.key} locale={locale} />
+    </div>
+
+    <Footer locale={locale} />
+  </main>
+
+  <div class="wheel-scrim" aria-hidden="true"></div>
+
+  <SubstanceDial locale={locale} categories={categories} initialKey={initial.key} />
+
+  <script>
+    import { initSubstanceDial } from "../scripts/substance-dial.ts";
+    import { initSearchPalette } from "../scripts/search-palette.ts";
+    initSubstanceDial();
+    initSearchPalette();
+  </script>
+</Layout>

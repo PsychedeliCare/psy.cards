@@ -5,6 +5,10 @@
     "combosTitle": "Combinaisons de drogues — psy.cards",
     "landingDescription": "Des cartes de réduction des risques claires et multilingues qui facilitent la lecture, le partage et l'utilisation d'informations fiables sur les substances."
   },
+  "dial": {
+    "ariaLabel": "Cadran des substances",
+    "pageTitle": "Roue des substances — psy.cards"
+  },
   "layout": {
     "close": "Fermer",
     "language": "Langue",
