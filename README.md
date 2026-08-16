@@ -1,8 +1,17 @@
 # psy.cards
 
-![psy.cards prototype](./public/assets/opengraph.jpg)
+![psy.cards prototype](./packages/web/public/assets/opengraph.jpg)
 
-`psy.cards` is a multilingual harm reduction card project that turns verified knowledge bases into compact, readable guidance across print, web, and social media formats. 
+`psy.cards` is a multilingual harm reduction card project that turns verified knowledge bases into compact, readable guidance across print, web, iOS, and social media formats.
+
+## Monorepo
+
+| Package | Role |
+| :-- | :-- |
+| `packages/web` | Astro static site + Cloudflare Worker |
+| `packages/ios` | Native SwiftUI iOS/iPadOS app |
+| `packages/shared` | Shared JSON datasets (`data/`, `i18n/`) + datapack generator |
+| `drugs/`, `combogen/` | TripSit git submodules (shared by web + iOS) | 
 
 The goal is to make high-quality substance information easier to access, easier to translate, and easier to distribute responsibly across Europe.
 
@@ -48,6 +57,7 @@ All commands run from the project root:
 | `pnpm preview` | Preview the production build locally |
 | `pnpm preview:cloudflare` | Preview the built `dist` directory with the Cloudflare Worker and assets binding |
 | `pnpm smoke:worker-routes` | Check custom-domain Worker routing without starting a server |
+| `pnpm datapack` | Regenerate the iOS data pack from shared JSON |
 
 To debug Cloudflare behavior locally, run `pnpm build` and then `pnpm preview:cloudflare`.
 For fast custom-domain routing checks, run `pnpm smoke:worker-routes`.
@@ -58,4 +68,4 @@ For fast custom-domain routing checks, run `pnpm smoke:worker-routes`.
 
 | [TripSit](https://tripsit.me) | [PsychonautWiki](https://psychonautwiki.org) | [Drugwatch](https://www.drugwatch.org) |
 | :--: | :--: | :--: |
-| <img src="./public/assets/tripsit-logo.png" alt="TripSit logo" width="140" /> | <img src="./public/assets/psychonautwiki-logo.png" alt="PsychonautWiki logo" width="140" /> | <img src="./public/assets/drugwatch-logo.png" alt="Drugwatch logo" width="140" /> |
+| <img src="./packages/web/public/assets/tripsit-logo.png" alt="TripSit logo" width="140" /> | <img src="./packages/web/public/assets/psychonautwiki-logo.png" alt="PsychonautWiki logo" width="140" /> | <img src="./packages/web/public/assets/drugwatch-logo.png" alt="Drugwatch logo" width="140" /> |

@@ -1,0 +1,1218 @@
+{
+  "locale": "it",
+  "groups": [
+    "stimulant",
+    "empathogen",
+    "psychedelic",
+    "dissociative",
+    "depressant",
+    "opioid",
+    "cannabinoid"
+  ],
+  "groupLabels": {
+    "psychedelic": "Psichedelici",
+    "dissociative": "Dissociativi",
+    "stimulant": "Stimolanti",
+    "depressant": "Depressivi",
+    "antidepressant": "Antidepressivi",
+    "empathogen": "Empatogeni",
+    "opioid": "Oppioidi",
+    "cannabinoid": "Cannabinoidi"
+  },
+  "substances": [
+    {
+      "key": "maois",
+      "slug": "maois",
+      "label": "IMAOs",
+      "prettyName": "IMAOs",
+      "group": "antidepressant",
+      "aliases": [],
+      "searchTerms": [
+        "IMAOs"
+      ],
+      "summary": null,
+      "isClass": true,
+      "classDescription": "Gli inibitori delle monoamino ossidasi impediscono la degradazione di serotonina, dopamina e noradrenalina. Includono alcaloidi dell'armala, fenelzina e selegilina.",
+      "dose": null,
+      "doseNote": null,
+      "onset": null,
+      "duration": null,
+      "afterEffects": null,
+      "effects": null,
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CC1=NC=CC2=C1NC3=C2C=CC(=C3)OC",
+        "compound": "Harmine",
+        "representative": true,
+        "assetName": "molecule_maois"
+      }
+    },
+    {
+      "key": "ssris",
+      "slug": "ssris",
+      "label": "SSRIs",
+      "prettyName": "SSRIs",
+      "group": "antidepressant",
+      "aliases": [],
+      "searchTerms": [
+        "SSRIs"
+      ],
+      "summary": null,
+      "isClass": true,
+      "classDescription": "Gli inibitori selettivi della ricaptazione della serotonina sono antidepressivi che aumentano la serotonina sinaptica (es. fluoxetina, sertralina, citalopram).",
+      "dose": null,
+      "doseNote": null,
+      "onset": null,
+      "duration": null,
+      "afterEffects": null,
+      "effects": null,
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CNCCC(C1=CC=CC=C1)OC2=CC=C(C=C2)C(F)(F)F",
+        "compound": "Fluoxetine",
+        "representative": true,
+        "assetName": "molecule_ssris"
+      }
+    },
+    {
+      "key": "amphetamines",
+      "slug": "amphetamines",
+      "label": "Anfetamine",
+      "prettyName": "Anfetamine",
+      "group": "stimulant",
+      "aliases": [],
+      "searchTerms": [
+        "Anfetamine"
+      ],
+      "summary": null,
+      "isClass": true,
+      "classDescription": "Le amfetamine sono una classe di stimolanti che include amfetamina, destroamfetamina, metamfetamina e analoghi correlati.",
+      "dose": null,
+      "doseNote": null,
+      "onset": null,
+      "duration": null,
+      "afterEffects": null,
+      "effects": null,
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CC(CC1=CC=CC=C1)N",
+        "compound": "Amphetamine",
+        "representative": true,
+        "assetName": "molecule_amphetamines"
+      }
+    },
+    {
+      "key": "cocaine",
+      "slug": "cocaine",
+      "label": "Cocaina",
+      "prettyName": "Cocaina",
+      "group": "stimulant",
+      "aliases": [
+        "coke"
+      ],
+      "searchTerms": [
+        "Cocaina",
+        "Cocaina",
+        "coke"
+      ],
+      "summary": "Uno stimolante del SNC molto popolare e a breve durata d'azione che agisce bloccando la ricaptazione di dopamina, serotonina e noradrenalina. È noto per aumentare euforia, sicurezza in sé, desiderio sessuale, concentrazione, temperatura corporea e frequenza cardiaca. La cocaina può causare grave vasocostrizione ed è nota per essere cardiotossica e avere un alto potenziale di riassunzione compulsiva e dipendenza.",
+      "isClass": false,
+      "classDescription": null,
+      "dose": {
+        "Insufflated": {
+          "Common": "50-100mg",
+          "Heavy": "150mg+",
+          "Light": "20-50mg",
+          "Strong": "100-150mg"
+        }
+      },
+      "doseNote": "Insufflated Light: 20-50mg Common: 50-100mg Strong: 100-150mg Heavy: 150mg+ | NOTE: Depending on purity, dosage will vary",
+      "onset": null,
+      "duration": {
+        "_unit": "hours",
+        "value": "1-1.5"
+      },
+      "afterEffects": "1-4 hours.",
+      "effects": [
+        "Umore elevato",
+        "Aumento dell'irritabilità",
+        "ego ipertrofico",
+        "euforia",
+        "stimolazione",
+        "frequenza cardiaca aumentata",
+        "effetti anestetizzanti a seconda della via di somministrazione",
+        "nausea (in particolare a dosi elevate)"
+      ],
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CN1[C@H]2CC[C@@H]1[C@H]([C@H](C2)OC(=O)C3=CC=CC=C3)C(=O)OC",
+        "compound": "Cocaine",
+        "representative": false,
+        "assetName": "molecule_cocaine"
+      }
+    },
+    {
+      "key": "caffeine",
+      "slug": "caffeine",
+      "label": "Caffeina",
+      "prettyName": "Caffeina",
+      "group": "stimulant",
+      "aliases": [
+        "coffee"
+      ],
+      "searchTerms": [
+        "Caffeina",
+        "Caffeina",
+        "coffee"
+      ],
+      "summary": "La caffeina è uno stimolante del SNC e la sostanza psicoattiva più usata al mondo. È legale e non regolamentata nella maggior parte del mondo, e si trova in molti prodotti comunemente venduti. Ha un buon profilo di sicurezza, anche se un uso regolare intenso può causare dipendenza fisica e contribuire a determinate condizioni mediche.",
+      "isClass": false,
+      "classDescription": null,
+      "dose": {
+        "Oral": {
+          "Common": "75mg-250mg",
+          "Heavy": "400mg+",
+          "Light": "20-75mg",
+          "Strong": "250-400mg",
+          "Threshold": "10-20mg"
+        }
+      },
+      "doseNote": "Threshold: 10-20mg Light: 20-75mg Common: 75mg-250mg Strong: 250-400mg Heavy: 400mg+ | NOTE: The lethal dose for caffeine starts at approximately 3g. The average cup of coffee contains roughly 75-150mg of caffeine.",
+      "onset": {
+        "_unit": "minutes",
+        "value": "5-10"
+      },
+      "duration": {
+        "_unit": "hours",
+        "value": "1.5-5"
+      },
+      "afterEffects": "3-4 hours",
+      "effects": [
+        "frequenza cardiaca elevata",
+        "aumento delle capacità cognitive",
+        "agitazione fisica",
+        "pensiero ansioso",
+        "pensieri accelerati",
+        "bodyload sgradevole"
+      ],
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CN1C=NC2=C1C(=O)N(C(=O)N2C)C",
+        "compound": "Caffeine",
+        "representative": false,
+        "assetName": "molecule_caffeine"
+      }
+    },
+    {
+      "key": "mdma",
+      "slug": "mdma",
+      "label": "MDMA",
+      "prettyName": "MDMA",
+      "group": "empathogen",
+      "aliases": [
+        "molly",
+        "ecstasy",
+        "adam",
+        "xtc",
+        "mandy",
+        "x",
+        "md"
+      ],
+      "searchTerms": [
+        "MDMA",
+        "MDMA",
+        "molly",
+        "ecstasy",
+        "adam",
+        "xtc",
+        "mandy",
+        "x",
+        "md"
+      ],
+      "summary": "La sostanza è stata associata a declino cognitivo quando assunta in eccesso. Viene usata in vari contesti, come feste, festival musicali, terapia psichedelica e altro. È spesso venduta in polvere o in pasticche pressate, e può essere adulterata con altre sostanze chimiche simili.",
+      "isClass": false,
+      "classDescription": null,
+      "dose": {
+        "Insufflated": {
+          "Common": "70-120mg",
+          "Heavy": "165mg+",
+          "Light": "30-70mg",
+          "Strong": "120-165mg"
+        },
+        "Oral": {
+          "Common": "75-125mg",
+          "Heavy": "175mg+",
+          "Light": "40-75mg",
+          "Strong": "125-175mg"
+        },
+        "Rectal": {
+          "Common": "70-120mg",
+          "Heavy": "165mg+",
+          "Light": "30-70mg",
+          "Strong": "120-165mg"
+        }
+      },
+      "doseNote": "Oral Light: 40-75mg  Common: 75-125mg  Strong: 125-175mg  Heavy: 175mg+ | Insufflated/Rectal Light: 30-70mg  Common: 70-120mg Strong: 120-165mg  Heavy: 165mg+ | NOTE: Higher doses may increase neurotoxic effects",
+      "onset": {
+        "_unit": "minutes",
+        "value": "20-70"
+      },
+      "duration": {
+        "_unit": "hours",
+        "value": "3-5"
+      },
+      "afterEffects": "1-72 hours.",
+      "effects": null,
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CC(CC1=CC2=C(C=C1)OCO2)NC",
+        "compound": "MDMA",
+        "representative": false,
+        "assetName": "molecule_mdma"
+      }
+    },
+    {
+      "key": "lsd",
+      "slug": "lsd",
+      "label": "LSD",
+      "prettyName": "LSD",
+      "group": "psychedelic",
+      "aliases": [
+        "lsd-25",
+        "acid",
+        "cid",
+        "lucy"
+      ],
+      "searchTerms": [
+        "LSD",
+        "LSD",
+        "lsd-25",
+        "acid",
+        "cid",
+        "lucy"
+      ],
+      "summary": "L'LSD è una sostanza psichedelica popolare con una storia relativamente lunga di uso e ricerca. È lo psichedelico archetipico e rimane di uso diffuso.",
+      "isClass": false,
+      "classDescription": null,
+      "dose": {
+        "Oral": {
+          "Common": "100-150ug",
+          "Heavy": "250ug+",
+          "Light": "50-100ug",
+          "Strong": "175-225ug"
+        }
+      },
+      "doseNote": "Oral Light: 50-100ug Common: 100-150ug Strong: 175-225ug Heavy: 250ug+ | Note: These doses are for pure LSD, it should be noted that tabs are often a lot weaker than advertised.",
+      "onset": {
+        "_unit": "minutes",
+        "value": "45-90"
+      },
+      "duration": {
+        "_unit": "hours",
+        "value": "9-14"
+      },
+      "afterEffects": "12-24 hours",
+      "effects": [
+        "distorsioni visive",
+        "senso di meraviglia infantile",
+        "intensificazione dei colori",
+        "pensieri accelerati",
+        "cambiamenti di tonalità",
+        "euforia",
+        "ansia",
+        "confusione"
+      ],
+      "avoid": "Caution is recommended for cannabis due to potentiation and related change in effects.",
+      "halfLife": "3-5 hours",
+      "molecule": {
+        "smiles": "CCN(CC)C(=O)[C@H]1CN([C@@H]2CC3=CNC4=CC=CC(=C34)C2=C1)C",
+        "compound": "LSD",
+        "representative": false,
+        "assetName": "molecule_lsd"
+      }
+    },
+    {
+      "key": "mushrooms",
+      "slug": "mushrooms",
+      "label": "Psilocibina",
+      "prettyName": "Funghi",
+      "group": "psychedelic",
+      "aliases": [
+        "psilocybin",
+        "shrooms",
+        "mushroom",
+        "psylocybin",
+        "magic mushrooms"
+      ],
+      "searchTerms": [
+        "Psilocibina",
+        "Funghi",
+        "psilocybin",
+        "shrooms",
+        "mushroom",
+        "psylocybin",
+        "magic mushrooms"
+      ],
+      "summary": "Funghi contenenti psilocibina, uno psichedelico prototipico. Va notato che esistono diversi tipi di funghi psicoattivi e una corretta identificazione è essenziale per la sicurezza. I dosaggi elencati si riferiscono a psilocybe cubensis, una delle specie di funghi psilocibinici più comuni e popolari.",
+      "isClass": false,
+      "classDescription": null,
+      "dose": {
+        "Oral": {
+          "Common": "1.5-3.5g",
+          "Light": "0.5-1.5g",
+          "Strong": "3.5g+"
+        }
+      },
+      "doseNote": "Oral Light: 0.5-1.5g Common: 1.5-3.5g Strong: 3.5g+ | NOTE: Dosage ranges will vary between fungus strains. The doses given are for *dried* psilocybe cubensis mushrooms. The mushrooms are substantially more potent per-weight when dry.",
+      "onset": {
+        "_unit": "hours",
+        "value": "1"
+      },
+      "duration": {
+        "_unit": "hours",
+        "value": "4-6"
+      },
+      "afterEffects": "1-24 hours.",
+      "effects": [
+        "distorsione visiva",
+        "intensificazione dei colori",
+        "senso di connessione con la natura",
+        "senso di benessere",
+        "senso di meraviglia"
+      ],
+      "avoid": null,
+      "halfLife": "1-4 hours",
+      "molecule": {
+        "smiles": "CN(C)CCC1=CNC2=C1C(=CC=C2)O",
+        "compound": "Psilocin",
+        "representative": false,
+        "assetName": "molecule_mushrooms"
+      }
+    },
+    {
+      "key": "dmt",
+      "slug": "dmt",
+      "label": "DMT",
+      "prettyName": "DMT",
+      "group": "psychedelic",
+      "aliases": [
+        "n,n-dmt",
+        "dimethyltryptamine"
+      ],
+      "searchTerms": [
+        "DMT",
+        "DMT",
+        "n,n-dmt",
+        "dimethyltryptamine"
+      ],
+      "summary": "Uno psichedelico popolare e potente, usato tipicamente in due modi: viene vaporizzato per una breve esperienza di 'breakthrough', oppure assunto in combinazione con un inibitore enzimatico per un trip lungo e intenso (noto anche come ayahuasca o pharmahuasca).",
+      "isClass": false,
+      "classDescription": null,
+      "dose": {
+        "Insufflated": {
+          "Common": "25-50mg",
+          "Light": "10-25mg",
+          "Strong": "50-125mg+"
+        },
+        "Intravenous": {
+          "Common": "15-25mg",
+          "Light": "10-15mg",
+          "Strong": "25-40mg"
+        },
+        "Vapourized": {
+          "Common": "15-25mg",
+          "Heavy": "35mg+",
+          "Light": "10-15mg",
+          "Strong": "25-35mg",
+          "Threshold": "5-10mg"
+        }
+      },
+      "doseNote": "Vapourised Threshold: 5-10mg Light: 10-15mg Common: 15-25mg Strong: 25-35mg Heavy: 35mg+ | Insufflated Light: 10-25mg Common: 25-50mg Strong: 50-125mg+ | Intravenous Light: 10-15mg Common: 15-25mg Strong: 25-40mg",
+      "onset": {
+        "_unit": "minutes",
+        "Insufflated": "3-5",
+        "Oral": "20-45",
+        "Vapourized": "0-2"
+      },
+      "duration": {
+        "_unit": "minutes",
+        "Insufflated": "45-60",
+        "Oral_MAOI": "180-420",
+        "Smoked": "3-10",
+        "Vapourized": "3-10"
+      },
+      "afterEffects": "15-60 minutes",
+      "effects": [
+        "esperienza immersiva",
+        "visioni a occhi aperti",
+        "cambiamento radicale della prospettiva",
+        "esperienze spirituali profonde e trasformative",
+        "potente ondata di sensazioni",
+        "cambiamento della percezione del tempo",
+        "allucinazioni uditive",
+        "cambiamento dei colori",
+        "pesante per i polmoni se fumato",
+        "fastidio allo stomaco",
+        "difficoltà a integrare le esperienze",
+        "paura travolgente"
+      ],
+      "avoid": null,
+      "halfLife": "10-20 minutes",
+      "molecule": {
+        "smiles": "CN(C)CCC1=CNC2=CC=CC=C21",
+        "compound": "DMT",
+        "representative": false,
+        "assetName": "molecule_dmt"
+      }
+    },
+    {
+      "key": "mescaline",
+      "slug": "mescaline",
+      "label": "Mescalina",
+      "prettyName": "Mescalina",
+      "group": "psychedelic",
+      "aliases": [
+        "buttons",
+        "mesc",
+        "san",
+        "san-pedro"
+      ],
+      "searchTerms": [
+        "Mescalina",
+        "Mescalina",
+        "buttons",
+        "mesc",
+        "san",
+        "san-pedro"
+      ],
+      "summary": "Uno psichedelico della famiglia delle fenetilamine. La sostanza si trova in molti cactus, come il Peyote e il San Pedro, e ha una lunga storia d'uso. La mescalina può essere presente naturalmente ed è spesso sintetizzata come composto sintetico.",
+      "isClass": false,
+      "classDescription": null,
+      "dose": {
+        "Oral": {
+          "Common": "200-300mg",
+          "Heavy": "500-700mg+",
+          "Light": "100-200mg",
+          "Strong": "300-500mg",
+          "Threshold": "100mg"
+        }
+      },
+      "doseNote": "Oral Threshold: 100mg Light: 100-200mg Common: 200-300mg Strong: 300-500mg Heavy: 500-700mg+ | NOTE: Doses are for Mescaline HCl",
+      "onset": {
+        "_unit": "minutes",
+        "value": "60-180"
+      },
+      "duration": {
+        "_unit": "hours",
+        "value": "6-12"
+      },
+      "afterEffects": "3-5 hours.",
+      "effects": [
+        "Euforia",
+        "empatia",
+        "introspezione",
+        "colori più vividi",
+        "visioni a occhi chiusi/aperti",
+        "sensazioni tattili aumentate",
+        "stimolazione mentale/fisica",
+        "diminuzione dell'appetito",
+        "dilatazione pupillare",
+        "irrequietezza",
+        "cambiamento della percezione",
+        "attenuazione dell'ego",
+        "sudorazione/brividi",
+        "tensione muscolare",
+        "confusione",
+        "insonnia"
+      ],
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "COC1=CC(=CC(=C1OC)OC)CCN",
+        "compound": "Mescaline",
+        "representative": false,
+        "assetName": "molecule_mescaline"
+      }
+    },
+    {
+      "key": "dox",
+      "slug": "dox",
+      "label": "DOx",
+      "prettyName": "DOx",
+      "group": "psychedelic",
+      "aliases": [],
+      "searchTerms": [
+        "DOx"
+      ],
+      "summary": null,
+      "isClass": true,
+      "classDescription": "DOx è una famiglia di psichedelici anfetaminici sostituiti (es. DOM, DOI, DOB, DOC) con durata prolungata e forte stimolazione.",
+      "dose": null,
+      "doseNote": null,
+      "onset": null,
+      "duration": null,
+      "afterEffects": null,
+      "effects": null,
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CC1=CC(=C(C=C1OC)CC(C)N)OC",
+        "compound": "DOM",
+        "representative": true,
+        "assetName": "molecule_dox"
+      }
+    },
+    {
+      "key": "nbomes",
+      "slug": "nbomes",
+      "label": "NBOMes",
+      "prettyName": "NBOMes",
+      "group": "psychedelic",
+      "aliases": [],
+      "searchTerms": [
+        "NBOMes"
+      ],
+      "summary": null,
+      "isClass": true,
+      "classDescription": "Gli NBOMe (N-Bomb) sono psichedelici estremamente potenti, attivi a dosi in microgrammi (25I-, 25C-, 25B-NBOMe). Margine di sicurezza ristretto; sono stati segnalati decessi.",
+      "dose": null,
+      "doseNote": null,
+      "onset": null,
+      "duration": null,
+      "afterEffects": null,
+      "effects": null,
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "COC1=CC=CC=C1CNCCC2=CC(=C(C=C2OC)I)OC",
+        "compound": "25I-NBOMe",
+        "representative": true,
+        "assetName": "molecule_nbomes"
+      }
+    },
+    {
+      "key": "2c-x",
+      "slug": "2c-x",
+      "label": "2C-x",
+      "prettyName": "2C-x",
+      "group": "psychedelic",
+      "aliases": [],
+      "searchTerms": [
+        "2C-x"
+      ],
+      "summary": null,
+      "isClass": true,
+      "classDescription": "2C-x è la famiglia 2C degli psichedelici fenetilaminici (es. 2C-B, 2C-E, 2C-I). Profili variabili; la maggior parte è attiva nell'intervallo 10-25 mg.",
+      "dose": null,
+      "doseNote": null,
+      "onset": null,
+      "duration": null,
+      "afterEffects": null,
+      "effects": null,
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "COC1=CC(=C(C=C1CCN)OC)Br",
+        "compound": "2C-B",
+        "representative": true,
+        "assetName": "molecule_2c_x"
+      }
+    },
+    {
+      "key": "2c-t-x",
+      "slug": "2c-t-x",
+      "label": "2C-T-x",
+      "prettyName": "2C-T-x",
+      "group": "psychedelic",
+      "aliases": [],
+      "searchTerms": [
+        "2C-T-x"
+      ],
+      "summary": null,
+      "isClass": true,
+      "classDescription": "2C-T-x è la sottofamiglia 2C sostituita con zolfo (es. 2C-T-2, 2C-T-7, 2C-T-21). Imprevedibile e sensibile agli IMAO.",
+      "dose": null,
+      "doseNote": null,
+      "onset": null,
+      "duration": null,
+      "afterEffects": null,
+      "effects": null,
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CCSC1=C(C=C(C(=C1)OC)CCN)OC",
+        "compound": "2C-T-2",
+        "representative": true,
+        "assetName": "molecule_2c_t_x"
+      }
+    },
+    {
+      "key": "5-meo-xxt",
+      "slug": "5-meo-xxt",
+      "label": "5-MeO-xxT",
+      "prettyName": "5-MeO-xxT",
+      "group": "psychedelic",
+      "aliases": [],
+      "searchTerms": [
+        "5-MeO-xxT"
+      ],
+      "summary": null,
+      "isClass": true,
+      "classDescription": "5-MeO-xxT comprende le triptamine 5-MeO (5-MeO-DMT, 5-MeO-MiPT, 5-MeO-DiPT). Estremamente potenti, brevi e intense.",
+      "dose": null,
+      "doseNote": null,
+      "onset": null,
+      "duration": null,
+      "afterEffects": null,
+      "effects": null,
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CN(C)CCC1=CNC2=C1C=C(C=C2)OC",
+        "compound": "5-MeO-DMT",
+        "representative": true,
+        "assetName": "molecule_5_meo_xxt"
+      }
+    },
+    {
+      "key": "ketamine",
+      "slug": "ketamine",
+      "label": "Ketamina",
+      "prettyName": "Ketamina",
+      "group": "dissociative",
+      "aliases": [
+        "k",
+        "ket",
+        "kitty",
+        "kittens",
+        "special k"
+      ],
+      "searchTerms": [
+        "Ketamina",
+        "Ketamina",
+        "k",
+        "ket",
+        "kitty",
+        "kittens",
+        "special k"
+      ],
+      "summary": "Un anestetico dissociativo e allucinogeno a breve durata d'azione comunemente usato in medicina. È il dissociativo prototipico ed è ampiamente usato a fini ricreativi a dosi sub-anestetiche. Piccole dosi sono paragonabili all'alcol, mentre dosi maggiori sono immobilizzanti e portano a esperienze psichedeliche: il \"K-Hole\".",
+      "isClass": false,
+      "classDescription": null,
+      "dose": {
+        "Insufflated": {
+          "Common": "50-125mg",
+          "Heavy": "175-250mg",
+          "Light": "20-50mg",
+          "Strong": "125-175mg",
+          "Threshold": "5-10mg"
+        }
+      },
+      "doseNote": "Insufflated Threshold: 5-10mg Light: 20-50mg Common: 50-125mg Strong: 125-175mg Heavy: 175-250mg | NOTE: Ketamine is based on weight. These are figures for the average 150 pound male There is no concrete dose for the \"K-Hole\" as each user is different.",
+      "onset": {
+        "_unit": "minutes",
+        "Insufflated": "7.5-20",
+        "Intramuscular": "2-7.5",
+        "Intravenous": "0-2",
+        "Oral": "10-75"
+      },
+      "duration": {
+        "_unit": "hours",
+        "value": "1-2"
+      },
+      "afterEffects": "1-2 hours",
+      "effects": [
+        "Una sensazione di ubriachezza e benessere a basse dosi",
+        "Con l'aumentare della dose l'utilizzatore può iniziare a sentire una disconnessione dal proprio corpo",
+        "A dosi da 'khole' l'utilizzatore può diventare completamente disconnesso sia dal corpo sia dalla mente"
+      ],
+      "avoid": "Driving, walking, motor activity. Mixing with other depressants such as alcohol, benzodiazepines, and opioids.",
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CNC1(CCCCC1=O)C2=CC=CC=C2Cl",
+        "compound": "Ketamine",
+        "representative": false,
+        "assetName": "molecule_ketamine"
+      }
+    },
+    {
+      "key": "mxe",
+      "slug": "mxe",
+      "label": "MXE",
+      "prettyName": "MXE",
+      "group": "dissociative",
+      "aliases": [
+        "methoxetamine",
+        "3-meo-2'oxo-pce"
+      ],
+      "searchTerms": [
+        "MXE",
+        "MXE",
+        "methoxetamine",
+        "3-meo-2'oxo-pce"
+      ],
+      "summary": "Una sostanza dissociativa analoga alla ketamina. Viene riportata come meno sedativa e più potente per peso. Resoconti aneddotici indicano che abbia un insieme di effetti soggettivamente più 'complicato'.",
+      "isClass": false,
+      "classDescription": null,
+      "dose": {
+        "Insufflated": {
+          "Common": "20-35mg",
+          "Heavy": "60mg+",
+          "Light": "10-20mg",
+          "Strong": "35-60mg",
+          "Threshold": "5-10mg"
+        },
+        "Oral": {
+          "Common": "25-35mg",
+          "Light": "15-25mg",
+          "Strong": "40-65mg",
+          "Threshold": "10-15mg"
+        },
+        "Sublingual": {
+          "Common": "40-60mg",
+          "Light": "10-20mg",
+          "Strong": "60-75mg",
+          "Threshold": "5-10mg"
+        }
+      },
+      "doseNote": "Insufflated Threshold: 5-10mg Light: 10-20mg Common: 20-35mg Strong: 35-60mg Heavy: 60mg+ M-Hole: 70mg+ | Oral Threshold: 10-15mg Light: 15-25mg Common: 25-35 Strong: 40-65mg M-Hole: 75mg+ | Sublingual Threshold: 5-10mg Low: 10-20mg Common: 40-60mg Strong: 60-75mg M-Hole: 75-100mg | NOTE: Bodyweight plays a slight factor in MXE dosing, these are values for a 175lb (80kg) male",
+      "onset": {
+        "_unit": "minutes",
+        "Insufflated": "5-20",
+        "Oral": "30-60",
+        "Sublingual": "15-45"
+      },
+      "duration": {
+        "_unit": "hours",
+        "value": "3-6"
+      },
+      "afterEffects": "2-48 hours",
+      "effects": null,
+      "avoid": "CNS depressants such as alcohol, benzodiazepines, and opioids. Additionally substances that have an effect on serotonin such as MDMA, methamphetamine, and dextromethorphan (DXM).",
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CCNC1(CCCCC1=O)C2=CC(=CC=C2)OC",
+        "compound": "MXE",
+        "representative": false,
+        "assetName": "molecule_mxe"
+      }
+    },
+    {
+      "key": "dxm",
+      "slug": "dxm",
+      "label": "DXM",
+      "prettyName": "Dextromethorphan",
+      "group": "dissociative",
+      "aliases": [
+        "dxm",
+        "robo",
+        "syrup",
+        "robotussin",
+        "dex",
+        "robitussin",
+        "DM"
+      ],
+      "searchTerms": [
+        "DXM",
+        "Dextromethorphan",
+        "dxm",
+        "robo",
+        "syrup",
+        "robotussin",
+        "dex",
+        "robitussin",
+        "DM"
+      ],
+      "summary": "Commonly found in certain over the counter cough medicines. Has dissociative effects similar to ketamine or MXE, though also shares properties with opioids and alcohol. It is recommended to dose DXM through direct ingestion of the drug, without other active ingrediants such as guaifenesin or doxylamine.",
+      "isClass": false,
+      "classDescription": null,
+      "dose": {
+        "Oral": {
+          "Common": "2.5-7.5mg/kg",
+          "Heavy": "15-20mg/kg",
+          "Light": "1.5-2.5mg/kg",
+          "Strong": "7.5-15mg/kg"
+        }
+      },
+      "doseNote": "Oral First-Plateau: 1.5-2.5mg/kg Second-Plateau: 2.5-7.5mg/kg Third-Plateau: 7.5-15mg/kg Fourth: 15-20mg/kg | NOTE: See http://dxm.tripsit.me for mg/lb doses, among other things. Deaths have been reported at 25mg/kg",
+      "onset": {
+        "_unit": "minutes",
+        "value": "20-60"
+      },
+      "duration": {
+        "_unit": "hours",
+        "value": "6-8"
+      },
+      "afterEffects": "1-12 hours.",
+      "effects": null,
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CN1CC[C@@]23CCCC[C@@H]2[C@@H]1CC4=C3C=C(C=C4)OC",
+        "compound": "Dextromethorphan",
+        "representative": false,
+        "assetName": "molecule_dxm"
+      }
+    },
+    {
+      "key": "nitrous",
+      "slug": "nitrous",
+      "label": "Nitroso",
+      "prettyName": "N2O",
+      "group": "dissociative",
+      "aliases": [
+        "laughing_gas",
+        "n20",
+        "n2o",
+        "nos",
+        "nitrous oxide",
+        "hippy crack"
+      ],
+      "searchTerms": [
+        "Nitroso",
+        "N2O",
+        "laughing_gas",
+        "n20",
+        "n2o",
+        "nos",
+        "nitrous oxide",
+        "hippy crack"
+      ],
+      "summary": "Il protossido di azoto, noto anche come gas esilarante, viene spesso inalato tramite palloncini riempiti con cartucce del gas. La sostanza è un inalante dissociativo a breve durata d'azione con forti effetti visivi, mentali e uditivi. È estremamente popolare, soprattutto in combinazione con altre sostanze.",
+      "isClass": false,
+      "classDescription": null,
+      "dose": null,
+      "doseNote": null,
+      "onset": {
+        "_unit": "minutes",
+        "value": "0-1"
+      },
+      "duration": {
+        "_unit": "minutes",
+        "value": "1-5"
+      },
+      "afterEffects": "15-30 minutes",
+      "effects": [
+        "risatine",
+        "miglioramento dell'umore",
+        "euforia",
+        "distorsione del suono",
+        "stato simile al sogno",
+        "allucinazioni da lievi a forti",
+        "riduzione degli stimoli esterni",
+        "analgesia",
+        "sensazione di formicolio nei nervi",
+        "goffaggine",
+        "nausea",
+        "mal di testa",
+        "intorpidimento alle estremità"
+      ],
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "[N-]=[N+]=O",
+        "compound": "Nitrous oxide",
+        "representative": false,
+        "assetName": "molecule_nitrous"
+      }
+    },
+    {
+      "key": "alcohol",
+      "slug": "alcohol",
+      "label": "Alcool",
+      "prettyName": "Alcol",
+      "group": "depressant",
+      "aliases": [
+        "etoh",
+        "beer",
+        "ethanol",
+        "booze",
+        "hooch"
+      ],
+      "searchTerms": [
+        "Alcool",
+        "Alcol",
+        "etoh",
+        "beer",
+        "ethanol",
+        "booze",
+        "hooch"
+      ],
+      "summary": "L'alcol è un depressivo del SNC che agisce attraverso il recettore GABAₐ, ed è una delle sostanze psicoattive forti più comuni usate dagli esseri umani. Ha una lunga storia d'uso e i suoi effetti intossicanti sono ben studiati e documentati. Rimane legale nella maggior parte del mondo.",
+      "isClass": false,
+      "classDescription": null,
+      "dose": {
+        "Oral": {
+          "Common": "2-4units",
+          "Heavy": "5-6units",
+          "Light": "1-2units"
+        }
+      },
+      "doseNote": "Oral Light: 1-2units Common: 2-4units Heavy: 5-6units | NOTE: Alcohol consumption should be spread out over a few hours and ideally separated by water breaks. It is recommended to review the label on alcohol for unit content",
+      "onset": {
+        "_unit": "minutes",
+        "value": "15-30"
+      },
+      "duration": {
+        "_unit": "hours",
+        "value": "1.5-3"
+      },
+      "afterEffects": "6-48 hours",
+      "effects": [
+        "rilassamento",
+        "miglioramento dell'umore",
+        "felicità",
+        "socievolezza",
+        "riduzione delle inibizioni",
+        "analgesia",
+        "linguaggio impastato",
+        "pelle arrossata",
+        "sonnolenza",
+        "tolleranza",
+        "euforia",
+        "amnesia"
+      ],
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CCO",
+        "compound": "Ethanol",
+        "representative": false,
+        "assetName": "molecule_alcohol"
+      }
+    },
+    {
+      "key": "ghb/gbl",
+      "slug": "ghb-gbl",
+      "label": "GHB/GBL",
+      "prettyName": "GHB",
+      "group": "depressant",
+      "aliases": [],
+      "searchTerms": [
+        "GHB/GBL",
+        "GHB"
+      ],
+      "summary": "GHB e il suo profarmaco GBL sono agonisti GABA-B con una curva dose-risposta molto stretta. GBL si converte rapidamente in GHB nell'organismo.",
+      "isClass": true,
+      "classDescription": "Il GHB e il suo profarmaco GBL sono agonisti GABA-B con una curva dose-risposta molto stretta. Il GBL si converte rapidamente in GHB nell'organismo.",
+      "dose": {
+        "Oral": {
+          "Common": "1-2.5g",
+          "Dangerous": "7g+",
+          "Heavy": "3.5-5g",
+          "Light": "0.5-1.5g",
+          "Strong": "2-3.5g"
+        }
+      },
+      "doseNote": "Oral Light: 0.5-1.5g Common: 1-2.5g Strong: 2-3.5g Heavy: 3.5-5g Dangerous: 7g+ | NOTE: Tends to induce heavy sedation roughly at 3g and higher.",
+      "onset": {
+        "_unit": "minutes",
+        "value": "20-60"
+      },
+      "duration": {
+        "_unit": "hours",
+        "value": "1.5-2.5"
+      },
+      "afterEffects": "2-4 hours",
+      "effects": [
+        "Similar to alcohol",
+        "but reported to feel 'cleaner'"
+      ],
+      "avoid": "Alcohol, benzodiazepines, and other depressants",
+      "halfLife": null,
+      "molecule": {
+        "smiles": "C(CC(=O)O)CO",
+        "compound": "GHB",
+        "representative": false,
+        "assetName": "molecule_ghb_gbl"
+      }
+    },
+    {
+      "key": "benzodiazepines",
+      "slug": "benzodiazepines",
+      "label": "Benzos",
+      "prettyName": "Benzos",
+      "group": "depressant",
+      "aliases": [],
+      "searchTerms": [
+        "Benzos"
+      ],
+      "summary": null,
+      "isClass": true,
+      "classDescription": "Le benzodiazepine sono modulatori allosterici positivi del recettore GABA-A usati come ansiolitici, sedativi e anticonvulsivanti (es. diazepam, alprazolam, clonazepam).",
+      "dose": null,
+      "doseNote": null,
+      "onset": null,
+      "duration": null,
+      "afterEffects": null,
+      "effects": null,
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CN1C(=O)CN=C(C2=C1C=CC(=C2)Cl)C3=CC=CC=C3",
+        "compound": "Diazepam",
+        "representative": true,
+        "assetName": "molecule_benzodiazepines"
+      }
+    },
+    {
+      "key": "opioids",
+      "slug": "opioids",
+      "label": "Oppioidi",
+      "prettyName": "Oppioidi",
+      "group": "opioid",
+      "aliases": [],
+      "searchTerms": [
+        "Oppioidi"
+      ],
+      "summary": null,
+      "isClass": true,
+      "classDescription": "Gli oppioidi agiscono sui recettori mu-oppioidi, producendo analgesia, sedazione e depressione respiratoria. Includono eroina, morfina, ossicodone, fentanil e altri.",
+      "dose": null,
+      "doseNote": null,
+      "onset": null,
+      "duration": null,
+      "afterEffects": null,
+      "effects": null,
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CN1CC[C@]23[C@@H]4[C@H]1CC5=C2C(=C(C=C5)O)O[C@H]3[C@H](C=C4)O",
+        "compound": "Morphine",
+        "representative": true,
+        "assetName": "molecule_opioids"
+      }
+    },
+    {
+      "key": "tramadol",
+      "slug": "tramadol",
+      "label": "Tramadolo",
+      "prettyName": "Tramadolo",
+      "group": "opioid",
+      "aliases": [
+        "tram"
+      ],
+      "searchTerms": [
+        "Tramadolo",
+        "Tramadolo",
+        "tram"
+      ],
+      "summary": "Un analgesico oppioide sintetico, il tramadolo è usato per trattare il dolore moderato e può essere considerato un oppioide di media potenza. Il tramadolo ha l'effetto insolito di essere un agente rilasciante serotonina e un inibitore della ricaptazione della serotonina. Di conseguenza, bisogna fare attenzione a non ingerire tramadolo in eccesso a causa del rischio di sindrome serotoninergica. Esiste un rischio di crisi epilettiche a dosi superiori a 300 mg, o inferiori in individui predisposti.",
+      "isClass": false,
+      "classDescription": null,
+      "dose": {
+        "Oral": {
+          "Common": "100-250mg",
+          "Heavy": "250-400mg",
+          "Light": "50-100mg"
+        }
+      },
+      "doseNote": "Oral Light: 50-100mg  Common:  100-250mg  Heavy: 250-400mg | NOTE: Tramadol has a ceiling dose where recreational effects are not increased. There is a risk of seizures at doses over 300mg or less for individuals predisposed. Tramadol decreases the seizure threshold. Caution is strongly recommended. Dosing insufflated is ineffective.",
+      "onset": {
+        "_unit": "hours",
+        "value": "1"
+      },
+      "duration": {
+        "_unit": "hours",
+        "value": "5-7"
+      },
+      "afterEffects": "1-12 hours.",
+      "effects": [
+        "euforia",
+        "umore elevato",
+        "sensazione generale di appagamento",
+        "prurito",
+        "sonnolenza",
+        "vomito",
+        "ritenzione urinaria",
+        "nausea",
+        "stitichezza",
+        "crisi epilettiche"
+      ],
+      "avoid": "benzos, alcohol, and other opiates",
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CN(C)C[C@H]1CCCC[C@@]1(C2=CC(=CC=C2)OC)O",
+        "compound": "Tramadol",
+        "representative": false,
+        "assetName": "molecule_tramadol"
+      }
+    },
+    {
+      "key": "cannabis",
+      "slug": "cannabis",
+      "label": "Cannabis",
+      "prettyName": "Cannabis",
+      "group": "cannabinoid",
+      "aliases": [
+        "weed",
+        "thc",
+        "marijuana",
+        "dagga",
+        "hash"
+      ],
+      "searchTerms": [
+        "Cannabis",
+        "Cannabis",
+        "weed",
+        "thc",
+        "marijuana",
+        "dagga",
+        "hash"
+      ],
+      "summary": "Una pianta psicoattiva comune e ampiamente usata, che sta iniziando a ottenere uno status legale per uso medico e persino ricreativo in alcune parti del mondo. Di solito viene fumata o ingerita; gli effetti principali sono rilassamento e affinità verso il cibo, uno stato descritto come 'stoned'.",
+      "isClass": false,
+      "classDescription": null,
+      "dose": {
+        "Smoked": {
+          "Common": "20-60mg",
+          "Light": "10-20mg",
+          "Strong": "60-100mg+"
+        }
+      },
+      "doseNote": "Smoked Light: 33mg Common: 66mg Strong: 100mg. Oral Light: 10-20mg Common: 20-60mg Strong: 60-100mg+",
+      "onset": {
+        "_unit": "minutes",
+        "Oral": "30-120",
+        "Smoked": "1-10"
+      },
+      "duration": {
+        "_unit": "hours",
+        "Oral": "4-10",
+        "Smoked": "1-4"
+      },
+      "afterEffects": "Smoked: 2-24 hours | Oral: 6-24 hours",
+      "effects": [
+        "Sedazione",
+        "aumento dell'appetito",
+        "rilassamento muscolare",
+        "spasmi muscolari",
+        "nausea",
+        "sollievo dal dolore",
+        "vasodilatazione",
+        "aumento della creatività",
+        "soppressione dell'ansia",
+        "ansia",
+        "soppressione dei sogni",
+        "amplificazione emotiva",
+        "mindfulness",
+        "paranoia",
+        "sonnolenza"
+      ],
+      "avoid": null,
+      "halfLife": null,
+      "molecule": {
+        "smiles": "CCCCCC1=CC(=C2[C@@H]3C=C(CC[C@H]3C(OC2=C1)(C)C)C)O",
+        "compound": "Δ9-THC",
+        "representative": false,
+        "assetName": "molecule_cannabis"
+      }
+    }
+  ]
+}

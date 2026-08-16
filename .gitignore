@@ -15,6 +15,8 @@ pnpm-debug.log*
 
 # environment variables
 .env
+.env.local
+.env.*.local
 .env.production
 
 # macOS-specific files
@@ -28,3 +30,26 @@ pnpm-debug.log*
 
 .wrangler/
 worker-configuration.d.ts
+
+# package build outputs
+packages/web/dist/
+packages/web/.astro/
+packages/*/node_modules/
+packages/ios/build/
+packages/ios/.build/
+screenshots/
+
+# Xcode user state & local build products (xcuserdata can nest inside
+# *.xcodeproj/project.xcworkspace/, so match it at any depth)
+xcuserdata/
+DerivedData/
+*.xcuserstate
+*.ipa
+*.dSYM
+*.dSYM.zip
+*.trace
+
+# Cursor sometimes copies skills into a package folder; canonical copies
+# live in .agents/skills/
+packages/*/.cursor/
+

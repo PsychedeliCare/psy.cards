@@ -1,0 +1,19 @@
+{
+  "name": "@psy.cards/shared",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "datapack": "node scripts/build-datapack.mjs && node scripts/render-molecules.mjs",
+    "datapack:json": "node scripts/build-datapack.mjs",
+    "datapack:molecules": "node scripts/render-molecules.mjs"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "jsdom": "^30.0.1",
+    "smiles-drawer": "^2.3.0"
+  }
+}

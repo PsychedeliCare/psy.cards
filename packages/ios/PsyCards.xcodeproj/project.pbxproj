@@ -1,0 +1,549 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		11F9F8099676BFA47FEB73DD /* DataPackModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E5E4628523F4D054AF0DF2 /* DataPackModels.swift */; };
+		12523F703EA7514B0CFA9D11 /* AppShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7CA81D6BB90CD7B4B880 /* AppShell.swift */; };
+		12857EAA59D875A164D22FAA /* SubstanceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4E7F0817027BD4D77A9C3 /* SubstanceDetailView.swift */; };
+		136AA6DE77872EDD20F55508 /* SubstanceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE48C8938B060D3BDA08945 /* SubstanceListView.swift */; };
+		20074F9843A440CEAAB901E5 /* WheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB798AC6DBB4165223AAC58 /* WheelView.swift */; };
+		2CE9BCA6FE71EFCF7BE3C728 /* fr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 7EDDB55AC8532C44CA9EFDDE /* fr.lproj */; };
+		2DD3FC630C04477DC5DA64F1 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32499B13D99A22A074546062 /* AboutView.swift */; };
+		31670320BD0D01C8DC2EDB98 /* CombosMatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AFB7F1C2776662A0124924 /* CombosMatrixView.swift */; };
+		62369D78E7D0F6F73247C614 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2A4DBA4815F947CC554D0205 /* en.lproj */; };
+		801F20B1BB9792687866E121 /* it.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 6E96626A83CBFB36D22F265C /* it.lproj */; };
+		8D29A07CB35584922EB33147 /* de.lproj in Resources */ = {isa = PBXBuildFile; fileRef = BFC6FEF6B6DF6A720829CC2C /* de.lproj */; };
+		93E4A91DA35934B77AF102F8 /* PsyCardsDesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D9873B94B37D101EC2B556 /* PsyCardsDesignTokens.swift */; };
+		B358157C70738845E8D155D4 /* DataPack in Resources */ = {isa = PBXBuildFile; fileRef = FDBA376BFA4FAF0FF1ED938E /* DataPack */; };
+		B8C0EBB4D73FA3EE38618D24 /* DataPackDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F70DF95F46E1607B8E17D0 /* DataPackDecodingTests.swift */; };
+		C23005EAB6489CC0FD0BD637 /* DataPackStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A84BA0CC33DBB20B9C70BD /* DataPackStore.swift */; };
+		DBF5C801DF60B49B894308E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFDC5A4901A2E353550FE8D1 /* Assets.xcassets */; };
+		E37BB7D79F7939F26CA95E92 /* PsyCardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281AF71EBE7DB1407431CB71 /* PsyCardsApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D3B043E1C6AD103BEEA74BDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4EC2A323F90E0C0638CC3D69 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 811845075E181185E90C0966;
+			remoteInfo = PsyCards;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0AB798AC6DBB4165223AAC58 /* WheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelView.swift; sourceTree = "<group>"; };
+		14E4E7F0817027BD4D77A9C3 /* SubstanceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceDetailView.swift; sourceTree = "<group>"; };
+		16AFB7F1C2776662A0124924 /* CombosMatrixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombosMatrixView.swift; sourceTree = "<group>"; };
+		281AF71EBE7DB1407431CB71 /* PsyCardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsyCardsApp.swift; sourceTree = "<group>"; };
+		2A4DBA4815F947CC554D0205 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
+		32499B13D99A22A074546062 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		3D7F70D1E90C8BC387FA1A64 /* PsyCardsTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PsyCardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		46D1C1E7A800D938ACA30FD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6DE48C8938B060D3BDA08945 /* SubstanceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceListView.swift; sourceTree = "<group>"; };
+		6E96626A83CBFB36D22F265C /* it.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = it.lproj; sourceTree = "<group>"; };
+		7C77EFF60A694276158DA5B8 /* PsyCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PsyCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EDDB55AC8532C44CA9EFDDE /* fr.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fr.lproj; sourceTree = "<group>"; };
+		87F70DF95F46E1607B8E17D0 /* DataPackDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPackDecodingTests.swift; sourceTree = "<group>"; };
+		A9A84BA0CC33DBB20B9C70BD /* DataPackStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPackStore.swift; sourceTree = "<group>"; };
+		AFDC5A4901A2E353550FE8D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BFC6FEF6B6DF6A720829CC2C /* de.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = de.lproj; sourceTree = "<group>"; };
+		D4D9873B94B37D101EC2B556 /* PsyCardsDesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsyCardsDesignTokens.swift; sourceTree = "<group>"; };
+		D72F7CA81D6BB90CD7B4B880 /* AppShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShell.swift; sourceTree = "<group>"; };
+		F7E5E4628523F4D054AF0DF2 /* DataPackModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPackModels.swift; sourceTree = "<group>"; };
+		FDBA376BFA4FAF0FF1ED938E /* DataPack */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DataPack; path = PsyCards/Resources/DataPack; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		136719CE9AD861C0AE57AF43 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				D4D9873B94B37D101EC2B556 /* PsyCardsDesignTokens.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		2E3FC00492D71300C7685F09 /* Wheel */ = {
+			isa = PBXGroup;
+			children = (
+				0AB798AC6DBB4165223AAC58 /* WheelView.swift */,
+			);
+			path = Wheel;
+			sourceTree = "<group>";
+		};
+		3755A55C878069810F5610A4 /* PsyCardsTests */ = {
+			isa = PBXGroup;
+			children = (
+				87F70DF95F46E1607B8E17D0 /* DataPackDecodingTests.swift */,
+			);
+			path = PsyCardsTests;
+			sourceTree = "<group>";
+		};
+		7CCC123176FF9E078DA3EABA /* PsyCards */ = {
+			isa = PBXGroup;
+			children = (
+				136719CE9AD861C0AE57AF43 /* Design */,
+				F7E614093521201D07F90E12 /* Features */,
+				841B2FA60682570E53DB0792 /* Models */,
+				E9230E281E0450ECB5FE081A /* Resources */,
+				D72F7CA81D6BB90CD7B4B880 /* AppShell.swift */,
+				BFC6FEF6B6DF6A720829CC2C /* de.lproj */,
+				2A4DBA4815F947CC554D0205 /* en.lproj */,
+				7EDDB55AC8532C44CA9EFDDE /* fr.lproj */,
+				46D1C1E7A800D938ACA30FD1 /* Info.plist */,
+				6E96626A83CBFB36D22F265C /* it.lproj */,
+				281AF71EBE7DB1407431CB71 /* PsyCardsApp.swift */,
+			);
+			path = PsyCards;
+			sourceTree = "<group>";
+		};
+		841B2FA60682570E53DB0792 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F7E5E4628523F4D054AF0DF2 /* DataPackModels.swift */,
+				A9A84BA0CC33DBB20B9C70BD /* DataPackStore.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B34008966C621E65814ECE71 = {
+			isa = PBXGroup;
+			children = (
+				7CCC123176FF9E078DA3EABA /* PsyCards */,
+				3755A55C878069810F5610A4 /* PsyCardsTests */,
+				B9DA57E360636C0512F1404C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B9DA57E360636C0512F1404C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7C77EFF60A694276158DA5B8 /* PsyCards.app */,
+				3D7F70D1E90C8BC387FA1A64 /* PsyCardsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CA9A879958F3621C0C4230D4 /* Combos */ = {
+			isa = PBXGroup;
+			children = (
+				16AFB7F1C2776662A0124924 /* CombosMatrixView.swift */,
+			);
+			path = Combos;
+			sourceTree = "<group>";
+		};
+		E048CB2C658FE651C9ED1B9C /* Substance */ = {
+			isa = PBXGroup;
+			children = (
+				14E4E7F0817027BD4D77A9C3 /* SubstanceDetailView.swift */,
+			);
+			path = Substance;
+			sourceTree = "<group>";
+		};
+		E913906EB707FAB0EA6DBB8F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				32499B13D99A22A074546062 /* AboutView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		E9230E281E0450ECB5FE081A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AFDC5A4901A2E353550FE8D1 /* Assets.xcassets */,
+				FDBA376BFA4FAF0FF1ED938E /* DataPack */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F7E614093521201D07F90E12 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				CA9A879958F3621C0C4230D4 /* Combos */,
+				FA037F4CAF0FBFE321F6BD8B /* Home */,
+				E913906EB707FAB0EA6DBB8F /* Settings */,
+				E048CB2C658FE651C9ED1B9C /* Substance */,
+				2E3FC00492D71300C7685F09 /* Wheel */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		FA037F4CAF0FBFE321F6BD8B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6DE48C8938B060D3BDA08945 /* SubstanceListView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2FE8927E5BE2AE2E32641EDF /* PsyCardsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7D2A8B097335C925484BCD1 /* Build configuration list for PBXNativeTarget "PsyCardsTests" */;
+			buildPhases = (
+				6A9BA71C4395024282BC4C37 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				932C58338E9FD532B3F276D2 /* PBXTargetDependency */,
+			);
+			name = PsyCardsTests;
+			packageProductDependencies = (
+			);
+			productName = PsyCardsTests;
+			productReference = 3D7F70D1E90C8BC387FA1A64 /* PsyCardsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		811845075E181185E90C0966 /* PsyCards */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0FDFCF6743B141426B3371FB /* Build configuration list for PBXNativeTarget "PsyCards" */;
+			buildPhases = (
+				DB999B9C67298F9F24CF059C /* Sources */,
+				B23FCFF89076E983F6954CD6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PsyCards;
+			packageProductDependencies = (
+			);
+			productName = PsyCards;
+			productReference = 7C77EFF60A694276158DA5B8 /* PsyCards.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4EC2A323F90E0C0638CC3D69 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					2FE8927E5BE2AE2E32641EDF = {
+						DevelopmentTeam = "";
+					};
+				};
+			};
+			buildConfigurationList = 319AEC8450C5D88C2E815BFE /* Build configuration list for PBXProject "PsyCards" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = B34008966C621E65814ECE71;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = B9DA57E360636C0512F1404C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				811845075E181185E90C0966 /* PsyCards */,
+				2FE8927E5BE2AE2E32641EDF /* PsyCardsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B23FCFF89076E983F6954CD6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBF5C801DF60B49B894308E5 /* Assets.xcassets in Resources */,
+				B358157C70738845E8D155D4 /* DataPack in Resources */,
+				8D29A07CB35584922EB33147 /* de.lproj in Resources */,
+				62369D78E7D0F6F73247C614 /* en.lproj in Resources */,
+				2CE9BCA6FE71EFCF7BE3C728 /* fr.lproj in Resources */,
+				801F20B1BB9792687866E121 /* it.lproj in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6A9BA71C4395024282BC4C37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8C0EBB4D73FA3EE38618D24 /* DataPackDecodingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB999B9C67298F9F24CF059C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2DD3FC630C04477DC5DA64F1 /* AboutView.swift in Sources */,
+				12523F703EA7514B0CFA9D11 /* AppShell.swift in Sources */,
+				31670320BD0D01C8DC2EDB98 /* CombosMatrixView.swift in Sources */,
+				11F9F8099676BFA47FEB73DD /* DataPackModels.swift in Sources */,
+				C23005EAB6489CC0FD0BD637 /* DataPackStore.swift in Sources */,
+				E37BB7D79F7939F26CA95E92 /* PsyCardsApp.swift in Sources */,
+				93E4A91DA35934B77AF102F8 /* PsyCardsDesignTokens.swift in Sources */,
+				12857EAA59D875A164D22FAA /* SubstanceDetailView.swift in Sources */,
+				136AA6DE77872EDD20F55508 /* SubstanceListView.swift in Sources */,
+				20074F9843A440CEAAB901E5 /* WheelView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		932C58338E9FD532B3F276D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 811845075E181185E90C0966 /* PsyCards */;
+			targetProxy = D3B043E1C6AD103BEEA74BDD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0AD6C20CABB6B9067C001B28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = N6XNEN5G84;
+				INFOPLIST_FILE = PsyCards/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = psy.cards;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.raphaelsaunier.psycards;
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1EAB7BEEEE9AC895CD7623DB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cards.psy.PsyCardsTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PsyCards.app/PsyCards";
+			};
+			name = Debug;
+		};
+		531ACFA2658FB3C27EC9185B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6A81F2DC8587130CCFEE029C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = N6XNEN5G84;
+				INFOPLIST_FILE = PsyCards/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = psy.cards;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.raphaelsaunier.psycards;
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A17D64932BF3CD7B870C13A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C0465986BC5C7991BC8314C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cards.psy.PsyCardsTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PsyCards.app/PsyCards";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0FDFCF6743B141426B3371FB /* Build configuration list for PBXNativeTarget "PsyCards" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0AD6C20CABB6B9067C001B28 /* Debug */,
+				6A81F2DC8587130CCFEE029C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		319AEC8450C5D88C2E815BFE /* Build configuration list for PBXProject "PsyCards" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				531ACFA2658FB3C27EC9185B /* Debug */,
+				A17D64932BF3CD7B870C13A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D7D2A8B097335C925484BCD1 /* Build configuration list for PBXNativeTarget "PsyCardsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EAB7BEEEE9AC895CD7623DB /* Debug */,
+				C0465986BC5C7991BC8314C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4EC2A323F90E0C0638CC3D69 /* Project object */;
+}

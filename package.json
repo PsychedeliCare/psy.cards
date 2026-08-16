@@ -2,50 +2,23 @@
   "name": "psy.cards",
   "type": "module",
   "version": "0.0.1",
+  "private": true,
   "engines": {
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "preview:cloudflare": "WRANGLER_LOG_PATH=$PWD/.wrangler/logs wrangler dev --config $PWD/wrangler.jsonc --cwd ${TMPDIR:-/tmp} --local --port 8788 --compatibility-date 2026-04-23 --show-interactive-dev-session false",
-    "import:wikipedia-combos": "node scripts/import-wikipedia-combos.mjs",
-    "i18n:extract": "node scripts/i18n-extract.mjs",
-    "i18n:fill": "node scripts/i18n-fill-translations.mjs --notes --drugs",
-    "i18n:check": "node scripts/i18n-check.mjs",
-    "print:pdf": "node scripts/generate-print-pdf.mjs",
-    "smoke:worker-routes": "node scripts/smoke-worker-routes.mjs",
-    "astro": "astro",
-    "generate-types": "wrangler types"
-  },
-  "dependencies": {
-    "@astrojs/cloudflare": "^14.2.0",
-    "@astrojs/mdx": "^7.0.5",
-    "@iconify-json/ph": "^1.2.2",
-    "@tailwindcss/vite": "^4.2.4",
-    "@twodft/astro-icon": "^1.2.4",
-    "animejs": "^4.5.0",
-    "astro": "^7.2.0",
-    "city-timezones": "^1.3.4",
-    "d3-shape": "^3.2.0",
-    "fuse.js": "^7.4.2",
-    "qrcode": "^1.5.4",
-    "smiles-drawer": "^2.3.0",
-    "suncalc": "^1.9.0",
-    "tailwindcss": "^4.2.4",
-    "wrangler": "^4.84.1"
-  },
-  "overrides": {
-    "vite": "^7"
-  },
-  "devDependencies": {
-    "@types/d3-shape": "^3.1.8",
-    "@types/qrcode": "^1.5.5",
-    "@vite-pwa/astro": "^1.2.0",
-    "pdf-lib": "^1.17.1",
-    "playwright": "^1.52.0",
-    "vite-plugin-pwa": "^1.3.0",
-    "workbox-window": "^7.4.1"
+    "dev": "pnpm --filter @psy.cards/web dev",
+    "build": "pnpm --filter @psy.cards/web build",
+    "preview": "pnpm --filter @psy.cards/web preview",
+    "preview:cloudflare": "pnpm --filter @psy.cards/web preview:cloudflare",
+    "import:wikipedia-combos": "pnpm --filter @psy.cards/web import:wikipedia-combos",
+    "i18n:extract": "pnpm --filter @psy.cards/web i18n:extract",
+    "i18n:fill": "pnpm --filter @psy.cards/web i18n:fill",
+    "i18n:check": "pnpm --filter @psy.cards/web i18n:check",
+    "print:pdf": "pnpm --filter @psy.cards/web print:pdf",
+    "smoke:worker-routes": "pnpm --filter @psy.cards/web smoke:worker-routes",
+    "datapack": "pnpm --filter @psy.cards/shared datapack",
+    "ios:generate": "cd packages/ios && xcodegen generate",
+    "generate-types": "pnpm --filter @psy.cards/web generate-types"
   }
 }
