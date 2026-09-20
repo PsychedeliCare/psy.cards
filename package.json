@@ -8,7 +8,10 @@
   },
   "scripts": {
     "dev": "pnpm --filter @psy.cards/web dev",
-    "build": "pnpm --filter @psy.cards/web build",
+    "build": "pnpm sources:check && pnpm --filter @psy.cards/web build",
+    "sources:refresh": "node packages/shared/scripts/sources.mjs refresh",
+    "sources:check": "node packages/shared/scripts/sources.mjs check",
+    "sources:test": "node --test packages/shared/scripts/sources.test.mjs",
     "preview": "pnpm --filter @psy.cards/web preview",
     "preview:cloudflare": "pnpm --filter @psy.cards/web preview:cloudflare",
     "import:wikipedia-combos": "pnpm --filter @psy.cards/web import:wikipedia-combos",

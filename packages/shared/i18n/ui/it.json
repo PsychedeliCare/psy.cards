@@ -7,7 +7,16 @@
   },
   "dial": {
     "ariaLabel": "Selettore delle sostanze",
-    "pageTitle": "Ruota delle sostanze — psy.cards"
+    "pageTitle": "Ruota delle sostanze — psy.cards",
+    "heading": "Esplora la ruota",
+    "intro": "Un altro modo per scoprire le sostanze. Gira la ruota, scegli una categoria ed esplora le schede.",
+    "hint": "Trascina per esplorare · Tocca per scegliere",
+    "previous": "Sostanza precedente",
+    "next": "Sostanza successiva",
+    "choose": "Scegli una sostanza",
+    "loading": "Caricamento della scheda…",
+    "error": "Impossibile caricare la scheda. Riprova.",
+    "retry": "Riprova"
   },
   "layout": {
     "close": "Chiudi",
@@ -39,7 +48,10 @@
     "navCombos": "Combo",
     "closeCard": "Chiudi scheda",
     "categoriesAria": "Categorie di sostanze",
-    "viewSwitchAria": "Passa tra sostanze e combinazioni"
+    "viewSwitchAria": "Passa tra sostanze e combinazioni",
+    "viewList": "Elenco",
+    "viewWheel": "Ruota",
+    "browseSwitchAria": "Passa tra vista ruota e elenco"
   },
   "footer": {
     "projectBy": "Un progetto di",

@@ -7,6 +7,7 @@
  * the same server-rendered SubstanceCard used everywhere else.
  */
 import Layout from "../components/Layout.astro";
+import BrowseViewSwitcher from "../components/BrowseViewSwitcher.astro";
 import SubstanceCard from "../components/SubstanceCard.astro";
 import SubstanceDial from "../components/SubstanceDial.astro";
 import Footer from "../components/Footer.astro";
@@ -43,22 +44,59 @@ const categories: DialCategoryInput[] = visibleGroupOrder.map((group) => ({
 const initial = categories[0]!.substances[0]!;
 ---
 
-<Layout locale={locale} title={title}>
+<Layout locale={locale} title={title} headerView="list">
   <main class="wheel-page">
-    <div class="wheel-card" data-dial-card data-initial-slug={initial.slug}>
-      <SubstanceCard substanceKey={initial.key} locale={locale} />
+    <div class="wheel-layout">
+      <aside class="wheel-explorer" aria-label={t(locale, ui, "dial.heading")}>
+        <div class="wheel-toolbar">
+          <BrowseViewSwitcher locale={locale} active="wheel" />
+        </div>
+        <SubstanceDial locale={locale} categories={categories} initialKey={initial.key} />
+        <p class="wheel-hint">{t(locale, ui, "dial.hint")}</p>
+        <div class={`wheel-selection group-${initial.group}`} data-dial-selection>
+          <div class="wheel-selection-controls">
+            <button type="button" data-dial-previous aria-label={t(locale, ui, "dial.previous")}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m14 6-6 6 6 6" /></svg>
+            </button>
+            <div class="wheel-picker">
+              <label for="wheel-substance" data-dial-group>{groupLabels[initial.group]}</label>
+              <select id="wheel-substance" data-dial-select aria-label={t(locale, ui, "dial.choose")}>
+                {categories.map((category) => (
+                  <optgroup label={category.label}>
+                    {category.substances.map((substance) => (
+                      <option value={substance.slug} selected={substance.key === initial.key}>{substance.label}</option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+            </div>
+            <button type="button" data-dial-next aria-label={t(locale, ui, "dial.next")}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m10 6 6 6-6 6" /></svg>
+            </button>
+          </div>
+        </div>
+      </aside>
+      <div class="wheel-reading">
+        <div class="wheel-card-status" data-dial-status role="status" hidden>
+          <span data-dial-status-text></span>
+          <button type="button" data-dial-retry hidden>{t(locale, ui, "dial.retry")}</button>
+        </div>
+        <div class="wheel-card" data-dial-card data-initial-slug={initial.slug}>
+          <SubstanceCard substanceKey={initial.key} locale={locale} />
+        </div>
+      </div>
     </div>
-
     <Footer locale={locale} />
   </main>
-
-  <div class="wheel-scrim" aria-hidden="true"></div>
-
-  <SubstanceDial locale={locale} categories={categories} initialKey={initial.key} />
+  <div data-modal-slot></div>
 
   <script>
     import { initSubstanceDial } from "../scripts/substance-dial.ts";
     import { initSearchPalette } from "../scripts/search-palette.ts";
+    import { initComboModal } from "../scripts/combo-modal.ts";
+    import { initBrowseSwitch } from "../scripts/landing-cards.ts";
+    initBrowseSwitch();
+    initComboModal();
     initSubstanceDial();
     initSearchPalette();
   </script>

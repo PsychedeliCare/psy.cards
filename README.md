@@ -54,6 +54,9 @@ All commands run from the project root:
 | `pnpm install` | Install dependencies |
 | `pnpm dev` | Start the local dev server |
 | `pnpm build` | Build the production site |
+| `pnpm sources:refresh` | Refresh source metadata from pinned local inputs and Git history (no network) |
+| `pnpm sources:check` | Verify source revisions, file hashes and registry freshness |
+| `pnpm sources:test` | Test provenance generation and failure cases |
 | `pnpm preview` | Preview the production build locally |
 | `pnpm preview:cloudflare` | Preview the built `dist` directory with the Cloudflare Worker and assets binding |
 | `pnpm smoke:worker-routes` | Check custom-domain Worker routing without starting a server |
@@ -61,6 +64,19 @@ All commands run from the project root:
 
 To debug Cloudflare behavior locally, run `pnpm build` and then `pnpm preview:cloudflare`.
 For fast custom-domain routing checks, run `pnpm smoke:worker-routes`.
+
+The English `/sources` page describes the data actually consumed, its revisions,
+and the differences between direct inputs, inherited references and credits.
+`pnpm build` verifies the checked-in source registry before building. Initialize
+submodules and retain their file history; commit local source-content edits before
+running `pnpm sources:refresh` so file dates identify real committed revisions.
+
+See the [data, localization and review audit](docs/data-and-localization-audit.md)
+for current translation limitations, reproducible enrichment, GitHub review
+workflows and the roadmap to 24 languages. The legacy `i18n:extract` command can
+overwrite translations; its paths and non-destructive behavior must be repaired
+before use. The existing `i18n:check` currently produces false success when it
+cannot find input files and must not be treated as publication validation.
 
 ## Acknowledgements
 

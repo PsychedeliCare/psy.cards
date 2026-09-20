@@ -1,0 +1,1597 @@
+{
+  "schemaVersion": 1,
+  "providers": [
+    {
+      "id": "tripsit-facts",
+      "name": "TripSit · substance factsheets",
+      "kind": "direct",
+      "role": "Substance information",
+      "url": "https://github.com/TripSit/drugs",
+      "description": "The upstream factsheet database contains 555 substances; the site and native app expose the 25 entries selected by the combination-chart configuration, including substance classes.",
+      "licenseStatement": "The repository package declares ISC. This is a recorded declaration, not a separate assessment of every embedded reference.",
+      "fields": [
+        {
+          "path": "[substance].name, pretty_name, aliases, properties.aliases, categories, properties.categories",
+          "web": "Names, aliases, category tags and search terms.",
+          "ios": "Names, aliases and search terms; groups come from configuration.",
+          "transformation": "Local labels and text overlays take precedence. dxm resolves to dextromethorphan; ghb/gbl resolves to ghb."
+        },
+        {
+          "path": "[substance].properties.summary",
+          "web": "Substance summary and search keywords.",
+          "ios": "Substance summary.",
+          "transformation": "Local text overlay takes precedence; class descriptions supply separate fallback copy."
+        },
+        {
+          "path": "[substance].formatted_dose, dose_note, properties.dose",
+          "web": "Dose chart uses formatted_dose and dose_note.",
+          "ios": "Dose uses formatted_dose; doseNote currently uses properties.dose.",
+          "transformation": "Dose levels, routes and numeric strings are kept; chart rendering derives visual ranges."
+        },
+        {
+          "path": "[substance].formatted_onset, formatted_duration, formatted_aftereffects, properties.peak, properties.after-effects, properties.half-life",
+          "web": "Timings, peak chart, after-effects and half-life.",
+          "ios": "Formatted onset/duration; afterEffects uses properties.after-effects; halfLife uses properties.half-life.",
+          "transformation": "Web timing charts parse source values. Native and web after-effects inputs differ."
+        },
+        {
+          "path": "[substance].formatted_effects, properties.effects",
+          "web": "Effect labels; properties.effects is extracted into overlays but not the displayed effect list.",
+          "ios": "formatted_effects becomes effects.",
+          "transformation": "Effect-array overlays are applied by position, then web labels receive icons and title casing."
+        },
+        {
+          "path": "[substance].properties.avoid, properties.warning, properties[\"test-kits\"]",
+          "web": "Safety advice.",
+          "ios": "Only properties.avoid is exported.",
+          "transformation": "Current extraction targets some incorrect top-level field names; not all displayed advice is localized."
+        },
+        {
+          "path": "[substance].links, pweffects",
+          "web": "Reference links and linked PsychonautWiki effect names.",
+          "ios": "Not exported in the current data pack.",
+          "transformation": "Inherited links; no independent PsychonautWiki or Erowid fetch."
+        },
+        {
+          "path": "[substance].sources, combos",
+          "web": "Present in the loaded upstream file; not used as the card's bibliography or interaction source.",
+          "ios": "Not exported from this file.",
+          "transformation": "Interaction status, notes and bibliography are read from combos.json instead."
+        }
+      ],
+      "limitations": [
+        "An upstream revision is not a psy.cards scientific approval.",
+        "Individual facts do not carry psy.cards reviewer identities or validation dates."
+      ],
+      "inheritedFrom": null,
+      "repositoryRevision": {
+        "id": "83670cb6bc8863615fcb9be081c87f061b42dea4",
+        "date": "2026-08-18T13:17:49.000Z",
+        "url": "https://github.com/TripSit/drugs/commit/83670cb6bc8863615fcb9be081c87f061b42dea4"
+      },
+      "sourceRevision": null,
+      "dataRevisionAt": "2026-01-25T16:58:57.000Z",
+      "retrievedAt": null,
+      "scientificReviewedAt": null,
+      "reviewStatus": "not-recorded",
+      "imports": [
+        {
+          "path": "drugs/drugs.json",
+          "sha256": "0ba8d7254220f8bf4e24722012b2404460b4756131a0314f223fef62d6505114",
+          "lastChangedRevision": "c5c559f2175feb2405d333ab0136af8450418425",
+          "lastChangedAt": "2026-01-25T16:58:57.000Z",
+          "url": "https://github.com/TripSit/drugs/blob/c5c559f2175feb2405d333ab0136af8450418425/drugs.json"
+        }
+      ]
+    },
+    {
+      "id": "tripsit-interactions",
+      "name": "TripSit · interactions",
+      "kind": "direct",
+      "role": "Interaction classifications and evidence",
+      "url": "https://github.com/TripSit/drugs",
+      "description": "Interaction data has 31 matrix keys. The current 25-column interface exposes 300 distinct pairs.",
+      "licenseStatement": "The repository package declares ISC.",
+      "fields": [
+        {
+          "path": "combos.json: [substanceA][substanceB].status, note, sources[].{author,title,url}",
+          "web": "Interaction cards, matrix, search status and references.",
+          "ios": "Matrix status summaries and pair records with notes and sources.",
+          "transformation": "Read either pair direction, preferring the requested direction's available fields; overlay the translated note. Web and iOS currently order translation keys differently."
+        },
+        {
+          "path": "combo_definitions.json: [].status, definition, emoji",
+          "web": "Legend labels, explanations and emoji.",
+          "ios": "Legend and pair explanations.",
+          "transformation": "Normalize statuses using combogen configuration; local translated definitions take precedence."
+        }
+      ],
+      "limitations": [
+        "Citations are inherited from TripSit and are not evidence of an independent psy.cards review.",
+        "Missing interactions use an unknown fallback; low-risk labels are source categories, not guarantees."
+      ],
+      "inheritedFrom": null,
+      "repositoryRevision": {
+        "id": "83670cb6bc8863615fcb9be081c87f061b42dea4",
+        "date": "2026-08-18T13:17:49.000Z",
+        "url": "https://github.com/TripSit/drugs/commit/83670cb6bc8863615fcb9be081c87f061b42dea4"
+      },
+      "sourceRevision": null,
+      "dataRevisionAt": "2025-11-26T07:32:22.000Z",
+      "retrievedAt": null,
+      "scientificReviewedAt": null,
+      "reviewStatus": "not-recorded",
+      "imports": [
+        {
+          "path": "drugs/combo_definitions.json",
+          "sha256": "225810f59a84a269becad1953e3cceb4fb8484152160b184941e6194ee32c5d9",
+          "lastChangedRevision": "51fc73bd4fba779812d1e700aaf63a8a720a0f0a",
+          "lastChangedAt": "2023-09-02T13:20:30.000Z",
+          "url": "https://github.com/TripSit/drugs/blob/51fc73bd4fba779812d1e700aaf63a8a720a0f0a/combo_definitions.json"
+        },
+        {
+          "path": "drugs/combos.json",
+          "sha256": "c6550950587710374460254ed529b5f3728a824a565e4422fc5c9280bddd6330",
+          "lastChangedRevision": "6b8094e4eb471000a4f9636db314cdc5e99200a0",
+          "lastChangedAt": "2025-11-26T07:32:22.000Z",
+          "url": "https://github.com/TripSit/drugs/blob/6b8094e4eb471000a4f9636db314cdc5e99200a0/combos.json"
+        }
+      ]
+    },
+    {
+      "id": "tripsit-translations",
+      "name": "TripSit · translations",
+      "kind": "direct",
+      "role": "Upstream labels and disclaimer",
+      "url": "https://github.com/TripSit/drugs/tree/main/translations",
+      "description": "English, French, German and Italian labels are combined with local overlays.",
+      "licenseStatement": "The repository package declares ISC.",
+      "fields": [
+        {
+          "path": "{locale}.json: drugs.*, interactions.*",
+          "web": "Substance and interaction labels; English labels resolve configured columns.",
+          "ios": "Substance and interaction labels; English labels resolve configured columns.",
+          "transformation": "Local drug-label augmentations override upstream labels. Web additionally bridges dxm to dextromethorphan."
+        },
+        {
+          "path": "disclaimer-{locale}.html: complete HTML",
+          "web": "Disclaimer component, with English fallback if absent.",
+          "ios": "Not imported; native disclaimer comes from local UI strings.",
+          "transformation": "Rendered as upstream HTML."
+        },
+        {
+          "path": "{locale}.json: title, app, support",
+          "web": "Loaded in the bundle but not used as current UI copy.",
+          "ios": "Read with the file but not exported as current UI copy.",
+          "transformation": "UI chrome is maintained locally."
+        }
+      ],
+      "limitations": [
+        "The imported files do not record per-string generation providers or psy.cards validation history."
+      ],
+      "inheritedFrom": null,
+      "repositoryRevision": {
+        "id": "83670cb6bc8863615fcb9be081c87f061b42dea4",
+        "date": "2026-08-18T13:17:49.000Z",
+        "url": "https://github.com/TripSit/drugs/commit/83670cb6bc8863615fcb9be081c87f061b42dea4"
+      },
+      "sourceRevision": null,
+      "dataRevisionAt": "2023-11-12T12:45:18.000Z",
+      "retrievedAt": null,
+      "scientificReviewedAt": null,
+      "reviewStatus": "not-recorded",
+      "imports": [
+        {
+          "path": "drugs/translations/de.json",
+          "sha256": "e822d5b26570d269b2896371736b7331f92213661e5301f8ed1ca5740c1104e3",
+          "lastChangedRevision": "83c27ffcfe632f41214ceee895cb4bc49c5a82f1",
+          "lastChangedAt": "2023-11-12T12:45:18.000Z",
+          "url": "https://github.com/TripSit/drugs/blob/83c27ffcfe632f41214ceee895cb4bc49c5a82f1/translations/de.json"
+        },
+        {
+          "path": "drugs/translations/disclaimer-de.html",
+          "sha256": "b6e5fed77c8420b5ca9a937ceed954dc17dd89104a7a04e68b9abe44c69e9108",
+          "lastChangedRevision": "83c27ffcfe632f41214ceee895cb4bc49c5a82f1",
+          "lastChangedAt": "2023-11-12T12:45:18.000Z",
+          "url": "https://github.com/TripSit/drugs/blob/83c27ffcfe632f41214ceee895cb4bc49c5a82f1/translations/disclaimer-de.html"
+        },
+        {
+          "path": "drugs/translations/disclaimer-en.html",
+          "sha256": "9d87c67450eb8007862fca7329573ea185f1ab34d9d8783ccf46757a60b57849",
+          "lastChangedRevision": "83c27ffcfe632f41214ceee895cb4bc49c5a82f1",
+          "lastChangedAt": "2023-11-12T12:45:18.000Z",
+          "url": "https://github.com/TripSit/drugs/blob/83c27ffcfe632f41214ceee895cb4bc49c5a82f1/translations/disclaimer-en.html"
+        },
+        {
+          "path": "drugs/translations/disclaimer-fr.html",
+          "sha256": "894d15cf2a3d332a353743d0b10b59c788d22e2ec671c26a55246f3f58d0db5e",
+          "lastChangedRevision": "83c27ffcfe632f41214ceee895cb4bc49c5a82f1",
+          "lastChangedAt": "2023-11-12T12:45:18.000Z",
+          "url": "https://github.com/TripSit/drugs/blob/83c27ffcfe632f41214ceee895cb4bc49c5a82f1/translations/disclaimer-fr.html"
+        },
+        {
+          "path": "drugs/translations/disclaimer-it.html",
+          "sha256": "8705fe04b43c73e2acbd06613f99f87ffe0d96115d28ef9c1d51ec49d2198b4f",
+          "lastChangedRevision": "83c27ffcfe632f41214ceee895cb4bc49c5a82f1",
+          "lastChangedAt": "2023-11-12T12:45:18.000Z",
+          "url": "https://github.com/TripSit/drugs/blob/83c27ffcfe632f41214ceee895cb4bc49c5a82f1/translations/disclaimer-it.html"
+        },
+        {
+          "path": "drugs/translations/en.json",
+          "sha256": "5223891b2df29170c55d70bbbc8d2e70d30f36fff7218fd28019df71023e8c40",
+          "lastChangedRevision": "83c27ffcfe632f41214ceee895cb4bc49c5a82f1",
+          "lastChangedAt": "2023-11-12T12:45:18.000Z",
+          "url": "https://github.com/TripSit/drugs/blob/83c27ffcfe632f41214ceee895cb4bc49c5a82f1/translations/en.json"
+        },
+        {
+          "path": "drugs/translations/fr.json",
+          "sha256": "c64febd421bcb928591de2579dc66046c296b178240eacdec9362006f9d57328",
+          "lastChangedRevision": "83c27ffcfe632f41214ceee895cb4bc49c5a82f1",
+          "lastChangedAt": "2023-11-12T12:45:18.000Z",
+          "url": "https://github.com/TripSit/drugs/blob/83c27ffcfe632f41214ceee895cb4bc49c5a82f1/translations/fr.json"
+        },
+        {
+          "path": "drugs/translations/it.json",
+          "sha256": "5fb4c15e56f4340a4529b695d3b67d73c34b0a740bd335f21601d54e0214cce1",
+          "lastChangedRevision": "83c27ffcfe632f41214ceee895cb4bc49c5a82f1",
+          "lastChangedAt": "2023-11-12T12:45:18.000Z",
+          "url": "https://github.com/TripSit/drugs/blob/83c27ffcfe632f41214ceee895cb4bc49c5a82f1/translations/it.json"
+        }
+      ]
+    },
+    {
+      "id": "combogen",
+      "name": "TripSit · combogen",
+      "kind": "direct",
+      "role": "Chart selection and presentation mappings",
+      "url": "https://github.com/TripSit/combogen",
+      "description": "The chart configuration selects the visible substances and maps interaction categories to presentation tokens.",
+      "licenseStatement": "No license declaration was found in the imported repository's package metadata.",
+      "fields": [
+        {
+          "path": "tableOrder, groupNames",
+          "web": "Column selection and original within-group order.",
+          "ios": "Same column selection.",
+          "transformation": "Local category overrides and group ordering are applied."
+        },
+        {
+          "path": "rewriteInteraction, interactionClass",
+          "web": "Status normalization, semantic status keys and icons.",
+          "ios": "Status normalization, keys and icons.",
+          "transformation": "Font Awesome identifiers are mapped to the app's icon identifiers; the chart generator itself is not run."
+        }
+      ],
+      "limitations": [
+        "Configuration ordering is editorial presentation, not a prevalence or evidence ranking."
+      ],
+      "inheritedFrom": null,
+      "repositoryRevision": {
+        "id": "2b3b72c8d179bd85a81650537ce680edf71baa08",
+        "date": "2025-05-08T13:40:00.000Z",
+        "url": "https://github.com/TripSit/combogen/commit/2b3b72c8d179bd85a81650537ce680edf71baa08"
+      },
+      "sourceRevision": null,
+      "dataRevisionAt": "2025-05-08T13:39:38.000Z",
+      "retrievedAt": null,
+      "scientificReviewedAt": null,
+      "reviewStatus": "not-recorded",
+      "imports": [
+        {
+          "path": "combogen/config.json",
+          "sha256": "f93b01553a843438e235cfbf4409f8a69d9c970c5f45db14a79e6817e343a427",
+          "lastChangedRevision": "6e4f10788faf844d9955a6ca5e2aaa9364e5f525",
+          "lastChangedAt": "2025-05-08T13:39:38.000Z",
+          "url": "https://github.com/TripSit/combogen/blob/6e4f10788faf844d9955a6ca5e2aaa9364e5f525/config.json"
+        }
+      ]
+    },
+    {
+      "id": "wikipedia",
+      "name": "Wikipedia · combination names",
+      "kind": "enrichment",
+      "role": "Slang and search enrichment",
+      "url": "https://en.wikipedia.org/wiki/List_of_drug_combinations",
+      "description": "A saved import of the List of drug combinations supplies slang, intoxication names and terms for search, alongside separately identified manual entries.",
+      "licenseStatement": "The saved import records CC BY-SA 4.0; the revision and article history provide attribution to Wikipedia contributors.",
+      "fields": [
+        {
+          "path": "entriesById.*: slang, intoxicationNames, comment, sourceSlots, tripSitKeys, pairKeys, combinationKey",
+          "web": "Slang labels and search aliases/keywords.",
+          "ios": "Intended for search terms, but the current generator does not read entriesById correctly.",
+          "transformation": "Wiki markup is cleaned, terms are mapped to TripSit identifiers, and combinations produce pair indexes."
+        },
+        {
+          "path": "searchDocuments[], byPair, tripSit.comboKeys",
+          "web": "Search term indexes and pair-name lookup.",
+          "ios": "Not consumed directly.",
+          "transformation": "Cards restrict names to two-key/single-pair entries; search also indexes broad class and multi-pair mappings."
+        },
+        {
+          "path": "source.{revisionId,revisionTimestamp,retrievedAt,url,license}, sourceRow, resolutionStatus, unresolvedTerms, tripSit.termMap",
+          "web": "Import provenance and mapping audit; not a scientific score.",
+          "ios": "Not exported.",
+          "transformation": "Manual mappings and exclusions are in the importer or generated seed; row-based IDs currently move when source rows move."
+        }
+      ],
+      "limitations": [
+        "Wikipedia enrichment never replaces TripSit interaction status, note or sources.",
+        "The retained snapshot has 47 entries (including manual curation) and 13 unresolved source terms.",
+        "A revision is recorded, but the original raw wikitext snapshot and its checksum are not retained; the current importer is not fully reproducible."
+      ],
+      "inheritedFrom": null,
+      "repositoryRevision": null,
+      "sourceRevision": {
+        "id": "1354837126",
+        "date": "2026-05-18T14:27:20.000Z",
+        "url": "https://en.wikipedia.org/w/index.php?title=List_of_drug_combinations&oldid=1354837126"
+      },
+      "dataRevisionAt": "2026-05-18T14:27:20.000Z",
+      "retrievedAt": "2026-06-16T10:38:38.800Z",
+      "scientificReviewedAt": null,
+      "reviewStatus": "not-recorded",
+      "imports": [
+        {
+          "path": "packages/shared/data/combos-extended.json",
+          "sha256": "0a3643f0efca39fb546b8b8f89632386426f477d4f93dc6d8d5895ca1578466a",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/data/combos-extended.json"
+        }
+      ]
+    },
+    {
+      "id": "local-language",
+      "name": "psy.cards · language and editorial content",
+      "kind": "local",
+      "role": "Local overlays, interface copy and terminology",
+      "url": "https://github.com/psychedelicare/psy.cards/tree/main/packages/shared/i18n",
+      "description": "Local English source overlays, translated content, class descriptions and UI copy, with human-readable terminology guidance.",
+      "licenseStatement": "No separate license is asserted here for local editorial content.",
+      "fields": [
+        {
+          "path": "ui/{locale}.json: all message keys",
+          "web": "Interface labels, descriptions and local editorial summaries.",
+          "ios": "Generated Localizable.strings and data-pack metadata.",
+          "transformation": "Web replaces named placeholders; iOS currently converts them to unnumbered %@ placeholders."
+        },
+        {
+          "path": "content/{locale}/drug-labels.json: [key]",
+          "web": "Label augmentation.",
+          "ios": "Label augmentation.",
+          "transformation": "Overrides upstream labels."
+        },
+        {
+          "path": "content/{locale}/{combo-notes,status-definitions,class-descriptions}.json: [key].{_source,text}",
+          "web": "Translated notes, definitions and class text.",
+          "ios": "Same inputs, resolved independently.",
+          "transformation": "text replaces source copy. _source is retained for comparison but runtime does not check drift."
+        },
+        {
+          "path": "content/{locale}/drugs/*.json: pretty_name, properties.summary, properties.effects, dose_note, formatted_effects[].{_source,text}",
+          "web": "Factsheet overlays; additional existing overlay keys are recursively applied.",
+          "ios": "Overlays are applied before data-pack projection.",
+          "transformation": "Source identity is the substance key/file; array elements use positional identity. Extractor also attempts top-level avoid/test_kits, which do not match the rendered upstream fields."
+        },
+        {
+          "path": "glossary/*.md; translatable-fields.md",
+          "web": "Contributor/translation guidance, not loaded by the site.",
+          "ios": "Not loaded by the app.",
+          "transformation": "The separate OpenAI provider reads this guidance; the currently wired fill command uses MyMemory directly."
+        }
+      ],
+      "limitations": [
+        "No structured per-string generation/provider/reviewer history exists. The current fill script cannot establish who produced existing translations.",
+        "Translation coverage is not scientific or language validation. The current i18n:check command reads the wrong directory and can falsely pass.",
+        "Class descriptions and local summaries need their own evidence and scientific review; they are not automatically upstream-validated."
+      ],
+      "inheritedFrom": null,
+      "repositoryRevision": null,
+      "sourceRevision": null,
+      "dataRevisionAt": "2026-08-16T21:05:52.000Z",
+      "retrievedAt": null,
+      "scientificReviewedAt": null,
+      "reviewStatus": "not-recorded",
+      "imports": [
+        {
+          "path": "packages/shared/i18n/content/de/class-descriptions.json",
+          "sha256": "14e2ae615bdcc75579d539d464dcd76f1e0c8fa9c7506d0fde78248789737b22",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/class-descriptions.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/combo-notes.json",
+          "sha256": "7fd4a2d77718b6a799c16a588d04354f6f9973cf55c08cd2347d42d133dda9a7",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/combo-notes.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drug-labels.json",
+          "sha256": "d5d0198b77ee4aae9d2989f0a9280c335a21613511640118f96f569997fa4401",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drug-labels.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/2c-t-x.json",
+          "sha256": "507398359c50680439597ee46b52e046439d7922d9eef0ee982fc366f61ba500",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/2c-t-x.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/2c-x.json",
+          "sha256": "b0179fb556f9e1db44011aad562108145b4c6033ac861686eb7d7cf6a5ab65ed",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/2c-x.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/5-meo-xxt.json",
+          "sha256": "b8163818f5623cd2073710f02137a9834b308d5b84479ff33fbcfa677a2edad6",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/5-meo-xxt.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/alcohol.json",
+          "sha256": "b10583669c654c104e6d1882401dd4be86ca5df2758e1413603ba7d360f36850",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/alcohol.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/amphetamines.json",
+          "sha256": "7b65285efe47dd4fdbeff4d0215f26974e4bed655a91fbe6baca0c94b326981f",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/amphetamines.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/amt.json",
+          "sha256": "3c4bea6341712d537c1114563a2156924091dd752a8bb0f57fc5ddc8e1261613",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/amt.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/benzodiazepines.json",
+          "sha256": "b406d7663317125770328fb7f87f57995fe706aba859ef8750e178ad6c2eda84",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/benzodiazepines.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/caffeine.json",
+          "sha256": "35efe1dfa5d1ba1df1edc1e9eb32bd721af808d93d081583e0912663aebaa6a7",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/caffeine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/cannabis.json",
+          "sha256": "f559eddabe3b39425fb88720e0e57749e014a074e840e95b193a8532214e8a3a",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/cannabis.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/cocaine.json",
+          "sha256": "3b5080d5cc1af7cb0bb92e41482897cc216970a475c66b348d23fc4160d7aaea",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/cocaine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/dextromethorphan.json",
+          "sha256": "ad8daca09663363c64ccff64c67b9c7234c50f11a6a1968d9c59e7864af06577",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/dextromethorphan.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/diphenhydramine.json",
+          "sha256": "9318b20bdf8834bc8b4069c98e401d3534c10c126bb531abb2014fd3cc5b0929",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/diphenhydramine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/dmt.json",
+          "sha256": "dfe0df089853bed2fef915931ef5cf4d50ea3c829dec065f6a132dc778e11bd3",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/dmt.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/dox.json",
+          "sha256": "882da3263befe8c428d3a7d9d39c539c7eb1a6b436b716d4a860e544bf6f1607",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/dox.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/ghb__gbl.json",
+          "sha256": "f54911a0909c74565453ea0a845dc71f7fbcd96468cf503897d624eed0eb7c71",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/ghb__gbl.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/ketamine.json",
+          "sha256": "1b7aca16f1a6d61bfd1c2e7e1eebf9b8c653cb30b49080803573a00d6e7675a4",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/ketamine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/lithium.json",
+          "sha256": "ec3c2870dbc9ee64b2eca9dca542030c40c8c475465d95a2fa194c185040f6e7",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/lithium.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/lsd.json",
+          "sha256": "6101f35b894623e70ad5ab4200b044fd9411fdc21989b06f1481556a1c9b24bd",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/lsd.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/maois.json",
+          "sha256": "43cf259491bffa3e1ce207617c2582071c9c17c25469775e539b329731819037",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/maois.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/mdma.json",
+          "sha256": "f9eeb9086a71557686b4fb5f3409adb7d1362b05a9b23a5670d5794232b4ebb5",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/mdma.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/mephedrone.json",
+          "sha256": "d2b7d07cf3ff972079c62a8cc439af41b30f75f765d5ba2a31a10d97e76e631b",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/mephedrone.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/mescaline.json",
+          "sha256": "45fb40f2cb6469403d3158694f2d32d6c6340cce07a7d612d913225fc8da3ee1",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/mescaline.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/mushrooms.json",
+          "sha256": "abb4a9f1fb5a0076c13986f0822cb970af852a6b6bd4a145d4996c32ba0da469",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/mushrooms.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/mxe.json",
+          "sha256": "7fd4ff98e1a9e52170982e6500b30dd6e19e7ad7f92e97e53d4d6ba86c4431f7",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/mxe.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/nbomes.json",
+          "sha256": "21c5cb04e63fdf23ee84acb65a2348e9f9240b684ec67b2fa05fd055e9c68b2a",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/nbomes.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/nitrous.json",
+          "sha256": "90ddff3608c39ef988c32b6cc4c629e38b3d7186899dc6db4f00a9318e5b9cc1",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/nitrous.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/opioids.json",
+          "sha256": "01f6b7edbe520fc2c05e0c33afe3673111cfadc10235334ec131dcd23b676fd9",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/opioids.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/pcp.json",
+          "sha256": "d0d2b3339ccfdb9a06c09690a5821416bdc76c2b45c3fae5c7a18f0d89c1860a",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/pcp.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/pregabalin.json",
+          "sha256": "b1fa48fee4a26786eda8ec05d4ac39e44c4508576ff2f269e04e443ae010df40",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/pregabalin.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/ssris.json",
+          "sha256": "2ce75cf61666aaf30f97e6b60b6faca3af6c98bd6dbe404c5187ffc195e8103e",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/ssris.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/drugs/tramadol.json",
+          "sha256": "4f604445e7c5ecdb660dab0e3cf7354ce6a287c9dce0aa6066c183727f65a895",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/drugs/tramadol.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/de/status-definitions.json",
+          "sha256": "82cadc976f66b078dc6ddbfba162faa0b14b0b69032d13a2d4d704336be07eac",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/de/status-definitions.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/class-descriptions.json",
+          "sha256": "17017e782159bcc3bf4dbd29d55c7729c6f0115b6bae564c6aa801fceaf4fabf",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/class-descriptions.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/combo-notes.json",
+          "sha256": "cb411c84b35006068f3410fb318003c535322e8c6d74ef71813bd16c7b2bc657",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/combo-notes.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drug-labels.json",
+          "sha256": "6162aba835dea62d390010b0347825c7c2e76e16ce51a80848262758a76b2971",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drug-labels.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/2c-t-x.json",
+          "sha256": "c8d6300b0ff4f668c4c61e24cea566c963edaa1019f26e1a2696a40e7dc52b93",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/2c-t-x.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/2c-x.json",
+          "sha256": "50d15472b1781d3861746715e70f757e61a2d51037f8c00ff10bcef6d24d0d08",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/2c-x.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/5-meo-xxt.json",
+          "sha256": "fd4b7ae5166dabb70d2ede22ade421efb17f55fb9d9d2a5a438ab31ed2c184b7",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/5-meo-xxt.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/alcohol.json",
+          "sha256": "4a58903bcb4810be61d7b24ba6ee3942ed9856fef1834dedf0dfb63c1a554ee9",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/alcohol.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/amphetamines.json",
+          "sha256": "2abb045ba040238aa6b55efd8487f06eccb690187c11cb2ac82e2eabdddf74bc",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/amphetamines.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/amt.json",
+          "sha256": "214568151ad814598c06a933d7741c735a42a243b90064ceeb37484578d9fcea",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/amt.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/benzodiazepines.json",
+          "sha256": "e3431eb692fb769be09e2f1f7033504358f169aa8a3d64af3bea3c52fe314bc1",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/benzodiazepines.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/caffeine.json",
+          "sha256": "fe91d9e1bd1673feaf28465eb603ca2dd1f3347b09ba79eb3775dcf938323051",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/caffeine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/cannabis.json",
+          "sha256": "f70d60796743005c4c74d88f23938e1f3006e5fc3d5ab6b16bd8c5f31fd93934",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/cannabis.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/cocaine.json",
+          "sha256": "d1673937f64b86a320aab61b97ce100453caa35c817e9e0388558acc7678d295",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/cocaine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/dextromethorphan.json",
+          "sha256": "1ffcf7be146a6cc069322cb98667094fbc2e3ccb659a8968089ef9747cd14ccb",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/dextromethorphan.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/diphenhydramine.json",
+          "sha256": "e0463d8b7b199e47f708ff1ca0d4ded44e7ae5bb7ade482ed992f03a400e7a70",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/diphenhydramine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/dmt.json",
+          "sha256": "658873aea257da50ca62fa3029387166ea03b565f1ba8e58ef3e438156338867",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/dmt.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/dox.json",
+          "sha256": "e4ec2d32b134ca3b6ce7b48dcf461d48538a9090333e401e88c47b748568a4ef",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/dox.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/ghb__gbl.json",
+          "sha256": "a137da9edf8edaf383a1054776314c3fe8c06d3cc8958cf1f0c867ee57f7de9b",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/ghb__gbl.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/ketamine.json",
+          "sha256": "7ec80d543ba22c24c32e6490781fa23bf2e44aae07e4e76184047cf4061e6260",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/ketamine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/lithium.json",
+          "sha256": "ec3c2870dbc9ee64b2eca9dca542030c40c8c475465d95a2fa194c185040f6e7",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/lithium.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/lsd.json",
+          "sha256": "fe5910fea78c2122844cdc5ade7806b52176f3e5f6540e7a7e1247cef8921991",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/lsd.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/maois.json",
+          "sha256": "7675c75debb085d40bd5e1200006e55d4a964021ebeade0344b0f550840a465f",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/maois.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/mdma.json",
+          "sha256": "95609f2616b5b204de324445c28e1bc6b71585e5b21bf1ce36b9f8371d728dd1",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/mdma.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/mephedrone.json",
+          "sha256": "ded79be15049b76d7ae049e8f84a7bbf1ec8d02558d3ecc46107ee761f620978",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/mephedrone.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/mescaline.json",
+          "sha256": "9efda42b2a1fb0f0b26fd7880a9b9ba461af86bae0d5b0893dcb7168e0605b26",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/mescaline.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/mushrooms.json",
+          "sha256": "58016f90e491563c67a71858ca7dba9363725a8b1cf2e591ceb8a9f40f7e6768",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/mushrooms.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/mxe.json",
+          "sha256": "82cd909bea5a640ae6b289871fca5520f00c4cc78742802a370d410cdd05fd51",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/mxe.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/nbomes.json",
+          "sha256": "b2e5f69499c82b4cc7af8e271b41ece154b05d6a392b02fb7a07381dcd3f4a93",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/nbomes.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/nitrous.json",
+          "sha256": "d1f6ece3c0ba6759ae1acccad7f349a1dff729d4f30a5e7e8a2e27d8ce1f4140",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/nitrous.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/opioids.json",
+          "sha256": "e3847f8cd8b5e7307440ba98a9693bd6523a42d7982e0a7ffc7e0422e3781c24",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/opioids.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/pcp.json",
+          "sha256": "e85c24830fbed675c0eb3f456f6c2001b1ad65dc17b3e3829e4814a71770195e",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/pcp.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/pregabalin.json",
+          "sha256": "f8cb59a1f299676dd4d93ff99c60e5aecd640d07cf7d7626b69ce8d4d7c05b58",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/pregabalin.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/ssris.json",
+          "sha256": "a56cca4a5ac217e7abc8af60fe0c52c17e705b14dd06a35d96ca1ff77247ab86",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/ssris.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/drugs/tramadol.json",
+          "sha256": "52af78893e3f6c5ec18c33d58fa2010d878ec94d349d2b0912fd42c855bc6d9b",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/drugs/tramadol.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/en/status-definitions.json",
+          "sha256": "618a1491ca3d15156f28d735a6dc31b385a23cadb879f10e0260e1aa2cf30ef7",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/en/status-definitions.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/class-descriptions.json",
+          "sha256": "5bd69145b78528d839f551bb0e710acb868a57afd540e6b9af7537494b2992c7",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/class-descriptions.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/combo-notes.json",
+          "sha256": "e31ee228b540fbc68fa4d9070f087bd1fd833c2eadb35b912ab257da6898afe5",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/combo-notes.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drug-labels.json",
+          "sha256": "2bbc1a2af69e4560f5a36867b811448c15fa7aee5b597da64cf46653580b642d",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drug-labels.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/2c-t-x.json",
+          "sha256": "3751cf57f809e40e25164d37a8571fa14aa763c5278d0cae5dba8cedf10ad695",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/2c-t-x.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/2c-x.json",
+          "sha256": "5ec9c838375fa645efbe1e194775cf312d8a49bd5c29219733aa065f48102239",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/2c-x.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/5-meo-xxt.json",
+          "sha256": "67fd162303b2e82cd84e95afb86f9e76d27f0c0366c23f8a8317c252bb224092",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/5-meo-xxt.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/alcohol.json",
+          "sha256": "e8bfdac0684ace0a87e54ddaa7450d7ba293d70194e88298862cb5d5374c95fd",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/alcohol.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/amphetamines.json",
+          "sha256": "4d27de8f439d7b5148123e1dfbf51bde543255061a7cd3878cf20e9da4f5ea1e",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/amphetamines.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/amt.json",
+          "sha256": "bcf09438bf7051ad35bd94e3edcdabb15be7ea6d12769eb9b0e53e59208af3be",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/amt.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/benzodiazepines.json",
+          "sha256": "4eb424e87c54e420befa40518bc542aa0c4b20b39a2fb9567fb23eb2d3535bdf",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/benzodiazepines.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/caffeine.json",
+          "sha256": "46aa1fd3c676a6c490f787314c753f249e74eb534dcc12e3576a41ea3b2075fe",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/caffeine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/cannabis.json",
+          "sha256": "4743d3f307e1a2cd4aa66a74e3061f3a22f8beae13a06c41cfe98529eb1c84a5",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/cannabis.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/cocaine.json",
+          "sha256": "78ce325dbfa916ad9f375336d0fccbad1ee75564f5fd9c47342c2fa301b3b8cf",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/cocaine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/dextromethorphan.json",
+          "sha256": "88f2aa19185129d7c18769f52a48382ee6d6ea6da039334fd084cfbcb8e166d7",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/dextromethorphan.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/diphenhydramine.json",
+          "sha256": "71c57c175246c9e9a3f7c9820aa70a7d0e302a984d3e001754f88c523fdb572f",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/diphenhydramine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/dmt.json",
+          "sha256": "2fafa5a4e42e64608d896e8a18a357ee5f2b952dd355d2124b32b009a21ccc52",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/dmt.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/dox.json",
+          "sha256": "5400fc51203a0901c38371cbac3c2d646f2e27b09354145dab67ec3d93a57930",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/dox.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/ghb__gbl.json",
+          "sha256": "e7178ab233c7d0b70bca08e56f4c7b0bf9bae29b558c3e1fdc1a3035087bbe91",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/ghb__gbl.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/ketamine.json",
+          "sha256": "8958d1f3a63c97281ea89851c849bb54a8ec627e5a0a79b8c3abeb18d396b95b",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/ketamine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/lithium.json",
+          "sha256": "ec3c2870dbc9ee64b2eca9dca542030c40c8c475465d95a2fa194c185040f6e7",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/lithium.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/lsd.json",
+          "sha256": "0cad02cc2d73909e312bf557facd1845a0aca034c14d63aeb4692ca0afe24c73",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/lsd.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/maois.json",
+          "sha256": "ad19480255fb59eb6884201f67bc8a431ec274330bb9810b5597202b61b5556f",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/maois.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/mdma.json",
+          "sha256": "3adb9afbbed12a74558d6317af3bfc59731e889bc0652a20d226788adc65169e",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/mdma.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/mephedrone.json",
+          "sha256": "9636fe5837daf3809213f9afe3958e4f334cea7c77bc39f9aa2e07d07422cf27",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/mephedrone.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/mescaline.json",
+          "sha256": "0f029c7d9e118c15e1ce3d934a69452f90726647223a8895f61d1aecd550756f",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/mescaline.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/mushrooms.json",
+          "sha256": "61c3c8748cc844e33514da44c9707c651bde089ce13f4bbc3140326ca30b89e1",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/mushrooms.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/mxe.json",
+          "sha256": "fb0dcc5ef5475a1fb201a52d8895deb67f55c4afc6bb15c963b9542bb435384f",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/mxe.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/nbomes.json",
+          "sha256": "58e6d77a3c1e89c625d44af143feda6afa5c872de353fe89c0b65d3242d400d8",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/nbomes.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/nitrous.json",
+          "sha256": "cc3c712998f7f862f6d843aefc99120e0c679302f595a72d6fe0ff445ea30c75",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/nitrous.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/opioids.json",
+          "sha256": "62582d0363de0f851853277d05d51adf99adfd05f52d3c9d1ed6d239df3b4818",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/opioids.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/pcp.json",
+          "sha256": "f4d6763c94f1955d5ca28961bb4bf9475767987937bbbd4903ad9b119a1e428b",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/pcp.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/pregabalin.json",
+          "sha256": "4fc62535c13a8fbcd86981e073bc6c7f8275465174c306fb8046d1a0008f784a",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/pregabalin.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/ssris.json",
+          "sha256": "62ade17df2fb2e7beaba321a08d87351b69d5ba0e803ce99dc502692f8f7af2b",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/ssris.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/drugs/tramadol.json",
+          "sha256": "5d1a7d19f9d6481f6216d6cf4c66ecf5b00b2c79097c965a6f824e4be478b83e",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/drugs/tramadol.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/fr/status-definitions.json",
+          "sha256": "42aff79baeb7bdd1bc69b1dade290d3a8c1f95933153aa56acc287f9e88e2ac6",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/fr/status-definitions.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/class-descriptions.json",
+          "sha256": "5e866a2354cf91d0c1e15cf8cc9397853da9619a6dfc72e8222875bcaa287601",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/class-descriptions.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/combo-notes.json",
+          "sha256": "66adcb65f4c143f0e21a818b116dd6b9953dffb7488f488315a85fe5ae7c5161",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/combo-notes.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drug-labels.json",
+          "sha256": "2798a78f726d5978574ac9afdc9393f2881b4bea4c5b04936f6a5455fe361429",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drug-labels.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/2c-t-x.json",
+          "sha256": "b6d5cbf459fb5ffd2125a120de655162531d9fe70866ebf3496321a878db9c96",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/2c-t-x.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/2c-x.json",
+          "sha256": "b794a4fd568d858e038cb1e30f35a250be751055e776d3847ca3d30fae5e883d",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/2c-x.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/5-meo-xxt.json",
+          "sha256": "791b99ac294109c7a9feb05e7b4d0633cc9d900587c6233369eca3dd413977d1",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/5-meo-xxt.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/alcohol.json",
+          "sha256": "432585d4261ac27ca3d74fc1cef8aa9b89727c57448d4ac260ca2e1f34693b40",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/alcohol.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/amphetamines.json",
+          "sha256": "912db9d6631c099836a7e64083994829ac30dde0328bd45edbab8587a702032f",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/amphetamines.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/amt.json",
+          "sha256": "b2050eb7fce7b46f2a21934e5f6426bb2b082f99bb489dc267ada759e86cdbff",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/amt.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/benzodiazepines.json",
+          "sha256": "dc1c7e8c82a0ab8faa1188af8ddfaa68d2796d406950ba0981267a0949072ce2",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/benzodiazepines.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/caffeine.json",
+          "sha256": "aab34505e86bebaa433cbe586d64ef5db458f3d4e6454755dc9afe1fed56be4d",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/caffeine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/cannabis.json",
+          "sha256": "f99bb97d4c430b70b3870ee638983843f7b305d9534d4558457351aa1e3f66b1",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/cannabis.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/cocaine.json",
+          "sha256": "dc742ddcd993f793e77f9a13fb78d96edb12a5a2ab3c78b3800b878f5515365a",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/cocaine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/dextromethorphan.json",
+          "sha256": "6064b16bba71b7730bb43bb781ed298447412181c1e1f07165d460f276a5e86d",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/dextromethorphan.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/diphenhydramine.json",
+          "sha256": "4fc6d9f7f9d4d4ddfab0cdcd5e0bb2c27d9a8343a2c6e9abfc6658cb695d8313",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/diphenhydramine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/dmt.json",
+          "sha256": "f584b6eedc06f8f2de55b5c5a3bd0908aad67be43d1944e18959172d499a03d2",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/dmt.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/dox.json",
+          "sha256": "c083125d06da3271cf5450f79a25d27291d9f8d3dae4811286c8d47744f1a831",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/dox.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/ghb__gbl.json",
+          "sha256": "736e84cfcfb572f9e0824aeedf6d0f80cc3c188cbab5bcce4c9c0f767900f9db",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/ghb__gbl.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/ketamine.json",
+          "sha256": "77a48986df0a96d724a2315654bff7938d12c90559eff59d7dd3bc2ceb775346",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/ketamine.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/lithium.json",
+          "sha256": "190e278e5741fcdc9b888b3b99739a83e460c0def09a83f75d64d5cd66be7ee3",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/lithium.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/lsd.json",
+          "sha256": "3e0fd35be9f0aa8c2668858e1193653237695164853eddf091f59a6d0fc3edd0",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/lsd.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/maois.json",
+          "sha256": "06e535dcc3a58c634dd3ae9a6bab99408ba14714a5268dfb9945acb293f9fa9d",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/maois.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/mdma.json",
+          "sha256": "ec614dd623855efcd55aa77cbf28d27f741e649bc545e2c5d011f3bb08dad21f",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/mdma.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/mephedrone.json",
+          "sha256": "f667d43b4237f18eceb98b4197b77feed039f22b5795b297a4d1aa42d81e5f72",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/mephedrone.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/mescaline.json",
+          "sha256": "877189ea93716f6ed3cc8b919e9cab1700bea27b68d20fe7c0c2b99f982ac3f2",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/mescaline.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/mushrooms.json",
+          "sha256": "fe0ea86d9e5885c8e92fdce8a8f4469c7ade654bee3a56d564c20e80d3f5d3c7",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/mushrooms.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/mxe.json",
+          "sha256": "65c7b18186f6171eddf5cfa9b28c65a7d638440c8a5da403cdaeaa0e9fe491eb",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/mxe.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/nbomes.json",
+          "sha256": "bca01248cfa86aeb7a4aa7c0d6386f0d89cc3039c4c1e2539250f688a3cb19c2",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/nbomes.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/nitrous.json",
+          "sha256": "00ddf53c5cc6b77543daa79c9d58673f08b917eb1e50653133b709066f910642",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/nitrous.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/opioids.json",
+          "sha256": "ffacfc99d632dafcadae0fbc2f682b08d7f1bcd50b1e28461a1f349cb88af5ac",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/opioids.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/pcp.json",
+          "sha256": "b632dd66e7037b61213b70b2560785e2a8f97f972d502579fb2918c53ddaa5fe",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/pcp.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/pregabalin.json",
+          "sha256": "bbf7775016c5cd18ce1f619a16f30b4985a4a000d34e4d19f0964ff4bb1d6838",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/pregabalin.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/ssris.json",
+          "sha256": "88f6e5d4c7933e33b756e9419a5c14138b485c199a3fb4318b9f2f549931ba6f",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/ssris.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/drugs/tramadol.json",
+          "sha256": "b231da471c291386a7b00c29ed4128170ee31901531ca9084ea26ed385fc3aa6",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/drugs/tramadol.json"
+        },
+        {
+          "path": "packages/shared/i18n/content/it/status-definitions.json",
+          "sha256": "a21cce0bb7d22b262e2a55cd5198d077dbe229b7350d6d77fba1089a475c27df",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/content/it/status-definitions.json"
+        },
+        {
+          "path": "packages/shared/i18n/glossary/README.md",
+          "sha256": "280f32a7220717117f06fdd35012ddd3a076189498433ccee4701f3208895740",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/glossary/README.md"
+        },
+        {
+          "path": "packages/shared/i18n/glossary/de.md",
+          "sha256": "5b1a3ec8d80305caec8298a6a33cb2de89a959ac541121f673954092764ac988",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/glossary/de.md"
+        },
+        {
+          "path": "packages/shared/i18n/glossary/fr.md",
+          "sha256": "aa0db75973c865ff7b7acea6414f7249caa25be29d19d9ca663cc092bea5add6",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/glossary/fr.md"
+        },
+        {
+          "path": "packages/shared/i18n/glossary/it.md",
+          "sha256": "b855b33450c81dad022b7f91e15faeb5655c7e27b58a224c7042e6ba5624fd30",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/glossary/it.md"
+        },
+        {
+          "path": "packages/shared/i18n/translatable-fields.md",
+          "sha256": "944a907726e63f15aa4bb66d7c16fc99d43f0f77d7e0a5be5632686a1bb08c1d",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/translatable-fields.md"
+        },
+        {
+          "path": "packages/shared/i18n/ui/de.json",
+          "sha256": "215ad033a43e84402710d1534cbf406043fb8d27ecc6b72e449d16798b9a13ee",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/ui/de.json"
+        },
+        {
+          "path": "packages/shared/i18n/ui/en.json",
+          "sha256": "cb8b85c9e2990b5c4ee98d5bde9562d4ab2220a5f599900dea9b47f3b6221b57",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/ui/en.json"
+        },
+        {
+          "path": "packages/shared/i18n/ui/fr.json",
+          "sha256": "5c6fa0137a1a79bd0d52707bde60e67bbe2e8114ddcbe75e98c41c8b112ba7de",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/ui/fr.json"
+        },
+        {
+          "path": "packages/shared/i18n/ui/it.json",
+          "sha256": "e6ababa486bca58b11ad106e043b90922e9df6c048aae45d1a59c348293ff570",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/ui/it.json"
+        }
+      ]
+    },
+    {
+      "id": "local-chemistry",
+      "name": "psy.cards · molecular structures",
+      "kind": "local",
+      "role": "Curated chemical structure strings",
+      "url": "https://github.com/psychedelicare/psy.cards/blob/main/packages/shared/data/substances.json",
+      "description": "Locally maintained SMILES strings and compound labels, including representative structures for some classes.",
+      "licenseStatement": "Original per-entry provenance is not recorded in this file.",
+      "fields": [
+        {
+          "path": "[key].smiles, compound, representative",
+          "web": "Molecular diagrams and structure data endpoint.",
+          "ios": "Molecule metadata and generated image assets.",
+          "transformation": "SmilesDrawer renders the strings; representative marks a class illustration rather than every member's structure."
+        }
+      ],
+      "limitations": [
+        "The local Git date records a repository change, not chemical validation or retrieval from a scientific provider.",
+        "Do not infer an unrecorded PubChem or other external import."
+      ],
+      "inheritedFrom": null,
+      "repositoryRevision": null,
+      "sourceRevision": null,
+      "dataRevisionAt": "2026-08-16T21:05:52.000Z",
+      "retrievedAt": null,
+      "scientificReviewedAt": null,
+      "reviewStatus": "not-recorded",
+      "imports": [
+        {
+          "path": "packages/shared/data/substances.json",
+          "sha256": "4b5d8a6c1240079daf4fb95a9519dbaf98a7f04405c4f6343aab69e4e0b5f22a",
+          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
+          "lastChangedAt": "2026-08-16T21:05:52.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/data/substances.json"
+        }
+      ]
+    },
+    {
+      "id": "psychonautwiki",
+      "name": "PsychonautWiki · inherited effect links",
+      "kind": "indirect",
+      "role": "Linked effect vocabulary",
+      "url": "https://psychonautwiki.org",
+      "inheritedFrom": "tripsit-facts",
+      "description": "Effect names and URLs arrive through TripSit's pweffects field; there is no independent PsychonautWiki importer.",
+      "fields": [
+        {
+          "path": "drugs.json: [substance].pweffects.{effectName: URL}",
+          "web": "Expandable linked effect list.",
+          "ios": "Not exported.",
+          "transformation": "Inherited through TripSit; the upstream page revisions are not recorded."
+        }
+      ],
+      "limitations": [
+        "TripSit's snapshot date is not a PsychonautWiki page revision date."
+      ],
+      "licenseStatement": "No separate license statement recorded here.",
+      "repositoryRevision": null,
+      "sourceRevision": null,
+      "dataRevisionAt": null,
+      "retrievedAt": null,
+      "scientificReviewedAt": null,
+      "reviewStatus": "not-recorded",
+      "imports": []
+    },
+    {
+      "id": "references",
+      "name": "Research citations and reference sites",
+      "kind": "indirect",
+      "role": "Inherited bibliography and external links",
+      "url": "https://github.com/TripSit/drugs",
+      "inheritedFrom": "tripsit-interactions",
+      "description": "Journal articles, books, Erowid and other references are linked from TripSit records. psy.cards does not independently synchronize those publications.",
+      "fields": [
+        {
+          "path": "combos.json: sources[].{author,title,url}; drugs.json: links.*",
+          "web": "Pair bibliographies and factsheet links.",
+          "ios": "Pair bibliographies only.",
+          "transformation": "Citation strings are preserved. Publication dates in citation text are not verification dates."
+        }
+      ],
+      "limitations": [
+        "Independent retrieval, revisions and psy.cards assessment of the cited works are not recorded. Individual links remain on their corresponding cards."
+      ],
+      "licenseStatement": "No separate license statement recorded here.",
+      "repositoryRevision": null,
+      "sourceRevision": null,
+      "dataRevisionAt": null,
+      "retrievedAt": null,
+      "scientificReviewedAt": null,
+      "reviewStatus": "not-recorded",
+      "imports": []
+    },
+    {
+      "id": "drugs-wheel",
+      "name": "The Drugs Wheel",
+      "kind": "reference",
+      "role": "Credited classification inspiration",
+      "url": "https://www.thedrugswheel.com/",
+      "description": "Credited by the site for its classification approach. Groups, overrides and summaries are held in local code and UI copy; no Drugs Wheel dataset is fetched.",
+      "fields": [],
+      "limitations": [
+        "No external dataset revision or retrieval date is recorded."
+      ],
+      "licenseStatement": "No separate license statement recorded here.",
+      "inheritedFrom": null,
+      "repositoryRevision": null,
+      "sourceRevision": null,
+      "dataRevisionAt": null,
+      "retrievedAt": null,
+      "scientificReviewedAt": null,
+      "reviewStatus": "not-recorded",
+      "imports": []
+    },
+    {
+      "id": "drugwatch",
+      "name": "Drugwatch",
+      "kind": "reference",
+      "role": "Acknowledgement",
+      "url": "https://www.drugwatch.org",
+      "description": "Appears in the site's acknowledgements. The current pipeline contains no separate Drugwatch data import.",
+      "fields": [],
+      "limitations": [
+        "An acknowledgement does not establish a data feed or scientific endorsement."
+      ],
+      "licenseStatement": "No separate license statement recorded here.",
+      "inheritedFrom": null,
+      "repositoryRevision": null,
+      "sourceRevision": null,
+      "dataRevisionAt": null,
+      "retrievedAt": null,
+      "scientificReviewedAt": null,
+      "reviewStatus": "not-recorded",
+      "imports": []
+    },
+    {
+      "id": "smilesdrawer",
+      "name": "SmilesDrawer",
+      "kind": "software",
+      "role": "Molecule rendering software",
+      "url": "https://pubs.acs.org/doi/10.1021/acs.jcim.7b00425",
+      "description": "Draws molecular diagrams from local SMILES strings. This is a software credit, not the provider of the chemical structures.",
+      "fields": [],
+      "limitations": [
+        "Dependency versions are pinned by pnpm-lock.yaml; a software release is not a scientific data revision."
+      ],
+      "licenseStatement": "No separate license statement recorded here.",
+      "inheritedFrom": null,
+      "repositoryRevision": null,
+      "sourceRevision": null,
+      "dataRevisionAt": null,
+      "retrievedAt": null,
+      "scientificReviewedAt": null,
+      "reviewStatus": "not-recorded",
+      "imports": []
+    }
+  ]
+}

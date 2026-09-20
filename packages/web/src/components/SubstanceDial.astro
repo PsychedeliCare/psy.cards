@@ -6,8 +6,7 @@
  * visible and correct — a static ring of substance links — with JS disabled.
  * `src/scripts/substance-dial.ts` only adds rotation and interaction.
  *
- * Desktop: anchored bottom-left, detent at 90° (east).
- * Mobile:  anchored bottom-right, detent at 270° (west).
+ * Full disc at every screen size, with the selection marker at 90° (east).
  */
 import "../styles/dial.css";
 import type { Locale } from "../i18n/locales";
@@ -39,9 +38,7 @@ const initialSub =
   layout.substances.find((s) => s.key === initialKey) ?? layout.substances[0]!;
 const activeGroup = initialSub.group;
 
-// SSR assumes the desktop detent; the client script re-seats the rotation
-// instantly on mount for the mobile breakpoint (no tween, no layout shift —
-// the dial is position: fixed).
+// The east-facing marker stays in the same position on every screen size.
 const initialRotation = rotationForSubstance(initialSub.midAngle, DESKTOP_DETENT, 0);
 
 const uid = `dial-${Math.random().toString(36).slice(2, 8)}`;
@@ -63,6 +60,7 @@ const substanceBase = localePath(locale, "/");
     role="listbox"
     aria-label={ariaLabel}
     aria-activedescendant={optionId(initialSub.slug)}
+    aria-controls="wheel-substance"
   >
     <svg
       viewBox="-100 -100 200 200"
@@ -140,6 +138,7 @@ const substanceBase = localePath(locale, "/");
         }
       </g>
       <circle class="dial-hub" r={DIAL.hubRadius} />
+      <text class="dial-hub-label" text-anchor="middle" y="1.5" aria-hidden="true">PSY.CARDS</text>
       <circle class="dial-rim" r={DIAL.rimRadius} />
       <circle class="dial-focus-ring" r={DIAL.rimRadius - 5} />
     </svg>

@@ -33,6 +33,9 @@
 "landing.closeCard" = "Chiudi scheda";
 "landing.categoriesAria" = "Categorie di sostanze";
 "landing.viewSwitchAria" = "Passa tra sostanze e combinazioni";
+"landing.viewList" = "Elenco";
+"landing.viewWheel" = "Ruota";
+"landing.browseSwitchAria" = "Passa tra vista ruota e elenco";
 "footer.projectBy" = "Un progetto di";
 "footer.enabledBy" = "Reso possibile dal lavoro straordinario di";
 "footer.contributeOn" = "Contribuisci su";

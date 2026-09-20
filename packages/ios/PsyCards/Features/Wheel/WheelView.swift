@@ -549,6 +549,8 @@ struct WheelView: View {
     @Environment(DataPackStore.self) private var store
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Binding var selectedKey: String?
+    @Binding var browseMode: SubstanceBrowseMode
 
     @AppStorage("dial.dockEdge") private var dockEdgeRaw = ""
     @AppStorage("dial.dockAlong") private var dockAlong = -1.0
@@ -591,8 +593,13 @@ struct WheelView: View {
                     diameter: diameter,
                     detent: detent,
                     rimWidth: compact ? 4.5 : 2,
-                    selectedKey: selected?.key,
-                    onSelect: { selected = $0 },
+                    selectedKey: selectedKey,
+                    onSelect: { substance in
+                        selected = substance
+                        if selectedKey != substance.key {
+                            selectedKey = substance.key
+                        }
+                    },
                     onActivate: { substance in
                         pushedSubstance = store.substance(key: substance.key)
                     }
@@ -612,8 +619,12 @@ struct WheelView: View {
             .frame(width: geo.size.width, height: geo.size.height)
         }
         .background(PsyCardsColors.ink.ignoresSafeArea())
-        .navigationTitle(String(localized: "dial.pageTitle"))
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                SubstanceBrowsePicker(mode: $browseMode)
+            }
+        }
         .navigationDestination(item: $pushedSubstance) { substance in
             SubstanceDetailView(substance: substance)
         }

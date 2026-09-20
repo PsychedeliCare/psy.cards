@@ -1,11 +1,7 @@
 ---
 import { Icon } from "@twodft/astro-icon/components";
 import MoleculeFigure from "./MoleculeFigure.astro";
-import {
-  getDrugByKey,
-  getClassDescriptionText,
-  getDisplayName,
-} from "../data/drugs";
+import { getDrugByKey, getDisplayName } from "../data/drugs";
 import { getSubstanceStructure } from "../data/substances";
 import type { Column } from "../data/config";
 import type { Locale } from "../i18n/locales";
@@ -16,16 +12,26 @@ import { t } from "../i18n/ui";
 interface Props {
   column: Column;
   locale?: Locale;
+  selected?: boolean;
 }
 
-const { column, locale = "en" } = Astro.props;
+const { column, locale = "en", selected = false } = Astro.props;
 const ui = getUiMessages(locale);
 
 const drug = getDrugByKey(column.key, locale);
 const displayName = drug?.pretty_name ?? getDisplayName(column.key, locale);
-const summary =
-  drug?.properties?.summary ?? getClassDescriptionText(column.key, locale) ?? "";
-const aliases = (drug?.aliases ?? []).slice(0, 4);
+const aliases = Array.from(
+  new Set(
+    (drug?.aliases ?? [])
+      .filter((alias): alias is string => typeof alias === "string" && alias.trim().length > 0)
+      .map((alias) => alias.trim())
+      .filter(
+        (alias) =>
+          alias.toLocaleLowerCase() !== displayName.toLocaleLowerCase() &&
+          alias.toLocaleLowerCase() !== column.key.toLocaleLowerCase()
+      )
+  )
+).slice(0, 3);
 const href = localePath(locale, `/${column.slug}`);
 const hasStructure = Boolean(getSubstanceStructure(column.key));
 
@@ -58,7 +64,7 @@ const commonDose = oralDose?.Common ?? oralDose?.common;
 ---
 
 <li
-  class:list={["list-card", `group-${column.group}`]}
+  class:list={["list-card", `group-${column.group}`, selected && "is-selected"]}
   data-list-card
   data-layout-id={column.slug}
   data-substance-key={column.key}
@@ -66,31 +72,27 @@ const commonDose = oralDose?.Common ?? oralDose?.common;
   data-group={column.group}
 >
   <div class="list-card-shell">
+    {hasStructure && <MoleculeFigure substanceKey={column.key} />}
     <a
       class:list={["list-card-compact", !hasStructure && "no-molecule"]}
       href={href}
       data-substance={href}
       data-list-card-open
+      aria-current={selected ? "true" : undefined}
     >
-      {
-        hasStructure && (
-          <div class={`list-card-molecule group-${column.group}`}>
-            <MoleculeFigure substanceKey={column.key} />
-          </div>
-        )
-      }
       <div class="list-card-body">
-        <h2 class="list-card-name">
-          {displayName}
+        <div class="list-card-title">
+          <h2 class="list-card-name">{displayName}</h2>
           {
             aliases.length > 0 && (
-              <span class="list-card-aliases">
-                {" "}({aliases.join(" · ")})
-              </span>
+              <ul class="list-card-tags">
+                {aliases.map((alias) => (
+                  <li>{alias}</li>
+                ))}
+              </ul>
             )
           }
-        </h2>
-        {summary && <p class="list-card-summary">{summary}</p>}
+        </div>
         {
           (onsetVal || durationVal || commonDose) && (
             <div class="list-card-meta">

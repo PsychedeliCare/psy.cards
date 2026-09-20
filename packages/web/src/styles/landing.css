@@ -1,23 +1,41 @@
 /* Landing substance list — global so script-toggled classes share styles. */
 
-.landing-nav {
+.browse-chrome {
   position: sticky;
-  top: 49px;
+  top: var(--browse-sticky-top);
   z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin: 0 -20px;
-  padding: 0 20px;
-  background: color-mix(in oklab, var(--color-ink) 92%, transparent);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
+  padding: 8px 20px 0;
+  background: var(--color-ink);
+}
+
+.browse-chrome::after {
+  content: "";
+  display: block;
+  height: 16px;
+  margin: 6px -20px -16px;
+  background: linear-gradient(var(--color-ink), transparent);
+  pointer-events: none;
+}
+
+.landing-nav {
+  position: static;
 }
 
 .landing-tabs {
   display: flex;
+  gap: 4px;
   overflow-x: auto;
+  overflow-y: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  padding: 4px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: color-mix(in oklab, var(--color-ink-2), transparent 4%);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--color-ink-2), transparent 8%);
 }
 
 .landing-tabs::-webkit-scrollbar {
@@ -39,7 +57,7 @@ html[data-color-scheme="light"] .landing-tabs {
   color: var(--color-fg-mute);
   background: transparent;
   border: 0;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
   cursor: pointer;
   transition: color 140ms ease, background 140ms ease;
 }
@@ -56,10 +74,6 @@ html[data-color-scheme="light"] .landing-tabs {
   background: rgba(255, 255, 255, 0.03);
 }
 
-html[data-color-scheme="light"] .landing-search {
-  border-right-color: rgba(23, 24, 19, 0.08);
-}
-
 html[data-color-scheme="light"] .landing-search:hover,
 html[data-color-scheme="light"] .landing-search:focus-visible {
   background: rgba(23, 24, 19, 0.04);
@@ -74,9 +88,10 @@ html[data-color-scheme="light"] .landing-search:focus-visible {
   min-height: 40px;
   padding: 10px 14px;
   color: var(--color-fg-mute);
+  overflow: hidden;
   background: transparent;
   border: 0;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
   cursor: pointer;
   font: inherit;
   font-size: 12px;
@@ -84,14 +99,6 @@ html[data-color-scheme="light"] .landing-search:focus-visible {
   letter-spacing: 0.02em;
   white-space: nowrap;
   transition: color 140ms ease, text-shadow 140ms ease;
-}
-
-.landing-tab:last-child {
-  border-right: 0;
-}
-
-html[data-color-scheme="light"] .landing-tab {
-  border-right-color: rgba(23, 24, 19, 0.08);
 }
 
 .landing-tab-label {
@@ -109,10 +116,11 @@ html[data-color-scheme="light"] .landing-tab {
 .landing-tab[class*="group-"]::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 10px;
+  right: 10px;
+  bottom: 5px;
   height: 3px;
+  border-radius: 999px;
   background: var(--hue);
   pointer-events: none;
 }
@@ -168,203 +176,237 @@ html[data-color-scheme="light"] .landing-tab:not([class*="group-"]):focus-visibl
   opacity: 0;
 }
 
+/* ---------- Browse layout (list + detail, desktop) ---------- */
+
+.browse-page {
+  --browse-sticky-top: 56px;
+  max-width: 880px;
+  width: 100%;
+}
+
+.browse-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.browse-explorer {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.browse-reading {
+  display: none;
+}
+
+.browse-card-status {
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  color: var(--color-fg);
+  background: var(--color-ink-3);
+  font-size: 14px;
+}
+
+.browse-card-status[hidden] {
+  display: none;
+}
+
+.browse-card-status button {
+  margin-left: 8px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.browse-card {
+  min-width: 0;
+  scroll-margin-top: 88px;
+}
+
+.browse-card[aria-busy="true"] {
+  opacity: 0.6;
+}
+
+.browse-card .substance-card {
+  border: 1px solid color-mix(in oklab, var(--color-fg) 12%, transparent);
+  border-radius: 22px;
+  box-shadow: 0 18px 60px -30px rgb(0 0 0 / 0.28);
+}
+
+.browse-card .accent {
+  display: none;
+}
+
+@media (min-width: 821px) {
+  .browse-page {
+    max-width: 1400px;
+    padding-inline: clamp(12px, 3vw, 48px);
+  }
+
+  .browse-layout {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr);
+    align-items: start;
+    gap: clamp(24px, 4vw, 64px);
+  }
+
+  .browse-explorer {
+    min-width: 0;
+  }
+
+  .browse-chrome {
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+
+  .browse-chrome::after {
+    margin-inline: 0;
+  }
+
+  .browse-reading {
+    display: block;
+    min-width: 0;
+    position: sticky;
+    top: var(--browse-sticky-top);
+    max-height: calc(100dvh - var(--browse-sticky-top) - 16px);
+    overflow: auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .browse-page {
+    --browse-sticky-top: 86px;
+  }
+}
+
 /* ---------- Card list ---------- */
 
 .substance-list {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 4px 0 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
+  position: relative;
 }
 
 .list-card {
-  scroll-margin-top: 120px;
   opacity: 1;
+}
+
+.list-card-shell {
+  position: relative;
+  overflow: clip;
+  color: var(--color-fg);
+  background-color: var(--color-ink-2);
+  border: 1px solid color-mix(in oklab, var(--color-fg) 12%, transparent);
+  border-radius: 16px;
+  box-shadow: 0 18px 60px -30px rgb(0 0 0 / 0.28);
+  transition: box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.list-card-shell > :not(.molecule-figure) {
+  position: relative;
+  z-index: 1;
+}
+
+.list-card-shell .molecule-figure {
+  --molecule-frame-size: 92px;
+}
+
+.list-card.is-selected .list-card-shell {
+  background-color: color-mix(in oklab, var(--hue, var(--color-fg)) 9%, var(--color-ink-2));
+  border-color: color-mix(in oklab, var(--color-fg) 20%, transparent);
 }
 
 .list-card.is-filtered-out {
   display: none;
 }
 
-.list-card-shell {
-  position: relative;
-  overflow: clip;
-  border: 1px solid transparent;
-  background:
-    linear-gradient(
-      180deg,
-      color-mix(in oklab, var(--color-ink-2), white 2%) 0%,
-      var(--color-ink-2) 100%
-    )
-      padding-box,
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.18) 0%,
-      rgba(255, 255, 255, 0.05) 42%,
-      rgba(255, 255, 255, 0.12) 100%
-    )
-      border-box;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.04) inset,
-    0 10px 28px rgba(0, 0, 0, 0.18);
-  transition: box-shadow 180ms ease;
-}
-
-html[data-color-scheme="light"] .list-card-shell {
-  background:
-    linear-gradient(180deg, #fff 0%, var(--color-ink-2) 100%) padding-box,
-    linear-gradient(
-      135deg,
-      rgba(23, 24, 19, 0.16) 0%,
-      rgba(23, 24, 19, 0.05) 45%,
-      rgba(23, 24, 19, 0.12) 100%
-    )
-      border-box;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.65) inset,
-    0 10px 24px rgba(23, 24, 19, 0.08);
-}
-
 .list-card-shell:hover {
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.06) inset,
-    0 14px 36px rgba(0, 0, 0, 0.28);
+    0 0 0 1px color-mix(in oklab, var(--color-fg) 10%, transparent),
+    0 18px 48px -28px rgb(0 0 0 / 0.32);
 }
 
 .list-card-compact {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
+  display: flex;
   align-items: stretch;
-  min-height: 118px;
+  min-height: 56px;
+  padding: 8px 12px;
   color: inherit;
   text-decoration: none;
   cursor: pointer;
 }
 
-.list-card-compact.no-molecule {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.list-card-molecule {
-  position: relative;
-  align-self: stretch;
-  width: 112px;
-  min-height: 100%;
-  overflow: hidden;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
-  background: var(--color-ink-2);
-}
-
-/* Solid hue + opacity keeps chroma; color-mix-with-transparent looked washed out. */
-.list-card-molecule::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 42% 45%,
-    var(--hue) 0%,
-    var(--hue) 46%,
-    transparent 108%
-  );
-  opacity: 0.3;
-  pointer-events: none;
-}
-
-html[data-color-scheme="light"] .list-card-molecule {
-  border-right-color: rgba(23, 24, 19, 0.08);
-  background: #fff;
-}
-
-html[data-color-scheme="light"] .list-card-molecule::before {
-  opacity: 0.24;
-}
-
-/* Override the full-card absolute molecule backdrop for compact list tiles. */
-.list-card-molecule .molecule-figure {
-  position: absolute;
-  inset: 0;
-  top: 0;
-  right: auto;
-  left: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  opacity: 0.92;
-  --molecule-frame-size: 112px;
-}
-
-.list-card-molecule .molecule-frame {
-  width: 100%;
-  height: 100%;
-  background: none;
-}
-
-html[data-color-scheme="light"] .list-card-molecule .molecule-figure {
-  opacity: 0.8;
+.list-card-compact:not(.no-molecule) .list-card-body {
+  padding-right: 56px;
 }
 
 .list-card-body {
   min-width: 0;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
   justify-content: center;
-  padding: 14px 16px;
+  gap: 4px;
+}
+
+.list-card-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .list-card-name {
   margin: 0;
   min-width: 0;
   overflow: hidden;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.list-card-aliases {
-  color: var(--color-fg-mute);
-  font-size: 0.78em;
-  font-weight: 500;
-  letter-spacing: 0;
+.list-card-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
 }
 
-.list-card-summary {
-  margin: 0;
-  color: var(--color-fg);
-  font-size: 13px;
-  line-height: 1.45;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
+.list-card-tags li {
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: 5px;
+  background-color: color-mix(in oklab, var(--color-fg) 5%, transparent);
+  color: var(--color-fg-mute);
 }
 
 .list-card-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 14px;
-  margin-top: 2px;
+  gap: 6px 12px;
   color: var(--color-fg-mute);
-  font-size: 11.5px;
+  font-size: 11px;
   line-height: 1.3;
 }
 
 .list-card-meta-item {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
 
 .list-card-meta-icon {
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   flex: none;
   opacity: 0.7;
 }
@@ -375,34 +417,20 @@ html[data-color-scheme="light"] .list-card-molecule .molecule-figure {
 }
 
 @media (max-width: 560px) {
-  .landing-nav {
-    margin: 0 -16px;
-    padding: 0 16px;
-  }
-
   .list-card-compact {
-    grid-template-columns: 88px minmax(0, 1fr);
-    min-height: 104px;
+    padding: 7px 10px;
   }
 
-  .list-card-molecule {
-    width: 88px;
+  .list-card-compact:not(.no-molecule) .list-card-body {
+    padding-right: 48px;
   }
 
-  .list-card-molecule .molecule-figure {
-    --molecule-frame-size: 88px;
-  }
-
-  .list-card-body {
-    padding: 12px 12px 12px 14px;
+  .list-card-shell .molecule-figure {
+    --molecule-frame-size: 80px;
   }
 
   .list-card-name {
-    font-size: 16px;
-  }
-
-  .list-card-summary {
-    -webkit-line-clamp: 3;
+    font-size: 15px;
   }
 
   .landing-search,

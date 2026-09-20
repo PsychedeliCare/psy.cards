@@ -33,6 +33,9 @@
 "landing.closeCard" = "Close card";
 "landing.categoriesAria" = "Substance categories";
 "landing.viewSwitchAria" = "Switch between substances and combinations";
+"landing.viewList" = "List";
+"landing.viewWheel" = "Wheel";
+"landing.browseSwitchAria" = "Switch between wheel and list views";
 "footer.projectBy" = "A project by";
 "footer.enabledBy" = "Enabled by the amazing work from";
 "footer.contributeOn" = "Contribute on";

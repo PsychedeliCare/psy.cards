@@ -9,9 +9,10 @@
  * fragments) and mirrors the selection into an `aria-live` region.
  */
 
+import { animate, type JSAnimation } from "animejs";
 import {
   DESKTOP_DETENT,
-  MOBILE_DETENT,
+  DIAL,
   activeSubstanceIndex,
   categoryLabelReversed,
   easeOutCubic,
@@ -25,12 +26,10 @@ const WHEEL_SNAP_DEBOUNCE_MS = 110;
 const CARD_UPDATE_DEBOUNCE_MS = 160;
 const LABEL_SYNC_TRAVEL_DEG = 30;
 const DRAG_TAP_THRESHOLD_PX = 6;
-const MOBILE_MEDIA_QUERY = "(max-width: 768px)";
 
 type SubstanceEntry = {
   el: SVGAElement;
   labelEl: SVGTextElement;
-  wedgePath: string;
   key: string;
   slug: string;
   label: string;
@@ -63,7 +62,6 @@ export function initSubstanceDial(): void {
   ).map((el) => ({
     el,
     labelEl: el.querySelector<SVGTextElement>("[data-dial-substance-label]")!,
-    wedgePath: el.querySelector<SVGPathElement>("[data-dial-wedge]")!.getAttribute("d") ?? "",
     key: el.dataset.key ?? "",
     slug: el.dataset.slug ?? "",
     label: el.dataset.label ?? "",
@@ -71,6 +69,7 @@ export function initSubstanceDial(): void {
     midAngle: Number(el.dataset.midAngle),
   }));
   if (!substances.length) return;
+  for (const sub of substances) sub.el.setAttribute("tabindex", "-1");
   const midAngles = substances.map((s) => s.midAngle);
 
   const categories: CategoryEntry[] = Array.from(
@@ -82,28 +81,45 @@ export function initSubstanceDial(): void {
     midAngle: Number(el.dataset.midAngle),
   }));
 
+  // Fit the actual font metrics, including translated names, after the font loads.
+  void document.fonts.ready.then(() => {
+    for (const sub of substances) {
+      const width = sub.labelEl.getComputedTextLength();
+      const size = Number(sub.labelEl.getAttribute("font-size"));
+      if (width > DIAL.labelMaxWidth) {
+        sub.labelEl.setAttribute("font-size", String(size * DIAL.labelMaxWidth / width));
+      }
+    }
+    for (const category of categories) {
+      const label = category.el.querySelector("text");
+      if (!label) continue;
+      const width = label.getComputedTextLength();
+      const available = category.arcEl.getTotalLength() - 3;
+      if (width > available) {
+        label.setAttribute("font-size", String(Number(label.getAttribute("font-size")) * available / width * 0.95));
+      }
+    }
+  });
+
   const cardContainer = document.querySelector<HTMLElement>("[data-dial-card]");
   const pageI18n = getPageI18n();
   const locale = pageI18n?.locale ?? "en";
   const localePrefix = locale === "en" ? "" : `/${locale}`;
-  const substanceBase = pageI18n?.substanceBase ?? "/";
   // Always use a trailing slash so CF/SW trailing-slash redirects don't fight
   // the dial's history updates (`/wheel` ↔ `/wheel/?s=…`).
   const basePath = window.location.pathname.replace(/\/?$/, "/") || "/";
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const mobileQuery = window.matchMedia(MOBILE_MEDIA_QUERY);
 
   // ---- state --------------------------------------------------------------
 
   let rotation = Number(rotor.dataset.initialRotation ?? 0);
-  let detent = mobileQuery.matches ? MOBILE_DETENT : DESKTOP_DETENT;
+  const detent = DESKTOP_DETENT;
   let activeIdx = -1;
   let lastLabelSyncRotation = rotation;
   let renderQueued = false;
 
   let animFrame = 0;
   let animFallbackTimer = 0;
-  let animating = false;
 
   let wheelSnapTimer = 0;
   let cardTimer = 0;
@@ -112,6 +128,16 @@ export function initSubstanceDial(): void {
   const initialCardSlug = cardContainer?.dataset.initialSlug ?? "";
   let renderedCardSlug = initialCardSlug;
   let lastPushedSlug = "";
+  let requestedCardSlug = initialCardSlug;
+  let cardAnimation: JSAnimation | undefined;
+  let cardRequest: AbortController | undefined;
+  const picker = document.querySelector<HTMLSelectElement>("[data-dial-select]");
+  const selection = document.querySelector<HTMLElement>("[data-dial-selection]");
+  const groupLabel = document.querySelector<HTMLElement>("[data-dial-group]");
+  const status = document.querySelector<HTMLElement>("[data-dial-status]");
+  const statusText = document.querySelector<HTMLElement>("[data-dial-status-text]");
+  const retry = document.querySelector<HTMLButtonElement>("[data-dial-retry]");
+  if (cardContainer) cardCache.set(initialCardSlug, cardContainer.innerHTML);
 
   // ---- rendering ----------------------------------------------------------
 
@@ -174,9 +200,11 @@ export function initSubstanceDial(): void {
     }
     disc!.setAttribute("aria-activedescendant", active.el.id);
 
+    if (picker) picker.value = active.slug;
+    if (selection) selection.className = `wheel-selection group-${active.group}`;
+    if (groupLabel) groupLabel.textContent = getUiString(`groups.${active.group}`, active.group);
     if (options.announce !== false) announce(active);
     scheduleCardUpdate(active.slug);
-    replaceRoute(active.slug);
   }
 
   function setRotation(next: number): void {
@@ -192,13 +220,9 @@ export function initSubstanceDial(): void {
     return `${basePath}?s=${encodeURIComponent(slug)}`;
   }
 
-  /** While spinning: replaceState so back/forward isn't flooded. */
-  function replaceRoute(slug: string): void {
-    history.replaceState({ psyDial: slug }, "", routeFor(slug));
-  }
-
-  /** On release/settle: a single pushState per landed substance. */
+  /** Only settled selections enter history, preserving the previous card. */
   function pushRoute(): void {
+    if (window.location.pathname.replace(/\/?$/, "/") !== basePath) return;
     const active = substances[activeIdx];
     if (!active || active.slug === lastPushedSlug) return;
     lastPushedSlug = active.slug;
@@ -207,36 +231,68 @@ export function initSubstanceDial(): void {
 
   // ---- card swapping ------------------------------------------------------
 
+  function setCardStatus(message?: string, failed = false): void {
+    if (status) status.hidden = !message;
+    if (statusText) statusText.textContent = message ?? "";
+    if (retry) retry.hidden = !failed;
+    cardContainer?.setAttribute("aria-busy", message && !failed ? "true" : "false");
+  }
+
   function scheduleCardUpdate(slug: string): void {
-    if (!cardContainer || slug === renderedCardSlug) return;
+    // Invalidate requests immediately, including a quick return to the current card.
+    requestedCardSlug = slug;
+    ++cardToken;
+    cardRequest?.abort();
     window.clearTimeout(cardTimer);
+    setCardStatus();
+    if (!cardContainer || slug === renderedCardSlug) return;
     cardTimer = window.setTimeout(() => void updateCard(slug), CARD_UPDATE_DEBOUNCE_MS);
   }
 
   async function updateCard(slug: string): Promise<void> {
     if (!cardContainer || slug === renderedCardSlug) return;
     const token = ++cardToken;
-
+    setCardStatus(getUiString("dial.loading", "Loading substance card…"));
     let html = cardCache.get(slug);
     if (html === undefined) {
+      cardRequest = new AbortController();
       try {
         const res = await fetch(`${localePrefix}/card/${slug}`, {
           headers: { Accept: "text/html" },
+          signal: cardRequest.signal,
         });
-        if (!res.ok) return;
+        if (!res.ok) throw new Error("Card unavailable");
         const doc = new DOMParser().parseFromString(await res.text(), "text/html");
-        html = doc.querySelector("[data-card-fragment]")?.innerHTML ?? "";
+        html = doc.querySelector("[data-card-fragment]")?.innerHTML;
+        if (!html) throw new Error("Card unavailable");
         cardCache.set(slug, html);
       } catch {
+        if (token === cardToken) {
+          setCardStatus(getUiString("dial.error", "The card could not be loaded. Try again."), true);
+        }
         return;
       }
     }
-
-    if (token !== cardToken || !html) return;
+    if (token !== cardToken || slug !== requestedCardSlug || !html) return;
+    cardAnimation?.revert();
     cardContainer.innerHTML = html;
     renderedCardSlug = slug;
-    cardContainer.scrollTop = 0;
+    setCardStatus();
+    if (!reducedMotion.matches) {
+      cardAnimation = animate(cardContainer, {
+        opacity: [0, 1], y: [12, 0], duration: 320, ease: "outCubic",
+        onComplete: (animation) => animation.revert(),
+      });
+    }
   }
+
+  retry?.addEventListener("click", () => void updateCard(requestedCardSlug));
+  picker?.addEventListener("change", () => {
+    const index = substances.findIndex((sub) => sub.slug === picker.value);
+    if (index >= 0) snapToIndex(index);
+  });
+  document.querySelector("[data-dial-previous]")?.addEventListener("click", () => snapToIndex(activeIdx - 1));
+  document.querySelector("[data-dial-next]")?.addEventListener("click", () => snapToIndex(activeIdx + 1));
 
   // ---- snapping -----------------------------------------------------------
 
@@ -245,7 +301,6 @@ export function initSubstanceDial(): void {
     if (animFallbackTimer) window.clearTimeout(animFallbackTimer);
     animFrame = 0;
     animFallbackTimer = 0;
-    animating = false;
   }
 
   function settle(): void {
@@ -267,7 +322,6 @@ export function initSubstanceDial(): void {
     const start = rotation;
     const delta = target - start;
     const t0 = performance.now();
-    animating = true;
 
     let finished = false;
     const finish = (): void => {
@@ -334,7 +388,7 @@ export function initSubstanceDial(): void {
   }
 
   disc.addEventListener("pointerdown", (event) => {
-    if (!event.isPrimary) return;
+    if (!event.isPrimary || event.button !== 0) return;
     cancelAnimation();
     const rect = disc.getBoundingClientRect();
     discCenterX = rect.left + rect.width / 2;
@@ -345,7 +399,6 @@ export function initSubstanceDial(): void {
     dragPrevAngle = pointerAngle(event);
     dragStartX = event.clientX;
     dragStartY = event.clientY;
-    disc.setPointerCapture(event.pointerId);
   });
 
   disc.addEventListener("pointermove", (event) => {
@@ -357,6 +410,7 @@ export function initSubstanceDial(): void {
     ) {
       return;
     }
+    if (!dragMoved) disc.setPointerCapture(event.pointerId);
     dragMoved = true;
     const angle = pointerAngle(event);
     // Unwrap the frame-to-frame delta across the ±180° seam.
@@ -369,9 +423,11 @@ export function initSubstanceDial(): void {
   function endDrag(event: PointerEvent): void {
     if (!dragging || event.pointerId !== dragPointerId) return;
     dragging = false;
+    if (disc!.hasPointerCapture(event.pointerId)) disc!.releasePointerCapture(event.pointerId);
     dragPointerId = -1;
     if (dragMoved) {
       suppressClick = true;
+      window.setTimeout(() => { suppressClick = false; }, 0);
       snapToNearest();
     }
   }
@@ -442,50 +498,30 @@ export function initSubstanceDial(): void {
         snapToIndex(substances.length - 1);
         break;
       case "Enter":
-      case " ": {
+      case " ":
         event.preventDefault();
-        const active = substances[activeIdx];
-        if (active) window.location.assign(`${substanceBase}${active.slug}`);
+        snapToIndex(activeIdx);
         break;
-      }
     }
   });
 
-  // ---- breakpoint / history / boot ----------------------------------------
-
-  function reseat(instant: boolean): void {
-    const idx = activeIdx >= 0 ? activeIdx : activeSubstanceIndex(midAngles, rotation, detent);
-    const target = rotationForSubstance(substances[idx]!.midAngle, detent, rotation);
-    if (instant) {
-      cancelAnimation();
-      rotation = target;
-      render();
-      syncLabels(true);
-      applyActive(activeSubstanceIndex(midAngles, rotation, detent), { announce: false });
-    } else {
-      animateTo(target);
-    }
-  }
-
-  const onBreakpointChange = (): void => {
-    detent = mobileQuery.matches ? MOBILE_DETENT : DESKTOP_DETENT;
-    reseat(true);
-  };
-  if (typeof mobileQuery.addEventListener === "function") {
-    mobileQuery.addEventListener("change", onBreakpointChange);
-  }
+  // ---- history / boot ----------------------------------------
 
   window.addEventListener("popstate", () => {
-    const slug = new URL(window.location.href).searchParams.get("s");
+    if (window.location.pathname.replace(/\/?$/, "/") !== basePath) return;
+    const slug = new URL(window.location.href).searchParams.get("s") ?? initialCardSlug;
     const idx = slug ? substances.findIndex((s) => s.slug === slug) : -1;
     if (idx >= 0) {
       lastPushedSlug = slug!;
-      animateTo(rotationForSubstance(substances[idx]!.midAngle, detent, rotation));
+      cancelAnimation();
+      rotation = rotationForSubstance(substances[idx]!.midAngle, detent, rotation);
+      render();
+      syncLabels(true);
+      applyActive(idx);
     }
   });
 
-  // Boot: honour ?s=<slug>, seat the SSR rotation on the breakpoint's detent
-  // (instant — SSR assumed desktop), and sync the initial active state.
+  // Boot: honour ?s=<slug> and sync the initial active state.
   const requestedSlug = new URL(window.location.href).searchParams.get("s");
   const requestedIdx = requestedSlug
     ? substances.findIndex((s) => s.slug === requestedSlug)
@@ -504,4 +540,8 @@ export function initSubstanceDial(): void {
   activeIdx = -1; // force applyActive to run once
   applyActive(bootIdx, { announce: false });
   lastPushedSlug = substances[bootIdx]!.slug;
+  // A combo modal owns the URL while open.
+  if (!new URL(window.location.href).searchParams.has("combo")) {
+    history.replaceState({ psyDial: lastPushedSlug }, "", routeFor(lastPushedSlug));
+  }
 }

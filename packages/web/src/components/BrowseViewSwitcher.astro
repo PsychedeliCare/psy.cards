@@ -1,0 +1,82 @@
+---
+import type { Locale } from "../i18n/locales";
+import { localePath } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
+
+interface Props {
+  locale?: Locale;
+  active: "list" | "wheel";
+}
+
+const { locale = "en", active } = Astro.props;
+const ui = getUiMessages(locale);
+const listHref = localePath(locale, "/");
+const wheelHref = localePath(locale, "/wheel");
+---
+
+<nav class="browse-switch" data-browse-switch aria-label={t(locale, ui, "landing.browseSwitchAria")}>
+  <ul>
+    <li>
+      <a
+        href={listHref}
+        class:list={["browse-switch__link", active === "list" && "is-active"]}
+        data-browse-view="list"
+        aria-current={active === "list" ? "page" : undefined}
+      >
+        {t(locale, ui, "landing.viewList")}
+      </a>
+    </li>
+    <li>
+      <a
+        href={wheelHref}
+        class:list={["browse-switch__link", active === "wheel" && "is-active"]}
+        data-browse-view="wheel"
+        aria-current={active === "wheel" ? "page" : undefined}
+      >
+        {t(locale, ui, "landing.viewWheel")}
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<style>
+  .browse-switch ul {
+    display: inline-flex;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+    background: color-mix(in oklab, var(--color-ink-2), transparent 8%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+  }
+
+  html[data-color-scheme="light"] .browse-switch ul {
+    border-color: rgba(23, 24, 19, 0.1);
+  }
+
+  .browse-switch__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 28px;
+    padding: 4px 12px;
+    color: var(--color-fg-mute);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    border-radius: 999px;
+  }
+
+  .browse-switch__link:hover,
+  .browse-switch__link:focus-visible {
+    color: var(--color-fg);
+  }
+
+  .browse-switch__link.is-active {
+    color: var(--color-ink);
+    background: var(--color-fg);
+  }
+</style>

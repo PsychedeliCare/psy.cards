@@ -7,7 +7,16 @@
   },
   "dial": {
     "ariaLabel": "Substanz-Wählrad",
-    "pageTitle": "Substanzrad — psy.cards"
+    "pageTitle": "Substanzrad — psy.cards",
+    "heading": "Entdecke das Rad",
+    "intro": "Substanzen auf andere Weise entdecken. Drehe das Rad, wähle eine Kategorie und erfahre mehr.",
+    "hint": "Ziehen zum Entdecken · Tippen zum Auswählen",
+    "previous": "Vorherige Substanz",
+    "next": "Nächste Substanz",
+    "choose": "Substanz auswählen",
+    "loading": "Substanzkarte wird geladen…",
+    "error": "Die Karte konnte nicht geladen werden. Versuche es erneut.",
+    "retry": "Erneut versuchen"
   },
   "layout": {
     "close": "Schließen",
@@ -39,7 +48,10 @@
     "navCombos": "Combos",
     "closeCard": "Karte schließen",
     "categoriesAria": "Substanzkategorien",
-    "viewSwitchAria": "Zwischen Substanzen und Kombinationen wechseln"
+    "viewSwitchAria": "Zwischen Substanzen und Kombinationen wechseln",
+    "viewList": "Liste",
+    "viewWheel": "Rad",
+    "browseSwitchAria": "Zwischen Rad- und Listenansicht wechseln"
   },
   "footer": {
     "projectBy": "Ein Projekt von",

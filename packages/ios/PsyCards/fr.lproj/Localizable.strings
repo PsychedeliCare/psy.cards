@@ -33,6 +33,9 @@
 "landing.closeCard" = "Fermer la carte";
 "landing.categoriesAria" = "Catégories de substances";
 "landing.viewSwitchAria" = "Basculer entre substances et combinaisons";
+"landing.viewList" = "Liste";
+"landing.viewWheel" = "Roue";
+"landing.browseSwitchAria" = "Basculer entre la roue et la liste";
 "footer.projectBy" = "Un projet de";
 "footer.enabledBy" = "Rendu possible grâce au travail remarquable de";
 "footer.contributeOn" = "Contribuer sur";

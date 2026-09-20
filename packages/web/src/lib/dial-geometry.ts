@@ -15,27 +15,27 @@ import type { GroupName } from "../data/config";
 
 export const DIAL = {
   /** Opaque centre, page background. */
-  hubRadius: 27,
-  categoryInner: 27,
-  categoryOuter: 62,
-  substanceInner: 62,
+  hubRadius: 24,
+  categoryInner: 24,
+  categoryOuter: 50,
+  substanceInner: 50,
   substanceOuter: 98,
   rimRadius: 98,
   /** Radial substance labels start here and must not bleed past r = 98. */
-  substanceLabelRadius: 66,
+  substanceLabelRadius: 54,
   /** Category labels run along an arc at this radius. */
-  categoryLabelRadius: 44.5,
+  categoryLabelRadius: 37,
   /** Degrees trimmed from each side of a category label arc. */
   categoryLabelInset: 2,
-  labelBaseSize: 3.9,
-  labelMinSize: 2.4,
+  labelBaseSize: 5.8,
+  labelMinSize: 3.8,
   /** Approximate average glyph width as a fraction of font size. */
   labelWidthFactor: 0.54,
-  /** Available radial run for a substance label (66 → ~96). */
-  labelMaxWidth: 30,
+  /** Available radial run for a substance label (54 → ~94). */
+  labelMaxWidth: 40,
   categoryLabelBaseSize: 4.6,
   categoryLabelMinSize: 2.6,
-  categoryLabelLetterSpacing: 0.45,
+  categoryLabelLetterSpacing: 0.3,
 } as const;
 
 export const DESKTOP_DETENT = 90;

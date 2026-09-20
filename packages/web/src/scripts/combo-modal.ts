@@ -11,6 +11,7 @@
  * - Handles Escape, backdrop click, and popstate.
  */
 
+import { animateCardModal, clearCardMotionStyles } from "./card-motion";
 import { initStatusTooltips } from "./status-tooltip.ts";
 import { lockPageScroll, unlockPageScroll } from "./scroll-lock.ts";
 import { getPageI18n, getUiString } from "../i18n/client";
@@ -29,6 +30,13 @@ let rootRoute = DEFAULT_ROOT_ROUTE;
 let cardRoutePrefix = "/card";
 let comboDataRoutePrefix = "/combo-data";
 let substancePathPrefix = "/";
+let returnFocus: HTMLElement | null = null;
+let modalOrigin: Element | null = null;
+let cancelMotion: (() => void) | undefined;
+let navigationToken = 0;
+let closing = false;
+let backgroundElements: HTMLElement[] = [];
+let surfaceUrl = "";
 
 function configureLocaleRoutes(): void {
   const pageI18n = getPageI18n();
@@ -41,9 +49,11 @@ function configureLocaleRoutes(): void {
 
 function ensureRoutesConfigured(options: ComboModalOptions = {}): void {
   configureLocaleRoutes();
-  rootRoute = normalizeRootRoute(
-    options.rootRoute ?? getPageI18n()?.comboRoute ?? DEFAULT_ROOT_ROUTE
-  );
+  if (!initialised || options.rootRoute) {
+    rootRoute = normalizeRootRoute(
+      options.rootRoute ?? getPageI18n()?.comboRoute ?? DEFAULT_ROOT_ROUTE
+    );
+  }
   if (isBurningMountainHost()) {
     rootRoute = normalizeRootRoute(stripBurningMountainSegment(rootRoute));
   }
@@ -116,7 +126,7 @@ function getSubstanceSlugFromPath(pathname: string): string | null {
   if (path === "/" || path === rootRoute) return null;
 
   const segments = path.split("/").filter(Boolean);
-  if (segments.length === 0) return null;
+  if (segments.length === 0 || segments.at(-1) === "wheel") return null;
 
   if (segments[0] === BURNING_MOUNTAIN_SEGMENT && segments.length === 2) {
     const slug = segments[1];
@@ -530,7 +540,7 @@ function ensureModal(): HTMLElement | null {
   if (!root) {
     slot.innerHTML = `
       <div class="modal-root" data-modal-root data-open="false" aria-hidden="true">
-        <button type="button" class="modal-backdrop" data-modal-close aria-label="Close"></button>
+        <button type="button" class="modal-backdrop" data-modal-close aria-label="Close" tabindex="-1"></button>
         <div class="modal-panel" role="dialog" aria-modal="true" data-modal-panel tabindex="-1">
           <button type="button" class="modal-close" data-modal-close aria-label="Close">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M18.3 5.71 12 12.01l-6.3-6.3-1.41 1.41L10.59 13.4l-6.3 6.3 1.41 1.41 6.3-6.3 6.3 6.3 1.41-1.41-6.3-6.3 6.3-6.3z"/></svg>
@@ -540,24 +550,68 @@ function ensureModal(): HTMLElement | null {
       </div>`;
     root = slot.querySelector<HTMLElement>("[data-modal-root]");
   }
+  root?.querySelectorAll("[data-modal-close]").forEach((button) => {
+    button.setAttribute("aria-label", getUiString("layout.close", "Close"));
+  });
   return root;
 }
 
-function openModal(root: HTMLElement) {
+function setBackgroundInert(inert: boolean): void {
+  if (inert) {
+    backgroundElements = Array.from(document.body.children).filter(
+      (element): element is HTMLElement => element instanceof HTMLElement &&
+        !element.matches("script, [data-modal-slot], .search-root, .search-palette") &&
+        !element.contains(document.querySelector("[data-modal-root]")) && !element.inert
+    );
+    for (const element of backgroundElements) element.inert = true;
+  } else {
+    for (const element of backgroundElements) element.inert = false;
+    backgroundElements = [];
+  }
+}
+
+function openModal(root: HTMLElement, animate = true) {
+  cancelMotion?.();
+  closing = false;
+  const panel = root.querySelector<HTMLElement>("[data-modal-panel]");
+  const backdrop = root.querySelector<HTMLElement>(".modal-backdrop");
+  const shouldAnimate = animate && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (shouldAnimate) {
+    if (panel) panel.style.opacity = "0";
+    if (backdrop) backdrop.style.opacity = "0";
+  } else {
+    clearCardMotionStyles(root);
+  }
   root.setAttribute("data-open", "true");
   root.setAttribute("aria-hidden", "false");
   lockPageScroll();
-  const panel = root.querySelector<HTMLElement>("[data-modal-panel]");
+  if (!backgroundElements.length) setBackgroundInert(true);
   panel?.focus({ preventScroll: true });
+  if (shouldAnimate) cancelMotion = animateCardModal(root, true, modalOrigin, () => {});
 }
 
 function closeModal(root: HTMLElement) {
-  root.setAttribute("data-open", "false");
-  root.setAttribute("aria-hidden", "true");
-  unlockPageScroll();
+  ++navigationToken;
+  if (closing || root.dataset.open !== "true") return;
+  closing = true;
+  root.querySelectorAll<HTMLElement>("[popover]:popover-open").forEach((popover) => {
+    popover.hidePopover();
+    popover.hidden = true;
+  });
+  cancelMotion?.();
+  cancelMotion = animateCardModal(root, false, modalOrigin, () => {
+    root.setAttribute("data-open", "false");
+    root.setAttribute("aria-hidden", "true");
+    unlockPageScroll();
+    setBackgroundInert(false);
+    returnFocus?.focus({ preventScroll: true });
+    returnFocus = null;
+    modalOrigin = null;
+    closing = false;
+  });
 }
 
-async function navigateToModal(target: ModalTarget, push: boolean): Promise<void> {
+async function navigateToModal(target: ModalTarget, push: boolean, origin?: HTMLElement): Promise<void> {
   const root = ensureModal();
   if (!root) {
     window.location.assign(target.url);
@@ -565,30 +619,64 @@ async function navigateToModal(target: ModalTarget, push: boolean): Promise<void
   }
   const content = root.querySelector<HTMLElement>("[data-modal-content]");
   if (!content) return;
-
+  const token = ++navigationToken;
   const wasOpen = root.getAttribute("data-open") === "true";
   if (!wasOpen) {
-    lockPageScroll();
+    if (push) surfaceUrl = window.location.pathname + window.location.search;
+    else if (!surfaceUrl) surfaceUrl = rootRoute;
+    returnFocus = origin ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
+    modalOrigin = origin?.closest("[data-list-card]") ?? origin ?? returnFocus;
   }
-
-  const scrollY = window.scrollY;
-
-  if (push) {
-    history.pushState({ psyModal: target.url, psyModalPushed: true }, "", target.url);
-  } else {
-    history.replaceState({ psyModal: target.url }, "", target.url);
-  }
-  window.scrollTo(0, scrollY);
-
-  content.innerHTML = "";
   const fragment = await fetchModalContent(target);
+  if (token !== navigationToken) return;
   if (!fragment) {
-    if (!wasOpen) unlockPageScroll();
     window.location.assign(target.url);
     return;
   }
-  content.appendChild(fragment);
-  openModal(root);
+  cancelMotion?.();
+  cancelMotion = undefined;
+  // Cross-links replace the current card so closing always returns to its source.
+  if (push && !wasOpen) {
+    history.pushState({ psyModal: target.url, psyModalPushed: true }, "", target.url);
+  } else if (push) {
+    history.replaceState({ ...history.state, psyModal: target.url }, "", target.url);
+  }
+  content.replaceChildren(fragment);
+  // A fragment can also be present in the wheel underneath this modal. Scope
+  // its IDs so labels and chart controls always target this copy of the card.
+  const ids = new Map<string, string>();
+  content.querySelectorAll<HTMLElement>("[id]").forEach((element) => {
+    const id = `modal-${token}-${element.id}`;
+    ids.set(element.id, id);
+    element.id = id;
+  });
+  content.querySelectorAll("[for], [aria-controls], [aria-labelledby], [aria-describedby], [href^='#'], [xlink\\:href]").forEach((element) => {
+    for (const attribute of ["for", "aria-controls", "aria-labelledby", "aria-describedby"]) {
+      const value = element.getAttribute(attribute);
+      if (value) element.setAttribute(attribute, value.split(/\s+/).map((id) => ids.get(id) ?? id).join(" "));
+    }
+    for (const attribute of ["href", "xlink:href"]) {
+      const value = element.getAttribute(attribute);
+      if (value?.startsWith("#") && ids.has(value.slice(1))) {
+        element.setAttribute(attribute, `#${ids.get(value.slice(1))}`);
+      }
+    }
+  });
+  const panel = root.querySelector<HTMLElement>("[data-modal-panel]");
+  if (panel) {
+    panel.scrollTop = 0;
+    const heading = content.querySelector<HTMLElement>("h2");
+    // The wheel has a second copy of the card in the page beneath the modal.
+    if (heading) {
+      heading.id = "modal-card-heading";
+      panel.setAttribute("aria-labelledby", heading.id);
+      panel.removeAttribute("aria-label");
+    } else {
+      panel.removeAttribute("aria-labelledby");
+      panel.setAttribute("aria-label", content.querySelector(".pair")?.textContent?.trim() ?? "psy.cards");
+    }
+  }
+  openModal(root, !wasOpen);
 }
 
 export async function openModalFromHref(href: string, push = true): Promise<boolean> {
@@ -603,7 +691,7 @@ function handleClose(): void {
   const root = document.querySelector<HTMLElement>("[data-modal-root]");
   if (!root) return;
   const isOpen = root.getAttribute("data-open") === "true";
-  if (!isOpen) return;
+  if (!isOpen || closing) return;
 
   closeModal(root);
 
@@ -617,7 +705,7 @@ function handleClose(): void {
     if (history.state && history.state.psyModalPushed) {
       history.back();
     } else {
-      history.replaceState(null, "", rootRoute);
+      history.replaceState(null, "", surfaceUrl || rootRoute);
     }
   }
 }
@@ -640,7 +728,7 @@ function handleDelegatedClick(event: MouseEvent): void {
   if (!target) return;
 
   event.preventDefault();
-  void navigateToModal(target, true);
+  void navigateToModal(target, true, anchor);
 }
 
 function handlePopState(): void {
@@ -655,11 +743,25 @@ function handlePopState(): void {
 }
 
 function handleKeydown(event: KeyboardEvent): void {
-  if (event.key !== "Escape") return;
+  if (event.defaultPrevented || document.querySelector('.search-palette[data-open="true"]')) return;
   const root = document.querySelector<HTMLElement>("[data-modal-root]");
   if (!root || root.getAttribute("data-open") !== "true") return;
-  event.preventDefault();
-  handleClose();
+  if (event.key === "Escape") {
+    event.preventDefault();
+    handleClose();
+  } else if (event.key === "Tab") {
+    const panel = root.querySelector<HTMLElement>("[data-modal-panel]")!;
+    const focusable = Array.from(panel.querySelectorAll<HTMLElement>(
+      'a[href], button, input, select, textarea, summary, [tabindex="0"]'
+    )).filter((element) => !element.hasAttribute("disabled") && element.getClientRects().length);
+    const first = focusable[0];
+    const last = focusable.at(-1);
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === panel)) {
+      event.preventDefault(); last?.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault(); first?.focus();
+    }
+  }
 }
 
 function handleCloseClick(event: MouseEvent): void {
@@ -682,7 +784,7 @@ export function initComboModal(options: ComboModalOptions = {}): void {
 
   const root = ensureModal();
   if (root && root.getAttribute("data-open") === "true") {
-    lockPageScroll();
+    openModal(root, false);
   }
 
   const initialTarget = getInitialModalTarget();

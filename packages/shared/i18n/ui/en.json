@@ -7,7 +7,16 @@
   },
   "dial": {
     "ariaLabel": "Substance dial",
-    "pageTitle": "Substance wheel — psy.cards"
+    "pageTitle": "Substance wheel — psy.cards",
+    "heading": "Explore the wheel",
+    "intro": "A different way to browse substances. Turn the wheel, follow a category, and take a closer look.",
+    "hint": "Drag to explore · Tap to select",
+    "previous": "Previous substance",
+    "next": "Next substance",
+    "choose": "Choose a substance",
+    "loading": "Loading substance card…",
+    "error": "The card could not be loaded. Try again.",
+    "retry": "Try again"
   },
   "layout": {
     "close": "Close",
@@ -39,7 +48,10 @@
     "navCombos": "Combos",
     "closeCard": "Close card",
     "categoriesAria": "Substance categories",
-    "viewSwitchAria": "Switch between substances and combinations"
+    "viewSwitchAria": "Switch between substances and combinations",
+    "viewList": "List",
+    "viewWheel": "Wheel",
+    "browseSwitchAria": "Switch between wheel and list views"
   },
   "footer": {
     "projectBy": "A project by",

@@ -5,8 +5,9 @@
   inset: 0;
   z-index: 90;
   pointer-events: none;
+  visibility: hidden;
   opacity: 0;
-  transition: opacity 120ms ease;
+  transition: opacity 120ms ease, visibility 120ms ease;
   --search-surface-border: rgba(255, 255, 255, 0.1);
   --search-divider: rgba(255, 255, 255, 0.08);
   --search-hover: rgba(255, 255, 255, 0.06);
@@ -32,6 +33,7 @@ html[data-color-scheme="light"] .search-palette {
 
 .search-palette[data-open="true"] {
   pointer-events: auto;
+  visibility: visible;
   opacity: 1;
 }
 

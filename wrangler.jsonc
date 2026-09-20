@@ -5,6 +5,9 @@
 	"compatibility_date": "2026-04-23",
 	"compatibility_flags": ["global_fetch_strictly_public"],
 	"name": "psy-cards",
+	// Pin the account that already hosts psy.cards. Local Wrangler profiles
+	// default to other accounts and must not create this Worker elsewhere.
+	"account_id": "c937f1b41fd854e31731dac9ab9874a0",
 	"main": "packages/web/src/worker.js",
 	// Keep versioned preview URLs enabled on workers.dev (required when workers.dev route is off).
 	"preview_urls": true,
@@ -33,5 +36,19 @@
 	},
 	"observability": {
 		"enabled": true
+	},
+	// Separate Worker `psy-cards-dev`. Its Workers Builds production branch
+	// should be `develop`, with deploy command `npx wrangler deploy --env dev`.
+	// Routes here replace the inherited production domains.
+	"env": {
+		"dev": {
+			"workers_dev": false,
+			"routes": [
+				{
+					"pattern": "dev.psy.cards",
+					"custom_domain": true
+				}
+			]
+		}
 	}
 }

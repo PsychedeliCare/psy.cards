@@ -21,6 +21,8 @@ export const PWA_NAVIGATE_FALLBACK_DENYLIST = [
   /^\/(?:fr|de|it)\/wheel(?:\/|$)/,
   // Cache inspector must hit the network so a stuck SW can still be cleared.
   /^\/cache(?:\/|$)/,
+  // The reference page must never be replaced by the interactive combos shell.
+  /^\/sources(?:\/|$)/,
 ];
 
 /**

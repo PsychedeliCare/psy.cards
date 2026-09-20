@@ -35,13 +35,13 @@ combogen/          TripSit/combogen git submodule
 
 ## Dev servers — do not start new ones
 
-**Never start a new `pnpm dev` / Astro / Vite server unless the user explicitly asks you to.** Multiple concurrent servers (especially on ports 4321–4323) break Astro/Vite caching and can serve stale builds.
+**NEVER start a new `pnpm dev` / Astro / Vite server without asking for explicit user permission and receiving approval first.** Implementation requests, browser testing, and an unused port are not permission to start a server. Multiple concurrent servers (especially on ports 4321–4323) break Astro/Vite caching and can serve stale builds.
 
 Before using a local URL:
 
 1. Check whether a server is already listening (typically `4321`, then `4322` / `4323` if Astro auto-incremented).
-2. Reuse that existing server and its URL.
-3. Only start a new server if nothing is listening **and** the user asked you to run the app / start the dev server.
+2. Verify the listening process's working directory belongs to this repository before reusing its URL. A familiar port may belong to another project.
+3. Reuse an existing server for this repository. If none exists, ask for explicit permission to start one and wait for approval; do not start one just to complete a preview or test.
 4. Do not kill or restart an existing healthy server just to “use a preferred port.”
 
 ## Architecture

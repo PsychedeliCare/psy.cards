@@ -3,6 +3,8 @@ import SwiftUI
 struct SubstanceListView: View {
     @Environment(DataPackStore.self) private var store
     @Binding var selectedKey: String?
+    @Binding var browseMode: SubstanceBrowseMode
+    var onChoose: ((String) -> Void)? = nil
     @State private var query = ""
     @State private var selectedGroup: String? = nil
 
@@ -36,6 +38,7 @@ struct SubstanceListView: View {
                         ForEach(section.items) { substance in
                             Button {
                                 selectedKey = substance.key
+                                onChoose?(substance.key)
                             } label: {
                                 SubstanceRow(substance: substance, isSelected: selectedKey == substance.key)
                             }
@@ -54,7 +57,7 @@ struct SubstanceListView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                PsyCardsBrandLabel()
+                SubstanceBrowsePicker(mode: $browseMode)
             }
         }
         .searchable(text: $query, prompt: String(localized: "comboTable.search"))

@@ -7,15 +7,17 @@
 .modal-root {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: 80;
   display: none;
+  place-items: center;
+  padding: 24px 12px;
   pointer-events: none;
   user-select: text;
   -webkit-user-select: text;
 }
 
 .modal-root[data-open="true"] {
-  display: block;
+  display: grid;
   pointer-events: auto;
 }
 
@@ -40,12 +42,11 @@
 }
 
 .modal-panel {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: min(640px, calc(100vw - 24px));
-  max-height: min(82vh, calc(100dvh - 48px));
+  position: relative;
+  width: min(720px, 100%);
+  max-height: calc(100dvh - 48px);
+  border: 1px solid color-mix(in oklab, var(--color-fg) 14%, transparent);
+  border-radius: 24px;
   overflow-x: clip;
   overflow-y: auto;
   background-color: var(--color-ink-2);
@@ -59,24 +60,26 @@
 }
 
 .modal-close {
-  position: absolute;
-  top: 8px;
-  right: 8px;
+  position: sticky;
+  float: right;
+  top: 12px;
+  margin: 12px 12px -56px 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   color: var(--color-fg-mute);
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 0;
+  background-color: var(--color-ink-3);
+  border: 1px solid color-mix(in oklab, var(--color-fg) 12%, transparent);
   cursor: pointer;
   z-index: 2;
 }
 
 .modal-close:hover {
   color: var(--color-fg);
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: color-mix(in oklab, var(--color-fg) 12%, var(--color-ink-2));
 }
 
 .modal-content {
@@ -84,13 +87,13 @@
 }
 
 @media (max-width: 480px) {
+  .modal-root { padding: max(12px, env(safe-area-inset-top)) 0 0; align-items: end; }
   .modal-panel {
-    top: auto;
-    bottom: 0;
-    left: 0;
-    transform: none;
     width: 100%;
-    max-height: 88dvh;
+    max-height: calc(100dvh - max(12px, env(safe-area-inset-top)));
+    border-radius: 22px 22px 0 0;
+    border-bottom: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 }
 
@@ -131,11 +134,11 @@
   padding: 0;
   overflow: hidden;
   pointer-events: none;
-  opacity: 0.4;
+  opacity: 0.15;
 }
 
 html[data-color-scheme="light"] .molecule-figure {
-  opacity: 0.28;
+  opacity: 0.13;
 }
 
 .molecule-figure:not([data-molecule-layout="combo"]) {
@@ -190,7 +193,7 @@ html[data-color-scheme="light"] .molecule-figure {
 
 .substance-card .card-header {
   display: block;
-  min-height: 72px;
+  min-height: 0;
 }
 
 .substance-card .card-header-body {
@@ -279,7 +282,7 @@ html[data-color-scheme="light"] .card-contribute-link:focus-visible {
   text-decoration: none;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
-  white-space: nowrap;
+  flex-wrap: wrap;
   transition:
     border-color 0.15s ease,
     background-color 0.15s ease,
@@ -340,11 +343,16 @@ html[data-color-scheme="light"] .card-contribute-link img {
 .substance-card {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  --card-rule: color-mix(in oklab, var(--color-fg) 12%, transparent);
+  --card-well: color-mix(in oklab, var(--color-fg) 5%, transparent);
+  container-type: inline-size;
+  gap: 24px;
+  min-width: 0;
   color: var(--color-fg);
   background-color: var(--color-ink-2);
-  padding: 22px 22px 26px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: clamp(20px, 3vw, 36px);
+  overflow-wrap: anywhere;
+  border-top: 3px solid var(--hue, var(--card-rule));
 }
 
 .substance-card .accent {
@@ -363,16 +371,18 @@ html[data-color-scheme="light"] .card-contribute-link img {
 
 .substance-card h2 {
   margin: 0;
-  font-size: 26px;
+  font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.12;
+  text-wrap: pretty;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.035em;
   color: var(--color-fg);
 }
 
 .substance-card h3,
 .combo-card h3 {
-  margin: 0 0 8px;
-  font-size: 13px;
+  margin: 0;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -391,15 +401,17 @@ html[data-color-scheme="light"] .card-contribute-link img {
 .substance-card .tags li {
   font-size: 11px;
   padding: 2px 8px;
-  background-color: rgba(255, 255, 255, 0.06);
-  color: var(--color-fg);
+  border-radius: 5px;
+  background-color: var(--card-well);
+  color: var(--color-fg-mute);
 }
 
 .substance-card .summary {
   margin: 0;
-  max-width: 75%;
-  font-size: 14.5px;
-  line-height: 1.55;
+  max-width: 65ch;
+  font-size: 15px;
+  line-height: 1.7;
+  text-wrap: pretty;
   color: var(--color-fg);
 }
 
@@ -413,12 +425,21 @@ html[data-color-scheme="light"] .card-contribute-link img {
 .substance-card section {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 12px;
+  min-width: 0;
 }
+
+.substance-card > section, .substance-card > .dose-charts {
+  padding-top: 22px;
+  border-top: 1px solid var(--card-rule);
+}
+
+.modal-content .card-header { padding-right: 44px; }
+.substance-card .title { min-width: 0; }
 
 .substance-card dl {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
   gap: 6px 14px;
   margin: 0;
 }
@@ -447,7 +468,7 @@ html[data-color-scheme="light"] .card-contribute-link img {
 
 .substance-card .timings {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   align-items: end;
   gap: 10px 18px;
 }
@@ -539,8 +560,14 @@ html[data-color-scheme="light"] .card-contribute-link img {
 .timing-chart-picker {
   position: fixed;
   z-index: 200;
-  min-width: min(240px, calc(100vw - 24px));
-  max-width: calc(100vw - 24px);
+  inset: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  width: min(300px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
 }
 
 .timing-chart-picker[hidden] {
@@ -762,163 +789,52 @@ html[data-color-scheme="light"] .card-contribute-link img {
   text-transform: lowercase;
 }
 
-.substance-combos {
+/* One readable row per risk; all pairs stay available without expansion. */
+.substance-card .substance-combos-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
 }
-
-.substance-combos-head {
+.substance-card .substance-combos-list > div {
+  display: grid;
+  grid-template-columns: minmax(100px, 0.9fr) minmax(0, 2fr);
+  gap: 8px 16px;
+  padding-block: 12px;
+  border-bottom: 1px solid var(--card-rule);
+}
+.substance-card .substance-combos-list > div:first-child { padding-top: 0; }
+.substance-card .substance-combos-list > div:last-child { border-bottom: 0; padding-bottom: 0; }
+.substance-card .substance-combos-list dt {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.substance-combos-table-wrap {
-  display: flex;
-  flex-direction: column;
+  align-items: flex-start;
   gap: 8px;
-  min-width: 0;
-}
-
-.substance-combos-expand-toggle {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.substance-combos-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 12.5px;
-}
-
-.substance-combos-table th,
-.substance-combos-table td {
-  text-align: left;
-  padding: 7px 10px 7px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  vertical-align: middle;
-}
-
-.substance-combos-table th:last-child,
-.substance-combos-table td:last-child {
-  padding-right: 0;
-}
-
-.substance-combos-table th {
-  color: var(--color-fg-mute);
-  font-weight: 500;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.substance-combos-table th:nth-child(2),
-.substance-combos-table td:nth-child(2) {
-  width: 42%;
-}
-
-.substance-combos-table th:nth-child(3),
-.substance-combos-table td:nth-child(3) {
-  width: 28%;
-  text-align: right;
-}
-
-.substance-combos-name {
   color: var(--color-fg);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.substance-combos-name:hover,
-.substance-combos-name:focus-visible {
-  color: var(--hue, var(--color-safe));
-}
-
-.substance-combos-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  max-width: 100%;
-  padding: 3px 8px;
-  font-size: 11.5px;
-  font-weight: 600;
-  line-height: 1.2;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.substance-combos-status span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.substance-combos-slang {
-  color: var(--color-fg-mute);
   font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.substance-combos-risk-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--hue);
+  color: var(--hue-ink);
+}
+.substance-card .substance-combos-list dd {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.substance-combos-list a {
+  color: var(--color-fg);
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--color-fg-mute) 45%, transparent);
-  text-underline-offset: 2px;
+  text-decoration-color: color-mix(in oklab, var(--color-fg) 22%, transparent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
 }
-
-.substance-combos-slang:hover,
-.substance-combos-slang:focus-visible {
-  color: var(--color-safe);
-  text-decoration-color: color-mix(in srgb, var(--color-safe) 55%, transparent);
-}
-
-.substance-combos-slang-empty {
-  color: color-mix(in srgb, var(--color-fg-mute) 55%, transparent);
-}
-
-.substance-combos-expand {
-  align-self: flex-start;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--color-safe);
-  font: inherit;
-  font-size: 12.5px;
-  font-weight: 500;
-  cursor: pointer;
-  user-select: none;
-}
-
-.substance-combos-expand:hover,
-.substance-combos-expand:focus-visible {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.substance-combos-expand-hide {
-  display: none;
-}
-
-.substance-combos-expand-toggle:not(:checked) ~ .substance-combos-table .substance-combos-row-extra {
-  display: none;
-}
-
-.substance-combos-expand-toggle:checked ~ .substance-combos-expand .substance-combos-expand-show {
-  display: none;
-}
-
-.substance-combos-expand-toggle:checked ~ .substance-combos-expand .substance-combos-expand-hide {
-  display: inline;
-}
-
-html[data-color-scheme="light"] .substance-combos-table th,
-html[data-color-scheme="light"] .substance-combos-table td {
-  border-bottom-color: rgba(23, 24, 19, 0.1);
-}
+.substance-combos-list a:hover { text-decoration-color: currentColor; }
 
 /* ---------- Dose chart (PsychonautWiki-inspired) ---------- */
 
@@ -983,7 +899,7 @@ html[data-color-scheme="light"] .substance-combos-table td {
   gap: 2px;
   padding: 2px;
   border-radius: 7px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-well);
 }
 
 .dose-view-radio {
@@ -998,8 +914,8 @@ html[data-color-scheme="light"] .substance-combos-table td {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 20px;
+  width: 36px;
+  height: 32px;
   border-radius: 5px;
   color: var(--color-fg-mute);
   cursor: pointer;
@@ -1018,7 +934,7 @@ html[data-color-scheme="light"] .substance-combos-table td {
 }
 
 .dose-view-radio:checked + .dose-view-btn {
-  background: rgba(255, 255, 255, 0.12);
+  background: color-mix(in oklab, var(--color-fg) 14%, transparent);
   color: var(--color-fg);
 }
 
@@ -1321,7 +1237,8 @@ html[data-color-scheme="light"] .substance-combos-table td {
   gap: 5px;
   padding: 3px 9px;
   font-size: 12px;
-  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 5px;
+  background-color: var(--card-well);
 }
 
 html[data-color-scheme="light"] .substance-card .pills li {
@@ -1631,4 +1548,58 @@ html[data-color-scheme="light"] .combo-card .status-tooltip {
 
 .combo-card .action-link {
   font-size: 13px;
+}
+
+/* Respond to the card's actual width, including narrow desktop dialogs. */
+@container (max-width: 480px) {
+  .substance-card .timings { grid-template-columns: minmax(0, 1fr); }
+  .substance-card .timings-table { padding-bottom: 0; }
+  .substance-card .card-contribute { grid-template-columns: minmax(0, 1fr); }
+  .substance-card .card-contribute-link { justify-self: start; }
+  .dose-plot { display: none; }
+  .dose-charts .dose-table { display: table; }
+  .dose-view-toggle { display: none; }
+}
+@container (max-width: 340px) {
+  .substance-card .substance-combos-list > div {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+    gap: 12px;
+  }
+  .substance-card .substance-combos-list dt { display: block; hyphens: auto; }
+  .substance-combos-risk-icon { display: inline-grid; margin-right: 6px; vertical-align: -5px; }
+}
+.substance-card .timings-table dt, .substance-card .timings-table dd { overflow-wrap: anywhere; }
+.substance-card .pills li { max-width: 100%; }
+.substance-card .pw-effects[open] .pills { margin-top: 12px; }
+.substance-card .dose-table th, .substance-card .dose-table td,
+.substance-card .dose-fallback-table th, .substance-card .dose-fallback-table td {
+  border-bottom-color: var(--card-rule);
+  padding-block: 8px;
+}
+.substance-card .dose-table th { color: var(--color-fg); }
+.substance-card .dose-route { overflow: visible; }
+.substance-card .dose-line { background: var(--card-rule); }
+
+.modal-morph {
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transform-origin: 0 0;
+  background: var(--color-ink-2);
+  border: 1px solid color-mix(in oklab, var(--color-fg) 14%, transparent);
+  box-shadow: 0 24px 80px -20px rgb(0 0 0 / 0.5);
+}
+
+.is-card-motion-origin {
+  visibility: hidden;
+}
+.modal-panel { overscroll-behavior: contain; scrollbar-width: thin; }
+.modal-backdrop { z-index: -1; }
+
+html[data-color-scheme="light"] .substance-card .inline-links a,
+html[data-color-scheme="light"] .substance-card .pills a:hover,
+html[data-color-scheme="light"] .combo-card .sources a,
+html[data-color-scheme="light"] .combo-card .action-link {
+  color: color-mix(in oklab, var(--color-safe) 55%, var(--color-fg));
 }

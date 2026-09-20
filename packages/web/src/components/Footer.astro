@@ -12,6 +12,13 @@ interface Props {
 
 const { locale = "en", variant = "wide" } = Astro.props;
 const ui = getUiMessages(locale);
+// A shared English reference page also serves the event domains.
+const sourcesLabel = {
+  en: "Sources (English)",
+  fr: "Sources (en anglais)",
+  de: "Quellen (Englisch)",
+  it: "Fonti (in inglese)",
+}[locale];
 ---
 
 <footer class:list={["site-footer", `site-footer--${variant}`]}>
@@ -61,6 +68,9 @@ const ui = getUiMessages(locale);
 
     <section class="footer-block credits" aria-label="Site credits">
       <p class="credit-links">
+        <a href="https://psy.cards/sources" hreflang="en">{sourcesLabel}</a>
+      </p>
+      <p class="credit-links">
         <span>{t(locale, ui, "footer.builtWith")}</span>
         <a
           href="https://www.fontshare.com"
@@ -91,6 +101,8 @@ const ui = getUiMessages(locale);
         </a>
       </p>
     </section>
+
+    <p class="footer-disclaimer">{t(locale, ui, "landing.disclaimer")}</p>
   </div>
 </footer>
 
@@ -229,6 +241,19 @@ const ui = getUiMessages(locale);
     flex-basis: 100%;
     width: 100%;
     order: 10;
+  }
+
+  .footer-disclaimer {
+    flex-basis: 100%;
+    width: 100%;
+    order: 11;
+    margin: 0 auto;
+    max-width: 52ch;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--color-fg-mute);
+    opacity: 0.78;
+    text-align: center;
   }
 
   .credit-links a {

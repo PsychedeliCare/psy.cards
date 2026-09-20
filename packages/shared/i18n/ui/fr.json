@@ -7,7 +7,16 @@
   },
   "dial": {
     "ariaLabel": "Cadran des substances",
-    "pageTitle": "Roue des substances — psy.cards"
+    "pageTitle": "Roue des substances — psy.cards",
+    "heading": "Explorez la roue",
+    "intro": "Une autre façon de découvrir les substances. Tournez la roue, suivez une catégorie et explorez les fiches.",
+    "hint": "Glissez pour explorer · Touchez pour choisir",
+    "previous": "Substance précédente",
+    "next": "Substance suivante",
+    "choose": "Choisir une substance",
+    "loading": "Chargement de la fiche…",
+    "error": "La fiche n’a pas pu être chargée. Réessayez.",
+    "retry": "Réessayer"
   },
   "layout": {
     "close": "Fermer",
@@ -39,7 +48,10 @@
     "navCombos": "Combos",
     "closeCard": "Fermer la carte",
     "categoriesAria": "Catégories de substances",
-    "viewSwitchAria": "Basculer entre substances et combinaisons"
+    "viewSwitchAria": "Basculer entre substances et combinaisons",
+    "viewList": "Liste",
+    "viewWheel": "Roue",
+    "browseSwitchAria": "Basculer entre la roue et la liste"
   },
   "footer": {
     "projectBy": "Un projet de",

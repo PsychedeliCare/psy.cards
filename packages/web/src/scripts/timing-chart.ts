@@ -188,7 +188,8 @@ function getCurveGeometry(data: TimingChartData): {
   maxHour: number;
 } {
   const durationEnd = Math.max(data.duration.average, data.duration.max);
-  const maxHour = Math.max(durationEnd * 1.08, 1);
+  // Keep the final whole-hour tick inside the plotted domain.
+  const maxHour = Math.max(Math.ceil(durationEnd * 1.08), 1);
 
   const onsetStart = data.onset?.min ?? Math.max(durationEnd * 0.05, 0.05);
   const onsetEnd = data.onset?.max ?? Math.max(durationEnd * 0.16, onsetStart);
@@ -635,21 +636,25 @@ function positionPicker(chart: HTMLElement): void {
 
   const rect = button.getBoundingClientRect();
   const margin = 12;
-  const pickerWidth = Math.min(240, window.innerWidth - margin * 2);
+  const { width: pickerWidth, height: pickerHeight } = picker.getBoundingClientRect();
   let left = rect.left;
   if (left + pickerWidth > window.innerWidth - margin) {
     left = window.innerWidth - pickerWidth - margin;
   }
   left = Math.max(margin, left);
+  const above = rect.top - pickerHeight - 6;
+  const top = Math.max(margin, Math.min(
+    above >= margin ? above : rect.bottom + 6,
+    window.innerHeight - pickerHeight - margin
+  ));
 
   picker.style.left = `${left}px`;
-  picker.style.top = `${rect.top}px`;
-  picker.style.transform = "translateY(calc(-100% - 6px))";
+  picker.style.top = `${top}px`;
 }
 
 function updateStartControl(chart: HTMLElement, state: ChartState): void {
   const button = chart.querySelector<HTMLButtonElement>("[data-timing-start-btn]");
-  const timeEl = chart.querySelector<HTMLElement>("[data-timing-start-time]");
+  const timeEl = chart.querySelector<HTMLTimeElement>("[data-timing-start-time]");
   const input = chart.querySelector<HTMLInputElement>("[data-timing-start-input]");
   const timezoneSelect = chart.querySelector<HTMLSelectElement>(
     "[data-timing-timezone-select]"
@@ -699,12 +704,16 @@ function setPickerOpen(chart: HTMLElement, open: boolean): void {
 
   if (!picker) return;
 
-  picker.hidden = !open;
   button?.setAttribute("aria-expanded", String(open));
 
   if (open) {
+    picker.hidden = false;
+    picker.showPopover?.();
     positionPicker(chart);
-    chart.querySelector<HTMLInputElement>("[data-timing-start-input]")?.focus();
+    chart.querySelector<HTMLInputElement>("[data-timing-start-input]")?.focus({ preventScroll: true });
+  } else {
+    if (picker.matches(":popover-open")) picker.hidePopover();
+    picker.hidden = true;
   }
 }
 
@@ -804,11 +813,19 @@ function bindChartControls(chart: HTMLElement): void {
 
     event.stopPropagation();
     const isOpen = picker ? !picker.hidden : false;
-    setPickerOpen(chart, isOpen);
+    setPickerOpen(chart, !isOpen);
   });
 
   panel?.addEventListener("click", (event) => {
     event.stopPropagation();
+  });
+
+  panel?.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    event.preventDefault();
+    event.stopPropagation();
+    setPickerOpen(chart, false);
+    chart.querySelector<HTMLButtonElement>("[data-timing-start-btn]")?.focus({ preventScroll: true });
   });
 
   input?.addEventListener("change", () => {

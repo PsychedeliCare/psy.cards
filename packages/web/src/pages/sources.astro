@@ -1,0 +1,196 @@
+---
+import Layout from "../components/Layout.astro";
+import Footer from "../components/Footer.astro";
+import registry from "../../../shared/data/sources.json";
+
+export const prerender = true;
+const reportUrl = "https://github.com/psychedelicare/psy.cards/blob/main/docs/data-and-localization-audit.md";
+const registryUrl = "https://github.com/psychedelicare/psy.cards/blob/main/packages/shared/data/sources.json";
+const kindLabels: Record<string, string> = {
+  direct: "Direct input", enrichment: "Enrichment", local: "Local content",
+  indirect: "Inherited reference", reference: "Acknowledgement", software: "Software",
+};
+const dateLabel = (date: string | null) => date
+  ? new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeZone: "UTC" }).format(new Date(date))
+  : "Not recorded";
+const dataProviders = registry.providers.filter((provider) => provider.imports.length > 0);
+const references = registry.providers.filter((provider) => provider.imports.length === 0);
+const groups = [
+  { id: "data", title: "The data we use", intro: "These are the inputs in this version of psy.cards. Expand a source to inspect its fields, transformations and file history.", providers: dataProviders },
+  { id: "references", title: "References and acknowledgements", intro: "Some organizations provide inherited references or inspiration. Their role differs from a dataset that we fetch directly.", providers: references },
+];
+---
+
+<Layout locale="en" title="Sources & methods — psy.cards" description="Where psy.cards data comes from, the revisions we use, the fields we import, and how we translate and review content." showLanguageSwitcher={false}>
+  <main class="sources-page">
+    <header class="sources-hero">
+      <p class="eyebrow">Sources & methods · English reference</p>
+      <h1>Know what’s behind<br />the cards.</h1>
+      <p class="lede">Our guidance brings together TripSit data, local editorial work and a small amount of search enrichment. Here is what each source contributes, which version we use, and what we still need to validate.</p>
+      <nav class="section-nav" aria-label="On this page">
+        <a href="#data">Data providers</a><a href="#methods">Enrichment & ranking</a><a href="#localization">Languages</a><a href="#review">Review workflow</a>
+      </nav>
+    </header>
+
+    <aside class="context-note" aria-labelledby="dates-heading">
+      <h2 id="dates-heading">A recent revision is not a recent scientific review.</h2>
+      <p><strong>Repository revision</strong> identifies the checkout, which may change only software. <strong>Imported data last changed</strong> refers to the consumed files, or the saved Wikipedia revision. <strong>Retrieved</strong> is shown only when an import recorded it. <strong>Scientific review</strong> refers to psy.cards validation, which is not currently tracked.</p>
+      <p>Dates are in UTC. Local file dates describe Git history, not the original authorship of a claim. Unknown dates stay unknown. <a href={registryUrl}>Inspect the source registry →</a></p>
+    </aside>
+
+    {groups.map((group) => (
+      <section id={group.id} class="source-section" aria-labelledby={`${group.id}-heading`}>
+        <div class="section-heading"><h2 id={`${group.id}-heading`}>{group.title}</h2><p>{group.intro}</p></div>
+        <div class="provider-list">
+          {group.providers.map((provider) => (
+            <details class="provider" id={provider.id}>
+              <summary>
+                <div><span class="provider-kind">{kindLabels[provider.kind]}</span><h3>{provider.name}</h3><span class="provider-role">{provider.role}</span></div>
+                <span class="provider-date">{provider.imports.length ? <>Data last changed <strong>{dateLabel(provider.dataRevisionAt)}</strong></> : "View role & details"}</span>
+              </summary>
+              <div class="provider-body">
+                <p>{provider.description}</p>
+                <p><a href={provider.url}>Visit source →</a></p>
+                {provider.inheritedFrom && <p>Inherited through <a href={`#${provider.inheritedFrom}`}>{registry.providers.find((p) => p.id === provider.inheritedFrom)?.name}</a>. No independent source revision is recorded.</p>}
+                <dl class="provenance">
+                  <div><dt>Repository revision</dt><dd>{provider.repositoryRevision ? <><a href={provider.repositoryRevision.url}><code>{provider.repositoryRevision.id.slice(0, 12)}</code></a> · <time datetime={provider.repositoryRevision.date!} title={provider.repositoryRevision.date!}>{dateLabel(provider.repositoryRevision.date)}</time></> : "Not applicable / not recorded"}</dd></div>
+                  {provider.sourceRevision && <div><dt>Source revision</dt><dd>{provider.sourceRevision.url ? <a href={provider.sourceRevision.url}>Wikipedia revision {provider.sourceRevision.id}</a> : "Revision ID not recorded"}</dd></div>}
+                  <div><dt>Imported data last changed</dt><dd>{provider.dataRevisionAt ? <time datetime={provider.dataRevisionAt} title={provider.dataRevisionAt}>{dateLabel(provider.dataRevisionAt)}</time> : "Not recorded"}</dd></div>
+                  <div><dt>Retrieved</dt><dd>{provider.retrievedAt ? <time datetime={provider.retrievedAt} title={provider.retrievedAt}>{dateLabel(provider.retrievedAt)}</time> : "Not recorded"}</dd></div>
+                  <div><dt>psy.cards scientific review</dt><dd>Not recorded</dd></div>
+                </dl>
+                {provider.fields.length > 0 ? (
+                  <div class="field-list">
+                    <h4>Imported fields & use</h4>
+                    {provider.fields.map((field) => (
+                      <div class="field">
+                        <code>{field.path}</code>
+                        <dl><div><dt>Web</dt><dd>{field.web}</dd></div><div><dt>iOS</dt><dd>{field.ios}</dd></div><div><dt>Processing</dt><dd>{field.transformation}</dd></div></dl>
+                      </div>
+                    ))}
+                  </div>
+                ) : <p>No dataset fields are imported directly from this source.</p>}
+                <div class="limitations"><h4>Provenance limits</h4><ul>{provider.limitations.map((limitation) => <li>{limitation}</li>)}</ul><p>{provider.licenseStatement}</p></div>
+                {provider.imports.length > 0 && (
+                  <details class="file-details">
+                    <summary>File history & SHA-256 checksums ({provider.imports.length})</summary>
+                    <p>Links identify each file’s last modifying commit. Checksums identify the exact bytes consumed from the current checkout; Wikipedia’s local file date is separate from its article revision.</p>
+                    <ul>{provider.imports.map((input) => <li><a href={input.url}><code>{input.path}</code></a><span>Last committed change: <time datetime={input.lastChangedAt!} title={input.lastChangedAt!}>{dateLabel(input.lastChangedAt)}</time></span><code class="checksum">{input.sha256}</code></li>)}</ul>
+                  </details>
+                )}
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <section id="methods" class="source-section prose" aria-labelledby="methods-heading">
+      <p class="eyebrow">Current behavior</p><h2 id="methods-heading">Enrichment helps people find a card.</h2>
+      <p>Wikipedia contributes combination slang and search terms. The saved import maps those terms to TripSit identifiers, retaining unresolved terms for inspection. Small manual additions and exclusions are also present. These names never determine an interaction’s risk classification.</p>
+      <p>Card labels use entries mapped to an exact two-substance set or a single pair. Search currently also includes broader class and multi-pair mappings. Those mappings require further review; a slang match does not establish equivalence between all substances in a class.</p>
+      <details class="method-details"><summary>How search and display order work</summary>
+        <p>Empty search shows an editorial list of 11 common substances. Substance cards show that same list first, followed by the remaining configured columns. Columns use local group order and preserve combogen order within each group.</p>
+        <p>Search uses Fuse.js with threshold <code>0.34</code> and <code>ignoreLocation: true</code>. Configured weights are title <code>0.48</code>, aliases <code>0.34</code>, keywords <code>0.20</code>, subtitle <code>0.08</code>, and type label <code>0.05</code>; they are relative weights, not percentages. It retrieves up to 24 candidates, promotes exact title or alias matches, removes duplicate destinations, then displays up to 12 results.</p>
+        <p>The native app currently uses substring matching instead. These are navigation choices, not rankings of prevalence, safety, or strength of evidence.</p>
+      </details>
+      <div class="roadmap-note"><span class="eyebrow">Proposed next step</span><p>Pin every enrichment import to an immutable source revision, retain the raw source and checksum, version mappings separately, and review a deterministic change report. Preserve stable entry identities when Wikipedia rows move. The current importer does not yet provide this complete workflow.</p></div>
+    </section>
+
+    <section id="localization" class="source-section prose" aria-labelledby="localization-heading">
+      <p class="eyebrow">Four languages today</p><h2 id="localization-heading">Translate the wording. Preserve the evidence.</h2>
+      <p>English, French, German and Italian combine upstream labels with local JSON overlays. Identifiers, safety codes, chemical notation, citations and numeric values stay canonical. Human-readable glossaries guide terminology, but the system does not yet maintain a structured translation history.</p>
+      <p>Existing records usually hold English source text and translated text. They do not establish when a translation was generated, which service produced it, or who validated it. The current fill command uses MyMemory; a separate OpenAI adapter exists but is not wired into that command. Neither fact identifies the provider of historical translations.</p>
+      <p>The audit found incomplete French combo-note coverage, missed translation lookups from inconsistent pair ordering, and a coverage checker that can report success after reading no files. Text differing from English is not proof of a correct or reviewed translation.</p>
+      <div class="roadmap-note"><span class="eyebrow">Proposed next step</span><p>A concept-based glossary and stable translation units would record source and translation hashes, generation provider and time, glossary version, contributor and reviewer. Changes would reopen only affected reviews. All 24 official EU languages are the architectural target; only the four current languages are published.</p></div>
+    </section>
+
+    <section id="review" class="source-section prose" aria-labelledby="review-heading">
+      <p class="eyebrow">Proposed workflow · not yet implemented</p><h2 id="review-heading">Review a version, then track what changes.</h2>
+      <p>Scientific validation and language validation need separate records. A source revision or a citation alone does not show that psy.cards has reviewed a claim. Today, per-claim scientific approvals and per-string language approvals are not recorded.</p>
+      <ol class="workflow">
+        <li><strong>Update in a pull request.</strong> Include source revisions, changed claims, citations and affected translations. Reviewers work in GitHub.</li>
+        <li><strong>Approve exact content.</strong> Bind scientific and language decisions to the content reviewed. Preserve approval for unchanged units and reopen affected approvals when meaning or evidence changes.</li>
+        <li><strong>Publish with a visible status.</strong> Distinguish unknown, draft, reviewed and stale content. Stale safety translations should visibly fall back to current English until corrected.</li>
+        <li><strong>Freeze reviewed editions.</strong> Give print editions and reviewer handoffs an immutable release manifest, with correction records and an urgent-update path.</li>
+      </ol>
+      <a class="report-link" href={reportUrl}>Read the full data, localization & review roadmap <span aria-hidden="true">↗</span></a>
+      <p class="report-note">The repository report contains the audit findings, reproducibility specification, migration stages and 24-language architecture assessment.</p>
+    </section>
+  </main>
+  <Footer locale="en" variant="narrow" />
+</Layout>
+
+<style>
+  .sources-page { max-width: 980px; margin: 0 auto; padding: 64px 24px 40px; }
+  .sources-hero { max-width: 780px; margin-bottom: 40px; }
+  .eyebrow, .provider-kind { display: block; color: var(--color-fg-mute); font-size: 0.75rem; font-weight: 650; letter-spacing: 0.07em; text-transform: uppercase; }
+  h1 { margin: 18px 0 24px; font-size: clamp(2.5rem, 7vw, 4.5rem); line-height: 1.06; letter-spacing: -0.045em; font-weight: 650; }
+  .lede { font-size: 1.13rem; line-height: 1.65; color: var(--color-fg-mute); max-width: 65ch; }
+  .section-nav { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 28px; font-size: 0.9rem; }
+  a { text-underline-offset: 4px; text-decoration: underline; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+  .context-note { padding: 24px; background: var(--color-ink-2); border: 1px solid var(--color-ink-3); border-radius: 14px; }
+  .context-note h2 { font-size: 1.05rem; font-weight: 650; margin-bottom: 10px; }
+  .context-note p { margin-top: 10px; font-size: 0.92rem; line-height: 1.65; color: var(--color-fg-mute); }
+  .context-note strong { color: var(--color-fg); font-weight: 550; }
+  .source-section { margin-top: 64px; scroll-margin-top: 88px; }
+  .section-heading { margin-bottom: 24px; max-width: 68ch; }
+  .section-heading h2, .prose h2 { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 600; letter-spacing: -0.025em; margin-bottom: 12px; }
+  .section-heading p, .prose > p:not(.eyebrow) { color: var(--color-fg-mute); line-height: 1.7; }
+  .provider { border-top: 1px solid var(--color-ink-3); scroll-margin-top: 88px; }
+  .provider:last-child { border-bottom: 1px solid var(--color-ink-3); }
+  .provider > summary { cursor: pointer; padding: 24px 0; display: grid; grid-template-columns: minmax(0, 1fr) auto 16px; gap: 20px; align-items: center; list-style: none; }
+  .provider > summary::-webkit-details-marker { display: none; }
+  .provider > summary::after { content: "+"; font-size: 1.4rem; font-weight: 400; text-align: center; }
+  .provider[open] > summary::after { content: "−"; }
+  .provider h3 { font-size: 1.12rem; font-weight: 600; margin: 5px 0; }
+  .provider-role { font-size: 0.87rem; color: var(--color-fg-mute); }
+  .provider-date { font-size: 0.78rem; color: var(--color-fg-mute); text-align: right; }
+  .provider-date strong { display: block; font-size: 0.9rem; font-weight: 500; color: var(--color-fg); margin-top: 4px; }
+  .provider-body { padding: 0 0 28px; font-size: 0.92rem; line-height: 1.65; }
+  .provider-body > p { margin-bottom: 12px; max-width: 80ch; color: var(--color-fg-mute); }
+  .provider-body a { color: var(--color-fg); }
+  .provenance { margin: 20px 0 28px; padding: 18px 20px; border-radius: 10px; background: var(--color-ink-2); }
+  dl > div { display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: 8px 16px; padding: 5px 0; }
+  dt { color: var(--color-fg-mute); }
+  dd { margin: 0; }
+  code { font-size: 0.8rem; overflow-wrap: anywhere; }
+  h4 { font-size: 0.93rem; font-weight: 650; margin-bottom: 12px; }
+  .field { padding: 16px 0; border-top: 1px solid var(--color-ink-3); }
+  .field > code { display: block; margin-bottom: 12px; }
+  .field dl > div { grid-template-columns: 5rem minmax(0, 1fr); }
+  .limitations { margin-top: 24px; color: var(--color-fg-mute); }
+  .limitations h4 { color: var(--color-fg); }
+  .limitations ul { padding-left: 20px; list-style: disc; }
+  .limitations li { margin: 8px 0; }
+  .limitations p { margin-top: 12px; font-size: 0.85rem; }
+  .file-details, .method-details { margin-top: 24px; border: 1px solid var(--color-ink-3); padding: 16px 20px; border-radius: 10px; }
+  .file-details summary, .method-details summary { cursor: pointer; font-weight: 550; }
+  .file-details p { margin-top: 16px; color: var(--color-fg-mute); }
+  .file-details ul { margin-top: 16px; }
+  .file-details li { padding: 12px 0; border-top: 1px solid var(--color-ink-3); }
+  .file-details li span, .checksum { display: block; color: var(--color-fg-mute); font-size: 0.75rem; margin-top: 4px; }
+  .prose { max-width: 760px; }
+  .prose > .eyebrow { margin-bottom: 14px; }
+  .prose > p, .method-details p { margin-bottom: 16px; }
+  .method-details p { margin-top: 16px; line-height: 1.7; color: var(--color-fg-mute); }
+  .roadmap-note { margin-top: 24px; padding-left: 20px; border-left: 2px solid var(--color-fg-mute); }
+  .roadmap-note p { margin-top: 8px; line-height: 1.7; color: var(--color-fg-mute); }
+  .workflow { list-style: decimal; padding-left: 24px; margin: 24px 0; }
+  .workflow li { padding: 0 0 18px 8px; line-height: 1.65; color: var(--color-fg-mute); }
+  .workflow strong { color: var(--color-fg); font-weight: 550; }
+  .report-link { display: inline-block; padding: 16px 20px; border: 1px solid var(--color-fg-mute); border-radius: 10px; font-weight: 550; }
+  .report-note { font-size: 0.85rem; margin-top: 14px; }
+  @media (max-width: 600px) {
+    .sources-page { padding: 36px 18px 24px; }
+    .context-note { padding: 18px; }
+    .provider > summary { grid-template-columns: minmax(0, 1fr) 16px; gap: 12px; }
+    .provider-date { grid-column: 1; text-align: left; }
+    .provider-date strong { display: inline; margin-left: 6px; }
+    .provider > summary::after { grid-column: 2; grid-row: 1; }
+    .provenance > div { grid-template-columns: 1fr; gap: 0; padding: 8px 0; }
+    .field dl > div { grid-template-columns: 1fr; gap: 0; }
+    .file-details, .method-details { padding: 14px; }
+  }
+</style>
