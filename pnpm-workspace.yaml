@@ -1,21 +1,20 @@
 packages:
   - 'packages/*'
 
-# Cloudflare Workers Builds currently pins pnpm 10.11.1, which does not
-# honor `allowBuilds`. `onlyBuiltDependencies` is the 10.11 allowlist;
-# `allowBuilds` keeps the same policy on pnpm 10.26+.
+# Cloudflare Workers Builds pins pnpm 10.11.1, which ignores `allowBuilds`.
+# `onlyBuiltDependencies` is the 10.11 allowlist; `allowBuilds` covers 10.26+.
 onlyBuiltDependencies:
   - esbuild
   - sharp
   - workerd
 
-ignoredBuiltDependencies:
-  - '@vgpu/adapter-node'
-  - webgpu
-
 allowBuilds:
-  '@vgpu/adapter-node': false
   esbuild: true
   sharp: true
-  webgpu: false
   workerd: true
+
+# Browser holograms and vgpu/mock tests never use Dawn. Drop the Node adapter
+# and its 68MB webgpu binaries so Cloudflare never runs those postinstalls.
+overrides:
+  '@vgpu/adapter-node': '-'
+  webgpu: '-'

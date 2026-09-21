@@ -32,9 +32,9 @@
       "sharp",
       "workerd"
     ],
-    "ignoredBuiltDependencies": [
-      "@vgpu/adapter-node",
-      "webgpu"
-    ]
+    "overrides": {
+      "@vgpu/adapter-node": "-",
+      "webgpu": "-"
+    }
   }
 }
