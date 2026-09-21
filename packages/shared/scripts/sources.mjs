@@ -147,11 +147,29 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   try {
     const command = process.argv[2];
     if (!["refresh", "check"].includes(command)) throw new Error("Usage: sources.mjs refresh|check");
-    const registry = buildRegistry();
-    const filename = path.join(root, registryPath);
-    if (command === "refresh") fs.writeFileSync(filename, serializeRegistry(registry));
-    else checkRegistry(registry, filename);
-    console.log(`Sources ${command}: ${registry.providers.length} providers, ${registry.providers.reduce((n, p) => n + p.imports.length, 0)} file records. No network requests.`);
+    // Workers Builds clones depth 1 and often skips submodules. Git log on that
+    // tree would stamp HEAD onto older files, so skip rather than publish dates.
+    if (command === "check") {
+      let shallow = false;
+      try {
+        shallow = git(root, "rev-parse", "--is-shallow-repository") === "true";
+      } catch {
+        shallow = false;
+      }
+      if (shallow) {
+        console.warn("Sources check skipped: shallow Git clone cannot establish source dates.");
+      } else if (process.env.CI && !fs.existsSync(path.join(root, "drugs/drugs.json"))) {
+        console.warn("Sources check skipped: git submodules are not initialized.");
+      } else {
+        const registry = buildRegistry();
+        checkRegistry(registry, path.join(root, registryPath));
+        console.log(`Sources check: ${registry.providers.length} providers, ${registry.providers.reduce((n, p) => n + p.imports.length, 0)} file records. No network requests.`);
+      }
+    } else {
+      const registry = buildRegistry();
+      fs.writeFileSync(path.join(root, registryPath), serializeRegistry(registry));
+      console.log(`Sources refresh: ${registry.providers.length} providers, ${registry.providers.reduce((n, p) => n + p.imports.length, 0)} file records. No network requests.`);
+    }
   } catch (error) {
     console.error(error.message);
     process.exitCode = 1;

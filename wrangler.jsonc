@@ -9,6 +9,11 @@
 	// default to other accounts and must not create this Worker elsewhere.
 	"account_id": "c937f1b41fd854e31731dac9ab9874a0",
 	"main": "packages/web/src/worker.js",
+	// Workers Builds deploy is `npx wrangler deploy` from the repo root. Run
+	// Astro here so a missing dashboard build command still produces dist/.
+	"build": {
+		"command": "pnpm --filter @psy.cards/web exec astro build"
+	},
 	// Keep versioned preview URLs enabled on workers.dev (required when workers.dev route is off).
 	"preview_urls": true,
 	"routes": [
