@@ -107,7 +107,7 @@
 
 /* Keep all card content above the decorative molecule backdrop so the
    title/name partly covers the structure rather than the reverse. */
-.substance-card:has(.molecule-figure) > :not(.molecule-figure),
+.substance-card:has(.molecule-figure) > :not(.molecule-figure, .substance-hologram),
 .combo-card:has(.molecule-figure) > :not(.molecule-figure) {
   position: relative;
   z-index: 1;
@@ -115,6 +115,32 @@
 
 .card-header {
   position: relative;
+}
+
+/* A bounded artwork surface, independent of the height/scrolling of the card.
+   Canvas pixels and text never intercept one another's input or transforms. */
+.substance-hologram {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 300px;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.substance-hologram[data-hologram-ready="true"] {
+  visibility: visible;
+}
+
+.substance-hologram[data-hologram-ready="true"] ~ .molecule-figure {
+  visibility: hidden;
+}
+
+@media print, (prefers-reduced-motion: reduce) {
+  .substance-hologram[data-hologram-ready="true"] { visibility: hidden; }
+  .substance-hologram[data-hologram-ready="true"] ~ .molecule-figure { visibility: visible; }
 }
 
 /* The figure is taken out of flow and pinned to the top-right corner so it

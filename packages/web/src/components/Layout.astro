@@ -95,9 +95,12 @@ const i18nPayload = JSON.stringify({
     <script>
       import { initSmilesDrawer } from "../scripts/smiles-drawer.ts";
       import { initTimingCharts } from "../scripts/timing-chart.ts";
+      import { initHolographicCards } from "../scripts/holographic-cards.ts";
 
       initSmilesDrawer();
       initTimingCharts();
+      const disposeHolograms = initHolographicCards();
+      if (import.meta.hot) import.meta.hot.dispose(disposeHolograms);
     </script>
   </body>
 </html>

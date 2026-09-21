@@ -7,6 +7,7 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "molecules:web": "node scripts/render-molecules.mjs --web",
     "datapack": "node scripts/build-datapack.mjs && node scripts/render-molecules.mjs",
     "datapack:json": "node scripts/build-datapack.mjs",
     "datapack:molecules": "node scripts/render-molecules.mjs"

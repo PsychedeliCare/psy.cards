@@ -14,6 +14,7 @@ import { toTitleCase } from "../lib/text";
 import MoleculeFigure from "./MoleculeFigure.astro";
 import CardContribute from "./CardContribute.astro";
 import SmilesCitation from "./SmilesCitation.astro";
+import { keyToSlug } from "../data/slug";
 import TimingChart from "./TimingChart.astro";
 import SubstanceComboTable from "./SubstanceComboTable.astro";
 import type { Locale } from "../i18n/locales";
@@ -95,6 +96,13 @@ const aliases = Array.from(
   data-card-type="substance"
   data-substance-key={substanceKey}
 >
+  {hasStructure && (
+    <canvas
+      class="substance-hologram"
+      data-molecule-mask={`/assets/molecules/${keyToSlug(substanceKey)}.png`}
+      aria-hidden="true"
+    />
+  )}
   <MoleculeFigure substanceKey={substanceKey} />
   <header class="card-header">
     <div class="card-header-body">

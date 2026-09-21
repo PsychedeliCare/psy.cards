@@ -387,7 +387,7 @@
       "inheritedFrom": null,
       "repositoryRevision": null,
       "sourceRevision": null,
-      "dataRevisionAt": "2026-08-16T21:05:52.000Z",
+      "dataRevisionAt": "2026-09-20T20:05:26.000Z",
       "retrievedAt": null,
       "scientificReviewedAt": null,
       "reviewStatus": "not-recorded",
@@ -1409,31 +1409,31 @@
         },
         {
           "path": "packages/shared/i18n/ui/de.json",
-          "sha256": "215ad033a43e84402710d1534cbf406043fb8d27ecc6b72e449d16798b9a13ee",
-          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
-          "lastChangedAt": "2026-08-16T21:05:52.000Z",
-          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/ui/de.json"
+          "sha256": "e2c994d92b6037c421159574c9c140fc1da97c3b74951852a13c400e8b71b8a0",
+          "lastChangedRevision": "cac37b1c35a9fcb7b4a08f0068eac361ff9eed69",
+          "lastChangedAt": "2026-09-20T20:05:26.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/cac37b1c35a9fcb7b4a08f0068eac361ff9eed69/packages/shared/i18n/ui/de.json"
         },
         {
           "path": "packages/shared/i18n/ui/en.json",
-          "sha256": "cb8b85c9e2990b5c4ee98d5bde9562d4ab2220a5f599900dea9b47f3b6221b57",
-          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
-          "lastChangedAt": "2026-08-16T21:05:52.000Z",
-          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/ui/en.json"
+          "sha256": "3b90958d6345e351fac4577f8ddf30c5df3d5f6e1582cb191dc22b20d632520c",
+          "lastChangedRevision": "cac37b1c35a9fcb7b4a08f0068eac361ff9eed69",
+          "lastChangedAt": "2026-09-20T20:05:26.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/cac37b1c35a9fcb7b4a08f0068eac361ff9eed69/packages/shared/i18n/ui/en.json"
         },
         {
           "path": "packages/shared/i18n/ui/fr.json",
-          "sha256": "5c6fa0137a1a79bd0d52707bde60e67bbe2e8114ddcbe75e98c41c8b112ba7de",
-          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
-          "lastChangedAt": "2026-08-16T21:05:52.000Z",
-          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/ui/fr.json"
+          "sha256": "204fa0693b784700c7bc1c64e720f4e543de39b259853c57ad6e2ceb4a108e86",
+          "lastChangedRevision": "cac37b1c35a9fcb7b4a08f0068eac361ff9eed69",
+          "lastChangedAt": "2026-09-20T20:05:26.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/cac37b1c35a9fcb7b4a08f0068eac361ff9eed69/packages/shared/i18n/ui/fr.json"
         },
         {
           "path": "packages/shared/i18n/ui/it.json",
-          "sha256": "e6ababa486bca58b11ad106e043b90922e9df6c048aae45d1a59c348293ff570",
-          "lastChangedRevision": "39f0742bdedbb38a73fee670158eebffe2bd2ae1",
-          "lastChangedAt": "2026-08-16T21:05:52.000Z",
-          "url": "https://github.com/psychedelicare/psy.cards/blob/39f0742bdedbb38a73fee670158eebffe2bd2ae1/packages/shared/i18n/ui/it.json"
+          "sha256": "2023a623c3e3a0d502d6fc7e95e4ef2baf3591570de057327ff5d415c8e14eab",
+          "lastChangedRevision": "cac37b1c35a9fcb7b4a08f0068eac361ff9eed69",
+          "lastChangedAt": "2026-09-20T20:05:26.000Z",
+          "url": "https://github.com/psychedelicare/psy.cards/blob/cac37b1c35a9fcb7b4a08f0068eac361ff9eed69/packages/shared/i18n/ui/it.json"
         }
       ]
     },

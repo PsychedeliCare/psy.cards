@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Prerender SMILES structures to SVG assets for the iOS asset catalog.
- * Prefer smiles-drawer when available; otherwise emit a labeled placeholder SVG.
+ * Prerender SMILES structures to PNG assets for iOS (default), or transparent
+ * monochrome WebGPU masks with --web. Web output never uses placeholders.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -17,6 +17,8 @@ const assetsRoot = path.join(
 );
 
 const require = createRequire(import.meta.url);
+const web = process.argv.includes("--web");
+const webAssetsRoot = path.join(monorepoRoot, "packages/web/public/assets/molecules");
 
 function keyToAssetName(key) {
   return `molecule_${key.replace(/\//g, "-").replace(/-/g, "_")}`;
@@ -59,6 +61,9 @@ async function getSmilesDrawerEnv() {
       `<!DOCTYPE html><html><body></body></html>`,
       { pretendToBeVisual: true }
     );
+    // SvgDrawer only probes optional canvas support. There is no canvas backend
+    // in this SVG-only DOM; explicitly returning null avoids jsdom diagnostics.
+    if (web) dom.window.HTMLCanvasElement.prototype.getContext = () => null;
     globalThis.window = dom.window;
     globalThis.document = dom.window.document;
     globalThis.SVGElement = dom.window.SVGElement;
@@ -110,13 +115,20 @@ async function tryRenderWithSmilesDrawer(smiles) {
           H: "#888888",
           BACKGROUND: "#00000000",
         },
+        foil: {
+          ...Object.fromEntries(
+            ["FOREGROUND", "C", "O", "N", "F", "CL", "BR", "I", "P", "S", "B", "SI", "H"]
+              .map((element) => [element, "#ffffff"])
+          ),
+          BACKGROUND: "#00000000",
+        },
       },
     });
 
     return await new Promise((resolve) => {
       SmilesDrawer.parse(smiles, (tree) => {
         try {
-          drawer.draw(tree, svg, "dark");
+          drawer.draw(tree, svg, web ? "foil" : "dark");
           const serialized = svg.outerHTML;
           svg.remove();
           resolve(serialized.includes("<path") || serialized.includes("<line") ? serialized : null);
@@ -200,6 +212,24 @@ async function main() {
   const substances = JSON.parse(
     fs.readFileSync(path.join(sharedRoot, "data/substances.json"), "utf8")
   );
+
+  if (web) {
+    // Prepare every image before writing so a bad structure cannot leave a
+    // partially regenerated set of masks. The iOS asset catalog is untouched.
+    const images = [];
+    for (const [key, structure] of Object.entries(substances)) {
+      const svg = await tryRenderWithSmilesDrawer(structure.smiles);
+      if (!svg) throw new Error(`Cannot generate molecule mask: ${key}`);
+      images.push([`${key.replace(/\//g, "-")}.png`, await rasterize(svg)]);
+    }
+    fs.mkdirSync(webAssetsRoot, { recursive: true });
+    for (const [filename, png] of images) {
+      fs.writeFileSync(path.join(webAssetsRoot, filename), png);
+    }
+    console.log(`Web molecule masks: ${images.length} drawn, no placeholders`);
+    smilesDrawerEnv?.dom?.window.close();
+    return;
+  }
 
   // Ensure jsdom is available for optional rendering; install lightly if missing.
   try {
