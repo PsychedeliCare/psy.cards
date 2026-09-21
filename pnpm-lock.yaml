@@ -6,11 +6,7 @@ settings:
 
 importers:
 
-  .:
-    dependencies:
-      vgpu:
-        specifier: ^0.5.0
-        version: 0.5.0(supports-color@10.2.2)
+  .: {}
 
   packages/shared:
     devDependencies:

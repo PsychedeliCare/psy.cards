@@ -17,7 +17,7 @@ import {
   DESKTOP_DETENT,
   DIAL,
   buildDialLayout,
-  categoryLabelReversed,
+  labelReverseOpacity,
   rotationForSubstance,
   substanceLabelOrientation,
   type DialCategoryInput,
@@ -33,7 +33,10 @@ interface Props {
 const { locale = "en", categories, initialKey } = Astro.props;
 const ui = getUiMessages(locale);
 
-const layout = buildDialLayout(categories);
+const layout = buildDialLayout(categories.map((cat) => ({
+  ...cat,
+  label: cat.label.toLocaleUpperCase(locale),
+})));
 const initialSub =
   layout.substances.find((s) => s.key === initialKey) ?? layout.substances[0]!;
 const activeGroup = initialSub.group;
@@ -70,7 +73,7 @@ const substanceBase = localePath(locale, "/");
       <g data-dial-rotor data-initial-rotation={initialRotation} transform={`rotate(${initialRotation})`}>
         {
           layout.categories.map((cat, i) => {
-            const reversed = categoryLabelReversed(cat.midAngle, initialRotation);
+            const reverseOpacity = labelReverseOpacity(cat.midAngle, initialRotation, "category");
             const arcId = `${uid}-cat-${i}`;
             return (
               <g
@@ -79,32 +82,38 @@ const substanceBase = localePath(locale, "/");
                 data-group={cat.group}
                 data-mid-angle={cat.midAngle}
                 data-active={cat.group === activeGroup ? "true" : "false"}
+                role="group"
+                aria-label={cat.label}
               >
                 <path class="dial-category-wedge" d={cat.path} />
                 <defs>
                   <path
-                    id={arcId}
-                    d={reversed ? cat.labelArcReverse : cat.labelArcForward}
+                    id={`${arcId}-forward`}
+                    d={cat.labelArcForward}
                     data-dial-cat-arc
-                    data-forward={cat.labelArcForward}
-                    data-reverse={cat.labelArcReverse}
                   />
+                  <path id={`${arcId}-reverse`} d={cat.labelArcReverse} />
                 </defs>
-                <text
-                  class="dial-category-label"
-                  font-size={cat.labelFontSize.toFixed(2)}
-                >
-                  <textPath href={`#${arcId}`} startOffset="50%">
-                    {cat.label.toLocaleUpperCase(locale)}
-                  </textPath>
-                </text>
+                {[false, true].map((reversed) => (
+                  <text
+                    class="dial-category-label"
+                    data-dial-label={reversed ? "reverse" : "forward"}
+                    font-size={cat.labelFontSize.toFixed(2)}
+                    opacity={reversed ? reverseOpacity : 1 - reverseOpacity}
+                    aria-hidden="true"
+                  >
+                    <textPath href={`#${arcId}-${reversed ? "reverse" : "forward"}`} startOffset="50%">
+                      {cat.label}
+                    </textPath>
+                  </text>
+                ))}
               </g>
             );
           })
         }
         {
           layout.substances.map((sub) => {
-            const o = substanceLabelOrientation(sub.midAngle, initialRotation);
+            const reverseOpacity = labelReverseOpacity(sub.midAngle, initialRotation, "substance");
             const isActive = sub.key === initialSub.key;
             return (
               <a
@@ -112,6 +121,7 @@ const substanceBase = localePath(locale, "/");
                 id={optionId(sub.slug)}
                 class={`dial-substance group-${sub.group}`}
                 role="option"
+                aria-label={sub.label}
                 aria-selected={isActive ? "true" : "false"}
                 data-dial-substance
                 data-key={sub.key}
@@ -123,15 +133,22 @@ const substanceBase = localePath(locale, "/");
                 data-in-active-group={sub.group === activeGroup ? "true" : "false"}
               >
                 <path class="dial-substance-wedge" data-dial-wedge d={sub.path} />
-                <text
-                  class="dial-substance-label"
-                  data-dial-substance-label
-                  transform={o.transform}
-                  text-anchor={o.anchor}
-                  font-size={sub.fontSize.toFixed(2)}
-                >
-                  {sub.label}
-                </text>
+                {[false, true].map((reversed) => {
+                  const o = substanceLabelOrientation(sub.midAngle, reversed);
+                  return (
+                    <text
+                      class="dial-substance-label"
+                      data-dial-label={reversed ? "reverse" : "forward"}
+                      transform={o.transform}
+                      text-anchor={o.anchor}
+                      font-size={sub.fontSize.toFixed(2)}
+                      opacity={reversed ? reverseOpacity : 1 - reverseOpacity}
+                      aria-hidden="true"
+                    >
+                      {sub.label}
+                    </text>
+                  );
+                })}
               </a>
             );
           })

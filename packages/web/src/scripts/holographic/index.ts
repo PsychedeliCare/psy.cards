@@ -1,3 +1,4 @@
+/** Client hologram; shader adapted from vgpu's holographic-card example (MIT). */
 import source from "./shader.wgsl?raw";
 import { createRenderer as create } from "./renderer.ts";
 

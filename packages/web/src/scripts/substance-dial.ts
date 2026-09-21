@@ -14,22 +14,25 @@ import {
   DESKTOP_DETENT,
   DIAL,
   activeSubstanceIndex,
-  categoryLabelReversed,
   easeOutCubic,
+  labelReverseOpacity,
   rotationForSubstance,
-  substanceLabelOrientation,
 } from "../lib/dial-geometry";
 import { getPageI18n, getUiString } from "../i18n/client";
 
 const SNAP_DURATION_MS = 280;
 const WHEEL_SNAP_DEBOUNCE_MS = 110;
 const CARD_UPDATE_DEBOUNCE_MS = 160;
-const LABEL_SYNC_TRAVEL_DEG = 30;
 const DRAG_TAP_THRESHOLD_PX = 6;
 
-type SubstanceEntry = {
+type LabelPair = {
+  forwardLabelEl: SVGTextElement;
+  reverseLabelEl: SVGTextElement;
+  reverseOpacity: number;
+};
+
+type SubstanceEntry = LabelPair & {
   el: SVGAElement;
-  labelEl: SVGTextElement;
   key: string;
   slug: string;
   label: string;
@@ -37,7 +40,7 @@ type SubstanceEntry = {
   midAngle: number;
 };
 
-type CategoryEntry = {
+type CategoryEntry = LabelPair & {
   el: SVGGElement;
   arcEl: SVGPathElement;
   group: string;
@@ -57,11 +60,17 @@ export function initSubstanceDial(): void {
   const liveRegion = shell.querySelector<HTMLElement>("[data-dial-live]");
   if (!disc || !rotor) return;
 
+  function labelPair(el: SVGElement): LabelPair {
+    const forwardLabelEl = el.querySelector<SVGTextElement>('[data-dial-label="forward"]')!;
+    const reverseLabelEl = el.querySelector<SVGTextElement>('[data-dial-label="reverse"]')!;
+    return { forwardLabelEl, reverseLabelEl, reverseOpacity: Number(reverseLabelEl.getAttribute("opacity")) };
+  }
+
   const substances: SubstanceEntry[] = Array.from(
     shell.querySelectorAll<SVGAElement>("[data-dial-substance]")
   ).map((el) => ({
     el,
-    labelEl: el.querySelector<SVGTextElement>("[data-dial-substance-label]")!,
+    ...labelPair(el),
     key: el.dataset.key ?? "",
     slug: el.dataset.slug ?? "",
     label: el.dataset.label ?? "",
@@ -76,28 +85,32 @@ export function initSubstanceDial(): void {
     shell.querySelectorAll<SVGGElement>("[data-dial-category]")
   ).map((el) => ({
     el,
+    ...labelPair(el),
     arcEl: el.querySelector<SVGPathElement>("[data-dial-cat-arc]")!,
     group: el.dataset.group ?? "",
     midAngle: Number(el.dataset.midAngle),
   }));
 
-  // Fit the actual font metrics, including translated names, after the font loads.
+  // Fit both fixed orientations once, using the same font metrics. Selection
+  // and rotation must not trigger resizing or alter the font weight.
+  function fitLabels(pair: LabelPair, available: number): void {
+    const label = pair.forwardLabelEl;
+    const width = label.getComputedTextLength();
+    if (width <= available) return;
+    const size = Number(label.getAttribute("font-size"));
+    const spacing = Number.parseFloat(getComputedStyle(label).letterSpacing) || 0;
+    const tracking = spacing * label.getNumberOfChars();
+    const fittedSize = size * (available - tracking) / (width - tracking);
+    pair.forwardLabelEl.setAttribute("font-size", String(fittedSize));
+    pair.reverseLabelEl.setAttribute("font-size", String(fittedSize));
+  }
+
   void document.fonts.ready.then(() => {
     for (const sub of substances) {
-      const width = sub.labelEl.getComputedTextLength();
-      const size = Number(sub.labelEl.getAttribute("font-size"));
-      if (width > DIAL.labelMaxWidth) {
-        sub.labelEl.setAttribute("font-size", String(size * DIAL.labelMaxWidth / width));
-      }
+      fitLabels(sub, DIAL.labelMaxWidth);
     }
     for (const category of categories) {
-      const label = category.el.querySelector("text");
-      if (!label) continue;
-      const width = label.getComputedTextLength();
-      const available = category.arcEl.getTotalLength() - 3;
-      if (width > available) {
-        label.setAttribute("font-size", String(Number(label.getAttribute("font-size")) * available / width * 0.95));
-      }
+      fitLabels(category, category.arcEl.getTotalLength() - 3);
     }
   });
 
@@ -115,7 +128,6 @@ export function initSubstanceDial(): void {
   let rotation = Number(rotor.dataset.initialRotation ?? 0);
   const detent = DESKTOP_DETENT;
   let activeIdx = -1;
-  let lastLabelSyncRotation = rotation;
   let renderQueued = false;
 
   let animFrame = 0;
@@ -143,6 +155,7 @@ export function initSubstanceDial(): void {
 
   function render(): void {
     rotor!.setAttribute("transform", `rotate(${rotation})`);
+    syncLabels();
   }
 
   function queueRender(): void {
@@ -154,27 +167,21 @@ export function initSubstanceDial(): void {
     });
   }
 
-  /**
-   * Label flip depends on absolute angle, so it changes during a spin.
-   * Recomputed on snap completion and every ~30° of travel, not per frame.
-   */
-  function syncLabels(force = false): void {
-    if (!force && Math.abs(rotation - lastLabelSyncRotation) < LABEL_SYNC_TRAVEL_DEG) {
-      return;
-    }
-    lastLabelSyncRotation = rotation;
+  function setLabelOpacity(pair: LabelPair, reverseOpacity: number): void {
+    if (pair.reverseOpacity === reverseOpacity) return;
+    pair.reverseOpacity = reverseOpacity;
+    pair.forwardLabelEl.setAttribute("opacity", String(1 - reverseOpacity));
+    pair.reverseLabelEl.setAttribute("opacity", String(reverseOpacity));
+  }
 
+  // Update opacity in the same frame as the rotor. Text paths, anchors and
+  // transforms stay fixed, including at reading boundaries and snap completion.
+  function syncLabels(): void {
     for (const sub of substances) {
-      const o = substanceLabelOrientation(sub.midAngle, rotation);
-      sub.labelEl.setAttribute("transform", o.transform);
-      sub.labelEl.setAttribute("text-anchor", o.anchor);
+      setLabelOpacity(sub, labelReverseOpacity(sub.midAngle, rotation, "substance"));
     }
     for (const cat of categories) {
-      const reversed = categoryLabelReversed(cat.midAngle, rotation);
-      const d = reversed ? cat.arcEl.dataset.reverse : cat.arcEl.dataset.forward;
-      if (d && cat.arcEl.getAttribute("d") !== d) {
-        cat.arcEl.setAttribute("d", d);
-      }
+      setLabelOpacity(cat, labelReverseOpacity(cat.midAngle, rotation, "category"));
     }
   }
 
@@ -210,7 +217,6 @@ export function initSubstanceDial(): void {
   function setRotation(next: number): void {
     rotation = next;
     queueRender();
-    syncLabels();
     applyActive(activeSubstanceIndex(midAngles, rotation, detent));
   }
 
@@ -305,7 +311,6 @@ export function initSubstanceDial(): void {
 
   function settle(): void {
     render();
-    syncLabels(true);
     applyActive(activeSubstanceIndex(midAngles, rotation, detent));
     pushRoute();
   }
@@ -340,7 +345,6 @@ export function initSubstanceDial(): void {
       }
       rotation = start + delta * easeOutCubic(t);
       render();
-      syncLabels();
       applyActive(activeSubstanceIndex(midAngles, rotation, detent));
       animFrame = requestAnimationFrame(frame);
     };
@@ -516,7 +520,6 @@ export function initSubstanceDial(): void {
       cancelAnimation();
       rotation = rotationForSubstance(substances[idx]!.midAngle, detent, rotation);
       render();
-      syncLabels(true);
       applyActive(idx);
     }
   });
@@ -536,7 +539,6 @@ export function initSubstanceDial(): void {
 
   rotation = rotationForSubstance(substances[bootIdx]!.midAngle, detent, rotation);
   render();
-  syncLabels(true);
   activeIdx = -1; // force applyActive to run once
   applyActive(bootIdx, { announce: false });
   lastPushedSlug = substances[bootIdx]!.slug;

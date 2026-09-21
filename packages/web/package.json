@@ -10,6 +10,7 @@
     "dev": "astro dev",
     "build": "pnpm --filter @psy.cards/shared molecules:web && astro build",
     "test:holograms": "node --experimental-strip-types --test scripts/holographic-card.test.mjs",
+    "test:dial": "node --experimental-strip-types --test scripts/dial-geometry.test.mjs",
     "preview": "astro preview",
     "preview:cloudflare": "WRANGLER_LOG_PATH=$PWD/../../.wrangler/logs wrangler dev --config $PWD/wrangler.jsonc --cwd ${TMPDIR:-/tmp} --local --port 8788 --compatibility-date 2026-04-23 --show-interactive-dev-session false",
     "import:wikipedia-combos": "node scripts/import-wikipedia-combos.mjs",

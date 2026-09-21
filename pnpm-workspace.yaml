@@ -1,6 +1,18 @@
 packages:
   - 'packages/*'
 
+# Cloudflare Workers Builds currently pins pnpm 10.11.1, which does not
+# honor `allowBuilds`. `onlyBuiltDependencies` is the 10.11 allowlist;
+# `allowBuilds` keeps the same policy on pnpm 10.26+.
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - workerd
+
+ignoredBuiltDependencies:
+  - '@vgpu/adapter-node'
+  - webgpu
+
 allowBuilds:
   '@vgpu/adapter-node': false
   esbuild: true

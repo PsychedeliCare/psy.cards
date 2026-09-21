@@ -26,7 +26,15 @@
     "ios:generate": "cd packages/ios && xcodegen generate",
     "generate-types": "pnpm --filter @psy.cards/web generate-types"
   },
-  "dependencies": {
-    "vgpu": "^0.5.0"
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "workerd"
+    ],
+    "ignoredBuiltDependencies": [
+      "@vgpu/adapter-node",
+      "webgpu"
+    ]
   }
 }

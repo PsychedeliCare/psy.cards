@@ -1,4 +1,5 @@
-// Adapted from vgpu's Holographic Card (MIT). See /holographic-card/README.md.
+// Adapted from vgpu's Holographic Card example (MIT, Copyright 2025 Vercel, Inc.).
+// https://vgpu.sh/examples/holographic-card — license: ./LICENSE
 struct Params {
   resolution: vec2f,
   tilt: vec2f,

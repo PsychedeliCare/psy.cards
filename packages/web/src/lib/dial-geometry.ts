@@ -24,7 +24,7 @@ export const DIAL = {
   /** Radial substance labels start here and must not bleed past r = 98. */
   substanceLabelRadius: 54,
   /** Category labels run along an arc at this radius. */
-  categoryLabelRadius: 37,
+  categoryLabelRadius: 44,
   /** Degrees trimmed from each side of a category label arc. */
   categoryLabelInset: 2,
   labelBaseSize: 5.8,
@@ -33,7 +33,7 @@ export const DIAL = {
   labelWidthFactor: 0.54,
   /** Available radial run for a substance label (54 → ~94). */
   labelMaxWidth: 40,
-  categoryLabelBaseSize: 4.6,
+  categoryLabelBaseSize: 5.2,
   categoryLabelMinSize: 2.6,
   categoryLabelLetterSpacing: 0.3,
 } as const;
@@ -209,39 +209,43 @@ export function buildDialLayout(categories: DialCategoryInput[]): DialLayout {
 }
 
 export type SubstanceLabelOrientation = {
-  flipped: boolean;
   transform: string;
   anchor: "start" | "end";
 };
 
 /**
- * Radial substance label placement. When the label's absolute angle
- * (mid-angle + rotation) is on the left half of the dial (> 180°), the text
- * is rotated 180° in place and end-anchored so it never renders mirrored or
- * upside down.
+ * Two fixed placements occupy the same radial run. Rotation only changes
+ * their opacity; it must never change the text's geometry or font metrics.
  */
 export function substanceLabelOrientation(
   midAngle: number,
-  rotation: number
+  reversed: boolean
 ): SubstanceLabelOrientation {
-  const absolute = normalizeAngle(midAngle + rotation);
-  const flipped = absolute > 180;
   const r = DIAL.substanceLabelRadius;
   const base = `rotate(${midAngle - 90}) translate(${r}, 0)`;
   return {
-    flipped,
-    transform: flipped ? `${base} rotate(180)` : base,
-    anchor: flipped ? "end" : "start",
+    transform: reversed ? `${base} rotate(180)` : base,
+    anchor: reversed ? "end" : "start",
   };
 }
 
 /**
- * Whether a category's textPath arc must be drawn in reverse (the wedge's
- * absolute mid-angle falls in the lower half of the dial).
+ * Crossfade around the vertical reading boundary instead of abruptly
+ * reversing a text path or rotating glyphs. The smoothstep is continuous
+ * across full turns and when a drag changes direction.
  */
-export function categoryLabelReversed(midAngle: number, rotation: number): boolean {
-  const absolute = normalizeAngle(midAngle + rotation);
-  return absolute > 90 && absolute < 270;
+export function labelReverseOpacity(
+  midAngle: number,
+  rotation: number,
+  kind: "category" | "substance"
+): number {
+  // Keep a category centred on the east-facing selection marker fully opaque.
+  // Its reading boundary sits just past vertical, away from that resting point.
+  const reverseCenter = kind === "category" ? 192 : 270;
+  const distance = 90 - circularDistance(midAngle + rotation, reverseCenter);
+  const fadeAngle = 8;
+  const t = Math.max(0, Math.min(1, (distance + fadeAngle) / (2 * fadeAngle)));
+  return t * t * (3 - 2 * t);
 }
 
 /**
