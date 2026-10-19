@@ -339,6 +339,8 @@ export function initLandingCards(): void {
     if (bootSlug) {
       setSelection(bootSlug);
       if (bootSlug !== renderedSlug) {
+        // updateCard drops responses for anything but the requested slug.
+        requestedSlug = bootSlug;
         void updateCard(bootSlug, false);
       }
       if (isDesktop() && !new URL(window.location.href).searchParams.has("combo")) {

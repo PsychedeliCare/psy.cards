@@ -21,6 +21,9 @@ struct Substance: Codable, Identifiable, Hashable, Sendable {
     var prettyName: String
     var group: String
     var aliases: [String]
+    /// Up to three aliases for list rows (web SubstanceListCard).
+    var listAliases: [String]
+    var listMeta: ListMeta
     var searchTerms: [String]
     var summary: String?
     var isClass: Bool
@@ -36,6 +39,14 @@ struct Substance: Codable, Identifiable, Hashable, Sendable {
     var molecule: MoleculeInfo?
 
     var id: String { key }
+}
+
+struct ListMeta: Codable, Hashable, Sendable {
+    var onset: String?
+    var duration: String?
+    var commonDose: String?
+
+    var isEmpty: Bool { onset == nil && duration == nil && commonDose == nil }
 }
 
 struct TimingValue: Codable, Hashable, Sendable {
@@ -133,17 +144,10 @@ struct ComboStatusGroup: Identifiable, Equatable, Sendable {
 }
 
 enum ComboGrouping {
-    static let previewLimit = 10
-
-    /// Low-risk first, then combinations to avoid, then caution.
-    private static let rank: [String: Int] = [
-        "synergy": 0,
-        "safe": 1,
-        "decrease": 2,
-        "dangerous": 3,
-        "unsafe": 4,
-        "serotoninsyndrome": 5,
-        "caution": 6,
+    /// Riskiest first, then low-risk combinations (web SubstanceComboTable).
+    static let riskOrder = [
+        "serotoninsyndrome", "dangerous", "unsafe", "caution",
+        "synergy", "safe", "decrease", "unknown",
     ]
 
     static func groups(
@@ -152,6 +156,7 @@ enum ComboGrouping {
         matrix: [String: [String: ComboCellSummary]]
     ) -> [ComboStatusGroup] {
         var buckets: [String: ComboStatusGroup] = [:]
+        // Partners keep the curated table order, like the web list.
         for other in substances where other.key != key {
             guard let cell = matrix[key]?[other.key] ?? matrix[other.key]?[key] else { continue }
             var group = buckets[cell.statusKey] ?? ComboStatusGroup(
@@ -160,39 +165,9 @@ enum ComboGrouping {
                 icon: cell.icon,
                 partners: []
             )
-            group.partners.append(ComboPartner(key: other.key, name: other.prettyName))
+            group.partners.append(ComboPartner(key: other.key, name: other.label))
             buckets[cell.statusKey] = group
         }
-        return buckets.values
-            .map { group in
-                var sorted = group
-                sorted.partners.sort { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
-                return sorted
-            }
-            .sorted { (rank[$0.statusKey] ?? 99) < (rank[$1.statusKey] ?? 99) }
-    }
-
-    static func preview(
-        _ groups: [ComboStatusGroup],
-        limit: Int = previewLimit
-    ) -> (visible: [ComboStatusGroup], hiddenCount: Int) {
-        let total = groups.reduce(0) { $0 + $1.partners.count }
-        guard total > limit else { return (groups, 0) }
-
-        var remaining = limit
-        var visible: [ComboStatusGroup] = []
-        for group in groups {
-            guard remaining > 0 else { break }
-            if group.partners.count <= remaining {
-                visible.append(group)
-                remaining -= group.partners.count
-            } else {
-                var clipped = group
-                clipped.partners = Array(group.partners.prefix(remaining))
-                visible.append(clipped)
-                remaining = 0
-            }
-        }
-        return (visible, total - limit)
+        return riskOrder.compactMap { buckets[$0] }
     }
 }

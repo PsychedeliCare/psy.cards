@@ -1,20 +1,22 @@
 ---
 import { Icon } from "@twodft/astro-icon/components";
 import DoseChart from "./DoseChart.astro";
+import CardFront from "./card/CardFront.astro";
+import CardBack from "./card/CardBack.astro";
+import CardPopovers from "./card/CardPopovers.astro";
 import {
   getDrugByKey,
   isDrugClass,
   getClassDescriptionText,
   getDisplayName,
 } from "../data/drugs";
-import { getColumnByKey } from "../data/config";
+import { getColumnByKey, getGroupLabels } from "../data/config";
 import { getEffectIcon } from "../data/effect-icons";
+import { getCardData } from "../data/harm-reduction";
 import { getSubstanceStructure } from "../data/substances";
 import { toTitleCase } from "../lib/text";
-import MoleculeFigure from "./MoleculeFigure.astro";
 import CardContribute from "./CardContribute.astro";
 import SmilesCitation from "./SmilesCitation.astro";
-import { keyToSlug } from "../data/slug";
 import TimingChart from "./TimingChart.astro";
 import SubstanceComboTable from "./SubstanceComboTable.astro";
 import type { Locale } from "../i18n/locales";
@@ -28,41 +30,24 @@ interface Props {
 
 const { substanceKey, locale = "en" } = Astro.props;
 const ui = getUiMessages(locale);
+const uid = `psy-${substanceKey.replace(/[^a-z0-9]+/gi, "")}-${crypto.randomUUID().slice(0, 6)}`;
 
 const column = getColumnByKey(locale, substanceKey);
 const drug = getDrugByKey(substanceKey, locale);
-const displayName = drug?.pretty_name ?? getDisplayName(substanceKey, locale);
+// Chemical formulas read better with subscripts (N2O → N₂O).
+const displayName = (drug?.pretty_name ?? getDisplayName(substanceKey, locale)).replace(
+  /^N2O$/,
+  "N₂O"
+);
 const classNote = getClassDescriptionText(substanceKey, locale);
+const groupLabel = column ? getGroupLabels(locale)[column.group] : undefined;
+const cardData = getCardData(substanceKey, locale);
 
-const categories = drug?.categories ?? drug?.properties?.categories ?? [];
 const props = drug?.properties ?? {};
 const summary = props.summary ?? classNote;
 
-function firstDurationValue(
-  d: Record<string, unknown> | undefined
-): string | undefined {
-  if (!d) return undefined;
-  const entries = Object.entries(d).filter(
-    ([k, v]) => k !== "_unit" && typeof v === "string" && v
-  );
-  if (!entries.length) return undefined;
-  return entries.map(([k, v]) => (k === "value" ? v : `${v} (${k})`)).join(", ");
-}
-
 const formattedOnset = drug?.formatted_onset as Record<string, unknown> | undefined;
-const formattedDuration = drug?.formatted_duration as
-  | Record<string, unknown>
-  | undefined;
-const formattedAftereffects = drug?.formatted_aftereffects as
-  | Record<string, unknown>
-  | undefined;
-
-const onsetVal = firstDurationValue(formattedOnset);
-const onsetUnit = formattedOnset?._unit;
-const durationVal = firstDurationValue(formattedDuration);
-const durationUnit = formattedDuration?._unit;
-const afterVal = firstDurationValue(formattedAftereffects);
-const afterUnit = formattedAftereffects?._unit;
+const formattedDuration = drug?.formatted_duration as Record<string, unknown> | undefined;
 const rawPeakVal = (props as Record<string, unknown>).peak;
 const peakVal: string | Record<string, unknown> | undefined =
   typeof rawPeakVal === "string" ||
@@ -72,20 +57,18 @@ const peakVal: string | Record<string, unknown> | undefined =
 
 const effects = drug?.formatted_effects ?? [];
 const links = drug?.links ?? undefined;
-const pweffects = drug?.pweffects ?? undefined;
-const pwEffectEntries =
-  pweffects ? Object.entries(pweffects) : [];
+const pwEffectEntries = drug?.pweffects ? Object.entries(drug.pweffects) : [];
 const hasEffects = effects.length > 0 || pwEffectEntries.length > 0;
 const hasStructure = Boolean(getSubstanceStructure(substanceKey));
 const aliases = Array.from(
   new Set(
     [...(drug?.aliases ?? []), ...(props.aliases ?? [])]
       .filter((alias): alias is string => typeof alias === "string" && alias.trim().length > 0)
-      .map((alias) => alias.trim())
+      .map((alias) => alias.trim().replace(/_/g, " ").toLocaleLowerCase())
       .filter(
         (alias) =>
-          alias.toLocaleLowerCase() !== displayName.toLocaleLowerCase() &&
-          alias.toLocaleLowerCase() !== substanceKey.toLocaleLowerCase()
+          alias !== displayName.toLocaleLowerCase() &&
+          alias !== substanceKey.toLocaleLowerCase()
       )
   )
 );
@@ -96,249 +79,232 @@ const aliases = Array.from(
   data-card-type="substance"
   data-substance-key={substanceKey}
 >
-  {hasStructure && (
-    <canvas
-      class="substance-hologram"
-      data-molecule-mask={`/assets/molecules/${keyToSlug(substanceKey)}.png`}
-      aria-hidden="true"
-    />
-  )}
-  <MoleculeFigure substanceKey={substanceKey} />
-  <header class="card-header">
-    <div class="card-header-body">
-      <div class="accent category-surface" aria-hidden="true"></div>
-      <div class="title">
-        <h2 id="card-heading">{displayName}</h2>
-        {
-          categories.length > 0 && (
-            <ul class="tags">
-              {categories.map((c) => (
-                <li>{c}</li>
-              ))}
-            </ul>
-          )
-        }
+  <div class="psy-deck" data-psy-deck>
+    <input type="radio" class="psy-deck__radio" name={`${uid}-side`} id={`${uid}-side-front`} value="front" checked aria-label={t(locale, ui, "card.faceDose")} />
+    <input type="radio" class="psy-deck__radio" name={`${uid}-side`} id={`${uid}-side-back`} value="back" aria-label={t(locale, ui, "card.faceSafety")} />
+    <div class="psy-deck__tabs" aria-hidden="true">
+      <label for={`${uid}-side-front`} data-side="front">
+        <Icon name="ph:scales-fill" />
+        {t(locale, ui, "card.faceDose")}
+      </label>
+      <label for={`${uid}-side-back`} data-side="back">
+        <Icon name="ph:shield-warning-fill" />
+        {t(locale, ui, "card.faceSafety")}
+      </label>
+    </div>
+    <div class={`psy-card${column ? ` group-${column.group}` : ""}`} data-psy-card>
+      <div class="psy-card__inner">
+        <CardFront
+          data={cardData}
+          locale={locale}
+          uid={uid}
+          displayName={displayName}
+          groupLabel={groupLabel}
+          aliases={aliases}
+          hasStructure={hasStructure}
+        />
+        <CardBack data={cardData} locale={locale} uid={uid} displayName={displayName} hasStructure={hasStructure} />
       </div>
     </div>
-  </header>
+    <CardPopovers data={cardData} locale={locale} uid={uid} displayName={displayName} />
+  </div>
 
-  {summary && <p class="summary">{summary}</p>}
+  <div class="psy-details">
+    <h3 class="psy-details__title">{tFormat(locale, ui, "card.details", { name: displayName })}</h3>
 
-  {
-    !drug && isDrugClass(substanceKey) && (
-      <p class="fallback-note">{t(locale, ui, "substanceCard.classFallback")}</p>
-    )
-  }
+    {summary && <p class="summary">{summary}</p>}
 
-  {
-    !drug && !classNote && (
-      <p class="fallback-note">{t(locale, ui, "substanceCard.missingDataFallback")}</p>
-    )
-  }
+    {
+      !drug && isDrugClass(substanceKey) && (
+        <p class="fallback-note">{t(locale, ui, "substanceCard.classFallback")}</p>
+      )
+    }
 
-  {
-    aliases.length > 0 && (
-      <section class="also-known-as">
-        <h3>{t(locale, ui, "substanceCard.alsoKnownAs")}</h3>
-        <ul class="pills alias-pills">
-          {aliases.map((alias) => (
-            <li>{alias}</li>
-          ))}
-        </ul>
-      </section>
-    )
-  }
+    {
+      aliases.length > 4 && (
+        <section class="also-known-as">
+          <h3>{t(locale, ui, "substanceCard.alsoKnownAs")}</h3>
+          <ul class="pills alias-pills">
+            {aliases.map((alias) => (
+              <li>{alias}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
 
-  {
-    (onsetVal || durationVal || afterVal) && (
-      <section class="timings">
-        <h3>{t(locale, ui, "substanceCard.timing")}</h3>
-        <TimingChart
-          formattedOnset={formattedOnset}
-          formattedDuration={formattedDuration}
-          peak={peakVal}
-          label={tFormat(locale, ui, "substanceCard.effectTimeline", { name: displayName })}
-          locale={locale}
-        />
-        <div class="timings-table">
+    {
+      (formattedOnset || formattedDuration) && (
+        <section class="timings">
+          <h3>{t(locale, ui, "substanceCard.timing")}</h3>
+          <TimingChart
+            formattedOnset={formattedOnset}
+            formattedDuration={formattedDuration}
+            peak={peakVal}
+            label={tFormat(locale, ui, "substanceCard.effectTimeline", { name: displayName })}
+          />
+        </section>
+      )
+    }
+
+    {
+      drug?.formatted_dose && (
+        <section class="doses">
+          <DoseChart
+            formattedDose={drug.formatted_dose}
+            doseNote={drug.dose_note}
+            locale={locale}
+          />
+        </section>
+      )
+    }
+
+    <SubstanceComboTable substanceKey={substanceKey} locale={locale} />
+
+    {
+      (props.avoid || props.warning || props["test-kits"]) && (
+        <section class="advice">
+          <h3>{t(locale, ui, "substanceCard.safety")}</h3>
           <dl>
-            {onsetVal && (
+            {props.warning && (
               <div>
-                <dt>{t(locale, ui, "substanceCard.onset")}</dt>
-                <dd>
-                  {onsetVal} <span class="unit">{onsetUnit}</span>
-                </dd>
+                <dt>{t(locale, ui, "substanceCard.warning")}</dt>
+                <dd>{props.warning}</dd>
               </div>
             )}
-            {durationVal && (
+            {props.avoid && (
               <div>
-                <dt>{t(locale, ui, "substanceCard.duration")}</dt>
-                <dd>
-                  {durationVal} <span class="unit">{durationUnit}</span>
-                </dd>
+                <dt>{t(locale, ui, "substanceCard.avoidCombining")}</dt>
+                <dd>{props.avoid}</dd>
               </div>
             )}
-            {afterVal && (
+            {props["test-kits"] && (
               <div>
-                <dt>{t(locale, ui, "substanceCard.afterEffects")}</dt>
-                <dd>
-                  {afterVal} <span class="unit">{afterUnit}</span>
-                </dd>
-              </div>
-            )}
-            {props["half-life"] && (
-              <div>
-                <dt>{t(locale, ui, "substanceCard.halfLife")}</dt>
-                <dd>{props["half-life"]}</dd>
+                <dt>{t(locale, ui, "substanceCard.testKits")}</dt>
+                <dd>{props["test-kits"]}</dd>
               </div>
             )}
           </dl>
-        </div>
-      </section>
-    )
-  }
+        </section>
+      )
+    }
 
-  {
-    drug?.formatted_dose && (
-      <section class="doses">
-        <DoseChart
-          formattedDose={drug.formatted_dose}
-          doseNote={drug.dose_note}
-          locale={locale}
-        />
-      </section>
-    )
-  }
-
-  <SubstanceComboTable substanceKey={substanceKey} locale={locale} />
-
-  {
-    (props.avoid || props.warning || props["test-kits"]) && (
-      <section class="advice">
-        <h3>{t(locale, ui, "substanceCard.safety")}</h3>
-        <dl>
-          {props.warning && (
-            <div>
-              <dt>{t(locale, ui, "substanceCard.warning")}</dt>
-              <dd>{props.warning}</dd>
-            </div>
-          )}
-          {props.avoid && (
-            <div>
-              <dt>{t(locale, ui, "substanceCard.avoidCombining")}</dt>
-              <dd>{props.avoid}</dd>
-            </div>
-          )}
-          {props["test-kits"] && (
-            <div>
-              <dt>{t(locale, ui, "substanceCard.testKits")}</dt>
-              <dd>{props["test-kits"]}</dd>
-            </div>
-          )}
-        </dl>
-      </section>
-    )
-  }
-
-  {
-    hasEffects && (
-      <section class="effects">
-        <h3>{t(locale, ui, "substanceCard.effects")}</h3>
-        {
-          effects.length > 0 && (
-            <ul class="pills">
-              {effects.map((e) => (
-                <li>
-                  <Icon
-                    name={`ph:${getEffectIcon(e)}`}
-                    class="effect-icon"
-                    aria-hidden="true"
-                  />
-                  {toTitleCase(e)}
-                </li>
-              ))}
-            </ul>
-          )
-        }
-        {
-          pwEffectEntries.length > 0 && (
-            <div class="pw-effects-well">
-              <details class="pw-effects">
-                <summary class="pw-effects-toggle">
-                  <span class="pw-effects-toggle-main">
-                    <img
-                      src="/assets/psychonautwiki-logo.png"
-                      alt=""
-                      width="72"
-                      height="20"
-                      decoding="async"
+    {
+      hasEffects && (
+        <section class="effects">
+          <h3>{t(locale, ui, "substanceCard.effects")}</h3>
+          {
+            effects.length > 0 && (
+              <ul class="pills">
+                {effects.map((e) => (
+                  <li>
+                    <Icon
+                      name={`ph:${getEffectIcon(e)}`}
+                      class="effect-icon"
+                      aria-hidden="true"
                     />
-                    <span class="pw-effects-label">
-                      {t(locale, ui, "substanceCard.pwEffects")}
+                    {toTitleCase(e)}
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+          {
+            pwEffectEntries.length > 0 && (
+              <div class="pw-effects-well">
+                <details class="pw-effects">
+                  <summary class="pw-effects-toggle">
+                    <span class="pw-effects-toggle-main">
+                      <img
+                        src="/assets/psychonautwiki-logo.png"
+                        alt=""
+                        width="72"
+                        height="20"
+                        decoding="async"
+                      />
+                      <span class="pw-effects-label">
+                        {t(locale, ui, "substanceCard.pwEffects")}
+                      </span>
+                      <span class="pw-effects-count">
+                        ({pwEffectEntries.length})
+                      </span>
                     </span>
-                    <span class="pw-effects-count">
-                      ({pwEffectEntries.length})
-                    </span>
-                  </span>
-                  <Icon
-                    name="ph:caret-down-fill"
-                    class="pw-effects-chevron"
-                    aria-hidden="true"
-                  />
-                </summary>
-                <ul class="pills">
-                  {pwEffectEntries.map(([label, href]) => (
-                    <li>
-                      <a
-                        href={href}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                      >
-                        {label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            </div>
-          )
-        }
-      </section>
-    )
-  }
+                    <Icon
+                      name="ph:caret-down-fill"
+                      class="pw-effects-chevron"
+                      aria-hidden="true"
+                    />
+                  </summary>
+                  <ul class="pills">
+                    {pwEffectEntries.map(([label, href]) => (
+                      <li>
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
+                          {label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </div>
+            )
+          }
+        </section>
+      )
+    }
 
-  {
-    links && (
-      <section class="links">
-        <h3>{t(locale, ui, "substanceCard.more")}</h3>
-        <ul class="inline-links">
-          {links.experiences && (
-            <li>
-              <a href={links.experiences} target="_blank" rel="noreferrer noopener">
-                {t(locale, ui, "substanceCard.tripReports")}
-              </a>
-            </li>
-          )}
-          {links.pihkal && (
-            <li>
-              <a href={links.pihkal} target="_blank" rel="noreferrer noopener">
-                PiHKAL
-              </a>
-            </li>
-          )}
-          {links.tihkal && (
-            <li>
-              <a href={links.tihkal} target="_blank" rel="noreferrer noopener">
-                TiHKAL
-              </a>
-            </li>
-          )}
-        </ul>
-      </section>
-    )
-  }
+    {
+      links && (
+        <section class="links">
+          <h3>{t(locale, ui, "substanceCard.more")}</h3>
+          <ul class="inline-links">
+            {links.experiences && (
+              <li>
+                <a href={links.experiences} target="_blank" rel="noreferrer noopener">
+                  {t(locale, ui, "substanceCard.tripReports")}
+                </a>
+              </li>
+            )}
+            {links.pihkal && (
+              <li>
+                <a href={links.pihkal} target="_blank" rel="noreferrer noopener">
+                  PiHKAL
+                </a>
+              </li>
+            )}
+            {links.tihkal && (
+              <li>
+                <a href={links.tihkal} target="_blank" rel="noreferrer noopener">
+                  TiHKAL
+                </a>
+              </li>
+            )}
+          </ul>
+        </section>
+      )
+    }
 
-  {hasStructure && <SmilesCitation locale={locale} />}
+    <section class="card-sources">
+      <h3>{t(locale, ui, "card.sources")}</h3>
+      <ul>
+        {cardData.sources.map((source) => (
+          <li>
+            {source.url ? (
+              <a href={source.url} target="_blank" rel="noreferrer noopener">{source.title}</a>
+            ) : (
+              source.title
+            )}
+            <span class="card-sources__meta"> — {source.author}{source.publication ? `, ${source.publication}` : ""}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
 
-  <CardContribute locale={locale} />
+    {hasStructure && <SmilesCitation locale={locale} />}
+
+    <CardContribute locale={locale} />
+  </div>
 </article>

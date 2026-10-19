@@ -560,7 +560,7 @@ function setBackgroundInert(inert: boolean): void {
   if (inert) {
     backgroundElements = Array.from(document.body.children).filter(
       (element): element is HTMLElement => element instanceof HTMLElement &&
-        !element.matches("script, [data-modal-slot], .search-root, .search-palette") &&
+        !element.matches("script, [data-modal-slot], .search-root, .search-palette, [data-body-dock], [data-body-show]") &&
         !element.contains(document.querySelector("[data-modal-root]")) && !element.inert
     );
     for (const element of backgroundElements) element.inert = true;
@@ -650,8 +650,8 @@ async function navigateToModal(target: ModalTarget, push: boolean, origin?: HTML
     ids.set(element.id, id);
     element.id = id;
   });
-  content.querySelectorAll("[for], [aria-controls], [aria-labelledby], [aria-describedby], [href^='#'], [xlink\\:href]").forEach((element) => {
-    for (const attribute of ["for", "aria-controls", "aria-labelledby", "aria-describedby"]) {
+  content.querySelectorAll("[for], [aria-controls], [aria-labelledby], [aria-describedby], [popovertarget], [href^='#'], [xlink\\:href]").forEach((element) => {
+    for (const attribute of ["for", "aria-controls", "aria-labelledby", "aria-describedby", "popovertarget"]) {
       const value = element.getAttribute(attribute);
       if (value) element.setAttribute(attribute, value.split(/\s+/).map((id) => ids.get(id) ?? id).join(" "));
     }
@@ -661,6 +661,10 @@ async function navigateToModal(target: ModalTarget, push: boolean, origin?: HTML
         element.setAttribute(attribute, `#${ids.get(value.slice(1))}`);
       }
     }
+  });
+  // Radio groups (card sides) are scoped by name, not id.
+  content.querySelectorAll<HTMLInputElement>("input[type='radio'][name]").forEach((input) => {
+    input.name = `modal-${token}-${input.name}`;
   });
   const panel = root.querySelector<HTMLElement>("[data-modal-panel]");
   if (panel) {
@@ -747,13 +751,18 @@ function handleKeydown(event: KeyboardEvent): void {
   const root = document.querySelector<HTMLElement>("[data-modal-root]");
   if (!root || root.getAttribute("data-open") !== "true") return;
   if (event.key === "Escape") {
+    // An open popover (routes, comparison) closes first.
+    if (root.querySelector(":popover-open")) return;
     event.preventDefault();
     handleClose();
   } else if (event.key === "Tab") {
     const panel = root.querySelector<HTMLElement>("[data-modal-panel]")!;
-    const focusable = Array.from(panel.querySelectorAll<HTMLElement>(
-      'a[href], button, input, select, textarea, summary, [tabindex="0"]'
-    )).filter((element) => !element.hasAttribute("disabled") && element.getClientRects().length);
+    const selector = 'a[href], button, input, select, textarea, summary, [tabindex="0"]';
+    // The body dock stays usable while a card is open.
+    const dock = document.querySelector<HTMLElement>("[data-body-dock]:not([hidden]), [data-body-show]:not([hidden])");
+    const focusable = [panel, ...(dock ? [dock] : [])]
+      .flatMap((scope) => Array.from(scope.matches(selector) ? [scope] : scope.querySelectorAll<HTMLElement>(selector)))
+      .filter((element) => !element.hasAttribute("disabled") && element.tabIndex >= 0 && element.getClientRects().length && getComputedStyle(element).visibility !== "hidden");
     const first = focusable[0];
     const last = focusable.at(-1);
     if (event.shiftKey && (document.activeElement === first || document.activeElement === panel)) {
@@ -770,6 +779,17 @@ function handleCloseClick(event: MouseEvent): void {
   if (target.closest("[data-modal-close]")) {
     event.preventDefault();
     handleClose();
+    return;
+  }
+  // Substance cards float on the backdrop, so empty space around them is
+  // backdrop too, even though it belongs to the (transparent) panel.
+  const panel = target.closest("[data-modal-panel]");
+  if (
+    panel?.querySelector(".psy-deck") &&
+    target.matches("[data-modal-panel], [data-modal-content], .substance-card, .psy-deck")
+  ) {
+    event.preventDefault();
+    handleClose();
   }
 }
 
@@ -784,6 +804,8 @@ export function initComboModal(options: ComboModalOptions = {}): void {
 
   const root = ensureModal();
   if (root && root.getAttribute("data-open") === "true") {
+    const heading = root.querySelector<HTMLElement>("[data-modal-content] h2[id]");
+    if (heading) root.querySelector("[data-modal-panel]")?.setAttribute("aria-labelledby", heading.id);
     openModal(root, false);
   }
 

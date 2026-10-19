@@ -39,6 +39,9 @@ export function createRenderer(
   let hover = 0;
   let lightX = pointerX;
   let lightY = pointerY;
+  // Flips charge the foil (see "psy:holo-boost"); it decays over BOOST_SECONDS.
+  let boost = 0;
+  const BOOST_SECONDS = 1.3;
 
   const stop = () => { loop?.stop(); loop = undefined; };
   const wake = () => { if (active && prepared && !disposed && !loop) render(); };
@@ -80,6 +83,8 @@ export function createRenderer(
     await shader.compile({ colors: [output.format] });
     if (disposed) return;
 
+    // The reverse of a card carries a silver (monochrome) seal.
+    shader.set({ params: { mono: canvas.dataset.hologramTone === "silver" ? 1 : 0 } });
     const updateTheme = () => {
       shader.set({ params: { lightScheme: document.documentElement.dataset.colorScheme === "light" ? 1 : 0 } });
       wake();
@@ -115,6 +120,9 @@ export function createRenderer(
       wake();
     };
     const leave = () => { reset(); wake(); };
+    const charge = () => { boost = 1; wake(); };
+    host.addEventListener("psy:holo-boost", charge);
+    cleanup.push(() => host.removeEventListener("psy:holo-boost", charge));
     const up = (event: PointerEvent) => { if (event.pointerType !== "mouse") leave(); };
     host.addEventListener("pointermove", move, { passive: true });
     host.addEventListener("pointerdown", move, { passive: true });
@@ -145,7 +153,8 @@ export function createRenderer(
           hover += (targetHover - hover) * blend;
           lightX += (pointerX - lightX) * blend;
           lightY += (pointerY - lightY) * blend;
-          shader.set({ params: { tilt: [tiltX, tiltY], pointer: [lightX, lightY], hover } });
+          boost = Math.max(0, boost - Math.min(time.deltaTime, 0.1) / BOOST_SECONDS);
+          shader.set({ params: { tilt: [tiltX, tiltY], pointer: [lightX, lightY], hover, boost } });
           currentFrame.pass(output, shader);
           if (!revealing) {
             revealing = true;
@@ -155,7 +164,7 @@ export function createRenderer(
             }).catch(fail);
           }
           const remaining = Math.max(Math.abs(targetX - tiltX), Math.abs(targetY - tiltY),
-            Math.abs(targetHover - hover), Math.abs(pointerX - lightX), Math.abs(pointerY - lightY));
+            Math.abs(targetHover - hover), Math.abs(pointerX - lightX), Math.abs(pointerY - lightY), boost);
           if (remaining < 0.001) stop();
         } catch (error) {
           // Cancel the failed frame and defer resource release until the callback
@@ -180,7 +189,7 @@ export function createRenderer(
       if (disposed || value === active) return;
       active = value;
       if (active) wake();
-      else { stop(); reset(); tiltX = tiltY = hover = 0; lightX = pointerX; lightY = pointerY; }
+      else { stop(); reset(); tiltX = tiltY = hover = boost = 0; lightX = pointerX; lightY = pointerY; }
     },
     dispose,
   };

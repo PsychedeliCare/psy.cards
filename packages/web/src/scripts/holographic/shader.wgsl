@@ -7,6 +7,10 @@ struct Params {
   hover: f32,
   lightScheme: f32,
   artwork: vec4f,
+  // 0–1, set to 1 on a flip and decayed by the renderer.
+  boost: f32,
+  // 1 = monochrome silver foil (the card's reverse).
+  mono: f32,
 }
 @group(0) @binding(0) var<uniform> params: Params;
 @group(0) @binding(1) var molecule: texture_2d<f32>;
@@ -79,13 +83,17 @@ fn fs_main(@location(0) uv: vec2f) -> @location(0) vec4f {
   let hit = eye - ray * (dot(eye, normal) / dot(ray, normal));
   let p = vec2f(dot(hit, right), dot(hit, down));
   let aa = max(length(fwidth(p)), 0.0006);
-  let hover = clamp(params.hover, 0.0, 1.0);
+  let boost = clamp(params.boost, 0.0, 1.0);
+  let hover = clamp(params.hover + boost * 0.75, 0.0, 1.0);
   let delta = p - params.pointer;
   let sweep = delta.x * 0.72 + delta.y * 0.52 + sin(p.y * 4.0 + p.x * 3.0) * 0.08;
   let lightBand = exp(-pow(sweep / 0.48, 2.0));
   let glint = exp(-pow(sweep / 0.085, 2.0));
   let spotlight = exp(-dot(delta * vec2f(0.8, 0.6), delta * vec2f(0.8, 0.6)) * 1.7);
-  let light = lightBand * spotlight * hover;
+  // A flip sends one bright band across the seal while the boost decays.
+  let sweepAt = mix(2.2, -2.2, boost);
+  let burst = exp(-pow((p.x * 0.75 - p.y * 0.55 - sweepAt) / 0.32, 2.0)) * smoothstep(0.0, 0.3, boost);
+  let light = lightBand * spotlight * hover + burst * 0.9;
   let lightDirection = normalize(vec3f(params.pointer, 1.2) - hit);
   let viewDirection = normalize(eye - hit);
   let lightAndView = vec2f(dot(lightDirection + viewDirection, right), dot(lightDirection + viewDirection, down));
@@ -99,16 +107,18 @@ fn fs_main(@location(0) uv: vec2f) -> @location(0) vec4f {
   let pearl = pearlColor(dot(lightAndView, vec2f(0.48, -0.32)) + p.y * 0.32 + contour * 0.003);
   let foil = clamp(pearl * 0.8 + spectral * 0.18 + vec3f(0.12), vec3f(0), vec3f(1));
   let ink = mix(vec3f(0.72, 0.76, 0.80), vec3f(0.12, 0.15, 0.19), params.lightScheme);
-  let foilInk = mix(foil, foil * 0.4, params.lightScheme);
+  let silver = vec3f(dot(foil, vec3f(0.3, 0.59, 0.11))) * vec3f(0.95, 0.98, 1.04) * 1.08;
+  let toned = mix(foil, silver, params.mono);
+  let foilInk = mix(toned, toned * 0.4, params.lightScheme);
   let mask = moleculeMask(p);
   let contours = stroke(sin(contour), 0.06, min(fwidth(contour), 1.0));
   let grid = (fract((p + 1.0) * 20.0) - 0.5) / 20.0;
   let dots = stroke(length(grid), 0.0008, aa * 0.4);
   let noise = grain(p + vec2f(2));
   let sparkle = pow(max(noise + 0.5, 0.0), 24.0) * glint * spotlight * hover;
-  let engraving = (contours * 0.055 + dots * 0.035) * (0.12 + hover * 0.42 + light);
+  let engraving = (contours * 0.06 + dots * 0.04) * (0.16 + hover * 0.48 + light);
   let wash = light * 0.025 + sparkle * 0.035;
-  let moleculeAlpha = mask * (0.22 + hover * 0.12 + light * 0.38);
+  let moleculeAlpha = mask * (0.26 + hover * 0.16 + light * 0.42);
   let echo = moleculeMask(p - vec2f(0.007, -0.004) - params.tilt * 0.012) * light * 0.09;
   // Transparent, premultiplied output: the DOM owns the card surface and text.
   let region = exp(-dot(p * vec2f(0.6, 0.7), p * vec2f(0.6, 0.7)) * 0.55);

@@ -1,0 +1,236 @@
+{
+  "$comment": "Language-independent harm reduction data for the substance cards. Text lives in i18n/content/<locale>/harm-reduction.json. Every number must cite a source id from `sources`; editorial ratings are marked `editorial: true`.",
+  "sources": {
+    "gable2004": {
+      "author": "Gable RS",
+      "title": "Comparison of acute lethal toxicity of commonly abused psychoactive substances",
+      "publication": "Addiction 99(6):686–696, 2004",
+      "url": "https://doi.org/10.1111/j.1360-0443.2004.00744.x"
+    },
+    "nutt2007": {
+      "author": "Nutt D, King LA, Saulsbury W, Blakemore C",
+      "title": "Development of a rational scale to assess the harm of drugs of potential misuse",
+      "publication": "The Lancet 369(9566):1047–1053, 2007",
+      "url": "https://doi.org/10.1016/S0140-6736(07)60464-4"
+    },
+    "saferparty": {
+      "author": "Saferparty.ch (Zurich drug checking)",
+      "title": "MDMA — safer use",
+      "url": "https://en.saferparty.ch/substanzen/mdma"
+    },
+    "efsa2015": {
+      "author": "EFSA Panel on Dietetic Products, Nutrition and Allergies",
+      "title": "Scientific Opinion on the safety of caffeine",
+      "publication": "EFSA Journal 13(5):4102, 2015",
+      "url": "https://doi.org/10.2903/j.efsa.2015.4102"
+    },
+    "ukcmo2016": {
+      "author": "UK Chief Medical Officers",
+      "title": "Low risk drinking guidelines",
+      "publication": "2016",
+      "url": "https://www.gov.uk/government/publications/alcohol-consumption-advice-on-low-risk-drinking"
+    },
+    "widmark": {
+      "author": "Widmark EMP",
+      "title": "Blood alcohol estimate: grams of alcohol ÷ (body weight × r), r ≈ 0.68 (men) / 0.55 (women)",
+      "publication": "1932"
+    },
+    "tripsit": {
+      "author": "TripSit",
+      "title": "Drug database and combination chart",
+      "url": "https://github.com/TripSit/drugs"
+    }
+  },
+  "gable2004": [
+    { "name": "Heroin", "key": "opioids", "route": "iv", "ratio": 6 },
+    { "name": "GHB", "key": "ghb/gbl", "route": "oral", "ratio": 8 },
+    { "name": "Isobutyl nitrite", "route": "inhaled", "ratio": 8 },
+    { "name": "Alcohol", "key": "alcohol", "route": "oral", "ratio": 10 },
+    { "name": "DXM", "key": "dxm", "route": "oral", "ratio": 10 },
+    { "name": "Methamphetamine", "key": "amphetamines", "route": "oral", "ratio": 10 },
+    { "name": "Cocaine", "key": "cocaine", "route": "intranasal", "ratio": 15 },
+    { "name": "MDMA", "key": "mdma", "route": "oral", "ratio": 16 },
+    { "name": "Codeine", "route": "oral", "ratio": 20 },
+    { "name": "Methadone", "route": "oral", "ratio": 20 },
+    { "name": "Mescaline", "key": "mescaline", "route": "oral", "ratio": 24, "extrapolated": true },
+    { "name": "Rohypnol", "key": "benzodiazepines", "route": "oral", "ratio": 30 },
+    { "name": "Ketamine", "key": "ketamine", "route": "intranasal", "ratio": 38, "extrapolated": true },
+    { "name": "DMT", "key": "dmt", "route": "oral", "ratio": 50, "extrapolated": true },
+    { "name": "Phenobarbital", "route": "oral", "ratio": 50 },
+    { "name": "Fluoxetine", "key": "ssris", "route": "oral", "ratio": 100 },
+    { "name": "Nitrous oxide", "key": "nitrous", "route": "inhaled", "ratio": 150, "atLeast": true },
+    { "name": "LSD", "key": "lsd", "route": "oral", "ratio": 1000, "extrapolated": true },
+    { "name": "Psilocybin", "key": "mushrooms", "route": "oral", "ratio": 1000, "extrapolated": true },
+    { "name": "Cannabis", "key": "cannabis", "route": "smoked", "ratio": 1000, "atLeast": true, "extrapolated": true }
+  ],
+  "substances": {
+    "lsd": {
+      "primaryRoute": "Oral",
+      "margin": { "ratio": 1000, "source": "gable2004", "extrapolated": true },
+      "dependence": { "level": 1, "nutt": 1.23, "nuttDrug": "LSD" },
+      "spacing": { "pattern": "x.x.x.x.", "unit": "week" }
+    },
+    "mushrooms": {
+      "primaryRoute": "Oral",
+      "margin": { "ratio": 1000, "source": "gable2004", "extrapolated": true, "compound": "Psilocybin" },
+      "dependence": { "level": 1, "editorial": true },
+      "spacing": { "pattern": "x.x.x.x.", "unit": "week" }
+    },
+    "dmt": {
+      "primaryRoute": "Vapourized",
+      "margin": { "ratio": 50, "source": "gable2004", "extrapolated": true },
+      "dependence": { "level": 1, "editorial": true },
+      "spacing": {}
+    },
+    "mescaline": {
+      "primaryRoute": "Oral",
+      "margin": { "ratio": 24, "source": "gable2004", "extrapolated": true },
+      "dependence": { "level": 1, "editorial": true },
+      "spacing": { "pattern": "x.x.x.x.", "unit": "week" }
+    },
+    "dox": {
+      "doseFrom": "dom",
+      "primaryRoute": "Oral",
+      "margin": null,
+      "dependence": { "level": 1, "editorial": true },
+      "spacing": { "pattern": "x.x.x.x.", "unit": "week" }
+    },
+    "nbomes": {
+      "doseFrom": "25i-nbome",
+      "primaryRoute": "Sublingual",
+      "margin": null,
+      "marginDanger": true,
+      "dependence": { "level": 1, "editorial": true },
+      "spacing": { "pattern": "x.x.x.x.", "unit": "week" }
+    },
+    "2c-x": {
+      "doseFrom": "2c-b",
+      "primaryRoute": "Oral",
+      "margin": null,
+      "dependence": { "level": 1, "editorial": true },
+      "spacing": { "pattern": "x.x.x.x.", "unit": "week" }
+    },
+    "2c-t-x": {
+      "doseFrom": "2c-t-2",
+      "primaryRoute": "Oral",
+      "margin": null,
+      "dependence": { "level": 1, "editorial": true },
+      "spacing": { "pattern": "x.x.x.x.", "unit": "week" }
+    },
+    "5-meo-xxt": {
+      "doseFrom": "5-meo-dmt",
+      "primaryRoute": "Smoked",
+      "margin": null,
+      "marginDanger": true,
+      "dependence": { "level": 1, "editorial": true },
+      "spacing": {}
+    },
+    "cannabis": {
+      "primaryRoute": "Smoked",
+      "margin": { "ratio": 1000, "source": "gable2004", "extrapolated": true, "atLeast": true },
+      "dependence": { "level": 3, "nutt": 1.51, "nuttDrug": "Cannabis" },
+      "spacing": {}
+    },
+    "ketamine": {
+      "primaryRoute": "Insufflated",
+      "margin": { "ratio": 38, "source": "gable2004", "extrapolated": true },
+      "dependence": { "level": 3, "nutt": 1.54, "nuttDrug": "Ketamine" },
+      "spacing": {},
+      "personal": { "kind": "referenceWeight", "weightKg": 68 }
+    },
+    "mxe": {
+      "primaryRoute": "Insufflated",
+      "margin": null,
+      "dependence": { "level": 3, "editorial": true },
+      "spacing": {},
+      "personal": { "kind": "referenceWeight", "weightKg": 80 }
+    },
+    "dxm": {
+      "primaryRoute": "Oral",
+      "margin": { "ratio": 10, "source": "gable2004" },
+      "dependence": { "level": 2, "editorial": true },
+      "spacing": { "pattern": "x.x.x.x.", "unit": "week" },
+      "personal": { "kind": "perKgChart" }
+    },
+    "nitrous": {
+      "primaryRoute": null,
+      "margin": { "ratio": 150, "source": "gable2004", "atLeast": true },
+      "dependence": { "level": 2, "editorial": true },
+      "spacing": {}
+    },
+    "amphetamines": {
+      "doseFrom": "amphetamine",
+      "primaryRoute": "Insufflated",
+      "margin": { "ratio": 10, "source": "gable2004", "compound": "Methamphetamine" },
+      "dependence": { "level": 4, "nutt": 1.67, "nuttDrug": "Amphetamine" },
+      "spacing": {}
+    },
+    "mdma": {
+      "primaryRoute": "Oral",
+      "margin": { "ratio": 16, "source": "gable2004" },
+      "dependence": { "level": 2, "nutt": 1.13, "nuttDrug": "Ecstasy" },
+      "spacing": { "pattern": "x..x..x..x..", "unit": "month" },
+      "personal": { "kind": "mgPerKg", "male": 1.5, "female": 1.3, "source": "saferparty" }
+    },
+    "cocaine": {
+      "primaryRoute": "Insufflated",
+      "margin": { "ratio": 15, "source": "gable2004" },
+      "dependence": { "level": 5, "nutt": 2.39, "nuttDrug": "Cocaine" },
+      "spacing": {}
+    },
+    "caffeine": {
+      "primaryRoute": "Oral",
+      "margin": null,
+      "dependence": { "level": 2, "editorial": true },
+      "spacing": {},
+      "personal": { "kind": "caffeine", "singleMgPerKg": 3, "singleMaxMg": 200, "dailyMg": 400, "source": "efsa2015" }
+    },
+    "alcohol": {
+      "primaryRoute": "Oral",
+      "margin": { "ratio": 10, "source": "gable2004" },
+      "dependence": { "level": 4, "nutt": 1.93, "nuttDrug": "Alcohol" },
+      "spacing": {},
+      "personal": { "kind": "bac", "gramsPerUnit": 8, "rMale": 0.68, "rFemale": 0.55, "limitPermille": 0.5, "source": "widmark" }
+    },
+    "ghb/gbl": {
+      "primaryRoute": "Oral",
+      "margin": { "ratio": 8, "source": "gable2004" },
+      "dependence": { "level": 4, "nutt": 1.19, "nuttDrug": "GHB" },
+      "spacing": {}
+    },
+    "opioids": {
+      "doseFrom": null,
+      "primaryRoute": null,
+      "margin": { "ratio": 6, "source": "gable2004", "compound": "Heroin (IV)" },
+      "dependence": { "level": 5, "nutt": 3.0, "nuttDrug": "Heroin" },
+      "spacing": {}
+    },
+    "tramadol": {
+      "primaryRoute": "Oral",
+      "margin": null,
+      "dependence": { "level": 4, "editorial": true },
+      "spacing": {}
+    },
+    "benzodiazepines": {
+      "doseFrom": "diazepam",
+      "primaryRoute": "Oral",
+      "margin": { "ratio": 30, "source": "gable2004", "compound": "Flunitrazepam" },
+      "dependence": { "level": 4, "nutt": 1.83, "nuttDrug": "Benzodiazepines" },
+      "spacing": {}
+    },
+    "maois": {
+      "doseFrom": null,
+      "primaryRoute": null,
+      "margin": null,
+      "dependence": { "level": 1, "editorial": true },
+      "spacing": {}
+    },
+    "ssris": {
+      "doseFrom": null,
+      "primaryRoute": null,
+      "margin": { "ratio": 100, "source": "gable2004", "compound": "Fluoxetine" },
+      "dependence": { "level": 1, "editorial": true },
+      "spacing": {}
+    }
+  }
+}

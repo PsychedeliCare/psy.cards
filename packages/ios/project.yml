@@ -55,6 +55,10 @@ targets:
           - de
           - it
         CFBundleDevelopmentRegion: en
+        CFBundleURLTypes:
+          - CFBundleURLName: cards.psy.PsyCards
+            CFBundleURLSchemes:
+              - psycards
   PsyCardsTests:
     type: bundle.unit-test
     platform: iOS
@@ -66,14 +70,28 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: cards.psy.PsyCardsTests
         GENERATE_INFOPLIST_FILE: YES
+  PsyCardsUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: PsyCardsUITests
+    dependencies:
+      - target: PsyCards
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: cards.psy.PsyCardsUITests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: PsyCards
 schemes:
   PsyCards:
     build:
       targets:
         PsyCards: all
         PsyCardsTests: [test]
+        PsyCardsUITests: [test]
     test:
       targets:
         - PsyCardsTests
+        - PsyCardsUITests
     run:
       config: Debug

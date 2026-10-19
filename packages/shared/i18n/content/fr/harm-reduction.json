@@ -1,0 +1,1261 @@
+{
+  "lsd": {
+    "dose": "Les buvards correspondent rarement à l'étiquette : commencez par un demi et attendez 2 h avant d'en reprendre.",
+    "prepare": "Le réactif d'Ehrlich vire au violet pour le LSD. Un buvard amer ou qui engourdit est sans doute un NBOMe : recrachez-le.",
+    "spacing": {
+      "value": "2 semaines",
+      "label": "Tolérance",
+      "text": "La tolérance s'installe dès le lendemain, dure ~2 semaines et vaut aussi pour champignons et mescaline."
+    },
+    "dependence": "Pas compulsif : la tolérance rend la reprise inutile.",
+    "risks": [
+      {
+        "title": "Bad trip",
+        "text": "Panique et confusion peuvent mener à des comportements à risque. Prévoyez un·e sitter sobre et un lieu calme."
+      },
+      {
+        "title": "Santé mentale",
+        "text": "Peut déclencher une psychose ou une manie en cas d'antécédents personnels ou familiaux."
+      },
+      {
+        "title": "Lithium",
+        "text": "Des convulsions ont été rapportées avec le lithium. Ne mélangez jamais."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Panique ou confusion extrême",
+        "Danger pour soi ou les autres",
+        "Convulsions ou surchauffe (autre produit ?)"
+      ],
+      "actions": [
+        "Allez dans un endroit calme, tamisé",
+        "Rassurez : c'est le produit, ça va passer",
+        "Appelez le 112 en cas de convulsions, douleur thoracique ou mise en danger"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Visuels"
+      },
+      {
+        "label": "Euphorie"
+      },
+      {
+        "label": "Introspection"
+      },
+      {
+        "label": "Temps distordu"
+      }
+    ]
+  },
+  "mushrooms": {
+    "dose": "La puissance varie selon l'espèce et le lot. Pesez-les ; commencez vers 1 g avec un nouveau lot.",
+    "prepare": "Les effets peuvent mettre 2 h : ne reprenez pas trop tôt. Une tisane de gingembre aide contre la nausée.",
+    "spacing": {
+      "value": "2 semaines",
+      "label": "Tolérance",
+      "text": "La tolérance dure ~2 semaines et vaut aussi pour le LSD et la mescaline."
+    },
+    "dependence": "Pas compulsif : la tolérance rend la reprise inutile.",
+    "risks": [
+      {
+        "title": "Bad trip",
+        "text": "Panique et confusion peuvent mener à des comportements à risque. Prévoyez un·e sitter sobre et un lieu calme."
+      },
+      {
+        "title": "Santé mentale",
+        "text": "Peut déclencher une psychose ou une manie en cas d'antécédents personnels ou familiaux."
+      },
+      {
+        "title": "Mauvais champignon",
+        "text": "Un champignon sauvage mal identifié peut détruire le foie. Ne consommez que des espèces identifiées avec certitude."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Panique ou confusion extrême",
+        "Danger pour soi ou les autres",
+        "Fortes douleurs au ventre des heures après (mauvais champignon)"
+      ],
+      "actions": [
+        "Allez dans un endroit calme, tamisé",
+        "Rassurez : c'est le produit, ça va passer",
+        "Appelez le 112 en cas de mise en danger ou de champignon suspect"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Visuels"
+      },
+      {
+        "label": "Euphorie"
+      },
+      {
+        "label": "Introspection"
+      },
+      {
+        "label": "Nausée"
+      }
+    ]
+  },
+  "dmt": {
+    "dose": "Utilisez une balance au milligramme : 10–15 mg vaporisés, c'est léger ; le « breakthrough » commence vers 25 mg.",
+    "prepare": "Asseyez-vous ou allongez-vous avant d'inhaler et confiez la pipe à un·e sitter : on peut perdre son corps en quelques secondes.",
+    "spacing": {
+      "value": "Intégrer",
+      "label": "Peu de tolérance",
+      "text": "La tolérance s'installe à peine, mais prenez le temps d'intégrer chaque expérience."
+    },
+    "dependence": "Pas compulsif. La tolérance s'installe à peine.",
+    "risks": [
+      {
+        "title": "Effet soudain",
+        "text": "Effet complet en une minute : chutes et brûlures si debout ou avec une flamme."
+      },
+      {
+        "title": "Ayahuasca",
+        "text": "La DMT orale exige un IMAO, dangereux avec ISRS, stimulants, MDMA et tramadol."
+      },
+      {
+        "title": "Cœur",
+        "text": "Le pouls et la tension montent fortement. Risqué en cas de problème cardiaque."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Panique au retour",
+        "Vomissements (surtout ayahuasca)",
+        "Fièvre, raideur, agitation (syndrome sérotoninergique)"
+      ],
+      "actions": [
+        "Gardez la personne assise ou sur le côté, loin des flammes",
+        "Rassurez : fumée, l'effet passe en 10–20 min",
+        "Appelez le 112 si convulsions, souffle difficile ou fièvre avec raideur"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Visuels intenses"
+      },
+      {
+        "label": "Breakthrough"
+      },
+      {
+        "label": "Rush corporel"
+      },
+      {
+        "label": "Très court"
+      }
+    ]
+  },
+  "mescaline": {
+    "dose": "Doses pour la mescaline HCl. La puissance des cactus varie beaucoup : commencez par une petite portion.",
+    "prepare": "Attendez-vous à de fortes nausées et à une montée lente (1–3 h). Ne reprenez pas avant 3 h.",
+    "spacing": {
+      "value": "2 semaines",
+      "label": "Tolérance",
+      "text": "La tolérance dure ~2 semaines et vaut aussi pour le LSD et les champignons."
+    },
+    "dependence": "Pas compulsif : la tolérance rend la reprise inutile.",
+    "risks": [
+      {
+        "title": "Long trip",
+        "text": "6–12 heures. Prévoyez un lieu sûr et un lendemain libre."
+      },
+      {
+        "title": "Santé mentale",
+        "text": "Peut déclencher une psychose ou une manie en cas d'antécédents."
+      },
+      {
+        "title": "Cœur",
+        "text": "Augmente le pouls et la tension."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Panique ou confusion extrême",
+        "Vomissements persistants",
+        "Douleur thoracique ou convulsions"
+      ],
+      "actions": [
+        "Allez dans un endroit calme, tamisé",
+        "Petites gorgées d'eau ; PLS si somnolence et vomissements",
+        "Appelez le 112 si douleur thoracique, convulsions ou mise en danger"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Visuels"
+      },
+      {
+        "label": "Empathie"
+      },
+      {
+        "label": "Introspection"
+      },
+      {
+        "label": "Nausée"
+      }
+    ]
+  },
+  "dox": {
+    "dose": "La puissance varie de 1 à 5 dans la famille (DOB, DOC, DOI, DOM).",
+    "prepare": "Souvent vendu sur buvard comme du LSD. Réactif d'Ehrlich : violet = LSD, aucun changement = peut-être un DOx.",
+    "marginNote": "Pas de données humaines. Les surdoses suivent surtout une confusion avec le LSD ou une reprise trop tôt.",
+    "spacing": {
+      "value": "2 semaines",
+      "label": "Tolérance",
+      "text": "Tolérance croisée avec les autres psychédéliques. Le trip peut durer une journée entière."
+    },
+    "dependence": "Pas compulsif.",
+    "risks": [
+      {
+        "title": "Montée tardive",
+        "text": "Jusqu'à 3 h avant les effets : reprendre est la voie classique vers la surdose."
+      },
+      {
+        "title": "Vasoconstriction",
+        "text": "Extrémités froides, engourdies, tension élevée. Risqué avec stimulants ou maladie cardiaque."
+      },
+      {
+        "title": "Très long",
+        "text": "12–30 heures, avec peu de sommeil."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Convulsions",
+        "Tension très élevée ou douleur thoracique",
+        "Surchauffe, agitation extrême"
+      ],
+      "actions": [
+        "Appelez le 112 si convulsions, douleur thoracique ou fièvre",
+        "Gardez la personne au frais et au calme",
+        "PLS si elle ne répond pas"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Visuels"
+      },
+      {
+        "label": "Stimulation"
+      },
+      {
+        "label": "Très long"
+      },
+      {
+        "label": "Extrémités froides"
+      }
+    ]
+  },
+  "nbomes": {
+    "dose": "Actif sous 1 mg : impossible à doser à l'œil. Ne sniffez ni n'avalez jamais de poudre ou de liquide.",
+    "prepare": "Goût amer ou engourdissant = probablement un NBOMe. Si vous attendiez du LSD, recrachez-le.",
+    "marginNote": "Aucune marge fiable : des décès ont été rapportés à des doses proches des doses habituelles.",
+    "spacing": {
+      "value": "2 semaines",
+      "label": "Tolérance",
+      "text": "Tolérance croisée avec les autres psychédéliques. Mieux vaut s'en passer."
+    },
+    "dependence": "Pas compulsif.",
+    "risks": [
+      {
+        "title": "Convulsions et cœur",
+        "text": "Cœur rapide, vasoconstriction, surchauffe et convulsions."
+      },
+      {
+        "title": "Décès à faible dose",
+        "text": "Surtout sniffé ou combiné à des stimulants."
+      },
+      {
+        "title": "Agitation",
+        "text": "Des états de confusion violente ont été rapportés."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Convulsions",
+        "Cœur très rapide, forte fièvre",
+        "Agitation violente ou confusion"
+      ],
+      "actions": [
+        "Appelez le 112 immédiatement",
+        "Rafraîchissez la personne ; dégagez l'espace autour",
+        "PLS si elle ne répond pas"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Visuels"
+      },
+      {
+        "label": "Stimulation"
+      },
+      {
+        "label": "Anxiété"
+      },
+      {
+        "label": "Cœur rapide"
+      }
+    ]
+  },
+  "2c-x": {
+    "dose": "Les autres 2C ont des puissances très différentes : ne transposez jamais une dose de l'un à l'autre.",
+    "prepare": "Pesez avec une balance au milligramme. Testez les poudres inconnues : du « 2C-B » est parfois un autre 2C ou un NBOMe.",
+    "marginNote": "Pas de données de marge. Courbe dose-effet raide : quelques mg changent beaucoup.",
+    "spacing": {
+      "value": "2 semaines",
+      "label": "Tolérance",
+      "text": "Tolérance croisée avec les autres psychédéliques."
+    },
+    "dependence": "Pas compulsif.",
+    "risks": [
+      {
+        "title": "Courbe raide",
+        "text": "Un peu plus peut être beaucoup plus fort."
+      },
+      {
+        "title": "Sérotoninergique",
+        "text": "Risqué avec les IMAO et le tramadol."
+      },
+      {
+        "title": "Charge corporelle",
+        "text": "Nausées, frissons et trips difficiles fréquents à forte dose."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Panique ou confusion extrême",
+        "Surchauffe",
+        "Convulsions"
+      ],
+      "actions": [
+        "Allez dans un endroit calme et frais",
+        "Rassurez : c'est le produit, ça va passer",
+        "Appelez le 112 si convulsions, douleur thoracique ou fièvre"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Visuels"
+      },
+      {
+        "label": "Euphorie"
+      },
+      {
+        "label": "Toucher accru"
+      },
+      {
+        "label": "Énergie"
+      }
+    ]
+  },
+  "2c-t-x": {
+    "dose": "Montée lente (1–2 h) : ne reprenez pas. Ne sniffez jamais.",
+    "prepare": "Pesez au milligramme et diluez dans l'eau pour fractionner les doses avec précision.",
+    "marginNote": "Pas de données de marge. Décès rapportés avec 2C-T-7 et 2C-T-21, parfois sniffés ou avec des IMAO.",
+    "spacing": {
+      "value": "2 semaines",
+      "label": "Tolérance",
+      "text": "Tolérance croisée avec les autres psychédéliques."
+    },
+    "dependence": "Pas compulsif.",
+    "risks": [
+      {
+        "title": "IMAO",
+        "text": "Réactions graves, possiblement mortelles."
+      },
+      {
+        "title": "Sniffer",
+        "text": "Des décès sont liés au 2C-T-7 sniffé."
+      },
+      {
+        "title": "Long et lourd",
+        "text": "Nausées et trip long, intense."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Convulsions",
+        "Très forte fièvre",
+        "Agitation extrême"
+      ],
+      "actions": [
+        "Appelez le 112 si convulsions ou fièvre",
+        "Rafraîchissez la personne dans un lieu calme",
+        "PLS si elle ne répond pas"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Visuels"
+      },
+      {
+        "label": "Introspection"
+      },
+      {
+        "label": "Long"
+      },
+      {
+        "label": "Nausée"
+      }
+    ]
+  },
+  "5-meo-xxt": {
+    "dose": "Plusieurs fois plus fort que la DMT : commencez à 2–3 mg pesés au milligramme.",
+    "prepare": "Allongez-vous avec un·e sitter sobre. Perte de contrôle du corps et vomissements sont fréquents.",
+    "marginNote": "Pas de données de marge. Réactions mortelles rapportées avec des IMAO (ex. ayahuasca).",
+    "spacing": {
+      "value": "Intégrer",
+      "label": "Peu de tolérance",
+      "text": "Bouleversant même à faible dose : prenez le temps d'intégrer avant de recommencer."
+    },
+    "dependence": "Pas compulsif.",
+    "risks": [
+      {
+        "title": "IMAO",
+        "text": "Réactions mortelles avec ayahuasca ou harmala."
+      },
+      {
+        "title": "Perte de contrôle",
+        "text": "Gestes brusques, chutes et vomissements sans conscience."
+      },
+      {
+        "title": "Santé mentale",
+        "text": "Très intense : risque de psychose en cas d'antécédents."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Ne répond plus après 30 minutes",
+        "Vomit allongé·e sur le dos",
+        "Convulsions"
+      ],
+      "actions": [
+        "PLS pour garder les voies respiratoires libres",
+        "Appelez le 112 si convulsions ou aucune réponse après 30 min",
+        "Signalez tout IMAO aux secours"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Dissolution de l'ego"
+      },
+      {
+        "label": "Rush écrasant"
+      },
+      {
+        "label": "Court"
+      },
+      {
+        "label": "Vomissements"
+      }
+    ]
+  },
+  "cannabis": {
+    "dose": "Space cakes : commencez par 5 mg de THC maximum et attendez 2 h. L'effet dure 4–10 h.",
+    "prepare": "Évitez le tabac ; vaporiser la fleur ménage les poumons. Ne conduisez pas pendant au moins 6 h.",
+    "marginNote": "Aucune surdose mortelle connue. Un malaise (« greening out ») est désagréable mais passe.",
+    "spacing": {
+      "value": "Pas tous les jours",
+      "label": "Pause de tolérance",
+      "text": "L'usage quotidien crée la dépendance. 2–4 semaines de pause remettent la tolérance à zéro."
+    },
+    "dependence": "Environ 1 personne sur 10 devient dépendante, davantage avec un usage quotidien.",
+    "risks": [
+      {
+        "title": "Anxiété et panique",
+        "text": "Fréquentes avec les variétés riches en THC et les space cakes."
+      },
+      {
+        "title": "Psychose",
+        "text": "Risque accru avec beaucoup de THC, un usage quotidien, jeune âge ou antécédents familiaux."
+      },
+      {
+        "title": "Synthétiques",
+        "text": "Fleurs « CBD » pulvérisées et vapes peuvent contenir des cannabinoïdes de synthèse : convulsions."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Panique, cœur qui s'emballe",
+        "Nausées, vomissements, malaise",
+        "Convulsions (penser aux synthétiques)"
+      ],
+      "actions": [
+        "Asseyez ou allongez la personne au calme",
+        "Eau ou boisson sucrée ; rassurez",
+        "Appelez le 112 si douleur thoracique, convulsions ou perte de connaissance"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Détente"
+      },
+      {
+        "label": "Fringale"
+      },
+      {
+        "label": "Sens aiguisés"
+      },
+      {
+        "label": "Anxiété"
+      }
+    ]
+  },
+  "ketamine": {
+    "dose": "Commencez par une petite trace (10–20 mg) et attendez 15 min : au-delà, le K-hole arrive vite.",
+    "prepare": "Écrasez finement, utilisez votre propre paille et rincez-vous le nez à l'eau après.",
+    "spacing": {
+      "value": "Rarement",
+      "label": "Protégez votre vessie",
+      "text": "Un usage hebdomadaire ou plus abîme la vessie et crée la dépendance. Laissez des semaines entre les prises."
+    },
+    "dependence": "Tolérance et usage compulsif s'installent vite en cas d'usage fréquent.",
+    "risks": [
+      {
+        "title": "Vessie abîmée",
+        "text": "Douleurs, envies pressantes, sang dans les urines : arrêtez et consultez. Les lésions peuvent devenir permanentes."
+      },
+      {
+        "title": "Accidents",
+        "text": "Engourdissement et perte de coordination : chutes, brûlures, noyade. Jamais dans l'eau ni seul·e."
+      },
+      {
+        "title": "Dépresseurs",
+        "text": "Avec alcool, GHB, benzos ou opioïdes : vomissements inconscient·e, la respiration s'arrête."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Impossible à réveiller",
+        "Vomit en étant sédaté·e",
+        "Respiration lente ou irrégulière"
+      ],
+      "actions": [
+        "PLS et restez avec la personne",
+        "Appelez le 112 si elle ne se réveille pas ou respire mal",
+        "Signalez alcool, GHB ou autres dépresseurs aux secours"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Détachement"
+      },
+      {
+        "label": "Engourdissement"
+      },
+      {
+        "label": "Euphorie"
+      },
+      {
+        "label": "Maladresse"
+      }
+    ]
+  },
+  "mxe": {
+    "dose": "Environ 3× plus forte que la kétamine. Attendez une heure avant de reprendre.",
+    "prepare": "Pesez au milligramme. Dure 3–6 h, avec des effets résiduels jusqu'au lendemain.",
+    "marginNote": "Pas de données de marge ; bien plus forte que la kétamine.",
+    "spacing": {
+      "value": "Rarement",
+      "label": "Protégez votre vessie",
+      "text": "Comme la kétamine, un usage fréquent expose aux lésions de la vessie et à la dépendance."
+    },
+    "dependence": "Comme la kétamine : usage compulsif si les prises sont fréquentes.",
+    "risks": [
+      {
+        "title": "Tension",
+        "text": "Augmente le pouls et la tension."
+      },
+      {
+        "title": "Sérotonine",
+        "text": "Risqué avec MDMA, ISRS, tramadol et DXM."
+      },
+      {
+        "title": "Dépresseurs",
+        "text": "Avec alcool, GHB ou opioïdes : problèmes respiratoires."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Impossible à réveiller",
+        "Agitation ou confusion sévère",
+        "Douleur thoracique ou cœur très rapide"
+      ],
+      "actions": [
+        "PLS et restez avec la personne",
+        "Appelez le 112 si elle ne se réveille pas ou a mal à la poitrine",
+        "Gardez-la au calme et au frais"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Détachement"
+      },
+      {
+        "label": "Euphorie"
+      },
+      {
+        "label": "Stimulation"
+      },
+      {
+        "label": "Engourdissement"
+      }
+    ]
+  },
+  "dxm": {
+    "dose": "Les doses dépendent du poids (mg/kg). Indiquez votre poids pour les voir en mg.",
+    "prepare": "N'utilisez que des produits dont le DXM est le SEUL principe actif : paracétamol, antihistaminiques ou guaïfénésine peuvent tuer à ces doses.",
+    "spacing": {
+      "value": "2 semaines",
+      "label": "Espacement",
+      "text": "Laissez 1–2 semaines entre les trips pour que tolérance et sérotonine récupèrent."
+    },
+    "dependence": "Tolérance et usage compulsif rapportés en cas d'usage régulier.",
+    "risks": [
+      {
+        "title": "Syndrome sérotoninergique",
+        "text": "Avec ISRS, MDMA, IMAO ou tramadol. Potentiellement mortel."
+      },
+      {
+        "title": "Métabolisme lent",
+        "text": "~1 personne sur 10 élimine lentement le DXM : effets bien plus forts et longs."
+      },
+      {
+        "title": "Surchauffe",
+        "text": "Plus nausées et vomissements. Restez au frais."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Forte fièvre, muscles raides",
+        "Agitation, confusion, convulsions",
+        "Vomit en position allongée"
+      ],
+      "actions": [
+        "Appelez le 112",
+        "Rafraîchissez la personne",
+        "PLS si somnolence"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Détachement"
+      },
+      {
+        "label": "Euphorie musicale"
+      },
+      {
+        "label": "Visuels"
+      },
+      {
+        "label": "Nausée"
+      }
+    ]
+  },
+  "nitrous": {
+    "dose": "Un ballon à la fois, respirez de l'air normal entre deux. Jamais directement du cracker ou de la bouteille, ni avec un sac sur la tête.",
+    "prepare": "Remplissez d'abord un ballon : le gaz sortant de la cartouche est glacé et brûle lèvres et gorge. Asseyez-vous.",
+    "spacing": {
+      "value": "Pauses",
+      "label": "Protégez vos nerfs",
+      "text": "Un usage intensif ou fréquent épuise la vitamine B12 : engourdissements et lésions nerveuses."
+    },
+    "dependence": "Surtout psychologique ; l'usage répété intensif est fréquent.",
+    "risks": [
+      {
+        "title": "Malaise et chute",
+        "text": "Asseyez-vous avant d'inhaler."
+      },
+      {
+        "title": "Manque d'oxygène",
+        "text": "Jamais de sac, de masque ni d'espace fermé."
+      },
+      {
+        "title": "Lésions nerveuses",
+        "text": "Fourmillements ou engourdissement des mains et pieds : arrêtez et consultez."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Inconscient·e",
+        "Ne respire pas normalement",
+        "Lèvres bleues"
+      ],
+      "actions": [
+        "Mettez la personne à l'air frais",
+        "PLS ; appelez le 112",
+        "Massage cardiaque si elle ne respire pas"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Fou rire"
+      },
+      {
+        "label": "Sons déformés"
+      },
+      {
+        "label": "Rêveur"
+      },
+      {
+        "label": "Rush court"
+      }
+    ]
+  },
+  "amphetamines": {
+    "dose": "La pureté varie énormément : commencez petit et attendez avant de reprendre.",
+    "prepare": "Mangez avant, prévoyez votre sommeil et buvez de l'eau par petites gorgées. Utilisez votre propre paille.",
+    "spacing": {
+      "value": "Jours de pause",
+      "label": "Pas de binge",
+      "text": "Évitez les jours consécutifs ; dormez et mangez bien avant la prochaine fois. La descente s'aggrave à chaque jour de prise."
+    },
+    "dependence": "Modérée pour le speed, très élevée pour la méthamphétamine.",
+    "risks": [
+      {
+        "title": "Cœur et surchauffe",
+        "text": "Cœur qui s'emballe, tension élevée, coup de chaleur en dansant."
+      },
+      {
+        "title": "Manque de sommeil et parano",
+        "text": "Les longues sessions peuvent causer paranoïa et psychose."
+      },
+      {
+        "title": "Crystal meth",
+        "text": "Bien plus forte, plus longue et plus addictive."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Douleur thoracique, cœur rapide ou irrégulier",
+        "Très forte fièvre",
+        "Agitation, paranoïa, convulsions"
+      ],
+      "actions": [
+        "Appelez le 112 si douleur thoracique, convulsions ou confusion",
+        "Rafraîchissez la personne au calme",
+        "De l'eau par gorgées, pas des litres"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Énergie"
+      },
+      {
+        "label": "Concentration"
+      },
+      {
+        "label": "Bavardage"
+      },
+      {
+        "label": "Cœur rapide"
+      }
+    ]
+  },
+  "mdma": {
+    "dose": "Limite haute : 1,5 mg/kg pour les hommes, 1,3 mg/kg pour les femmes. Indiquez votre corps en bas pour calculer.",
+    "prepare": "Faites-la tester (analyse de produits, Marquis + Simon's). Les ecstas contiennent souvent 150 mg ou plus : commencez par un quart ou une moitié.",
+    "spacing": {
+      "value": "3 mois",
+      "label": "Règle des 3 mois",
+      "text": "La sérotonine a besoin de temps. Plus souvent, c'est des effets plus faibles et des descentes plus dures."
+    },
+    "dependence": "Un usage fréquent émousse les effets et le moral.",
+    "risks": [
+      {
+        "title": "Surchauffe",
+        "text": "Faites des pauses de danse, rafraîchissez-vous, buvez 300–500 ml d'eau par heure."
+      },
+      {
+        "title": "Trop d'eau",
+        "text": "Des litres d'eau peuvent causer une hyponatrémie mortelle. Buvez par gorgées ; les boissons isotoniques aident."
+      },
+      {
+        "title": "Reprendre",
+        "text": "Plus de MDMA, c'est plus de chaleur, de fatigue et de descente, pas plus de magie."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Très forte fièvre, ne transpire plus",
+        "Confusion, muscles raides, convulsions",
+        "Effondrement"
+      ],
+      "actions": [
+        "Appelez le 112 et dites que c'est de la MDMA",
+        "Rafraîchissez : ombre, linges mouillés, éventail",
+        "Ne forcez pas à boire ; PLS si inconscient·e"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Empathie"
+      },
+      {
+        "label": "Euphorie"
+      },
+      {
+        "label": "Musique sublimée"
+      },
+      {
+        "label": "Mâchoire serrée"
+      }
+    ]
+  },
+  "cocaine": {
+    "dose": "La pureté est souvent élevée en Europe : commencez par une petite trace (20–30 mg) et attendez 20 min.",
+    "prepare": "Utilisez votre propre paille (hépatite C). Rincez-vous le nez après. Testez les produits de coupe si possible.",
+    "spacing": {
+      "value": "Jours de pause",
+      "label": "Casser le cycle",
+      "text": "Le craving monte vite : évitez les jours consécutifs et les nuits blanches. Fixez une limite avant de commencer."
+    },
+    "dependence": "Les effets courts poussent à reprendre sans cesse ; le crack encore plus.",
+    "risks": [
+      {
+        "title": "Cœur et AVC",
+        "text": "Douleur thoracique, arythmie et AVC, même chez les jeunes."
+      },
+      {
+        "title": "Avec l'alcool",
+        "text": "Forme du cocaéthylène : plus toxique pour le cœur et plus durable."
+      },
+      {
+        "title": "Reprises",
+        "text": "L'effet retombe en 30–60 min et pousse à enchaîner les traces."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Douleur ou oppression thoracique",
+        "Cœur rapide ou irrégulier",
+        "Forte fièvre, convulsions, panique"
+      ],
+      "actions": [
+        "Appelez le 112 si douleur thoracique ou convulsions",
+        "Gardez la personne au calme et au frais",
+        "PLS si elle ne répond pas"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Énergie"
+      },
+      {
+        "label": "Assurance"
+      },
+      {
+        "label": "Bavardage"
+      },
+      {
+        "label": "Cœur rapide"
+      }
+    ]
+  },
+  "caffeine": {
+    "dose": "Café ≈ 80–100 mg · boisson énergisante ≈ 80 mg/250 ml · comprimés 100–200 mg.",
+    "prepare": "La caféine pure en poudre est dangereuse : une cuillère à café peut tuer. Ne dosez jamais à l'œil.",
+    "spacing": {
+      "value": "≤ 400 mg",
+      "label": "Par jour",
+      "text": "Limite journalière de l'EFSA pour les adultes (200 mg en cas de grossesse). Évitez-la 6 h avant de dormir."
+    },
+    "dependence": "Légère dépendance physique : maux de tête au sevrage.",
+    "risks": [
+      {
+        "title": "Cœur et anxiété",
+        "text": "Palpitations, nervosité et panique à forte dose."
+      },
+      {
+        "title": "Poudre et comprimés",
+        "text": "Surdose accidentelle facile."
+      },
+      {
+        "title": "Sommeil",
+        "text": "Perturbe le sommeil même si vous vous sentez bien."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Cœur rapide ou irrégulier",
+        "Vomissements, tremblements",
+        "Confusion, convulsions"
+      ],
+      "actions": [
+        "Appelez le 112 si douleur thoracique, cœur irrégulier ou convulsions",
+        "Appelez toujours en cas de poudre ou de comprimés",
+        "Arrêtez la caféine, reposez-vous, buvez par gorgées"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Vigilance"
+      },
+      {
+        "label": "Concentration"
+      },
+      {
+        "label": "Nervosité"
+      },
+      {
+        "label": "Sommeil perturbé"
+      }
+    ]
+  },
+  "alcohol": {
+    "dose": "1 unité = 10 ml d'alcool pur : environ un demi de bière ou un shot.",
+    "prepare": "Mangez avant, alternez avec de l'eau et fixez une limite. Ne conduisez jamais.",
+    "spacing": {
+      "value": "≤ 14 unités",
+      "label": "Par semaine",
+      "text": "Réparties sur 3 jours ou plus, avec plusieurs jours sans alcool chaque semaine (recommandation britannique)."
+    },
+    "dependence": "Le sevrage après une forte consommation quotidienne peut être mortel.",
+    "risks": [
+      {
+        "title": "Dépresseurs",
+        "text": "Avec GHB, benzos, opioïdes ou kétamine, la respiration peut s'arrêter."
+      },
+      {
+        "title": "Étouffement",
+        "text": "Mettez en PLS les ami·es très ivres."
+      },
+      {
+        "title": "Accidents et violence",
+        "text": "Prises de risque, chutes, noyades et bagarres."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Impossible à réveiller",
+        "Respiration lente ou irrégulière",
+        "Peau froide, pâle ou bleue ; vomit inconscient·e"
+      ],
+      "actions": [
+        "PLS, appelez le 112",
+        "Restez avec la personne et gardez-la au chaud",
+        "Ni café ni douche froide"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Détente"
+      },
+      {
+        "label": "Sociabilité"
+      },
+      {
+        "label": "Maladresse"
+      },
+      {
+        "label": "Trous noirs"
+      }
+    ]
+  },
+  "ghb/gbl": {
+    "dose": "Mesurez à la seringue orale. Le GBL est environ deux fois plus fort que le GHB. Attendez au moins 2 h avant de reprendre.",
+    "prepare": "Jamais avec de l'alcool. Notez vos heures de prise ou mettez un minuteur, et prévenez un·e ami·e.",
+    "spacing": {
+      "value": "Jamais tous les jours",
+      "label": "Dépendance",
+      "text": "Un usage quotidien peut rendre dépendant en quelques semaines ; le sevrage peut être mortel : arrêtez avec un suivi médical."
+    },
+    "dependence": "Jugée modérée en 2007, mais l'usage quotidien entraîne une dépendance sévère.",
+    "risks": [
+      {
+        "title": "Marge infime",
+        "text": "Entre euphorie et perte de connaissance, la marche est minuscule."
+      },
+      {
+        "title": "Avec l'alcool",
+        "text": "Perte de connaissance et arrêt respiratoire."
+      },
+      {
+        "title": "Le GBL brûle",
+        "text": "Ne le buvez jamais pur : diluez-le et étiquetez la bouteille."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Impossible à réveiller",
+        "Respiration ronflante ou gargouillante",
+        "Vomissements, agitation soudaine, convulsions"
+      ],
+      "actions": [
+        "PLS, appelez le 112",
+        "Restez avec la personne : ne la laissez jamais « cuver »",
+        "Dites aux secours combien et quand"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Euphorie"
+      },
+      {
+        "label": "Sociabilité"
+      },
+      {
+        "label": "Somnolence"
+      },
+      {
+        "label": "Perte de connaissance"
+      }
+    ]
+  },
+  "opioids": {
+    "dose": "La puissance varie de 1 à 100 entre opioïdes (fentanyl et nitazènes agissent en microgrammes) et la tolérance chute après quelques jours sans.",
+    "prepare": "Ayez de la naloxone, ne consommez jamais seul·e, testez le fentanyl et les nitazènes, et faites d'abord une petite dose test.",
+    "spacing": {
+      "value": "Moins",
+      "label": "Après toute pause",
+      "text": "La tolérance baisse en quelques jours. Après un sevrage, un hôpital, la prison ou une pause, prenez beaucoup moins."
+    },
+    "dependence": "Dépendance physique en quelques semaines d'usage quotidien.",
+    "risks": [
+      {
+        "title": "Arrêt respiratoire",
+        "text": "Principale cause de décès, bien pire avec alcool, benzos ou GHB."
+      },
+      {
+        "title": "Fentanyl et nitazènes",
+        "text": "Cachés dans l'héroïne et les faux comprimés. Actifs en microgrammes."
+      },
+      {
+        "title": "Infections",
+        "text": "Ne partagez jamais aiguilles ni matériel : VIH, hépatite C."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Pupilles en tête d'épingle",
+        "Lèvres bleues ou grises",
+        "Impossible à réveiller ; respiration lente, absente ou gargouillante"
+      ],
+      "actions": [
+        "Appelez le 112 et donnez la naloxone ; répétez après 2–3 min si besoin",
+        "Insufflations ou massage cardiaque ; puis PLS",
+        "Restez : la naloxone peut s'estomper avant l'opioïde"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Euphorie chaude"
+      },
+      {
+        "label": "Analgésie"
+      },
+      {
+        "label": "Somnolence"
+      },
+      {
+        "label": "Respiration lente"
+      }
+    ]
+  },
+  "tramadol": {
+    "dose": "Effet plafond : plus de tramadol ajoute surtout du risque de convulsions, pas d'euphorie.",
+    "prepare": "À éviter en cas d'épilepsie, d'antidépresseurs ou d'autres produits sérotoninergiques.",
+    "marginNote": "Pas de données de marge. Risque de convulsions au-delà de ~300 mg ; jamais plus de 400 mg/jour.",
+    "spacing": {
+      "value": "Pas tous les jours",
+      "label": "Dépendance",
+      "text": "L'usage quotidien mène à une dépendance aux opioïdes et à un sevrage difficile."
+    },
+    "dependence": "Dépendance aux opioïdes plus un sevrage de type antidépresseur.",
+    "risks": [
+      {
+        "title": "Convulsions",
+        "text": "Le risque augmente avec la dose et les stimulants."
+      },
+      {
+        "title": "Syndrome sérotoninergique",
+        "text": "Avec ISRS, MDMA, IMAO ou DXM."
+      },
+      {
+        "title": "Respiration",
+        "text": "Avec alcool, benzos ou autres opioïdes."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Convulsions",
+        "Impossible à réveiller ; respiration lente",
+        "Fièvre, agitation, muscles raides"
+      ],
+      "actions": [
+        "Appelez le 112",
+        "Donnez la naloxone si la respiration est lente",
+        "Protégez la tête pendant une crise, puis PLS"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Analgésie"
+      },
+      {
+        "label": "Légère euphorie"
+      },
+      {
+        "label": "Nausée"
+      },
+      {
+        "label": "Risque de convulsions"
+      }
+    ]
+  },
+  "benzodiazepines": {
+    "dose": "Les benzos varient de 1 à 20 en puissance : 0,5 mg d'alprazolam ≈ 10 mg de diazépam.",
+    "prepare": "Faux « Xanax » et comprimés de rue contiennent souvent des benzos plus fortes. Commencez par une fraction et ne reprenez pas.",
+    "spacing": {
+      "value": "2–4 semaines",
+      "label": "Durée maximale",
+      "text": "Au-delà de 2–4 semaines d'usage quotidien, la dépendance s'installe. Après un usage régulier, n'arrêtez jamais d'un coup : diminuez."
+    },
+    "dependence": "Le sevrage après un usage régulier peut provoquer des convulsions.",
+    "risks": [
+      {
+        "title": "Respiration",
+        "text": "Avec alcool, opioïdes ou GHB, la respiration peut s'arrêter."
+      },
+      {
+        "title": "Trous noirs",
+        "text": "Pertes de mémoire et prises de risque ; on se sent moins atteint·e qu'on ne l'est."
+      },
+      {
+        "title": "Convulsions de sevrage",
+        "text": "Après un usage régulier. Diminuez avec un suivi médical."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Très somnolent·e ou impossible à réveiller",
+        "Respiration lente, superficielle",
+        "Confusion, élocution pâteuse"
+      ],
+      "actions": [
+        "PLS, appelez le 112",
+        "Restez avec la personne",
+        "Signalez alcool ou opioïdes aux secours"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Calme"
+      },
+      {
+        "label": "Somnolence"
+      },
+      {
+        "label": "Pertes de mémoire"
+      },
+      {
+        "label": "Maladresse"
+      }
+    ]
+  },
+  "maois": {
+    "dose": "Antidépresseurs sur ordonnance ou préparations traditionnelles (ayahuasca, rue de Syrie). Pas d'usage récréatif seuls.",
+    "prepare": "Vérifiez chaque produit et médicament avec un·e pharmacien·ne. Avec les IMAO irréversibles, évitez les aliments riches en tyramine (fromages affinés, charcuterie).",
+    "marginNote": "Pas de données de marge. Le danger vient des mélanges, pas de l'IMAO seul.",
+    "spacing": {
+      "value": "2 semaines",
+      "label": "Élimination",
+      "text": "Les IMAO irréversibles agissent jusqu'à 2 semaines après la dernière prise. L'harmala dure environ un jour."
+    },
+    "dependence": "Non addictif.",
+    "risks": [
+      {
+        "title": "Syndrome sérotoninergique",
+        "text": "Avec MDMA, ISRS, DXM, tramadol ou 5-MeO : souvent mortel."
+      },
+      {
+        "title": "Crise hypertensive",
+        "text": "Avec des stimulants ou des aliments riches en tyramine."
+      },
+      {
+        "title": "Ayahuasca",
+        "text": "Contient des IMAO : mêmes règles."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Mal de tête violent",
+        "Fièvre, sueurs, muscles raides",
+        "Confusion, tension très élevée"
+      ],
+      "actions": [
+        "Appelez le 112 immédiatement",
+        "Rafraîchissez la personne",
+        "Dites aux secours quel IMAO et quoi d'autre a été pris"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Humeur (semaines)"
+      },
+      {
+        "label": "Potentialise"
+      },
+      {
+        "label": "Insomnie"
+      },
+      {
+        "label": "Interactions alimentaires"
+      }
+    ]
+  },
+  "ssris": {
+    "dose": "Antidépresseurs sur ordonnance : prenez-les comme prescrit.",
+    "prepare": "Les ISRS atténuent la MDMA et les psychédéliques. N'arrêtez pas pour « faire de la place » : c'est risqué et déstabilisant.",
+    "spacing": {
+      "value": "Comme prescrit",
+      "label": "N'arrêtez pas brutalement",
+      "text": "Un arrêt brutal peut provoquer un syndrome de sevrage : diminuez avec votre médecin."
+    },
+    "dependence": "Non addictif, mais l'arrêt doit être progressif.",
+    "risks": [
+      {
+        "title": "Syndrome sérotoninergique",
+        "text": "Avec IMAO, tramadol, DXM ou MDMA à forte dose."
+      },
+      {
+        "title": "Effets atténués",
+        "text": "La MDMA semble plus faible, ce qui pousse à reprendre."
+      },
+      {
+        "title": "Autres interactions",
+        "text": "Le lithium et le millepertuis interagissent aussi."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Agitation, sueurs, fièvre",
+        "Spasmes ou muscles raides",
+        "Cœur qui s'emballe"
+      ],
+      "actions": [
+        "Appelez le 112",
+        "Rafraîchissez la personne",
+        "Arrêtez tout produit sérotoninergique"
+      ]
+    },
+    "effects": [
+      {
+        "label": "Humeur (semaines)"
+      },
+      {
+        "label": "Nausée"
+      },
+      {
+        "label": "Atténue la MDMA"
+      },
+      {
+        "label": "Sommeil modifié"
+      }
+    ]
+  }
+}

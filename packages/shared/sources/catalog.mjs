@@ -90,6 +90,20 @@ export const providers = [
     limitations: ["No structured per-string generation/provider/reviewer history exists. The current fill script cannot establish who produced existing translations.", "Translation coverage is not scientific or language validation. The current i18n:check command reads the wrong directory and can falsely pass.", "Class descriptions and local summaries need their own evidence and scientific review; they are not automatically upstream-validated."],
   },
   {
+    id: "local-harm-reduction", name: "psy.cards · harm reduction ratings", kind: "local",
+    role: "Two-sided card ratings and personal-dose formulas", url: "https://github.com/psychedelicare/psy.cards/blob/main/packages/shared/data/harm-reduction.json",
+    inputs: [file("packages/shared/data/harm-reduction.json")],
+    description: "Per-substance primary route, reference compounds for classes, acute toxicity margins transcribed from Gable (2004, Addiction 99:686–696), dependence ratings informed by Nutt et al. (2007, Lancet 369:1047–1053), spacing patterns and personal-dose formulas. Card texts live in i18n/content/{locale}/harm-reduction.json.",
+    licenseStatement: "Local editorial dataset; cited publications remain under their publishers' terms.",
+    fields: [
+      field("substances.[key].primaryRoute, doseFrom", "Route shown first on the card front; class cards borrow a named reference compound's TripSit dosing.", "Not exported.", "Other routes stay available in a popover; opioids, MAOIs and SSRIs deliberately show no standard dose."),
+      field("substances.[key].margin, gable2004[]", "Toxicity margin meter and comparison chart.", "Not exported.", "Ratios from Gable 2004 Table 1; extrapolated (animal-derived) values are flagged. Classes name the compound used (e.g. heroin for opioids)."),
+      field("substances.[key].dependence", "Dependence meter (1–5).", "Not exported.", "Editorial 1–5 rating; Nutt et al. 2007 mean dependence scores (0–3) are shown where available, other ratings are labelled as estimates."),
+      field("substances.[key].spacing, personal", "Spacing pattern and the personalised 'For you' tile.", "Not exported.", "MDMA 1.5/1.3 mg/kg (Saferparty), caffeine 3 mg/kg single dose and 400 mg/day (EFSA 2015), alcohol Widmark r = 0.68/0.55, DXM mg/kg × body weight."),
+    ],
+    limitations: ["Safety ratios describe acute lethality of a single substance in a healthy adult without tolerance; they ignore mixing, accidents, mental health and addiction.", "Dependence ratings for substances not scored by Nutt et al. are editorial estimates pending review.", "Harm reduction texts and their FR/DE/IT translations are local editorial content and need scientific and language review before print."],
+  },
+  {
     id: "local-chemistry", name: "psy.cards · molecular structures", kind: "local",
     role: "Curated chemical structure strings", url: "https://github.com/psychedelicare/psy.cards/blob/main/packages/shared/data/substances.json",
     inputs: [file("packages/shared/data/substances.json")],

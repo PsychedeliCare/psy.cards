@@ -1,0 +1,1617 @@
+/* Two-sided substance card.
+ *
+ * The card is an A6 object (105 × 148 mm, like the printed cards) that scales
+ * uniformly: `--card-w` is resolved once to a length and every size inside
+ * the card is in `em` of `--card-w / 27`. Layouts computed at build time
+ * (dose-scale label placement) therefore hold at every size.
+ *
+ * Narrow: one card, flipped in 3D with the side radios (works without JS).
+ * Wide (deck ≥ 46rem and a tall enough viewport): both sides side by side.
+ * Content that does not fit grows the card rather than being cut off.
+ */
+
+@property --card-w {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 360px;
+}
+
+/* ---------- Deck ---------- */
+
+.psy-deck {
+  container: psy-deck / inline-size;
+  --deck-gap: clamp(14px, 2.2cqi, 28px);
+  --deck-offset: 10.5rem;
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.psy-deck__radio {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.psy-deck__tabs {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid color-mix(in oklab, var(--color-fg) 12%, transparent);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--color-fg) 5%, var(--color-ink));
+}
+
+.psy-deck__tabs label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 14px 0 12px;
+  border-radius: 999px;
+  color: var(--color-fg-mute);
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.psy-deck__tabs label svg {
+  width: 15px;
+  height: 15px;
+}
+
+.psy-deck__tabs label:hover {
+  color: var(--color-fg);
+}
+
+.psy-deck:has(.psy-deck__radio[value="front"]:checked) .psy-deck__tabs [data-side="front"],
+.psy-deck:has(.psy-deck__radio[value="back"]:checked) .psy-deck__tabs [data-side="back"] {
+  color: var(--color-ink);
+  background: var(--color-fg);
+}
+
+.psy-deck:has(.psy-deck__radio[value="front"]:focus-visible) .psy-deck__tabs [data-side="front"],
+.psy-deck:has(.psy-deck__radio[value="back"]:focus-visible) .psy-deck__tabs [data-side="back"] {
+  outline: 2px solid var(--color-safe);
+  outline-offset: 2px;
+}
+
+/* ---------- Card & 3D flip ---------- */
+
+
+.psy-card {
+  /* Hover tilt (set by JS on the element under the pointer). */
+  transform: perspective(calc(var(--card-w) * 4)) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* A6 by default (print parity). Phones get a taller "phone card" below so
+     text never drops under ~10.5px; everything else is in em of 1/--card-em. */
+  --card-em: 28.5;
+  --card-ratio: calc(148 / 105);
+  --card-max-h-w: max(17rem, calc((100dvh - var(--deck-offset)) / var(--card-ratio)));
+  --card-w: min(100cqi, 30rem, var(--card-max-h-w));
+  --face: color-mix(in oklab, var(--color-ink-2) 94%, var(--hue, #888) 6%);
+  --face-edge: color-mix(in oklab, var(--color-fg) 13%, transparent);
+  --tile: color-mix(in oklab, var(--color-fg) 4.5%, transparent);
+  --tile-edge: color-mix(in oklab, var(--color-fg) 8%, transparent);
+  --ink-soft: color-mix(in oklab, var(--color-fg) 84%, transparent);
+  --flip-ms: 720ms;
+  width: var(--card-w);
+  font-size: max(10px, calc(var(--card-w) / var(--card-em)));
+  perspective: calc(var(--card-w) * 3.6);
+  color: var(--color-fg);
+  overflow-wrap: break-word;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@container psy-deck (max-width: 28rem) {
+  .psy-card {
+    --card-em: 24;
+    --card-ratio: 1.72;
+  }
+}
+
+.psy-card__inner {
+  position: relative;
+  display: grid;
+  transform-style: preserve-3d;
+  /* --flip-angle is cumulative (set by JS) so the turn follows the gesture. */
+  transform: rotateY(var(--flip-angle, 0deg));
+  transition: transform var(--flip-ms) cubic-bezier(0.45, 0.05, 0.2, 1);
+}
+
+.psy-face {
+  grid-area: 1 / 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  min-width: 0;
+  min-height: calc(var(--card-w) * var(--card-ratio));
+  padding: 1.1em 1em 0.75em;
+  border: 1px solid var(--face-edge);
+  border-radius: 1.35em;
+  overflow: clip;
+  background: var(--face);
+  box-shadow:
+    0 0.1em 0 color-mix(in oklab, var(--color-fg) 6%, transparent) inset,
+    0 1.6em 3.2em -1.4em rgb(0 0 0 / 0.55),
+    0 0.3em 0.8em -0.3em rgb(0 0 0 / 0.35);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  isolation: isolate;
+  /* The incoming side shows at once; the outgoing one hides after the turn
+     (backface culling covers the overlap). Hidden sides leave the focus
+     order and the accessibility tree. */
+  transition: visibility 0s linear 0s;
+}
+
+/* Category accent along the top edge. */
+.psy-face::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 0.32em;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--hue, #888), black 10%),
+    var(--hue, #888) 40%,
+    color-mix(in oklab, var(--hue, #888), white 18%)
+  );
+  pointer-events: none;
+}
+
+.psy-face > :not(.molecule-figure, .substance-hologram, .psy-foil, .psy-curl, [popover]) {
+  position: relative;
+  z-index: 1;
+}
+
+.psy-face--front {
+  background:
+    radial-gradient(110% 62% at 100% 0%, color-mix(in oklab, var(--hue, #888) 20%, transparent), transparent 62%),
+    radial-gradient(80% 50% at 0% 100%, color-mix(in oklab, var(--hue, #888) 8%, transparent), transparent 70%),
+    var(--face);
+}
+
+.psy-face--back {
+  transform: rotateY(180deg);
+  visibility: hidden;
+  transition-delay: var(--flip-ms);
+  background:
+    radial-gradient(90% 55% at 0% 0%, color-mix(in oklab, var(--hue, #888) 13%, transparent), transparent 62%),
+    repeating-linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--color-fg) 2.2%, transparent) 0 1px,
+      transparent 1px 0.7em
+    ),
+    var(--face);
+}
+
+.psy-deck:has(.psy-deck__radio[value="back"]:checked) .psy-card__inner {
+  transform: rotateY(var(--flip-angle, 180deg));
+}
+
+.psy-deck:has(.psy-deck__radio[value="back"]:checked) .psy-face--front {
+  visibility: hidden;
+  transition-delay: var(--flip-ms);
+}
+
+.psy-deck:has(.psy-deck__radio[value="back"]:checked) .psy-face--back {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+/* Vertical scrolling stays native; horizontal swipes flip the card. */
+.psy-card {
+  touch-action: pan-y pinch-zoom;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .psy-card__inner,
+  .psy-deck:has(.psy-deck__radio[value="back"]:checked) .psy-card__inner {
+    transform: none;
+    transition: none;
+  }
+
+  .psy-face--back {
+    transform: none;
+  }
+
+  .psy-face {
+    transition: none;
+  }
+}
+
+/* ---------- Tilt, foil & corner curl ---------- */
+
+.psy-card[data-tilting] {
+  transition-duration: 0.12s;
+}
+
+/* Holographic foil on both sides, laminated over the whole face: a fine
+   rainbow grating that slides with the pointer, an etched texture and a
+   glare. Colour-dodge leaves light text white and only tints dark areas, so
+   the copy stays readable; it is quiet at rest and blooms on hover/flip. */
+.psy-foil {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: var(--foil-rest, 0.055);
+  mix-blend-mode: color-dodge;
+  background:
+    radial-gradient(
+      farthest-corner circle at var(--glare-x, 82%) var(--glare-y, 10%),
+      hsl(0 0% 100% / 0.8) 0%,
+      hsl(0 0% 100% / 0.1) 20%,
+      transparent 42%
+    ),
+    repeating-linear-gradient(-45deg, hsl(0 0% 100% / 0.1) 0 1px, transparent 1px 0.38em),
+    repeating-linear-gradient(
+      115deg,
+      hsl(352 95% 64%) 0%,
+      hsl(32 95% 60%) 0.6%,
+      hsl(62 95% 58%) 1.2%,
+      hsl(140 80% 56%) 1.8%,
+      hsl(190 95% 60%) 2.4%,
+      hsl(240 90% 68%) 3%,
+      hsl(290 90% 66%) 3.6%,
+      hsl(352 95% 64%) 4.2%
+    );
+  background-size: 100% 100%, 100% 100%, 160% 160%;
+  background-position: center, center, var(--glare-x, 82%) var(--glare-y, 10%);
+  /* Vivid where the light falls, a faint sheen elsewhere. */
+  -webkit-mask-image: radial-gradient(
+    farthest-corner circle at var(--glare-x, 82%) var(--glare-y, 10%),
+    #000 0%,
+    rgb(0 0 0 / 0.45) 28%,
+    rgb(0 0 0 / 0.08) 70%
+  );
+  mask-image: radial-gradient(
+    farthest-corner circle at var(--glare-x, 82%) var(--glare-y, 10%),
+    #000 0%,
+    rgb(0 0 0 / 0.45) 28%,
+    rgb(0 0 0 / 0.08) 70%
+  );
+  transition: opacity 0.45s ease;
+}
+
+.psy-card[data-tilting] .psy-foil,
+.psy-face[data-tilting] .psy-foil {
+  opacity: 0.15;
+}
+
+/* A flip (or a corner tap) charges the foil: a bright sweep that settles. */
+.psy-card[data-holo-burst] .psy-foil,
+.psy-face[data-holo-burst] .psy-foil {
+  -webkit-mask-image: none;
+  mask-image: none;
+  animation: psy-holo-burst 1.4s cubic-bezier(0.22, 0.8, 0.2, 1);
+}
+
+@keyframes psy-holo-burst {
+  0% {
+    opacity: 0.1;
+    background-position: center, center, 0% 0%;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.07;
+    background-position: center, center, 100% 100%;
+  }
+}
+
+/* The reverse is darker, with a monochrome silver foil. */
+.psy-face--back {
+  --face: color-mix(in oklab, #08080a 95%, var(--hue, #888) 5%);
+  --foil-rest: 0.04;
+  --tile: color-mix(in oklab, var(--color-fg) 5.5%, transparent);
+}
+
+.psy-face--back .psy-foil {
+  background:
+    radial-gradient(
+      farthest-corner circle at var(--glare-x, 82%) var(--glare-y, 10%),
+      hsl(0 0% 100% / 0.85) 0%,
+      hsl(0 0% 100% / 0.12) 20%,
+      transparent 42%
+    ),
+    repeating-linear-gradient(-45deg, hsl(0 0% 100% / 0.06) 0 1px, transparent 1px 0.38em),
+    repeating-linear-gradient(
+      115deg,
+      hsl(220 8% 74%) 0%,
+      hsl(220 6% 56%) 1.2%,
+      hsl(210 12% 86%) 2.4%,
+      hsl(220 6% 52%) 3.6%,
+      hsl(220 8% 74%) 4.8%
+    );
+  background-size: 100% 100%, 100% 100%, 160% 160%;
+  background-position: center, center, var(--glare-x, 82%) var(--glare-y, 10%);
+}
+
+.psy-face--back .psy-curl::after {
+  background:
+    linear-gradient(315deg, hsl(0 0% 100% / 0.4) 0%, transparent 50%),
+    linear-gradient(135deg, hsl(220 6% 40%) 0%, hsl(220 6% 22%) 100%);
+}
+
+.psy-face--back[data-corner] .psy-curl::after {
+  background:
+    linear-gradient(315deg, hsl(0 0% 100% / 0.6) 0%, transparent 45%),
+    linear-gradient(135deg, hsl(220 8% 86%) 0%, hsl(220 6% 52%) 55%, hsl(220 8% 74%) 100%);
+}
+
+/* Corners are flip hotspots; a folded corner hints at them. */
+.psy-face[data-corner] {
+  cursor: pointer;
+}
+
+.psy-curl {
+  --curl: 1.3em;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  width: var(--curl);
+  height: var(--curl);
+  pointer-events: none;
+  filter: drop-shadow(-0.12em -0.12em 0.22em rgb(0 0 0 / 0.5));
+  transition: width 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* The corner beyond the fold, then the folded flap lying on the card. */
+.psy-curl::before,
+.psy-curl::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.psy-curl::before {
+  background: color-mix(in oklab, var(--color-ink) 88%, transparent);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.psy-curl::after {
+  /* The flap shows the card's reverse: its colour, with a foil glint
+     along the fold. */
+  background:
+    linear-gradient(315deg, hsl(0 0% 100% / 0.45) 0%, hsl(0 0% 100% / 0.08) 30%, transparent 55%),
+    linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--hue, #888) 30%, var(--color-ink-3)) 0%,
+      color-mix(in oklab, var(--hue, #888) 55%, var(--color-ink-3)) 100%
+    );
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.psy-face[data-corner] .psy-curl::after {
+  background:
+    linear-gradient(315deg, hsl(0 0% 100% / 0.55) 0%, transparent 45%),
+    linear-gradient(
+      135deg,
+      hsl(190 90% 68%) 0%,
+      hsl(280 80% 72%) 40%,
+      color-mix(in oklab, var(--hue, #888) 70%, white) 100%
+    );
+}
+
+.psy-face[data-corner] .psy-curl {
+  --curl: 2.6em;
+}
+
+.psy-face[data-corner="bl"] .psy-curl {
+  right: auto;
+  left: 0;
+  transform: scaleX(-1);
+}
+
+.psy-face[data-corner="tr"] .psy-curl {
+  top: 0;
+  bottom: auto;
+  transform: scaleY(-1);
+}
+
+.psy-face[data-corner="tl"] .psy-curl {
+  top: 0;
+  right: auto;
+  bottom: auto;
+  left: 0;
+  transform: scale(-1, -1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .psy-card,
+  .psy-face {
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+  }
+
+  .psy-card[data-holo-burst] .psy-foil,
+  .psy-face[data-holo-burst] .psy-foil {
+    animation: none;
+  }
+}
+
+/* ---------- Header ---------- */
+
+.psy-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3em;
+  min-width: 0;
+  margin-top: 0.15em;
+}
+
+.psy-head__aliases {
+  padding-right: 6em;
+}
+
+.psy-head__group {
+  margin: 0;
+  padding: 0.38em 0.8em;
+  border-radius: 999px;
+  font-size: 0.6em;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.psy-head__title {
+  margin: 0.04em 0 0;
+  font-size: 2.3em;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.psy-head__title--long {
+  font-size: 1.8em;
+  letter-spacing: -0.03em;
+}
+
+.psy-head__aliases {
+  margin: 0;
+  color: var(--color-fg-mute);
+  font-size: 0.72em;
+  line-height: 1.3;
+}
+
+.psy-head--back {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.6em;
+  padding-right: 0;
+}
+
+.psy-head__kicker {
+  margin: 0;
+  color: var(--hue, var(--color-fg-mute));
+  font-size: 0.66em;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.psy-head__title--back {
+  margin-top: 0.1em;
+  font-size: 1.5em;
+  letter-spacing: -0.03em;
+}
+
+/* ---------- Molecule artwork (front, top right) ---------- */
+
+.psy-face .substance-hologram {
+  inset: 0 0 auto auto;
+  width: 13.5em;
+  height: 13.5em;
+}
+
+.psy-face .molecule-figure {
+  --molecule-frame-size: 10.5em;
+  top: 8px;
+  right: 8px;
+  opacity: 0.2;
+}
+
+/* The reverse carries the same seal, quieter, beneath the frosted tiles. */
+.psy-face--back .molecule-figure {
+  opacity: 0.12;
+}
+
+/* ---------- Bento ---------- */
+
+.psy-bento {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.4em;
+  min-width: 0;
+}
+
+.psy-row {
+  display: flex;
+  gap: 0.4em;
+  min-width: 0;
+}
+
+.psy-row > .psy-tile {
+  flex: 1 1 0;
+}
+
+.psy-row--back > .psy-tile--spacing {
+  flex-grow: 1.5;
+}
+
+.psy-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.36em;
+  min-width: 0;
+  padding: 0.6em 0.72em 0.64em;
+  border: 1px solid var(--tile-edge);
+  border-radius: 0.85em;
+  background: var(--tile);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.psy-tile--prepare,
+.psy-tile--emergency {
+  flex-grow: 1;
+}
+
+.psy-tile h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin: 0;
+  color: var(--color-fg-mute);
+  font-size: 0.62em;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.psy-tile h3 svg {
+  flex: none;
+  width: 1.35em;
+  height: 1.35em;
+  color: var(--hue, var(--color-fg-mute));
+}
+
+.psy-tile__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em;
+  min-width: 0;
+}
+
+.psy-tile__head h3 {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.psy-tile__text {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.72em;
+  line-height: 1.31;
+  text-wrap: pretty;
+}
+
+.psy-tile__text strong {
+  color: var(--color-fg);
+}
+
+.psy-tile__text--lead {
+  color: var(--color-fg);
+  font-size: 0.86em;
+  line-height: 1.38;
+}
+
+.psy-tile__text--note {
+  padding-top: 0.45em;
+  border-top: 1px dashed var(--tile-edge);
+  color: var(--color-fg-mute);
+}
+
+.psy-personal__value[data-long] {
+  font-size: 1.12em;
+}
+
+.psy-tile__text--small {
+  font-size: 0.66em;
+  color: var(--color-fg-mute);
+}
+
+.psy-ref {
+  padding: 0.15em 0.5em;
+  border-radius: 999px;
+  color: var(--color-fg);
+  background: color-mix(in oklab, var(--hue, var(--color-fg)) 22%, transparent);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.psy-tile__foot {
+  margin: 0;
+  color: var(--color-fg-mute);
+  font-size: 0.62em;
+}
+
+.psy-muted {
+  color: var(--color-fg-mute);
+  font-weight: 500;
+}
+
+.psy-unit {
+  color: var(--color-fg-mute);
+  font-size: 0.82em;
+  font-weight: 600;
+}
+
+/* Small pill buttons inside tiles (other routes, compare). */
+.psy-chip-btn,
+.psy-info-btn {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.3em;
+  min-height: 2.1em;
+  padding: 0 0.65em;
+  border: 1px solid var(--tile-edge);
+  border-radius: 999px;
+  color: var(--color-fg);
+  background: color-mix(in oklab, var(--color-fg) 7%, transparent);
+  font: inherit;
+  font-size: 0.64em;
+  font-weight: 750;
+  cursor: pointer;
+  transition: background-color 140ms ease;
+}
+
+.psy-chip-btn svg,
+.psy-info-btn svg {
+  width: 1.15em;
+  height: 1.15em;
+}
+
+.psy-info-btn {
+  justify-content: center;
+  width: 2.1em;
+  padding: 0;
+  color: var(--color-fg-mute);
+}
+
+.psy-chip-btn:hover,
+.psy-info-btn:hover {
+  background: color-mix(in oklab, var(--color-fg) 14%, transparent);
+}
+
+/* ---------- Dose tile ---------- */
+
+.psy-route {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  margin: 0;
+  color: var(--color-fg);
+  font-size: 0.68em;
+  font-weight: 750;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.psy-route svg {
+  width: 1.2em;
+  height: 1.2em;
+  color: var(--color-fg-mute);
+}
+
+.psy-route__unit {
+  margin-left: 0.15em;
+  padding: 0.1em 0.45em;
+  border-radius: 0.4em;
+  color: var(--color-fg-mute);
+  background: color-mix(in oklab, var(--color-fg) 8%, transparent);
+  font-size: 0.92em;
+  text-transform: none;
+}
+
+.psy-dose {
+  position: relative;
+  padding: 0 0.3em;
+}
+
+.psy-dose__labels,
+.psy-dose__ticks {
+  position: relative;
+  height: 1.15em;
+}
+
+.psy-dose__label,
+.psy-dose__tick {
+  position: absolute;
+  left: var(--x);
+  transform: translateX(-50%);
+  font-size: 0.68em;
+  line-height: 1.7;
+  white-space: nowrap;
+}
+
+.psy-dose__label {
+  top: 0;
+  color: var(--c);
+  font-weight: 800;
+  text-transform: lowercase;
+}
+
+.psy-dose__tick {
+  top: 0;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
+
+.psy-dose__track {
+  position: relative;
+  height: 0.62em;
+  margin: 0.2em 0 0.3em;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--color-fg) 9%, transparent);
+}
+
+.psy-dose__bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--l);
+  width: var(--w);
+  border-radius: 999px;
+  background: var(--c);
+  box-shadow: 0 0 0 0.12em var(--face);
+}
+
+.psy-dose__bar--open {
+  border-radius: 999px 0 0 999px;
+  background: linear-gradient(90deg, var(--c) 45%, transparent),
+    repeating-linear-gradient(90deg, var(--c) 0 0.3em, transparent 0.3em 0.55em);
+  box-shadow: none;
+}
+
+.psy-dose__point {
+  position: absolute;
+  top: 50%;
+  left: var(--l);
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 0 0.14em var(--face);
+  transform: translate(-50%, -50%);
+}
+
+.psy-dose__marker {
+  position: absolute;
+  top: 50%;
+  left: var(--x, 0%);
+  z-index: 1;
+  width: 1em;
+  height: 1em;
+  border: 0.2em solid var(--color-fg);
+  border-radius: 50%;
+  background: var(--face);
+  box-shadow: 0 0 0 0.12em rgb(0 0 0 / 0.6), 0 0.2em 0.5em rgb(0 0 0 / 0.45);
+  transform: translate(-50%, -50%);
+}
+
+.psy-dose__marker[hidden] {
+  display: none;
+}
+
+.psy-dose-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7em, 1fr));
+  gap: 0.25em 0.8em;
+  margin: 0;
+}
+
+.psy-dose-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5em;
+  font-size: 0.74em;
+}
+
+.psy-dose-list dt {
+  color: var(--color-fg-mute);
+  text-transform: lowercase;
+}
+
+.psy-dose-list dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+/* ---------- Personal & timing tiles ---------- */
+
+.psy-personal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+}
+
+.psy-personal[hidden] {
+  display: none;
+}
+
+.psy-personal__value {
+  margin: 0;
+  font-size: 1.45em;
+  font-weight: 850;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.psy-personal__label {
+  margin: 0;
+  color: var(--color-fg);
+  font-size: 0.66em;
+  font-weight: 750;
+}
+
+.psy-personal__formula {
+  margin: 0.15em 0 0;
+  color: var(--color-fg-mute);
+  font-size: 0.62em;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-personal-empty][hidden] {
+  display: none;
+}
+
+/* ---------- Toxicity margin ---------- */
+
+/* A slim row: label, log-scale meter (1× → 1000×), value and a compare
+   button. Detail lives in the comparison popover. */
+.psy-margin-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+  min-width: 0;
+  margin-top: 0.1em;
+  padding-top: 0.45em;
+  border-top: 1px dashed var(--tile-edge);
+}
+
+.psy-margin-row h3 {
+  flex: none;
+}
+
+.psy-margin {
+  flex: 1;
+  min-width: 4em;
+}
+
+.psy-margin__track {
+  position: relative;
+  height: 0.42em;
+  margin: 0;
+  border-radius: 999px;
+  /* Same hue mapping as the comparison chart: red ≤ 5×, green at 1000×. */
+  background: linear-gradient(
+    90deg,
+    hsl(0 72% 50%) 0%,
+    hsl(0 72% 50%) 23%,
+    hsl(17 80% 52%) 33.3%,
+    hsl(45 85% 52%) 50%,
+    hsl(73 70% 48%) 66.7%,
+    hsl(130 60% 45%) 100%
+  );
+}
+
+.is-unknown .psy-margin__track {
+  height: 0.42em;
+  background: repeating-linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--color-fg) 22%, transparent) 0 0.25em,
+    color-mix(in oklab, var(--color-fg) 6%, transparent) 0.25em 0.5em
+  );
+}
+
+.is-unknown.is-danger .psy-margin__track {
+  background: repeating-linear-gradient(
+    135deg,
+    color-mix(in oklab, #ef4444 70%, transparent) 0 0.25em,
+    color-mix(in oklab, #ef4444 20%, transparent) 0.25em 0.5em
+  );
+}
+
+.psy-margin__dot {
+  position: absolute;
+  top: 50%;
+  left: var(--x);
+  z-index: 1;
+  width: 0.9em;
+  height: 0.9em;
+  border: 0.16em solid var(--face);
+  border-radius: 50%;
+  background: var(--color-fg);
+  box-shadow: 0 0 0 0.08em rgb(0 0 0 / 0.45);
+  transform: translate(-50%, -50%);
+}
+
+.psy-margin__dot.is-estimate {
+  border-style: dashed;
+  border-color: var(--color-fg);
+  background: var(--face);
+}
+
+.psy-margin__value {
+  flex: none;
+  font-size: 0.68em;
+  font-weight: 800;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.psy-margin__ref {
+  /* Alcohol as a familiar reference, marked above the track. */
+  position: absolute;
+  bottom: calc(100% + 0.08em);
+  left: var(--x);
+  display: grid;
+  place-items: center;
+  color: var(--color-fg-mute);
+  transform: translateX(-50%);
+}
+
+.psy-margin__ref::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 1px;
+  height: 0.5em;
+  background: currentColor;
+}
+
+.psy-margin__ref svg {
+  width: 0.8em;
+  height: 0.8em;
+}
+
+/* ---------- Effects & effects over time ---------- */
+
+.psy-effects {
+  display: grid;
+  gap: 0.24em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.psy-effects li {
+  display: flex;
+  align-items: center;
+  gap: 0.45em;
+  color: var(--color-fg);
+  font-size: 0.7em;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.psy-effects svg {
+  flex: none;
+  width: 1.3em;
+  height: 1.3em;
+  color: var(--hue, var(--color-fg-mute));
+}
+
+.psy-curve {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+  padding: 0 0.1em;
+}
+
+/* Intensity curve sampled as rounded bars, coloured by phase. */
+.psy-curve__bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.14em;
+  height: 2.6em;
+  margin-top: 0.15em;
+}
+
+.psy-curve__bar {
+  flex: 1 1 0;
+  min-height: 0.32em;
+  height: calc(var(--h) * 100%);
+  border-radius: 999px;
+  background: var(--hue, var(--color-fg));
+}
+
+.psy-curve__bar.is-onset {
+  background: color-mix(in oklab, var(--hue, var(--color-fg)) 70%, var(--color-fg));
+  opacity: 0.8;
+}
+
+.psy-curve__bar.is-peak {
+  box-shadow: 0 0 0.45em color-mix(in oklab, var(--hue, var(--color-fg)) 45%, transparent);
+}
+
+.psy-curve__bar.is-comedown {
+  background: color-mix(in oklab, var(--hue, var(--color-fg)) 55%, var(--color-ink-3));
+}
+
+.psy-curve__bar.is-after {
+  background: color-mix(in oklab, var(--color-fg) 24%, transparent);
+}
+
+/* A small break before the compressed after-effects tail. */
+.psy-curve__bar.is-comedown + .psy-curve__bar.is-after {
+  margin-left: 0.4em;
+}
+
+.psy-curve__labels {
+  position: relative;
+  height: 1.05em;
+}
+
+.psy-curve__phase {
+  position: absolute;
+  top: 0;
+  left: var(--x);
+  font-size: 0.6em;
+  line-height: 1.7;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.psy-curve__phase {
+  color: var(--hue, var(--color-fg));
+  font-weight: 800;
+}
+
+.psy-curve__phase.is-after,
+.psy-curve__phase.is-comedown {
+  color: var(--color-fg-mute);
+}
+
+.psy-curve__summary {
+  margin: 0.1em 0 0;
+  color: var(--color-fg-mute);
+  font-size: 0.6em;
+  line-height: 1.35;
+}
+
+.psy-caution {
+  color: var(--color-fg-mute);
+}
+
+.psy-caution strong {
+  color: var(--color-caution);
+}
+
+.psy-caution a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px dotted color-mix(in oklab, var(--color-fg) 35%, transparent);
+}
+
+/* ---------- Footer / flip ---------- */
+
+.psy-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6em;
+  min-height: 2.1em;
+}
+
+.psy-foot__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  color: var(--color-fg-mute);
+  font-size: 0.64em;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+
+.psy-foot__brand img {
+  width: 1.3em;
+  height: 1.3em;
+  border-radius: 0.3em;
+}
+
+.psy-flip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  min-height: 2.5em;
+  padding: 0 0.9em;
+  border-radius: 999px;
+  color: var(--color-ink);
+  background: var(--color-fg);
+  font-size: 0.7em;
+  font-weight: 800;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  box-shadow: 0 0.35em 1em -0.3em rgb(0 0 0 / 0.5);
+  transition: transform 160ms ease;
+}
+
+.psy-flip svg {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.psy-flip:hover {
+  transform: translateY(-1px);
+}
+
+.psy-flip--icon {
+  flex: none;
+  min-height: 2.4em;
+  padding: 0 0.8em 0 0.7em;
+  color: var(--color-fg);
+  background: color-mix(in oklab, var(--color-fg) 10%, transparent);
+  box-shadow: none;
+}
+
+/* ---------- Back: spacing & dependence ---------- */
+
+.psy-spacing__value {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1em 0.45em;
+  margin: 0;
+}
+
+.psy-spacing__value strong {
+  color: var(--color-fg);
+  font-size: 1.3em;
+  font-weight: 850;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.psy-spacing__value span {
+  color: var(--hue, var(--color-fg-mute));
+  font-size: 0.66em;
+  font-weight: 800;
+}
+
+.psy-spacing__pattern {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2em 0.5em;
+}
+
+.psy-spacing__cells {
+  display: flex;
+  gap: 0.22em;
+}
+
+.psy-spacing__cell {
+  width: 0.58em;
+  height: 0.58em;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--color-fg) 13%, transparent);
+}
+
+.psy-spacing__cell.is-use {
+  background: var(--hue, var(--color-fg));
+  box-shadow: 0 0 0.5em color-mix(in oklab, var(--hue, var(--color-fg)) 70%, transparent);
+}
+
+.psy-spacing__span {
+  color: var(--color-fg-mute);
+  font-size: 0.58em;
+  white-space: nowrap;
+}
+
+.psy-meter {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.2em;
+  margin-top: 0.1em;
+}
+
+.psy-meter__step {
+  height: 0.55em;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--color-fg) 12%, transparent);
+}
+
+.psy-meter[data-level="1"] .is-on { background: #4ade80; }
+.psy-meter[data-level="2"] .is-on { background: #a3e635; }
+.psy-meter[data-level="3"] .is-on { background: #facc15; }
+.psy-meter[data-level="4"] .is-on { background: #fb923c; }
+.psy-meter[data-level="5"] .is-on { background: #ef4444; }
+
+.psy-meter__label {
+  margin: 0;
+  font-size: 0.92em;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Back: risks, combos, emergency ---------- */
+
+.psy-risks {
+  display: grid;
+  gap: 0.42em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.psy-risks li {
+  display: grid;
+  grid-template-columns: 1.75em minmax(0, 1fr);
+  align-items: start;
+  gap: 0.55em;
+}
+
+.psy-risks__icon {
+  display: grid;
+  place-items: center;
+  width: 1.75em;
+  height: 1.75em;
+  border-radius: 0.55em;
+  color: #fdba74;
+  background: color-mix(in oklab, #f97316 18%, transparent);
+}
+
+.psy-risks__icon svg {
+  width: 1.05em;
+  height: 1.05em;
+}
+
+.psy-risks p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.7em;
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.psy-risks strong {
+  color: var(--color-fg);
+}
+
+.psy-avoid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.psy-avoid__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  min-height: 2.1em;
+  padding: 0 0.6em 0 0.42em;
+  border-radius: 999px;
+  font-size: 0.68em;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: filter 140ms ease;
+}
+
+.psy-avoid__more {
+  color: var(--color-fg);
+  background: color-mix(in oklab, var(--color-fg) 10%, transparent);
+  box-shadow: inset 0 0 0 1px var(--tile-edge);
+}
+
+.psy-avoid__chip:hover,
+.psy-avoid__chip:focus-visible {
+  filter: brightness(1.12);
+}
+
+.psy-tile--emergency {
+  border-color: color-mix(in oklab, #ef4444 45%, transparent);
+  background:
+    radial-gradient(120% 90% at 100% 0%, color-mix(in oklab, #ef4444 26%, transparent), transparent 70%),
+    color-mix(in oklab, #ef4444 11%, var(--face));
+}
+
+.psy-tile--emergency h3 {
+  color: #fecaca;
+}
+
+.psy-tile--emergency h3 svg {
+  color: #f87171;
+}
+
+.psy-call {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.35em;
+  min-height: 2.3em;
+  padding: 0 0.8em 0 0.65em;
+  border-radius: 999px;
+  color: #fff;
+  background: #dc2626;
+  font-size: 0.7em;
+  font-weight: 850;
+  text-decoration: none;
+  box-shadow: 0 0.3em 0.9em -0.2em rgb(220 38 38 / 0.6);
+}
+
+.psy-call svg {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.psy-call:hover {
+  background: #ef4444;
+}
+
+.psy-emergency__signs strong {
+  color: #fecaca;
+}
+
+.psy-emergency__actions {
+  display: grid;
+  gap: 0.12em;
+  margin: 0;
+  padding-left: 1.25em;
+  list-style: decimal;
+  color: var(--color-fg);
+  font-size: 0.7em;
+  line-height: 1.32;
+}
+
+.psy-emergency__actions li::marker {
+  color: #fca5a5;
+  font-weight: 850;
+}
+
+/* ---------- Popovers (other routes, comparison, ratings) ---------- */
+
+.psy-popover {
+  /* Top-layer content: sized for the viewport, not the card. */
+  font-size: min(15px, calc((100vw - 32px) / 25));
+  width: min(25em, calc(100vw - 32px));
+  max-height: min(84dvh, 44em);
+  margin: auto;
+  padding: 1em 1.1em 1.15em;
+  overflow: auto;
+  color: var(--color-fg);
+  background: var(--color-ink-2);
+  border: 1px solid color-mix(in oklab, var(--color-fg) 14%, transparent);
+  border-radius: 1.1em;
+  box-shadow: 0 2em 4em -1em rgb(0 0 0 / 0.65);
+  overscroll-behavior: contain;
+}
+
+.psy-popover--wide {
+  width: min(30em, calc(100vw - 32px));
+}
+
+.psy-popover::backdrop {
+  background: rgb(0 0 0 / 0.5);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+.psy-popover:popover-open {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9em;
+}
+
+.psy-popover__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75em;
+}
+
+.psy-popover__head h3 {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.psy-popover p {
+  margin: 0;
+  font-size: 0.88em;
+  line-height: 1.5;
+}
+
+.psy-popover__close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.2em;
+  height: 2.2em;
+  border: 0;
+  border-radius: 50%;
+  color: var(--color-fg-mute);
+  background: color-mix(in oklab, var(--color-fg) 8%, transparent);
+  cursor: pointer;
+}
+
+.psy-popover__close:hover {
+  color: var(--color-fg);
+}
+
+.psy-popover__route {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45em;
+  padding: 0.7em 0.8em;
+  border-radius: 0.8em;
+  background: color-mix(in oklab, var(--color-fg) 5%, transparent);
+  --face: var(--color-ink-2);
+  --ink-soft: color-mix(in oklab, var(--color-fg) 84%, transparent);
+}
+
+.psy-popover__note {
+  color: var(--color-fg-mute);
+  font-size: 0.8em !important;
+}
+
+.psy-gable {
+  display: grid;
+  gap: 0.28em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.psy-gable__row {
+  display: grid;
+  grid-template-columns: 8.6em minmax(0, 1fr);
+  align-items: center;
+  gap: 0.6em;
+  font-size: 0.8em;
+}
+
+.psy-gable__name {
+  overflow: hidden;
+  color: var(--color-fg-mute);
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.psy-gable__bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: var(--w);
+  min-width: 3.4em;
+  height: 1.45em;
+  padding-right: 0.4em;
+  border-radius: 0.35em;
+  background: hsl(var(--h) 72% 50%);
+}
+
+.psy-gable__row.is-estimate .psy-gable__bar {
+  background: hsl(var(--h) 72% 50% / 0.35);
+  outline: 1.5px dashed hsl(var(--h) 72% 58%);
+  outline-offset: -1.5px;
+}
+
+.psy-gable__value {
+  color: #0b0b0c;
+  font-size: 0.86em;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+}
+
+.psy-gable__row.is-estimate .psy-gable__value {
+  color: var(--color-fg);
+}
+
+.psy-gable__row.is-current .psy-gable__name {
+  color: var(--color-fg);
+  font-weight: 850;
+}
+
+.psy-gable__row.is-current .psy-gable__bar {
+  box-shadow: 0 0 0 2px var(--color-fg);
+}
+
+/* ---------- Spread: both sides when there is room ----------
+   Kept last so it overrides the single-card rules above. */
+
+@media (min-height: 34rem) {
+  @container psy-deck (min-width: 46rem) {
+    .psy-deck__tabs,
+    .psy-deck__radio,
+    .psy-flip {
+      display: none;
+    }
+
+    .psy-card {
+      --card-w: min((100cqi - var(--deck-gap)) / 2, 31rem, var(--card-max-h-w));
+      width: calc(var(--card-w) * 2 + var(--deck-gap));
+      perspective: none;
+      transform: none;
+    }
+
+    .psy-card__inner,
+    .psy-deck:has(.psy-deck__radio[value="back"]:checked) .psy-card__inner {
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--deck-gap);
+      transform: none;
+      transition: none;
+    }
+
+    .psy-face,
+    .psy-deck:has(.psy-deck__radio[value="back"]:checked) .psy-face--front {
+      grid-area: auto;
+      /* Each side tilts on its own when both are shown. */
+      transform: perspective(calc(var(--card-w) * 4)) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+      visibility: visible;
+      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .psy-face[data-tilting] {
+      transition-duration: 0.12s;
+    }
+
+    .psy-curl {
+      --curl: 0em;
+    }
+  }
+}
+
+/* ---------- Light scheme ---------- */
+
+html[data-color-scheme="light"] .psy-card {
+  --face: color-mix(in oklab, #ffffff 94%, var(--hue, #888) 6%);
+  --tile: color-mix(in oklab, var(--color-fg) 4%, transparent);
+}
+
+.psy-popover {
+  --face: var(--color-ink-2);
+  --ink-soft: color-mix(in oklab, var(--color-fg) 84%, transparent);
+}
+
+.psy-popover .psy-route {
+  font-size: 0.85em;
+}
+
+.psy-meter--wide {
+  width: 100%;
+}

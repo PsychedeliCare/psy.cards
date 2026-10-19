@@ -7,26 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0057EE7F01E21ECA9256B1E4 /* CardPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3DF7FDD3D297A5F04FD25F /* CardPrimitives.swift */; };
 		11F9F8099676BFA47FEB73DD /* DataPackModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E5E4628523F4D054AF0DF2 /* DataPackModels.swift */; };
 		12523F703EA7514B0CFA9D11 /* AppShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72F7CA81D6BB90CD7B4B880 /* AppShell.swift */; };
 		12857EAA59D875A164D22FAA /* SubstanceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E4E7F0817027BD4D77A9C3 /* SubstanceDetailView.swift */; };
 		136AA6DE77872EDD20F55508 /* SubstanceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE48C8938B060D3BDA08945 /* SubstanceListView.swift */; };
+		17AEFF3664D4585BD5D2EA9F /* DoseScaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A926A15F35D31E3F2C72E1 /* DoseScaleView.swift */; };
 		20074F9843A440CEAAB901E5 /* WheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB798AC6DBB4165223AAC58 /* WheelView.swift */; };
 		2CE9BCA6FE71EFCF7BE3C728 /* fr.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 7EDDB55AC8532C44CA9EFDDE /* fr.lproj */; };
 		2DD3FC630C04477DC5DA64F1 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32499B13D99A22A074546062 /* AboutView.swift */; };
 		31670320BD0D01C8DC2EDB98 /* CombosMatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AFB7F1C2776662A0124924 /* CombosMatrixView.swift */; };
+		3C3B95308FEC9DDD6A88519E /* HologramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472F6E6089CDF63885C525AA /* HologramView.swift */; };
+		42675BC7458D696655EBDECC /* HorizontalSwipeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CAC7287DE90D682FBD555A /* HorizontalSwipeGesture.swift */; };
+		434F8E7A05B66E7C04F6EF0A /* SubstanceCardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51062DC2513CD3D8D7EBF09D /* SubstanceCardDeck.swift */; };
+		438724645C5BADCAB76CF62D /* CardModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39A36FFB68F93C15DC4F024 /* CardModels.swift */; };
+		610C11E47299579461A0B333 /* FloatingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B19FD51523956C2E2BC58BD /* FloatingCardView.swift */; };
 		62369D78E7D0F6F73247C614 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 2A4DBA4815F947CC554D0205 /* en.lproj */; };
+		75E5B9650A9F16BF39198541 /* CardFaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFC582EC374EF1EB3B962A6 /* CardFaces.swift */; };
 		801F20B1BB9792687866E121 /* it.lproj in Resources */ = {isa = PBXBuildFile; fileRef = 6E96626A83CBFB36D22F265C /* it.lproj */; };
 		8D29A07CB35584922EB33147 /* de.lproj in Resources */ = {isa = PBXBuildFile; fileRef = BFC6FEF6B6DF6A720829CC2C /* de.lproj */; };
 		93E4A91DA35934B77AF102F8 /* PsyCardsDesignTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D9873B94B37D101EC2B556 /* PsyCardsDesignTokens.swift */; };
+		9A5B8AD7AB8E4FE4660826CD /* CardTourUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77817E0B83DD28E954FE47DC /* CardTourUITests.swift */; };
+		B0FF3BE08BE867D94D0753D5 /* MarginViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C268FC94CA3499BE07D592 /* MarginViews.swift */; };
 		B358157C70738845E8D155D4 /* DataPack in Resources */ = {isa = PBXBuildFile; fileRef = FDBA376BFA4FAF0FF1ED938E /* DataPack */; };
 		B8C0EBB4D73FA3EE38618D24 /* DataPackDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F70DF95F46E1607B8E17D0 /* DataPackDecodingTests.swift */; };
+		BB97EB804DB1CADB77944FAB /* BodyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740E11A7D412781F67D1658D /* BodyProfile.swift */; };
 		C23005EAB6489CC0FD0BD637 /* DataPackStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A84BA0CC33DBB20B9C70BD /* DataPackStore.swift */; };
 		DBF5C801DF60B49B894308E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFDC5A4901A2E353550FE8D1 /* Assets.xcassets */; };
 		E37BB7D79F7939F26CA95E92 /* PsyCardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281AF71EBE7DB1407431CB71 /* PsyCardsApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		000E4D187EB06A2D357849BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4EC2A323F90E0C0638CC3D69 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 811845075E181185E90C0966;
+			remoteInfo = PsyCards;
+		};
 		D3B043E1C6AD103BEEA74BDD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4EC2A323F90E0C0638CC3D69 /* Project object */;
@@ -39,22 +57,34 @@
 /* Begin PBXFileReference section */
 		0AB798AC6DBB4165223AAC58 /* WheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelView.swift; sourceTree = "<group>"; };
 		14E4E7F0817027BD4D77A9C3 /* SubstanceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceDetailView.swift; sourceTree = "<group>"; };
+		15A926A15F35D31E3F2C72E1 /* DoseScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseScaleView.swift; sourceTree = "<group>"; };
 		16AFB7F1C2776662A0124924 /* CombosMatrixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombosMatrixView.swift; sourceTree = "<group>"; };
+		18CBE014C53CE4DB0BA567E0 /* PsyCardsUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PsyCardsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		281AF71EBE7DB1407431CB71 /* PsyCardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsyCardsApp.swift; sourceTree = "<group>"; };
 		2A4DBA4815F947CC554D0205 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
 		32499B13D99A22A074546062 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		3D7F70D1E90C8BC387FA1A64 /* PsyCardsTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PsyCardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46D1C1E7A800D938ACA30FD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		472F6E6089CDF63885C525AA /* HologramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HologramView.swift; sourceTree = "<group>"; };
+		4DFC582EC374EF1EB3B962A6 /* CardFaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFaces.swift; sourceTree = "<group>"; };
+		51062DC2513CD3D8D7EBF09D /* SubstanceCardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceCardDeck.swift; sourceTree = "<group>"; };
+		54C268FC94CA3499BE07D592 /* MarginViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarginViews.swift; sourceTree = "<group>"; };
 		6DE48C8938B060D3BDA08945 /* SubstanceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceListView.swift; sourceTree = "<group>"; };
 		6E96626A83CBFB36D22F265C /* it.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = it.lproj; sourceTree = "<group>"; };
+		740E11A7D412781F67D1658D /* BodyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyProfile.swift; sourceTree = "<group>"; };
+		77817E0B83DD28E954FE47DC /* CardTourUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTourUITests.swift; sourceTree = "<group>"; };
 		7C77EFF60A694276158DA5B8 /* PsyCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PsyCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EDDB55AC8532C44CA9EFDDE /* fr.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fr.lproj; sourceTree = "<group>"; };
 		87F70DF95F46E1607B8E17D0 /* DataPackDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPackDecodingTests.swift; sourceTree = "<group>"; };
+		9B19FD51523956C2E2BC58BD /* FloatingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingCardView.swift; sourceTree = "<group>"; };
+		A7CAC7287DE90D682FBD555A /* HorizontalSwipeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalSwipeGesture.swift; sourceTree = "<group>"; };
 		A9A84BA0CC33DBB20B9C70BD /* DataPackStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPackStore.swift; sourceTree = "<group>"; };
 		AFDC5A4901A2E353550FE8D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFC6FEF6B6DF6A720829CC2C /* de.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = de.lproj; sourceTree = "<group>"; };
+		C39A36FFB68F93C15DC4F024 /* CardModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModels.swift; sourceTree = "<group>"; };
 		D4D9873B94B37D101EC2B556 /* PsyCardsDesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsyCardsDesignTokens.swift; sourceTree = "<group>"; };
 		D72F7CA81D6BB90CD7B4B880 /* AppShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShell.swift; sourceTree = "<group>"; };
+		DC3DF7FDD3D297A5F04FD25F /* CardPrimitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPrimitives.swift; sourceTree = "<group>"; };
 		F7E5E4628523F4D054AF0DF2 /* DataPackModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPackModels.swift; sourceTree = "<group>"; };
 		FDBA376BFA4FAF0FF1ED938E /* DataPack */ = {isa = PBXFileReference; lastKnownFileType = folder; name = DataPack; path = PsyCards/Resources/DataPack; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -63,6 +93,8 @@
 		136719CE9AD861C0AE57AF43 /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				DC3DF7FDD3D297A5F04FD25F /* CardPrimitives.swift */,
+				A7CAC7287DE90D682FBD555A /* HorizontalSwipeGesture.swift */,
 				D4D9873B94B37D101EC2B556 /* PsyCardsDesignTokens.swift */,
 			);
 			path = Design;
@@ -82,6 +114,18 @@
 				87F70DF95F46E1607B8E17D0 /* DataPackDecodingTests.swift */,
 			);
 			path = PsyCardsTests;
+			sourceTree = "<group>";
+		};
+		441BF7428BA19EBCA0DF32EB /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				4DFC582EC374EF1EB3B962A6 /* CardFaces.swift */,
+				15A926A15F35D31E3F2C72E1 /* DoseScaleView.swift */,
+				472F6E6089CDF63885C525AA /* HologramView.swift */,
+				54C268FC94CA3499BE07D592 /* MarginViews.swift */,
+				51062DC2513CD3D8D7EBF09D /* SubstanceCardDeck.swift */,
+			);
+			path = Card;
 			sourceTree = "<group>";
 		};
 		7CCC123176FF9E078DA3EABA /* PsyCards */ = {
@@ -105,10 +149,20 @@
 		841B2FA60682570E53DB0792 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				740E11A7D412781F67D1658D /* BodyProfile.swift */,
+				C39A36FFB68F93C15DC4F024 /* CardModels.swift */,
 				F7E5E4628523F4D054AF0DF2 /* DataPackModels.swift */,
 				A9A84BA0CC33DBB20B9C70BD /* DataPackStore.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		AF6CA5C5D597A8D50A438D4D /* PsyCardsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				77817E0B83DD28E954FE47DC /* CardTourUITests.swift */,
+			);
+			path = PsyCardsUITests;
 			sourceTree = "<group>";
 		};
 		B34008966C621E65814ECE71 = {
@@ -116,6 +170,7 @@
 			children = (
 				7CCC123176FF9E078DA3EABA /* PsyCards */,
 				3755A55C878069810F5610A4 /* PsyCardsTests */,
+				AF6CA5C5D597A8D50A438D4D /* PsyCardsUITests */,
 				B9DA57E360636C0512F1404C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -125,6 +180,7 @@
 			children = (
 				7C77EFF60A694276158DA5B8 /* PsyCards.app */,
 				3D7F70D1E90C8BC387FA1A64 /* PsyCardsTests.xctest */,
+				18CBE014C53CE4DB0BA567E0 /* PsyCardsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,6 +196,7 @@
 		E048CB2C658FE651C9ED1B9C /* Substance */ = {
 			isa = PBXGroup;
 			children = (
+				9B19FD51523956C2E2BC58BD /* FloatingCardView.swift */,
 				14E4E7F0817027BD4D77A9C3 /* SubstanceDetailView.swift */,
 			);
 			path = Substance;
@@ -165,6 +222,7 @@
 		F7E614093521201D07F90E12 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				441BF7428BA19EBCA0DF32EB /* Card */,
 				CA9A879958F3621C0C4230D4 /* Combos */,
 				FA037F4CAF0FBFE321F6BD8B /* Home */,
 				E913906EB707FAB0EA6DBB8F /* Settings */,
@@ -221,6 +279,24 @@
 			productReference = 7C77EFF60A694276158DA5B8 /* PsyCards.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D5F26C85254415B882E36987 /* PsyCardsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AD97B0470BDF484B9F11CE1 /* Build configuration list for PBXNativeTarget "PsyCardsUITests" */;
+			buildPhases = (
+				4B9B2BC24521EE7751E8D906 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				174D7B4648CB35ACBB6991A4 /* PBXTargetDependency */,
+			);
+			name = PsyCardsUITests;
+			packageProductDependencies = (
+			);
+			productName = PsyCardsUITests;
+			productReference = 18CBE014C53CE4DB0BA567E0 /* PsyCardsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -232,6 +308,10 @@
 				TargetAttributes = {
 					2FE8927E5BE2AE2E32641EDF = {
 						DevelopmentTeam = "";
+					};
+					D5F26C85254415B882E36987 = {
+						DevelopmentTeam = "";
+						TestTargetID = 811845075E181185E90C0966;
 					};
 				};
 			};
@@ -251,6 +331,7 @@
 			targets = (
 				811845075E181185E90C0966 /* PsyCards */,
 				2FE8927E5BE2AE2E32641EDF /* PsyCardsTests */,
+				D5F26C85254415B882E36987 /* PsyCardsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -272,6 +353,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4B9B2BC24521EE7751E8D906 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A5B8AD7AB8E4FE4660826CD /* CardTourUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6A9BA71C4395024282BC4C37 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -286,11 +375,21 @@
 			files = (
 				2DD3FC630C04477DC5DA64F1 /* AboutView.swift in Sources */,
 				12523F703EA7514B0CFA9D11 /* AppShell.swift in Sources */,
+				BB97EB804DB1CADB77944FAB /* BodyProfile.swift in Sources */,
+				75E5B9650A9F16BF39198541 /* CardFaces.swift in Sources */,
+				438724645C5BADCAB76CF62D /* CardModels.swift in Sources */,
+				0057EE7F01E21ECA9256B1E4 /* CardPrimitives.swift in Sources */,
 				31670320BD0D01C8DC2EDB98 /* CombosMatrixView.swift in Sources */,
 				11F9F8099676BFA47FEB73DD /* DataPackModels.swift in Sources */,
 				C23005EAB6489CC0FD0BD637 /* DataPackStore.swift in Sources */,
+				17AEFF3664D4585BD5D2EA9F /* DoseScaleView.swift in Sources */,
+				610C11E47299579461A0B333 /* FloatingCardView.swift in Sources */,
+				3C3B95308FEC9DDD6A88519E /* HologramView.swift in Sources */,
+				42675BC7458D696655EBDECC /* HorizontalSwipeGesture.swift in Sources */,
+				B0FF3BE08BE867D94D0753D5 /* MarginViews.swift in Sources */,
 				E37BB7D79F7939F26CA95E92 /* PsyCardsApp.swift in Sources */,
 				93E4A91DA35934B77AF102F8 /* PsyCardsDesignTokens.swift in Sources */,
+				434F8E7A05B66E7C04F6EF0A /* SubstanceCardDeck.swift in Sources */,
 				12857EAA59D875A164D22FAA /* SubstanceDetailView.swift in Sources */,
 				136AA6DE77872EDD20F55508 /* SubstanceListView.swift in Sources */,
 				20074F9843A440CEAAB901E5 /* WheelView.swift in Sources */,
@@ -300,6 +399,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		174D7B4648CB35ACBB6991A4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 811845075E181185E90C0966 /* PsyCards */;
+			targetProxy = 000E4D187EB06A2D357849BA /* PBXContainerItemProxy */;
+		};
 		932C58338E9FD532B3F276D2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 811845075E181185E90C0966 /* PsyCards */;
@@ -322,7 +426,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.raphaelsaunier.psycards;
+				PRODUCT_BUNDLE_IDENTIFIER = cards.psy.PsyCards;
 				SDKROOT = iphoneos;
 				SWIFT_STRICT_CONCURRENCY = complete;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -428,10 +532,27 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.raphaelsaunier.psycards;
+				PRODUCT_BUNDLE_IDENTIFIER = cards.psy.PsyCards;
 				SDKROOT = iphoneos;
 				SWIFT_STRICT_CONCURRENCY = complete;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		951E53A25103FD5305FEADF0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cards.psy.PsyCardsUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PsyCards;
 			};
 			name = Release;
 		};
@@ -496,6 +617,23 @@
 			};
 			name = Release;
 		};
+		BE53F407278BE509E350CBDF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = cards.psy.PsyCardsUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PsyCards;
+			};
+			name = Debug;
+		};
 		C0465986BC5C7991BC8314C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -530,6 +668,15 @@
 			buildConfigurations = (
 				531ACFA2658FB3C27EC9185B /* Debug */,
 				A17D64932BF3CD7B870C13A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4AD97B0470BDF484B9F11CE1 /* Build configuration list for PBXNativeTarget "PsyCardsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE53F407278BE509E350CBDF /* Debug */,
+				951E53A25103FD5305FEADF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

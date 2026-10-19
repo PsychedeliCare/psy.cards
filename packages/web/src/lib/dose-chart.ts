@@ -29,7 +29,7 @@ const LEVEL_COLORS: Record<DoseLevel, string> = {
   fatal: "#7f1d1d",
 };
 
-const CHARTABLE_UNITS = new Set(["µg", "mg", "g", "ml", "units", "seeds"]);
+const CHARTABLE_UNITS = new Set(["µg", "mg", "g", "ml", "units", "seeds", "mg/kg"]);
 
 const ROUTE_ICONS: Record<string, string> = {
   oral: "pill-fill",
@@ -109,40 +109,36 @@ function normalizeUnit(unit: string): string {
   return unit;
 }
 
+/** Parses TripSit amounts such as `75-125mg`, `75mg-250mg`, `250ug+`,
+ *  `50-125mg+`, `2.5-7.5mg/kg` or `15-30mg.` (stray trailing periods). */
 export function parseDoseAmount(raw: string): ParsedAmount | null {
-  const compact = raw.trim().toLowerCase().replace(/\s+/g, "");
+  const compact = raw.trim().toLowerCase().replace(/\s+/g, "").replace(/\.+$/, "");
   if (!compact || compact === "unknown") return null;
+  const openEnd = compact.endsWith("+");
+  const body = openEnd ? compact.slice(0, -1) : compact;
+  const unitPattern = "([a-zµ][a-z0-9/µ]*)";
 
-  const rangeMatch = compact.match(/^([\d.]+)-([\d.]+)([a-z][a-z0-9/]*)\+?$/);
+  const rangeMatch = body.match(new RegExp(`^([\\d.]+)${unitPattern}?-([\\d.]+)${unitPattern}$`));
   if (rangeMatch) {
+    const [, min, leadingUnit, max, unit] = rangeMatch;
+    if (leadingUnit && leadingUnit !== unit) return null;
     return {
-      min: parseFloat(rangeMatch[1]),
-      max: parseFloat(rangeMatch[2]),
-      openEnd: compact.endsWith("+"),
-      unit: normalizeUnit(rangeMatch[3]),
+      min: parseFloat(min!),
+      max: parseFloat(max!),
+      openEnd,
+      unit: normalizeUnit(unit!),
       raw,
     };
   }
 
-  const plusMatch = compact.match(/^([\d.]+)([a-z][a-z0-9/]*)\+$/);
-  if (plusMatch) {
-    return {
-      min: parseFloat(plusMatch[1]),
-      max: null,
-      openEnd: true,
-      unit: normalizeUnit(plusMatch[2]),
-      raw,
-    };
-  }
-
-  const singleMatch = compact.match(/^([\d.]+)([a-z][a-z0-9/]*)$/);
+  const singleMatch = body.match(new RegExp(`^([\\d.]+)${unitPattern}$`));
   if (singleMatch) {
-    const value = parseFloat(singleMatch[1]);
+    const value = parseFloat(singleMatch[1]!);
     return {
       min: value,
-      max: value,
-      openEnd: false,
-      unit: normalizeUnit(singleMatch[2]),
+      max: openEnd ? null : value,
+      openEnd,
+      unit: normalizeUnit(singleMatch[2]!),
       raw,
     };
   }

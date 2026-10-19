@@ -9,6 +9,7 @@
   "scripts": {
     "molecules:web": "pnpm --filter @psy.cards/shared molecules:web",
     "test:holograms": "pnpm --filter @psy.cards/web test:holograms",
+    "test:cards": "pnpm --filter @psy.cards/web test:cards",
     "dev": "pnpm --filter @psy.cards/web dev",
     "build": "pnpm sources:check && pnpm --filter @psy.cards/web build",
     "sources:refresh": "node packages/shared/scripts/sources.mjs refresh",
@@ -24,6 +25,8 @@
     "smoke:worker-routes": "pnpm --filter @psy.cards/web smoke:worker-routes",
     "datapack": "pnpm --filter @psy.cards/shared datapack",
     "ios:generate": "cd packages/ios && xcodegen generate",
+    "android:build": "cd packages/android && ./gradlew :app:assembleDebug",
+    "android:test": "cd packages/android && ./gradlew :app:testDebugUnitTest",
     "generate-types": "pnpm --filter @psy.cards/web generate-types"
   },
   "pnpm": {

@@ -10,6 +10,7 @@
 | :-- | :-- |
 | `packages/web` | Astro static site + Cloudflare Worker |
 | `packages/ios` | Native SwiftUI iOS/iPadOS app |
+| `packages/android` | Native Jetpack Compose Android app |
 | `packages/shared` | Shared JSON datasets (`data/`, `i18n/`) + datapack generator |
 | `drugs/`, `combogen/` | TripSit git submodules (shared by web + iOS) | 
 
@@ -27,6 +28,7 @@ The project is designed around strong space constraints: each format must surfac
 | **Print (Premium)** | Higher-quality boxed editions for supporters, gifting, and crowdfunding rewards. |
 | **Instagram** | Localised carousel-friendly versions for `@psychedelicards` and language-specific accounts. |
 | **Web** | Mobile-friendly reference pages linked from QR codes and backed by transparent sources. |
+| **iOS & Android** | Native apps with the same two-sided cards, offline, personalised to the reader's body. |
 | **AI / Chatbot** | A later safety-focused conversational layer for questions such as dosage, interactions, and risk reduction. |
 
 ## Roadmap
@@ -57,10 +59,13 @@ All commands run from the project root:
 | `pnpm sources:refresh` | Refresh source metadata from pinned local inputs and Git history (no network) |
 | `pnpm sources:check` | Verify source revisions, file hashes and registry freshness |
 | `pnpm sources:test` | Test provenance generation and failure cases |
+| `pnpm test:cards` | Test card layout, dose parsing, personal-dose maths and harm reduction content completeness |
 | `pnpm preview` | Preview the production build locally |
 | `pnpm preview:cloudflare` | Preview the built `dist` directory with the Cloudflare Worker and assets binding |
 | `pnpm smoke:worker-routes` | Check custom-domain Worker routing without starting a server |
-| `pnpm datapack` | Regenerate the iOS data pack from shared JSON |
+| `pnpm datapack` | Regenerate the native apps' data pack (iOS + Android) from shared JSON |
+| `pnpm android:build` | Build the Android debug APK |
+| `pnpm android:test` | Run the Android unit tests |
 
 To debug Cloudflare behavior locally, run `pnpm build` and then `pnpm preview:cloudflare`.
 For fast custom-domain routing checks, run `pnpm smoke:worker-routes`.

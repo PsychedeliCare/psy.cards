@@ -1,0 +1,66 @@
+---
+/**
+ * "Effects over time" as a row of rounded bars whose heights follow the
+ * intensity curve, coloured by phase. Labels are laid out at build time in
+ * em, like the dose scale, so they never collide at any card size.
+ */
+import { buildEffectCurve, type TimingInput } from "../../lib/effect-curve";
+import { estimateTextEm, spreadLabels } from "../../lib/label-layout";
+import type { Locale } from "../../i18n/locales";
+import { getUiMessages } from "../../i18n/load-locale";
+import { t } from "../../i18n/ui";
+
+interface Props {
+  timing: { onset?: TimingInput; duration?: TimingInput; after?: TimingInput };
+  locale: Locale;
+  /** Plot width in em (the label layout depends on it). */
+  widthEm?: number;
+}
+
+const { timing, locale, widthEm = 19.6 } = Astro.props;
+const ui = getUiMessages(locale);
+const curve = buildEffectCurve(timing);
+const FONT_EM = 0.6;
+const pct = (em: number) => (em / widthEm) * 100;
+const round = (n: number) => Math.round(n * 100) / 100;
+
+const phaseLabel = {
+  onset: t(locale, ui, "card.phaseOnset"),
+  peak: t(locale, ui, "card.phasePeak"),
+  comedown: t(locale, ui, "card.phaseComedown"),
+  after: t(locale, ui, "card.phaseAfter"),
+};
+const phaseLabels = curve
+  ? spreadLabels(
+      curve.phases.map((phase) => ({
+        pos: (phase.start + phase.end) / 2,
+        width: pct(estimateTextEm(phaseLabel[phase.phase], FONT_EM) + 0.2),
+        priority: phase.phase === "peak" ? 3 : phase.phase === "after" ? 2 : 1,
+      })),
+      pct(0.4)
+    )
+  : [];
+const summary = [
+  timing.onset && `${t(locale, ui, "card.onset")} ${timing.onset.value} ${timing.onset.unit === "minutes" ? "min" : "h"}`,
+  timing.duration && `${t(locale, ui, "card.duration")} ${timing.duration.value} ${timing.duration.unit === "minutes" ? "min" : "h"}`,
+  timing.after && `${t(locale, ui, "card.afterEffects")} ${timing.after.value} ${timing.after.unit === "minutes" ? "min" : "h"}`,
+].filter(Boolean);
+---
+
+{curve && (
+  <div class="psy-curve">
+    <div class="psy-curve__bars" role="img" aria-label={summary.join(", ")}>
+      {curve.bars.map((bar) => (
+        <span class={`psy-curve__bar is-${bar.phase}`} style={`--h: ${round(bar.height)}`} />
+      ))}
+    </div>
+    <div class="psy-curve__labels" aria-hidden="true">
+      {phaseLabels.map(({ index, x }) => (
+        <span class={`psy-curve__phase is-${curve.phases[index]!.phase}`} style={`--x: ${round(x)}%`}>
+          {phaseLabel[curve.phases[index]!.phase]}
+        </span>
+      ))}
+    </div>
+    {summary.length > 0 && <p class="psy-curve__summary">{summary.join(" · ")}</p>}
+  </div>
+)}

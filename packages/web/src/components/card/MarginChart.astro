@@ -1,0 +1,39 @@
+---
+/**
+ * Gable (2004) safety ratios — lethal dose ÷ usual dose — on a log scale.
+ * A corrected, sourced take on the widely shared "therapeutic ratio" chart:
+ * values come from the paper's Table 1 and extrapolated ones are marked.
+ */
+import type { GableRow } from "../../data/harm-reduction";
+import { getDisplayLabel } from "../../data/config";
+import type { Locale } from "../../i18n/locales";
+
+interface Props {
+  rows: GableRow[];
+  current: string;
+  locale: Locale;
+}
+
+const { rows, current, locale } = Astro.props;
+const sorted = [...rows].sort((a, b) => a.ratio - b.ratio);
+const width = (ratio: number) => Math.max(6, (Math.log10(ratio) / 3) * 100);
+// Hue runs from red (≤ 5×) to green (1000×) on the same log scale as the
+// card's margin meter, so colours mean the same thing in both places.
+const hue = (ratio: number) =>
+  Math.round(Math.min(1, Math.max(0, (Math.log10(ratio) - 0.7) / 2.3)) * 130);
+const label = (row: GableRow) =>
+  row.key && !["opioids", "amphetamines", "benzodiazepines", "ssris", "mushrooms"].includes(row.key)
+    ? getDisplayLabel(locale, row.key)
+    : row.name;
+---
+
+<ol class="psy-gable">
+  {sorted.map((row) => (
+    <li class:list={["psy-gable__row", { "is-current": row.key === current, "is-estimate": row.extrapolated }]}>
+      <span class="psy-gable__name">{label(row)}</span>
+      <span class="psy-gable__bar" style={`--w: ${width(row.ratio)}%; --h: ${hue(row.ratio)}`}>
+        <span class="psy-gable__value">{row.atLeast ? ">" : ""}{row.ratio}×</span>
+      </span>
+    </li>
+  ))}
+</ol>

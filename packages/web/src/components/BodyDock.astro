@@ -1,0 +1,81 @@
+---
+/**
+ * Bottom-of-screen body profile (sex + weight) that personalises dose
+ * tiles. It appears while a substance card is on screen; values stay in
+ * this browser (see scripts/body-profile.ts).
+ */
+import { Icon } from "@twodft/astro-icon/components";
+import type { Locale } from "../i18n/locales";
+import { getUiMessages } from "../i18n/load-locale";
+import { t } from "../i18n/ui";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
+const ui = getUiMessages(locale);
+---
+
+<aside class="body-dock" data-body-dock aria-label={t(locale, ui, "body.title")} hidden>
+  <div class="body-dock__bar">
+    <span class="body-dock__title">
+      <Icon name="ph:user-fill" aria-hidden="true" />
+      <span>{t(locale, ui, "body.title")}</span>
+    </span>
+
+    <div class="body-dock__sex" role="radiogroup" aria-label={t(locale, ui, "body.sex")}>
+      <button type="button" role="radio" aria-checked="false" data-body-sex="male" title={t(locale, ui, "body.male")}>
+        <Icon name="ph:gender-male-bold" aria-hidden="true" />
+        <span>{t(locale, ui, "body.male")}</span>
+      </button>
+      <button type="button" role="radio" aria-checked="false" data-body-sex="female" title={t(locale, ui, "body.female")}>
+        <Icon name="ph:gender-female-bold" aria-hidden="true" />
+        <span>{t(locale, ui, "body.female")}</span>
+      </button>
+    </div>
+
+    <div class="body-dock__weight" role="group" aria-label={t(locale, ui, "body.weight")}>
+      <button type="button" data-body-step="-1" aria-label={t(locale, ui, "body.decrease")}>
+        <Icon name="ph:minus-bold" aria-hidden="true" />
+      </button>
+      <input
+        type="number"
+        inputmode="numeric"
+        min="30"
+        max="551"
+        step="1"
+        placeholder="—"
+        data-body-weight
+        aria-label={t(locale, ui, "body.weight")}
+      />
+      <button type="button" class="body-dock__unit" data-body-unit aria-label={`${t(locale, ui, "body.weight")}: kg`}>kg</button>
+      <button type="button" data-body-step="1" aria-label={t(locale, ui, "body.increase")}>
+        <Icon name="ph:plus-bold" aria-hidden="true" />
+      </button>
+    </div>
+
+    <button
+      type="button"
+      class="body-dock__save"
+      role="switch"
+      aria-checked="true"
+      data-body-remember
+      title={`${t(locale, ui, "body.saveHint")} — ${t(locale, ui, "body.privacy")}`}
+      aria-describedby="body-dock-privacy"
+    >
+      <span class="body-dock__switch" aria-hidden="true"></span>
+      <span>{t(locale, ui, "body.save")}</span>
+    </button>
+    <span id="body-dock-privacy" class="sr-only">{t(locale, ui, "body.saveHint")}. {t(locale, ui, "body.privacy")}</span>
+
+    <button type="button" class="body-dock__hide" data-body-hide aria-label={t(locale, ui, "body.hide")} title={t(locale, ui, "body.hide")}>
+      <Icon name="ph:caret-down-bold" aria-hidden="true" />
+    </button>
+  </div>
+</aside>
+
+<button type="button" class="body-dock-fab" data-body-show hidden aria-label={t(locale, ui, "body.show")}>
+  <Icon name="ph:user-fill" aria-hidden="true" />
+  <span data-body-summary>{t(locale, ui, "body.show")}</span>
+</button>

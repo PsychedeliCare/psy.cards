@@ -27,6 +27,12 @@
       "prettyName": "IMAOs",
       "group": "antidepressant",
       "aliases": [],
+      "listAliases": [],
+      "listMeta": {
+        "onset": null,
+        "duration": null,
+        "commonDose": null
+      },
       "searchTerms": [
         "IMAOs"
       ],
@@ -55,6 +61,12 @@
       "prettyName": "ISRSs",
       "group": "antidepressant",
       "aliases": [],
+      "listAliases": [],
+      "listMeta": {
+        "onset": null,
+        "duration": null,
+        "commonDose": null
+      },
       "searchTerms": [
         "ISRSs"
       ],
@@ -83,6 +95,12 @@
       "prettyName": "Amphétamines",
       "group": "stimulant",
       "aliases": [],
+      "listAliases": [],
+      "listMeta": {
+        "onset": null,
+        "duration": null,
+        "commonDose": null
+      },
       "searchTerms": [
         "Amphétamines"
       ],
@@ -113,6 +131,14 @@
       "aliases": [
         "coke"
       ],
+      "listAliases": [
+        "coke"
+      ],
+      "listMeta": {
+        "onset": null,
+        "duration": "1-1.5 hours",
+        "commonDose": null
+      },
       "searchTerms": [
         "Cocaïne",
         "Cocaïne",
@@ -164,6 +190,14 @@
       "aliases": [
         "coffee"
       ],
+      "listAliases": [
+        "coffee"
+      ],
+      "listMeta": {
+        "onset": "5-10 minutes",
+        "duration": "1.5-5 hours",
+        "commonDose": "75mg-250mg"
+      },
       "searchTerms": [
         "Cafféine",
         "Caféine",
@@ -223,6 +257,16 @@
         "x",
         "md"
       ],
+      "listAliases": [
+        "molly",
+        "ecstasy",
+        "adam"
+      ],
+      "listMeta": {
+        "onset": "20-70 minutes",
+        "duration": "3-5 hours",
+        "commonDose": "75-125mg"
+      },
       "searchTerms": [
         "MDMA",
         "MDMA",
@@ -289,6 +333,16 @@
         "cid",
         "lucy"
       ],
+      "listAliases": [
+        "lsd-25",
+        "acid",
+        "cid"
+      ],
+      "listMeta": {
+        "onset": "45-90 minutes",
+        "duration": "9-14 hours",
+        "commonDose": "100-150ug"
+      },
       "searchTerms": [
         "LSD",
         "LSD",
@@ -350,6 +404,16 @@
         "psylocybin",
         "magic mushrooms"
       ],
+      "listAliases": [
+        "psilocybin",
+        "shrooms",
+        "mushroom"
+      ],
+      "listMeta": {
+        "onset": "1 hours",
+        "duration": "4-6 hours",
+        "commonDose": "1.5-3.5g"
+      },
       "searchTerms": [
         "Champignons",
         "Champignons",
@@ -405,6 +469,15 @@
         "n,n-dmt",
         "dimethyltryptamine"
       ],
+      "listAliases": [
+        "n,n-dmt",
+        "dimethyltryptamine"
+      ],
+      "listMeta": {
+        "onset": "3-5 minutes",
+        "duration": "45-60 minutes",
+        "commonDose": null
+      },
       "searchTerms": [
         "DMT",
         "DMT",
@@ -483,6 +556,16 @@
         "san",
         "san-pedro"
       ],
+      "listAliases": [
+        "buttons",
+        "mesc",
+        "san"
+      ],
+      "listMeta": {
+        "onset": "60-180 minutes",
+        "duration": "6-12 hours",
+        "commonDose": "200-300mg"
+      },
       "searchTerms": [
         "Mescaline",
         "Mescaline",
@@ -547,6 +630,12 @@
       "prettyName": "DOx",
       "group": "psychedelic",
       "aliases": [],
+      "listAliases": [],
+      "listMeta": {
+        "onset": null,
+        "duration": null,
+        "commonDose": null
+      },
       "searchTerms": [
         "DOx"
       ],
@@ -575,6 +664,12 @@
       "prettyName": "NBOMes",
       "group": "psychedelic",
       "aliases": [],
+      "listAliases": [],
+      "listMeta": {
+        "onset": null,
+        "duration": null,
+        "commonDose": null
+      },
       "searchTerms": [
         "NBOMes"
       ],
@@ -603,6 +698,12 @@
       "prettyName": "2C-x",
       "group": "psychedelic",
       "aliases": [],
+      "listAliases": [],
+      "listMeta": {
+        "onset": null,
+        "duration": null,
+        "commonDose": null
+      },
       "searchTerms": [
         "2C-x"
       ],
@@ -631,6 +732,12 @@
       "prettyName": "2C-T-x",
       "group": "psychedelic",
       "aliases": [],
+      "listAliases": [],
+      "listMeta": {
+        "onset": null,
+        "duration": null,
+        "commonDose": null
+      },
       "searchTerms": [
         "2C-T-x"
       ],
@@ -659,6 +766,12 @@
       "prettyName": "5-MeO-xxT",
       "group": "psychedelic",
       "aliases": [],
+      "listAliases": [],
+      "listMeta": {
+        "onset": null,
+        "duration": null,
+        "commonDose": null
+      },
       "searchTerms": [
         "5-MeO-xxT"
       ],
@@ -693,6 +806,16 @@
         "kittens",
         "special k"
       ],
+      "listAliases": [
+        "k",
+        "ket",
+        "kitty"
+      ],
+      "listMeta": {
+        "onset": "7.5-20 minutes",
+        "duration": "1-2 hours",
+        "commonDose": null
+      },
       "searchTerms": [
         "Kétamine",
         "Kétamine",
@@ -751,6 +874,15 @@
         "methoxetamine",
         "3-meo-2'oxo-pce"
       ],
+      "listAliases": [
+        "methoxetamine",
+        "3-meo-2'oxo-pce"
+      ],
+      "listMeta": {
+        "onset": "5-20 minutes",
+        "duration": "3-6 hours",
+        "commonDose": "25-35mg"
+      },
       "searchTerms": [
         "MXE",
         "MXE",
@@ -818,6 +950,16 @@
         "robitussin",
         "DM"
       ],
+      "listAliases": [
+        "robo",
+        "syrup",
+        "robotussin"
+      ],
+      "listMeta": {
+        "onset": "20-60 minutes",
+        "duration": "6-8 hours",
+        "commonDose": "2.5-7.5mg/kg"
+      },
       "searchTerms": [
         "DXM",
         "Dextromethorphan",
@@ -874,6 +1016,16 @@
         "nitrous oxide",
         "hippy crack"
       ],
+      "listAliases": [
+        "laughing_gas",
+        "n20",
+        "nos"
+      ],
+      "listMeta": {
+        "onset": "0-1 minutes",
+        "duration": "1-5 minutes",
+        "commonDose": null
+      },
       "searchTerms": [
         "Gaz hilarant",
         "N2O",
@@ -935,6 +1087,16 @@
         "booze",
         "hooch"
       ],
+      "listAliases": [
+        "etoh",
+        "beer",
+        "ethanol"
+      ],
+      "listMeta": {
+        "onset": "15-30 minutes",
+        "duration": "1.5-3 hours",
+        "commonDose": "2-4units"
+      },
       "searchTerms": [
         "Alcool",
         "Alcool",
@@ -994,6 +1156,12 @@
       "prettyName": "GHB",
       "group": "depressant",
       "aliases": [],
+      "listAliases": [],
+      "listMeta": {
+        "onset": "20-60 minutes",
+        "duration": "1.5-2.5 hours",
+        "commonDose": "1-2.5g"
+      },
       "searchTerms": [
         "GHB/GBL",
         "GHB"
@@ -1040,6 +1208,12 @@
       "prettyName": "Benzodiazépines",
       "group": "depressant",
       "aliases": [],
+      "listAliases": [],
+      "listMeta": {
+        "onset": null,
+        "duration": null,
+        "commonDose": null
+      },
       "searchTerms": [
         "Benzodiazépines"
       ],
@@ -1068,6 +1242,12 @@
       "prettyName": "Opiacés",
       "group": "opioid",
       "aliases": [],
+      "listAliases": [],
+      "listMeta": {
+        "onset": null,
+        "duration": null,
+        "commonDose": null
+      },
       "searchTerms": [
         "Opiacés"
       ],
@@ -1098,6 +1278,14 @@
       "aliases": [
         "tram"
       ],
+      "listAliases": [
+        "tram"
+      ],
+      "listMeta": {
+        "onset": "1 hours",
+        "duration": "5-7 hours",
+        "commonDose": "100-250mg"
+      },
       "searchTerms": [
         "Tramadol",
         "Tramadol",
@@ -1157,6 +1345,16 @@
         "dagga",
         "hash"
       ],
+      "listAliases": [
+        "weed",
+        "thc",
+        "marijuana"
+      ],
+      "listMeta": {
+        "onset": "30-120 minutes",
+        "duration": "4-10 hours",
+        "commonDose": null
+      },
       "searchTerms": [
         "Cannabis",
         "Cannabis",

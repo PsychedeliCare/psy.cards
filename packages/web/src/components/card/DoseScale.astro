@@ -1,0 +1,114 @@
+---
+/**
+ * Compact, card-sized dose scale: coloured ranges on a shared track with
+ * level names above and boundary amounts below. Everything is laid out in
+ * `em`, so labels placed at build time never collide at any card size.
+ */
+import type { DoseChart } from "../../lib/dose-chart";
+import { formatDoseTick } from "../../lib/dose-chart";
+import { estimateTextEm, spreadLabels } from "../../lib/label-layout";
+import type { Locale } from "../../i18n/locales";
+import { getUiMessages } from "../../i18n/load-locale";
+import { t } from "../../i18n/ui";
+
+interface Props {
+  chart: DoseChart;
+  locale?: Locale;
+  /** Width of the plot in em (the label layout depends on it). */
+  widthEm?: number;
+  /** Personal upper limit marker, in the chart's unit. */
+  markerMgPerKg?: { male: number; female: number };
+}
+
+const { chart, locale = "en", widthEm = 22.4, markerMgPerKg } = Astro.props;
+const ui = getUiMessages(locale);
+const FONT_EM = 0.68;
+const pct = (em: number) => (em / widthEm) * 100;
+
+function levelLabel(level: string): string {
+  const value = t(locale, ui, `doseChart.${level}`);
+  return value === `doseChart.${level}` ? level : value;
+}
+
+const segments = chart.segments;
+const labels = segments.map((segment) => levelLabel(segment.level));
+const labelPlacement = spreadLabels(
+  segments.map((segment, index) => ({
+    pos: segment.isPoint ? segment.left : segment.center,
+    width: pct(estimateTextEm(labels[index]!, FONT_EM) + 0.2),
+    priority: segment.level === "common" ? 3 : segment.level === "threshold" ? 0 : 1,
+  })),
+  pct(0.45)
+);
+
+type Tick = { value: number; text: string; pos: number; priority: number };
+const tickMap = new Map<number, Tick>();
+segments.forEach((segment, index) => {
+  const priority = segment.level === "common" ? 3 : index === 0 ? 2 : 1;
+  const add = (value: number, open = false) => {
+    const pos = (value / chart.scaleMax) * 100;
+    const existing = tickMap.get(value);
+    const text = `${formatDoseTick(value)}${open ? "+" : ""}`;
+    if (!existing || existing.priority < priority) tickMap.set(value, { value, text, pos, priority });
+  };
+  add(segment.start);
+  if (segment.openEnd) {
+    const last = tickMap.get(segment.start)!;
+    last.text = `${formatDoseTick(segment.start)}+`;
+  } else if (!segment.isPoint) {
+    add(segment.end);
+  }
+});
+const ticks = [...tickMap.values()].sort((a, b) => a.value - b.value);
+const tickPlacement = spreadLabels(
+  ticks.map((tick) => ({ pos: tick.pos, width: pct(estimateTextEm(tick.text, FONT_EM) + 0.15), priority: tick.priority })),
+  pct(0.5)
+);
+const perKg = chart.unit.endsWith("/kg");
+const round = (n: number) => Math.round(n * 100) / 100;
+---
+
+<div
+  class="psy-dose"
+  data-dose-scale
+  data-scale-max={chart.scaleMax}
+  data-unit={chart.unit}
+  data-per-kg={perKg ? "" : undefined}
+  data-marker-male={markerMgPerKg?.male}
+  data-marker-female={markerMgPerKg?.female}
+  role="img"
+  aria-label={segments.map((segment, index) => `${labels[index]}: ${segment.amount}`).join(", ")}
+>
+  <div class="psy-dose__labels" aria-hidden="true">
+    {labelPlacement.map(({ index, x }) => (
+      <span class="psy-dose__label" style={`--x: ${round(x)}%; --c: ${segments[index]!.color}`}>
+        {labels[index]}
+      </span>
+    ))}
+  </div>
+  <div class="psy-dose__track" aria-hidden="true">
+    {segments.map((segment) =>
+      segment.isPoint ? (
+        <span class="psy-dose__point" style={`--l: ${round(segment.left)}%; --c: ${segment.color}`} />
+      ) : (
+        <span
+          class:list={["psy-dose__bar", { "psy-dose__bar--open": segment.openEnd }]}
+          style={`--l: ${round(segment.left)}%; --w: ${round(segment.width)}%; --c: ${segment.color}`}
+        />
+      )
+    )}
+    {markerMgPerKg && <span class="psy-dose__marker" data-dose-marker hidden />}
+  </div>
+  <div class="psy-dose__ticks" aria-hidden="true">
+    {tickPlacement.map(({ index, x }) => (
+      <span
+        class="psy-dose__tick"
+        style={`--x: ${round(x)}%; --anchor: ${round(ticks[index]!.pos)}%`}
+        data-base={ticks[index]!.value}
+        data-suffix={ticks[index]!.text.endsWith("+") ? "+" : undefined}
+      >
+        {ticks[index]!.text}
+      </span>
+    ))}
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- UI strings live in assets/datapack/<locale>/ui.json (shared with web and iOS). -->
+    <string name="app_name" translatable="false">psy.cards</string>
+</resources>

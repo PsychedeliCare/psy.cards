@@ -33,9 +33,14 @@ export function initHolographicCards(
     entry.renderer = undefined;
   };
   const permitted = () => !motion.matches && !print.matches && !suspended && Boolean(navigator.gpu);
+  // A card's hidden side (visibility: hidden while flipped) keeps its layout box,
+  // so intersection alone would leave its renderer running.
+  // (The canvas itself stays hidden until its first frame, so ask the host.)
+  const shown = (entry: Entry) =>
+    typeof getComputedStyle !== "function" || getComputedStyle(entry.host).visibility !== "hidden";
   const active = (canvas: HTMLCanvasElement, entry: Entry) =>
     permitted() && entry.visible && !document.hidden && canvas.isConnected &&
-    !canvas.closest('[inert], [data-open="false"]');
+    !canvas.closest('[inert], [data-open="false"]') && shown(entry);
 
   const sync = (canvas: HTMLCanvasElement, entry: Entry) => {
     if (disposed) return;
@@ -75,7 +80,7 @@ export function initHolographicCards(
   });
   const register = (canvas: HTMLCanvasElement) => {
     if (entries.has(canvas)) return;
-    const host = canvas.closest<HTMLElement>(".substance-card");
+    const host = canvas.closest<HTMLElement>("[data-hologram-host], .substance-card");
     if (!host) return;
     // Cached innerHTML can contain an old ready attribute, but never GPU pixels.
     delete canvas.dataset.hologramReady;
@@ -106,6 +111,7 @@ export function initHolographicCards(
   motion.addEventListener("change", syncAll);
   print.addEventListener("change", syncAll);
   document.addEventListener("visibilitychange", syncAll);
+  document.addEventListener("psy:card-flip", syncAll);
   const hide = () => { suspended = true; syncAll(); };
   const show = () => { suspended = false; syncAll(); };
   window.addEventListener("pagehide", hide);
@@ -122,6 +128,7 @@ export function initHolographicCards(
     motion.removeEventListener("change", syncAll);
     print.removeEventListener("change", syncAll);
     document.removeEventListener("visibilitychange", syncAll);
+    document.removeEventListener("psy:card-flip", syncAll);
     window.removeEventListener("pagehide", hide);
     window.removeEventListener("pageshow", show);
     window.removeEventListener("beforeprint", hide);

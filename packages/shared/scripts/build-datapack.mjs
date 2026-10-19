@@ -1,20 +1,35 @@
 #!/usr/bin/env node
 /**
- * Builds a Swift-friendly offline data pack for the iOS app.
- * Output: packages/ios/PsyCards/Resources/DataPack/{locale}/*.json
- *         packages/ios/PsyCards/{locale}.lproj/Localizable.strings
+ * Builds the offline data pack shared by the native apps.
+ *
+ * iOS:     packages/ios/PsyCards/Resources/DataPack/{locale}/*.json
+ *          packages/ios/PsyCards/{locale}.lproj/Localizable.strings
+ *          packages/ios/PsyCards/Resources/Assets.xcassets/Phosphor/*
+ * Android: packages/android/app/src/main/assets/datapack/{locale}/*.json
+ *          (including ui.json: flattened UI strings, named {placeholders})
+ *          packages/android/app/src/main/res/drawable/ph_*.xml
+ *          (Android outputs are skipped until packages/android exists.)
+ *
+ * Card data mirrors packages/web/src/data/harm-reduction.ts (getCardData) and
+ * reuses the web's own dose parser, so every platform shows the same numbers.
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildDoseCharts, formatDoseTick, getRouteIcon, getRouteLabel } from "../../web/src/lib/dose-chart.ts";
+import { statusIcons } from "../../web/src/data/status-icons.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const monorepoRoot = path.resolve(__dirname, "../../..");
 const sharedRoot = path.resolve(__dirname, "..");
 const iosRoot = path.join(monorepoRoot, "packages/ios/PsyCards");
 const dataPackRoot = path.join(iosRoot, "Resources/DataPack");
+const iosPhosphorRoot = path.join(iosRoot, "Resources/Assets.xcassets/Phosphor");
+const androidRoot = path.join(monorepoRoot, "packages/android/app/src/main");
+const hasAndroid = fs.existsSync(path.join(monorepoRoot, "packages/android"));
 
 const LOCALES = ["en", "fr", "de", "it"];
+const DATAPACK_VERSION = 2;
 
 const groupOverrides = {
   cannabis: "cannabinoid",
@@ -60,14 +75,69 @@ const legendOrder = [
   "Low Risk & Decrease",
 ];
 
+/** Card "Don't mix with" chips (web AVOID_STATUSES), most severe first. */
+const AVOID_STATUSES = ["dangerous", "serotoninsyndrome", "unsafe"];
+
+/** Gable rows whose key is a class keep the paper's compound name (web MarginChart). */
+const GABLE_COMPOUND_KEYS = new Set(["opioids", "amphetamines", "benzodiazepines", "ssris", "mushrooms"]);
+
+/** Phosphor icons used by card chrome on every platform (web CardFront/CardBack/BodyDock). */
+const UI_ICONS = [
+  "scales-fill",
+  "shield-warning-fill",
+  "user-fill",
+  "sparkle-fill",
+  "clock-fill",
+  "skull-fill",
+  "chart-bar-horizontal-fill",
+  "test-tube-fill",
+  "arrows-clockwise-bold",
+  "arrows-counter-clockwise-bold",
+  "calendar-dots-fill",
+  "link-break-fill",
+  "info-bold",
+  "warning-fill",
+  "prohibit-fill",
+  "siren-fill",
+  "phone-call-fill",
+  "wine-fill",
+  "caret-down-bold",
+  "timer-fill",
+  "hourglass-medium-fill",
+  "moon-stars-fill",
+  "gender-male-bold",
+  "gender-female-bold",
+  "minus-bold",
+  "plus-bold",
+  "x-bold",
+  "timer",
+  "hourglass-medium",
+  "pill",
+  "github-logo-fill",
+  "book-open-text-fill",
+  "flask-fill",
+  "globe-hemisphere-west-fill",
+  "list-bullets-bold",
+  "magnifying-glass-bold",
+  "caret-left-bold",
+  "caret-right-bold",
+  "cards-fill",
+  "grid-nine-fill",
+  "gear-six-fill",
+  "record-fill",
+];
+
 function readJson(relativePath) {
-  return JSON.parse(
-    fs.readFileSync(path.join(monorepoRoot, relativePath), "utf8")
-  );
+  return JSON.parse(fs.readFileSync(path.join(monorepoRoot, relativePath), "utf8"));
 }
 
 function readSharedJson(relativePath) {
   return JSON.parse(fs.readFileSync(path.join(sharedRoot, relativePath), "utf8"));
+}
+
+function readSharedJsonIfExists(relativePath, fallback) {
+  const file = path.join(sharedRoot, relativePath);
+  return fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, "utf8")) : fallback;
 }
 
 function writeJson(filePath, data) {
@@ -80,36 +150,32 @@ function overlayText(value) {
   return value;
 }
 
+/** Same semantics as the web's applyOverlayValue (packages/web/src/data/drugs.ts). */
 function applyOverlay(base, overlay) {
   if (overlay === undefined || overlay === null) return base;
-  if (typeof overlay === "object" && overlay !== null && "text" in overlay) {
-    return overlay.text;
-  }
+  if (typeof overlay === "object" && "text" in overlay) return overlay.text;
   if (Array.isArray(base) && Array.isArray(overlay)) {
     return overlay.map((item, i) => {
       if (item && typeof item === "object" && "text" in item) return item.text;
       return base[i] ?? item;
     });
   }
-  if (
-    base &&
-    typeof base === "object" &&
-    !Array.isArray(base) &&
-    overlay &&
-    typeof overlay === "object" &&
-    !Array.isArray(overlay)
-  ) {
+  if (base && typeof base === "object" && !Array.isArray(base) && typeof overlay === "object" && !Array.isArray(overlay)) {
     const result = { ...base };
     for (const [key, value] of Object.entries(overlay)) {
       result[key] = applyOverlay(base[key], value);
     }
     return result;
   }
-  return overlay ?? base;
+  return base;
 }
 
 function keyToSlug(key) {
   return key.replace(/\//g, "-");
+}
+
+function toTitleCase(text) {
+  return text.replace(/\b\w+/g, (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
 }
 
 function loadDrugOverlays(locale) {
@@ -136,17 +202,25 @@ function flattenMessages(obj, prefix = "") {
   return out;
 }
 
-function iosStringValue(value) {
-  return value
-    .replace(/\\/g, "\\\\")
-    .replace(/"/g, '\\"')
-    .replace(/\n/g, "\\n")
-    .replace(/%(\d+)\$[sd@]/g, "%$1$@")
-    .replace(/\{(\w+)\}/g, "%@");
+function getNested(obj, dotted) {
+  return dotted.split(".").reduce((current, part) => (current && typeof current === "object" ? current[part] : undefined), obj);
 }
 
-function mergeDrugLabels(tripsitDrugs, augment) {
-  return { ...tripsitDrugs, ...augment };
+function makeT(ui) {
+  return (key, vars = {}) => {
+    const value = getNested(ui, key);
+    let text = typeof value === "string" ? value : key;
+    for (const [name, replacement] of Object.entries(vars)) text = text.replaceAll(`{${name}}`, replacement);
+    return text;
+  };
+}
+
+/**
+ * Named `{placeholders}` are kept verbatim: the apps substitute them by name,
+ * so translations may reorder arguments freely.
+ */
+function iosStringValue(value) {
+  return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n");
 }
 
 function resolveStatus(raw, localeBundle, comboDefs, combogen) {
@@ -154,22 +228,13 @@ function resolveStatus(raw, localeBundle, comboDefs, combogen) {
   const interactionClass = combogen.interactionClass;
   const lower = (raw ?? "").toLowerCase();
   const normalised = rewrite[lower] ?? (raw ? lower : "fallback");
-  const [statusKey, faIcon] =
-    interactionClass[normalised] ?? interactionClass.fallback;
-  const labelByRaw = Object.fromEntries(
-    comboDefs.map((d) => [d.status.toLowerCase(), d.status])
-  );
-  const emojiByRaw = Object.fromEntries(
-    comboDefs.map((d) => [d.status.toLowerCase(), d.emoji])
-  );
-  const definitionByRaw = Object.fromEntries(
-    comboDefs.map((d) => [d.status.toLowerCase(), d.definition])
-  );
+  const [statusKey, faIcon] = interactionClass[normalised] ?? interactionClass.fallback;
+  const labelByRaw = Object.fromEntries(comboDefs.map((d) => [d.status.toLowerCase(), d.status]));
+  const emojiByRaw = Object.fromEntries(comboDefs.map((d) => [d.status.toLowerCase(), d.emoji]));
+  const definitionByRaw = Object.fromEntries(comboDefs.map((d) => [d.status.toLowerCase(), d.definition]));
 
   const localizedLabel =
-    localeBundle.tripsit.interactions?.[normalised] ??
-    localeBundle.tripsit.interactions?.[raw] ??
-    null;
+    localeBundle.tripsit.interactions?.[normalised] ?? localeBundle.tripsit.interactions?.[raw] ?? null;
   const statusOverlay = localeBundle.statusDefinitions[normalised];
   const fallbackOverlay = localeBundle.statusDefinitions.fallback;
 
@@ -180,9 +245,7 @@ function resolveStatus(raw, localeBundle, comboDefs, combogen) {
     label:
       localizedLabel ??
       labelByRaw[normalised] ??
-      (normalised === "fallback"
-        ? localeBundle.ui.status?.unknown ?? "Unknown"
-        : normalised),
+      (normalised === "fallback" ? localeBundle.ui.status?.unknown ?? "Unknown" : normalised),
     emoji: emojiByRaw[normalised] ?? "",
     definition:
       overlayText(statusOverlay) ??
@@ -193,44 +256,31 @@ function resolveStatus(raw, localeBundle, comboDefs, combogen) {
   };
 }
 
-function buildColumns(localeBundle, combogen) {
+function buildColumns(localeBundle, combogen, enLabelToKey) {
   const labelToKey = {};
-  for (const [key, label] of Object.entries(localeBundle.tripsit.drugs)) {
-    labelToKey[label] = key;
-  }
-  // Prefer English labels for key resolution (matrix uses English labels)
-  const enTripsit = readJson("drugs/translations/en.json");
-  const enLabelToKey = {};
-  for (const [key, label] of Object.entries(enTripsit.drugs)) {
-    enLabelToKey[label] = key;
-  }
+  for (const [key, label] of Object.entries(localeBundle.tripsit.drugs)) labelToKey[label] = key;
 
   const groupNames = combogen.groupNames;
   const originalColumns = combogen.tableOrder.flatMap((groupLabels, groupIndex) =>
     groupLabels.map((label) => {
       const key = enLabelToKey[label] ?? labelToKey[label] ?? label.toLowerCase();
-      const localizedLabel = localeBundle.drugLabels[key] ?? label;
       return {
         key,
-        label: localizedLabel,
+        label: localeBundle.drugLabels[key] ?? label,
         slug: keyToSlug(key),
         group: groupOverrides[key] ?? groupNames[groupIndex],
       };
     })
   );
 
-  const originalOrder = new Map(
-    originalColumns.map((column, index) => [column.key, index])
+  const originalOrder = new Map(originalColumns.map((column, index) => [column.key, index]));
+  const rank = (group) => {
+    const index = groupOrder.indexOf(group);
+    return index === -1 ? groupOrder.length : index;
+  };
+  return [...originalColumns].sort(
+    (a, b) => rank(a.group) - rank(b.group) || (originalOrder.get(a.key) ?? 0) - (originalOrder.get(b.key) ?? 0)
   );
-
-  return [...originalColumns].sort((a, b) => {
-    const groupA = groupOrder.indexOf(a.group);
-    const groupB = groupOrder.indexOf(b.group);
-    const safeGroupA = groupA === -1 ? groupOrder.length : groupA;
-    const safeGroupB = groupB === -1 ? groupOrder.length : groupB;
-    if (safeGroupA !== safeGroupB) return safeGroupA - safeGroupB;
-    return (originalOrder.get(a.key) ?? 0) - (originalOrder.get(b.key) ?? 0);
-  });
 }
 
 function getDrug(drugs, key, overlays) {
@@ -240,30 +290,55 @@ function getDrug(drugs, key, overlays) {
   return overlay ? applyOverlay(structuredClone(base), overlay) : base;
 }
 
+/** First non-unit entry of a TripSit duration object (web SubstanceListCard). */
+function firstDurationValue(duration) {
+  if (!duration) return undefined;
+  const entry = Object.entries(duration).find(([key, value]) => key !== "_unit" && typeof value === "string" && value);
+  return entry?.[1];
+}
+
+function listMetaFor(drug) {
+  const onset = firstDurationValue(drug?.formatted_onset);
+  const duration = firstDurationValue(drug?.formatted_duration);
+  const doseMap = drug?.formatted_dose ?? {};
+  const oral = doseMap.Oral ?? doseMap.oral;
+  const commonDose = oral?.Common ?? oral?.common;
+  return {
+    onset: onset ? `${onset}${drug.formatted_onset._unit ? ` ${drug.formatted_onset._unit}` : ""}` : null,
+    duration: duration ? `${duration}${drug.formatted_duration._unit ? ` ${drug.formatted_duration._unit}` : ""}` : null,
+    commonDose: commonDose ?? null,
+  };
+}
+
 function buildSubstance(key, column, drug, substances, classDescriptions, slangIndex) {
   const structure = substances[key];
   const props = drug?.properties ?? {};
-  const aliases = [
-    ...(drug?.aliases ?? []),
-    ...(Array.isArray(props.aliases) ? props.aliases : []),
-  ];
+  const aliases = [...(drug?.aliases ?? []), ...(Array.isArray(props.aliases) ? props.aliases : [])];
   const uniqueAliases = [...new Set(aliases.map(String))];
+  const prettyName = drug?.pretty_name ?? column.label;
+  const listAliases = [
+    ...new Set(
+      (drug?.aliases ?? [])
+        .filter((alias) => typeof alias === "string" && alias.trim())
+        .map((alias) => alias.trim())
+        .filter(
+          (alias) =>
+            alias.toLocaleLowerCase() !== prettyName.toLocaleLowerCase() &&
+            alias.toLocaleLowerCase() !== key.toLocaleLowerCase()
+        )
+    ),
+  ].slice(0, 3);
 
   return {
     key,
     slug: column.slug,
     label: column.label,
-    prettyName: drug?.pretty_name ?? column.label,
+    prettyName,
     group: column.group,
     aliases: uniqueAliases,
-    searchTerms: [
-      column.label,
-      drug?.pretty_name,
-      ...uniqueAliases,
-      ...(slangIndex[key] ?? []),
-    ]
-      .filter(Boolean)
-      .map(String),
+    listAliases,
+    listMeta: listMetaFor(drug),
+    searchTerms: [column.label, drug?.pretty_name, ...uniqueAliases, ...(slangIndex[key] ?? [])].filter(Boolean).map(String),
     summary: props.summary ?? null,
     isClass: key in classDescriptions,
     classDescription: overlayText(classDescriptions[key]) ?? null,
@@ -286,6 +361,11 @@ function buildSubstance(key, column, drug, substances, classDescriptions, slangI
   };
 }
 
+/** Column keys that differ from the combo dataset's (web i18n/key-aliases.ts). */
+const matrixKeyAlias = { dxm: "dextromethorphan" };
+const resolveMatrixKey = (key) => matrixKeyAlias[key] ?? key;
+
+/** Mirrors the web's getInteraction (packages/web/src/data/combos.ts). */
 function buildCombos(columns, combos, localeBundle, comboDefs, combogen) {
   const keys = columns.map((c) => c.key);
   const matrix = {};
@@ -296,27 +376,21 @@ function buildCombos(columns, combos, localeBundle, comboDefs, combogen) {
       if (i === j) continue;
       const a = keys[i];
       const b = keys[j];
-      const ab = combos[a]?.[b];
-      const ba = combos[b]?.[a];
-      const entry = ab || ba
-        ? {
-            status: ab?.status ?? ba?.status,
-            note: ab?.note ?? ba?.note,
-            sources: ab?.sources ?? ba?.sources,
-          }
-        : undefined;
+      const dataA = resolveMatrixKey(a);
+      const dataB = resolveMatrixKey(b);
+      const ab = combos[dataA]?.[dataB];
+      const ba = combos[dataB]?.[dataA];
+      const entry =
+        ab && ba ? { status: ab.status ?? ba.status, note: ab.note ?? ba.note, sources: ab.sources ?? ba.sources } : ab ?? ba;
 
-      const sorted = [a, b].sort();
-      const pairKey = `${sorted[0]}|${sorted[1]}`;
+      // Overlay notes are keyed by sorted dataset keys, then column order.
+      const [first, second] = i < j ? [a, b] : [b, a];
       const note =
-        overlayText(localeBundle.comboNotes[pairKey]) ?? entry?.note ?? null;
-      const definition = resolveStatus(
-        entry?.status,
-        localeBundle,
-        comboDefs,
-        combogen
-      );
-
+        overlayText(localeBundle.comboNotes[[dataA, dataB].sort().join("|")]) ??
+        overlayText(localeBundle.comboNotes[`${first}|${second}`]) ??
+        entry?.note ??
+        null;
+      const definition = resolveStatus(entry?.status, localeBundle, comboDefs, combogen);
       const cell = {
         a,
         b,
@@ -329,164 +403,498 @@ function buildCombos(columns, combos, localeBundle, comboDefs, combogen) {
         sources: entry?.sources ?? [],
       };
 
-      if (!matrix[a]) matrix[a] = {};
-      matrix[a][b] = {
-        statusKey: cell.statusKey,
-        label: cell.label,
-        icon: cell.icon,
-      };
-
-      if (i < j) {
-        pairs.push({
-          id: `${keyToSlug(a)}~${keyToSlug(b)}`,
-          ...cell,
-        });
-      }
+      matrix[a] ??= {};
+      matrix[a][b] = { statusKey: cell.statusKey, label: cell.label, icon: cell.icon };
+      if (i < j) pairs.push({ id: `${keyToSlug(a)}~${keyToSlug(b)}`, ...cell });
     }
   }
 
-  const legend = legendOrder.map((raw) =>
-    resolveStatus(raw, localeBundle, comboDefs, combogen)
-  );
-
+  const legend = legendOrder.map((raw) => resolveStatus(raw, localeBundle, comboDefs, combogen));
   return { matrix, pairs, legend };
 }
 
 function buildSlangIndex(extended) {
   const index = {};
-  const entries = Array.isArray(extended)
-    ? extended
-    : extended?.entries ?? Object.values(extended ?? {});
+  const entries = Array.isArray(extended) ? extended : extended?.entries ?? Object.values(extended ?? {});
   for (const entry of entries) {
     if (!entry || typeof entry !== "object") continue;
-    const terms = [
-      ...(entry.slang ?? []),
-      ...(entry.intoxicationNames ?? []),
-    ].filter(Boolean);
-    const keys = entry.tripSitKeys ?? entry.pairKeys ?? [];
-    for (const key of keys) {
-      if (!index[key]) index[key] = [];
+    const terms = [...(entry.slang ?? []), ...(entry.intoxicationNames ?? [])].filter(Boolean);
+    for (const key of entry.tripSitKeys ?? entry.pairKeys ?? []) {
+      index[key] ??= [];
       index[key].push(...terms.map(String));
     }
   }
-  for (const key of Object.keys(index)) {
-    index[key] = [...new Set(index[key])];
-  }
+  for (const key of Object.keys(index)) index[key] = [...new Set(index[key])];
   return index;
 }
 
 function buildLocaleBundle(locale) {
   const ui = readSharedJson(`i18n/ui/${locale}.json`);
   const tripsit = readJson(`drugs/translations/${locale}.json`);
-  const drugLabelsAugment = readSharedJson(`i18n/content/${locale}/drug-labels.json`);
-  const comboNotes = readSharedJson(`i18n/content/${locale}/combo-notes.json`);
-  const statusDefinitions = readSharedJson(
-    `i18n/content/${locale}/status-definitions.json`
-  );
-  const classDescriptions = readSharedJson(
-    `i18n/content/${locale}/class-descriptions.json`
-  );
   return {
     locale,
     ui,
+    t: makeT(ui),
     tripsit,
-    drugLabels: mergeDrugLabels(tripsit.drugs, drugLabelsAugment),
-    comboNotes,
-    statusDefinitions,
-    classDescriptions,
+    drugLabels: { ...tripsit.drugs, ...readSharedJson(`i18n/content/${locale}/drug-labels.json`) },
+    comboNotes: readSharedJson(`i18n/content/${locale}/combo-notes.json`),
+    statusDefinitions: readSharedJson(`i18n/content/${locale}/status-definitions.json`),
+    classDescriptions: readSharedJson(`i18n/content/${locale}/class-descriptions.json`),
     drugOverlays: loadDrugOverlays(locale),
+    harmReduction: readSharedJsonIfExists(`i18n/content/${locale}/harm-reduction.json`, {}),
   };
 }
 
-function writeStrings(locale, ui) {
-  const lines = [
-    "/* Generated by packages/shared/scripts/build-datapack.mjs. Do not edit directly. */",
-  ];
-  for (const [key, value] of flattenMessages(ui)) {
-    lines.push(`"${key}" = "${iosStringValue(value)}";`);
+/* ---------------------------------------------------------------- Cards */
+
+const round = (n) => Math.round(n * 100) / 100;
+
+function routeKey(route) {
+  return route.toLowerCase().replace(/[^a-z]/g, "");
+}
+
+/** Locale text wins field by field; anything untranslated falls back to English (web mergeContent). */
+function mergeContent(base = {}, overlay = {}) {
+  return {
+    ...base,
+    ...overlay,
+    spacing: overlay.spacing ? { ...base.spacing, ...overlay.spacing } : base.spacing,
+    overdose: overlay.overdose ? { ...base.overdose, ...overlay.overdose } : base.overdose,
+    risks: base.risks?.map((risk, index) => ({ ...risk, ...overlay.risks?.[index], icon: risk.icon })),
+  };
+}
+
+function pickTiming(duration, route) {
+  if (!duration) return null;
+  const entries = Object.entries(duration).filter(
+    ([key, value]) => key !== "_unit" && typeof value === "string" && Boolean(value)
+  );
+  if (!entries.length) return null;
+  const wanted = route ? routeKey(route) : "";
+  const match = entries.find(([key]) => routeKey(key) === wanted) ?? entries.find(([key]) => key === "value") ?? entries[0];
+  return { value: match[1].replace(/-/g, "–"), unit: duration._unit };
+}
+
+/**
+ * Serialises a web DoseRouteChart and adds the label/tick candidates that
+ * DoseScale.astro derives. Apps run the same overlap-free placement
+ * (web spreadLabels) against measured text widths.
+ */
+function chartForApps(chart, t) {
+  const base = { route: chart.route, routeLabel: getRouteLabel(chart.route), routeIcon: getRouteIcon(chart.route) };
+  if (!chart.chartable) {
+    return { ...base, chartable: false, rows: chart.rows.map(({ level, amount }) => ({ level, amount })) };
   }
+
+  const levelLabel = (level) => {
+    const value = t(`doseChart.${level}`);
+    return value === `doseChart.${level}` ? level : value;
+  };
+  const labels = chart.segments.map((segment) => ({
+    text: levelLabel(segment.level),
+    pos: round(segment.isPoint ? segment.left : segment.center),
+    color: segment.color,
+    priority: segment.level === "common" ? 3 : segment.level === "threshold" ? 0 : 1,
+  }));
+
+  const tickMap = new Map();
+  chart.segments.forEach((segment, index) => {
+    const priority = segment.level === "common" ? 3 : index === 0 ? 2 : 1;
+    const add = (value) => {
+      const existing = tickMap.get(value);
+      if (!existing || existing.priority < priority) {
+        tickMap.set(value, { value, text: formatDoseTick(value), pos: round((value / chart.scaleMax) * 100), priority, suffix: "" });
+      }
+    };
+    add(segment.start);
+    if (segment.openEnd) {
+      const tick = tickMap.get(segment.start);
+      tick.text = `${formatDoseTick(segment.start)}+`;
+      tick.suffix = "+";
+    } else if (!segment.isPoint) {
+      add(segment.end);
+    }
+  });
+
+  return {
+    ...base,
+    chartable: true,
+    unit: chart.unit,
+    perKg: chart.unit.endsWith("/kg"),
+    scaleMax: chart.scaleMax,
+    segments: chart.segments.map((segment) => ({
+      level: segment.level,
+      amount: segment.amount,
+      color: segment.color,
+      left: round(segment.left),
+      width: round(segment.width),
+      start: segment.start,
+      end: segment.end,
+      openEnd: segment.openEnd,
+      isPoint: segment.isPoint,
+    })),
+    labels,
+    ticks: [...tickMap.values()].sort((a, b) => a.value - b.value),
+  };
+}
+
+function cardAliases(drug, displayName, key) {
+  const props = drug?.properties ?? {};
+  return [
+    ...new Set(
+      [...(drug?.aliases ?? []), ...(props.aliases ?? [])]
+        .filter((alias) => typeof alias === "string" && alias.trim().length > 0)
+        .map((alias) => alias.trim().replace(/_/g, " ").toLocaleLowerCase())
+        .filter((alias) => alias !== displayName.toLocaleLowerCase() && alias !== key.toLocaleLowerCase())
+    ),
+  ];
+}
+
+function effectIconResolver() {
+  const icons = readJson("packages/web/src/data/effect-icons.json");
+  const aliases = readJson("packages/web/src/data/phosphor-icon-aliases.json");
+  const fallback = icons._default ?? "circle-dot";
+  return (effect) => {
+    const icon = icons[effect] ?? fallback;
+    return `${aliases[icon] ?? icon}-fill`;
+  };
+}
+
+function buildCards({ localeBundle, enBundle, columns, matrix, drugs, hr, substancesData, effectIcon, iconSet }) {
+  const { t } = localeBundle;
+  const en = enBundle.harmReduction;
+  const local = localeBundle.locale === "en" ? {} : localeBundle.harmReduction;
+  const labelOf = Object.fromEntries(columns.map((column) => [column.key, column.label]));
+  const cards = {};
+
+  for (const column of columns) {
+    const { key } = column;
+    const data = hr.substances[key];
+    if (!data) throw new Error(`Missing harm reduction data for "${key}"`);
+    const content = mergeContent(en[key], local[key]);
+    for (const risk of content.risks ?? []) iconSet.add(risk.icon);
+
+    const ownDrug = getDrug(drugs, key, localeBundle.drugOverlays);
+    const doseDrug =
+      data.doseFrom === undefined ? ownDrug : data.doseFrom ? getDrug(drugs, data.doseFrom, localeBundle.drugOverlays) : undefined;
+    const charts = doseDrug?.formatted_dose ? buildDoseCharts(doseDrug.formatted_dose) : [];
+    const wanted = data.primaryRoute ? routeKey(data.primaryRoute) : "";
+    const primary =
+      charts.find((chart) => routeKey(chart.route) === wanted) ?? charts.find((chart) => chart.chartable) ?? charts[0];
+    const timingDrug = ownDrug?.formatted_duration ? ownDrug : doseDrug;
+    const timingRoute = primary?.route ?? data.primaryRoute;
+    const primaryApp = primary ? chartForApps(primary, t) : null;
+
+    const avoid = columns
+      .filter((other) => other.key !== key)
+      .flatMap((other) => {
+        const cell = matrix[key]?.[other.key] ?? matrix[other.key]?.[key];
+        if (!cell || !AVOID_STATUSES.includes(cell.statusKey)) return [];
+        return [{ key: other.key, label: other.label, statusKey: cell.statusKey, statusLabel: cell.label, icon: cell.icon }];
+      })
+      .sort((a, b) => AVOID_STATUSES.indexOf(a.statusKey) - AVOID_STATUSES.indexOf(b.statusKey));
+
+    const sourceIds = new Set(["tripsit"]);
+    if (data.margin || data.marginDanger) sourceIds.add("gable2004");
+    if (data.dependence.nutt !== undefined) sourceIds.add("nutt2007");
+    if (data.personal && "source" in data.personal) sourceIds.add(data.personal.source);
+    if (key === "alcohol") sourceIds.add("ukcmo2016");
+    if (key === "caffeine") sourceIds.add("efsa2015");
+
+    let personal = data.personal ?? null;
+    if (personal?.kind === "perKgChart") {
+      const common = primaryApp?.chartable ? primaryApp.segments.find((segment) => segment.level === "common") : undefined;
+      personal = { ...personal, minMgPerKg: common?.start ?? null, maxMgPerKg: common?.end ?? null };
+    }
+
+    // Details under the card (web SubstanceCard .psy-details).
+    const displayName = (ownDrug?.pretty_name ?? labelOf[key] ?? key).replace(/^N2O$/, "N₂O");
+    const props = ownDrug?.properties ?? {};
+    const effects = (ownDrug?.formatted_effects ?? []).map((effect) => {
+      const icon = effectIcon(effect);
+      iconSet.add(icon);
+      return { text: toTitleCase(effect), icon };
+    });
+    const doseCharts = ownDrug?.formatted_dose ? buildDoseCharts(ownDrug.formatted_dose).map((chart) => chartForApps(chart, t)) : [];
+    for (const chart of [primaryApp, ...charts.map((chart) => chartForApps(chart, t)), ...doseCharts]) {
+      if (chart) iconSet.add(chart.routeIcon);
+    }
+
+    cards[key] = {
+      key,
+      slug: column.slug,
+      group: column.group,
+      displayName,
+      groupLabel: localeBundle.ui.groups?.[column.group] ?? column.group,
+      aliases: cardAliases(ownDrug, displayName, key),
+      content,
+      primary: primaryApp,
+      otherRoutes: charts.filter((chart) => chart !== primary).map((chart) => chartForApps(chart, t)),
+      referenceName: data.doseFrom && doseDrug ? doseDrug.pretty_name : null,
+      doseNote: doseDrug?.dose_note?.replace(/^\s*note:\s*/i, "").trim() || null,
+      timing: {
+        onset: pickTiming(timingDrug?.formatted_onset, timingRoute),
+        duration: pickTiming(timingDrug?.formatted_duration, timingRoute),
+        after: pickTiming(timingDrug?.formatted_aftereffects, timingRoute),
+      },
+      margin: data.margin ?? null,
+      marginDanger: Boolean(data.marginDanger),
+      dependence: data.dependence,
+      spacing: data.spacing ?? {},
+      personal,
+      avoid,
+      sources: [...sourceIds].flatMap((id) => (hr.sources[id] ? [{ id, ...hr.sources[id] }] : [])),
+      details: {
+        summary: props.summary ?? overlayText(localeBundle.classDescriptions[key]) ?? null,
+        isClassFallback: !ownDrug && key in enBundle.classDescriptions,
+        warning: props.warning ?? null,
+        avoidText: props.avoid ?? null,
+        testKits: props["test-kits"] ?? null,
+        effects,
+        pwEffects: Object.entries(ownDrug?.pweffects ?? {}).map(([label, url]) => ({ label, url })),
+        links: {
+          experiences: ownDrug?.links?.experiences ?? null,
+          pihkal: ownDrug?.links?.pihkal ?? null,
+          tihkal: ownDrug?.links?.tihkal ?? null,
+        },
+        doseCharts,
+        doseNote: ownDrug?.dose_note ?? null,
+        hasStructure: Boolean(substancesData[key]),
+      },
+    };
+  }
+  return cards;
+}
+
+/* ---------------------------------------------------------------- Icons */
+
+function phosphorBody(name, iconify) {
+  const icon = iconify.icons[name];
+  if (icon) return icon.body;
+  const alias = iconify.aliases?.[name];
+  if (alias) return phosphorBody(alias.parent, iconify);
+  throw new Error(`Unknown Phosphor icon "${name}"`);
+}
+
+function pathsFromBody(body) {
+  const paths = [];
+  for (const match of body.matchAll(/<path([^>]*)\/?>/g)) {
+    const attrs = match[1];
+    const d = attrs.match(/\sd="([^"]+)"/)?.[1];
+    if (!d) continue;
+    const opacity = attrs.match(/opacity="([^"]+)"/)?.[1];
+    paths.push({ d, opacity: opacity ? Number(opacity) : 1 });
+  }
+  if (!paths.length) throw new Error(`No paths in icon body: ${body.slice(0, 80)}`);
+  return paths;
+}
+
+function svgDocument(paths) {
+  const body = paths
+    .map(({ d, opacity }) => `<path fill="#000000"${opacity < 1 ? ` fill-opacity="${opacity}"` : ""} d="${d}"/>`)
+    .join("");
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">${body}</svg>\n`;
+}
+
+function vectorDrawable(paths) {
+  const body = paths
+    .map(
+      ({ d, opacity }) =>
+        `    <path android:fillColor="#FF000000"${opacity < 1 ? ` android:fillAlpha="${opacity}"` : ""} android:pathData="${d}" />`
+    )
+    .join("\n");
+  return `<?xml version="1.0" encoding="utf-8"?>
+<!-- Phosphor Icons (MIT). Generated by packages/shared/scripts/build-datapack.mjs. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="256"
+    android:viewportHeight="256">
+${body}
+</vector>
+`;
+}
+
+function writeIcons(iconSet) {
+  const iconify = readJson("packages/web/node_modules/@iconify-json/ph/icons.json");
+  const icons = [...iconSet].sort().map((name) => ({ asset: `ph-${name}`, paths: pathsFromBody(phosphorBody(name, iconify)) }));
+  // Combo status icons are Phosphor duotone; the secondary layer sits at 20% (web Icon.astro).
+  for (const [name, duo] of Object.entries(statusIcons)) {
+    icons.push({ asset: `status-${name}`, paths: [{ d: duo.secondary, opacity: 0.2 }, { d: duo.primary, opacity: 1 }] });
+  }
+
+  fs.rmSync(iosPhosphorRoot, { recursive: true, force: true });
+  writeJson(path.join(iosPhosphorRoot, "Contents.json"), {
+    info: { author: "xcode", version: 1 },
+    properties: { "provides-namespace": false },
+  });
+  for (const { asset, paths } of icons) {
+    const dir = path.join(iosPhosphorRoot, `${asset}.imageset`);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, `${asset}.svg`), svgDocument(paths));
+    writeJson(path.join(dir, "Contents.json"), {
+      images: [{ filename: `${asset}.svg`, idiom: "universal" }],
+      info: { author: "xcode", version: 1 },
+      properties: { "preserves-vector-representation": true, "template-rendering-intent": "template" },
+    });
+  }
+
+  if (hasAndroid) {
+    writeAndroidAssetIndex(icons.map(({ asset }) => asset));
+    const drawables = path.join(androidRoot, "res/drawable");
+    fs.mkdirSync(drawables, { recursive: true });
+    for (const file of fs.readdirSync(drawables)) {
+      if (/^(ph|status)_.*\.xml$/.test(file)) fs.rmSync(path.join(drawables, file));
+    }
+    for (const { asset, paths } of icons) {
+      fs.writeFileSync(path.join(drawables, `${asset.replace(/-/g, "_")}.xml`), vectorDrawable(paths));
+    }
+  }
+  return icons.length;
+}
+
+/**
+ * Resource ids by name, so the app never resolves drawables reflectively
+ * (which would also defeat resource shrinking).
+ */
+function writeAndroidAssetIndex(iconAssets) {
+  const substances = readSharedJson("data/substances.json");
+  const resName = (asset) => asset.replace(/-/g, "_");
+  const icons = iconAssets.map((asset) => `        "${asset.replace(/^(ph|status)-/, "$1:")}" to R.drawable.${resName(asset)},`);
+  const molecules = Object.keys(substances).map((key) => {
+    const asset = `molecule_${keyToSlug(key).replace(/-/g, "_")}`;
+    return `        "${asset}" to R.drawable.${asset},`;
+  });
+  const source = `// Generated by packages/shared/scripts/build-datapack.mjs. Do not edit directly.
+package cards.psy.app.generated
+
+import cards.psy.app.R
+
+/** Phosphor icons (\`ph:<name>\`) and duotone combo status icons (\`status:<name>\`). */
+object GeneratedIcons {
+    val byName: Map<String, Int> = mapOf(
+${icons.join("\n")}
+    )
+}
+
+/** Prerendered molecule structures, keyed by the data pack's \`assetName\`. */
+object GeneratedMolecules {
+    val byAsset: Map<String, Int> = mapOf(
+${molecules.join("\n")}
+    )
+}
+`;
+  const out = path.join(androidRoot, "kotlin/cards/psy/app/generated/GeneratedAssets.kt");
+  fs.mkdirSync(path.dirname(out), { recursive: true });
+  fs.writeFileSync(out, source);
+}
+
+/* -------------------------------------------------------------- Strings */
+
+function writeIosStrings(locale, ui) {
+  const lines = ["/* Generated by packages/shared/scripts/build-datapack.mjs. Do not edit directly. */"];
+  for (const [key, value] of flattenMessages(ui)) lines.push(`"${key}" = "${iosStringValue(value)}";`);
   lines.push("");
   const out = path.join(iosRoot, `${locale}.lproj/Localizable.strings`);
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, lines.join("\n"));
-  return out;
 }
+
+/**
+ * Android reads UI strings from the data pack (like the web's `t()`), so the
+ * in-app language, dynamic keys (`card.dependenceLevels.3`) and named
+ * placeholders behave exactly as on the other platforms.
+ */
+function writeAndroidStrings(locale, ui) {
+  if (!hasAndroid) return;
+  writeJson(path.join(androidRoot, "assets/datapack", locale, "ui.json"), Object.fromEntries(flattenMessages(ui)));
+}
+
+/* ----------------------------------------------------------------- Main */
 
 function main() {
   const combogen = readJson("combogen/config.json");
   const drugs = readJson("drugs/drugs.json");
   const combos = readJson("drugs/combos.json");
   const comboDefs = readJson("drugs/combo_definitions.json");
-  const substances = readSharedJson("data/substances.json");
-  const extended = readSharedJson("data/combos-extended.json");
-  const slangIndex = buildSlangIndex(extended);
+  const substancesData = readSharedJson("data/substances.json");
+  const hr = readSharedJson("data/harm-reduction.json");
+  const slangIndex = buildSlangIndex(readSharedJson("data/combos-extended.json"));
+  const effectIcon = effectIconResolver();
+  const enLabelToKey = Object.fromEntries(Object.entries(readJson("drugs/translations/en.json").drugs).map(([key, label]) => [label, key]));
+  const enBundle = buildLocaleBundle("en");
+  const iconSet = new Set(UI_ICONS);
 
-  fs.mkdirSync(dataPackRoot, { recursive: true });
-
+  const outputRoots = [dataPackRoot, ...(hasAndroid ? [path.join(androidRoot, "assets/datapack")] : [])];
   const manifest = {
-    version: 1,
+    version: DATAPACK_VERSION,
     generatedAt: new Date().toISOString(),
     locales: LOCALES,
     substanceCount: 0,
   };
 
   for (const locale of LOCALES) {
-    const localeBundle = buildLocaleBundle(locale);
-    const columns = buildColumns(localeBundle, combogen);
-    const substanceList = columns.map((column) => {
-      const drug = getDrug(drugs, column.key, localeBundle.drugOverlays);
-      return buildSubstance(
+    const localeBundle = locale === "en" ? enBundle : buildLocaleBundle(locale);
+    const columns = buildColumns(localeBundle, combogen, enLabelToKey);
+    const substanceList = columns.map((column) =>
+      buildSubstance(
         column.key,
         column,
-        drug,
-        substances,
+        getDrug(drugs, column.key, localeBundle.drugOverlays),
+        substancesData,
         localeBundle.classDescriptions,
         slangIndex
-      );
-    });
-
-    const { matrix, pairs, legend } = buildCombos(
-      columns,
-      combos,
-      localeBundle,
-      comboDefs,
-      combogen
+      )
     );
+    const { matrix, pairs, legend } = buildCombos(columns, combos, localeBundle, comboDefs, combogen);
+    const cards = buildCards({ localeBundle, enBundle, columns, matrix, drugs, hr, substancesData, effectIcon, iconSet });
+    const labelOf = Object.fromEntries(columns.map((column) => [column.key, column.label]));
 
-    const localeDir = path.join(dataPackRoot, locale);
-    writeJson(path.join(localeDir, "substances.json"), {
-      locale,
-      groups: visibleGroupOrder,
-      groupLabels: localeBundle.ui.groups ?? {},
-      substances: substanceList,
-    });
-    writeJson(path.join(localeDir, "combos.json"), {
-      locale,
-      columns: columns.map((c) => ({
-        key: c.key,
-        slug: c.slug,
-        label: c.label,
-        group: c.group,
-      })),
-      matrix,
-      pairs,
-      legend,
-    });
-    writeJson(path.join(localeDir, "meta.json"), {
-      locale,
-      siteTitle: localeBundle.ui.meta?.siteTitle ?? "psy.cards",
-      siteDescription: localeBundle.ui.meta?.siteDescription ?? "",
-      disclaimer: localeBundle.ui.landing?.disclaimer ?? "",
-      about: localeBundle.ui.landing?.about ?? "",
-    });
+    const files = {
+      "substances.json": {
+        locale,
+        groups: visibleGroupOrder,
+        groupLabels: localeBundle.ui.groups ?? {},
+        substances: substanceList,
+      },
+      "combos.json": {
+        locale,
+        columns: columns.map(({ key, slug, label, group }) => ({ key, slug, label, group })),
+        matrix,
+        pairs,
+        legend,
+      },
+      "cards.json": {
+        locale,
+        sources: hr.sources,
+        gable: hr.gable2004.map((row) => ({
+          ...row,
+          label: row.key && !GABLE_COMPOUND_KEYS.has(row.key) ? labelOf[row.key] ?? row.name : row.name,
+        })),
+        cards,
+      },
+      "meta.json": {
+        locale,
+        siteTitle: localeBundle.ui.meta?.siteTitle ?? "psy.cards",
+        siteDescription: localeBundle.ui.meta?.siteDescription ?? "",
+        disclaimer: localeBundle.ui.landing?.disclaimer ?? "",
+        about: localeBundle.ui.landing?.about ?? "",
+      },
+    };
 
-    const stringsPath = writeStrings(locale, localeBundle.ui);
-    console.log(`Wrote ${locale} datapack (${substanceList.length} substances) + ${stringsPath}`);
+    for (const root of outputRoots) {
+      for (const [name, data] of Object.entries(files)) writeJson(path.join(root, locale, name), data);
+    }
+    writeIosStrings(locale, localeBundle.ui);
+    writeAndroidStrings(locale, localeBundle.ui);
     manifest.substanceCount = substanceList.length;
+    console.log(`Wrote ${locale} datapack (${substanceList.length} substances, ${Object.keys(cards).length} cards)`);
   }
 
-  writeJson(path.join(dataPackRoot, "manifest.json"), manifest);
-  console.log(`Data pack ready at ${dataPackRoot}`);
+  for (const root of outputRoots) writeJson(path.join(root, "manifest.json"), manifest);
+  const iconCount = writeIcons(iconSet);
+  console.log(`Wrote ${iconCount} vector icons${hasAndroid ? " (iOS + Android)" : " (iOS)"}`);
+  console.log(`Data pack ready at ${outputRoots.join(", ")}`);
 }
 
 main();

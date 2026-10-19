@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "../../public/fontshare/css/satoshi.css";
 @import "./cards.css";
+@import "./substance-card.css";
+@import "./body-dock.css";
 @import "./landing.css";
 @import "./search-palette.css";
 

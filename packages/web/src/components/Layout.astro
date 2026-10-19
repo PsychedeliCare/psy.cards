@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import PreviewBanner from "./PreviewBanner.astro";
 import PwaShell from "./PwaShell.astro";
+import BodyDock from "./BodyDock.astro";
 import SiteHeader from "./SiteHeader.astro";
 import { PWA_THEME_COLOR } from "../pwa-config";
 import { pwaInfo } from "virtual:pwa-info";
@@ -91,12 +92,17 @@ const i18nPayload = JSON.stringify({
     <slot />
     <PreviewBanner locale={locale} />
     <PwaShell locale={locale} />
+    <BodyDock locale={locale} />
     <script src="../scripts/pwa.ts"></script>
     <script>
       import { initSmilesDrawer } from "../scripts/smiles-drawer.ts";
       import { initTimingCharts } from "../scripts/timing-chart.ts";
       import { initHolographicCards } from "../scripts/holographic-cards.ts";
+      import { initSubstanceCards } from "../scripts/substance-card.ts";
+      import { initBodyDock } from "../scripts/body-dock.ts";
 
+      initBodyDock();
+      initSubstanceCards();
       initSmilesDrawer();
       initTimingCharts();
       const disposeHolograms = initHolographicCards();

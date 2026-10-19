@@ -1,0 +1,1436 @@
+{
+  "lsd": {
+    "dose": "Blotters rarely match their label: start with half a tab and wait 2 hours before taking more.",
+    "prepare": "Ehrlich reagent turns purple for LSD. A bitter or numbing blotter is likely an NBOMe: spit it out.",
+    "spacing": {
+      "value": "2 weeks",
+      "label": "Tolerance",
+      "text": "Tolerance builds overnight, lasts ~2 weeks and carries over to mushrooms and mescaline."
+    },
+    "dependence": "Not compulsive: tolerance makes repeated use pointless.",
+    "risks": [
+      {
+        "icon": "smiley-nervous-fill",
+        "title": "Difficult trips",
+        "text": "Panic and confusion can lead to risky behaviour. Have a sober sitter and a calm place."
+      },
+      {
+        "icon": "brain-fill",
+        "title": "Mental health",
+        "text": "Can trigger psychosis or mania with a personal or family history of psychosis or bipolar disorder."
+      },
+      {
+        "icon": "lightning-fill",
+        "title": "Lithium",
+        "text": "Seizures reported when combined with lithium. Never mix."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Extreme panic or confusion",
+        "Danger to self or others",
+        "Seizures or overheating (suspect another drug)"
+      ],
+      "actions": [
+        "Move somewhere calm, quiet and dim",
+        "Reassure them: it's the drug and it will pass",
+        "Call 112 for seizures, chest pain or if they can't be kept safe"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "eye-fill",
+        "label": "Visuals"
+      },
+      {
+        "icon": "smiley-fill",
+        "label": "Euphoria"
+      },
+      {
+        "icon": "lightbulb-fill",
+        "label": "Insight"
+      },
+      {
+        "icon": "clock-countdown-fill",
+        "label": "Time distortion"
+      }
+    ]
+  },
+  "mushrooms": {
+    "dose": "Potency varies between species and batches. Weigh them; start around 1 g with a new batch.",
+    "prepare": "Effects can take up to 2 hours: don't redose early. Ginger tea helps with nausea.",
+    "spacing": {
+      "value": "2 weeks",
+      "label": "Tolerance",
+      "text": "Tolerance lasts ~2 weeks and is shared with LSD and mescaline."
+    },
+    "dependence": "Not compulsive: tolerance makes repeated use pointless.",
+    "risks": [
+      {
+        "icon": "smiley-nervous-fill",
+        "title": "Difficult trips",
+        "text": "Panic and confusion can lead to risky behaviour. Have a sober sitter and a calm place."
+      },
+      {
+        "icon": "brain-fill",
+        "title": "Mental health",
+        "text": "Can trigger psychosis or mania with a personal or family history of psychosis or bipolar disorder."
+      },
+      {
+        "icon": "skull-fill",
+        "title": "Wrong mushroom",
+        "text": "Misidentified wild mushrooms can cause fatal liver failure. Only eat species identified with certainty."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Extreme panic or confusion",
+        "Danger to self or others",
+        "Severe stomach pain hours later (wrong mushroom)"
+      ],
+      "actions": [
+        "Move somewhere calm, quiet and dim",
+        "Reassure them: it's the drug and it will pass",
+        "Call 112 if they can't be kept safe or a wild mushroom may be poisonous"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "eye-fill",
+        "label": "Visuals"
+      },
+      {
+        "icon": "smiley-fill",
+        "label": "Euphoria"
+      },
+      {
+        "icon": "lightbulb-fill",
+        "label": "Introspection"
+      },
+      {
+        "icon": "smiley-sad-fill",
+        "label": "Nausea"
+      }
+    ]
+  },
+  "dmt": {
+    "dose": "Use a milligram scale: 10–15 mg vaporised is light, breakthrough doses start around 25 mg.",
+    "prepare": "Sit or lie down before inhaling and let a sitter take the pipe: you can lose your body within seconds.",
+    "spacing": {
+      "value": "Integrate",
+      "label": "Little tolerance",
+      "text": "Tolerance barely builds, but take time to process each experience before repeating."
+    },
+    "dependence": "Not compulsive. Tolerance barely builds.",
+    "risks": [
+      {
+        "icon": "person-simple-throw-fill",
+        "title": "Sudden onset",
+        "text": "Full effects within a minute: falls and burns if standing or holding a flame."
+      },
+      {
+        "icon": "warning-fill",
+        "title": "Ayahuasca",
+        "text": "Oral DMT needs an MAOI, which is dangerous with SSRIs, stimulants, MDMA and tramadol."
+      },
+      {
+        "icon": "heartbeat-fill",
+        "title": "Heart",
+        "text": "Heart rate and blood pressure rise sharply. Risky with heart conditions."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Panic after coming back",
+        "Vomiting (mainly ayahuasca)",
+        "Fever, stiff muscles, agitation (serotonin syndrome)"
+      ],
+      "actions": [
+        "Keep them seated or on their side, away from flames",
+        "Reassure: smoked effects fade within 10–20 minutes",
+        "Call 112 for seizures, breathing problems or fever with stiffness"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "eye-fill",
+        "label": "Intense visuals"
+      },
+      {
+        "icon": "sparkle-fill",
+        "label": "Breakthrough"
+      },
+      {
+        "icon": "heartbeat-fill",
+        "label": "Body rush"
+      },
+      {
+        "icon": "timer-fill",
+        "label": "Very short"
+      }
+    ]
+  },
+  "mescaline": {
+    "dose": "Doses are for mescaline HCl. Cactus potency varies widely: start with a small portion.",
+    "prepare": "Expect strong nausea and a slow onset (1–3 h). Don't redose before 3 hours.",
+    "spacing": {
+      "value": "2 weeks",
+      "label": "Tolerance",
+      "text": "Tolerance lasts ~2 weeks and is shared with LSD and mushrooms."
+    },
+    "dependence": "Not compulsive: tolerance makes repeated use pointless.",
+    "risks": [
+      {
+        "icon": "clock-fill",
+        "title": "Long trip",
+        "text": "6–12 hours. Plan a safe place and a free next day."
+      },
+      {
+        "icon": "brain-fill",
+        "title": "Mental health",
+        "text": "Can trigger psychosis or mania with a personal or family history."
+      },
+      {
+        "icon": "heartbeat-fill",
+        "title": "Heart",
+        "text": "Raises heart rate and blood pressure."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Extreme panic or confusion",
+        "Persistent vomiting",
+        "Chest pain or seizures"
+      ],
+      "actions": [
+        "Move somewhere calm, quiet and dim",
+        "Small sips of water; recovery position if drowsy and vomiting",
+        "Call 112 for chest pain, seizures or if they can't be kept safe"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "eye-fill",
+        "label": "Visuals"
+      },
+      {
+        "icon": "heart-fill",
+        "label": "Empathy"
+      },
+      {
+        "icon": "lightbulb-fill",
+        "label": "Insight"
+      },
+      {
+        "icon": "smiley-sad-fill",
+        "label": "Nausea"
+      }
+    ]
+  },
+  "dox": {
+    "dose": "Potency varies 5× across the family (DOB, DOC, DOI, DOM).",
+    "prepare": "Often sold on blotters as LSD. Ehrlich reagent: purple = LSD, no change = possibly DOx.",
+    "marginNote": "No human data. Overdoses mostly follow mistaking DOx for LSD or redosing before it kicks in.",
+    "spacing": {
+      "value": "2 weeks",
+      "label": "Tolerance",
+      "text": "Shares tolerance with other psychedelics. The trip itself can last a whole day."
+    },
+    "dependence": "Not compulsive.",
+    "risks": [
+      {
+        "icon": "hourglass-medium-fill",
+        "title": "Delayed onset",
+        "text": "Can take 3 hours to start: redosing is the classic route to overdose."
+      },
+      {
+        "icon": "snowflake-fill",
+        "title": "Vasoconstriction",
+        "text": "Cold, numb limbs and high blood pressure. Risky with heart disease or stimulants."
+      },
+      {
+        "icon": "moon-stars-fill",
+        "title": "Very long",
+        "text": "12–30 hours with little sleep."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Seizures",
+        "Very high blood pressure or chest pain",
+        "Overheating, extreme agitation"
+      ],
+      "actions": [
+        "Call 112 for seizures, chest pain or high temperature",
+        "Keep them cool and calm in a quiet place",
+        "Recovery position if unresponsive"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "eye-fill",
+        "label": "Visuals"
+      },
+      {
+        "icon": "lightning-fill",
+        "label": "Stimulation"
+      },
+      {
+        "icon": "hourglass-medium-fill",
+        "label": "Very long"
+      },
+      {
+        "icon": "snowflake-fill",
+        "label": "Cold limbs"
+      }
+    ]
+  },
+  "nbomes": {
+    "dose": "Active below 1 mg: impossible to dose by eye. Never snort or swallow powders or liquids.",
+    "prepare": "Bitter or numbing taste = likely NBOMe. If you expected LSD, spit it out.",
+    "marginNote": "No reliable safety margin: deaths reported at doses close to normal ones.",
+    "spacing": {
+      "value": "2 weeks",
+      "label": "Tolerance",
+      "text": "Shares tolerance with other psychedelics. Safer to avoid entirely."
+    },
+    "dependence": "Not compulsive.",
+    "risks": [
+      {
+        "icon": "lightning-fill",
+        "title": "Seizures & heart",
+        "text": "Fast heart, vasoconstriction, overheating and seizures."
+      },
+      {
+        "icon": "skull-fill",
+        "title": "Deaths at low doses",
+        "text": "Especially when snorted or combined with stimulants."
+      },
+      {
+        "icon": "smiley-nervous-fill",
+        "title": "Agitation",
+        "text": "Violent confusion has been reported."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Seizures",
+        "Racing heart, very high temperature",
+        "Violent agitation or confusion"
+      ],
+      "actions": [
+        "Call 112 straight away",
+        "Cool them down; clear the space around them",
+        "Recovery position if unresponsive"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "eye-fill",
+        "label": "Visuals"
+      },
+      {
+        "icon": "lightning-fill",
+        "label": "Stimulation"
+      },
+      {
+        "icon": "smiley-nervous-fill",
+        "label": "Anxiety"
+      },
+      {
+        "icon": "heartbeat-fill",
+        "label": "Racing heart"
+      }
+    ]
+  },
+  "2c-x": {
+    "dose": "Other 2Cs differ a lot in strength: never swap doses between them.",
+    "prepare": "Weigh with a milligram scale. Test unknown powders: some '2C-B' is another 2C or an NBOMe.",
+    "marginNote": "No safety-ratio data. Steep dose curve: a few mg make a big difference.",
+    "spacing": {
+      "value": "2 weeks",
+      "label": "Tolerance",
+      "text": "Shares tolerance with other psychedelics."
+    },
+    "dependence": "Not compulsive.",
+    "risks": [
+      {
+        "icon": "chart-bar-horizontal-fill",
+        "title": "Steep dose curve",
+        "text": "A little more can be much stronger."
+      },
+      {
+        "icon": "warning-fill",
+        "title": "Serotonergic",
+        "text": "Risky with MAOIs and tramadol."
+      },
+      {
+        "icon": "smiley-nervous-fill",
+        "title": "Body load",
+        "text": "Nausea, chills and difficult trips are common at higher doses."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Extreme panic or confusion",
+        "Overheating",
+        "Seizures"
+      ],
+      "actions": [
+        "Move somewhere calm and cool",
+        "Reassure them: it's the drug and it will pass",
+        "Call 112 for seizures, chest pain or high temperature"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "eye-fill",
+        "label": "Visuals"
+      },
+      {
+        "icon": "smiley-fill",
+        "label": "Euphoria"
+      },
+      {
+        "icon": "hand-fill",
+        "label": "Touch enhanced"
+      },
+      {
+        "icon": "lightning-fill",
+        "label": "Body energy"
+      }
+    ]
+  },
+  "2c-t-x": {
+    "dose": "Slow onset (1–2 h): don't redose. Never snort.",
+    "prepare": "Weigh with a milligram scale and dissolve in water to split doses accurately.",
+    "marginNote": "No safety-ratio data. Deaths reported with 2C-T-7 and 2C-T-21, some after snorting or with MAOIs.",
+    "spacing": {
+      "value": "2 weeks",
+      "label": "Tolerance",
+      "text": "Shares tolerance with other psychedelics."
+    },
+    "dependence": "Not compulsive.",
+    "risks": [
+      {
+        "icon": "prohibit-fill",
+        "title": "MAOIs",
+        "text": "Severe, possibly fatal reactions."
+      },
+      {
+        "icon": "wind-fill",
+        "title": "Snorting",
+        "text": "Deaths linked to insufflating 2C-T-7."
+      },
+      {
+        "icon": "clock-fill",
+        "title": "Long and heavy",
+        "text": "Nausea and a long, intense trip."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Seizures",
+        "Very high temperature",
+        "Extreme agitation"
+      ],
+      "actions": [
+        "Call 112 for seizures or high temperature",
+        "Cool them down in a calm place",
+        "Recovery position if unresponsive"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "eye-fill",
+        "label": "Visuals"
+      },
+      {
+        "icon": "lightbulb-fill",
+        "label": "Introspection"
+      },
+      {
+        "icon": "hourglass-medium-fill",
+        "label": "Long"
+      },
+      {
+        "icon": "smiley-sad-fill",
+        "label": "Nausea"
+      }
+    ]
+  },
+  "5-meo-xxt": {
+    "dose": "Several times stronger than DMT: start at 2–3 mg on a milligram scale.",
+    "prepare": "Lie down with a sober sitter. Losing control of the body and vomiting are common.",
+    "marginNote": "No safety-ratio data. Fatal reactions reported when combined with MAOIs (e.g. ayahuasca).",
+    "spacing": {
+      "value": "Integrate",
+      "label": "Little tolerance",
+      "text": "Overwhelming even at low doses: take time to integrate before repeating."
+    },
+    "dependence": "Not compulsive.",
+    "risks": [
+      {
+        "icon": "prohibit-fill",
+        "title": "MAOIs",
+        "text": "Fatal reactions with ayahuasca or harmala."
+      },
+      {
+        "icon": "person-simple-throw-fill",
+        "title": "Loss of control",
+        "text": "Thrashing, falls and vomiting while unaware."
+      },
+      {
+        "icon": "brain-fill",
+        "title": "Mental health",
+        "text": "Very intense: psychosis risk with a personal or family history."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Unresponsive for over 30 minutes",
+        "Vomiting while lying on their back",
+        "Seizures"
+      ],
+      "actions": [
+        "Recovery position to keep the airway clear",
+        "Call 112 for seizures or no response after 30 minutes",
+        "Tell paramedics about any MAOI"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "sparkle-fill",
+        "label": "Ego dissolution"
+      },
+      {
+        "icon": "wind-fill",
+        "label": "Overwhelming rush"
+      },
+      {
+        "icon": "timer-fill",
+        "label": "Short"
+      },
+      {
+        "icon": "smiley-sad-fill",
+        "label": "Vomiting"
+      }
+    ]
+  },
+  "cannabis": {
+    "dose": "Edibles: start with 5 mg THC or less and wait 2 hours. They last 4–10 hours.",
+    "prepare": "Skip the tobacco; vaping flower is gentler on the lungs. Don't drive for at least 6 hours.",
+    "marginNote": "No known fatal overdose. Greening out is unpleasant but passes.",
+    "spacing": {
+      "value": "Not daily",
+      "label": "Tolerance break",
+      "text": "Daily use builds dependence. A 2–4 week break resets tolerance."
+    },
+    "dependence": "About 1 in 10 users become dependent, more with daily use.",
+    "risks": [
+      {
+        "icon": "smiley-nervous-fill",
+        "title": "Anxiety & panic",
+        "text": "Common with high-THC strains and edibles."
+      },
+      {
+        "icon": "brain-fill",
+        "title": "Psychosis",
+        "text": "Higher risk with high THC, daily use, youth or a family history."
+      },
+      {
+        "icon": "flask-fill",
+        "title": "Synthetics",
+        "text": "Sprayed 'CBD weed' and vapes can contain synthetic cannabinoids: seizures."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Panic, racing heart",
+        "Nausea, vomiting, fainting",
+        "Seizures (suspect synthetics)"
+      ],
+      "actions": [
+        "Sit or lie down somewhere calm",
+        "Sip water or a sugary drink; reassure",
+        "Call 112 for chest pain, seizures or unconsciousness"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "smiley-fill",
+        "label": "Relaxation"
+      },
+      {
+        "icon": "fork-knife-fill",
+        "label": "Munchies"
+      },
+      {
+        "icon": "music-notes-fill",
+        "label": "Enhanced senses"
+      },
+      {
+        "icon": "smiley-nervous-fill",
+        "label": "Anxiety"
+      }
+    ]
+  },
+  "ketamine": {
+    "dose": "Start with a small bump (10–20 mg) and wait 15 minutes: more tips into a K-hole fast.",
+    "prepare": "Crush finely, use your own straw and rinse your nose with water afterwards.",
+    "spacing": {
+      "value": "Rarely",
+      "label": "Protect your bladder",
+      "text": "Weekly or more use drives bladder damage and dependence. Leave weeks between sessions."
+    },
+    "dependence": "Tolerance and compulsive use build quickly with frequent use.",
+    "risks": [
+      {
+        "icon": "drop-fill",
+        "title": "Bladder damage",
+        "text": "Pain, urgency or blood in urine: stop and see a doctor. It can become permanent."
+      },
+      {
+        "icon": "person-simple-swim-fill",
+        "title": "Accidents",
+        "text": "Numbness and poor coordination: falls, burns, drowning. Never in water or alone."
+      },
+      {
+        "icon": "warning-octagon-fill",
+        "title": "Depressants",
+        "text": "With alcohol, GHB, benzos or opioids: vomiting while unconscious, breathing stops."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Can't be woken",
+        "Vomiting while sedated",
+        "Slow or irregular breathing"
+      ],
+      "actions": [
+        "Recovery position and stay with them",
+        "Call 112 if they can't be woken or breathing is weak",
+        "Tell paramedics about alcohol, GHB or other depressants"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "person-simple-fill",
+        "label": "Detachment"
+      },
+      {
+        "icon": "hand-fill",
+        "label": "Numbness"
+      },
+      {
+        "icon": "smiley-fill",
+        "label": "Euphoria"
+      },
+      {
+        "icon": "person-simple-throw-fill",
+        "label": "Clumsiness"
+      }
+    ]
+  },
+  "mxe": {
+    "dose": "About 3× stronger than ketamine. Wait an hour before redosing.",
+    "prepare": "Weigh with a milligram scale. Lasts 3–6 h, with after-effects into the next day.",
+    "marginNote": "No safety-ratio data; much stronger than ketamine.",
+    "spacing": {
+      "value": "Rarely",
+      "label": "Protect your bladder",
+      "text": "Like ketamine, frequent use risks bladder damage and dependence."
+    },
+    "dependence": "Similar to ketamine: compulsive use with frequent dosing.",
+    "risks": [
+      {
+        "icon": "heartbeat-fill",
+        "title": "Blood pressure",
+        "text": "Raises heart rate and blood pressure."
+      },
+      {
+        "icon": "warning-fill",
+        "title": "Serotonin",
+        "text": "Risky with MDMA, SSRIs, tramadol and DXM."
+      },
+      {
+        "icon": "warning-octagon-fill",
+        "title": "Depressants",
+        "text": "With alcohol, GHB or opioids: breathing problems."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Can't be woken",
+        "Severe agitation or confusion",
+        "Chest pain or very fast heart"
+      ],
+      "actions": [
+        "Recovery position and stay with them",
+        "Call 112 if they can't be woken or have chest pain",
+        "Keep them calm and cool"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "person-simple-fill",
+        "label": "Detachment"
+      },
+      {
+        "icon": "smiley-fill",
+        "label": "Euphoria"
+      },
+      {
+        "icon": "lightning-fill",
+        "label": "Stimulation"
+      },
+      {
+        "icon": "hand-fill",
+        "label": "Numbness"
+      }
+    ]
+  },
+  "dxm": {
+    "dose": "Doses scale with body weight (mg/kg). Set your weight to see doses in mg.",
+    "prepare": "Only use products where DXM is the ONLY active ingredient: paracetamol, antihistamines or guaifenesin can be deadly at these doses.",
+    "spacing": {
+      "value": "2 weeks",
+      "label": "Spacing",
+      "text": "Leave 1–2 weeks between trips so tolerance and serotonin can recover."
+    },
+    "dependence": "Tolerance and compulsive use reported with regular use.",
+    "risks": [
+      {
+        "icon": "thermometer-hot-fill",
+        "title": "Serotonin syndrome",
+        "text": "With SSRIs, MDMA, MAOIs or tramadol. Potentially fatal."
+      },
+      {
+        "icon": "dna-fill",
+        "title": "Slow metabolisers",
+        "text": "~1 in 10 people break DXM down slowly: much stronger, longer effects."
+      },
+      {
+        "icon": "thermometer-simple-fill",
+        "title": "Overheating",
+        "text": "Plus nausea and vomiting. Keep cool."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "High temperature, stiff muscles",
+        "Agitation, confusion, seizures",
+        "Vomiting while lying down"
+      ],
+      "actions": [
+        "Call 112",
+        "Cool them down",
+        "Recovery position if drowsy"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "person-simple-fill",
+        "label": "Detachment"
+      },
+      {
+        "icon": "music-notes-fill",
+        "label": "Music euphoria"
+      },
+      {
+        "icon": "eye-fill",
+        "label": "Visuals"
+      },
+      {
+        "icon": "smiley-sad-fill",
+        "label": "Nausea"
+      }
+    ]
+  },
+  "nitrous": {
+    "dose": "One balloon at a time, normal breaths of air in between. Never inhale straight from a cracker or tank, or with a bag over your head.",
+    "prepare": "Fill a balloon first: gas straight from the canister is freezing and burns lips and throat. Sit down.",
+    "spacing": {
+      "value": "Breaks",
+      "label": "Protect your nerves",
+      "text": "Heavy or frequent use depletes vitamin B12, causing numbness and nerve damage."
+    },
+    "dependence": "Mostly psychological; heavy repeated use is common.",
+    "risks": [
+      {
+        "icon": "person-simple-throw-fill",
+        "title": "Fainting & falls",
+        "text": "Sit down before inhaling."
+      },
+      {
+        "icon": "wind-fill",
+        "title": "Lack of oxygen",
+        "text": "Never use bags, masks or closed spaces."
+      },
+      {
+        "icon": "lightning-fill",
+        "title": "Nerve damage",
+        "text": "Tingling or numb hands and feet: stop and see a doctor."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Unconscious",
+        "Not breathing normally",
+        "Blue lips"
+      ],
+      "actions": [
+        "Get them into fresh air",
+        "Recovery position; call 112",
+        "CPR if they're not breathing"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "smiley-fill",
+        "label": "Giggles"
+      },
+      {
+        "icon": "ear-fill",
+        "label": "Sound distortion"
+      },
+      {
+        "icon": "cloud-fill",
+        "label": "Dreamy"
+      },
+      {
+        "icon": "timer-fill",
+        "label": "Short rush"
+      }
+    ]
+  },
+  "amphetamines": {
+    "dose": "Purity varies wildly: start small and wait before redosing.",
+    "prepare": "Eat first, plan your sleep and sip water. Use your own straw.",
+    "spacing": {
+      "value": "Days off",
+      "label": "No binges",
+      "text": "Avoid consecutive days; sleep and eat properly before next time. Comedowns build with each day of use."
+    },
+    "dependence": "Moderate for speed, very high for crystal meth.",
+    "risks": [
+      {
+        "icon": "heartbeat-fill",
+        "title": "Heart & overheating",
+        "text": "Racing heart, high blood pressure, heatstroke when dancing."
+      },
+      {
+        "icon": "brain-fill",
+        "title": "Sleep loss & paranoia",
+        "text": "Long sessions can cause paranoia and psychosis."
+      },
+      {
+        "icon": "warning-fill",
+        "title": "Crystal meth",
+        "text": "Much stronger, longer-lasting and more addictive."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Chest pain, racing or irregular heart",
+        "Very high temperature",
+        "Severe agitation, paranoia, seizures"
+      ],
+      "actions": [
+        "Call 112 for chest pain, seizures or confusion",
+        "Cool them down somewhere calm",
+        "Sips of water, not litres"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "lightning-fill",
+        "label": "Energy"
+      },
+      {
+        "icon": "target-fill",
+        "label": "Focus"
+      },
+      {
+        "icon": "chat-circle-dots-fill",
+        "label": "Talkative"
+      },
+      {
+        "icon": "heartbeat-fill",
+        "label": "Racing heart"
+      }
+    ]
+  },
+  "mdma": {
+    "dose": "Upper limit: 1.5 mg/kg for men, 1.3 mg/kg for women. Set your body below to calculate.",
+    "prepare": "Test it (drug checking, Marquis + Simon's). Pills often contain 150 mg or more: start with a quarter or half.",
+    "spacing": {
+      "value": "3 months",
+      "label": "3-month rule",
+      "text": "Serotonin needs time to recover. More often means weaker highs and harder comedowns."
+    },
+    "dependence": "Frequent use erodes the effects and mood.",
+    "risks": [
+      {
+        "icon": "thermometer-hot-fill",
+        "title": "Overheating",
+        "text": "Take breaks from dancing, cool off and sip 300–500 ml of water per hour."
+      },
+      {
+        "icon": "drop-fill",
+        "title": "Too much water",
+        "text": "Litres of water can cause fatal hyponatraemia. Sip, don't chug; isotonic drinks help."
+      },
+      {
+        "icon": "arrows-clockwise-bold",
+        "title": "Redosing",
+        "text": "More MDMA brings more heat, strain and comedown, not more magic."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Very high temperature, no sweating",
+        "Confusion, stiff muscles, seizures",
+        "Collapse"
+      ],
+      "actions": [
+        "Call 112 and say it's MDMA",
+        "Cool them: shade, wet cloths, fan",
+        "Don't force water; recovery position if unresponsive"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "heart-fill",
+        "label": "Empathy"
+      },
+      {
+        "icon": "smiley-fill",
+        "label": "Euphoria"
+      },
+      {
+        "icon": "music-notes-fill",
+        "label": "Love of music"
+      },
+      {
+        "icon": "tooth-fill",
+        "label": "Jaw clenching"
+      }
+    ]
+  },
+  "cocaine": {
+    "dose": "Purity in Europe is often high: start with a small line (20–30 mg) and wait 20 minutes.",
+    "prepare": "Use your own straw (hepatitis C). Rinse your nose afterwards. Test for adulterants if you can.",
+    "spacing": {
+      "value": "Days off",
+      "label": "Break the cycle",
+      "text": "Craving builds fast: avoid consecutive days and all-night binges. Set a limit before you start."
+    },
+    "dependence": "Short highs drive compulsive redosing; crack even more so.",
+    "risks": [
+      {
+        "icon": "heartbeat-fill",
+        "title": "Heart & stroke",
+        "text": "Chest pain, arrhythmia and stroke, even in young people."
+      },
+      {
+        "icon": "wine-fill",
+        "title": "With alcohol",
+        "text": "Forms cocaethylene: more toxic to the heart and longer-lasting."
+      },
+      {
+        "icon": "repeat-bold",
+        "title": "Redosing",
+        "text": "Effects fade in 30–60 minutes, pushing more and more lines."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Chest pain or pressure",
+        "Racing or irregular heart",
+        "Very high temperature, seizures, panic"
+      ],
+      "actions": [
+        "Call 112 for chest pain or seizures",
+        "Keep them calm and cool",
+        "Recovery position if unresponsive"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "lightning-fill",
+        "label": "Energy"
+      },
+      {
+        "icon": "crown-fill",
+        "label": "Confidence"
+      },
+      {
+        "icon": "chat-circle-dots-fill",
+        "label": "Talkative"
+      },
+      {
+        "icon": "heartbeat-fill",
+        "label": "Racing heart"
+      }
+    ]
+  },
+  "caffeine": {
+    "dose": "Coffee ≈ 80–100 mg · energy drink ≈ 80 mg/250 ml · pills 100–200 mg.",
+    "prepare": "Pure caffeine powder is dangerous: a teaspoon can kill. Never measure by eye.",
+    "spacing": {
+      "value": "≤ 400 mg",
+      "label": "Per day",
+      "text": "EFSA safe daily limit for adults (200 mg if pregnant). Avoid within 6 hours of sleep."
+    },
+    "dependence": "Mild physical dependence: withdrawal headaches.",
+    "risks": [
+      {
+        "icon": "heartbeat-fill",
+        "title": "Heart & anxiety",
+        "text": "Palpitations, jitters and panic at high doses."
+      },
+      {
+        "icon": "pill-fill",
+        "title": "Powder & pills",
+        "text": "Easy to overdose by accident."
+      },
+      {
+        "icon": "moon-fill",
+        "title": "Sleep",
+        "text": "Disrupts sleep even when you feel fine."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Racing or irregular heart",
+        "Vomiting, tremor",
+        "Confusion, seizures"
+      ],
+      "actions": [
+        "Call 112 for chest pain, irregular heart or seizures",
+        "Always call if powder or pills were involved",
+        "Stop caffeine, rest, sip water"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "lightning-fill",
+        "label": "Alertness"
+      },
+      {
+        "icon": "target-fill",
+        "label": "Focus"
+      },
+      {
+        "icon": "heartbeat-fill",
+        "label": "Jitters"
+      },
+      {
+        "icon": "moon-fill",
+        "label": "Poor sleep"
+      }
+    ]
+  },
+  "alcohol": {
+    "dose": "1 unit = 10 ml of pure alcohol: about half a pint of beer or a single shot.",
+    "prepare": "Eat first, alternate with water and set a limit. Never drive.",
+    "spacing": {
+      "value": "≤ 14 units",
+      "label": "Per week",
+      "text": "Spread over 3 or more days, with several alcohol-free days each week (UK guidance)."
+    },
+    "dependence": "Withdrawal after heavy daily drinking can be fatal.",
+    "risks": [
+      {
+        "icon": "warning-octagon-fill",
+        "title": "Depressants",
+        "text": "With GHB, benzos, opioids or ketamine, breathing can stop."
+      },
+      {
+        "icon": "person-simple-fill",
+        "title": "Choking",
+        "text": "Put very drunk friends in the recovery position."
+      },
+      {
+        "icon": "car-fill",
+        "title": "Accidents & violence",
+        "text": "Risk-taking, falls, drowning and fights."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Can't be woken",
+        "Slow or irregular breathing",
+        "Cold, pale or blue skin; vomiting while passed out"
+      ],
+      "actions": [
+        "Recovery position, call 112",
+        "Stay with them and keep them warm",
+        "No coffee or cold showers"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "smiley-fill",
+        "label": "Relaxation"
+      },
+      {
+        "icon": "users-fill",
+        "label": "Sociability"
+      },
+      {
+        "icon": "person-simple-throw-fill",
+        "label": "Clumsiness"
+      },
+      {
+        "icon": "eye-slash-fill",
+        "label": "Blackouts"
+      }
+    ]
+  },
+  "ghb/gbl": {
+    "dose": "Measure with an oral syringe. GBL is about twice as strong as GHB. Wait at least 2 hours before more.",
+    "prepare": "Never with alcohol. Write down your dosing times or set a timer, and tell a friend.",
+    "spacing": {
+      "value": "Never daily",
+      "label": "Dependence",
+      "text": "Daily use can cause dependence within weeks; withdrawal can be life-threatening: stop with medical help."
+    },
+    "dependence": "Rated moderate in 2007, but daily use leads to severe dependence.",
+    "risks": [
+      {
+        "icon": "warning-octagon-fill",
+        "title": "Tiny margin",
+        "text": "The step from euphoria to unconscious is very small."
+      },
+      {
+        "icon": "wine-fill",
+        "title": "With alcohol",
+        "text": "Unconsciousness and stopped breathing."
+      },
+      {
+        "icon": "drop-half-bottom-fill",
+        "title": "GBL burns",
+        "text": "Never drink it neat: dilute, and label the bottle."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Can't be woken",
+        "Snoring or gurgling breathing",
+        "Vomiting, sudden agitation, seizures"
+      ],
+      "actions": [
+        "Recovery position, call 112",
+        "Stay with them: never let them 'sleep it off'",
+        "Tell paramedics how much and when"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "smiley-fill",
+        "label": "Euphoria"
+      },
+      {
+        "icon": "users-fill",
+        "label": "Sociability"
+      },
+      {
+        "icon": "bed-fill",
+        "label": "Sleepiness"
+      },
+      {
+        "icon": "warning-fill",
+        "label": "Sudden passing out"
+      }
+    ]
+  },
+  "opioids": {
+    "dose": "Potency varies 100× between opioids (fentanyl and nitazenes work in micrograms) and tolerance drops after a few days off.",
+    "prepare": "Carry naloxone, never use alone, test for fentanyl or nitazenes and try a small test dose first.",
+    "spacing": {
+      "value": "Use less",
+      "label": "After any break",
+      "text": "Tolerance drops within days. After detox, hospital, prison or a pause, use far less."
+    },
+    "dependence": "Physical dependence develops within weeks of daily use.",
+    "risks": [
+      {
+        "icon": "wind-fill",
+        "title": "Breathing stops",
+        "text": "The main cause of death, much worse with alcohol, benzos or GHB."
+      },
+      {
+        "icon": "skull-fill",
+        "title": "Fentanyl & nitazenes",
+        "text": "Hidden in heroin and fake pills. Active in micrograms."
+      },
+      {
+        "icon": "syringe-fill",
+        "title": "Infections",
+        "text": "Never share needles or equipment: HIV, hepatitis C."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Pinpoint pupils",
+        "Blue or grey lips",
+        "Can't be woken; slow or no breathing, gurgling"
+      ],
+      "actions": [
+        "Call 112 and give naloxone; repeat after 2–3 min if needed",
+        "Rescue breaths or CPR; then recovery position",
+        "Stay: naloxone can wear off before the opioid"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "smiley-fill",
+        "label": "Warm euphoria"
+      },
+      {
+        "icon": "bandaids-fill",
+        "label": "Pain relief"
+      },
+      {
+        "icon": "bed-fill",
+        "label": "Drowsiness"
+      },
+      {
+        "icon": "wind-fill",
+        "label": "Slow breathing"
+      }
+    ]
+  },
+  "tramadol": {
+    "dose": "Ceiling effect: more tramadol mainly adds seizure risk, not more euphoria.",
+    "prepare": "Avoid with epilepsy, antidepressants or other serotonergic drugs.",
+    "marginNote": "No safety-ratio data. Seizure risk rises above ~300 mg; never exceed 400 mg/day.",
+    "spacing": {
+      "value": "Not daily",
+      "label": "Dependence",
+      "text": "Daily use leads to opioid dependence and a difficult withdrawal."
+    },
+    "dependence": "Opioid dependence plus antidepressant-like withdrawal.",
+    "risks": [
+      {
+        "icon": "lightning-fill",
+        "title": "Seizures",
+        "text": "Risk rises with dose and with stimulants."
+      },
+      {
+        "icon": "thermometer-hot-fill",
+        "title": "Serotonin syndrome",
+        "text": "With SSRIs, MDMA, MAOIs or DXM."
+      },
+      {
+        "icon": "wind-fill",
+        "title": "Breathing",
+        "text": "With alcohol, benzos or other opioids."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Seizures",
+        "Can't be woken; slow breathing",
+        "Fever, agitation, stiff muscles"
+      ],
+      "actions": [
+        "Call 112",
+        "Give naloxone if breathing is slow",
+        "Protect their head during a seizure, then recovery position"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "bandaids-fill",
+        "label": "Pain relief"
+      },
+      {
+        "icon": "smiley-fill",
+        "label": "Mild euphoria"
+      },
+      {
+        "icon": "smiley-sad-fill",
+        "label": "Nausea"
+      },
+      {
+        "icon": "lightning-fill",
+        "label": "Seizure risk"
+      }
+    ]
+  },
+  "benzodiazepines": {
+    "dose": "Benzos differ 20× in strength: 0.5 mg alprazolam ≈ 10 mg diazepam.",
+    "prepare": "Fake 'Xanax' and street pills often contain stronger benzos. Start with a fraction and don't redose.",
+    "spacing": {
+      "value": "2–4 weeks",
+      "label": "Maximum course",
+      "text": "Daily use beyond 2–4 weeks causes dependence. After regular use, never stop suddenly: taper."
+    },
+    "dependence": "Withdrawal after regular use can cause seizures.",
+    "risks": [
+      {
+        "icon": "wind-fill",
+        "title": "Breathing",
+        "text": "With alcohol, opioids or GHB, breathing can stop."
+      },
+      {
+        "icon": "eye-slash-fill",
+        "title": "Blackouts",
+        "text": "Memory loss and risky behaviour; you feel less high than you are."
+      },
+      {
+        "icon": "lightning-fill",
+        "title": "Withdrawal seizures",
+        "text": "After regular use. Taper with medical help."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Very drowsy or can't be woken",
+        "Slow, shallow breathing",
+        "Confusion, slurred speech"
+      ],
+      "actions": [
+        "Recovery position, call 112",
+        "Stay with them",
+        "Tell paramedics about alcohol or opioids"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "smiley-fill",
+        "label": "Calm"
+      },
+      {
+        "icon": "bed-fill",
+        "label": "Sleepiness"
+      },
+      {
+        "icon": "eye-slash-fill",
+        "label": "Memory loss"
+      },
+      {
+        "icon": "person-simple-throw-fill",
+        "label": "Clumsiness"
+      }
+    ]
+  },
+  "maois": {
+    "dose": "Prescription antidepressants or traditional preparations (ayahuasca, Syrian rue). Not used on their own recreationally.",
+    "prepare": "Check every drug and medication with a pharmacist. With irreversible MAOIs, avoid tyramine-rich foods (aged cheese, cured meat).",
+    "marginNote": "No safety-ratio data. The danger lies in combinations, not the MAOI alone.",
+    "spacing": {
+      "value": "2 weeks",
+      "label": "Washout",
+      "text": "Irreversible MAOIs keep acting up to 2 weeks after the last dose. Harmala lasts about a day."
+    },
+    "dependence": "Not addictive.",
+    "risks": [
+      {
+        "icon": "thermometer-hot-fill",
+        "title": "Serotonin syndrome",
+        "text": "With MDMA, SSRIs, DXM, tramadol or 5-MeO: often fatal."
+      },
+      {
+        "icon": "heartbeat-fill",
+        "title": "Hypertensive crisis",
+        "text": "With stimulants or tyramine-rich food."
+      },
+      {
+        "icon": "leaf-fill",
+        "title": "Ayahuasca",
+        "text": "Contains MAOIs: the same rules apply."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Severe headache",
+        "Fever, sweating, stiff muscles",
+        "Confusion, very high blood pressure"
+      ],
+      "actions": [
+        "Call 112 straight away",
+        "Cool them down",
+        "Tell paramedics which MAOI and what else was taken"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "sun-fill",
+        "label": "Mood lift (weeks)"
+      },
+      {
+        "icon": "warning-fill",
+        "label": "Boosts other drugs"
+      },
+      {
+        "icon": "moon-fill",
+        "label": "Insomnia"
+      },
+      {
+        "icon": "fork-knife-fill",
+        "label": "Food interactions"
+      }
+    ]
+  },
+  "ssris": {
+    "dose": "Prescription antidepressants: take as prescribed.",
+    "prepare": "SSRIs blunt MDMA and psychedelics. Don't skip doses to 'make room': it is risky and destabilising.",
+    "spacing": {
+      "value": "As prescribed",
+      "label": "Don't stop suddenly",
+      "text": "Stopping abruptly can cause discontinuation symptoms: taper with your doctor."
+    },
+    "dependence": "Not addictive, but stopping needs a taper.",
+    "risks": [
+      {
+        "icon": "thermometer-hot-fill",
+        "title": "Serotonin syndrome",
+        "text": "With MAOIs, tramadol, DXM or high-dose MDMA."
+      },
+      {
+        "icon": "arrows-clockwise-bold",
+        "title": "Weaker effects",
+        "text": "MDMA feels weaker, which tempts people to redose."
+      },
+      {
+        "icon": "warning-fill",
+        "title": "Other interactions",
+        "text": "Lithium and St John's wort also interact."
+      }
+    ],
+    "overdose": {
+      "signs": [
+        "Agitation, sweating, fever",
+        "Twitching or stiff muscles",
+        "Racing heart"
+      ],
+      "actions": [
+        "Call 112",
+        "Cool them down",
+        "Stop all serotonergic drugs"
+      ]
+    },
+    "effects": [
+      {
+        "icon": "sun-fill",
+        "label": "Mood lift (weeks)"
+      },
+      {
+        "icon": "smiley-sad-fill",
+        "label": "Nausea"
+      },
+      {
+        "icon": "heart-fill",
+        "label": "Blunts MDMA"
+      },
+      {
+        "icon": "moon-fill",
+        "label": "Sleep changes"
+      }
+    ]
+  }
+}

@@ -35,6 +35,20 @@
                ReferencedContainer = "container:PsyCards.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D5F26C85254415B882E36987"
+               BuildableName = "PsyCardsUITests.xctest"
+               BlueprintName = "PsyCardsUITests"
+               ReferencedContainer = "container:PsyCards.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -61,6 +75,17 @@
                BlueprintIdentifier = "2FE8927E5BE2AE2E32641EDF"
                BuildableName = "PsyCardsTests.xctest"
                BlueprintName = "PsyCardsTests"
+               ReferencedContainer = "container:PsyCards.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D5F26C85254415B882E36987"
+               BuildableName = "PsyCardsUITests.xctest"
+               BlueprintName = "PsyCardsUITests"
                ReferencedContainer = "container:PsyCards.xcodeproj">
             </BuildableReference>
          </TestableReference>

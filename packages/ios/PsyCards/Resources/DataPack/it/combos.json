@@ -235,9 +235,9 @@
         "icon": "heartbeat"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "dangerous",
+        "label": "Pericoloso",
+        "icon": "warning-octagon"
       },
       "nitrous": {
         "statusKey": "safe",
@@ -357,9 +357,9 @@
         "icon": "warning"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "dangerous",
+        "label": "Pericoloso",
+        "icon": "warning-octagon"
       },
       "nitrous": {
         "statusKey": "safe",
@@ -479,9 +479,9 @@
         "icon": "warning"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "unsafe",
+        "label": "Non Sicuro",
+        "icon": "heartbeat"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -601,9 +601,9 @@
         "icon": "warning"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "unsafe",
+        "label": "Non Sicuro",
+        "icon": "heartbeat"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -723,9 +723,9 @@
         "icon": "arrow-fat-line-right"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "caution",
+        "label": "Attenzione",
+        "icon": "warning"
       },
       "nitrous": {
         "statusKey": "safe",
@@ -845,9 +845,9 @@
         "icon": "warning"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "dangerous",
+        "label": "Pericoloso",
+        "icon": "warning-octagon"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -967,9 +967,9 @@
         "icon": "arrow-fat-line-up"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -1089,9 +1089,9 @@
         "icon": "arrow-fat-line-up"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -1211,9 +1211,9 @@
         "icon": "arrow-fat-line-up"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -1333,9 +1333,9 @@
         "icon": "arrow-fat-line-up"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -1455,9 +1455,9 @@
         "icon": "warning"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "unsafe",
+        "label": "Non Sicuro",
+        "icon": "heartbeat"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -1577,9 +1577,9 @@
         "icon": "warning"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "unsafe",
+        "label": "Non Sicuro",
+        "icon": "heartbeat"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -1699,9 +1699,9 @@
         "icon": "arrow-fat-line-up"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -1821,9 +1821,9 @@
         "icon": "warning"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "unsafe",
+        "label": "Non Sicuro",
+        "icon": "heartbeat"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -1943,9 +1943,9 @@
         "icon": "arrow-fat-line-up"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "unsafe",
+        "label": "Non Sicuro",
+        "icon": "heartbeat"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -2065,9 +2065,9 @@
         "icon": "arrow-fat-line-up"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -2187,9 +2187,9 @@
         "icon": "arrow-fat-line-up"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "unsafe",
+        "label": "Non Sicuro",
+        "icon": "heartbeat"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -2229,124 +2229,124 @@
     },
     "dxm": {
       "maois": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "dangerous",
+        "label": "Pericoloso",
+        "icon": "warning-octagon"
       },
       "ssris": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "dangerous",
+        "label": "Pericoloso",
+        "icon": "warning-octagon"
       },
       "amphetamines": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "unsafe",
+        "label": "Non Sicuro",
+        "icon": "heartbeat"
       },
       "cocaine": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "unsafe",
+        "label": "Non Sicuro",
+        "icon": "heartbeat"
       },
       "caffeine": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "caution",
+        "label": "Attenzione",
+        "icon": "warning"
       },
       "mdma": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "dangerous",
+        "label": "Pericoloso",
+        "icon": "warning-octagon"
       },
       "lsd": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "mushrooms": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "dmt": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "mescaline": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "dox": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "unsafe",
+        "label": "Non Sicuro",
+        "icon": "heartbeat"
       },
       "nbomes": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "unsafe",
+        "label": "Non Sicuro",
+        "icon": "heartbeat"
       },
       "2c-x": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "2c-t-x": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "unsafe",
+        "label": "Non Sicuro",
+        "icon": "heartbeat"
       },
       "5-meo-xxt": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "unsafe",
+        "label": "Non Sicuro",
+        "icon": "heartbeat"
       },
       "ketamine": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "mxe": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "unsafe",
+        "label": "Non Sicuro",
+        "icon": "heartbeat"
       },
       "nitrous": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "alcohol": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "dangerous",
+        "label": "Pericoloso",
+        "icon": "warning-octagon"
       },
       "ghb/gbl": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "dangerous",
+        "label": "Pericoloso",
+        "icon": "warning-octagon"
       },
       "benzodiazepines": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "caution",
+        "label": "Attenzione",
+        "icon": "warning"
       },
       "opioids": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "dangerous",
+        "label": "Pericoloso",
+        "icon": "warning-octagon"
       },
       "tramadol": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "dangerous",
+        "label": "Pericoloso",
+        "icon": "warning-octagon"
       },
       "cannabis": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       }
     },
     "nitrous": {
@@ -2436,9 +2436,9 @@
         "icon": "arrow-fat-line-up"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "alcohol": {
         "statusKey": "caution",
@@ -2558,9 +2558,9 @@
         "icon": "warning-octagon"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "dangerous",
+        "label": "Pericoloso",
+        "icon": "warning-octagon"
       },
       "nitrous": {
         "statusKey": "caution",
@@ -2680,9 +2680,9 @@
         "icon": "warning-octagon"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "dangerous",
+        "label": "Pericoloso",
+        "icon": "warning-octagon"
       },
       "nitrous": {
         "statusKey": "caution",
@@ -2802,9 +2802,9 @@
         "icon": "warning"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "caution",
+        "label": "Attenzione",
+        "icon": "warning"
       },
       "nitrous": {
         "statusKey": "decrease",
@@ -2924,9 +2924,9 @@
         "icon": "warning-octagon"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "dangerous",
+        "label": "Pericoloso",
+        "icon": "warning-octagon"
       },
       "nitrous": {
         "statusKey": "caution",
@@ -3046,9 +3046,9 @@
         "icon": "warning-octagon"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "dangerous",
+        "label": "Pericoloso",
+        "icon": "warning-octagon"
       },
       "nitrous": {
         "statusKey": "caution",
@@ -3168,9 +3168,9 @@
         "icon": "arrow-fat-line-up"
       },
       "dxm": {
-        "statusKey": "unknown",
-        "label": "Soluzione di ripiego",
-        "icon": "question"
+        "statusKey": "synergy",
+        "label": "Basso Rischio e Sinergia",
+        "icon": "arrow-fat-line-up"
       },
       "nitrous": {
         "statusKey": "synergy",
@@ -3401,12 +3401,12 @@
       "id": "maois~dxm",
       "a": "maois",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
-      "note": null,
+      "statusKey": "dangerous",
+      "label": "Pericoloso",
+      "icon": "warning-octagon",
+      "emoji": "☠️",
+      "definition": "Queste combinazioni sono considerate estremamente dannose e dovrebbero essere sempre evitate. Le reazioni a queste sostanze assunte insieme sono molto imprevedibili e possono causare la morte.",
+      "note": "Alto rischio di sindrome serotoninergica",
       "sources": []
     },
     {
@@ -3693,12 +3693,12 @@
       "id": "ssris~dxm",
       "a": "ssris",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
-      "note": null,
+      "statusKey": "dangerous",
+      "label": "Pericoloso",
+      "icon": "warning-octagon",
+      "emoji": "☠️",
+      "definition": "Queste combinazioni sono considerate estremamente dannose e dovrebbero essere sempre evitate. Le reazioni a queste sostanze assunte insieme sono molto imprevedibili e possono causare la morte.",
+      "note": "Alto rischio di sindrome serotoninergica.",
       "sources": []
     },
     {
@@ -3973,12 +3973,12 @@
       "id": "amphetamines~dxm",
       "a": "amphetamines",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
-      "note": null,
+      "statusKey": "unsafe",
+      "label": "Non Sicuro",
+      "icon": "heartbeat",
+      "emoji": "🛑",
+      "definition": "L'assunzione di queste combinazioni comporta un rischio considerevole di danni fisici; andrebbero evitate quando possibile.",
+      "note": "Entrambe le sostanze aumentano la frequenza cardiaca; nei casi estremi, attacchi di panico causati da queste sostanze hanno portato a problemi cardiaci più seri.",
       "sources": []
     },
     {
@@ -4225,12 +4225,12 @@
       "id": "cocaine~dxm",
       "a": "cocaine",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
-      "note": null,
+      "statusKey": "unsafe",
+      "label": "Non Sicuro",
+      "icon": "heartbeat",
+      "emoji": "🛑",
+      "definition": "L'assunzione di queste combinazioni comporta un rischio considerevole di danni fisici; andrebbero evitate quando possibile.",
+      "note": "Entrambe le sostanze aumentano la frequenza cardiaca; nei casi estremi, attacchi di panico causati da queste sostanze hanno portato a problemi cardiaci più seri",
       "sources": []
     },
     {
@@ -4486,13 +4486,29 @@
       "id": "caffeine~dxm",
       "a": "caffeine",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
-      "note": null,
-      "sources": []
+      "statusKey": "caution",
+      "label": "Attenzione",
+      "icon": "warning",
+      "emoji": "⚠️",
+      "definition": "Queste combinazioni di solito non sono fisicamente dannose, ma possono produrre effetti indesiderati, come disagio fisico o sovrastimolazione. Un uso eccessivo può causare problemi di salute fisica. Gli effetti sinergici possono essere imprevedibili. È necessario prestare cautela se si sceglie di usare questa combinazione.",
+      "note": "Dosi elevate di caffeina possono potenzialmente peggiorare l'ansia, soprattutto durante un'esperienza dissociativa, per via dei suoi effetti stimolanti. Questa combinazione può anche causare disagio fisico. Tuttavia, le risposte individuali alla caffeina possono variare molto, spesso in base a fattori come uso abituale o occasionale.",
+      "sources": [
+        {
+          "author": "Chad J Reissig, Lawrence P Carter, Matthew W Johnson, Miriam Z Mintzer, Margaret A Klinedinst, Roland R Griffiths",
+          "title": "High doses of dextromethorphan, an NMDA antagonist, produce effects similar to classic hallucinogens ",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/22526529/"
+        },
+        {
+          "author": "Arthur Eumann Mesas, Luz M Leon-Muñoz, Fernando Rodriguez-Artalejo, Esther Lopez-Garcia",
+          "title": "The effect of coffee on blood pressure and cardiovascular disease in hypertensive individuals: a systematic review and meta-analysis ",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/21880846/"
+        },
+        {
+          "author": "M-L Nurminen, L Niittynen, R Korpela & H Vapaatalo",
+          "title": "Coffee, caffeine and blood pressure: a critical review",
+          "url": "https://www.nature.com/articles/1600899"
+        }
+      ]
     },
     {
       "id": "caffeine~nitrous",
@@ -4714,11 +4730,11 @@
       "id": "mdma~dxm",
       "a": "mdma",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
+      "statusKey": "dangerous",
+      "label": "Pericoloso",
+      "icon": "warning-octagon",
+      "emoji": "☠️",
+      "definition": "Queste combinazioni sono considerate estremamente dannose e dovrebbero essere sempre evitate. Le reazioni a queste sostanze assunte insieme sono molto imprevedibili e possono causare la morte.",
       "note": null,
       "sources": []
     },
@@ -4957,11 +4973,11 @@
       "id": "lsd~dxm",
       "a": "lsd",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
+      "statusKey": "synergy",
+      "label": "Basso Rischio e Sinergia",
+      "icon": "arrow-fat-line-up",
+      "emoji": "↗",
+      "definition": "Queste sostanze agiscono insieme producendo un effetto maggiore della somma delle singole parti e, se usate con cautela, è improbabile che causino reazioni avverse o indesiderate. Prima di combinare sostanze è sempre necessario fare ulteriori ricerche.",
       "note": null,
       "sources": []
     },
@@ -5161,11 +5177,11 @@
       "id": "mushrooms~dxm",
       "a": "mushrooms",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
+      "statusKey": "synergy",
+      "label": "Basso Rischio e Sinergia",
+      "icon": "arrow-fat-line-up",
+      "emoji": "↗",
+      "definition": "Queste sostanze agiscono insieme producendo un effetto maggiore della somma delle singole parti e, se usate con cautela, è improbabile che causino reazioni avverse o indesiderate. Prima di combinare sostanze è sempre necessario fare ulteriori ricerche.",
       "note": null,
       "sources": []
     },
@@ -5353,11 +5369,11 @@
       "id": "dmt~dxm",
       "a": "dmt",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
+      "statusKey": "synergy",
+      "label": "Basso Rischio e Sinergia",
+      "icon": "arrow-fat-line-up",
+      "emoji": "↗",
+      "definition": "Queste sostanze agiscono insieme producendo un effetto maggiore della somma delle singole parti e, se usate con cautela, è improbabile che causino reazioni avverse o indesiderate. Prima di combinare sostanze è sempre necessario fare ulteriori ricerche.",
       "note": null,
       "sources": []
     },
@@ -5533,11 +5549,11 @@
       "id": "mescaline~dxm",
       "a": "mescaline",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
+      "statusKey": "synergy",
+      "label": "Basso Rischio e Sinergia",
+      "icon": "arrow-fat-line-up",
+      "emoji": "↗",
+      "definition": "Queste sostanze agiscono insieme producendo un effetto maggiore della somma delle singole parti e, se usate con cautela, è improbabile che causino reazioni avverse o indesiderate. Prima di combinare sostanze è sempre necessario fare ulteriori ricerche.",
       "note": null,
       "sources": []
     },
@@ -5701,12 +5717,12 @@
       "id": "dox~dxm",
       "a": "dox",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
-      "note": null,
+      "statusKey": "unsafe",
+      "label": "Non Sicuro",
+      "icon": "heartbeat",
+      "emoji": "🛑",
+      "definition": "L'assunzione di queste combinazioni comporta un rischio considerevole di danni fisici; andrebbero evitate quando possibile.",
+      "note": "La classe DOx, come stimolanti psichedelici, può mascherare gli effetti del DXM e portare a ridose non sicure. Il DXM può anche potenziare il DOx, producendo un'esperienza spiacevolmente intensa.",
       "sources": []
     },
     {
@@ -5857,11 +5873,11 @@
       "id": "nbomes~dxm",
       "a": "nbomes",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
+      "statusKey": "unsafe",
+      "label": "Non Sicuro",
+      "icon": "heartbeat",
+      "emoji": "🛑",
+      "definition": "L'assunzione di queste combinazioni comporta un rischio considerevole di danni fisici; andrebbero evitate quando possibile.",
       "note": null,
       "sources": []
     },
@@ -6001,11 +6017,11 @@
       "id": "2c-x~dxm",
       "a": "2c-x",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
+      "statusKey": "synergy",
+      "label": "Basso Rischio e Sinergia",
+      "icon": "arrow-fat-line-up",
+      "emoji": "↗",
+      "definition": "Queste sostanze agiscono insieme producendo un effetto maggiore della somma delle singole parti e, se usate con cautela, è improbabile che causino reazioni avverse o indesiderate. Prima di combinare sostanze è sempre necessario fare ulteriori ricerche.",
       "note": null,
       "sources": []
     },
@@ -6133,11 +6149,11 @@
       "id": "2c-t-x~dxm",
       "a": "2c-t-x",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
+      "statusKey": "unsafe",
+      "label": "Non Sicuro",
+      "icon": "heartbeat",
+      "emoji": "🛑",
+      "definition": "L'assunzione di queste combinazioni comporta un rischio considerevole di danni fisici; andrebbero evitate quando possibile.",
       "note": null,
       "sources": []
     },
@@ -6253,12 +6269,12 @@
       "id": "5-meo-xxt~dxm",
       "a": "5-meo-xxt",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
-      "note": null,
+      "statusKey": "unsafe",
+      "label": "Non Sicuro",
+      "icon": "heartbeat",
+      "emoji": "🛑",
+      "definition": "L'assunzione di queste combinazioni comporta un rischio considerevole di danni fisici; andrebbero evitate quando possibile.",
+      "note": "Esistono poche informazioni su questa combinazione.",
       "sources": []
     },
     {
@@ -6361,13 +6377,44 @@
       "id": "ketamine~dxm",
       "a": "ketamine",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
-      "note": null,
-      "sources": []
+      "statusKey": "synergy",
+      "label": "Basso Rischio e Sinergia",
+      "icon": "arrow-fat-line-up",
+      "emoji": "↗",
+      "definition": "Queste sostanze agiscono insieme producendo un effetto maggiore della somma delle singole parti e, se usate con cautela, è improbabile che causino reazioni avverse o indesiderate. Prima di combinare sostanze è sempre necessario fare ulteriori ricerche.",
+      "note": "Entrambe le sostanze esercitano i loro effetti principalmente tramite antagonismo NMDA. Al momento non ci sono prove su meccanismi che possano ridurre questi effetti.",
+      "sources": [
+        {
+          "author": "Jeanna M. Marraffa",
+          "title": "Dextromethorphan",
+          "url": "https://doi.org/10.1016/B978-0-12-824315-2.00127-5"
+        },
+        {
+          "author": "Georges Mion, Thierry Villevieille",
+          "title": "Ketamine Pharmacology: An Update (Pharmacodynamics and Molecular Aspects, Recent Findings)",
+          "url": "https://doi.org/10.1111/cns.12099"
+        },
+        {
+          "author": "P. Klepstad, P. C. Borchgrevink",
+          "title": "Four years' treatment with ketamine and a trial of dextromethorphan in a patient with severe post-herpetic neuralgia",
+          "url": "https://doi.org/10.1111/j.1399-6576.1997.tb04709.x"
+        },
+        {
+          "author": "Stephen M. Stahl",
+          "title": "Mechanism of action of dextromethorphan/quinidine: comparison with ketamine",
+          "url": "https://doi.org/10.1017/S109285291300062X"
+        },
+        {
+          "author": "A M Hughes,1 J Rhodes,1 G Fisher,2 M Sellers,3 and J W Growcott1",
+          "title": "Assessment of the effect of dextromethorphan and ketamine on the acute nociceptive threshold and wind-up of the second pain response in healthy male volunteers",
+          "url": "https://doi.org/10.1046%2Fj.1365-2125.2002.01602.x"
+        },
+        {
+          "author": "Keiji Tabuchi, MD, Zenya Ito, MD, Shigeki Tsuji, MD, Akira Hara, MD, Tetsuro Wada, MD, Jun Kusakari, MD",
+          "title": "Effect of Ketamine, Dextromethorphan, and MK-801 on Cochlear Dysfunction Induced by Transient Ischemia",
+          "url": "https://doi.org/10.1177/000348940211100107"
+        }
+      ]
     },
     {
       "id": "ketamine~nitrous",
@@ -6457,13 +6504,39 @@
       "id": "mxe~dxm",
       "a": "mxe",
       "b": "dxm",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
-      "note": null,
-      "sources": []
+      "statusKey": "unsafe",
+      "label": "Non Sicuro",
+      "icon": "heartbeat",
+      "emoji": "🛑",
+      "definition": "L'assunzione di queste combinazioni comporta un rischio considerevole di danni fisici; andrebbero evitate quando possibile.",
+      "note": "Combinare DXM con MXE comporta un rischio di sindrome serotoninergica, poiché DXM e MXE sono entrambi SRI. MXE e DXM hanno affinità notevoli per il trasportatore della serotonina.",
+      "sources": [
+        {
+          "author": "Bryan L. Roth, Simon Gibbons, Warunya Arunotayanun, Xi-Ping Huang, Vincent Setola, Ric Treble, Les Iversen",
+          "title": "The Ketamine Analogue Methoxetamine and 3- and 4-Methoxy Analogues of Phencyclidine Are High Affinity and Selective Ligands for the Glutamate NMDA Receptor",
+          "url": "https://doi.org/10.1371/journal.pone.0059334"
+        },
+        {
+          "author": "Matteo Marti, Giuseppe Talani, Cristina Miliano, Sabrine Bilel, Francesca Biggio, Jessica Bratzu, Marco Diana, Maria Antonietta De Luca, Liana Fattore",
+          "title": "New insights into methoxetamine mechanisms of action: Focus on serotonergic 5-HT2 receptors in pharmacological and behavioral effects in the rat ",
+          "url": "https://doi.org/10.1016/j.expneurol.2021.113836"
+        },
+        {
+          "author": "Laura Hondebrink, Emma E.J. Kasteel, Anke M. Tukker, Fiona M.J. Wijnolts, Anouk H.A. Verboven, Remco H.S. Westerink",
+          "title": "Neuropharmacological characterization of the new psychoactive substance methoxetamine",
+          "url": "https://doi.org/10.1016/j.neuropharm.2017.04.035"
+        },
+        {
+          "author": "Linda L. Werling, Ashleigh Keller, Julie G. Frank, Samer J. Nuwayhid",
+          "title": "A comparison of the binding profiles of dextromethorphan, memantine, fluoxetine and amitriptyline: Treatment of involuntary emotional expression disorder",
+          "url": "https://doi.org/10.1016/j.expneurol.2007.06.013"
+        },
+        {
+          "author": "Linda Nguyen, Kelan L. Thomas, Brandon P. Lucke-Wold, John Z. Cavendish, Molly S. Crowe, Rae R. Matsumoto",
+          "title": "Dextromethorphan: An update on its utility for neurological and neuropsychiatric disorders",
+          "url": "https://doi.org/10.1016/j.pharmthera.2016.01.016"
+        }
+      ]
     },
     {
       "id": "mxe~nitrous",
@@ -6553,11 +6626,11 @@
       "id": "dxm~nitrous",
       "a": "dxm",
       "b": "nitrous",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
+      "statusKey": "synergy",
+      "label": "Basso Rischio e Sinergia",
+      "icon": "arrow-fat-line-up",
+      "emoji": "↗",
+      "definition": "Queste sostanze agiscono insieme producendo un effetto maggiore della somma delle singole parti e, se usate con cautela, è improbabile che causino reazioni avverse o indesiderate. Prima di combinare sostanze è sempre necessario fare ulteriori ricerche.",
       "note": null,
       "sources": []
     },
@@ -6565,59 +6638,59 @@
       "id": "dxm~alcohol",
       "a": "dxm",
       "b": "alcohol",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
-      "note": null,
+      "statusKey": "dangerous",
+      "label": "Pericoloso",
+      "icon": "warning-octagon",
+      "emoji": "☠️",
+      "definition": "Queste combinazioni sono considerate estremamente dannose e dovrebbero essere sempre evitate. Le reazioni a queste sostanze assunte insieme sono molto imprevedibili e possono causare la morte.",
+      "note": "Entrambe le sostanze potenziano l'atassia e la sedazione causate dall'altra e, ad alte dosi, possono portare a perdita di coscienza inattesa. Mettere la persona coinvolta in posizione laterale di sicurezza per prevenire l'aspirazione del vomito in caso di eccesso. Inoltre, la depressione del SNC può causare difficoltà respiratorie. Evitare oltre il 1° plateau.",
       "sources": []
     },
     {
       "id": "dxm~ghb-gbl",
       "a": "dxm",
       "b": "ghb/gbl",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
-      "note": null,
+      "statusKey": "dangerous",
+      "label": "Pericoloso",
+      "icon": "warning-octagon",
+      "emoji": "☠️",
+      "definition": "Queste combinazioni sono considerate estremamente dannose e dovrebbero essere sempre evitate. Le reazioni a queste sostanze assunte insieme sono molto imprevedibili e possono causare la morte.",
+      "note": "Entrambe le sostanze causano atassia e comportano rischio di vomito e perdita di coscienza. Se la persona perde conoscenza sotto l'effetto delle sostanze, c'è un grave rischio di aspirazione del vomito se non viene posta in posizione laterale di sicurezza. Questa combinazione è difficile da prevedere",
       "sources": []
     },
     {
       "id": "dxm~benzodiazepines",
       "a": "dxm",
       "b": "benzodiazepines",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
-      "note": null,
+      "statusKey": "caution",
+      "label": "Attenzione",
+      "icon": "warning",
+      "emoji": "⚠️",
+      "definition": "Queste combinazioni di solito non sono fisicamente dannose, ma possono produrre effetti indesiderati, come disagio fisico o sovrastimolazione. Un uso eccessivo può causare problemi di salute fisica. Gli effetti sinergici possono essere imprevedibili. È necessario prestare cautela se si sceglie di usare questa combinazione.",
+      "note": "Piccole dosi di benzodiazepine possono interrompere un brutto trip, ma entrambe le sostanze potenziano l'atassia e la sedazione causate dall'altra e ciò, ad alte dosi, può portare a perdita di coscienza inattesa. Durante l'incoscienza, se la persona non è posta in posizione laterale di sicurezza, c'è rischio di aspirazione del vomito.",
       "sources": []
     },
     {
       "id": "dxm~opioids",
       "a": "dxm",
       "b": "opioids",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
-      "note": null,
+      "statusKey": "dangerous",
+      "label": "Pericoloso",
+      "icon": "warning-octagon",
+      "emoji": "☠️",
+      "definition": "Queste combinazioni sono considerate estremamente dannose e dovrebbero essere sempre evitate. Le reazioni a queste sostanze assunte insieme sono molto imprevedibili e possono causare la morte.",
+      "note": "Depressione del SNC, difficoltà respiratorie, problemi cardiaci, epatotossicità: combinazione complessivamente molto pericolosa. Inoltre, se si assume DXM, la tolleranza agli oppiacei diminuisce leggermente, causando ulteriori effetti sinergici.",
       "sources": []
     },
     {
       "id": "dxm~tramadol",
       "a": "dxm",
       "b": "tramadol",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
+      "statusKey": "dangerous",
+      "label": "Pericoloso",
+      "icon": "warning-octagon",
+      "emoji": "☠️",
+      "definition": "Queste combinazioni sono considerate estremamente dannose e dovrebbero essere sempre evitate. Le reazioni a queste sostanze assunte insieme sono molto imprevedibili e possono causare la morte.",
       "note": null,
       "sources": []
     },
@@ -6625,11 +6698,11 @@
       "id": "dxm~cannabis",
       "a": "dxm",
       "b": "cannabis",
-      "statusKey": "unknown",
-      "label": "Soluzione di ripiego",
-      "icon": "question",
-      "emoji": "",
-      "definition": "I dati di interazione non sono disponibili per questa coppia. Fai ulteriori ricerche prima di combinarle.",
+      "statusKey": "synergy",
+      "label": "Basso Rischio e Sinergia",
+      "icon": "arrow-fat-line-up",
+      "emoji": "↗",
+      "definition": "Queste sostanze agiscono insieme producendo un effetto maggiore della somma delle singole parti e, se usate con cautela, è improbabile che causino reazioni avverse o indesiderate. Prima di combinare sostanze è sempre necessario fare ulteriori ricerche.",
       "note": null,
       "sources": []
     },

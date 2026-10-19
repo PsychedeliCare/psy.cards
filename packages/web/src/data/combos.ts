@@ -1,6 +1,7 @@
 import combosData from "../../../../drugs/combos.json";
 import type { Locale } from "../i18n/locales";
 import { getComboNote } from "../i18n/load-locale";
+import { resolveMatrixKey } from "../i18n/key-aliases";
 import { resolveStatus, type Definition } from "./definitions";
 import { sortPair } from "./config";
 
@@ -31,8 +32,11 @@ export function getInteraction(
   keyB: string,
   locale: Locale = "en"
 ): Interaction {
-  const ab = combos[keyA]?.[keyB];
-  const ba = combos[keyB]?.[keyA];
+  // Column keys can differ from the dataset's (e.g. `dxm` vs `dextromethorphan`).
+  const dataA = resolveMatrixKey(keyA);
+  const dataB = resolveMatrixKey(keyB);
+  const ab = combos[dataA]?.[dataB];
+  const ba = combos[dataB]?.[dataA];
 
   let entry: ComboEntry | undefined;
   if (ab && ba) {
@@ -45,10 +49,14 @@ export function getInteraction(
     entry = ab ?? ba;
   }
 
+  // Overlay notes are keyed by the alphabetically sorted dataset keys; the
+  // column-order key is kept as a fallback for older overlay entries.
+  const canonicalKey = [dataA, dataB].sort().join("|");
   const [sortedA, sortedB] = sortPair(locale, keyA, keyB);
-  const pairKey = `${sortedA}|${sortedB}`;
   const localizedNote =
-    getComboNote(locale, pairKey) ?? entry?.note;
+    getComboNote(locale, canonicalKey) ??
+    getComboNote(locale, `${sortedA}|${sortedB}`) ??
+    entry?.note;
 
   return {
     definition: resolveStatus(entry?.status, locale),

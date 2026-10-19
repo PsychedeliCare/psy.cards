@@ -86,7 +86,63 @@
   width: 100%;
 }
 
+/* Substance cards float straight on a translucent, blurred backdrop: the card
+   is the only frame. The panel stays the scroll container, wide enough to
+   show both sides when the viewport allows. */
+.modal-root:has(.psy-deck) {
+  padding: 0;
+}
+
+.modal-root:has(.psy-deck) .modal-backdrop {
+  background: color-mix(in oklab, var(--color-ink) 52%, transparent);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
+}
+
+.modal-panel:has(.psy-deck) {
+  width: min(1100px, 100%);
+  max-height: 100dvh;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  scrollbar-width: none;
+}
+
+.modal-panel:has(.psy-deck)::-webkit-scrollbar {
+  display: none;
+}
+
+.modal-panel:has(.psy-deck) .modal-close {
+  margin-top: max(12px, env(safe-area-inset-top, 0px));
+  color: var(--color-fg);
+  background: color-mix(in oklab, var(--color-ink-2) 60%, transparent);
+  border-color: color-mix(in oklab, var(--color-fg) 16%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.modal-content > .substance-card {
+  padding: 64px clamp(12px, 3vw, 28px) clamp(16px, 3vw, 28px);
+}
+
+.modal-content .psy-deck {
+  --deck-offset: 14rem;
+}
+
+.modal-content .psy-details {
+  border-color: color-mix(in oklab, var(--color-fg) 12%, transparent);
+  background-color: color-mix(in oklab, var(--color-ink-2) 78%, transparent);
+  box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.6);
+}
+
 @media (max-width: 480px) {
+  .modal-root:has(.psy-deck) { padding: 0; align-items: stretch; }
+  .modal-panel:has(.psy-deck) {
+    max-height: 100dvh;
+    border-radius: 0;
+  }
   .modal-root { padding: max(12px, env(safe-area-inset-top)) 0 0; align-items: end; }
   .modal-panel {
     width: 100%;
@@ -99,7 +155,6 @@
 
 /* ---------- Molecule figures (SmilesDrawer) ---------- */
 
-.substance-card,
 .combo-card {
   position: relative;
   overflow: clip;
@@ -107,7 +162,6 @@
 
 /* Keep all card content above the decorative molecule backdrop so the
    title/name partly covers the structure rather than the reverse. */
-.substance-card:has(.molecule-figure) > :not(.molecule-figure, .substance-hologram),
 .combo-card:has(.molecule-figure) > :not(.molecule-figure) {
   position: relative;
   z-index: 1;
@@ -215,19 +269,6 @@ html[data-color-scheme="light"] .molecule-figure {
   line-height: 1;
   color: var(--color-fg-mute);
   opacity: 0.75;
-}
-
-.substance-card .card-header {
-  display: block;
-  min-height: 0;
-}
-
-.substance-card .card-header-body {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: stretch;
-  gap: 14px;
 }
 
 .combo-card .card-header {
@@ -367,21 +408,62 @@ html[data-color-scheme="light"] .card-contribute-link img {
 /* ---------- Substance card ---------- */
 
 .substance-card {
-  display: flex;
-  flex-direction: column;
   --card-rule: color-mix(in oklab, var(--color-fg) 12%, transparent);
   --card-well: color-mix(in oklab, var(--color-fg) 5%, transparent);
-  container-type: inline-size;
-  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
   min-width: 0;
   color: var(--color-fg);
-  background-color: var(--color-ink-2);
-  padding: clamp(20px, 3vw, 36px);
-  overflow-wrap: anywhere;
-  border-top: 3px solid var(--hue, var(--card-rule));
+  container-type: inline-size;
 }
 
-.substance-card .accent {
+/* In-depth reference below the two-sided card. */
+.psy-details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+  padding: clamp(18px, 3vw, 32px);
+  overflow-wrap: anywhere;
+  background-color: var(--color-ink-2);
+  border: 1px solid var(--card-rule);
+  border-radius: 22px;
+}
+
+.psy-details > .psy-details__title {
+  margin: 0;
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 750;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  text-wrap: balance;
+}
+
+.card-sources ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.card-sources a {
+  color: var(--color-fg);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--color-fg) 30%, transparent);
+  text-underline-offset: 3px;
+}
+
+.card-sources__meta {
+  color: var(--color-fg-mute);
+}
+
+.psy-details .accent {
   flex: 0 0 4px;
   width: 4px;
   min-width: 4px;
@@ -389,13 +471,13 @@ html[data-color-scheme="light"] .card-contribute-link img {
   color: currentColor;
 }
 
-.substance-card .title {
+.psy-details .title {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.substance-card h2 {
+.psy-details h2 {
   margin: 0;
   font-size: clamp(28px, 4vw, 38px);
   line-height: 1.12;
@@ -405,7 +487,7 @@ html[data-color-scheme="light"] .card-contribute-link img {
   color: var(--color-fg);
 }
 
-.substance-card h3,
+.psy-details h3,
 .combo-card h3 {
   margin: 0;
   font-size: 12px;
@@ -415,7 +497,7 @@ html[data-color-scheme="light"] .card-contribute-link img {
   color: var(--color-fg);
 }
 
-.substance-card .tags {
+.psy-details .tags {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -424,7 +506,7 @@ html[data-color-scheme="light"] .card-contribute-link img {
   gap: 6px;
 }
 
-.substance-card .tags li {
+.psy-details .tags li {
   font-size: 11px;
   padding: 2px 8px;
   border-radius: 5px;
@@ -432,7 +514,7 @@ html[data-color-scheme="light"] .card-contribute-link img {
   color: var(--color-fg-mute);
 }
 
-.substance-card .summary {
+.psy-details .summary {
   margin: 0;
   max-width: 65ch;
   font-size: 15px;
@@ -441,70 +523,69 @@ html[data-color-scheme="light"] .card-contribute-link img {
   color: var(--color-fg);
 }
 
-.substance-card .fallback-note {
+.psy-details .fallback-note {
   margin: 0;
   font-size: 13px;
   line-height: 1.5;
   color: var(--color-fg-mute);
 }
 
-.substance-card section {
+.psy-details section {
   display: flex;
   flex-direction: column;
   gap: 12px;
   min-width: 0;
 }
 
-.substance-card > section, .substance-card > .dose-charts {
+.psy-details > section, .psy-details > .dose-charts {
   padding-top: 22px;
   border-top: 1px solid var(--card-rule);
 }
 
 .modal-content .card-header { padding-right: 44px; }
-.substance-card .title { min-width: 0; }
 
-.substance-card dl {
+.psy-details dl {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
   gap: 6px 14px;
   margin: 0;
 }
 
-.substance-card dl > div {
+.psy-details dl > div {
   display: contents;
 }
 
-.substance-card dt {
+.psy-details dt {
   font-size: 12px;
   color: var(--color-fg-mute);
   align-self: baseline;
 }
 
-.substance-card dd {
+.psy-details dd {
   margin: 0;
   font-size: 13.5px;
   color: var(--color-fg);
   line-height: 1.5;
 }
 
-.substance-card .unit {
+.psy-details .unit {
   color: var(--color-fg-mute);
   font-size: 12px;
 }
 
-.substance-card .timings {
+.psy-details .timings {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   align-items: end;
   gap: 10px 18px;
 }
 
-.substance-card .timings > h3 {
+.psy-details .timings > h3 {
   grid-column: 1 / -1;
   margin-bottom: 2px;
 }
 
-.substance-card .timings-table {
+.psy-details .timings-table {
   min-width: 0;
   padding-bottom: 16px;
 }
@@ -779,27 +860,27 @@ html[data-color-scheme="light"] .card-contribute-link img {
 }
 
 @media (max-width: 480px) {
-  .substance-card .timings {
+  .psy-details .timings {
     grid-template-columns: 1fr;
     align-items: stretch;
   }
 }
 
-.substance-card .doses table {
+.psy-details .doses table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
 }
 
-.substance-card .doses th,
-.substance-card .doses td {
+.psy-details .doses th,
+.psy-details .doses td {
   text-align: left;
   padding: 6px 10px 6px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   font-weight: 400;
 }
 
-.substance-card .doses th {
+.psy-details .doses th {
   color: var(--color-fg-mute);
   font-weight: 500;
   font-size: 11px;
@@ -807,30 +888,30 @@ html[data-color-scheme="light"] .card-contribute-link img {
   letter-spacing: 0.06em;
 }
 
-.substance-card .also-known-as {
+.psy-details .also-known-as {
   gap: 8px;
 }
 
-.substance-card .alias-pills li {
+.psy-details .alias-pills li {
   text-transform: lowercase;
 }
 
 /* One readable row per risk; all pairs stay available without expansion. */
-.substance-card .substance-combos-list {
+.psy-details .substance-combos-list {
   display: flex;
   flex-direction: column;
   gap: 0;
 }
-.substance-card .substance-combos-list > div {
+.psy-details .substance-combos-list > div {
   display: grid;
   grid-template-columns: minmax(100px, 0.9fr) minmax(0, 2fr);
   gap: 8px 16px;
   padding-block: 12px;
   border-bottom: 1px solid var(--card-rule);
 }
-.substance-card .substance-combos-list > div:first-child { padding-top: 0; }
-.substance-card .substance-combos-list > div:last-child { border-bottom: 0; padding-bottom: 0; }
-.substance-card .substance-combos-list dt {
+.psy-details .substance-combos-list > div:first-child { padding-top: 0; }
+.psy-details .substance-combos-list > div:last-child { border-bottom: 0; padding-bottom: 0; }
+.psy-details .substance-combos-list dt {
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -849,7 +930,7 @@ html[data-color-scheme="light"] .card-contribute-link img {
   background: var(--hue);
   color: var(--hue-ink);
 }
-.substance-card .substance-combos-list dd {
+.psy-details .substance-combos-list dd {
   font-size: 13px;
   line-height: 1.7;
 }
@@ -1241,14 +1322,14 @@ html[data-color-scheme="light"] .card-contribute-link img {
   margin: 2px 0 0;
 }
 
-.substance-card .note {
+.psy-details .note {
   margin: 6px 0 0;
   font-size: 12.5px;
   color: var(--color-fg-mute);
   line-height: 1.5;
 }
 
-.substance-card .pills {
+.psy-details .pills {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1257,7 +1338,7 @@ html[data-color-scheme="light"] .card-contribute-link img {
   gap: 6px;
 }
 
-.substance-card .pills li {
+.psy-details .pills li {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -1267,23 +1348,23 @@ html[data-color-scheme="light"] .card-contribute-link img {
   background-color: var(--card-well);
 }
 
-html[data-color-scheme="light"] .substance-card .pills li {
+html[data-color-scheme="light"] .psy-details .pills li {
   background-color: rgba(23, 24, 19, 0.07);
   border: 1px solid rgba(23, 24, 19, 0.12);
   color: var(--color-fg);
 }
 
-html[data-color-scheme="light"] .substance-card .pills .effect-icon {
+html[data-color-scheme="light"] .psy-details .pills .effect-icon {
   opacity: 0.72;
   color: var(--color-fg-mute);
 }
 
-html[data-color-scheme="light"] .substance-card .pw-effects-well {
+html[data-color-scheme="light"] .psy-details .pw-effects-well {
   background-color: rgba(23, 24, 19, 0.04);
   border-color: rgba(23, 24, 19, 0.1);
 }
 
-.substance-card .pills .effect-icon {
+.psy-details .pills .effect-icon {
   width: 13px;
   height: 13px;
   flex-shrink: 0;
@@ -1291,7 +1372,7 @@ html[data-color-scheme="light"] .substance-card .pw-effects-well {
   color: var(--color-fg-mute);
 }
 
-.substance-card .pw-effects-well {
+.psy-details .pw-effects-well {
   width: 100%;
   box-sizing: border-box;
   margin-top: 12px;
@@ -1301,18 +1382,18 @@ html[data-color-scheme="light"] .substance-card .pw-effects-well {
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.substance-card .pw-effects {
+.psy-details .pw-effects {
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin: 0;
 }
 
-.substance-card .pw-effects:not([open]) {
+.psy-details .pw-effects:not([open]) {
   gap: 0;
 }
 
-.substance-card .pw-effects-toggle {
+.psy-details .pw-effects-toggle {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1329,22 +1410,22 @@ html[data-color-scheme="light"] .substance-card .pw-effects-well {
   line-height: 1.3;
 }
 
-.substance-card .pw-effects-toggle-main {
+.psy-details .pw-effects-toggle-main {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   min-width: 0;
 }
 
-.substance-card .pw-effects-toggle::-webkit-details-marker {
+.psy-details .pw-effects-toggle::-webkit-details-marker {
   display: none;
 }
 
-.substance-card .pw-effects-toggle:hover {
+.psy-details .pw-effects-toggle:hover {
   color: var(--color-safe);
 }
 
-.substance-card .pw-effects-toggle img {
+.psy-details .pw-effects-toggle img {
   display: block;
   width: auto;
   height: 18px;
@@ -1352,16 +1433,16 @@ html[data-color-scheme="light"] .substance-card .pw-effects-well {
   flex-shrink: 0;
 }
 
-.substance-card .pw-effects-label {
+.psy-details .pw-effects-label {
   font-weight: 500;
 }
 
-.substance-card .pw-effects-count {
+.psy-details .pw-effects-count {
   color: var(--color-fg-mute);
   font-weight: 400;
 }
 
-.substance-card .pw-effects-chevron {
+.psy-details .pw-effects-chevron {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
@@ -1369,24 +1450,24 @@ html[data-color-scheme="light"] .substance-card .pw-effects-well {
   transition: transform 0.15s ease;
 }
 
-.substance-card .pw-effects[open] .pw-effects-chevron {
+.psy-details .pw-effects[open] .pw-effects-chevron {
   transform: rotate(180deg);
 }
 
-.substance-card .pw-effects .pills {
+.psy-details .pw-effects .pills {
   margin: 0;
 }
 
-.substance-card .pills a {
+.psy-details .pills a {
   color: inherit;
   text-decoration: none;
 }
 
-.substance-card .pills a:hover {
+.psy-details .pills a:hover {
   color: var(--color-safe);
 }
 
-.substance-card .inline-links,
+.psy-details .inline-links,
 .combo-card .sources ul {
   list-style: none;
   margin: 0;
@@ -1402,7 +1483,7 @@ html[data-color-scheme="light"] .substance-card .pw-effects-well {
   gap: 6px;
 }
 
-.substance-card .inline-links a,
+.psy-details .inline-links a,
 .combo-card .sources a,
 .combo-card .action-link {
   color: var(--color-safe);
@@ -1410,7 +1491,7 @@ html[data-color-scheme="light"] .substance-card .pw-effects-well {
   border-bottom: 1px solid rgba(53, 175, 255, 0.3);
 }
 
-.substance-card .inline-links a:hover,
+.psy-details .inline-links a:hover,
 .combo-card .sources a:hover,
 .combo-card .action-link:hover {
   border-bottom-color: var(--color-safe);
@@ -1578,33 +1659,30 @@ html[data-color-scheme="light"] .combo-card .status-tooltip {
 
 /* Respond to the card's actual width, including narrow desktop dialogs. */
 @container (max-width: 480px) {
-  .substance-card .timings { grid-template-columns: minmax(0, 1fr); }
-  .substance-card .timings-table { padding-bottom: 0; }
-  .substance-card .card-contribute { grid-template-columns: minmax(0, 1fr); }
-  .substance-card .card-contribute-link { justify-self: start; }
-  .dose-plot { display: none; }
-  .dose-charts .dose-table { display: table; }
-  .dose-view-toggle { display: none; }
+  .psy-details .timings { grid-template-columns: minmax(0, 1fr); }
+  .psy-details .timings-table { padding-bottom: 0; }
+  .psy-details .card-contribute { grid-template-columns: minmax(0, 1fr); }
+  .psy-details .card-contribute-link { justify-self: start; }
 }
 @container (max-width: 340px) {
-  .substance-card .substance-combos-list > div {
+  .psy-details .substance-combos-list > div {
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
     gap: 12px;
   }
-  .substance-card .substance-combos-list dt { display: block; hyphens: auto; }
+  .psy-details .substance-combos-list dt { display: block; hyphens: auto; }
   .substance-combos-risk-icon { display: inline-grid; margin-right: 6px; vertical-align: -5px; }
 }
-.substance-card .timings-table dt, .substance-card .timings-table dd { overflow-wrap: anywhere; }
-.substance-card .pills li { max-width: 100%; }
-.substance-card .pw-effects[open] .pills { margin-top: 12px; }
-.substance-card .dose-table th, .substance-card .dose-table td,
-.substance-card .dose-fallback-table th, .substance-card .dose-fallback-table td {
+.psy-details .timings-table dt, .psy-details .timings-table dd { overflow-wrap: anywhere; }
+.psy-details .pills li { max-width: 100%; }
+.psy-details .pw-effects[open] .pills { margin-top: 12px; }
+.psy-details .dose-table th, .psy-details .dose-table td,
+.psy-details .dose-fallback-table th, .psy-details .dose-fallback-table td {
   border-bottom-color: var(--card-rule);
   padding-block: 8px;
 }
-.substance-card .dose-table th { color: var(--color-fg); }
-.substance-card .dose-route { overflow: visible; }
-.substance-card .dose-line { background: var(--card-rule); }
+.psy-details .dose-table th { color: var(--color-fg); }
+.psy-details .dose-route { overflow: visible; }
+.psy-details .dose-line { background: var(--card-rule); }
 
 .modal-morph {
   position: fixed;
@@ -1623,8 +1701,8 @@ html[data-color-scheme="light"] .combo-card .status-tooltip {
 .modal-panel { overscroll-behavior: contain; scrollbar-width: thin; }
 .modal-backdrop { z-index: -1; }
 
-html[data-color-scheme="light"] .substance-card .inline-links a,
-html[data-color-scheme="light"] .substance-card .pills a:hover,
+html[data-color-scheme="light"] .psy-details .inline-links a,
+html[data-color-scheme="light"] .psy-details .pills a:hover,
 html[data-color-scheme="light"] .combo-card .sources a,
 html[data-color-scheme="light"] .combo-card .action-link {
   color: color-mix(in oklab, var(--color-safe) 55%, var(--color-fg));

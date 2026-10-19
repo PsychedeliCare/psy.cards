@@ -86,7 +86,10 @@ export function animateCardModal(
   panel.style.opacity = String(panelFrom);
   backdrop.style.opacity = String(backdropFrom);
 
-  const panelRect = panel.getBoundingClientRect();
+  // A frameless substance card morphs to and from its front, not the
+  // transparent panel around it.
+  const surface = panel.querySelector<HTMLElement>(".psy-face--front") ?? panel;
+  const panelRect = surface.getBoundingClientRect();
   const sourceRect = origin instanceof Element && origin.isConnected
     ? origin.getBoundingClientRect()
     : null;
@@ -137,7 +140,7 @@ export function animateCardModal(
     );
     fade(backdrop, backdropFrom, opening ? 1 : 0, duration, 0, finish);
   } else {
-    const radius = getComputedStyle(panel).borderRadius;
+    const radius = getComputedStyle(surface).borderRadius;
     const originSurface = origin?.querySelector(".list-card-shell") ?? origin;
     const sourceRadius = originSurface ? getComputedStyle(originSurface).borderRadius || radius : radius;
     const fromRect = opening ? sourceRect : panelRect;

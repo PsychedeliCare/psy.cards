@@ -1,524 +1,447 @@
 import Charts
 import SwiftUI
 
+/// A substance's page: the two-sided card, then the details beneath it
+/// (web `SubstanceCard.astro`).
 struct SubstanceDetailView: View {
     @Environment(DataPackStore.self) private var store
     let substance: Substance
-    var embedded: Bool = false
-    @State private var selectedPair: ComboPair?
-    @State private var showAllCombos = false
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: PsyCardsSpacing.l) {
-                hero
-                if let summary = substance.summary ?? substance.classDescription {
-                    sectionCard(title: String(localized: "substanceCard.more")) {
-                        Text(summary)
-                            .foregroundStyle(PsyCardsColors.fg)
+        ScrollViewReader { proxy in
+            ScrollView {
+                SubstanceCardContent(substance: substance, scrollProxy: proxy)
+                    .padding(.horizontal, 16)
+                    .padding(.top, 8)
+                    .padding(.bottom, 32)
+                    .frame(maxWidth: 1100)
+                    .frame(maxWidth: .infinity)
+            }
+        }
+        .background {
+            PsyCardsBackground(accent: PsyCardsColors.group(substance.group))
+        }
+        .navigationTitle(substance.prettyName)
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+/// Card + details, without its own scroll view so the wheel can host it too.
+struct SubstanceCardContent: View {
+    @Environment(DataPackStore.self) private var store
+    let substance: Substance
+    var scrollProxy: ScrollViewProxy?
+
+    @State private var selectedPair: ComboPair?
+
+    static let combosAnchor = "substance-combos"
+
+    var body: some View {
+        if let card = store.card(key: substance.key) {
+            VStack(spacing: 28) {
+                SubstanceCardDeck(
+                    card: card,
+                    moleculeAsset: card.details.hasStructure ? substance.molecule?.assetName : nil,
+                    onSelectCombo: { selectedPair = store.pair(a: substance.key, b: $0) },
+                    onShowAllCombos: {
+                        withAnimation(.smooth) {
+                            scrollProxy?.scrollTo(Self.combosAnchor, anchor: .top)
+                        }
+                    }
+                )
+                .frame(maxWidth: 1040)
+                .id(card.key)
+
+                SubstanceDetailsSection(substance: substance, card: card) { partner in
+                    selectedPair = store.pair(a: substance.key, b: partner)
+                }
+                .frame(maxWidth: 640)
+            }
+            .frame(maxWidth: .infinity)
+            .sheet(item: $selectedPair) { pair in
+                ComboPairSheet(pair: pair)
+                    .psyCardsSheetPresentation(detents: [.medium, .large])
+            }
+        } else {
+            ContentUnavailableView(substance.prettyName, systemImage: "rectangle.on.rectangle.slash")
+        }
+    }
+}
+
+// MARK: - Details
+
+struct SubstanceDetailsSection: View {
+    @Environment(DataPackStore.self) private var store
+    @Environment(BodyProfileStore.self) private var profile
+    let substance: Substance
+    let card: SubstanceCardData
+    var showsTitle = true
+    let onSelectPartner: (String) -> Void
+
+    @State private var showDoseTable = false
+    @State private var showPwEffects = false
+
+    private var details: CardDetails { card.details }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if showsTitle {
+                Text(store.t("card.details", ["name": card.displayName]))
+                    .font(.title2.weight(.heavy))
+                    .foregroundStyle(PsyCardsColors.fg)
+                    .padding(.bottom, 12)
+                    .accessibilityAddTraits(.isHeader)
+            }
+
+            if let summary = details.summary {
+                Text(summary)
+                    .font(.body)
+                    .foregroundStyle(PsyCardsColors.inkSoft)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.bottom, 8)
+            }
+            if details.isClassFallback {
+                Text(store.t("substanceCard.classFallback"))
+                    .font(.footnote)
+                    .foregroundStyle(PsyCardsColors.fgMute)
+                    .padding(.bottom, 8)
+            }
+
+            if card.aliases.count > 4 {
+                section(store.t("substanceCard.alsoKnownAs")) {
+                    FlowLayout(spacing: 6) {
+                        ForEach(card.aliases, id: \.self) { alias in
+                            Pill(text: alias)
+                        }
                     }
                 }
-                if let dose = substance.dose, !dose.isEmpty {
-                    sectionCard(title: String(localized: "substanceCard.doses")) {
-                        DoseChartView(dose: dose)
-                        if let note = substance.doseNote {
+            }
+
+            if card.timing.onset != nil || card.timing.duration != nil {
+                section(store.t("substanceCard.timing")) {
+                    TimingChartView(
+                        onset: card.timing.onset?.asTimingValue,
+                        duration: card.timing.duration?.asTimingValue,
+                        tint: PsyCardsColors.group(card.group)
+                    )
+                    .accessibilityLabel(store.t("substanceCard.effectTimeline", ["name": card.displayName]))
+                }
+            }
+
+            if !details.doseCharts.isEmpty {
+                section(store.t("substanceCard.doses"), trailing: doseToggle) {
+                    VStack(alignment: .leading, spacing: 18) {
+                        ForEach(details.doseCharts) { chart in
+                            VStack(alignment: .leading, spacing: 8) {
+                                RouteLabel(
+                                    chart: chart,
+                                    unitOverride: chart.isPerKg ? profile.weightKg.map { "mg · \(store.number($0)) kg" } : nil
+                                )
+                                if chart.chartable && !showDoseTable {
+                                    DoseScaleView(chart: chart, weightKg: chart.isPerKg ? profile.weightKg : nil)
+                                } else {
+                                    DoseListView(rows: chart.rows ?? (chart.segments ?? []).map { DoseRow(level: store.t("doseChart.\($0.level)"), amount: $0.amount) })
+                                }
+                            }
+                        }
+                        if let note = details.doseNote {
                             Text(note)
                                 .font(.footnote)
                                 .foregroundStyle(PsyCardsColors.fgMute)
                         }
                     }
+                    .animation(.smooth(duration: 0.25), value: showDoseTable)
                 }
-                if substance.onset != nil || substance.duration != nil {
-                    sectionCard(title: String(localized: "substanceCard.timing")) {
-                        TimingChartView(
-                            onset: substance.onset,
-                            duration: substance.duration,
-                            afterEffects: substance.afterEffects,
-                            tint: PsyCardsColors.group(substance.group)
-                        )
+            }
+
+            combos
+                .id(SubstanceCardContent.combosAnchor)
+
+            if details.warning != nil || details.avoidText != nil || details.testKits != nil {
+                section(store.t("substanceCard.safety")) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        if let warning = details.warning { definition(store.t("substanceCard.warning"), warning) }
+                        if let avoid = details.avoidText { definition(store.t("substanceCard.avoidCombining"), avoid) }
+                        if let kits = details.testKits { definition(store.t("substanceCard.testKits"), kits) }
                     }
                 }
-                if let effects = substance.effects, !effects.isEmpty {
-                    sectionCard(title: String(localized: "substanceCard.effects")) {
-                        FlowLayout(spacing: 8) {
-                            ForEach(effects, id: \.self) { effect in
-                                Text(effect)
-                                    .font(.caption.weight(.medium))
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 6)
-                                    .glassEffect(.regular, in: .capsule)
+            }
+
+            if !details.effects.isEmpty || !details.pwEffects.isEmpty {
+                section(store.t("substanceCard.effects")) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        FlowLayout(spacing: 6) {
+                            ForEach(details.effects) { effect in
+                                Pill(text: effect.text, icon: effect.icon)
                             }
                         }
-                    }
-                }
-                if let molecule = substance.molecule {
-                    sectionCard(title: molecule.compound) {
-                        MoleculeView(info: molecule, tint: PsyCardsColors.group(substance.group))
-                    }
-                }
-                comboStrip
-                if let avoid = substance.avoid {
-                    sectionCard(title: String(localized: "substanceCard.avoidCombining")) {
-                        Text(avoid).foregroundStyle(PsyCardsColors.fg)
-                    }
-                }
-            }
-            .padding(.horizontal, embedded ? 12 : 16)
-            .padding(.top, embedded ? 4 : 8)
-            .padding(.bottom, 40)
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-        .background {
-            PsyCardsBackground(accent: PsyCardsColors.group(substance.group))
-        }
-        .modifier(SubstanceDetailChrome(title: substance.prettyName, embedded: embedded))
-        .sheet(item: $selectedPair) { pair in
-            ComboPairSheet(pair: pair)
-                .psyCardsSheetPresentation(detents: [.medium, .large])
-        }
-    }
-
-    private var hero: some View {
-        VStack(alignment: .leading, spacing: PsyCardsSpacing.s) {
-            HStack(spacing: 8) {
-                Image(systemName: PsyCardsColors.groupSymbol(substance.group))
-                    .font(.caption.weight(.bold))
-                Text(store.groupLabel(substance.group).uppercased())
-                    .font(.caption.weight(.bold))
-                    .tracking(1.2)
-            }
-            .foregroundStyle(PsyCardsColors.group(substance.group))
-            if embedded {
-                Text(substance.prettyName)
-                    .font(.title.bold())
-                    .foregroundStyle(PsyCardsColors.fg)
-            }
-            if !substance.aliases.isEmpty {
-                Text(substance.aliases.prefix(6).joined(separator: " · "))
-                    .font(.footnote)
-                    .foregroundStyle(PsyCardsColors.fgMute)
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(PsyCardsSpacing.m)
-        .glassEffect(
-            .regular.tint(PsyCardsColors.group(substance.group).opacity(0.22)),
-            in: .rect(cornerRadius: PsyCardsRadius.l)
-        )
-    }
-
-    private var comboStrip: some View {
-        let groups = store.comboGroups(for: substance.key)
-        let preview = ComboGrouping.preview(groups)
-        let visible = showAllCombos ? groups : preview.visible
-        return sectionCard(title: String(localized: "substanceCard.combos")) {
-            VStack(alignment: .leading, spacing: 12) {
-                ForEach(visible) { group in
-                    ComboStatusRow(group: group) { partnerKey in
-                        selectedPair = store.pair(a: substance.key, b: partnerKey)
-                    }
-                }
-                if preview.hiddenCount > 0 {
-                    Button {
-                        withAnimation(.easeInOut(duration: 0.2)) {
-                            showAllCombos.toggle()
+                        if !details.pwEffects.isEmpty {
+                            DisclosureGroup(isExpanded: $showPwEffects) {
+                                FlowLayout(spacing: 6) {
+                                    ForEach(details.pwEffects) { effect in
+                                        if let url = URL(string: effect.url) {
+                                            Link(destination: url) { Pill(text: effect.label, isLink: true) }
+                                        }
+                                    }
+                                }
+                                .padding(.top, 10)
+                            } label: {
+                                Text("\(store.t("substanceCard.pwEffects")) (\(details.pwEffects.count))")
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(PsyCardsColors.fg)
+                            }
+                            .tint(PsyCardsColors.fgMute)
+                            .padding(12)
+                            .background(PsyCardsColors.tile, in: .rect(cornerRadius: 14, style: .continuous))
                         }
-                    } label: {
-                        Text(
-                            showAllCombos
-                                ? String(localized: "substanceCard.comboShowLess")
-                                : String(
-                                    format: String(localized: "substanceCard.comboShowAll"),
-                                    "\(preview.hiddenCount)"
-                                )
-                        )
-                        .font(.caption.weight(.semibold))
                     }
-                    .buttonStyle(.bordered)
-                    .controlSize(.small)
-                    .tint(PsyCardsColors.fgMute)
                 }
             }
-        }
-    }
 
-    private func sectionCard<Content: View>(title: String, @ViewBuilder content: () -> Content) -> some View {
-        VStack(alignment: .leading, spacing: PsyCardsSpacing.s) {
-            Text(title)
-                .font(.headline)
-                .foregroundStyle(PsyCardsColors.fg)
-            content()
+            if !details.links.isEmpty {
+                section(store.t("substanceCard.more")) {
+                    HStack(spacing: 16) {
+                        if let url = details.links.experiences.flatMap(URL.init(string:)) {
+                            Link(store.t("substanceCard.tripReports"), destination: url)
+                        }
+                        if let url = details.links.pihkal.flatMap(URL.init(string:)) {
+                            Link("PiHKAL", destination: url)
+                        }
+                        if let url = details.links.tihkal.flatMap(URL.init(string:)) {
+                            Link("TiHKAL", destination: url)
+                        }
+                    }
+                    .font(.subheadline.weight(.semibold))
+                    .tint(PsyCardsColors.fg)
+                }
+            }
+
+            section(store.t("card.sources")) {
+                VStack(alignment: .leading, spacing: 10) {
+                    ForEach(card.sources, id: \.title) { source in
+                        SourceRow(source: source)
+                    }
+                }
+            }
+
+            if details.hasStructure {
+                Text(linkLine(store.t("smilesCitation.prefix") + " ", link: store.t("smilesCitation.tool"), url: "https://github.com/reymond-group/smilesDrawer"))
+                    .font(.caption)
+                    .foregroundStyle(PsyCardsColors.fgMute)
+                    .tint(PsyCardsColors.fgMute)
+                    .padding(.top, 18)
+            }
+
+            ContributeFooter()
+                .padding(.top, 22)
         }
-        .padding(PsyCardsSpacing.m)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .glassEffect(.regular, in: .rect(cornerRadius: PsyCardsRadius.m))
     }
-}
 
-private struct SubstanceDetailChrome: ViewModifier {
-    let title: String
-    let embedded: Bool
+    private var doseToggle: some View {
+        Picker(store.t("doseChart.title"), selection: $showDoseTable) {
+            Label(store.t("doseChart.chart"), systemImage: "chart.bar.fill").tag(false)
+            Label(store.t("doseChart.table"), systemImage: "tablecells").tag(true)
+        }
+        .pickerStyle(.segmented)
+        .labelStyle(.iconOnly)
+        .frame(width: 96)
+    }
 
     @ViewBuilder
-    func body(content: Content) -> some View {
-        if embedded {
-            content
-        } else {
-            content
-                .navigationTitle(title)
-                .navigationBarTitleDisplayMode(.inline)
+    private var combos: some View {
+        let groups = store.comboGroups(for: card.key)
+        if !groups.isEmpty {
+            section(store.t("substanceCard.combos")) {
+                VStack(alignment: .leading, spacing: 0) {
+                    ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
+                        ComboStatusRow(group: group, onSelect: onSelectPartner)
+                            .padding(.vertical, 10)
+                            .overlay(alignment: .bottom) {
+                                if index < groups.count - 1 { Divider().opacity(0.6) }
+                            }
+                    }
+                }
+            }
+        }
+    }
+
+    private func definition(_ term: String, _ text: String) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(term)
+                .font(.footnote.weight(.bold))
+                .foregroundStyle(PsyCardsColors.fgMute)
+            Text(text)
+                .font(.subheadline)
+                .foregroundStyle(PsyCardsColors.fg)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    private func section<Content: View>(
+        _ title: String,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        section(title, trailing: EmptyView(), content: content)
+    }
+
+    private func section<Trailing: View, Content: View>(
+        _ title: String,
+        trailing: Trailing,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text(title)
+                    .font(.footnote.weight(.heavy))
+                    .tracking(1.2)
+                    .textCase(.uppercase)
+                    .foregroundStyle(PsyCardsColors.fg)
+                    .accessibilityAddTraits(.isHeader)
+                Spacer()
+                trailing
+            }
+            content()
+        }
+        .padding(.vertical, 18)
+        .overlay(alignment: .top) {
+            Rectangle().fill(PsyCardsColors.fg.opacity(0.1)).frame(height: 1)
         }
     }
 }
 
-private struct ComboStatusRow: View {
+private struct Pill: View {
+    let text: String
+    var icon: String? = nil
+    var isLink: Bool = false
+
+    var body: some View {
+        HStack(spacing: 5) {
+            if let icon {
+                PhIcon(icon, size: 13)
+                    .foregroundStyle(PsyCardsColors.fgMute)
+            }
+            Text(text)
+                .font(.footnote.weight(.medium))
+                .foregroundStyle(PsyCardsColors.fg)
+                .underline(isLink, color: PsyCardsColors.fgMute)
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
+        .background(PsyCardsColors.fg.opacity(0.06), in: .capsule)
+        .overlay(Capsule().strokeBorder(PsyCardsColors.tileEdge))
+    }
+}
+
+struct SourceRow: View {
+    let source: CardSource
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            if let url = source.link {
+                Link(destination: url) {
+                    Text(source.title)
+                        .font(.subheadline.weight(.semibold))
+                        .underline(color: PsyCardsColors.fg.opacity(0.35))
+                        .multilineTextAlignment(.leading)
+                }
+                .tint(PsyCardsColors.fg)
+            } else {
+                Text(source.title)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(PsyCardsColors.fg)
+            }
+            Text([source.author, source.publication].compactMap { $0 }.joined(separator: ", "))
+                .font(.caption)
+                .foregroundStyle(PsyCardsColors.fgMute)
+        }
+        .accessibilityElement(children: .combine)
+    }
+}
+
+/// "Contribute on GitHub" (web `CardContribute.astro`).
+struct ContributeFooter: View {
+    @Environment(DataPackStore.self) private var store
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Link(destination: URL(string: "https://github.com/TripSit/drugs")!) {
+                HStack(spacing: 8) {
+                    Text(store.t("footer.contributeOn"))
+                    PhIcon("github-logo-fill", size: 18)
+                    Text("GitHub").fontWeight(.bold)
+                }
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(PsyCardsColors.fg)
+                .padding(.horizontal, 16)
+                .frame(minHeight: 44)
+            }
+            .buttonStyle(.glass)
+            Text(store.t("cardContribute.communityNote"))
+                .font(.caption)
+                .foregroundStyle(PsyCardsColors.fgMute)
+            Text(linkLine(store.t("cardContribute.chartIssuePrefix"), link: store.t("cardContribute.chartIssueLink"), url: "https://github.com/raphaelsaunier/psy.cards"))
+                .font(.caption)
+                .foregroundStyle(PsyCardsColors.fgMute)
+                .tint(PsyCardsColors.fg)
+        }
+    }
+}
+
+/// Plain text followed by an underlined link.
+func linkLine(_ prefix: String, link: String, url: String) -> AttributedString {
+    var linked = AttributedString(link)
+    linked.link = URL(string: url)
+    linked.underlineStyle = .single
+    return AttributedString(prefix) + linked
+}
+
+// MARK: - Combos
+
+struct ComboStatusRow: View {
     let group: ComboStatusGroup
     let onSelect: (String) -> Void
 
-    var body: some View {
-        HStack(alignment: .top, spacing: 10) {
-            RoundedRectangle(cornerRadius: 2, style: .continuous)
-                .fill(PsyCardsColors.status(group.statusKey))
-                .frame(width: 4)
-                .padding(.vertical, 2)
-            VStack(alignment: .leading, spacing: 4) {
-                Label(group.label, systemImage: PsyCardsColors.statusSymbol(group.icon))
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(PsyCardsColors.status(group.statusKey))
-                    .labelStyle(.titleAndIcon)
-                    .symbolRenderingMode(.hierarchical)
-                ComboNameList(partners: group.partners, statusLabel: group.label, onSelect: onSelect)
-            }
-        }
-        .accessibilityElement(children: .contain)
-    }
-}
-
-private struct ComboNameList: View {
-    let partners: [ComboPartner]
-    let statusLabel: String
-    let onSelect: (String) -> Void
+    @ScaledMetric(relativeTo: .subheadline) private var labelWidth: CGFloat = 118
 
     var body: some View {
-        FlowLayout(spacing: 0) {
-            ForEach(Array(partners.enumerated()), id: \.element.id) { index, partner in
-                Button {
-                    onSelect(partner.key)
-                } label: {
-                    Text(index < partners.count - 1 ? "\(partner.name), " : partner.name)
-                        .font(.subheadline)
-                        .foregroundStyle(PsyCardsColors.fg)
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel("\(partner.name), \(statusLabel)")
-                .accessibilityHint(String(localized: "landing.navCombos"))
-            }
-        }
-    }
-}
-
-// MARK: - Dose chart (port of packages/web/src/lib/dose-chart.ts)
-
-struct DoseChartView: View {
-    private let charts: [DoseRouteChart]
-
-    init(dose: [String: [String: String]]) {
-        charts = dose
-            .sorted { $0.key < $1.key }
-            .map { DoseRouteChart(route: $0.key, levels: $0.value) }
-    }
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: PsyCardsSpacing.m) {
-            ForEach(charts) { chart in
-                DoseRouteChartView(chart: chart)
-            }
-        }
-    }
-}
-
-struct DoseRouteChart: Identifiable {
-    struct Segment: Identifiable {
-        let level: String
-        let amount: String
-        let color: Color
-        /// Percentages of the full scale (0-100).
-        let left: Double
-        let width: Double
-        let isPoint: Bool
-        let openEnd: Bool
-
-        var id: String { level }
-    }
-
-    struct FallbackRow: Identifiable {
-        let level: String
-        let amount: String
-
-        var id: String { level }
-    }
-
-    let route: String
-    let unit: String?
-    let scaleMax: Double
-    let segments: [Segment]
-    let fallbackRows: [FallbackRow]
-
-    var id: String { route }
-    var isChartable: Bool { !segments.isEmpty }
-
-    private static let levelOrder = ["threshold", "light", "common", "strong", "heavy", "dangerous", "fatal"]
-    private static let chartableUnits: Set<String> = ["µg", "mg", "g", "ml", "units", "seeds"]
-
-    private struct ParsedAmount {
-        let min: Double
-        let max: Double?
-        let openEnd: Bool
-        let unit: String
-    }
-
-    init(route: String, levels: [String: String]) {
-        self.route = route
-
-        let ordered = levels
-            .map { (level: $0.key, amount: $0.value) }
-            .sorted { a, b in
-                let ai = Self.levelOrder.firstIndex(of: a.level.lowercased()) ?? 99
-                let bi = Self.levelOrder.firstIndex(of: b.level.lowercased()) ?? 99
-                return ai < bi
-            }
-
-        let fallback = ordered.map { FallbackRow(level: $0.level, amount: $0.amount) }
-
-        var parsedRows: [(level: String, amount: String, parsed: ParsedAmount)] = []
-        for row in ordered where Self.levelOrder.contains(row.level.lowercased()) {
-            guard let parsed = Self.parseAmount(row.amount) else {
-                self.unit = nil
-                self.scaleMax = 1
-                self.segments = []
-                self.fallbackRows = fallback
-                return
-            }
-            parsedRows.append((row.level, row.amount, parsed))
-        }
-
-        let units = Set(parsedRows.map(\.parsed.unit))
-        guard !parsedRows.isEmpty, units.count == 1, let unit = units.first,
-              Self.chartableUnits.contains(unit) else {
-            self.unit = nil
-            self.scaleMax = 1
-            self.segments = []
-            self.fallbackRows = fallback
-            return
-        }
-
-        var scaleMax = parsedRows
-            .flatMap { [$0.parsed.min, $0.parsed.max ?? $0.parsed.min] }
-            .max() ?? 1
-        for row in parsedRows where row.parsed.openEnd {
-            scaleMax = Swift.max(scaleMax, Self.niceScaleMax(row.parsed.min * 1.2))
-        }
-        scaleMax = Self.niceScaleMax(scaleMax)
-
-        func percent(_ value: Double) -> Double {
-            scaleMax > 0 ? value / scaleMax * 100 : 0
-        }
-
-        self.unit = unit
-        self.scaleMax = scaleMax
-        self.fallbackRows = []
-        self.segments = parsedRows.map { row in
-            let start = row.parsed.min
-            let end = row.parsed.openEnd ? scaleMax : (row.parsed.max ?? row.parsed.min)
-            let left = percent(start)
-            let right = percent(end)
-            let isPoint = start == end
-            return Segment(
-                level: row.level,
-                amount: row.amount,
-                color: PsyCardsColors.doseLevel(row.level),
-                left: left,
-                width: isPoint ? 0 : Swift.max(right - left, 0.5),
-                isPoint: isPoint,
-                openEnd: row.parsed.openEnd
-            )
-        }
-    }
-
-    private static func parseAmount(_ raw: String) -> ParsedAmount? {
-        let compact = raw.trimmingCharacters(in: .whitespaces)
-            .lowercased()
-            .replacingOccurrences(of: " ", with: "")
-        guard !compact.isEmpty, compact != "unknown" else { return nil }
-
-        func normalize(_ unit: Substring) -> String {
-            let u = String(unit)
-            return (u == "ug" || u == "mcg") ? "µg" : u
-        }
-
-        if let match = compact.wholeMatch(of: /([\d.]+)-([\d.]+)([a-zµ][a-z0-9\/µ]*?)(\+?)/) {
-            guard let lo = Double(match.1), let hi = Double(match.2) else { return nil }
-            return ParsedAmount(min: lo, max: hi, openEnd: !match.4.isEmpty, unit: normalize(match.3))
-        }
-        if let match = compact.wholeMatch(of: /([\d.]+)([a-zµ][a-z0-9\/µ]*?)\+/) {
-            guard let value = Double(match.1) else { return nil }
-            return ParsedAmount(min: value, max: nil, openEnd: true, unit: normalize(match.2))
-        }
-        if let match = compact.wholeMatch(of: /([\d.]+)([a-zµ][a-z0-9\/µ]*)/) {
-            guard let value = Double(match.1) else { return nil }
-            return ParsedAmount(min: value, max: value, openEnd: false, unit: normalize(match.2))
-        }
-        return nil
-    }
-
-    private static func niceScaleMax(_ value: Double) -> Double {
-        guard value > 0 else { return 1 }
-        let magnitude = pow(10, floor(log10(value)))
-        let normalized = value / magnitude
-        let factor: Double = switch normalized {
-        case ...1.2: 1.2
-        case ...1.5: 1.5
-        case ...2: 2
-        case ...2.5: 2.5
-        case ...3: 3
-        case ...5: 5
-        case ...7.5: 7.5
-        default: 10
-        }
-        return factor * magnitude
-    }
-
-    static func routeSymbol(_ route: String) -> String {
-        let key = route.lowercased().split(separator: "(").first.map(String.init) ?? route.lowercased()
-        return switch key.trimmingCharacters(in: .whitespaces) {
-        case "oral": "pill.fill"
-        case "insufflated": "wind"
-        case "rectal": "cross.case.fill"
-        case "vapourized", "vaporized": "cloud.fill"
-        case "intravenous", "intramuscular": "syringe.fill"
-        case "smoked": "smoke.fill"
-        case "sublingual", "buccal": "mouth.fill"
-        case "transdermal": "bandage.fill"
-        case "dried", "fresh", "dry": "leaf.fill"
-        case "wet": "drop.fill"
-        default: "circle.fill"
-        }
-    }
-
-    static func formatScale(_ value: Double) -> String {
-        value == value.rounded() ? String(Int(value)) : String((value * 100).rounded() / 100)
-    }
-}
-
-private struct DoseRouteChartView: View {
-    let chart: DoseRouteChart
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: 6) {
-                Image(systemName: DoseRouteChart.routeSymbol(chart.route))
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(PsyCardsColors.fgMute)
-                Text(chart.route.replacingOccurrences(of: "_", with: " ").capitalized)
+        HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .top, spacing: 8) {
+                StatusIcon(name: group.icon, size: 15)
+                    .foregroundStyle(PsyCardsColors.ink(onStatus: group.statusKey))
+                    .frame(width: 26, height: 26)
+                    .background(PsyCardsColors.status(group.statusKey), in: .rect(cornerRadius: 7, style: .continuous))
+                Text(group.label)
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(PsyCardsColors.fg)
-                Spacer()
-                if let unit = chart.unit {
-                    Text(unit)
-                        .font(.caption2.weight(.semibold).monospaced())
-                        .foregroundStyle(PsyCardsColors.fgMute)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 3)
-                        .background(.white.opacity(0.08), in: .capsule)
-                }
+                    .fixedSize(horizontal: false, vertical: true)
             }
+            .frame(width: labelWidth, alignment: .leading)
 
-            if chart.isChartable {
-                track
-                HStack {
-                    Text("0")
-                    Spacer()
-                    Text("\(DoseRouteChart.formatScale(chart.scaleMax))\(chart.unit ?? "")")
-                }
-                .font(.caption2.monospaced())
-                .foregroundStyle(PsyCardsColors.fgMute)
-                FlowLayout(spacing: 6) {
-                    ForEach(chart.segments) { segment in
-                        HStack(spacing: 5) {
-                            Circle()
-                                .fill(segment.color)
-                                .frame(width: 7, height: 7)
-                            Text(segment.level.capitalized)
-                                .font(.caption2.weight(.medium))
-                                .foregroundStyle(PsyCardsColors.fg)
-                            Text(segment.amount)
-                                .font(.caption2.monospaced())
-                                .foregroundStyle(PsyCardsColors.fgMute)
-                        }
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(.white.opacity(0.06), in: .capsule)
+            FlowLayout(spacing: 0, lineSpacing: 4) {
+                ForEach(Array(group.partners.enumerated()), id: \.element.id) { index, partner in
+                    Button {
+                        onSelect(partner.key)
+                    } label: {
+                        let separator = Text(index < group.partners.count - 1 ? ", " : "").foregroundStyle(PsyCardsColors.fgMute)
+                        Text("\(Text(partner.name).underline(color: PsyCardsColors.fg.opacity(0.35)).foregroundStyle(PsyCardsColors.fg))\(separator)")
                     }
-                }
-            } else {
-                VStack(alignment: .leading, spacing: 4) {
-                    ForEach(chart.fallbackRows) { row in
-                        HStack {
-                            Text(row.level.capitalized)
-                                .font(.caption.weight(.medium))
-                                .foregroundStyle(PsyCardsColors.fg)
-                            Spacer()
-                            Text(row.amount)
-                                .font(.caption.monospaced())
-                                .foregroundStyle(PsyCardsColors.fgMute)
-                        }
-                    }
+                    .font(.subheadline)
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("\(partner.name), \(group.label)")
                 }
             }
+            .padding(.top, 3)
         }
-    }
-
-    private var track: some View {
-        GeometryReader { geo in
-            let width = geo.size.width
-            ZStack(alignment: .leading) {
-                Capsule()
-                    .fill(.white.opacity(0.07))
-                    .frame(height: 6)
-                    .frame(maxHeight: .infinity, alignment: .center)
-
-                ForEach(chart.segments) { segment in
-                    if segment.isPoint {
-                        Circle()
-                            .fill(segment.color)
-                            .frame(width: 12, height: 12)
-                            .offset(x: width * segment.left / 100 - 6)
-                    } else {
-                        RoundedRectangle(cornerRadius: 5, style: .continuous)
-                            .fill(segmentFill(segment))
-                            .frame(width: max(width * segment.width / 100, 6), height: 14)
-                            .offset(x: width * segment.left / 100)
-                    }
-                }
-            }
-        }
-        .frame(height: 16)
-    }
-
-    private func segmentFill(_ segment: DoseRouteChart.Segment) -> LinearGradient {
-        LinearGradient(
-            colors: segment.openEnd
-                ? [segment.color, segment.color.opacity(0.15)]
-                : [segment.color, segment.color.mix(with: .black, by: 0.18)],
-            startPoint: .leading,
-            endPoint: .trailing
-        )
+        .accessibilityElement(children: .contain)
     }
 }
 
 // MARK: - Timing chart (port of packages/web/src/scripts/timing-chart.ts)
 
 struct TimingChartView: View {
+    @Environment(DataPackStore.self) private var store
+
     struct CurvePoint: Identifiable {
         let hour: Double
         let intensity: Double
@@ -534,33 +457,23 @@ struct TimingChartView: View {
         var id: Double { hour }
     }
 
-    private let onset: TimingValue?
-    private let duration: TimingValue?
-    private let afterEffects: String?
     private let tint: Color
     private let points: [CurvePoint]
     private let markers: [Marker]
     private let maxHour: Double
     private let ticks: [Double]
+    @State private var start = Date.now
 
-    init(onset: TimingValue?, duration: TimingValue?, afterEffects: String?, tint: Color) {
-        self.onset = onset
-        self.duration = duration
-        self.afterEffects = afterEffects
+    init(onset: TimingValue?, duration: TimingValue?, tint: Color) {
         self.tint = tint
-
-        let onsetRange = Self.range(from: onset)
-        let durationRange = Self.range(from: duration)
-
-        guard let durationRange else {
+        guard let durationRange = Self.range(from: duration) else {
             points = []
             markers = []
             maxHour = 1
             ticks = []
             return
         }
-
-        let geometry = Self.curveGeometry(onset: onsetRange, duration: durationRange)
+        let geometry = Self.curveGeometry(onset: Self.range(from: onset), duration: durationRange)
         points = geometry.points
         markers = geometry.markers
         maxHour = geometry.maxHour
@@ -569,111 +482,85 @@ struct TimingChartView: View {
 
     var body: some View {
         if !points.isEmpty {
-            Chart {
-                ForEach(points) { point in
-                    AreaMark(
-                        x: .value("Hours", point.hour),
-                        y: .value("Intensity", point.intensity)
-                    )
-                    .interpolationMethod(.monotone)
-                    .foregroundStyle(
-                        .linearGradient(
-                            colors: [tint.opacity(0.36), tint.opacity(0)],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
-
-                    LineMark(
-                        x: .value("Hours", point.hour),
-                        y: .value("Intensity", point.intensity)
-                    )
-                    .interpolationMethod(.monotone)
-                    .lineStyle(StrokeStyle(lineWidth: 2.2, lineCap: .round))
-                    .foregroundStyle(tint)
+            VStack(alignment: .leading, spacing: 10) {
+                chart
+                HStack {
+                    Text(store.t("timingChart.startTime"))
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(PsyCardsColors.fgMute)
+                    Spacer()
+                    DatePicker(store.t("timingChart.startTime"), selection: $start, displayedComponents: .hourAndMinute)
+                        .labelsHidden()
+                        .environment(\.locale, store.swiftLocale)
                 }
-
-                ForEach(markers) { marker in
-                    RuleMark(x: .value("Hours", marker.hour))
-                        .lineStyle(StrokeStyle(lineWidth: 1, dash: [3, 3]))
-                        .foregroundStyle(.white.opacity(0.18))
-
-                    PointMark(
-                        x: .value("Hours", marker.hour),
-                        y: .value("Intensity", marker.intensity)
-                    )
-                    .symbolSize(38)
-                    .foregroundStyle(tint)
-                    .annotation(
-                        position: marker.intensity > 0.8 ? .trailing : .top,
-                        overflowResolution: .init(x: .fit(to: .chart), y: .fit(to: .chart))
-                    ) {
-                        if let label = marker.label {
-                            Text(label)
-                                .font(.caption2.weight(.semibold))
-                                .foregroundStyle(PsyCardsColors.fg)
-                                .padding(.horizontal, 7)
-                                .padding(.vertical, 2)
-                                .background(.white.opacity(0.1), in: .capsule)
-                        }
-                    }
-                }
-            }
-            .chartXScale(domain: 0...maxHour)
-            .chartYScale(domain: 0...1.12)
-            .chartYAxis(.hidden)
-            .chartXAxis {
-                AxisMarks(values: ticks) { value in
-                    AxisTick(stroke: StrokeStyle(lineWidth: 1))
-                        .foregroundStyle(.white.opacity(0.2))
-                    AxisValueLabel {
-                        if let hour = value.as(Double.self) {
-                            Text(Self.formatTick(hour))
-                                .font(.caption2.monospaced())
-                                .foregroundStyle(PsyCardsColors.fgMute)
-                        }
-                    }
-                }
-            }
-            .frame(height: 150)
-            .accessibilityLabel(String(localized: "substanceCard.timing"))
-        }
-
-        VStack(alignment: .leading, spacing: 6) {
-            if let onset {
-                timingRow(
-                    label: String(localized: "substanceCard.onset"),
-                    value: "\(onset.value ?? "—") \(onset.unit ?? "")"
-                )
-            }
-            if let duration {
-                timingRow(
-                    label: String(localized: "substanceCard.duration"),
-                    value: "\(duration.value ?? "—") \(duration.unit ?? "")"
-                )
-            }
-            if let afterEffects {
-                timingRow(
-                    label: String(localized: "substanceCard.afterEffects"),
-                    value: afterEffects
-                )
             }
         }
     }
 
-    private func timingRow(label: String, value: String) -> some View {
-        HStack(spacing: 8) {
-            Circle()
-                .fill(tint.opacity(0.8))
-                .frame(width: 6, height: 6)
-            Text(label)
-                .font(.footnote.weight(.medium))
-                .foregroundStyle(PsyCardsColors.fg)
-            Spacer()
-            Text(value)
-                .font(.footnote.monospaced())
-                .foregroundStyle(PsyCardsColors.fgMute)
+    private var chart: some View {
+        Chart {
+            ForEach(points) { point in
+                AreaMark(x: .value("Hours", point.hour), y: .value("Intensity", point.intensity))
+                    .interpolationMethod(.monotone)
+                    .foregroundStyle(.linearGradient(colors: [tint.opacity(0.4), tint.opacity(0)], startPoint: .top, endPoint: .bottom))
+                LineMark(x: .value("Hours", point.hour), y: .value("Intensity", point.intensity))
+                    .interpolationMethod(.monotone)
+                    .lineStyle(StrokeStyle(lineWidth: 2.4, lineCap: .round))
+                    .foregroundStyle(tint)
+            }
+            ForEach(markers) { marker in
+                RuleMark(x: .value("Hours", marker.hour))
+                    .lineStyle(StrokeStyle(lineWidth: 1, dash: [3, 3]))
+                    .foregroundStyle(PsyCardsColors.fg.opacity(0.2))
+                PointMark(x: .value("Hours", marker.hour), y: .value("Intensity", marker.intensity))
+                    .symbol {
+                        Circle()
+                            .fill(PsyCardsColors.ink)
+                            .overlay(Circle().strokeBorder(PsyCardsColors.fg, lineWidth: 2))
+                            .frame(width: 10, height: 10)
+                    }
+                    .annotation(position: marker.intensity > 0.8 ? .top : .topLeading, spacing: 4, overflowResolution: .init(x: .fit(to: .chart), y: .fit(to: .chart))) {
+                        if let label = marker.label {
+                            Text(store.t("timingChart.\(label)").uppercased())
+                                .font(.caption2.weight(.heavy))
+                                .tracking(0.6)
+                                .foregroundStyle(PsyCardsColors.fg)
+                                .padding(.horizontal, 7)
+                                .padding(.vertical, 3)
+                                .background(PsyCardsColors.ink3, in: .capsule)
+                        }
+                    }
+            }
         }
+        .chartXScale(domain: 0...maxHour)
+        .chartYScale(domain: 0...1.32)
+        .chartYAxis(.hidden)
+        .chartXAxis {
+            AxisMarks(position: .top, values: ticks) { value in
+                AxisValueLabel {
+                    if let hour = value.as(Double.self) {
+                        Text("+\(Int(hour))h")
+                            .font(.caption2.monospacedDigit())
+                            .foregroundStyle(PsyCardsColors.fgMute)
+                    }
+                }
+            }
+            AxisMarks(position: .bottom, values: ticks) { value in
+                AxisGridLine(stroke: StrokeStyle(lineWidth: 1, dash: [2, 4]))
+                    .foregroundStyle(PsyCardsColors.fg.opacity(0.12))
+                AxisValueLabel {
+                    if let hour = value.as(Double.self) {
+                        Text(start.addingTimeInterval(hour * 3600), format: .dateTime.hour().minute().locale(store.swiftLocale))
+                            .font(.caption2.monospacedDigit())
+                            .foregroundStyle(PsyCardsColors.fgMute)
+                    }
+                }
+            }
+        }
+        .chartPlotStyle { plot in
+            plot.background(PsyCardsColors.fg.opacity(0.03), in: .rect(cornerRadius: 8))
+        }
+        .frame(height: 170)
     }
 
     // MARK: Curve math
@@ -684,36 +571,22 @@ struct TimingChartView: View {
         var average: Double { (min + max) / 2 }
     }
 
-    private static func range(from timing: TimingValue?) -> TimingRange? {
-        guard let timing, let value = timing.value?.lowercased(), !value.contains("unknown") else {
-            return nil
-        }
-        let multiplier: Double = {
-            let unit = (timing.unit ?? "").lowercased()
-            if unit.contains("sec") { return 1.0 / 3600 }
-            if unit.contains("min") { return 1.0 / 60 }
-            if unit.contains("day") { return 24 }
-            return 1
-        }()
+    static func range(from timing: TimingValue?) -> TimingRange? {
+        guard let timing, let value = timing.value?.lowercased(), !value.contains("unknown") else { return nil }
+        let unit = (timing.unit ?? "").lowercased()
+        let multiplier: Double = unit.contains("sec") ? 1.0 / 3600 : unit.contains("min") ? 1.0 / 60 : unit.contains("day") ? 24 : 1
         let numbers = value.matches(of: /\d+(?:\.\d+)?/).compactMap { Double($0.output) }
         guard let first = numbers.first else { return nil }
         let second = numbers.count > 1 ? numbers[1] : first
-        let lo = Swift.min(first, second) * multiplier
-        let hi = Swift.max(first, second) * multiplier
-        return TimingRange(min: lo, max: hi)
+        return TimingRange(min: Swift.min(first, second) * multiplier, max: Swift.max(first, second) * multiplier)
     }
 
-    private static func curveGeometry(
-        onset: TimingRange?,
-        duration: TimingRange
-    ) -> (points: [CurvePoint], markers: [Marker], maxHour: Double) {
-        func clamp(_ value: Double, _ lo: Double, _ hi: Double) -> Double {
-            Swift.min(Swift.max(value, lo), hi)
-        }
+    private static func curveGeometry(onset: TimingRange?, duration: TimingRange) -> (points: [CurvePoint], markers: [Marker], maxHour: Double) {
+        func clamp(_ value: Double, _ lo: Double, _ hi: Double) -> Double { Swift.min(Swift.max(value, lo), hi) }
 
         let durationEnd = Swift.max(duration.average, duration.max)
-        let maxHour = Swift.max(durationEnd * 1.08, 1)
-
+        // Keep the final whole-hour tick inside the plotted domain.
+        let maxHour = Swift.max((durationEnd * 1.08).rounded(.up), 1)
         let onsetStart = onset?.min ?? Swift.max(durationEnd * 0.05, 0.05)
         let onsetEnd = onset?.max ?? Swift.max(durationEnd * 0.16, onsetStart)
         let onsetMid = onset?.average ?? (onsetStart + onsetEnd) / 2
@@ -725,38 +598,30 @@ struct TimingChartView: View {
         let tailStart = clamp(durationEnd - Swift.max(activeWindow * 0.12, 0.12), comedownMid, durationEnd)
 
         let raw: [CurvePoint] = [
-            CurvePoint(hour: 0, intensity: 0),
-            CurvePoint(hour: onsetStart, intensity: 0.04),
-            CurvePoint(hour: onsetMid, intensity: 0.18),
-            CurvePoint(hour: onsetEnd, intensity: 0.45),
-            CurvePoint(hour: prePeak, intensity: 0.82),
-            CurvePoint(hour: peakHour, intensity: 1),
-            CurvePoint(hour: plateauEnd, intensity: 0.88),
-            CurvePoint(hour: comedownMid, intensity: 0.32),
-            CurvePoint(hour: tailStart, intensity: 0.08),
-            CurvePoint(hour: durationEnd, intensity: 0),
+            .init(hour: 0, intensity: 0),
+            .init(hour: onsetStart, intensity: 0.04),
+            .init(hour: onsetMid, intensity: 0.18),
+            .init(hour: onsetEnd, intensity: 0.45),
+            .init(hour: prePeak, intensity: 0.82),
+            .init(hour: peakHour, intensity: 1),
+            .init(hour: plateauEnd, intensity: 0.88),
+            .init(hour: comedownMid, intensity: 0.32),
+            .init(hour: tailStart, intensity: 0.08),
+            .init(hour: durationEnd, intensity: 0),
         ]
-
-        // Merge points closer than 0.01h, keeping the higher intensity.
         var points: [CurvePoint] = []
         for point in raw.sorted(by: { $0.hour < $1.hour }) {
             if let last = points.last, abs(last.hour - point.hour) < 0.01 {
-                points[points.count - 1] = CurvePoint(
-                    hour: last.hour,
-                    intensity: Swift.max(last.intensity, point.intensity)
-                )
+                points[points.count - 1] = CurvePoint(hour: last.hour, intensity: Swift.max(last.intensity, point.intensity))
             } else {
                 points.append(point)
             }
         }
 
         var markers: [Marker] = []
-        if let onset {
-            markers.append(Marker(hour: onset.average, intensity: 0.4, label: "onset"))
-        }
+        if let onset { markers.append(Marker(hour: onset.average, intensity: 0.4, label: "onset")) }
         markers.append(Marker(hour: peakHour, intensity: 1, label: "peak"))
-        markers.append(Marker(hour: durationEnd, intensity: 0.04, label: nil))
-
+        markers.append(Marker(hour: durationEnd, intensity: 0.02, label: nil))
         return (points, markers, maxHour)
     }
 
@@ -770,92 +635,10 @@ struct TimingChartView: View {
         }
         var ticks: [Double] = [0]
         var hour = step
-        while hour < maxHour {
+        while hour <= maxHour {
             ticks.append(hour)
             hour += step
         }
-        let roundedMax = maxHour.rounded(.up)
-        if roundedMax > ticks.last ?? 0 {
-            ticks.append(roundedMax)
-        }
-        return Array(ticks.prefix(6))
-    }
-
-    private static func formatTick(_ hour: Double) -> String {
-        "+\(Int(hour))h"
-    }
-}
-
-// MARK: - Molecule
-
-struct MoleculeView: View {
-    let info: MoleculeInfo
-    let tint: Color
-
-    var body: some View {
-        VStack(spacing: PsyCardsSpacing.s) {
-            Image(info.assetName)
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: 280, maxHeight: 280)
-                .frame(maxWidth: .infinity)
-                .background {
-                    RadialGradient(
-                        colors: [tint.opacity(0.16), .clear],
-                        center: .center,
-                        startRadius: 10,
-                        endRadius: 190
-                    )
-                }
-            if info.representative {
-                Text("Representative structure")
-                    .font(.caption)
-                    .foregroundStyle(PsyCardsColors.fgMute)
-            }
-            Text(info.smiles)
-                .font(.caption2.monospaced())
-                .foregroundStyle(PsyCardsColors.fgMute)
-                .textSelection(.enabled)
-        }
-    }
-}
-
-/// Simple wrapping layout for effect chips.
-struct FlowLayout: Layout {
-    var spacing: CGFloat = 8
-
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        let maxWidth = proposal.width ?? .infinity
-        var x: CGFloat = 0
-        var y: CGFloat = 0
-        var rowHeight: CGFloat = 0
-        for subview in subviews {
-            let size = subview.sizeThatFits(.unspecified)
-            if x + size.width > maxWidth {
-                x = 0
-                y += rowHeight + spacing
-                rowHeight = 0
-            }
-            x += size.width + spacing
-            rowHeight = max(rowHeight, size.height)
-        }
-        return CGSize(width: maxWidth, height: y + rowHeight)
-    }
-
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
-        var x = bounds.minX
-        var y = bounds.minY
-        var rowHeight: CGFloat = 0
-        for subview in subviews {
-            let size = subview.sizeThatFits(.unspecified)
-            if x + size.width > bounds.maxX {
-                x = bounds.minX
-                y += rowHeight + spacing
-                rowHeight = 0
-            }
-            subview.place(at: CGPoint(x: x, y: y), proposal: ProposedViewSize(size))
-            x += size.width + spacing
-            rowHeight = max(rowHeight, size.height)
-        }
+        return Array(ticks.prefix(7))
     }
 }

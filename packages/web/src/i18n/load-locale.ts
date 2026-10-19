@@ -109,12 +109,15 @@ function drugFileKeyToMatrixKey(filename: string): string {
 }
 
 function loadDrugOverlays(locale: Locale): Record<string, Record<string, unknown>> {
-  const prefix = `../../../../packages/shared/i18n/content/${locale}/drugs/`;
+  // Vite rewrites glob keys to the shortest relative path, so match the
+  // stable suffix rather than the literal pattern prefix.
+  const suffix = `/i18n/content/${locale}/drugs/`;
   const overlays: Record<string, Record<string, unknown>> = {};
 
   for (const [path, mod] of Object.entries(drugOverlayModules)) {
-    if (!path.startsWith(prefix)) continue;
-    const filename = path.slice(prefix.length);
+    const at = path.indexOf(suffix);
+    if (at === -1) continue;
+    const filename = path.slice(at + suffix.length);
     const key = drugFileKeyToMatrixKey(filename);
     overlays[key] = mod;
   }

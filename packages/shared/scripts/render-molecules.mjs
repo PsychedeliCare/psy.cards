@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 /**
- * Prerender SMILES structures to PNG assets for iOS (default), or transparent
- * monochrome WebGPU masks with --web. Web output never uses placeholders.
+ * Prerender SMILES structures to PNG assets for the native apps (default:
+ * the iOS asset catalog, plus Android drawables once packages/android
+ * exists), or transparent monochrome WebGPU masks with --web. Web output
+ * never uses placeholders.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -19,6 +21,8 @@ const assetsRoot = path.join(
 const require = createRequire(import.meta.url);
 const web = process.argv.includes("--web");
 const webAssetsRoot = path.join(monorepoRoot, "packages/web/public/assets/molecules");
+const androidDrawables = path.join(monorepoRoot, "packages/android/app/src/main/res/drawable-nodpi");
+const hasAndroid = fs.existsSync(path.join(monorepoRoot, "packages/android"));
 
 function keyToAssetName(key) {
   return `molecule_${key.replace(/\//g, "-").replace(/-/g, "_")}`;
@@ -261,6 +265,10 @@ async function main() {
     }
     const png = await rasterize(svg);
     writeImageSet(assetName, png);
+    if (hasAndroid) {
+      fs.mkdirSync(androidDrawables, { recursive: true });
+      fs.writeFileSync(path.join(androidDrawables, `${assetName}.png`), png);
+    }
     console.log(`molecule ${key} → ${assetName} (${isDrawn ? "drawn" : "placeholder"})`);
   }
 

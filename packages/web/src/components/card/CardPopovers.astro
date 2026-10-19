@@ -1,0 +1,88 @@
+---
+/**
+ * Popovers opened from the card (other routes, toxicity comparison,
+ * dependence rating). They live outside the 3D card: Chromium does not paint
+ * top-layer content whose ancestor sits in a backface-hidden 3D context.
+ */
+import { Icon } from "@twodft/astro-icon/components";
+import DoseScale from "./DoseScale.astro";
+import MarginChart from "./MarginChart.astro";
+import { getRouteIcon, getRouteLabel } from "../../lib/dose-chart";
+import type { CardData } from "../../data/harm-reduction";
+import type { Locale } from "../../i18n/locales";
+import { getUiMessages } from "../../i18n/load-locale";
+import { t, tFormat } from "../../i18n/ui";
+
+interface Props {
+  data: CardData;
+  locale: Locale;
+  uid: string;
+  displayName: string;
+}
+
+const { data, locale, uid, displayName } = Astro.props;
+const ui = getUiMessages(locale);
+const level = Math.min(5, Math.max(1, data.dependence.level));
+const closeLabel = t(locale, ui, "layout.close");
+const dependenceSource =
+  data.dependence.nutt !== undefined
+    ? tFormat(locale, ui, "card.nuttScore", {
+        score: data.dependence.nutt.toFixed(2),
+        drug: data.dependence.nuttDrug ?? displayName,
+      })
+    : t(locale, ui, "card.editorial");
+---
+
+{data.otherRoutes.length > 0 && (
+  <div class="psy-popover" id={`${uid}-routes`} popover>
+    <div class="psy-popover__head">
+      <h3>{displayName} · {t(locale, ui, "card.otherRoutes")}</h3>
+      <button type="button" class="psy-popover__close" popovertarget={`${uid}-routes`} popovertargetaction="hide" aria-label={closeLabel}>
+        <Icon name="ph:x-bold" aria-hidden="true" />
+      </button>
+    </div>
+    {data.otherRoutes.map((chart) => (
+      <section class="psy-popover__route">
+        <p class="psy-route">
+          <Icon name={`ph:${getRouteIcon(chart.route)}`} aria-hidden="true" />
+          {getRouteLabel(chart.route)}
+          {chart.chartable && <span class="psy-route__unit">{chart.unit}</span>}
+        </p>
+        {chart.chartable ? (
+          <DoseScale chart={chart} locale={locale} widthEm={20.6} />
+        ) : (
+          <dl class="psy-dose-list">
+            {chart.rows.map((row) => <div><dt>{row.level}</dt><dd>{row.amount}</dd></div>)}
+          </dl>
+        )}
+      </section>
+    ))}
+    {data.doseNote && <p class="psy-popover__note">{data.doseNote}</p>}
+  </div>
+)}
+
+<div class="psy-popover psy-popover--wide" id={`${uid}-margin`} popover>
+  <div class="psy-popover__head">
+    <h3>{t(locale, ui, "card.marginChartTitle")}</h3>
+    <button type="button" class="psy-popover__close" popovertarget={`${uid}-margin`} popovertargetaction="hide" aria-label={closeLabel}>
+      <Icon name="ph:x-bold" aria-hidden="true" />
+    </button>
+  </div>
+  <MarginChart rows={data.gable} current={data.key} locale={locale} />
+  <p class="psy-popover__note">{t(locale, ui, "card.marginChartNote")}</p>
+  <p class="psy-popover__note">{t(locale, ui, "card.marginCaveat")}</p>
+</div>
+
+<div class="psy-popover" id={`${uid}-dependence`} popover>
+  <div class="psy-popover__head">
+    <h3>{t(locale, ui, "card.dependence")}: {t(locale, ui, `card.dependenceLevels.${level}`)}</h3>
+    <button type="button" class="psy-popover__close" popovertarget={`${uid}-dependence`} popovertargetaction="hide" aria-label={closeLabel}>
+      <Icon name="ph:x-bold" aria-hidden="true" />
+    </button>
+  </div>
+  <div class="psy-meter psy-meter--wide" data-level={level} aria-hidden="true">
+    {[1, 2, 3, 4, 5].map((step) => <span class:list={["psy-meter__step", { "is-on": step <= level }]} />)}
+  </div>
+  {data.content.dependence && <p>{data.content.dependence}</p>}
+  <p class="psy-popover__note">{dependenceSource}</p>
+</div>

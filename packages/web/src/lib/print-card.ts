@@ -5,6 +5,7 @@ import {
   getDrugByKey,
 } from "../data/drugs";
 import { getSubstanceStructure } from "../data/substances";
+import { getCardData } from "../data/harm-reduction";
 import type { Locale } from "../i18n/locales";
 import { localePath } from "../i18n/locales";
 import { buildDoseCharts, type DoseChart } from "./dose-chart";
@@ -77,12 +78,14 @@ export function getPrintCardData(
   const props = drug?.properties ?? {};
   const summary = props.summary ?? classNote;
 
+  // Same route as the web card (most common route first, class references).
+  const cardPrimary = getCardData(substanceKey, locale).primary;
   const charts = drug?.formatted_dose
     ? buildDoseCharts(drug.formatted_dose)
     : [];
-  const primaryChart = charts.find(
-    (chart): chart is DoseChart => chart.chartable
-  );
+  const primaryChart = cardPrimary?.chartable
+    ? cardPrimary
+    : charts.find((chart): chart is DoseChart => chart.chartable);
 
   return {
     substanceKey,

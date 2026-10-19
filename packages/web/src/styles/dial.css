@@ -159,11 +159,8 @@
 .wheel-picker option, .wheel-picker optgroup { color: var(--color-fg); background: var(--color-ink-2); }
 .wheel-reading, .wheel-card { min-width: 0; }
 .wheel-card { scroll-margin-top: 88px; }
-.wheel-card .substance-card {
-  border: 1px solid color-mix(in oklab, var(--color-fg) 12%, transparent);
-  border-top: 3px solid var(--hue, var(--color-fg-mute));
-  border-radius: 22px;
-  box-shadow: 0 18px 60px -30px rgb(0 0 0 / 0.28);
+.wheel-card .psy-deck {
+  --deck-offset: 9rem;
 }
 .wheel-card-status {
   padding: 12px 16px;
