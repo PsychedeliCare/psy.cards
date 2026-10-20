@@ -1,0 +1,708 @@
+{
+  "$comment": "Harm reduction organisations featured on card backs. Verified 2026-10.",
+  "asOf": "2026-10",
+  "organisations": [
+    {
+      "id": "safezone",
+      "name": "SafeZone.ch",
+      "country": "CH",
+      "regions": [],
+      "city": null,
+      "scope": "online",
+      "services": ["online-counselling", "info"],
+      "url": "https://www.safezone.ch",
+      "phone": null,
+      "email": null,
+      "languages": ["de", "fr", "it"],
+      "substances": ["all"],
+      "featured": true,
+      "description": {
+        "en": "Free, anonymous online counselling on drugs, alcohol and addiction by Swiss professionals.",
+        "de": "Kostenlose, anonyme Online-Beratung zu Drogen, Alkohol und Sucht durch Schweizer Fachleute.",
+        "fr": "Conseil en ligne gratuit et anonyme sur les drogues, l'alcool et les addictions, par des spécialistes.",
+        "it": "Consulenza online gratuita e anonima su droghe, alcol e dipendenze, a cura di specialisti svizzeri."
+      },
+      "sources": ["https://www.safezone.ch"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "tox-info-suisse",
+      "name": "Tox Info Suisse",
+      "country": "CH",
+      "regions": [],
+      "city": null,
+      "scope": "national",
+      "services": ["poison-centre", "helpline"],
+      "url": "https://www.toxinfo.ch",
+      "phone": "145",
+      "email": null,
+      "languages": ["de", "fr", "it", "en"],
+      "substances": ["all"],
+      "featured": true,
+      "description": {
+        "en": "24/7 poison emergency line 145: medical advice on overdoses, drug combinations and poisonings.",
+        "de": "Notfallnummer 145 rund um die Uhr: ärztliche Beratung bei Überdosis, Mischkonsum und Vergiftung.",
+        "fr": "Urgence 145 jour et nuit : conseil médical en cas de surdose, de mélange de produits ou d'intoxication.",
+        "it": "Emergenza 145 giorno e notte: consulenza medica in caso di overdose, mix di sostanze o intossicazione."
+      },
+      "sources": ["https://www.toxinfo.ch"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "saferparty-zh",
+      "name": "Saferparty.ch (DIZ Zürich)",
+      "country": "CH",
+      "regions": ["ZH"],
+      "city": "Zürich",
+      "scope": "regional",
+      "services": ["drug-checking", "counselling", "nightlife", "online-counselling", "info"],
+      "url": "https://www.saferparty.ch",
+      "phone": "+41 44 415 76 40",
+      "email": null,
+      "languages": ["de", "en"],
+      "substances": ["all"],
+      "featured": true,
+      "description": {
+        "en": "Free, anonymous drug checking (by appointment) and counselling in Zürich, plus warnings on dangerous pills.",
+        "de": "Kostenloses, anonymes Drug Checking (mit Termin) und Beratung in Zürich, dazu Warnungen vor Pillen.",
+        "fr": "Drug checking gratuit et anonyme (sur rendez-vous) et conseils à Zurich, avec alertes sur les pilules.",
+        "it": "Drug checking gratuito e anonimo (su appuntamento) e consulenza a Zurigo, con avvisi sulle pastiglie."
+      },
+      "sources": [
+        "https://www.saferparty.ch",
+        "https://en.saferparty.ch/blog/neue-offnungszeiten-drug-checking-ab-2026",
+        "https://www.stadt-zuerich.ch/de/gesundheit/sucht-und-drogen/beratung-unterstuetzung-fuer-suchtkranke/diz.html"
+      ],
+      "verified": "2026-10"
+    },
+    {
+      "id": "nuit-blanche-ge",
+      "name": "Nuit Blanche? (Première ligne)",
+      "country": "CH",
+      "regions": ["GE"],
+      "city": "Genève",
+      "scope": "regional",
+      "services": ["drug-checking", "nightlife", "counselling", "info"],
+      "url": "https://www.nuit-blanche.ch",
+      "phone": "+41 22 733 70 50",
+      "email": "contact@nuit-blanche.ch",
+      "languages": ["fr"],
+      "substances": ["all"],
+      "featured": true,
+      "description": {
+        "en": "Free, anonymous drug checking by appointment in Geneva, outreach at parties and online advice.",
+        "de": "Kostenloses, anonymes Drug Checking mit Termin in Genf, Präsenz an Partys und Online-Beratung.",
+        "fr": "Drug checking gratuit et anonyme sur rendez-vous à Genève, présence en milieu festif et conseils en ligne.",
+        "it": "Drug checking gratuito e anonimo su appuntamento a Ginevra, presenza alle feste e consigli online."
+      },
+      "sources": [
+        "https://www.nuit-blanche.ch/contact/",
+        "https://nuit-blanche.ch/drug-checking-prise-de-rdv/",
+        "https://globalcommissionondrugs.org/highlights-from-gcdp/nuit-blanche-2025/"
+      ],
+      "verified": "2026-10"
+    },
+    {
+      "id": "infodrog",
+      "name": "Infodrog",
+      "country": "CH",
+      "regions": [],
+      "city": null,
+      "scope": "national",
+      "services": ["info"],
+      "url": "https://www.infodrog.ch/de/hilfe-finden/substanzwarnungen.html",
+      "phone": null,
+      "email": null,
+      "languages": ["de", "fr", "it"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "National substance warnings from Swiss drug checking, plus Suchtindex, a directory of local addiction help.",
+        "de": "Nationale Substanzwarnungen aus dem Drug Checking und Suchtindex, das Verzeichnis lokaler Suchthilfe.",
+        "fr": "Alertes nationales issues du drug checking et Suchtindex, l'annuaire des services d'aide en addiction.",
+        "it": "Avvisi nazionali dal drug checking e Suchtindex, l'elenco dei servizi locali per le dipendenze."
+      },
+      "sources": [
+        "https://www.infodrog.ch",
+        "https://www.infodrog.ch/de/hilfe-finden/substanzwarnungen.html",
+        "https://www.infodrog.ch/de/aktivitaeten/drug-checking.html"
+      ],
+      "verified": "2026-10"
+    },
+    {
+      "id": "sucht-schweiz",
+      "name": "Sucht Schweiz / Addiction Suisse",
+      "country": "CH",
+      "regions": [],
+      "city": null,
+      "scope": "national",
+      "services": ["info"],
+      "url": "https://www.suchtschweiz.ch",
+      "phone": "021 321 29 11",
+      "email": null,
+      "languages": ["de", "fr", "it"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Independent information on alcohol, drugs and addiction, free leaflets and a list of Swiss helplines.",
+        "de": "Unabhängige Infos zu Alkohol, Drogen und Sucht, kostenlose Broschüren und eine Liste von Hilfetelefonen.",
+        "fr": "Infos indépendantes sur l'alcool, les drogues et les addictions, brochures gratuites et lignes d'aide.",
+        "it": "Informazioni indipendenti su alcol, droghe e dipendenze, opuscoli gratuiti e numeri d'aiuto svizzeri."
+      },
+      "sources": ["https://www.suchtschweiz.ch", "https://www.suchtschweiz.ch/hilfe/", "https://www.addictionsuisse.ch"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "raveitsafe-be",
+      "name": "rave it safe / dib (CONTACT)",
+      "country": "CH",
+      "regions": ["BE"],
+      "city": "Bern, Biel/Bienne",
+      "scope": "regional",
+      "services": ["drug-checking", "counselling", "nightlife", "info"],
+      "url": "https://www.raveitsafe.ch",
+      "phone": "031 378 22 20",
+      "email": null,
+      "languages": ["de"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Free, anonymous walk-in drug checking in Bern (Wed) and Biel (Tue), plus advice at parties and online.",
+        "de": "Kostenloses, anonymes Drug Checking ohne Anmeldung in Bern (Mi) und Biel (Di), Beratung an Partys.",
+        "fr": "Drug checking gratuit et anonyme sans rendez-vous à Berne (mer) et Bienne (mar), conseils en soirée.",
+        "it": "Drug checking gratuito e anonimo senza appuntamento a Berna (mer) e Bienne (mar), consigli alle feste."
+      },
+      "sources": [
+        "https://www.raveitsafe.ch",
+        "https://www.raveitsafe.ch/angebotsdetails/dib-drug-checking-bern/",
+        "https://www.raveitsafe.ch/drug-checking-auswertung-2025-doppelter-rekord-im-kanton-bern/"
+      ],
+      "verified": "2026-10"
+    },
+    {
+      "id": "dibs-bs",
+      "name": "DIBS / Safer Dance Basel",
+      "country": "CH",
+      "regions": ["BS", "BL"],
+      "city": "Basel",
+      "scope": "regional",
+      "services": ["drug-checking", "counselling", "nightlife"],
+      "url": "https://www.suchthilfe.ch/praevention/safer-dance/",
+      "phone": "+41 76 272 22 70",
+      "email": "dibs@suchthilfe.ch",
+      "languages": ["de"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Free, anonymous drug checking in Basel on Mondays (book ahead, age 15+), plus mobile testing at parties.",
+        "de": "Kostenloses, anonymes Drug Checking in Basel am Montag (mit Anmeldung, ab 15), mobil auch an Partys.",
+        "fr": "Drug checking gratuit et anonyme à Bâle le lundi (sur inscription, dès 15 ans) et en mobile en soirée.",
+        "it": "Drug checking gratuito e anonimo a Basilea il lunedì (su prenotazione, dai 15 anni) e mobile alle feste."
+      },
+      "sources": [
+        "https://www.bs.ch/en/node/13768",
+        "https://www.suchthilfe.ch/praevention/safer-dance/",
+        "https://www.bs.ch/medienmitteilungen/gd/2025-jahresauswertung-des-angebotes-dibs-drogeninfo-basel"
+      ],
+      "verified": "2026-10"
+    },
+    {
+      "id": "tragwerk-lu",
+      "name": "Tragwerk Drogeninfo",
+      "country": "CH",
+      "regions": ["LU"],
+      "city": "Luzern",
+      "scope": "regional",
+      "services": ["drug-checking", "counselling", "nightlife"],
+      "url": "https://www.tragwerk-luzern.ch/angebote/drogeninfo",
+      "phone": "+41 79 433 64 64",
+      "email": "drogeninfo@tragwerk-luzern.ch",
+      "languages": ["de"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Free, anonymous drug checking and advice in Lucerne on Monday evenings, and mobile at parties.",
+        "de": "Kostenloses, anonymes Drug Checking und Beratung in Luzern am Montagabend sowie mobil an Partys.",
+        "fr": "Drug checking gratuit et anonyme et conseils à Lucerne le lundi soir, et en mobile lors de fêtes.",
+        "it": "Drug checking gratuito e anonimo e consulenza a Lucerna il lunedì sera, e mobile alle feste."
+      },
+      "sources": ["https://www.tragwerk-luzern.ch/angebote/drogeninfo", "https://www.infodrog.ch/de/aktivitaeten/drug-checking.html"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "nightlife-vaud",
+      "name": "NightLife Vaud",
+      "country": "CH",
+      "regions": ["VD"],
+      "city": "Lausanne",
+      "scope": "regional",
+      "services": ["drug-checking", "nightlife", "counselling", "info"],
+      "url": "https://www.nightlifevaud.ch",
+      "phone": "+41 21 623 84 84",
+      "email": null,
+      "languages": ["fr"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Free, anonymous drug checking in Lausanne on Thursdays 17–20h, plus prevention teams in clubs.",
+        "de": "Kostenloses, anonymes Drug Checking in Lausanne, donnerstags 17–20 Uhr, und Präventionsteams in Clubs.",
+        "fr": "Drug checking gratuit et anonyme à Lausanne le jeudi de 17h à 20h, et équipes de prévention en club.",
+        "it": "Drug checking gratuito e anonimo a Losanna il giovedì dalle 17 alle 20, e squadre di prevenzione nei club."
+      },
+      "sources": ["https://www.nightlifevaud.ch", "https://www.nightlifevaud.ch/permanence/"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "quai9-ge",
+      "name": "Quai 9 (Première ligne)",
+      "country": "CH",
+      "regions": ["GE"],
+      "city": "Genève",
+      "scope": "regional",
+      "services": ["consumption-room", "needle-exchange"],
+      "url": "https://www.premiereligne.ch/dispositifs/espace-daccueil-et-consommation/",
+      "phone": "+41 22 748 28 78",
+      "email": "info@premiereligne.ch",
+      "languages": ["fr"],
+      "substances": ["opioids", "cocaine"],
+      "featured": false,
+      "description": {
+        "en": "Supervised drug consumption room near Geneva station (18+), with sterile equipment and nurses. Daily.",
+        "de": "Betreuter Konsumraum beim Bahnhof Genf (ab 18), mit sterilem Material und Pflegefachleuten. Täglich.",
+        "fr": "Espace de consommation supervisé près de la gare de Genève (18+), matériel stérile et infirmiers. Ouvert 7/7.",
+        "it": "Sala di consumo supervisionata vicino alla stazione di Ginevra (18+), materiale sterile e infermieri."
+      },
+      "sources": [
+        "https://www.premiereligne.ch/dispositifs/espace-daccueil-et-consommation/",
+        "https://www.premiereligne.ch/contact/"
+      ],
+      "verified": "2026-10"
+    },
+    {
+      "id": "danno-ti",
+      "name": "Danno.ch (Radix Svizzera italiana)",
+      "country": "CH",
+      "regions": ["TI"],
+      "city": null,
+      "scope": "regional",
+      "services": ["info", "nightlife", "peer-support", "online-counselling"],
+      "url": "https://www.danno.ch",
+      "phone": null,
+      "email": "info@danno.ch",
+      "languages": ["it"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Italian-language info on party drugs, safer-use stands at Ticino events and anonymous online advice.",
+        "de": "Infos auf Italienisch zu Partydrogen, Safer-Use-Stände an Tessiner Events und anonyme Online-Beratung.",
+        "fr": "Infos en italien sur les drogues festives, stands safer use au Tessin et conseils anonymes en ligne.",
+        "it": "Informazioni sulle sostanze, stand di riduzione dei rischi agli eventi in Ticino e consulenza anonima online."
+      },
+      "sources": ["https://www.danno.ch", "https://danno.ch/chi-siamo/"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "eve-rave-ch",
+      "name": "eve&rave Schweiz",
+      "country": "CH",
+      "regions": [],
+      "city": null,
+      "scope": "national",
+      "services": ["peer-support", "nightlife", "info"],
+      "url": "https://www.eve-rave.ch",
+      "phone": null,
+      "email": null,
+      "languages": ["de"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Non-profit offering Psycare (support through difficult trips), info stands at events and a substance guide.",
+        "de": "Verein mit Psycare (Begleitung bei schwierigen Trips), Infoständen an Events und einem Substanzhandbuch.",
+        "fr": "Association offrant Psycare (soutien lors de bad trips), des stands d'info en soirée et un guide des produits.",
+        "it": "Associazione che offre Psycare (supporto nei trip difficili), stand informativi e una guida alle sostanze."
+      },
+      "sources": ["https://www.eve-rave.ch", "https://www.eve-rave.ch/kontakt/"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "147-pro-juventute",
+      "name": "147 Pro Juventute",
+      "country": "CH",
+      "regions": [],
+      "city": null,
+      "scope": "national",
+      "services": ["helpline", "online-counselling"],
+      "url": "https://www.147.ch",
+      "phone": "147",
+      "email": "beratung@147.ch",
+      "languages": ["de", "fr", "it"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Free, confidential 24/7 helpline for children and young people, also by WhatsApp and email.",
+        "de": "Kostenlose, vertrauliche Beratung für Kinder und Jugendliche, rund um die Uhr, auch per WhatsApp und Mail.",
+        "fr": "Aide gratuite et confidentielle 24h/24 pour les enfants et les jeunes, aussi par WhatsApp et e-mail.",
+        "it": "Aiuto gratuito e confidenziale 24 ore su 24 per bambini e giovani, anche via WhatsApp ed e-mail."
+      },
+      "sources": ["https://www.147.ch/de/", "https://www.suchtschweiz.ch/hilfe/"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "drugcom",
+      "name": "drugcom.de",
+      "country": "DE",
+      "regions": [],
+      "city": null,
+      "scope": "online",
+      "services": ["online-counselling", "info"],
+      "url": "https://www.drugcom.de",
+      "phone": null,
+      "email": null,
+      "languages": ["de"],
+      "substances": ["all"],
+      "featured": true,
+      "description": {
+        "en": "Free, anonymous chat and email counselling on drugs, plus a drug lexicon, self-tests and Quit the Shit.",
+        "de": "Kostenlose, anonyme Chat- und E-Mail-Beratung zu Drogen, Drogenlexikon, Selbsttests und Quit the Shit.",
+        "fr": "Conseil gratuit et anonyme par chat et e-mail sur les drogues, lexique, autotests et Quit the Shit.",
+        "it": "Consulenza gratuita e anonima via chat ed e-mail sulle droghe, lessico, autotest e Quit the Shit."
+      },
+      "sources": ["https://www.drugcom.de", "https://www.drugcom.de/beratung/chat/", "https://www.drugcom.de/ueber-uns/"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "sucht-drogen-hotline",
+      "name": "Sucht & Drogen Hotline",
+      "country": "DE",
+      "regions": [],
+      "city": null,
+      "scope": "national",
+      "services": ["helpline"],
+      "url": "https://www.bioeg.de/service/infotelefone/sucht-drogen-hotline/",
+      "phone": "01806 313031",
+      "email": null,
+      "languages": ["de"],
+      "substances": ["all"],
+      "featured": true,
+      "description": {
+        "en": "Nationwide anonymous phone line, daily 8am–midnight (€0.20 per call), referring you to local services.",
+        "de": "Bundesweite anonyme Telefonberatung, täglich 8–24 Uhr (0,20 € pro Anruf), mit Vermittlung vor Ort.",
+        "fr": "Ligne nationale anonyme, tous les jours de 8h à minuit (0,20 € par appel), oriente vers l'aide locale.",
+        "it": "Linea nazionale anonima, ogni giorno dalle 8 a mezzanotte (0,20 € a chiamata), indirizza ai servizi locali."
+      },
+      "sources": [
+        "https://www.bioeg.de/service/infotelefone/sucht-drogen-hotline/",
+        "https://www.nuernberg.de/internet/suchtpraevention/telefonberatung.html"
+      ],
+      "verified": "2026-10"
+    },
+    {
+      "id": "digisucht",
+      "name": "DigiSucht",
+      "country": "DE",
+      "regions": [],
+      "city": null,
+      "scope": "online",
+      "services": ["online-counselling"],
+      "url": "https://www.suchtberatung.digital",
+      "phone": null,
+      "email": null,
+      "languages": ["de"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Free, anonymous online addiction counselling by chat or video, with local services in 14 German states.",
+        "de": "Kostenlose, anonyme Online-Suchtberatung per Chat oder Video, mit Beratungsstellen in 14 Bundesländern.",
+        "fr": "Conseil en addiction en ligne, gratuit et anonyme, par chat ou vidéo, avec des centres de 14 Länder.",
+        "it": "Consulenza online gratuita e anonima sulle dipendenze, via chat o video, con centri in 14 Länder."
+      },
+      "sources": ["https://www.suchtberatung.digital"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "dah-drogen",
+      "name": "Deutsche Aidshilfe – Drogenportal",
+      "country": "DE",
+      "regions": [],
+      "city": null,
+      "scope": "national",
+      "services": ["info", "consumption-room", "needle-exchange", "helpline", "online-counselling"],
+      "url": "https://www.aidshilfe.de/drogen",
+      "phone": "0180 33 19411",
+      "email": null,
+      "languages": ["de"],
+      "substances": ["all"],
+      "featured": true,
+      "description": {
+        "en": "Find drug consumption rooms and syringe vending machines in Germany, plus safer-use info and counselling.",
+        "de": "Drogenkonsumräume und Spritzenautomaten in Deutschland finden, dazu Safer-Use-Infos und Beratung.",
+        "fr": "Trouver salles de consommation et distributeurs de seringues en Allemagne, infos safer use et conseil.",
+        "it": "Trova sale del consumo e distributori di siringhe in Germania, con info safer use e consulenza."
+      },
+      "sources": [
+        "https://www.aidshilfe.de/drogen/",
+        "https://www.aidshilfe.de/drogen/drogenkonsumraeume",
+        "https://www.aidshilfe.de/drogen/drug-checking-verordnungen-der-bundeslaender"
+      ],
+      "verified": "2026-10"
+    },
+    {
+      "id": "naloxontraining",
+      "name": "Naloxon-Training (Deutsche Aidshilfe)",
+      "country": "DE",
+      "regions": [],
+      "city": null,
+      "scope": "online",
+      "services": ["naloxone", "info"],
+      "url": "https://www.naloxontraining.de",
+      "phone": null,
+      "email": null,
+      "languages": ["de"],
+      "substances": ["opioids", "tramadol"],
+      "featured": false,
+      "description": {
+        "en": "Short videos and an online course on recognising an opioid overdose and using naloxone nasal spray.",
+        "de": "Kurze Videos und Online-Training: Opioid-Überdosis erkennen und Naloxon-Nasenspray richtig anwenden.",
+        "fr": "Vidéos et formation en ligne pour reconnaître une overdose d'opioïdes et utiliser la naloxone en spray.",
+        "it": "Video e corso online per riconoscere un'overdose da oppioidi e usare lo spray nasale di naloxone."
+      },
+      "sources": ["https://www.naloxontraining.de"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "jes",
+      "name": "JES Bundesverband",
+      "country": "DE",
+      "regions": [],
+      "city": null,
+      "scope": "national",
+      "services": ["peer-support"],
+      "url": "https://www.jes-bundesverband.de",
+      "phone": "+49 30 69008756",
+      "email": null,
+      "languages": ["de"],
+      "substances": ["opioids"],
+      "featured": false,
+      "description": {
+        "en": "Self-help network of people who use drugs, former users and people in opioid substitution treatment.",
+        "de": "Selbsthilfenetzwerk von Drogen gebrauchenden Menschen, Ehemaligen und Substituierten, mit lokalen Gruppen.",
+        "fr": "Réseau d'autosupport de personnes qui consomment des drogues, d'ex-usagers et de personnes substituées.",
+        "it": "Rete di auto-aiuto di persone che usano droghe, ex consumatori e persone in terapia sostitutiva."
+      },
+      "sources": ["https://www.jes-bundesverband.de", "https://www.jes-bundesverband.de/kleingedrucktes/kontakt/"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "drugchecking-berlin",
+      "name": "Drugchecking Berlin",
+      "country": "DE",
+      "regions": ["BE"],
+      "city": "Berlin",
+      "scope": "regional",
+      "services": ["drug-checking", "counselling"],
+      "url": "https://drugchecking.berlin",
+      "phone": null,
+      "email": null,
+      "languages": ["de"],
+      "substances": ["all"],
+      "featured": true,
+      "description": {
+        "en": "Free, anonymous drug checking with counselling at three Berlin sites (Fixpunkt, Schwulenberatung, vista).",
+        "de": "Kostenloses, anonymes Drugchecking mit Beratung an drei Standorten (Fixpunkt, Schwulenberatung, vista).",
+        "fr": "Drug checking gratuit et anonyme avec conseil sur trois sites à Berlin (Fixpunkt, Schwulenberatung, vista).",
+        "it": "Drug checking gratuito e anonimo con consulenza in tre sedi a Berlino (Fixpunkt, Schwulenberatung, vista)."
+      },
+      "sources": ["https://drugchecking.berlin", "https://drugchecking.berlin/index.php/kontakt/druckausgleich"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "sonar-berlin",
+      "name": "SONAR – Safer Nightlife Berlin",
+      "country": "DE",
+      "regions": ["BE"],
+      "city": "Berlin",
+      "scope": "regional",
+      "services": ["nightlife", "info", "counselling"],
+      "url": "https://safer-nightlife.berlin",
+      "phone": null,
+      "email": "sonar@safer-nightlife.de",
+      "languages": ["de", "en"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Harm reduction info stands at Berlin clubs and festivals, safer-mixing guides and a nightlife podcast.",
+        "de": "Infostände zu Safer Use in Berliner Clubs und auf Festivals, Safer-Mixing-Infos und ein Podcast.",
+        "fr": "Stands de réduction des risques dans les clubs et festivals de Berlin, infos sur les mélanges et podcast.",
+        "it": "Stand di riduzione del danno in club e festival di Berlino, info sui mix di sostanze e un podcast."
+      },
+      "sources": ["https://safer-nightlife.berlin", "https://safer-nightlife.berlin/kontakt/"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "drogennotdienst-berlin",
+      "name": "Drogennotdienst Berlin",
+      "country": "DE",
+      "regions": ["BE"],
+      "city": "Berlin",
+      "scope": "regional",
+      "services": ["counselling", "helpline"],
+      "url": "https://drogennotdienst.de",
+      "phone": "030 19237",
+      "email": null,
+      "languages": ["de"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Berlin drug counselling by phone, chat or walk-in (Mon–Fri 9–19, Sat 14–19), incl. a party-drug clinic.",
+        "de": "Drogenberatung in Berlin per Telefon, Chat oder vor Ort (Mo–Fr 9–19, Sa 14–19), mit Partydrogensprechstunde.",
+        "fr": "Conseil drogues à Berlin par téléphone, chat ou sur place (lu–ve 9–19h, sa 14–19h), drogues festives incluses.",
+        "it": "Consulenza a Berlino al telefono, in chat o di persona (lun–ven 9–19, sab 14–19), anche sulle droghe da festa."
+      },
+      "sources": ["https://drogennotdienst.de"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "mindzone",
+      "name": "mindzone",
+      "country": "DE",
+      "regions": ["BY"],
+      "city": "München",
+      "scope": "regional",
+      "services": ["nightlife", "info", "online-counselling"],
+      "url": "https://mindzone.info",
+      "phone": "089 51657533",
+      "email": "kontakt@mindzone.info",
+      "languages": ["de"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Info stands at parties across Bavaria, pill warnings and anonymous online counselling (Caritas).",
+        "de": "Infostände auf Partys in ganz Bayern, Pillenwarnungen und anonyme Online-Beratung (Caritas).",
+        "fr": "Stands d'info en soirée dans toute la Bavière, alertes sur les pilules et conseil anonyme en ligne.",
+        "it": "Stand informativi alle feste in tutta la Baviera, avvisi sulle pastiglie e consulenza anonima online."
+      },
+      "sources": ["https://mindzone.info", "https://mindzone.info/kontakt/", "https://mindzone.info/projekt/profil/"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "drug-scouts",
+      "name": "Drug Scouts",
+      "country": "DE",
+      "regions": ["SN"],
+      "city": "Leipzig",
+      "scope": "regional",
+      "services": ["counselling", "helpline", "info", "nightlife"],
+      "url": "https://www.drugscouts.de",
+      "phone": "0341 211 22 10",
+      "email": "drugscouts@drugscouts.de",
+      "languages": ["de", "en"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Free, anonymous drug counselling in Leipzig, walk-in or by phone (Thu), plus info and party outreach.",
+        "de": "Kostenlose, anonyme Drogenberatung in Leipzig, vor Ort oder am Drogentelefon (Do), Infos und Partyarbeit.",
+        "fr": "Conseil drogues gratuit et anonyme à Leipzig, sur place ou par téléphone (jeu), infos et présence en soirée.",
+        "it": "Consulenza gratuita e anonima a Lipsia, di persona o al telefono (gio), info e presenza alle feste."
+      },
+      "sources": ["https://www.drugscouts.de"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "chillout-potsdam",
+      "name": "Chill out e.V.",
+      "country": "DE",
+      "regions": ["BB"],
+      "city": "Potsdam",
+      "scope": "regional",
+      "services": ["counselling", "online-counselling", "info"],
+      "url": "https://www.chillout-pdm.de",
+      "phone": "0331 28791258",
+      "email": "chillout@chillout-pdm.de",
+      "languages": ["de", "en"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Accepting drug counselling in Potsdam with open drop-in hours, online advice and substance warnings.",
+        "de": "Akzeptierende Drogenberatung in Potsdam mit offenen Sprechzeiten, Online-Beratung und Warnmeldungen.",
+        "fr": "Conseil drogues sans jugement à Potsdam, permanences ouvertes, conseil en ligne et alertes sur les produits.",
+        "it": "Consulenza sulle droghe senza giudizio a Potsdam, orari aperti, consulenza online e avvisi sulle sostanze."
+      },
+      "sources": ["https://www.chillout-pdm.de"],
+      "verified": "2026-10"
+    },
+    {
+      "id": "drogerie-alive-th",
+      "name": "Drogerie / ALIVE (SiT Thüringen)",
+      "country": "DE",
+      "regions": ["TH"],
+      "city": "Erfurt",
+      "scope": "regional",
+      "services": ["drug-checking", "nightlife", "peer-support", "info"],
+      "url": "https://praevention-info.de/drogerie/",
+      "phone": "+49 361 21 30 03 60",
+      "email": null,
+      "languages": ["de"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Safer-nightlife team at parties in Thuringia, with a PsyCare chill-out area and mobile drug checking (ALIVE).",
+        "de": "Safer-Nightlife-Team auf Thüringer Partys mit PsyCare-Chillout und mobilem Drug Checking (ALIVE).",
+        "fr": "Équipe safer nightlife en Thuringe : espace PsyCare/chill-out et drug checking mobile (ALIVE) en soirée.",
+        "it": "Squadra safer nightlife in Turingia: area PsyCare/chill-out e drug checking mobile (ALIVE) alle feste."
+      },
+      "sources": [
+        "https://praevention-info.de/drogerie/",
+        "https://praevention-info.de/drogerie/drug-checking",
+        "https://www.aerzteblatt.de/news/partydrogen-check-mindert-gefahren-des-konsums"
+      ],
+      "verified": "2026-10"
+    },
+    {
+      "id": "drug-checking-mv",
+      "name": "Drug-Checking Mecklenburg-Vorpommern",
+      "country": "DE",
+      "regions": ["MV"],
+      "city": "Rostock",
+      "scope": "regional",
+      "services": ["drug-checking", "counselling"],
+      "url": "https://drug-checking.med.uni-rostock.de",
+      "phone": null,
+      "email": null,
+      "languages": ["de"],
+      "substances": ["all"],
+      "featured": false,
+      "description": {
+        "en": "Free, anonymous drug checking at Rostock's health office (Tue 16–18h) and at festivals such as Fusion.",
+        "de": "Kostenloses, anonymes Drug Checking im Gesundheitsamt Rostock (Di 16–18 Uhr) und auf Festivals wie Fusion.",
+        "fr": "Drug checking gratuit et anonyme au service de santé de Rostock (mar 16h–18h) et sur des festivals.",
+        "it": "Drug checking gratuito e anonimo all'ufficio sanitario di Rostock (mar 16–18) e a festival come Fusion."
+      },
+      "sources": [
+        "https://drug-checking.med.uni-rostock.de/stationaeres-drug-checking",
+        "https://drug-checking.med.uni-rostock.de/aktuelles",
+        "https://rathaus.rostock.de/de/gemeinsames_drug_checking_angebot_im_rostocker_gesundheitsamt_gestartet/406055"
+      ],
+      "verified": "2026-10"
+    }
+  ],
+  "emergency": {
+    "CH": {
+      "ambulance": "144",
+      "general": "112",
+      "poison": { "name": "Tox Info Suisse", "phone": "145", "url": "https://www.toxinfo.ch" }
+    },
+    "DE": {
+      "ambulance": "112",
+      "general": "112",
+      "poison": [
+        { "name": "Giftnotruf Berlin (Charité)", "phone": "030 19240", "regions": ["BE", "BB"], "url": "https://giftnotruf.charite.de" },
+        { "name": "Informationszentrale gegen Vergiftungen Bonn", "phone": "0228 19240", "regions": ["NW"], "url": "https://gizbonn.de" },
+        { "name": "Gemeinsames Giftinformationszentrum Erfurt", "phone": "0361 730730", "regions": ["MV", "SN", "ST", "TH"], "url": "https://www.ggiz-erfurt.de" },
+        { "name": "Vergiftungs-Informations-Zentrale Freiburg", "phone": "0761 19240", "regions": ["BW"], "url": "https://www.uniklinik-freiburg.de/giftberatung.html" },
+        { "name": "Giftinformationszentrum-Nord (Göttingen)", "phone": "0551 19240", "regions": ["HB", "HH", "NI", "SH"], "url": "https://www.giz-nord.de" },
+        { "name": "Giftinformationszentrum Mainz", "phone": "06131 19240", "regions": ["RP", "HE", "SL"], "url": "https://www.unimedizin-mainz.de/giz/index.html" },
+        { "name": "Giftnotruf München", "phone": "089 19240", "regions": ["BY"], "url": "https://toxikologie.mri.tum.de/de/giftnotruf-muenchen" }
+      ]
+    }
+  }
+}

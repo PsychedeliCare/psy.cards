@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,10 +29,15 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -42,11 +48,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.os.LocaleListCompat
 import cards.psy.app.R
+import cards.psy.app.data.LocalInfoStore
 import cards.psy.app.data.Sex
 import cards.psy.app.data.SupportedLocales
 import cards.psy.app.data.WeightUnit
 import cards.psy.app.ui.LocalBody
+import cards.psy.app.ui.LocalCountry
 import cards.psy.app.ui.LocalPack
+import cards.psy.app.ui.card.CountryPickerSheet
+import cards.psy.app.ui.components.PhIcon
 import cards.psy.app.ui.components.StatusIcon
 import cards.psy.app.ui.substance.SourceRow
 import cards.psy.app.ui.theme.PsyColors
@@ -57,7 +67,9 @@ private val localeNames = mapOf("en" to "English", "fr" to "Français", "de" to 
 fun SettingsScreen(contentPadding: PaddingValues) {
     val pack = LocalPack.current
     val body = LocalBody.current
+    val country = LocalCountry.current
     val uri = LocalUriHandler.current
+    var pickCountry by remember { mutableStateOf(false) }
 
     LazyColumn(
         Modifier.fillMaxSize(),
@@ -88,6 +100,33 @@ fun SettingsScreen(contentPadding: PaddingValues) {
                     ) {
                         Text(localeNames[locale] ?: locale, fontSize = 16.sp, modifier = Modifier.weight(1f))
                         RadioButton(selected = pack.locale == locale, onClick = null)
+                    }
+                }
+            }
+        }
+
+        if (country.countries.isNotEmpty()) {
+            item {
+                Group(pack.t("country.title"), footer = "${pack.t("country.hint")} ${pack.t("country.privacy")}") {
+                    val code = country.code
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .clickable(role = Role.Button) { pickCountry = true }
+                            .padding(horizontal = 16.dp, vertical = 12.dp)
+                            .testTag("country-picker"),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    ) {
+                        PhIcon("globe-fill", size = 18.dp, tint = PsyColors.fgMute)
+                        Text(pack.t("country.choose"), fontSize = 16.sp, modifier = Modifier.weight(1f))
+                        Text(
+                            code?.let { "${LocalInfoStore.flag(it)}  ${country.name(it, pack.javaLocale)}" } ?: "—",
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = if (code == null) PsyColors.fgMute else PsyColors.fg,
+                        )
+                        PhIcon("caret-right-bold", size = 12.dp, tint = PsyColors.fgMute)
                     }
                 }
             }
@@ -176,6 +215,7 @@ fun SettingsScreen(contentPadding: PaddingValues) {
             )
         }
     }
+    if (pickCountry) CountryPickerSheet(onDismiss = { pickCountry = false }, allowNone = true)
 }
 
 @Composable

@@ -1,8 +1,9 @@
 ---
 /**
- * Compact, card-sized dose scale: coloured ranges on a shared track with
- * level names above and boundary amounts below. Everything is laid out in
- * `em`, so labels placed at build time never collide at any card size.
+ * Card-sized linear dose chart: coloured ranges sitting on a continuous
+ * line, a dotted bracket under each range and boundary amounts below, with
+ * level names above. Everything is laid out in `em`, so labels placed at
+ * build time never collide at any card size.
  */
 import type { DoseChart } from "../../lib/dose-chart";
 import { formatDoseTick } from "../../lib/dose-chart";
@@ -93,6 +94,14 @@ const round = (n: number) => Math.round(n * 100) / 100;
       ) : (
         <span
           class:list={["psy-dose__bar", { "psy-dose__bar--open": segment.openEnd }]}
+          style={`--l: ${round(segment.left)}%; --w: ${round(segment.width)}%; --c: ${segment.color}`}
+        />
+      )
+    )}
+    {segments.map((segment) =>
+      segment.isPoint ? null : (
+        <span
+          class:list={["psy-dose__range", { "psy-dose__range--open": segment.openEnd }]}
           style={`--l: ${round(segment.left)}%; --w: ${round(segment.width)}%; --c: ${segment.color}`}
         />
       )

@@ -1,0 +1,270 @@
+{
+  "country": "SK",
+  "name": "Slovakia",
+  "asOf": "2026-10",
+  "summary": "Possessing any amount is a crime. Since Aug 2024 the Criminal Code sets 'negligible amounts' (e.g. 2 g cannabis): up to 1 yr for cannabis, 2 yrs for other drugs; more carries 6 months–6 yrs.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "155",
+    "poisonControl": {
+      "name": "Národné toxikologické informačné centrum (NTIC)",
+      "phone": "+421 2 5477 4166"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law. Paramedics are bound by medical confidentiality, but police may attend, and possessing even a negligible amount is a crime.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug checking service is known to operate legally in Slovakia.",
+  "sources": {
+    "tz": {
+      "title": "Criminal Code 300/2005 Z. z., §§ 135c–135e, 171–172 and Annexes 1–2 (version from 18 Aug 2026)",
+      "url": "https://static.slov-lex.sk/static/SK/ZZ/2005/300/20260818.html"
+    },
+    "z139": {
+      "title": "Act 139/1998 Z. z. on narcotic and psychotropic substances, Annex 1 (version from 1 Jan 2026)",
+      "url": "https://static.slov-lex.sk/static/SK/ZZ/1998/139/20260101.html"
+    },
+    "teraz2022": {
+      "title": "TASR (Mar 2022): parliament creates separate, milder offence for cannabis possession",
+      "url": "https://www.teraz.sk/slovensko/nrsr-trestne-sadzby-za-marihuanu-pre-v/619768-clanok.html"
+    },
+    "suklDxm": {
+      "title": "ŠÚKL: Stopex (dextromethorphan) tablets moved to prescription-only",
+      "url": "https://www.sukl.sk/buxus/docs/Media/Doplnujuce_informacie_k_lieku_STOPEX__dextrometorfan_.pdf"
+    },
+    "wikiMush": {
+      "title": "Wikipedia: Legal status of psilocybin mushrooms",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "alk": {
+      "title": "Act 219/1996 Z. z. on protection against abuse of alcoholic beverages (no sale to under-18s)",
+      "url": "https://www.slov-lex.sk/ezbierky/pravne-predpisy/SK/ZZ/1996/219/"
+    },
+    "euN2O": {
+      "title": "EU Perspectives (Mar 2026): nitrous oxide classified reprotoxic; large canisters may be barred from consumer sale from Feb 2027",
+      "url": "https://euperspectives.eu/2026/03/nitrous-oxide-deaths-and-injuries-fuel-calls-for-eu-wide-restrictions/"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Up to 3 blotters ('negligible amount'): up to 2 yrs; up to 15 blotters: 6 months–3 yrs; more: 1–6 yrs.",
+      "sources": [
+        "tz",
+        "z139"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Negligible amount is 10 g dried (≤100 mg psilocybin/psilocin): up to 2 yrs. Growing ≤40 fruiting bodies: up to 1 yr. More: harsher.",
+      "sources": [
+        "tz",
+        "z139",
+        "wikiMush"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "DMT is listed. Up to 1 g ('negligible'): up to 2 yrs; more: 6 months–6 yrs. Ayahuasca contains DMT.",
+      "sources": [
+        "z139",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is listed; possession is a crime (up to 2 yrs for ≤1 g). Cacti are not named on the list.",
+      "sources": [
+        "z139",
+        "tz"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOC, DOET etc. are listed; possession of any amount is a crime (up to 2 yrs for a negligible amount).",
+      "sources": [
+        "z139",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25I-NBOMe and related NBOMes are listed; possession of any amount is a crime.",
+      "sources": [
+        "z139",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B and other 2C-x are listed; possession of any amount is a crime (up to 2 yrs for ≤1 g).",
+      "sources": [
+        "z139",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7 are listed; possession of any amount is a crime.",
+      "sources": [
+        "z139",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "5-MeO-MiPT and 5-MeO-DALT are listed (crime). 5-MeO-DMT was not found on the 2026 list, so its status is less clear.",
+      "sources": [
+        "z139",
+        "tz"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Up to 2 g (≤200 mg THC): up to 1 yr; ≤10 g: 6 months–3 yrs; more: 1–6 yrs. Growing ≤2 plants: up to 6 months. CBD hemp legal.",
+      "sources": [
+        "tz",
+        "teraz2022"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Listed medicine (anaesthetic). Possession without a prescription is a crime (up to 2 yrs for ≤1 g).",
+      "sources": [
+        "z139",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is listed; possession of any amount is a crime.",
+      "sources": [
+        "z139",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "legal",
+      "note": "Explicitly excluded from the drug lists. Some cough products are sold OTC in pharmacies; Stopex tablets are prescription-only since 2015.",
+      "sources": [
+        "z139",
+        "suklDxm"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a listed drug and no specific consumer ban found. EU rules may stop sales of large canisters to the public from Feb 2027.",
+      "sources": [
+        "z139",
+        "euN2O"
+      ],
+      "confidence": "medium"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Negligible amount 0.2 g (amphetamine or methamphetamine): up to 2 yrs; more: harsher. ADHD medicines are prescription-only.",
+      "sources": [
+        "tz",
+        "z139"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Negligible amount is 3 pills or 0.8 g: up to 2 yrs; up to 15 pills: 6 months–3 yrs; more: 1–6 yrs.",
+      "sources": [
+        "tz",
+        "z139"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Negligible amount is 0.3 g: up to 2 yrs; up to 1.5 g: 6 months–3 yrs; more: 1–6 yrs.",
+      "sources": [
+        "tz",
+        "z139"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal and not a controlled substance.",
+      "sources": [
+        "z139"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 18; selling or serving alcohol to under-18s is prohibited.",
+      "sources": [
+        "alk"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB and GBL are both listed, so possession is a crime. Sodium oxybate is prescription-only.",
+      "sources": [
+        "z139",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin: negligible amount 0.5 g (up to 2 yrs). Morphine, oxycodone, fentanyl are prescription-only; without one, possession is a crime.",
+      "sources": [
+        "tz",
+        "z139"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine; not on the Slovak controlled-drug list, so possession without a prescription is not a drug crime.",
+      "sources": [
+        "z139"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only; diazepam and most others are listed psychotropics, so possession without a prescription can be a crime.",
+      "sources": [
+        "z139",
+        "tz"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Pharmaceutical MAOIs are prescription-only. Harmala alkaloids/Syrian rue are not listed; DMT in ayahuasca is.",
+      "sources": [
+        "z139"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "z139"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "country": "LT",
+  "name": "Lithuania",
+  "asOf": "2026-10",
+  "summary": "Since 2017, possessing even a small amount of drugs without intent to sell is a criminal offence (Criminal Code art. 259(2)); people who seek treatment can be released from liability.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "Apsinuodijimų kontrolės ir informacijos biuras (Poison Control and Information Bureau)",
+      "phone": "+370 5 236 2052"
+    }
+  },
+  "callingForHelp": "No specific legal protection for people who call for help in a drug emergency was found.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug checking service found.",
+  "sources": {
+    "bk": {
+      "title": "Baudžiamasis kodeksas (Criminal Code), art. 259",
+      "url": "https://e-seimas.lrs.lt/portal/legalAct/lt/TAD/TAIS.111555/asr"
+    },
+    "drinkingAge": {
+      "title": "Legal drinking age (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "energy": {
+      "title": "Energy drink: regulation by country (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Energy_drink"
+    },
+    "cannabisLt": {
+      "title": "Cannabis in Lithuania (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Cannabis_in_Lithuania"
+    },
+    "psilocybin": {
+      "title": "Legal status of psilocybin mushrooms (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "euReach": {
+      "title": "Dáil answer on nitrous oxide incl. EU REACH consumer restriction (Sept 2026), HRB National Drugs Library",
+      "url": "https://www.drugsandalcohol.ie/46896/"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Possession of any amount is a criminal offence (small amounts: fine, community service or arrest).",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "medium"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin mushrooms are controlled; possession is an offence and growing them is a crime.",
+      "sources": [
+        "bk",
+        "psilocybin"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "DMT is controlled; ayahuasca is treated as a DMT preparation.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is controlled; possession is a criminal offence.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "Controlled; possession is a criminal offence.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "Controlled; possession is a criminal offence.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "Controlled; possession is a criminal offence.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "Controlled; possession is a criminal offence.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "medium"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "5-MeO-DMT is controlled; other 5-MeO tryptamines are likely controlled as new psychoactive substances.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Criminalised in 2017, including small amounts; medical cannabis isn't available. Hemp products up to 0.3% THC are legal.",
+      "sources": [
+        "bk",
+        "cannabisLt"
+      ],
+      "confidence": "medium"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Controlled medicine: possession without a prescription is a criminal offence.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "medium"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Controlled; possession is a criminal offence.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "low"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not verified. DXM is not under the UN drug conventions; whether it is OTC or prescription-only in Lithuania was not confirmed.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a controlled drug; national sales rules not verified. EU ban on consumer sales expected from Feb 2027.",
+      "sources": [
+        "euReach"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Possession of any amount is a criminal offence. ADHD medicines are legal with a prescription.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Possession of any amount is a criminal offence.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "medium"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Possession of any amount is a criminal offence.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "medium"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal, but selling energy drinks to under-18s has been banned since 2014.",
+      "sources": [
+        "energy"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 20 (raised from 18 in 2018); shop sales limited to 10:00–20:00 (Sundays 10:00–15:00).",
+      "sources": [
+        "drinkingAge"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is controlled; possession is a criminal offence. Status of GBL/1,4-BD not verified.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "low"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin and other opioids: possession of any amount is a criminal offence; legal only with a prescription.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "medium"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine. Whether unprescribed possession is itself an offence was not verified.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Psychotropic substances: possession without a prescription is treated like other drug possession.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Medical MAOIs are prescription-only; harmala/Syrian rue not known to be controlled. Ayahuasca contains DMT (controlled).",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "grey",
+      "note": "Prescription-only medicines, not controlled drugs.",
+      "sources": [
+        "bk"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

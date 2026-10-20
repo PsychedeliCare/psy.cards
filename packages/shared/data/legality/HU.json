@@ -1,0 +1,261 @@
+{
+  "country": "HU",
+  "name": "Hungary",
+  "asOf": "2026-10",
+  "summary": "Using or holding even a small amount is a crime (up to 2 yrs); more is 2–8 yrs or worse. Diversion to a 6-month programme is limited since 2025 (twice max, must reveal the source). Rules unchanged as of Oct 2026.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "104",
+    "poisonControl": {
+      "name": "Egészségügyi Toxikológiai Tájékoztató Szolgálat (ETTSZ)",
+      "phone": "+36 80 201 199"
+    }
+  },
+  "callingForHelp": "No Good Samaritan protection. Drug use itself is a crime and police may get involved, although medical staff are bound by confidentiality.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug checking service operates in Hungary.",
+  "sources": {
+    "btk": {
+      "title": "Criminal Code (Act C of 2012), §§ 178–180 and 461 (version in force from 1 Oct 2026)",
+      "url": "https://net.jogtar.hu/jogszabaly?docid=a1200100.tv"
+    },
+    "bm78": {
+      "title": "Interior Ministry Decree 78/2022 (XII. 28.) on controlled substances, incl. NPS generic groups (version from 9 Oct 2026)",
+      "url": "https://net.jogtar.hu/jogszabaly?docid=a2200078.bm"
+    },
+    "drogriporter": {
+      "title": "Drogriporter: 'Ismerd a jogaid – drogszigor idején is!' (27 Jan 2026) on the June 2025 amendments",
+      "url": "https://drogriporter.hu/ismerd-a-jogaid-drogszigor-idejen-is/"
+    },
+    "wikiCannabis": {
+      "title": "Wikipedia: Legality of cannabis (Hungary: CBD only)",
+      "url": "https://en.wikipedia.org/wiki/Legality_of_cannabis"
+    },
+    "wikiAge": {
+      "title": "Wikipedia: Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Holding up to 0.001 g pure LSD ('small amount') for own use: up to 2 yrs or diversion; more: 2–8 yrs.",
+      "sources": [
+        "btk",
+        "bm78"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Treated by psilocybin content: up to 0.1 g psilocybin (0.2 g psilocin) is a 'small amount' (up to 2 yrs or diversion); more: 2–8 yrs.",
+      "sources": [
+        "btk",
+        "bm78"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "DMT is listed; small amount is set per case (7× an effective dose, about 0.35 g). Ayahuasca and harmine are also controlled.",
+      "sources": [
+        "btk",
+        "bm78",
+        "drogriporter"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is listed; possession for own use is a crime (up to 2 yrs for a small amount, 2–8 yrs above).",
+      "sources": [
+        "bm78",
+        "btk"
+      ],
+      "confidence": "high"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOC etc. are listed and a generic phenethylamine group covers relatives; possession is a crime.",
+      "sources": [
+        "bm78",
+        "btk"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25I-NBOMe is listed and the NPS generic phenethylamine group covers other NBOMes; possession is a crime.",
+      "sources": [
+        "bm78",
+        "btk"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B and other 2C-x are listed or covered by the generic phenethylamine group; possession is a crime.",
+      "sources": [
+        "bm78",
+        "btk"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-7 and other 2C-T-x are listed or covered by the generic phenethylamine group; possession is a crime.",
+      "sources": [
+        "bm78",
+        "btk"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "A generic NPS group covers 4-/5-methoxy tryptamines (5-MeO-DMT, 5-MeO-MiPT…), and NPS count as drugs; possession is a crime.",
+      "sources": [
+        "bm78",
+        "btk"
+      ],
+      "confidence": "high"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Small amount: ≤6 g total THC (roughly 30+ g of strong herb) or ≤5 plants: up to 2 yrs or diversion. More: 2–8 yrs. HHC banned. No medical access.",
+      "sources": [
+        "btk",
+        "drogriporter",
+        "wikiCannabis"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "A medicine, but possession without a prescription is a drug crime (small amount: ≤1 g pure ketamine, up to 2 yrs).",
+      "sources": [
+        "btk",
+        "bm78"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is listed; possession is a crime (up to 2 yrs for a small amount).",
+      "sources": [
+        "bm78",
+        "btk"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "grey",
+      "note": "Not a controlled drug (the decree excludes it). Sold as a cough medicine in pharmacies; prescription/OTC status not verified.",
+      "sources": [
+        "bm78"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not on the controlled-substance or NPS lists; no specific consumer ban was found.",
+      "sources": [
+        "bm78"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Small amount ≤0.5 g pure amphetamine/methamphetamine: up to 2 yrs or diversion; more: 2–8 yrs. ADHD medicines are prescription-only.",
+      "sources": [
+        "btk",
+        "bm78"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Small amount ≤1 g pure MDMA: up to 2 yrs or diversion; more: 2–8 yrs. Near schools/dorms: 1–5 yrs even for small amounts.",
+      "sources": [
+        "btk",
+        "drogriporter"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Small amount ≤2 g pure cocaine: up to 2 yrs or diversion; more: 2–8 yrs.",
+      "sources": [
+        "btk"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal and not a controlled substance.",
+      "sources": [
+        "bm78"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 18; sale to minors is prohibited.",
+      "sources": [
+        "wikiAge"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB and GBL are listed drugs (small amount: 7.5 g GHB, 6.2 g GBL; up to 2 yrs or diversion). Oxybate is prescription-only.",
+      "sources": [
+        "btk",
+        "bm78"
+      ],
+      "confidence": "high"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin small amount ≤0.6 g pure (up to 2 yrs); more 2–8 yrs. Morphine, oxycodone, fentanyl are prescription-only.",
+      "sources": [
+        "btk",
+        "bm78"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine; not on the controlled-drug lists, so possession without a prescription is not a drug crime.",
+      "sources": [
+        "bm78"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only (psychotropic lists P3/P4, not 'drugs' for possession offences). Dealing them, or hoarding unauthorised ones, is a crime.",
+      "sources": [
+        "bm78",
+        "btk"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "illegal",
+      "note": "Harmine is on the NPS list, which counts as a drug, so Syrian rue/ayahuasca extracts risk prosecution. Pharmaceutical MAOIs are Rx-only.",
+      "sources": [
+        "bm78",
+        "btk"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "bm78"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

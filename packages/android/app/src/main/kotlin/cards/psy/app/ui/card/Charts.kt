@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -25,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.CornerRadius
@@ -52,9 +50,7 @@ import cards.psy.app.data.DoseChart
 import cards.psy.app.data.DoseRow
 import cards.psy.app.data.GableRow
 import cards.psy.app.data.PersonalDoseMath
-import cards.psy.app.data.ToxicityMargin
 import cards.psy.app.ui.LocalPack
-import cards.psy.app.ui.components.HatchPattern
 import cards.psy.app.ui.components.LabelLayout
 import cards.psy.app.ui.components.PhIcon
 import cards.psy.app.ui.theme.PsyColors
@@ -68,9 +64,10 @@ private val ScaleLabelStyle = TextStyle(fontSize = 11.5.sp, fontWeight = FontWei
 private val ScaleTickStyle = TextStyle(fontSize = 11.5.sp, fontWeight = FontWeight.SemiBold, fontFeatureSettings = "tnum")
 
 /**
- * Compact dose scale (web `card/DoseScale.astro`): coloured ranges on a
- * shared track, level names above and boundary amounts below, placed
- * without collisions against the real text widths.
+ * Linear dose chart (web `card/DoseScale.astro`): coloured ranges sitting on
+ * a continuous line with a dotted bracket under each range, level names
+ * above and boundary amounts below, placed without collisions against the
+ * real text widths.
  */
 @Composable
 fun DoseScale(
@@ -115,10 +112,10 @@ fun DoseScale(
                     Text(label.text.lowercase(), style = ScaleLabelStyle, color = hexColor(label.color), maxLines = 1)
                 }
             }
-            Box(Modifier.padding(vertical = 5.dp).fillMaxWidth().height(9.dp)) {
-                DoseTrack(chart, face, Modifier.matchParentSizeCompat())
+            Box(Modifier.padding(top = 5.dp, bottom = 3.dp).fillMaxWidth().height(TrackHeight + BracketGap + BracketHeight)) {
+                DoseTrack(chart, face, Modifier.fillMaxWidth().height(TrackHeight + BracketGap + BracketHeight))
                 if (markerFraction >= 0f) {
-                    val trackHeight = 9.dp
+                    val trackHeight = TrackHeight
                     Box(
                         Modifier
                             .offset(x = with(density) { (widthPx * markerFraction).toDp() } - trackHeight * 0.85f, y = -trackHeight * 0.35f)
@@ -138,7 +135,11 @@ fun DoseScale(
     }
 }
 
-private fun Modifier.matchParentSizeCompat() = this.then(Modifier.fillMaxWidth().height(9.dp))
+private val TrackHeight = 9.dp
+
+/** Dotted bracket under each range (start → end amount). */
+private val BracketHeight = 5.dp
+private val BracketGap = 2.dp
 
 /** Positions each child centred at x% of the row (web `left: var(--x)` + translateX(-50%)). */
 @Composable
@@ -158,8 +159,32 @@ private fun PlacedRow(xs: List<Double>, content: @Composable () -> Unit) {
 @Composable
 private fun DoseTrack(chart: DoseChart, face: Color, modifier: Modifier) {
     Canvas(modifier) {
-        val h = size.height
-        drawRoundRect(PsyColors.fg.copy(alpha = 0.09f), cornerRadius = CornerRadius(h / 2))
+        val h = TrackHeight.toPx()
+        // The continuous line the ranges sit on.
+        val lineH = h * 0.45f
+        drawRoundRect(
+            PsyColors.fg.copy(alpha = 0.11f),
+            topLeft = Offset(-3.dp.toPx(), (h - lineH) / 2),
+            size = Size(size.width + 6.dp.toPx(), lineH),
+            cornerRadius = CornerRadius(lineH / 2),
+        )
+        // Dotted brackets spanning each range.
+        val half = 0.5.dp.toPx()
+        val dots = PathEffect.dashPathEffect(floatArrayOf(1.5.dp.toPx(), 1.8.dp.toPx()))
+        for (segment in chart.segments) {
+            if (segment.isPoint) continue
+            val x0 = size.width * (segment.left / 100).toFloat()
+            val x1 = x0 + max(size.width * (segment.width / 100).toFloat(), h)
+            val top = h + BracketGap.toPx()
+            val bottom = top + BracketHeight.toPx()
+            val bracket = Path().apply {
+                moveTo(x0 + half, top)
+                lineTo(x0 + half, bottom)
+                lineTo(if (segment.openEnd) x1 - h else x1 - half, bottom)
+                if (!segment.openEnd) lineTo(x1 - half, top)
+            }
+            drawPath(bracket, hexColor(segment.color).copy(alpha = 0.6f), style = Stroke(1.dp.toPx(), pathEffect = dots))
+        }
         val ring = max(1.5.dp.toPx(), h * 0.2f)
         for (segment in chart.segments) {
             val color = hexColor(segment.color)
@@ -245,109 +270,6 @@ fun RouteLabel(chart: DoseChart, unitOverride: String? = null) {
                     .padding(horizontal = 6.dp, vertical = 2.dp),
             )
         }
-    }
-}
-
-// ---------------------------------------------------------------- Margin
-
-/** Log-scale position (1× → 0, 1000× → 1) shared by the meter and the chart. */
-private fun logPosition(ratio: Double) = (log10(ratio) / 3).coerceIn(0.0, 1.0).toFloat()
-
-/**
- * Toxicity margin meter (web `.psy-margin`): lethal ÷ usual dose on a log
- * track from red to green, with alcohol as a familiar reference point.
- */
-@Composable
-fun MarginMeter(margin: ToxicityMargin?, danger: Boolean, alcoholRatio: Double?, face: Color, modifier: Modifier = Modifier) {
-    val pack = LocalPack.current
-    val trackHeight = 8.dp
-    val bubbleHeight = 22.dp
-    val density = LocalDensity.current
-    val measurer = rememberTextMeasurer()
-    Column(modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-        BoxWithConstraints(Modifier.fillMaxWidth().height(if (margin == null) trackHeight else bubbleHeight + 7.dp + trackHeight)) {
-            val width = maxWidth
-            val trackTop = if (margin == null) 0.dp else bubbleHeight + 7.dp
-            val trackModifier = Modifier.offset(y = trackTop).fillMaxWidth().height(trackHeight).clip(CircleShape)
-            if (margin == null) {
-                HatchPattern(
-                    color = if (danger) PsyColors.emergency.copy(alpha = 0.7f) else PsyColors.fg.copy(alpha = 0.22f),
-                    background = if (danger) PsyColors.emergency.copy(alpha = 0.2f) else PsyColors.fg.copy(alpha = 0.06f),
-                    spacing = 7.dp,
-                    lineWidth = 3.2.dp,
-                    modifier = trackModifier,
-                )
-            } else {
-                Box(trackModifier.background(Brush.horizontalGradient(*PsyColors.marginStops)))
-            }
-            if (alcoholRatio != null) {
-                Box(
-                    Modifier
-                        .offset(x = width * logPosition(alcoholRatio) - trackHeight * 1.05f, y = trackTop - trackHeight * 0.55f)
-                        .size(trackHeight * 2.1f)
-                        .background(PsyColors.fg.copy(alpha = 0.88f), CircleShape),
-                    contentAlignment = Alignment.Center,
-                ) { PhIcon("wine-fill", size = trackHeight * 1.15f, tint = PsyColors.ink) }
-            }
-            if (margin != null) {
-                val fraction = logPosition(margin.ratio)
-                val text = "${if (margin.atLeast) ">" else ""}${pack.number(margin.ratio)}×"
-                // The bubble slides so it never leaves the track; its pointer
-                // stays exactly on the value (web translateX(-x)).
-                Layout(content = { MarginBubble(text, margin.extrapolated, face, bubbleHeight) }) { measurables, constraints ->
-                    val bubble = measurables.first().measure(constraints.copy(minWidth = 0))
-                    layout(constraints.maxWidth, bubble.height) {
-                        bubble.placeRelative(((constraints.maxWidth - bubble.width) * fraction).toInt(), 0)
-                    }
-                }
-                Canvas(Modifier.offset(x = width * fraction - 5.dp, y = bubbleHeight + 1.dp).size(10.dp, 6.dp)) {
-                    drawPath(Path().apply { moveTo(0f, 0f); lineTo(size.width, 0f); lineTo(size.width / 2, size.height); close() }, PsyColors.fg)
-                }
-            }
-        }
-        BoxWithConstraints(Modifier.fillMaxWidth().height(16.dp)) {
-            val labels = listOf("1×", "10×", "100×", "1000×")
-            labels.forEachIndexed { index, label ->
-                val measured = with(density) { measurer.measure(label, TextStyle(fontSize = 10.sp)).size.width.toDp() }
-                val x = when (index) {
-                    0 -> 0.dp
-                    3 -> maxWidth - measured
-                    else -> maxWidth * (index / 3f) - measured / 2
-                }
-                Text(label, fontSize = 10.sp, color = PsyColors.fgMute, modifier = Modifier.offset(x = x))
-            }
-        }
-    }
-}
-
-@Composable
-private fun MarginBubble(text: String, estimate: Boolean, face: Color, height: Dp) {
-    val base = Modifier
-        .height(height)
-        .shadow(4.dp, CircleShape)
-    Box(
-        if (estimate) {
-            base.background(face, CircleShape).drawWithContent {
-                drawContent()
-                drawRoundRect(
-                    PsyColors.fg,
-                    cornerRadius = CornerRadius(size.height / 2),
-                    style = Stroke(1.dp.toPx(), pathEffect = PathEffect.dashPathEffect(floatArrayOf(6f, 4f))),
-                )
-            }
-        } else {
-            base.background(PsyColors.fg, CircleShape)
-        }.padding(horizontal = 8.dp),
-        contentAlignment = Alignment.Center,
-    ) {
-        Text(
-            text,
-            fontSize = 12.sp,
-            fontWeight = FontWeight.Black,
-            color = if (estimate) PsyColors.fg else PsyColors.ink,
-            maxLines = 1,
-            modifier = Modifier.wrapContentSize(),
-        )
     }
 }
 

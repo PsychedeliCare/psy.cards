@@ -1,0 +1,264 @@
+{
+  "country": "SM",
+  "name": "San Marino",
+  "asOf": "2026-10",
+  "summary": "Own law (L. 139/1997): possessing drugs without intent to sell, and personal use, are crimes (6 months–3 years, reducible); adults with under 3 g of cannabis face a day-fine. Tables updated Sept 2026.",
+  "emergency": {
+    "general": "113",
+    "ambulance": "118"
+  },
+  "poisonControlNote": "No national poison centre; the nearest are Italian centres (e.g. Milan Niguarda, +39 02 6610 1029, 24h).",
+  "callingForHelp": "No Good Samaritan law. Personal use is a crime (unless prescribed via ISS), so police involvement is possible. Failing to help someone in danger is a crime (Penal Code art. 162).",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug-checking service found.",
+  "sources": {
+    "l139": {
+      "title": "Legge 26 novembre 1997 n. 139 – drug offences (Consiglio Grande e Generale)",
+      "url": "https://www.consigliograndeegenerale.sm/on-line/home/archivio-leggi-decreti-e-regolamenti/scheda17014634.html"
+    },
+    "cp": {
+      "title": "San Marino Penal Code, coordinated text updated 27 Feb 2026 (incl. L. 139/1997)",
+      "url": "https://www.consigliograndeegenerale.sm/on-line/home/archivio-leggi-decreti-e-regolamenti/documento17088264.html"
+    },
+    "dd136": {
+      "title": "Decreto Delegato 10 settembre 2026 n. 136 – updated list of narcotic/psychotropic substances",
+      "url": "https://www.consigliograndeegenerale.sm/on-line/home/archivio-leggi-decreti-e-regolamenti/documento17160432.html"
+    },
+    "iss": {
+      "title": "ISS San Marino – useful numbers",
+      "url": "https://www.iss.sm/on-line/home/menudestra/numeri-utili.html"
+    },
+    "wikiCannabisSm": {
+      "title": "Wikipedia – Cannabis in San Marino",
+      "url": "https://en.wikipedia.org/wiki/Cannabis_in_San_Marino"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Table I: possession without intent to sell, or use, is a crime (6 months–3 years' prison; can be reduced to 3–12 months if minor; judicial pardon possible).",
+      "sources": [
+        "l139",
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin, psilocin and Psilocybe, Conocybe and Stropharia fungi are Table I: possession or use is a crime (6 months–3 years, reducible).",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "DMT and ayahuasca (incl. harmine/harmaline) are Table I: possession or use is a crime (6 months–3 years, reducible).",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline and peyote (Lophophora williamsii) are Table I: possession or use is a crime (6 months–3 years, reducible).",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOM, DOB and DOC are Table I: possession or use is a crime (6 months–3 years, reducible).",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25I-, 25B-, 25C-NBOMe and analogues are Table I: possession or use is a crime.",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B, 2C-I and analogues are Table I: possession or use is a crime (6 months–3 years, reducible).",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2, 2C-T-7 and 2C-T-21 are listed in Table I: possession or use is a crime.",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "5-MeO-DMT, 5-MeO-MiPT and 5-MeO-DiPT are listed in Table I: possession or use is a crime.",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Adults with under 3 g (no intent to sell): minor offence, day-fine (20–60 days). Larger amounts or a repeat within 5 years: 6 months–3 years.",
+      "sources": [
+        "cp",
+        "dd136",
+        "wikiCannabisSm"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Licensed medicine listed in Table I: legal only with an ISS-recognised prescription; otherwise possession or use is a crime (6 months–3 years).",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is Table I: possession or use is a crime.",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "legal",
+      "note": "Expressly excluded from the 2026 drug tables; sold as a cough medicine.",
+      "sources": [
+        "dd136"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not in the 2026 drug tables; no specific rule found.",
+      "sources": [
+        "dd136"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamine and methamphetamine are Table I: possession or use is a crime. ADHD stimulants are prescription-only medicines.",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Table I: possession without intent to sell, or use, is a crime (6 months–3 years' prison; can be reduced to 3–12 months if minor; judicial pardon possible).",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Table I: possession without intent to sell, or use, is a crime (6 months–3 years' prison; can be reduced to 3–12 months if minor; judicial pardon possible).",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal for adults; venues serving alcohol to under-18s commit an offence (Penal Code art. 165).",
+      "sources": [
+        "cp"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB and GBL are Table IV: possession or use without prescription is a crime. Sodium oxybate is a prescription medicine.",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin and other opioids are Table I: possession or use without an ISS-recognised prescription is a crime.",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Listed in Table I: legal only with an ISS-recognised prescription; otherwise possession or use is a crime.",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Table IV: legal only with an ISS-recognised prescription; otherwise possession or use is a crime.",
+      "sources": [
+        "cp",
+        "dd136"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "illegal",
+      "note": "Harmine, harmaline and ayahuasca are Table I: possession or use is a crime. MAOI antidepressants are prescription-only medicines.",
+      "sources": [
+        "dd136",
+        "cp"
+      ],
+      "confidence": "high"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription medicines; not in the drug tables.",
+      "sources": [
+        "dd136"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

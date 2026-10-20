@@ -15,6 +15,7 @@
     "sources:refresh": "node packages/shared/scripts/sources.mjs refresh",
     "sources:check": "node packages/shared/scripts/sources.mjs check",
     "sources:test": "node --test packages/shared/scripts/sources.test.mjs",
+    "legality:test": "node --test packages/shared/scripts/legality.test.mjs",
     "preview": "pnpm --filter @psy.cards/web preview",
     "preview:cloudflare": "pnpm --filter @psy.cards/web preview:cloudflare",
     "import:wikipedia-combos": "pnpm --filter @psy.cards/web import:wikipedia-combos",

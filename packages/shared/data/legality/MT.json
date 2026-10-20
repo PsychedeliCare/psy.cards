@@ -1,0 +1,286 @@
+{
+  "country": "MT",
+  "name": "Malta",
+  "asOf": "2026-10",
+  "summary": "Cannabis legal for adults since 2021 (limits; licensed non-profit associations). Up to 2 g of other drugs → Commissioner for Justice fine; more is criminal. Recreational nitrous oxide banned in 2026.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "Malta National Poisons Centre (public line 08:00–20:00)",
+      "phone": "1774"
+    }
+  },
+  "callingForHelp": "No specific Good Samaritan law found. Health staff are bound by confidentiality; small-quantity possession is handled by the Commissioner for Justice rather than the courts.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug-checking service; harm-reduction groups have called for one.",
+  "sources": {
+    "euda": {
+      "title": "EUDA – Penalties for drug law offences in Europe at a glance (updated Sept 2024)",
+      "url": "https://www.euda.europa.eu/publications/topic-overviews/content/drug-law-penalties-at-a-glance_en"
+    },
+    "cap628": {
+      "title": "Authority on the Responsible Use of Cannabis Act (Cap. 628, Laws of Malta)",
+      "url": "https://legislation.mt/eli/cap/628/eng"
+    },
+    "cap537": {
+      "title": "Drug Dependence (Treatment not Imprisonment) Act (Cap. 537, Laws of Malta)",
+      "url": "https://legislation.mt/eli/cap/537/eng"
+    },
+    "vicente": {
+      "title": "Vicente LLP – Malta cannabis laws guide",
+      "url": "https://vicentellp.com/insights/malta-cannabis-laws-a-guide-for-us-businesses-entering-europes-first-legal-cannabis-market/"
+    },
+    "n2oNews": {
+      "title": "MaltaToday (12 May 2026) – ban on recreational use of nitrous oxide",
+      "url": "https://www.maltatoday.com.mt/news/national/141725/maltese_manufacturer_welcomes_ban_on_recreational_use_of_nitrous_oxide"
+    },
+    "n2oTris": {
+      "title": "EU TRIS 2026/0241/MT – Restriction on the Recreational Use of Dinitrogen Oxide Regulations, 2026",
+      "url": "https://technical-regulation-information-system.ec.europa.eu/en/notification/27944"
+    },
+    "drugChecking": {
+      "title": "MaltaToday – Malta in crucial need of drug testing kits, report finds",
+      "url": "https://www.maltatoday.com.mt/news/national/127669/malta_in_crucial_need_for_drug_testing_kits_report_finds"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    },
+    "wikiCannabis": {
+      "title": "Wikipedia – Legality of cannabis",
+      "url": "https://en.wikipedia.org/wiki/Legality_of_cannabis"
+    },
+    "wikiDrink": {
+      "title": "Wikipedia – Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "decriminalised",
+      "note": "Up to 2 g (gross) for own use: €75–125 fine from the Commissioner for Justice; a 2nd case within 2 years goes to a rehab board. More is a criminal offence.",
+      "sources": [
+        "euda",
+        "cap537"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "decriminalised",
+      "note": "Psilocybin is controlled. The 2 g small-quantity rule counts gross weight, so mushroom amounts can easily exceed it and become a criminal matter.",
+      "sources": [
+        "euda",
+        "cap537"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "Up to 2 g (gross) for own use: €75–125 fine from the Commissioner for Justice; a 2nd case within 2 years goes to a rehab board. More is a criminal offence.",
+      "sources": [
+        "euda",
+        "cap537",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "decriminalised",
+      "note": "Mescaline is controlled: up to 2 g for own use is a €75–125 fine (Commissioner for Justice); more is criminal. Status of cacti not confirmed.",
+      "sources": [
+        "euda",
+        "cap537",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "decriminalised",
+      "note": "DOM, DOB, DOC are UN Schedule I: up to 2 g for own use is a €75–125 fine from the Commissioner for Justice; more is criminal.",
+      "sources": [
+        "euda",
+        "cap537",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "decriminalised",
+      "note": "NBOMes are UN Schedule I: up to 2 g for own use is a €75–125 fine from the Commissioner for Justice; more is criminal.",
+      "sources": [
+        "euda",
+        "cap537",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "decriminalised",
+      "note": "2C-B is UN-controlled: up to 2 g for own use is a €75–125 fine from the Commissioner for Justice; more is criminal.",
+      "sources": [
+        "euda",
+        "cap537",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "unknown",
+      "note": "2C-T-2/2C-T-7 are not UN-scheduled; could not confirm whether Malta lists them.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "5-MeO-DMT and 5-MeO-MiPT are not UN-scheduled; could not confirm whether Malta lists them.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "legal",
+      "note": "18+: up to 7 g in public, 50 g and 4 plants at home. 7–28 g: €50–100 fine; public use €235. Buy only via licensed non-profit associations.",
+      "sources": [
+        "euda",
+        "cap628",
+        "vicente",
+        "wikiCannabis"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "unknown",
+      "note": "Prescription anaesthetic; could not confirm whether Malta schedules it as a controlled drug. If it does, the 2 g small-quantity fine rule applies.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "decriminalised",
+      "note": "UN Schedule II since 2016: up to 2 g for own use is a €75–125 fine from the Commissioner for Justice; more is criminal.",
+      "sources": [
+        "incb",
+        "euda",
+        "cap537"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not a controlled drug; could not confirm its pharmacy/prescription status in Malta.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "illegal",
+      "note": "2026 Public Health Act regulations ban importing, possessing, using or selling N2O for recreational purposes; legitimate uses exempt. Penalties unconfirmed.",
+      "sources": [
+        "n2oNews",
+        "n2oTris"
+      ],
+      "confidence": "medium"
+    },
+    "amphetamines": {
+      "status": "decriminalised",
+      "note": "Up to 2 g for own use: €75–125 fine (Commissioner for Justice); more is criminal. Prescription stimulants for ADHD are medical-only.",
+      "sources": [
+        "euda",
+        "cap537"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "Up to 2 g (gross) for own use: €75–125 fine from the Commissioner for Justice; a 2nd case within 2 years goes to a rehab board. More is a criminal offence.",
+      "sources": [
+        "euda",
+        "cap537"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "decriminalised",
+      "note": "Up to 2 g (gross) for own use: €75–125 fine from the Commissioner for Justice; a 2nd case within 2 years goes to a rehab board. More is a criminal offence.",
+      "sources": [
+        "euda",
+        "cap537"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal; minimum age to buy alcohol is 17.",
+      "sources": [
+        "wikiDrink"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "decriminalised",
+      "note": "GHB is UN Schedule II: up to 2 g (gross) for own use is a fine from the Commissioner for Justice. GBL/1,4-BD status not confirmed.",
+      "sources": [
+        "incb",
+        "euda",
+        "cap537"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "decriminalised",
+      "note": "Heroin up to 2 g for own use: €75–125 fine (Commissioner for Justice); more is criminal. Prescription opioids are medical-only.",
+      "sources": [
+        "euda",
+        "cap537"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only controlled psychotropics; small non-prescribed amounts fall under the Commissioner for Justice fine regime.",
+      "sources": [
+        "euda",
+        "cap537"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "MAOI antidepressants are prescription-only. Status of harmala alkaloids/ayahuasca not confirmed (DMT is controlled).",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

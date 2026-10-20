@@ -1,0 +1,257 @@
+{
+  "country": "LU",
+  "name": "Luxembourg",
+  "asOf": "2026-10",
+  "summary": "Since 2023 adults may grow 4 cannabis plants per household and use it at home; ≤3 g in public is a €25–500 fine (usually a €145 ticket). Using other drugs: 8 days–6 months prison and/or €251–2,500.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "Centre Antipoisons (Belgian centre, serves Luxembourg)",
+      "phone": "8002 5500"
+    }
+  },
+  "callingForHelp": "No specific Good Samaritan protection found; emergency medical staff are bound by professional secrecy.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "Occasional drug checking (DUCK) offered by the PIPAPO party project (4motion asbl); no permanent public service found.",
+  "sources": {
+    "loi1973": {
+      "title": "Law of 19 Feb 1973 on medicines and drug addiction (consolidated 21 Jul 2023)",
+      "url": "https://legilux.public.lu/eli/etat/leg/loi/1973/02/19/n1/consolide/20230721"
+    },
+    "rgdStup": {
+      "title": "Grand-ducal regulation of 26 Mar 1974: list of narcotics (consolidated 12 Dec 2025)",
+      "url": "https://legilux.public.lu/eli/etat/leg/rgd/1974/03/26/n1/consolide/20251212"
+    },
+    "rgdPsy": {
+      "title": "Grand-ducal regulation of 20 Mar 1974: psychotropic substances (consolidated 13 Jul 2026)",
+      "url": "https://legilux.public.lu/eli/etat/leg/rgd/1974/03/20/n1/consolide/20260713"
+    },
+    "rgdT34": {
+      "title": "Grand-ducal regulation of 6 Feb 1997: Schedule III/IV psychotropics (consolidated 12 Dec 2025)",
+      "url": "https://legilux.public.lu/eli/etat/leg/rgd/1997/02/06/n1/consolide/20251212"
+    },
+    "alc2006": {
+      "title": "Law of 22 Dec 2006 banning alcohol sales to under-16s",
+      "url": "https://legilux.public.lu/eli/etat/leg/loi/2006/12/22/n11/jo"
+    },
+    "pipapo": {
+      "title": "PIPAPO (4motion asbl): party work and DUCK drug checking",
+      "url": "https://pipapo.lu/"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Listed psychotrope. Using or possessing for own use: 8 days–6 months prison and/or €251–2,500; higher if in front of minors.",
+      "sources": [
+        "loi1973",
+        "rgdPsy"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin is listed, and the list also covers organisms naturally containing it with established abuse potential, so magic mushrooms/truffles are covered.",
+      "sources": [
+        "rgdPsy",
+        "loi1973"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "DMT is a listed psychotrope; ayahuasca is therefore illegal.",
+      "sources": [
+        "rgdPsy",
+        "loi1973"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is listed, and organisms naturally containing it (e.g. peyote) are covered; ornamental cactus sales may be tolerated.",
+      "sources": [
+        "rgdPsy"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOC, DOET and DOM are listed psychotropes. No generic analogue ban, so newer analogues may be unlisted.",
+      "sources": [
+        "rgdPsy"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25I-, 25B- and 25C-NBOMe are listed. No generic analogue ban: other NBOMes may be unscheduled.",
+      "sources": [
+        "rgdPsy"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-I and other 2C-x are listed (2C-B is internationally controlled). No generic analogue ban, so some newer analogues may be unlisted.",
+      "sources": [
+        "rgdPsy"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7 are listed psychotropes.",
+      "sources": [
+        "rgdPsy"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "grey",
+      "note": "5-MeO-DMT and 5-MeO-MiPT were not found on Luxembourg's lists and there is no generic tryptamine ban; they appear unscheduled.",
+      "sources": [
+        "rgdPsy",
+        "rgdStup"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Adults: up to 4 home-grown plants per household, use and possession at home legal. Public: ≤3 g = €25–500 fine (€145 ticket); more is a crime.",
+      "sources": [
+        "loi1973",
+        "rgdStup"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Not on the narcotics/psychotropic lists checked; a prescription-only (mainly hospital) medicine.",
+      "sources": [
+        "rgdStup",
+        "rgdPsy",
+        "rgdT34"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is a listed psychotrope.",
+      "sources": [
+        "rgdPsy"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not a controlled drug (only levomethorphan is listed). Whether DXM cough medicines need a prescription was not verified.",
+      "sources": [
+        "rgdStup"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a controlled substance and no national law on recreational sale found (2026).",
+      "sources": [
+        "rgdStup",
+        "rgdPsy"
+      ],
+      "confidence": "medium"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamines are internationally controlled; possession for own use: 8 days–6 months and/or €251–2,500. ADHD drugs on prescription.",
+      "sources": [
+        "loi1973"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Listed psychotrope. Own use: 8 days–6 months prison and/or €251–2,500 fine; supply much heavier.",
+      "sources": [
+        "rgdPsy",
+        "loi1973"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Listed narcotic. Own use: 8 days–6 months prison and/or €251–2,500 fine; supply much heavier.",
+      "sources": [
+        "rgdStup",
+        "loi1973"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely.",
+      "sources": [
+        "rgdPsy"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Selling or offering alcohol to under-16s is banned; no separate national age limit for spirits found.",
+      "sources": [
+        "alc2006"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is a listed psychotrope (sodium oxybate on prescription). GBL and 1,4-BD were not found on the lists.",
+      "sources": [
+        "rgdT34",
+        "rgdPsy"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin banned (except an authorised heroin-assisted pilot); morphine, oxycodone, fentanyl are listed narcotics on prescription only.",
+      "sources": [
+        "rgdStup",
+        "loi1973"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Not on the narcotics lists checked; prescription-only medicine.",
+      "sources": [
+        "rgdStup"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Listed Schedule III/IV psychotropes; prescription-only.",
+      "sources": [
+        "rgdT34"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "Prescription-only medicines. Harmala alkaloids are not listed, but ayahuasca contains DMT (listed).",
+      "sources": [
+        "rgdPsy"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled.",
+      "sources": [
+        "rgdT34"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

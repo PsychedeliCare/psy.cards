@@ -1,0 +1,257 @@
+{
+  "country": "FI",
+  "name": "Finland",
+  "asOf": "2026-10",
+  "summary": "Narcotics Act and Criminal Code ch. 50: using or possessing narcotics is a crime; small amounts usually get summary day-fines. Other psychoactives may be banned from the consumer market (sale illegal, possession not).",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "Myrkytystietokeskus (Poison Information Centre)",
+      "phone": "0800 147 111"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law. Health care staff are bound by confidentiality; no specific legal protection for people who call for help.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No established drug checking service found.",
+  "sources": {
+    "asetus": {
+      "title": "Valtioneuvoston asetus huumausaineina pidettävistä aineista 543/2008 (as amended to 6/2026)",
+      "url": "https://www.finlex.fi/fi/lainsaadanto/2008/543"
+    },
+    "rikoslaki": {
+      "title": "Rikoslaki 39/1889, chapter 50 (narcotics offences)",
+      "url": "https://www.finlex.fi/fi/lainsaadanto/1889/39"
+    },
+    "psyko": {
+      "title": "Valtioneuvoston asetus kuluttajamarkkinoilta kielletyistä psykoaktiivisista aineista 1130/2014",
+      "url": "https://www.finlex.fi/fi/lainsaadanto/2014/1130"
+    },
+    "cannabisFi": {
+      "title": "Cannabis in Finland (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Cannabis_in_Finland"
+    },
+    "drinkingAge": {
+      "title": "Legal drinking age (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "dxmFi": {
+      "title": "Dekstrometorfaani (Finnish Wikipedia)",
+      "url": "https://fi.wikipedia.org/wiki/Dekstrometorfaani"
+    },
+    "euReach": {
+      "title": "Dáil answer on nitrous oxide incl. EU REACH consumer restriction (Sept 2026), HRB National Drugs Library",
+      "url": "https://www.drugsandalcohol.ie/46896/"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Narcotic. Drug use offence: fine or up to 6 months; usually summary day-fines.",
+      "sources": [
+        "asetus",
+        "rikoslaki"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybe mushrooms are listed narcotics, and growing them is specifically prohibited.",
+      "sources": [
+        "asetus",
+        "rikoslaki"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "Narcotic. Since Dec 2022, DMT-containing plant powders and preparations used to get high (e.g. ayahuasca) are listed too.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline and mescaline-containing cacti are listed narcotics.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "high"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOM (STP) and DOC are listed narcotics.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25B-, 25C- and 25I-NBOMe are listed narcotics.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B and other 2C-x are listed narcotics.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-7 and related 2C-T-x are listed narcotics.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "5-MeO-DMT is a listed narcotic. 5-MeO-MiPT is not on the narcotics list; it may be banned from sale as a psychoactive substance.",
+      "sources": [
+        "asetus",
+        "psyko"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Narcotic. Possession of about 10 g hash/15 g weed or less usually means 10–20 day-fines. Medical cannabis is very limited.",
+      "sources": [
+        "asetus",
+        "cannabisFi"
+      ],
+      "confidence": "medium"
+    },
+    "ketamine": {
+      "status": "grey",
+      "note": "Prescription medicine but not on Finland's narcotics list (checked 2026): unprescribed possession isn't a narcotics offence; selling it is illegal.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "medium"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is a listed narcotic.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "legal",
+      "note": "Explicitly excluded from the narcotics list. Cough medicines with DXM (e.g. Resilar) are sold in pharmacies without prescription.",
+      "sources": [
+        "asetus",
+        "dxmFi"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a narcotic; possession isn't an offence. National sales rules not verified; EU ban on consumer sales expected from Feb 2027.",
+      "sources": [
+        "asetus",
+        "euReach"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Narcotics. ADHD medicines (lisdexamfetamine, methylphenidate) are legal with a prescription.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Listed narcotic; use and possession are crimes.",
+      "sources": [
+        "asetus",
+        "rikoslaki"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Listed narcotic; use and possession are crimes.",
+      "sources": [
+        "asetus",
+        "rikoslaki"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "From 18 for drinks up to 22% ABV (shops sell up to 8%); stronger drinks only at Alko from 20.",
+      "sources": [
+        "drinkingAge"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is a listed narcotic. GBL and 1,4-BD are not on the narcotics list (2026). Sodium oxybate is prescription-only.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin and opioid medicines (morphine, oxycodone, fentanyl, buprenorphine) are narcotics; legal only with a prescription.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "grey",
+      "note": "Prescription medicine but not on the narcotics list (checked 2026): possession isn't a narcotics offence; unauthorised supply is illegal.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Listed narcotics (psychotropic list IV): unprescribed possession or use is a drug offence.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Medical MAOIs are prescription-only; harmala/Syrian rue aren't listed. DMT plant preparations (ayahuasca) are narcotics.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "grey",
+      "note": "Prescription-only, not narcotics: possession isn't an offence, but unauthorised sale or import is.",
+      "sources": [
+        "asetus"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "country": "CY",
+  "name": "Cyprus",
+  "asOf": "2026-10",
+  "summary": "Drug use and possession are criminal offences under the 1977 Narcotic Drugs Law, with penalties by class (A/B/C); first-time offenders under 25 face at most 1 year and can be diverted to treatment.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "Centre for Drugs and Poisoning (Nicosia)",
+      "phone": "+357 90 901 401"
+    }
+  },
+  "callingForHelp": "No specific Good Samaritan law found. Possession is criminal and police may become involved; health staff are bound by medical confidentiality.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No public drug-checking service found.",
+  "sources": {
+    "euda": {
+      "title": "EUDA – Penalties for drug law offences in Europe at a glance (updated Sept 2024)",
+      "url": "https://www.euda.europa.eu/publications/topic-overviews/content/drug-law-penalties-at-a-glance_en"
+    },
+    "law1977": {
+      "title": "Narcotic Drugs and Psychotropic Substances Law 29/1977 (CyLaw, consolidated)",
+      "url": "http://www.cylaw.org/nomoi/enop/non-ind/1977_1_29/full.html"
+    },
+    "visitCyprus": {
+      "title": "Visit Cyprus – health & safety, emergency numbers",
+      "url": "https://www.visitcyprus.com/useful-info/health-safety"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    },
+    "wikiCannabis": {
+      "title": "Wikipedia – Legality of cannabis",
+      "url": "https://en.wikipedia.org/wiki/Legality_of_cannabis"
+    },
+    "wikiDrink": {
+      "title": "Wikipedia – Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Class A: possession up to 12 years' prison (first-time under-25s max 1 year); use is also an offence. Diversion to treatment is possible.",
+      "sources": [
+        "euda",
+        "law1977"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocin is Class A, so psilocybin mushrooms are treated as a Class A drug: possession up to 12 years' prison.",
+      "sources": [
+        "law1977",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "DMT is Class A: possession up to 12 years' prison (first-time under-25s max 1 year).",
+      "sources": [
+        "law1977",
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is Class A: possession up to 12 years' prison (first-time under-25s max 1 year).",
+      "sources": [
+        "law1977",
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOM is listed in Class A; DOB/DOC are UN Schedule I and presumed controlled. Possession is a serious crime.",
+      "sources": [
+        "law1977",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "NBOMes are UN Schedule I and presumed controlled; possession is a crime.",
+      "sources": [
+        "incb",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B is UN Schedule II and presumed controlled; possession is a crime.",
+      "sources": [
+        "incb",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "unknown",
+      "note": "2C-T-2/2C-T-7 are not UN-scheduled; could not confirm whether Cyprus lists them.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "5-MeO-DMT and 5-MeO-MiPT are not UN-scheduled; could not confirm whether Cyprus lists them.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Class B: possession up to 8 years' prison (first-time under-25s max 1 year); diversion to treatment possible. Medical cannabis is available.",
+      "sources": [
+        "euda",
+        "law1977",
+        "wikiCannabis"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "unknown",
+      "note": "Prescription anaesthetic; could not confirm its class under Cypriot law. If controlled, non-prescribed possession is a crime.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "UN Schedule II since 2016 and presumed controlled; possession is a crime.",
+      "sources": [
+        "incb",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "grey",
+      "note": "Expressly excluded from the narcotics schedule; it is a cough medicine, but its prescription status was not confirmed.",
+      "sources": [
+        "law1977"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "unknown",
+      "note": "Not UN-scheduled; no national rule found in sources checked.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamine and methamphetamine are Class B: possession up to 8 years' prison. Methylphenidate (Class B) is prescription-only.",
+      "sources": [
+        "law1977",
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Class A: possession up to 12 years' prison (first-time under-25s max 1 year); use is also an offence. Diversion to treatment is possible.",
+      "sources": [
+        "euda",
+        "law1977"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Class A: possession up to 12 years' prison (first-time under-25s max 1 year); use is also an offence. Diversion to treatment is possible.",
+      "sources": [
+        "euda",
+        "law1977"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal; selling alcohol to under-17s is prohibited.",
+      "sources": [
+        "wikiDrink"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is UN Schedule II and presumed controlled; possession is a crime. GBL/1,4-BD status not confirmed.",
+      "sources": [
+        "incb",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin, morphine, oxycodone, fentanyl are Class A: possession without prescription up to 12 years' prison. Prescription opioids medical-only.",
+      "sources": [
+        "law1977",
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only; Class C, so possession without a prescription can carry up to 4 years' prison.",
+      "sources": [
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "MAOI antidepressants are prescription-only. Status of harmala alkaloids/ayahuasca not confirmed (DMT is Class A).",
+      "sources": [
+        "law1977"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

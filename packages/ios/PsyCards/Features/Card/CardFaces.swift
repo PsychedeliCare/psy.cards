@@ -2,8 +2,9 @@ import SwiftUI
 
 // MARK: - Front: dose & timing
 
-/// Card front (web `card/CardFront.astro`): dose scale, personal figure,
-/// timing, toxicity margin and preparation advice.
+/// Card front (web `card/CardFront.astro`), the facts: linear dose chart
+/// (acute toxicity as its footnote), personal figure, effects, timing and
+/// preparation advice.
 struct CardFrontView: View {
     @Environment(DataPackStore.self) private var store
     @Environment(BodyProfileStore.self) private var profile
@@ -29,23 +30,27 @@ struct CardFrontView: View {
 
     private var showSideTile: Bool { card.personal != nil || showDoseTip }
 
+    private var effects: [CardEffect] { content.effects ?? [] }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             header
                 .padding(.bottom, 4)
             doseTile
-            if showSideTile || card.hasTiming {
+            if showSideTile || !effects.isEmpty {
                 TileRow(weights: [1, 1]) {
                     if showSideTile { personalTile }
-                    if card.hasTiming { timingTile }
+                    if !effects.isEmpty { effectsTile }
                 }
             }
-            marginTile
+            if card.hasTiming { timingTile }
+            if let spacing = content.spacing {
+                SpacingTile(card: card, spacing: spacing)
+            }
             if let prepare = content.prepare {
                 prepareTile(prepare)
-            } else {
-                Spacer(minLength: 0)
             }
+            Spacer(minLength: 0)
             footer
         }
         .padding(.horizontal, 14)
@@ -156,7 +161,30 @@ struct CardFrontView: View {
                     .foregroundStyle(PsyCardsColors.fg)
                     .fixedSize(horizontal: false, vertical: true)
             }
+            toxicityFootnote
         }
+    }
+
+    // MARK: Effects
+
+    private var effectsTile: some View {
+        CardTile(grows: true) {
+            TileHeading(icon: "sparkle-fill", title: store.t("substanceCard.effects"), iconColor: hue)
+            VStack(alignment: .leading, spacing: 6) {
+                ForEach(effects) { effect in
+                    HStack(spacing: 7) {
+                        PhIcon(effect.icon, size: 14)
+                            .foregroundStyle(hue)
+                            .frame(width: 16)
+                        Text(effect.label)
+                            .font(.footnote.weight(.semibold))
+                            .foregroundStyle(PsyCardsColors.fg)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .combine)
     }
 
     // MARK: Personal ("For you" / "Start low")
@@ -223,34 +251,35 @@ struct CardFrontView: View {
     // MARK: Timing
 
     private var timingTile: some View {
-        CardTile(grows: true) {
+        let rows: [(String, CardTimingValue)] = [
+            ("card.onset", card.timing.onset),
+            ("card.duration", card.timing.duration),
+            ("card.afterEffects", card.timing.after),
+        ].compactMap { key, value in value.map { (key, $0) } }
+        return CardTile {
             TileHeading(icon: "clock-fill", title: store.t("card.timing"), iconColor: hue)
-            VStack(spacing: 0) {
-                let rows: [(String, CardTimingValue)] = [
-                    ("card.onset", card.timing.onset),
-                    ("card.duration", card.timing.duration),
-                    ("card.afterEffects", card.timing.after),
-                ].compactMap { key, value in value.map { (key, $0) } }
+            HStack(alignment: .top, spacing: 0) {
                 ForEach(Array(rows.enumerated()), id: \.offset) { index, row in
-                    HStack(alignment: .firstTextBaseline, spacing: 6) {
+                    VStack(alignment: .leading, spacing: 2) {
                         Text(store.t(row.0))
                             .font(.caption.weight(.semibold))
                             .foregroundStyle(PsyCardsColors.fgMute)
-                        Spacer(minLength: 4)
                         let unit = Text(" \(row.1.shortUnit)").font(.caption2.weight(.semibold)).foregroundStyle(PsyCardsColors.fgMute)
                         Text("\(Text(row.1.value).font(.subheadline.weight(.heavy).monospacedDigit()))\(unit)")
                             .foregroundStyle(PsyCardsColors.fg)
                             .lineLimit(1)
                             .minimumScaleFactor(0.75)
                     }
-                    .padding(.vertical, 6)
-                    .overlay(alignment: .bottom) {
-                        if index < rows.count - 1 {
-                            Line()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, index == 0 ? 0 : 10)
+                    .overlay(alignment: .leading) {
+                        if index > 0 {
+                            VLine()
                                 .stroke(PsyCardsColors.tileEdge, style: StrokeStyle(lineWidth: 1, dash: [3, 3]))
-                                .frame(height: 1)
+                                .frame(width: 1)
                         }
                     }
+                    .accessibilityElement(children: .combine)
                 }
             }
         }
@@ -259,21 +288,11 @@ struct CardFrontView: View {
     // MARK: Margin
 
     /// "Lethal dose ≈ 16× a usual dose (compound), estimated from animal data"
-    private var marginLine: AttributedString {
-        var line = AttributedString(marginText)
-        line.inlinePresentationIntent = .stronglyEmphasized
-        line.foregroundColor = PsyCardsColors.fg
-        if let compound = card.margin?.compound {
-            line += AttributedString(" (\(compound))")
-        }
-        if card.margin?.isEstimate == true {
-            var estimate = AttributedString(", \(store.t("card.marginExtrapolated"))")
-            estimate.foregroundColor = PsyCardsColors.fgMute
-            line += estimate
-        }
-        if card.margin == nil, let note = content.marginNote {
-            line += AttributedString(" \(note)")
-        }
+    private var marginFootnote: String {
+        var line = marginText
+        if let compound = card.margin?.compound { line += " (\(compound))" }
+        if card.margin?.isEstimate == true { line += ", \(store.t("card.marginExtrapolated"))" }
+        if card.margin == nil, let note = content.marginNote { line += " · \(note)" }
         return line
     }
 
@@ -282,41 +301,41 @@ struct CardFrontView: View {
         return store.t(margin.isLowerBound ? "card.marginAtLeast" : "card.marginLabel", ["ratio": store.number(margin.ratio)])
     }
 
-    private var marginTile: some View {
-        CardTile {
-            HStack {
-                TileHeading(icon: "skull-fill", title: store.t("card.margin"), iconColor: hue)
+    /// Acute toxicity as a muted footnote of the dose; the comparison chart is
+    /// one tap away. Only a narrow margin (NBOMes, 5-MeO) is flagged.
+    private var toxicityFootnote: some View {
+        Button {
+            showCompare = true
+        } label: {
+            HStack(alignment: .firstTextBaseline, spacing: 6) {
+                PhIcon(card.marginDanger ? "warning-fill" : "skull-fill", size: 11)
+                Text(marginFootnote)
+                    .font(.caption2.weight(card.marginDanger ? .bold : .medium))
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
                 Spacer(minLength: 4)
-                Button {
-                    showCompare = true
-                } label: {
-                    HStack(spacing: 4) {
-                        PhIcon("chart-bar-horizontal-fill", size: 13)
-                        Text(store.t("card.marginCompare"))
-                    }
-                }
-                .buttonStyle(.tileChip)
-                .accessibilityIdentifier("margin-compare")
+                PhIcon("caret-right-bold", size: 9)
+                    .opacity(0.5)
             }
-            MarginMeterView(
-                margin: card.margin,
-                danger: card.marginDanger,
-                alcoholRatio: card.key == "alcohol" ? nil : (store.gable.first { $0.key == "alcohol" }?.ratio ?? 10),
-                face: face
-            )
-            .padding(.horizontal, 2)
-            .padding(.top, card.margin == nil ? 2 : 6)
-            Text(marginLine)
-            .font(.footnote)
-            .foregroundStyle(PsyCardsColors.inkSoft)
-            .fixedSize(horizontal: false, vertical: true)
+            .foregroundStyle(card.marginDanger ? PsyCardsColors.emergencyInk : PsyCardsColors.fgMute)
+            .padding(.top, 7)
+            .overlay(alignment: .top) {
+                Line()
+                    .stroke(PsyCardsColors.tileEdge, style: StrokeStyle(lineWidth: 1, dash: [3, 3]))
+                    .frame(height: 1)
+            }
+            .contentShape(.rect)
         }
+        .buttonStyle(.plain)
+        .accessibilityLabel(marginFootnote)
+        .accessibilityHint(store.t("card.marginCompare"))
+        .accessibilityIdentifier("margin-compare")
     }
 
     // MARK: Prepare
 
     private func prepareTile(_ prepare: String) -> some View {
-        CardTile(grows: true) {
+        CardTile {
             TileHeading(icon: "test-tube-fill", title: store.t("card.prepare"), iconColor: hue)
             tileText(prepare)
             if let dose = content.dose, isBacOrCaffeine {
@@ -362,40 +381,46 @@ struct CardFrontView: View {
 
 // MARK: - Back: risks & safety
 
-/// Card back (web `card/CardBack.astro`): spacing, dependence, key risks,
-/// combinations to avoid and what to do in an emergency.
+/// Card back (web `card/CardBack.astro`), safety: key risks, combinations to
+/// avoid, what to do in an emergency (local numbers), local help, spacing,
+/// dependence and the legal status in the person's country.
 struct CardBackView: View {
     @Environment(DataPackStore.self) private var store
+    @Environment(LocalInfoStore.self) private var localInfo
     let card: SubstanceCardData
     let onFlip: () -> Void
     let onSelectCombo: (String) -> Void
     let onShowAllCombos: () -> Void
 
     @State private var showDependence = false
+    @State private var showLegal = false
 
     private var content: CardContent { card.content }
     private var hue: Color { PsyCardsColors.group(card.group) }
     private static let maxAvoid = 7
 
     var body: some View {
+        let organisations = localInfo.organisations(for: card.key)
         VStack(alignment: .leading, spacing: 8) {
             header
                 .padding(.bottom, 4)
-            TileRow(weights: content.spacing == nil ? [1] : [1.5, 1]) {
-                if let spacing = content.spacing {
-                    spacingTile(spacing)
-                }
-                dependenceTile
-            }
             if let risks = content.risks, !risks.isEmpty {
                 risksTile(risks)
             }
             avoidTile
             if let overdose = content.overdose {
                 emergencyTile(overdose)
-            } else {
-                Spacer(minLength: 0)
             }
+            if !organisations.isEmpty {
+                helpTile(organisations)
+            }
+            dependenceTile
+            legalTile
+            Spacer(minLength: 0)
+        }
+        .sheet(isPresented: $showLegal) {
+            LegalDetailsSheet(card: card)
+                .psyCardsSheetPresentation(detents: [.medium, .large])
         }
         .padding(.horizontal, 14)
         .padding(.top, 20)
@@ -423,57 +448,12 @@ struct CardBackView: View {
         }
     }
 
-    // MARK: Spacing
-
-    private func spacingTile(_ spacing: SpacingText) -> some View {
-        CardTile(grows: true) {
-            TileHeading(icon: "calendar-dots-fill", title: store.t("card.spacing"), iconColor: hue)
-            ViewThatFits(in: .horizontal) {
-                HStack(alignment: .firstTextBaseline, spacing: 6) { spacingValue(spacing) }
-                VStack(alignment: .leading, spacing: 2) { spacingValue(spacing) }
-            }
-            let cells = card.spacing.cells
-            if !cells.isEmpty {
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack(spacing: 4) {
-                        ForEach(Array(cells.enumerated()), id: \.offset) { _, used in
-                            Circle()
-                                .fill(used ? hue : PsyCardsColors.fg.opacity(0.13))
-                                .frame(width: 8, height: 8)
-                                .shadow(color: used ? hue.opacity(0.7) : .clear, radius: 4)
-                        }
-                    }
-                    Text(store.t("card.spacingSpan", [
-                        "count": "\(cells.count)",
-                        "unit": store.t("card.units.\(card.spacing.unit ?? "week")"),
-                    ]))
-                    .font(.caption2)
-                    .foregroundStyle(PsyCardsColors.fgMute)
-                }
-                .accessibilityHidden(true)
-            }
-            tileText(spacing.text)
-        }
-    }
-
-    @ViewBuilder
-    private func spacingValue(_ spacing: SpacingText) -> some View {
-        Text(spacing.value)
-            .font(.system(size: 22, weight: .heavy))
-            .tracking(-0.6)
-            .foregroundStyle(PsyCardsColors.fg)
-            .fixedSize()
-        Text(spacing.label)
-            .font(.caption.weight(.heavy))
-            .foregroundStyle(hue)
-    }
-
     // MARK: Dependence
 
     private var dependenceTile: some View {
         let level = card.dependence.clampedLevel
         let label = store.t("card.dependenceLevels.\(level)")
-        return CardTile(grows: true) {
+        return CardTile {
             HStack(spacing: 4) {
                 TileHeading(icon: "link-break-fill", title: store.t("card.dependence"), iconColor: hue)
                 Spacer(minLength: 0)
@@ -584,11 +564,11 @@ struct CardBackView: View {
     // MARK: Emergency
 
     private func emergencyTile(_ overdose: Overdose) -> some View {
-        let number = store.t("card.emergencyNumber")
+        let number = localInfo.emergencyNumber
+        let country = localInfo.current
         return CardTile(
             tint: PsyCardsColors.emergency.opacity(0.11),
-            edge: PsyCardsColors.emergency.opacity(0.45),
-            grows: true
+            edge: PsyCardsColors.emergency.opacity(0.45)
         ) {
             HStack {
                 TileHeading(
@@ -598,7 +578,7 @@ struct CardBackView: View {
                     textColor: PsyCardsColors.emergencyInk
                 )
                 Spacer(minLength: 4)
-                if let url = URL(string: "tel:\(number)") {
+                if let url = LocalInfoStore.telURL(number) {
                     Link(destination: url) {
                         HStack(spacing: 5) {
                             PhIcon("phone-call-fill", size: 15)
@@ -624,7 +604,9 @@ struct CardBackView: View {
                             .fontWeight(.heavy)
                             .foregroundStyle(PsyCardsColors.emergencyMarker)
                             .monospacedDigit()
-                        Text(action)
+                        // Authored with the European 112; the local number reaches
+                        // the ambulance directly.
+                        Text(action.replacingOccurrences(of: "112", with: number))
                             .foregroundStyle(PsyCardsColors.fg)
                             .fixedSize(horizontal: false, vertical: true)
                     }
@@ -633,6 +615,33 @@ struct CardBackView: View {
             }
             .accessibilityElement(children: .combine)
             .accessibilityLabel(store.t("card.actions"))
+            if let country, country.emergency.poison != nil || country.callingForHelp != nil {
+                VStack(alignment: .leading, spacing: 4) {
+                    if let poison = country.emergency.poison, let url = LocalInfoStore.telURL(poison.phone) {
+                        Link(destination: url) {
+                            HStack(spacing: 5) {
+                                PhIcon("first-aid-kit-fill", size: 13)
+                                Text(store.t("card.poisonCentre", ["number": poison.phone]))
+                                    .font(.caption.weight(.heavy))
+                            }
+                            .foregroundStyle(PsyCardsColors.emergencyInk)
+                        }
+                        .accessibilityHint(poison.name)
+                    }
+                    if let calling = country.callingForHelp {
+                        Text(calling)
+                            .font(.caption2)
+                            .foregroundStyle(PsyCardsColors.inkSoft)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+                .padding(.top, 6)
+                .overlay(alignment: .top) {
+                    Line()
+                        .stroke(PsyCardsColors.emergency.opacity(0.35), style: StrokeStyle(lineWidth: 1, dash: [3, 3]))
+                        .frame(height: 1)
+                }
+            }
         }
         .background {
             RadialGradient(
@@ -642,6 +651,329 @@ struct CardBackView: View {
                 endRadius: 260
             )
             .clipShape(.rect(cornerRadius: 14, style: .continuous))
+        }
+    }
+}
+
+// MARK: - Front: spacing
+
+/// How often (web `.psy-tile--spacing`): the interval, a calendar of use
+/// over the span and why.
+private struct SpacingTile: View {
+    @Environment(DataPackStore.self) private var store
+    let card: SubstanceCardData
+    let spacing: SpacingText
+
+    private var hue: Color { PsyCardsColors.group(card.group) }
+
+    var body: some View {
+        CardTile {
+            TileHeading(icon: "calendar-dots-fill", title: store.t("card.spacing"), iconColor: hue)
+            ViewThatFits(in: .horizontal) {
+                HStack(alignment: .center, spacing: 12) {
+                    value
+                    Spacer(minLength: 0)
+                    calendar
+                }
+                VStack(alignment: .leading, spacing: 6) {
+                    value
+                    calendar
+                }
+            }
+            tileText(spacing.text)
+        }
+    }
+
+    private var value: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 6) {
+            Text(spacing.value)
+                .font(.system(size: 22, weight: .heavy))
+                .tracking(-0.6)
+                .foregroundStyle(PsyCardsColors.fg)
+                .fixedSize()
+            Text(spacing.label)
+                .font(.caption.weight(.heavy))
+                .foregroundStyle(hue)
+                .fixedSize()
+        }
+    }
+
+    @ViewBuilder
+    private var calendar: some View {
+        let cells = card.spacing.cells
+        if !cells.isEmpty {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 4) {
+                    ForEach(Array(cells.enumerated()), id: \.offset) { _, used in
+                        Circle()
+                            .fill(used ? hue : PsyCardsColors.fg.opacity(0.13))
+                            .frame(width: 8, height: 8)
+                            .shadow(color: used ? hue.opacity(0.7) : .clear, radius: 4)
+                    }
+                }
+                Text(store.t("card.spacingSpan", [
+                    "count": "\(cells.count)",
+                    "unit": store.t("card.units.\(card.spacing.unit ?? "week")"),
+                ]))
+                .font(.caption2)
+                .foregroundStyle(PsyCardsColors.fgMute)
+            }
+            .fixedSize()
+            .accessibilityHidden(true)
+        }
+    }
+}
+
+// MARK: - Back: local help & legal status
+
+extension CardBackView {
+    fileprivate func helpTile(_ organisations: [Organisation]) -> some View {
+        CardTile {
+            TileHeading(icon: "hand-heart-fill", title: store.t("card.help"), iconColor: hue)
+            VStack(alignment: .leading, spacing: 10) {
+                ForEach(organisations) { org in
+                    OrganisationRow(organisation: org, hue: hue)
+                }
+            }
+        }
+    }
+
+    fileprivate var legalTile: some View {
+        let country = localInfo.current
+        let entry = country?.substances[card.key]
+        return CardTile {
+            HStack(spacing: 6) {
+                TileHeading(icon: "gavel-fill", title: store.t("card.legal"), iconColor: hue)
+                    .layoutPriority(1)
+                Spacer(minLength: 4)
+                CountryMenu()
+            }
+            if let country, let entry {
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    LegalStatusPill(status: entry.status)
+                    if let note = entry.note {
+                        Text(note)
+                            .font(.caption)
+                            .foregroundStyle(PsyCardsColors.inkSoft)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+                HStack {
+                    Text(store.t("card.legalAsOf", ["date": country.asOf]))
+                        .font(.caption2)
+                        .foregroundStyle(PsyCardsColors.fgMute)
+                    Spacer(minLength: 4)
+                    Button {
+                        showLegal = true
+                    } label: {
+                        HStack(spacing: 3) {
+                            Text(store.t("card.legalDetails"))
+                            PhIcon("caret-right-bold", size: 9)
+                        }
+                        .font(.caption2.weight(.heavy))
+                        .foregroundStyle(PsyCardsColors.fg)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("legal-details")
+                }
+            } else {
+                tileText(store.t(localInfo.code == nil ? "country.prompt" : "country.noData"))
+            }
+        }
+    }
+}
+
+/// One harm reduction service (web `.psy-help__item`).
+private struct OrganisationRow: View {
+    @Environment(DataPackStore.self) private var store
+    let organisation: Organisation
+    let hue: Color
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 9) {
+            Capsule()
+                .fill(hue.opacity(0.7))
+                .frame(width: 3)
+            VStack(alignment: .leading, spacing: 3) {
+                HStack(alignment: .firstTextBaseline, spacing: 6) {
+                    if let link = organisation.link {
+                        Link(destination: link) {
+                            HStack(alignment: .firstTextBaseline, spacing: 3) {
+                                Text(organisation.name)
+                                PhIcon("arrow-square-out-bold", size: 10)
+                                    .opacity(0.6)
+                            }
+                        }
+                    } else {
+                        Text(organisation.name)
+                    }
+                    if organisation.scope == "regional", let city = organisation.city {
+                        Text(city)
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(PsyCardsColors.fgMute)
+                    }
+                }
+                .font(.footnote.weight(.heavy))
+                .foregroundStyle(PsyCardsColors.fg)
+                if let text = organisation.description(locale: store.locale) {
+                    Text(text)
+                        .font(.caption)
+                        .foregroundStyle(PsyCardsColors.inkSoft)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                FlowLayout(spacing: 4, lineSpacing: 4) {
+                    ForEach(organisation.services.prefix(3), id: \.self) { service in
+                        Text(store.t("card.services.\(service)"))
+                            .font(.caption2.weight(.bold))
+                            .foregroundStyle(PsyCardsColors.fg)
+                            .padding(.horizontal, 7)
+                            .padding(.vertical, 2)
+                            .background(PsyCardsColors.fg.opacity(0.08), in: .capsule)
+                    }
+                    if let phone = organisation.phone, let url = LocalInfoStore.telURL(phone) {
+                        Link(destination: url) {
+                            HStack(spacing: 3) {
+                                PhIcon("phone-fill", size: 10)
+                                Text(phone)
+                                    .monospacedDigit()
+                            }
+                            .font(.caption2.weight(.heavy))
+                            .foregroundStyle(PsyCardsColors.fg)
+                            .padding(.horizontal, 7)
+                            .padding(.vertical, 2)
+                            .overlay(Capsule().strokeBorder(PsyCardsColors.tileEdge))
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+    }
+}
+
+/// Country chip on the card: picks the country for every card.
+struct CountryMenu: View {
+    @Environment(DataPackStore.self) private var store
+    @Environment(LocalInfoStore.self) private var localInfo
+
+    var body: some View {
+        Menu {
+            Picker(store.t("country.title"), selection: Binding(get: { localInfo.code }, set: { localInfo.setCountry($0) })) {
+                ForEach(localInfo.sortedCodes(locale: store.swiftLocale), id: \.self) { code in
+                    Text("\(LocalInfoStore.flag(code))  \(localInfo.name(of: code, locale: store.swiftLocale))")
+                        .tag(String?.some(code))
+                }
+            }
+        } label: {
+            HStack(spacing: 4) {
+                Text(localInfo.code.map(LocalInfoStore.flag) ?? "🌍")
+                Text(localInfo.code.map { localInfo.name(of: $0, locale: store.swiftLocale) } ?? store.t("country.choose"))
+                    .lineLimit(1)
+                PhIcon("caret-down-bold", size: 9)
+                    .opacity(0.6)
+            }
+            .font(.caption2.weight(.bold))
+            .foregroundStyle(PsyCardsColors.fg)
+            .padding(.horizontal, 9)
+            .frame(minHeight: 28)
+            .background(PsyCardsColors.fg.opacity(0.07), in: .capsule)
+            .overlay(Capsule().strokeBorder(PsyCardsColors.tileEdge))
+            .contentShape(.capsule)
+        }
+        .accessibilityLabel(store.t("country.title"))
+        .accessibilityIdentifier("card-country")
+    }
+}
+
+struct LegalStatusPill: View {
+    @Environment(DataPackStore.self) private var store
+    let status: LegalStatus
+
+    var body: some View {
+        Text(store.t("card.legalStatus.\(status.rawValue)"))
+            .font(.caption2.weight(.heavy))
+            .foregroundStyle(PsyCardsColors.ink)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 3)
+            .background(status.color, in: .capsule)
+            .fixedSize()
+    }
+}
+
+extension LegalStatus {
+    var color: Color {
+        switch self {
+        case .legal: Color(hex: 0x4ADE80)
+        case .medical: Color(hex: 0x60A5FA)
+        case .decriminalised: Color(hex: 0xFACC15)
+        case .grey: Color(hex: 0xCBD5E1)
+        case .illegal: Color(hex: 0xF87171)
+        case .unknown: Color(hex: 0xA1A1AA)
+        }
+    }
+}
+
+/// Legal status details: the country's approach, sources and caveats.
+private struct LegalDetailsSheet: View {
+    @Environment(DataPackStore.self) private var store
+    @Environment(LocalInfoStore.self) private var localInfo
+    @Environment(\.dismiss) private var dismiss
+    let card: SubstanceCardData
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                if let country = localInfo.current, let entry = country.substances[card.key] {
+                    VStack(alignment: .leading, spacing: 14) {
+                        HStack(alignment: .firstTextBaseline, spacing: 8) {
+                            LegalStatusPill(status: entry.status)
+                            if let note = entry.note {
+                                Text(note).font(.subheadline)
+                            }
+                        }
+                        if let summary = country.summary {
+                            Text(summary).font(.footnote)
+                        }
+                        if let checking = country.drugChecking {
+                            Text("\(Text(store.t("card.services.drug-checking")).bold()): \(checking)")
+                                .font(.footnote)
+                        }
+                        if let calling = country.callingForHelp {
+                            Text("\(Text(store.t("card.emergency")).bold()) \(calling)")
+                                .font(.footnote)
+                        }
+                        if !entry.sources.isEmpty {
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text(store.t("card.legalSources"))
+                                    .font(.caption.weight(.heavy))
+                                    .tracking(1)
+                                    .textCase(.uppercase)
+                                    .foregroundStyle(PsyCardsColors.fgMute)
+                                ForEach(entry.sources) { source in
+                                    if let link = source.link {
+                                        Link(source.title, destination: link)
+                                            .font(.footnote.weight(.semibold))
+                                    } else {
+                                        Text(source.title).font(.footnote)
+                                    }
+                                }
+                            }
+                        }
+                        Text(store.t("card.legalDisclaimer"))
+                            .font(.caption)
+                            .foregroundStyle(PsyCardsColors.fgMute)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(20)
+                }
+            }
+            .navigationTitle("\(card.displayName) · \(localInfo.code.map { localInfo.name(of: $0, locale: store.swiftLocale) } ?? "")")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(role: .close) { dismiss() }
+                }
+            }
         }
     }
 }
@@ -660,6 +992,15 @@ private struct Line: Shape {
         var path = Path()
         path.move(to: CGPoint(x: rect.minX, y: rect.midY))
         path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+        return path
+    }
+}
+
+private struct VLine: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
         return path
     }
 }

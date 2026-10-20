@@ -1,0 +1,295 @@
+{
+  "country": "RU",
+  "name": "Russia",
+  "asOf": "2026-10",
+  "summary": "Very harsh. Below a tiny 'significant amount' (e.g. 6 g cannabis, 0.2 g cocaine) possession or use is an administrative offence (fine or up to 15 days' jail; foreigners expelled). Above it: up to 3, 3–10 or 10–15 yrs.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "103",
+    "poisonControl": {
+      "name": "Toxicology Information and Advisory Centre (Moscow)",
+      "phone": "+7 495 628 16 87"
+    }
+  },
+  "callingForHelp": "No Good Samaritan protection. Hospitals report crime-linked injuries, so police may follow up; narcology registration is possible. Seeking treatment voluntarily avoids admin liability for use.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug checking services. Sharing drug information can be prosecuted as 'propaganda' (Code of Administrative Offences art. 6.13).",
+  "sources": {
+    "koap68": {
+      "title": "Code of Administrative Offences art. 6.8 (possession without intent to sell; ed. 4 Aug 2026)",
+      "url": "https://www.consultant.ru/document/cons_doc_LAW_34661/8c58af8ec7516f0ddf1334e950f3a60ea525ca28/"
+    },
+    "koap69": {
+      "title": "Code of Administrative Offences art. 6.9 (use without prescription)",
+      "url": "https://www.consultant.ru/document/cons_doc_LAW_34661/6b8bbf2b2605b8ac8baee51ec758a3b2c2fe75c4/"
+    },
+    "koap6131": {
+      "title": "Code of Administrative Offences art. 6.13.1 (propaganda of nitrous oxide, since 2021)",
+      "url": "https://www.consultant.ru/document/cons_doc_LAW_34661/97da26cd8573a1f251fe05c6a0398470a9d3ad71/"
+    },
+    "uk228": {
+      "title": "Criminal Code art. 228 (possession in significant/large/especially large amounts; ed. 4 Aug 2026)",
+      "url": "https://www.consultant.ru/document/cons_doc_LAW_10699/a109722731a0509e104278d1b2d2f589beee330f/"
+    },
+    "uk234": {
+      "title": "Criminal Code art. 234 (potent substances for sale)",
+      "url": "https://www.consultant.ru/document/cons_doc_LAW_10699/deb8cd782c79ab8888215304186ca7e15ffb2fdc/"
+    },
+    "uk2261": {
+      "title": "Criminal Code art. 226.1 (smuggling of potent substances)",
+      "url": "https://www.consultant.ru/document/cons_doc_LAW_10699/1f73e94c7dfdcefa44dbbc1b2799cf9c5331bee5/"
+    },
+    "pp1002": {
+      "title": "Government Decree 1002 of 1 Oct 2012: significant, large and especially large amounts (ed. 11 Jun 2025)",
+      "url": "https://www.consultant.ru/document/cons_doc_LAW_507690/"
+    },
+    "pp681": {
+      "title": "Government Decree 681 of 30 Jun 1998: lists of controlled substances (ed. 11 Jun 2025)",
+      "url": "https://www.consultant.ru/document/cons_doc_LAW_502244/"
+    },
+    "ruwikiN2O": {
+      "title": "Russian Wikipedia: Nitrous oxide – ban on sale to individuals from 1 Jan 2021 (Federal Law 472-FZ)",
+      "url": "https://ru.wikipedia.org/wiki/Оксид_азота(I)"
+    },
+    "wikiAge": {
+      "title": "Wikipedia: Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "'Significant amount' is 0.0001 g (0.1 mg) and whole mixtures can be weighed, so even one blotter can mean prosecution; 0.005 g is 'large' (3–10 yrs).",
+      "sources": [
+        "pp1002",
+        "uk228"
+      ],
+      "confidence": "medium"
+    },
+    "mushrooms": {
+      "status": "decriminalised",
+      "note": "Under 10 g of mushroom (fruit body): admin fine RUB 4,000–5,000 or up to 15 days' arrest. 10 g+: crime (up to 3 yrs); 100 g+: 3–10 yrs.",
+      "sources": [
+        "pp1002",
+        "koap68",
+        "uk228"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "Under 0.5 g: admin offence (fine or up to 15 days). Ayahuasca brew is weighed as a whole mixture, and B. caapi and harmala are also listed.",
+      "sources": [
+        "pp1002",
+        "pp681",
+        "koap68"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline cacti are listed: 50 g of cactus (or 0.5 g mescaline) is already a crime (up to 3 yrs); 250 g+ is 'large' (3–10 yrs).",
+      "sources": [
+        "pp1002",
+        "uk228"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB 'significant amount' is 0.01 g and whole blotters/mixtures can be weighed, so typical amounts are a crime (up to 3 yrs or more).",
+      "sources": [
+        "pp1002",
+        "uk228"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "NBOMe derivatives: 0.05 g counts as 'significant', weighed with the blotter/mixture, so typical amounts are a crime.",
+      "sources": [
+        "pp1002",
+        "pp681",
+        "uk228"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-x are listed as derivatives of 2,5-dimethoxyphenethylamine: 0.05 g of powder or mixture is already a crime (up to 3 yrs).",
+      "sources": [
+        "pp1002",
+        "uk228"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-7 is listed: 0.2 g is 'significant' (crime), 1 g is 'large' (3–10 yrs); mixtures are weighed whole.",
+      "sources": [
+        "pp1002",
+        "uk228"
+      ],
+      "confidence": "medium"
+    },
+    "5-meo-xxt": {
+      "status": "decriminalised",
+      "note": "5-MeO-DMT is covered as a DMT derivative (crime from 0.5 g); 5-MeO-MiPT from just 0.05 g. Below that: admin fine or up to 15 days.",
+      "sources": [
+        "pp1002",
+        "pp681",
+        "koap68"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Under 6 g herb / 2 g hashish: fine RUB 4,000–5,000 or up to 15 days; foreigners expelled. Above: crime (up to 3 yrs; 100 g+: 3–10 yrs). No medical use.",
+      "sources": [
+        "pp1002",
+        "koap68",
+        "koap69",
+        "uk228"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Controlled anaesthetic. Without a prescription 0.2 g+ is a crime (up to 3 yrs) and 5 g+ is 'large' (3–10 yrs); less is an admin offence.",
+      "sources": [
+        "pp1002",
+        "pp681",
+        "uk228"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine and its derivatives are listed narcotics; small 'significant amounts' make most possession a crime.",
+      "sources": [
+        "pp681",
+        "uk228"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "medical",
+      "note": "Dextromethorphan is a List III psychotropic: prescription-only, and possession without one is an offence.",
+      "sources": [
+        "pp681",
+        "koap68"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a narcotic. Sale to individuals has been banned since 2021 and promoting recreational use is fined (RUB 1,000–2,000 for individuals).",
+      "sources": [
+        "koap6131",
+        "ruwikiN2O"
+      ],
+      "confidence": "medium"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Crime from 0.2 g amphetamine / 0.3 g methamphetamine; 1 g amphetamine is 'large' (3–10 yrs). No prescription amphetamines for ADHD.",
+      "sources": [
+        "pp1002",
+        "uk228"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "Under 0.6 g (whole pill weight, about 1–2 pills): admin fine or up to 15 days. 0.6 g+: crime; 3 g+: 3–10 yrs.",
+      "sources": [
+        "pp1002",
+        "koap68",
+        "uk228"
+      ],
+      "confidence": "medium"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Crime from 0.2 g (up to 3 yrs); 1 g is already 'large' (3–10 yrs). Below 0.2 g: admin fine or up to 15 days' arrest.",
+      "sources": [
+        "pp1002",
+        "uk228",
+        "koap68"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal and not a controlled substance.",
+      "sources": [
+        "pp681"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 18; sale to minors is prohibited. Drinking in many public places is an administrative offence.",
+      "sources": [
+        "wikiAge"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB and GBL are List III psychotropics: 10 g is 'significant' (crime), 50 g 'large' (3–10 yrs). A small bottle can exceed this.",
+      "sources": [
+        "pp1002",
+        "pp681",
+        "uk228"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin: crime from 0.5 g (2.5 g = 3–10 yrs); methadone from 0.2 g. Morphine, oxycodone, fentanyl are strictly Rx; no opioid substitution therapy.",
+      "sources": [
+        "pp1002",
+        "uk228"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only 'potent substance': possessing it to sell is a crime (up to 3 yrs) and bringing it into Russia without papers can be smuggling.",
+      "sources": [
+        "uk234",
+        "uk2261"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only List III psychotropics. Without one, e.g. 1 g diazepam or 0.2 g clonazepam (tablet weight may count) is a crime.",
+      "sources": [
+        "pp1002",
+        "pp681",
+        "uk228"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "illegal",
+      "note": "Harmine is a listed narcotic and Peganum harmala and B. caapi are listed plants: 3 g of plant is already a crime. Pharmaceutical MAOIs are Rx.",
+      "sources": [
+        "pp1002",
+        "pp681",
+        "uk228"
+      ],
+      "confidence": "high"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "pp681"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

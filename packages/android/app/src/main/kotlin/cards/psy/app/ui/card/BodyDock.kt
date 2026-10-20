@@ -16,6 +16,7 @@ import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -44,6 +45,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -67,7 +69,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cards.psy.app.data.Sex
 import cards.psy.app.data.WeightUnit
+import cards.psy.app.data.LocalInfoStore
 import cards.psy.app.ui.LocalBody
+import cards.psy.app.ui.LocalCountry
 import cards.psy.app.ui.LocalPack
 import cards.psy.app.ui.components.PhIcon
 import cards.psy.app.ui.theme.PsyColors
@@ -135,6 +139,8 @@ private fun ExpandedDock() {
     val pack = LocalPack.current
     val body = LocalBody.current
     val focus = LocalFocusManager.current
+    var pickCountry by remember { mutableStateOf(false) }
+    if (pickCountry) CountryPickerSheet(onDismiss = { pickCountry = false })
     Surface(
         shape = CircleShape,
         color = PsyColors.ink3,
@@ -143,12 +149,16 @@ private fun ExpandedDock() {
         border = androidx.compose.foundation.BorderStroke(1.dp, PsyColors.fg.copy(alpha = 0.1f)),
         modifier = Modifier.fillMaxWidth().widthIn(max = 560.dp).semantics { contentDescription = pack.t("body.title") },
     ) {
+        BoxWithConstraints {
+        // Narrow docks drop the decorative icon to make room for the country.
+        val roomy = maxWidth >= 430.dp
+        val showCountryName = maxWidth >= 520.dp
         Row(
             Modifier.height(60.dp).padding(horizontal = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(6.dp),
         ) {
-            PhIcon("user-fill", size = 17.dp, tint = PsyColors.fgMute, modifier = Modifier.padding(start = 6.dp))
+            if (roomy) PhIcon("user-fill", size = 17.dp, tint = PsyColors.fgMute, modifier = Modifier.padding(start = 6.dp))
 
             // Sex
             Row(
@@ -198,6 +208,8 @@ private fun ExpandedDock() {
                 RepeatButton("plus", pack.t("body.increase"), "dock-plus") { body.stepWeight(1) }
             }
 
+            CountryButton(showName = showCountryName) { focus.clearFocus(); pickCountry = true }
+
             Spacer(Modifier.weight(1f))
 
             Switch(
@@ -212,6 +224,33 @@ private fun ExpandedDock() {
             IconButton(onClick = { focus.clearFocus(); body.collapseDock(true) }, modifier = Modifier.size(36.dp).testTag("dock-hide")) {
                 Icon(painterResource(cards.psy.app.R.drawable.ph_caret_down_bold), pack.t("body.hide"), tint = PsyColors.fgMute, modifier = Modifier.size(16.dp))
             }
+        }
+        }
+    }
+}
+
+/** The person's country (web `.body-dock__country`): the flag, and its name when there is room. */
+@Composable
+private fun CountryButton(showName: Boolean, onClick: () -> Unit) {
+    val pack = LocalPack.current
+    val country = LocalCountry.current
+    val code = country.code
+    val name = code?.let { country.name(it, pack.javaLocale) } ?: pack.t("country.choose")
+    Row(
+        Modifier
+            .height(40.dp)
+            .background(PsyColors.fg.copy(alpha = 0.07f), CircleShape)
+            .clip(CircleShape)
+            .clickable(role = Role.Button, onClick = onClick)
+            .padding(horizontal = if (showName) 11.dp else 10.dp)
+            .testTag("dock-country")
+            .semantics { contentDescription = "${pack.t("country.title")}: $name" },
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        Text(code?.let(LocalInfoStore::flag) ?: "🌍", fontSize = 17.sp)
+        if (showName) {
+            Text(name, fontSize = 13.sp, fontWeight = FontWeight.Bold, maxLines = 1, modifier = Modifier.widthIn(max = 120.dp))
         }
     }
 }

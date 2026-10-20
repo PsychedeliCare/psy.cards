@@ -1,0 +1,54 @@
+---
+/**
+ * The printed-card layout shared by every illustrated face on /about:
+ * index and kicker on top, a vertical spine label down the right edge,
+ * content in between and a brand footer. Sizes are in cqi of the card, so
+ * the same A6 layout holds at any width.
+ */
+interface Props {
+  /** Small index in the top corner, e.g. "01". */
+  index?: string;
+  kicker?: string;
+  /** Vertical label running down the right edge. */
+  spine?: string;
+  /** Right-hand footer text; the footer only shows when set. */
+  foot?: string;
+  href?: string;
+  external?: boolean;
+  lang?: string;
+  class?: string;
+}
+
+const { index, kicker, spine, foot, href, external = false, lang, class: className } = Astro.props;
+const Tag = href ? "a" : "div";
+---
+
+<Tag
+  class:list={["pc", spine && "pc--spine", className]}
+  href={href}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noreferrer noopener" : undefined}
+  lang={lang}
+>
+  {spine && <span class="pc-spine" aria-hidden="true"><span>{spine}</span></span>}
+  {
+    (index || kicker) && (
+      <p class="pc-top">
+        {index && <span class="pc-index">{index}</span>}
+        {kicker && <span class="pc-kicker">{kicker}</span>}
+      </p>
+    )
+  }
+  <slot />
+  {
+    foot !== undefined && (
+      <p class="pc-foot">
+        <span class="pc-brand">
+          <img src="/favicon.png" alt="" width="14" height="14" />
+          psy.cards
+        </span>
+        <span>{foot}</span>
+      </p>
+    )
+  }
+</Tag>

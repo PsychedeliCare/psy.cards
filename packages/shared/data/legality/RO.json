@@ -1,0 +1,276 @@
+{
+  "country": "RO",
+  "name": "Romania",
+  "asOf": "2026-10",
+  "summary": "Possession for own use is a crime (Law 143/2000): 'risk' drugs incl. cannabis, ketamine, GHB, benzos: 3 months–2 yrs or fine; 'high-risk' drugs: 6 months–3 yrs or fine. First offences are often waived or deferred.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "Toxicological Information Office, National Institute of Public Health (INSP), weekday office hours",
+      "phone": "+40 21 318 36 06"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law. Medical staff are bound by confidentiality, but police can become involved in drug cases and possession of any amount is a crime.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No established public drug checking service is known in Romania.",
+  "sources": {
+    "wikiCannabis": {
+      "title": "Wikipedia: Cannabis in Romania (illegal; 2013 low-THC medical law; 2023 '3 grame' bill rejected)",
+      "url": "https://en.wikipedia.org/wiki/Cannabis_in_Romania"
+    },
+    "wikiLegality": {
+      "title": "Wikipedia: Legality of cannabis (Romania: small quantities – fine for first offenders)",
+      "url": "https://en.wikipedia.org/wiki/Legality_of_cannabis"
+    },
+    "wikiMush": {
+      "title": "Wikipedia: Legal status of psilocybin mushrooms (Romania: illegal)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "wikiAyahuasca": {
+      "title": "Wikipedia: Legal status of ayahuasca by country (Romania: illegal)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_ayahuasca_by_country"
+    },
+    "un1971": {
+      "title": "INCB Green List: psychotropic substances under international control (1971 Convention)",
+      "url": "https://www.incb.org/incb/en/psychotropics/green-list.html"
+    },
+    "wikiAge": {
+      "title": "Wikipedia: Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "euN2O": {
+      "title": "EU Perspectives (Mar 2026): nitrous oxide classified reprotoxic; large canisters may be barred from consumer sale from Feb 2027",
+      "url": "https://euperspectives.eu/2026/03/nitrous-oxide-deaths-and-injuries-fuel-calls-for-eu-wide-restrictions/"
+    },
+    "l143": {
+      "title": "Law 143/2000 on drug trafficking and consumption: art. 1 (risk vs high-risk), art. 4, annex tables I–IV (unofficial consolidated text; penalties revised in 2014)",
+      "url": "https://legeaz.net/legea-143-2000"
+    },
+    "l143anexa": {
+      "title": "Law 143/2000 annex: drug tables I–III (unofficial consolidated text)",
+      "url": "https://legeaz.net/legea-143-2000/anexa"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Table I high-risk drug: possession for own use 6 months–3 yrs or a fine; first offences are often waived or deferred.",
+      "sources": [
+        "l143anexa",
+        "l143"
+      ],
+      "confidence": "medium"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin, psilocin and all Psilocybe species are Table I high-risk drugs; possessing or growing them is a crime.",
+      "sources": [
+        "l143anexa",
+        "wikiMush"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "Table I high-risk drug; possession is a crime. Ayahuasca possession, sale and cultivation are illegal.",
+      "sources": [
+        "l143anexa",
+        "wikiAyahuasca"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Table I high-risk drug; possession is a crime (6 months–3 yrs or a fine).",
+      "sources": [
+        "l143anexa",
+        "l143"
+      ],
+      "confidence": "high"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOC, DOI, DOET are Table I high-risk drugs; possession is a crime.",
+      "sources": [
+        "l143anexa",
+        "l143"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25I/25B/25C-NBOMe are UN Schedule I and nationally controlled; possession is a crime.",
+      "sources": [
+        "un1971",
+        "l143"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B and other 2C-x are UN-scheduled and controlled as high-risk drugs; possession is a crime.",
+      "sources": [
+        "un1971",
+        "l143"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7 are Table I high-risk drugs; possession is a crime.",
+      "sources": [
+        "l143anexa",
+        "l143"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "Not UN-scheduled; whether 5-MeO tryptamines are on Romania's drug tables or only covered by the NPS law was not verified.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Table III 'risk' drug: possession for own use 3 months–2 yrs or a fine; first offenders often get a waiver. Only low-THC medicines allowed, none marketed.",
+      "sources": [
+        "l143anexa",
+        "l143",
+        "wikiCannabis",
+        "wikiLegality"
+      ],
+      "confidence": "medium"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Table III 'risk' drug and a prescription/veterinary anaesthetic: possession without a prescription is a crime (3 months–2 yrs or fine).",
+      "sources": [
+        "l143anexa",
+        "l143"
+      ],
+      "confidence": "medium"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is UN Schedule II; possession is a crime.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not internationally controlled; pharmacy (OTC vs prescription) status in Romania was not verified.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "unknown",
+      "note": "Restrictions on recreational sale have been debated; the current national rules were not verified. EU limits on large canisters may apply from 2027.",
+      "sources": [
+        "euN2O"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamine and methamphetamine are Table II high-risk drugs: possession for own use is a crime. ADHD stimulants are strictly controlled.",
+      "sources": [
+        "l143anexa",
+        "l143"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Table I high-risk drug: possession for own use 6 months–3 yrs or a fine; first offences are often waived or deferred.",
+      "sources": [
+        "l143anexa",
+        "l143"
+      ],
+      "confidence": "medium"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Table II high-risk drug: possession for own use 6 months–3 yrs or a fine.",
+      "sources": [
+        "l143anexa",
+        "l143"
+      ],
+      "confidence": "medium"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal and not a controlled substance.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 18; sale to minors is prohibited.",
+      "sources": [
+        "wikiAge"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is a Table III 'risk' drug: possession is a crime (3 months–2 yrs or fine). Status of GBL/1,4-BD not verified.",
+      "sources": [
+        "l143anexa",
+        "l143"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin (Table I) and fentanyl, morphine etc. (Tables I–II) are high-risk: possession 6 months–3 yrs or fine. Medical opioids need a prescription.",
+      "sources": [
+        "l143anexa",
+        "l143"
+      ],
+      "confidence": "medium"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine; not found in the drug tables, so possession without a prescription is likely not a drug crime.",
+      "sources": [
+        "l143anexa"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Diazepam and other benzodiazepines are Table III 'risk' drugs: possession without a prescription is a crime (3 months–2 yrs or fine).",
+      "sources": [
+        "l143anexa",
+        "l143"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "Pharmaceutical MAOIs are prescription-only. Status of harmala/Syrian rue not verified; ayahuasca (DMT) is illegal.",
+      "sources": [
+        "un1971",
+        "wikiAyahuasca"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

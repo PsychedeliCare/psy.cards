@@ -327,7 +327,36 @@
     "phaseAfter": "danach",
     "caution": "Vorsicht",
     "marginShort": "Tödliche Dosis",
-    "marginValue": "≈ {ratio}× üblich"
+    "marginValue": "≈ {ratio}× üblich",
+    "legal": "Rechtslage",
+    "legalStatus": {
+      "legal": "Legal",
+      "medical": "Verschreibungspflichtig",
+      "decriminalised": "Entkriminalisiert",
+      "grey": "Grauzone",
+      "illegal": "Illegal",
+      "unknown": "Unklar"
+    },
+    "legalDetails": "Details & Quellen",
+    "legalSources": "Quellen",
+    "legalAsOf": "Keine Rechtsberatung · {date}",
+    "legalDisclaimer": "Eine Zusammenfassung, keine Rechtsberatung. Gesetze und ihre Durchsetzung ändern sich: Frag im Zweifel eine lokale Fachstelle.",
+    "help": "Hilfe & Beratung",
+    "poisonCentre": "Giftnotruf {number}",
+    "services": {
+      "drug-checking": "Drug-Checking",
+      "counselling": "Beratung",
+      "helpline": "Hotline",
+      "nightlife": "Partyprävention",
+      "peer-support": "Peer-Support",
+      "naloxone": "Naloxon",
+      "needle-exchange": "Spritzentausch",
+      "consumption-room": "Konsumraum",
+      "online-counselling": "Onlineberatung",
+      "info": "Information",
+      "treatment": "Behandlung",
+      "poison-centre": "Giftnotruf"
+    }
   },
   "body": {
     "title": "Dein Körper",
@@ -345,5 +374,13 @@
     "clear": "Löschen",
     "hide": "Ausblenden",
     "show": "Dosen anpassen"
+  },
+  "country": {
+    "title": "Dein Land",
+    "choose": "Land",
+    "prompt": "Wähle dein Land, um Rechtslage, Notrufnummer und Hilfe vor Ort zu sehen.",
+    "hint": "Legt Notrufnummer, Rechtslage und lokale Angebote auf den Karten fest.",
+    "privacy": "Nur auf diesem Gerät gespeichert.",
+    "noData": "Für dieses Land gibt es noch keine Daten."
   }
 }

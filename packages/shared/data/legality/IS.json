@@ -1,0 +1,244 @@
+{
+  "country": "IS",
+  "name": "Iceland",
+  "asOf": "2026-10",
+  "summary": "Act on Narcotics 65/1974: possessing or using controlled drugs is a crime; small amounts are usually fined. Bills to decriminalise personal-use amounts (2020–2023) did not pass.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "Eitrunarmiðstöð Landspítala (Poison Centre)",
+      "phone": "543 2222"
+    }
+  },
+  "callingForHelp": "No specific legal protection for people who call for help in a drug emergency was found.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug checking service found.",
+  "sources": {
+    "log": {
+      "title": "Lög um ávana- og fíkniefni nr. 65/1974",
+      "url": "https://www.althingi.is/lagas/nuna/1974065.html"
+    },
+    "reg": {
+      "title": "Reglugerð 233/2001 um ávana- og fíkniefni (substance lists, amended 2025)",
+      "url": "https://island.is/reglugerdir/nr/0233-2001"
+    },
+    "cannabisIs": {
+      "title": "Cannabis in Iceland (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Cannabis_in_Iceland"
+    },
+    "psilocybin": {
+      "title": "Legal status of psilocybin mushrooms (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "drinkingAge": {
+      "title": "Legal drinking age (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Controlled (Regulation 233/2001). Possession is a crime; small amounts usually end in a fine.",
+      "sources": [
+        "log",
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin and psilocin are controlled, so mushrooms containing them are treated as illegal.",
+      "sources": [
+        "reg",
+        "psilocybin"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "DMT is controlled; ayahuasca is therefore illegal.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline and mescaline cacti and seeds (Echinopsis pachanoi/peruviana) are listed.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOM, DOET and related compounds are listed.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25I-NBOMe and many other NBOMes are listed.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B, 2C-I, 2C-E and others are listed.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2, 2C-T-7 and related compounds are listed.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "5-MeO-DMT, 5-MeO-MiPT and 5-MeO-DiPT are listed.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Illegal; small amounts usually mean arrest and a fine rather than prison. Decriminalisation bills have failed.",
+      "sources": [
+        "log",
+        "cannabisIs"
+      ],
+      "confidence": "medium"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Listed controlled substance: possession without a prescription is an offence.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is listed.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "grey",
+      "note": "Not on Iceland's controlled substances list (2025 version). As a medicine, its supply is pharmacy-regulated.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a controlled substance; no specific possession offence found.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamine and methamphetamine are controlled. ADHD medicines are legal with a prescription.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Controlled; possession is a crime.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Controlled; possession is a crime.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal.",
+      "sources": [
+        "log"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 20 to buy or be served; retail mainly through state-run Vínbúðin stores.",
+      "sources": [
+        "drinkingAge"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB, GBL and 1,4-butanediol are all listed controlled substances.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin, fentanyl, oxycodone and other opioids are controlled; legal only with a prescription.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Tramadol is a listed controlled substance; prescription required.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "high"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Listed controlled substances; legal only with a prescription.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Medical MAOIs are prescription-only; harmala/Syrian rue are not listed. Ayahuasca is illegal (DMT).",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "grey",
+      "note": "Prescription-only medicines, not controlled substances.",
+      "sources": [
+        "reg"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

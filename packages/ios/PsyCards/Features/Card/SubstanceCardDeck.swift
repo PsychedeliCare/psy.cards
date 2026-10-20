@@ -71,7 +71,7 @@ struct SubstanceCardDeck: View {
                 Color.clear.preference(key: CardWidthKey.self, value: geo.size.width)
             }
             .frame(height: 0)
-            StackedFaces {
+            StackedFaces(visible: side == .front ? 0 : 1) {
                 CardSurface(card: card, side: .front) { front(swipe: dragAngle / 180) }
                     .modifier(FlipFace(angle: angle + dragAngle, isBack: false, reduceMotion: reduceMotion))
                 CardSurface(card: card, side: .back) { back }
@@ -204,18 +204,29 @@ private struct FlipFace: ViewModifier, Animatable {
 
 /// Lays both faces on top of each other at the height of the taller one,
 /// so a flip never changes the card's size.
+/// Both faces on top of each other. The card takes the height of the side
+/// that shows (each side is laid out at its own height), so the shorter side
+/// has no empty space at the bottom.
 private struct StackedFaces: Layout {
+    var visible: Int
+
+    private func height(of subview: LayoutSubview, width: CGFloat) -> CGFloat {
+        max(subview.sizeThatFits(ProposedViewSize(width: width, height: nil)).height, width * 1.35)
+    }
+
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let width = proposal.width ?? 380
-        let height = subviews
-            .map { $0.sizeThatFits(ProposedViewSize(width: width, height: nil)).height }
-            .max() ?? 0
-        return CGSize(width: width, height: max(height, width * 1.35))
+        guard !subviews.isEmpty else { return CGSize(width: width, height: 0) }
+        let shown = subviews[min(visible, subviews.count - 1)]
+        return CGSize(width: width, height: height(of: shown, width: width))
     }
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         for subview in subviews {
-            subview.place(at: bounds.origin, proposal: ProposedViewSize(width: bounds.width, height: bounds.height))
+            subview.place(
+                at: bounds.origin,
+                proposal: ProposedViewSize(width: bounds.width, height: height(of: subview, width: bounds.width))
+            )
         }
     }
 }

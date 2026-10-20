@@ -25,6 +25,7 @@ import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
@@ -42,6 +43,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
@@ -51,6 +53,7 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
@@ -88,14 +91,24 @@ fun SubstanceCardDeck(
                 Modifier.widthIn(max = MaxCardWidth * 2 + 20.dp),
                 horizontalArrangement = Arrangement.spacedBy(20.dp),
             ) {
+                // Side by side, both sides take the taller one's height.
                 var height by remember(card.key) { mutableIntStateOf(0) }
                 val minHeight = with(LocalDensity.current) { height.toDp() }
-                val measure = Modifier.weight(1f).heightIn(min = minHeight).onSizeChanged { if (it.height > height) height = it.height }
+                val measure = Modifier.weight(1f).onSizeChanged { if (it.height > height) height = it.height }
                 CardSurface(card, front = true, modifier = measure) {
-                    CardFront(card, moleculeAsset, 0f, onFlip = {}, onShowRoutes = { sheet = SHEET_ROUTES }, onShowCompare = { sheet = SHEET_COMPARE })
+                    CardFront(card, moleculeAsset, 0f, onFlip = {}, onShowRoutes = { sheet = SHEET_ROUTES }, onShowCompare = { sheet = SHEET_COMPARE }, minHeight = minHeight)
                 }
                 CardSurface(card, front = false, modifier = measure) {
-                    CardBack(card, onFlip = {}, onSelectCombo, onShowAllCombos, onShowDependence = { sheet = SHEET_DEPENDENCE })
+                    CardBack(
+                        card,
+                        onFlip = {},
+                        onSelectCombo,
+                        onShowAllCombos,
+                        onShowDependence = { sheet = SHEET_DEPENDENCE },
+                        onShowLegal = { sheet = SHEET_LEGAL },
+                        onPickCountry = { sheet = SHEET_COUNTRY },
+                        minHeight = minHeight,
+                    )
                 }
             }
         } else {
@@ -106,6 +119,8 @@ fun SubstanceCardDeck(
         SHEET_ROUTES -> OtherRoutesSheet(card) { sheet = SHEET_NONE }
         SHEET_COMPARE -> MarginCompareSheet(card) { sheet = SHEET_NONE }
         SHEET_DEPENDENCE -> DependenceSheet(card) { sheet = SHEET_NONE }
+        SHEET_LEGAL -> LegalDetailsSheet(card) { sheet = SHEET_NONE }
+        SHEET_COUNTRY -> CountryPickerSheet(onDismiss = { sheet = SHEET_NONE })
     }
 }
 
@@ -113,6 +128,8 @@ private const val SHEET_NONE = 0
 private const val SHEET_ROUTES = 1
 private const val SHEET_COMPARE = 2
 private const val SHEET_DEPENDENCE = 3
+private const val SHEET_LEGAL = 4
+private const val SHEET_COUNTRY = 5
 
 @Composable
 private fun SingleCard(
@@ -131,9 +148,19 @@ private fun SingleCard(
     val angle = remember(card.key) { Animatable(0f) }
     var drag by remember(card.key) { mutableFloatStateOf(0f) }
     var widthPx by remember { mutableFloatStateOf(1f) }
-    var faceHeight by remember(card.key) { mutableIntStateOf(0) }
+    var frontHeight by remember(card.key) { mutableIntStateOf(0) }
+    var backHeight by remember(card.key) { mutableIntStateOf(0) }
     val total = angle.value + drag
-    val showingBack = abs(((total % 360) + 360) % 360 - 180) < 90
+    val showingBack = isBack(total)
+    // The side the card is turning to (or showing): the card takes its height.
+    val settledBack = isBack(angle.targetValue + drag)
+    val deckHeight = remember(card.key) { Animatable(0f) }
+    val targetHeight = if (settledBack) backHeight else frontHeight
+    LaunchedEffect(targetHeight) {
+        if (targetHeight == 0) return@LaunchedEffect
+        if (deckHeight.value == 0f) deckHeight.snapTo(targetHeight.toFloat())
+        else deckHeight.animateTo(targetHeight.toFloat(), spring(dampingRatio = 0.9f, stiffness = Spring.StiffnessMediumLow))
+    }
 
     fun flip(direction: Int) {
         scope.launch {
@@ -195,47 +222,76 @@ private fun SingleCard(
                     )
                 },
         ) {
-            val minHeight = with(density) { maxOf(faceHeight, (widthPx * 1.35f).toInt()).toDp() }
-            Face(total, back = false, minHeight) { h ->
-                CardSurface(card, front = true, modifier = Modifier.onSizeChanged { if (it.height > faceHeight) faceHeight = it.height; h(it.height) }) {
-                    CardFront(
-                        card,
-                        moleculeAsset,
-                        swipe = drag / 180,
-                        onFlip = { flip(-1) },
-                        onShowRoutes = { onSheet(SHEET_ROUTES) },
-                        onShowCompare = { onSheet(SHEET_COMPARE) },
-                    )
+            val minHeight = with(density) { (widthPx * 1.35f).toDp() }
+            StackedFaces(visible = if (settledBack) 1 else 0, height = { deckHeight.value }) {
+                Face(total, back = false) {
+                    CardSurface(card, front = true, modifier = Modifier.onSizeChanged { frontHeight = it.height }) {
+                        CardFront(
+                            card,
+                            moleculeAsset,
+                            swipe = drag / 180,
+                            onFlip = { flip(-1) },
+                            onShowRoutes = { onSheet(SHEET_ROUTES) },
+                            onShowCompare = { onSheet(SHEET_COMPARE) },
+                            minHeight = minHeight,
+                        )
+                    }
                 }
-            }
-            Face(total, back = true, minHeight) { h ->
-                CardSurface(card, front = false, modifier = Modifier.onSizeChanged { if (it.height > faceHeight) faceHeight = it.height; h(it.height) }) {
-                    CardBack(card, onFlip = { flip(1) }, onSelectCombo, onShowAllCombos, onShowDependence = { onSheet(SHEET_DEPENDENCE) })
+                Face(total, back = true) {
+                    CardSurface(card, front = false, modifier = Modifier.onSizeChanged { backHeight = it.height }) {
+                        CardBack(
+                            card,
+                            onFlip = { flip(1) },
+                            onSelectCombo,
+                            onShowAllCombos,
+                            onShowDependence = { onSheet(SHEET_DEPENDENCE) },
+                            onShowLegal = { onSheet(SHEET_LEGAL) },
+                            onPickCountry = { onSheet(SHEET_COUNTRY) },
+                            minHeight = minHeight,
+                        )
+                    }
                 }
             }
         }
     }
 }
 
+private fun isBack(angle: Float) = abs(((angle % 360) + 360) % 360 - 180) < 90
+
+/**
+ * Both faces on top of each other. The card takes the height of the side
+ * that shows (each side is laid out at its own height), so the shorter side
+ * has no empty space at the bottom; [height] animates between the two.
+ */
+@Composable
+private fun StackedFaces(visible: Int, height: () -> Float, content: @Composable () -> Unit) {
+    Layout(content, Modifier.fillMaxWidth()) { measurables, constraints ->
+        val placeables = measurables.map { it.measure(constraints.copy(minHeight = 0, maxHeight = Constraints.Infinity)) }
+        val natural = placeables.getOrNull(visible)?.height ?: 0
+        val animated = height().roundToInt()
+        layout(constraints.maxWidth, if (animated > 0) animated else natural) {
+            placeables.forEach { it.place(0, 0) }
+        }
+    }
+}
+
 /** One face of the card, shown depending on the (animated) flip angle. */
 @Composable
-private fun Face(total: Float, back: Boolean, minHeight: androidx.compose.ui.unit.Dp, content: @Composable ((Int) -> Unit) -> Unit) {
+private fun Face(total: Float, back: Boolean, content: @Composable () -> Unit) {
     val faceAngle = total + if (back) 180f else 0f
     val visible = cos(Math.toRadians(faceAngle.toDouble())) > 0
     val density = LocalDensity.current.density
     Box(
         Modifier
             .zIndex(if (visible) 1f else 0f)
-            .heightIn(min = minHeight)
             .graphicsLayer {
                 rotationY = faceAngle
                 cameraDistance = 14f * density
                 alpha = if (visible) 1f else 0f
             }
             .then(if (visible) Modifier else Modifier.clearAndSetSemantics {}),
-        propagateMinConstraints = true,
     ) {
-        content {}
+        content()
     }
 }
 

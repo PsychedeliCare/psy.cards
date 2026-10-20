@@ -68,6 +68,15 @@ struct CardContent: Codable, Hashable, Sendable {
     var dependence: String?
     var risks: [RiskItem]?
     var overdose: Overdose?
+    var effects: [CardEffect]?
+}
+
+/// An effect on the card front (authored with its Phosphor icon).
+struct CardEffect: Codable, Hashable, Sendable, Identifiable {
+    var icon: String
+    var label: String
+
+    var id: String { label }
 }
 
 struct SpacingText: Codable, Hashable, Sendable {

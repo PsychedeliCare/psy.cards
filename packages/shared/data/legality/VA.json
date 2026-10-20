@@ -1,0 +1,251 @@
+{
+  "country": "VA",
+  "name": "Vatican City",
+  "asOf": "2026-10",
+  "summary": "Vatican Law VIII/2013 adopts the UN drug schedules: possessing personal-use amounts carries 1 month–1 year prison and up to €1,000 fine; supply 6–20 years. Substances outside UN schedules aren't listed.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112"
+  },
+  "poisonControlNote": "No Vatican poison centre; Rome's centres are adjacent (e.g. Policlinico Gemelli, +39 06 305 4343, 24h).",
+  "callingForHelp": "No specific Good Samaritan law found. Emergencies rely on Vatican health services and Rome's 112/118 system; no information found on reporting practice.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug-checking service.",
+  "sources": {
+    "law8": {
+      "title": "Vatican City Law No. VIII of 11 July 2013 – Supplementary norms on criminal matters (arts. 41–45)",
+      "url": "https://www.vaticanstate.va/it/stato-e-governo/legislazione-e-normativa/normativa-in-materia-penale-e-amministrativa.html?download=96:legge-n-viii-norme-complementari-in-materia-penale"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    },
+    "wikiCannabis": {
+      "title": "Wikipedia – Legality of cannabis",
+      "url": "https://en.wikipedia.org/wiki/Legality_of_cannabis"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Controlled via UN schedules (Law VIII/2013): amounts for personal use carry 1 month–1 year prison and up to €1,000 fine; supply 6–20 years.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin is UN Schedule I, so mushrooms containing it are likely covered: personal-use amounts carry 1 month–1 year prison.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "Controlled via UN schedules (Law VIII/2013): amounts for personal use carry 1 month–1 year prison and up to €1,000 fine; supply 6–20 years.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Controlled via UN schedules (Law VIII/2013): amounts for personal use carry 1 month–1 year prison and up to €1,000 fine; supply 6–20 years.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOM, DOB, DOC are UN Schedule I, adopted by Vatican law: personal-use amounts carry 1 month–1 year prison and up to €1,000 fine.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25I-, 25B-, 25C-NBOMe are UN Schedule I, adopted by Vatican law: personal-use amounts carry 1 month–1 year prison.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B is UN Schedule II, adopted by Vatican law: personal-use amounts carry 1 month–1 year prison. Other 2C-x may not be covered.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "grey",
+      "note": "Not on the UN schedules that Vatican law (Law VIII/2013) adopts, and no Vatican list found.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "5-meo-xxt": {
+      "status": "grey",
+      "note": "Not on the UN schedules that Vatican law (Law VIII/2013) adopts, and no Vatican list found.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "UN-controlled: personal-use amounts carry 1 month–1 year prison and up to €1,000 fine. No medical cannabis framework found.",
+      "sources": [
+        "law8",
+        "wikiCannabis"
+      ],
+      "confidence": "medium"
+    },
+    "ketamine": {
+      "status": "grey",
+      "note": "Not on the UN schedules adopted by Vatican law and no Vatican list found; a prescription anaesthetic.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "UN Schedule II since 2016, adopted by Vatican law: personal-use amounts carry 1 month–1 year prison.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "grey",
+      "note": "Not on the UN schedules that Vatican law (Law VIII/2013) adopts, and no Vatican list found.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not on the UN schedules that Vatican law (Law VIII/2013) adopts, and no Vatican list found.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "UN Schedule II: personal-use amounts carry 1 month–1 year prison; pharmacy supply on prescription is exempt (art. 45).",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Controlled via UN schedules (Law VIII/2013): amounts for personal use carry 1 month–1 year prison and up to €1,000 fine; supply 6–20 years.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Controlled via UN schedules (Law VIII/2013): amounts for personal use carry 1 month–1 year prison and up to €1,000 fine; supply 6–20 years.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal; no specific Vatican age rule found.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is UN Schedule II, adopted by Vatican law; GBL/1,4-BD are not on UN schedules.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin is UN-controlled: personal-use amounts carry 1 month–1 year prison. Prescription opioids dispensed by pharmacies are exempt.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription medicine; not on UN schedules.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "UN Schedule IV psychotropics are covered by Law VIII; legal only when dispensed on prescription (art. 45).",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Harmala alkaloids/Syrian rue are not on the UN schedules adopted by Vatican law; MAOI antidepressants are prescription medicines.",
+      "sources": [
+        "law8",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription medicines; not controlled drugs.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    }
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "country": "PT",
+  "name": "Portugal",
+  "asOf": "2026-10",
+  "summary": "Since 2001 (Law 30/2000) acquiring or possessing drugs for own use is an administrative offence handled by dissuasion commissions. A 2023 reform added synthetic drugs and amounts over 10 days if for own use.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "CIAV – Centro de Informação Antivenenos (INEM), 24h",
+      "phone": "800 250 250"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law, but personal use is not a crime. INEM (112) is a health service and staff are bound by medical confidentiality. Failing to help is a crime (CP art. 200).",
+  "callingForHelpConfidence": "medium",
+  "drugChecking": "Available: Kosmicare runs a free, anonymous drug-checking service in Lisbon and at festivals.",
+  "sources": {
+    "euda": {
+      "title": "EUDA – Penalties for drug law offences in Europe at a glance (updated Sept 2024)",
+      "url": "https://www.euda.europa.eu/publications/topic-overviews/content/drug-law-penalties-at-a-glance_en"
+    },
+    "lei55": {
+      "title": "Lei 55/2023 – amends Law 30/2000 and Decree-Law 15/93 (Diário da República)",
+      "url": "https://diariodarepublica.pt/dr/detalhe/lei/55-2023-221432122"
+    },
+    "plmj": {
+      "title": "PLMJ (Oct 2023) – note on the amendment of the drug regime",
+      "url": "https://www.plmj.com/xms/files/03_Novidades_legislativas/2023/outubro/NI_Alteracao_ao_Regime_de_Combate_a_Droga.pdf"
+    },
+    "dl15": {
+      "title": "Decree-Law 15/93 with annexed tables (Infarmed compilation)",
+      "url": "https://www.infarmed.pt/documents/15786/1070504/068-DL_15_93_VF.pdf"
+    },
+    "p154": {
+      "title": "Portaria 154/2013 – list of banned new psychoactive substances (Infarmed)",
+      "url": "https://www.infarmed.pt/documents/15786/1070504/070-C_Port_154_2013.pdf"
+    },
+    "rtpN2o": {
+      "title": "RTP (2026) – GNR: nitrous oxide on the NPS list since 2022",
+      "url": "https://www.rtp.pt/noticias/pais/apreensoes-de-botijas-de-gas-do-riso-aumentaram-quase-15-vezes-em-tres-anos-revela-gnr_n1718928"
+    },
+    "iceers": {
+      "title": "ICEERS – Ayahuasca legal situation in Portugal",
+      "url": "https://www.iceers.org/portugal/"
+    },
+    "kosmicare": {
+      "title": "Lisbon Addictions – Kosmicare drug checking in Lisbon",
+      "url": "https://www.lisbonaddictions.eu/node/7359"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    },
+    "wikiCannabis": {
+      "title": "Wikipedia – Legality of cannabis",
+      "url": "https://en.wikipedia.org/wiki/Legality_of_cannabis"
+    },
+    "wikiMush": {
+      "title": "Wikipedia – Legal status of psilocybin mushrooms",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "wikiDrink": {
+      "title": "Wikipedia – Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "decriminalised",
+      "note": "Own-use possession (up to a 10-day supply) goes to a Dissuasion Commission (CDT): warning, fine or treatment referral. Supply is a crime.",
+      "sources": [
+        "euda",
+        "lei55",
+        "plmj"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "decriminalised",
+      "note": "Psilocybin is controlled; possession for own use goes to a Dissuasion Commission (administrative). Selling or growing to supply is a crime.",
+      "sources": [
+        "euda",
+        "dl15",
+        "wikiMush"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "DMT is Table II-A: possession for own use goes to a Dissuasion Commission. Ayahuasca isn't named, but its DMT is; harmine is on the NPS list.",
+      "sources": [
+        "dl15",
+        "iceers",
+        "p154"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "decriminalised",
+      "note": "Mescaline is Table II-A: possession for own use is an administrative matter (Dissuasion Commission). The cacti are not named in the tables.",
+      "sources": [
+        "dl15",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "decriminalised",
+      "note": "DOB, DOM and related amphetamines are Table II-A: possession for own use goes to a Dissuasion Commission; supply is a crime.",
+      "sources": [
+        "dl15",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "decriminalised",
+      "note": "NBOMes are controlled (UN Schedule I; 25C-NBOMe also on the 2013 NPS list): possession for own use goes to a Dissuasion Commission.",
+      "sources": [
+        "incb",
+        "p154",
+        "lei55"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "decriminalised",
+      "note": "2C-B is controlled and other 2C-x (e.g. 2C-P) are on the NPS list; since 2023 own-use possession of both goes to a Dissuasion Commission.",
+      "sources": [
+        "dl15",
+        "p154",
+        "lei55"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "decriminalised",
+      "note": "2C-T-2 and 2C-T-7 are Table II-A; 2C-T-4 is on the NPS list. Possession for own use goes to a Dissuasion Commission (administrative).",
+      "sources": [
+        "dl15",
+        "p154",
+        "lei55"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "decriminalised",
+      "note": "Several 5-MeO tryptamines are on the 2013 NPS list; since 2023 own-use NPS possession goes to a Dissuasion Commission. 5-MeO-DMT/MiPT listing unconfirmed.",
+      "sources": [
+        "p154",
+        "lei55"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Up to a 10-day supply (≈25 g herb, 5 g hash): Dissuasion Commission, administrative. Growing is still a crime. Medical cannabis legal since 2018.",
+      "sources": [
+        "euda",
+        "wikiCannabis",
+        "lei55"
+      ],
+      "confidence": "medium"
+    },
+    "ketamine": {
+      "status": "decriminalised",
+      "note": "On the NPS list since 2013 (and a prescription anaesthetic): sale is banned; own-use possession falls under the 2023 decriminalisation rules.",
+      "sources": [
+        "p154",
+        "lei55"
+      ],
+      "confidence": "medium"
+    },
+    "mxe": {
+      "status": "decriminalised",
+      "note": "On the 2013 NPS list and UN Schedule II since 2016: possession for own use goes to a Dissuasion Commission (administrative).",
+      "sources": [
+        "p154",
+        "incb",
+        "lei55"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not a controlled drug; could not confirm whether DXM cough medicines need a prescription in Portugal.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "decriminalised",
+      "note": "On the NPS list since 2022: production, sale and possession outside authorised industrial/medical uses are banned; sanctions are administrative.",
+      "sources": [
+        "rtpN2o",
+        "lei55"
+      ],
+      "confidence": "medium"
+    },
+    "amphetamines": {
+      "status": "decriminalised",
+      "note": "Amphetamine and methamphetamine are Table II-B: own-use possession goes to a Dissuasion Commission. Methylphenidate is prescribed for ADHD.",
+      "sources": [
+        "dl15",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "Table II-A: possession for own use (up to a 10-day supply) goes to a Dissuasion Commission; above that a court decides. Supply is a crime.",
+      "sources": [
+        "dl15",
+        "euda",
+        "lei55"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "decriminalised",
+      "note": "Table I-B: possession for own use (up to a 10-day supply) goes to a Dissuasion Commission; above that a court decides. Supply is a crime.",
+      "sources": [
+        "dl15",
+        "euda",
+        "lei55"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal for adults; selling or serving alcohol to under-18s is prohibited.",
+      "sources": [
+        "wikiDrink"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "decriminalised",
+      "note": "GHB is Table II-A: own-use possession goes to a Dissuasion Commission. GBL/1,4-BD status not confirmed. Sodium oxybate is prescription-only.",
+      "sources": [
+        "dl15",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "decriminalised",
+      "note": "Heroin: own-use possession (up to a 10-day supply) goes to a Dissuasion Commission. Prescription opioids are medical-only.",
+      "sources": [
+        "dl15",
+        "euda",
+        "lei55"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only (Table IV); non-prescribed possession for own use is handled by a Dissuasion Commission like other drugs.",
+      "sources": [
+        "dl15",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "decriminalised",
+      "note": "Harmine is on the 2013 NPS list (sale banned; own-use possession administrative); ayahuasca is unclear due to DMT. MAOI antidepressants: prescription.",
+      "sources": [
+        "p154",
+        "iceers",
+        "lei55"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

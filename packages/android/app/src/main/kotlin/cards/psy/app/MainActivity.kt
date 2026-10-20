@@ -2,8 +2,10 @@ package cards.psy.app
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
+import android.telephony.TelephonyManager
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -21,10 +23,12 @@ import androidx.core.content.edit
 import androidx.core.os.LocaleListCompat
 import cards.psy.app.data.BodyProfileStore
 import cards.psy.app.data.DataPack
+import cards.psy.app.data.LocalInfoStore
 import cards.psy.app.data.SupportedLocales
 import cards.psy.app.ui.BrowseMode
 import cards.psy.app.ui.CombosRoute
 import cards.psy.app.ui.LocalBody
+import cards.psy.app.ui.LocalCountry
 import cards.psy.app.ui.LocalPack
 import cards.psy.app.ui.PsyCardsApp
 import cards.psy.app.ui.SubstanceRoute
@@ -53,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         val pack = DataPack.load(assets, locale)
         val prefs = getSharedPreferences("psy.cards", Context.MODE_PRIVATE)
         val body = BodyProfileStore(prefs)
+        val country = LocalInfoStore(LocalInfoStore.load(assets), prefs, deviceRegions())
 
         setContent {
             val navigation = remember { TopLevelBackStack(SubstancesRoute) }
@@ -64,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                 open(uri, pack, navigation) { selectedKey = it }
             }
 
-            CompositionLocalProvider(LocalPack provides pack, LocalBody provides body) {
+            CompositionLocalProvider(LocalPack provides pack, LocalBody provides body, LocalCountry provides country) {
                 PsyCardsTheme {
                     // Expose test tags to UI Automator (adb / Maestro / macrobenchmarks).
                     androidx.compose.foundation.layout.Box(Modifier.semantics { testTagsAsResourceId = true }) {
@@ -85,6 +90,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    /** The system locales' regions (not the per-app locale), then the SIM / network country. */
+    private fun deviceRegions(): List<String> {
+        val system = Resources.getSystem().configuration.locales
+        val telephony = getSystemService(TelephonyManager::class.java)
+        return (0 until system.size()).map { system[it].country } +
+            listOfNotNull(telephony?.simCountryIso, telephony?.networkCountryIso)
     }
 
     override fun onNewIntent(intent: Intent) {

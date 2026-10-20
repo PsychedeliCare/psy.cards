@@ -1,0 +1,265 @@
+{
+  "country": "RS",
+  "name": "Serbia",
+  "asOf": "2026-10",
+  "summary": "Possessing any controlled drug, even a small amount for own use, is a crime (fine or up to 3 yrs; court may waive the penalty). Large amounts: 3–10 yrs. The control list is broad and was updated in 2023–24.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "194",
+    "poisonControl": {
+      "name": "National Poison Control Centre, Military Medical Academy (VMA), Belgrade (24h)",
+      "phone": "+381 11 360 8440"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law or other specific legal protection for people who call an ambulance (194) for an overdose was found.",
+  "callingForHelpConfidence": "medium",
+  "drugChecking": "No established drug-checking service found.",
+  "sources": {
+    "cc": {
+      "title": "Criminal Code (Krivični zakonik), arts. 246–247, consolidated to Sl. glasnik 63/2026",
+      "url": "https://www.paragraf.rs/propisi/krivicni-zakonik-2019.html"
+    },
+    "list": {
+      "title": "Customs Administration – list of psychoactive controlled substances per Pravilnik (Sl. glasnik 77/2024), Feb 2025",
+      "url": "https://carina.rs/upload/media/2025/4/3/63060/Spisak_PAKS_15022025.pdf"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    },
+    "wikiCannabis": {
+      "title": "Wikipedia – Legality of cannabis",
+      "url": "https://en.wikipedia.org/wiki/Legality_of_cannabis"
+    },
+    "drinkAge": {
+      "title": "Wikipedia – Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "who": {
+      "title": "WHO – World directory of poisons centres (2023)",
+      "url": "https://www.who.int/data/gho/data/themes/topics/indicator-groups/poison-control-and-unintentional-poisoning"
+    },
+    "e112": {
+      "title": "Wikipedia – 112 emergency number (national numbers)",
+      "url": "https://en.wikipedia.org/wiki/112_(emergency_telephone_number)"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "LSD (and 1P-LSD, 1cP-LSD, 1B-LSD) are listed. Own-use possession: fine or up to 3 yrs (art. 246a).",
+      "sources": [
+        "cc",
+        "list"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin and psilocin are listed; mushrooms/truffles containing them are treated as drugs under art. 246a.",
+      "sources": [
+        "cc",
+        "list"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "DMT is listed (ayahuasca contains DMT). Possession for own use: fine or up to 3 yrs, court may waive penalty; large amounts 3–10 yrs (CC art. 246a).",
+      "sources": [
+        "cc",
+        "list"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is listed; the status of live cacti (peyote, San Pedro) was not specifically confirmed.",
+      "sources": [
+        "cc",
+        "list"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOM (STP) and DOB are on the national list. Possession for own use: fine or up to 3 yrs, court may waive penalty; large amounts 3–10 yrs (CC art. 246a).",
+      "sources": [
+        "cc",
+        "list"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25I-, 25B- and 25C-NBOMe are on the national list. Possession for own use: fine or up to 3 yrs, court may waive penalty; large amounts 3–10 yrs (CC art. 246a).",
+      "sources": [
+        "cc",
+        "list"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B and several 2C-B derivatives are listed. Possession for own use: fine or up to 3 yrs, court may waive penalty; large amounts 3–10 yrs (CC art. 246a).",
+      "sources": [
+        "cc",
+        "list"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2, 2C-T-4, 2C-T-7 and 2C-T-21 are on the national list (not UN-controlled, but controlled in Serbia).",
+      "sources": [
+        "list"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "5-MeO-DMT, 5-MeO-DIPT and 5-MeO-MIPT are on the national list.",
+      "sources": [
+        "list"
+      ],
+      "confidence": "high"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Own-use possession: fine or up to 3 yrs (may be waived); large amounts 3–10 yrs; cultivation 2–8 yrs. No medical cannabis access.",
+      "sources": [
+        "cc",
+        "list",
+        "wikiCannabis"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Controlled (on the national list); used as an anaesthetic. Possession without authorisation is prosecuted like other drugs.",
+      "sources": [
+        "cc",
+        "list"
+      ],
+      "confidence": "medium"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is on the national list (UN Schedule II). Own-use possession: fine or up to 3 yrs (art. 246a).",
+      "sources": [
+        "list",
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "grey",
+      "note": "Not controlled: the list explicitly excludes dextromethorphan from control. Only medicines rules apply.",
+      "sources": [
+        "list"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Nitrous oxide is not on the controlled-substance list; no possession offence found.",
+      "sources": [
+        "list"
+      ],
+      "confidence": "medium"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamine, dexamfetamine and methamphetamine are listed; possession without a prescription is a crime (art. 246a).",
+      "sources": [
+        "cc",
+        "list"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "MDMA is listed. Possession for own use: fine or up to 3 yrs, court may waive penalty; large amounts 3–10 yrs (CC art. 246a).",
+      "sources": [
+        "cc",
+        "list"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Cocaine is listed. Possession for own use: fine or up to 3 yrs, court may waive penalty; large amounts 3–10 yrs (CC art. 246a).",
+      "sources": [
+        "cc",
+        "list"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not controlled.",
+      "sources": [
+        "list"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal for adults; selling, serving or giving alcohol to under-18s is prohibited.",
+      "sources": [
+        "drinkAge"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is listed (own-use possession is a crime). GBL and 1,4-butanediol are not on the list.",
+      "sources": [
+        "cc",
+        "list"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin, morphine, oxycodone, fentanyl and analogues are listed; prescription opioids are legal only with a prescription.",
+      "sources": [
+        "cc",
+        "list"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Tramadol is on the controlled list; prescription-only.",
+      "sources": [
+        "list"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Listed psychotropics (e.g. diazepam, alprazolam, clonazepam); prescription-only.",
+      "sources": [
+        "list"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "MAOI antidepressants are prescription-only. Harmine is on the controlled list; ayahuasca contains DMT (controlled).",
+      "sources": [
+        "list"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only antidepressants; not controlled substances.",
+      "sources": [
+        "list"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

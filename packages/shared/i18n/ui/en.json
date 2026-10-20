@@ -327,7 +327,36 @@
     "phaseAfter": "after",
     "caution": "Caution",
     "marginShort": "Lethal dose",
-    "marginValue": "≈ {ratio}× usual"
+    "marginValue": "≈ {ratio}× usual",
+    "legal": "Legal status",
+    "legalStatus": {
+      "legal": "Legal",
+      "medical": "Prescription only",
+      "decriminalised": "Decriminalised",
+      "grey": "Grey area",
+      "illegal": "Illegal",
+      "unknown": "Unclear"
+    },
+    "legalDetails": "Details & sources",
+    "legalSources": "Sources",
+    "legalAsOf": "Not legal advice · {date}",
+    "legalDisclaimer": "A summary, not legal advice. Laws and how they are enforced change: check a local service if in doubt.",
+    "help": "Help & support",
+    "poisonCentre": "Poisoning advice {number}",
+    "services": {
+      "drug-checking": "Drug checking",
+      "counselling": "Counselling",
+      "helpline": "Helpline",
+      "nightlife": "Party outreach",
+      "peer-support": "Peer support",
+      "naloxone": "Naloxone",
+      "needle-exchange": "Needle exchange",
+      "consumption-room": "Consumption room",
+      "online-counselling": "Online counselling",
+      "info": "Information",
+      "treatment": "Treatment",
+      "poison-centre": "Poison centre"
+    }
   },
   "body": {
     "title": "Your body",
@@ -345,5 +374,13 @@
     "clear": "Clear",
     "hide": "Hide",
     "show": "Personalise doses"
+  },
+  "country": {
+    "title": "Your country",
+    "choose": "Country",
+    "prompt": "Choose your country to see the law, the emergency number and local help.",
+    "hint": "Sets the emergency number, legal status and local services shown on the cards.",
+    "privacy": "Saved on this device only.",
+    "noData": "No data for this country yet."
   }
 }

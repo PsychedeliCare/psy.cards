@@ -1,0 +1,271 @@
+{
+  "country": "DK",
+  "name": "Denmark",
+  "asOf": "2026-10",
+  "summary": "Euphoriant Substances Act (lists A–E): possession for own use is an offence, usually a fixed fine set in law since July 2025; above set amounts means prison. Supervised drug consumption rooms are legal.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "Giftlinjen (Poison Line)",
+      "phone": "82 12 12 12"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law. Health staff are bound by confidentiality. Since July 2024, socially marginalised people dependent on hard drugs get a warning, not a fine, for own-use possession.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No established public drug checking service found. Supervised drug consumption rooms operate legally in several cities.",
+  "sources": {
+    "bek": {
+      "title": "Bekendtgørelse om euforiserende stoffer (BEK nr 405 af 26/03/2026), lists A–E",
+      "url": "https://www.retsinformation.dk/api/pdf/255932"
+    },
+    "rigsadv": {
+      "title": "Rigsadvokatmeddelelsen, afsnittet Narkotika (CIR1H nr 9362 af 01/04/2026) – fine tariffs",
+      "url": "https://www.retsinformation.dk/api/pdf/256033"
+    },
+    "lattergas": {
+      "title": "Lov nr. 732 af 13/06/2023 (lattergasloven: marketing and possession of nitrous oxide)",
+      "url": "https://www.retsinformation.dk/eli/lta/2023/732/pdf"
+    },
+    "lov667": {
+      "title": "Lov nr. 667 af 11/06/2024 (warning rule and drug consumption rooms)",
+      "url": "https://www.retsinformation.dk/eli/lta/2024/667/pdf"
+    },
+    "dexofan": {
+      "title": "Folketinget answer (2008): Dexofan made prescription-only from 18 April 2008",
+      "url": "https://ft.dk/samling/20072/almdel/suu/spm/350/svar/546765/555380.pdf"
+    },
+    "alcoholDk": {
+      "title": "NordAN: new age limits for alcohol sales to 16–17-year-olds in Denmark (1 April 2025)",
+      "url": "https://www.nordicalcohol.org/post/new-age-limits-for-alcohol-sales-to-16-17-year-olds-in-denmark-enters-into-force-on-1-april-2025"
+    },
+    "christiania": {
+      "title": "The Local DK: why Christiania is closing its open drug market (2024)",
+      "url": "https://www.thelocal.dk/20240406/why-denmarks-hippy-christiania-is-closing-down-its-open-drug-market"
+    },
+    "euReach": {
+      "title": "Dáil answer on nitrous oxide incl. EU REACH consumer restriction (Sept 2026), HRB National Drugs Library",
+      "url": "https://www.drugsandalcohol.ie/46896/"
+    },
+    "ayahuasca": {
+      "title": "Legal status of ayahuasca by country (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_ayahuasca_by_country"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "List A. Own-use possession fined (first offence DKK 3,000 for up to 9 doses, rising with amount and repeats).",
+      "sources": [
+        "bek",
+        "rigsadv"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin mushrooms and their spores are on List B (since 2001). Own-use possession is fined.",
+      "sources": [
+        "bek"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "List B. Ayahuasca is illegal; the Supreme Court rejected a religious (Santo Daime) exemption.",
+      "sources": [
+        "bek",
+        "ayahuasca"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline and San Pedro/Peruvian torch cacti and seeds (Echinopsis pachanoi/peruviana) are explicitly on List B.",
+      "sources": [
+        "bek"
+      ],
+      "confidence": "high"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOM etc. on List B; the phenethylamine group definition covers analogues.",
+      "sources": [
+        "bek"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "Covered by the List B phenethylamine group definition (N-methoxybenzyl substitution).",
+      "sources": [
+        "bek"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B, 2C-I, 2C-E etc. are on List B.",
+      "sources": [
+        "bek"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2, 2C-T-4 and 2C-T-7 are on List B.",
+      "sources": [
+        "bek"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "5-MeO-DMT, 5-MeO-DIPT and 5-MeO-DALT are on List B. 5-MeO-MiPT isn't listed by name (2026 order), so its status is unclear.",
+      "sources": [
+        "bek"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Fine DKK 2,000 (<10 g hash/<50 g weed), +50%/+100% for repeats; doubled in strict penalty zones. Christiania's Pusher Street closed 2024.",
+      "sources": [
+        "rigsadv",
+        "christiania",
+        "lov667"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "List B medicine. Without a prescription, fines like amphetamine: DKK 3,000 (<1 g) to 8,000; 5 g or more means prison.",
+      "sources": [
+        "bek",
+        "rigsadv"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is on List B.",
+      "sources": [
+        "bek"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "medical",
+      "note": "Prescription-only since 2008. Pure DXM is on List C; ordinary medicines containing it fall outside the narcotics rules.",
+      "sources": [
+        "bek",
+        "dexofan"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a narcotic. Since July 2023, possession in public places is banned (fine from DKK 3,000) and sales to under-18s are banned. EU consumer ban due 2027.",
+      "sources": [
+        "lattergas",
+        "euReach"
+      ],
+      "confidence": "high"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "List B: fines DKK 3,000–8,000 below 5 g (more for repeats); 5 g+ means prison. ADHD medicines legal with a prescription.",
+      "sources": [
+        "bek",
+        "rigsadv"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "List B. Fines: DKK 3,000 (up to 3 pills), 6,000 (4–11), 8,000 (12–19); 20+ pills means prison even for own use.",
+      "sources": [
+        "bek",
+        "rigsadv"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "List B. Fines DKK 3,000 (<1 g), 6,000 (1–2.9 g), 8,000 (3–4.9 g); 5 g or more means prison.",
+      "sources": [
+        "bek",
+        "rigsadv"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal.",
+      "sources": [
+        "bek"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Shops may sell drinks up to 6% ABV from 16; stronger drinks from 18 (since April 2025). Bars and restaurants: 18.",
+      "sources": [
+        "alcoholDk"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is on List B (fined like other drugs). GBL and 1,4-BD are not on the narcotics lists (2026 order).",
+      "sources": [
+        "bek"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin is List A; 5 g+ is always prison. Tougher fines for opioid pills since July 2025 (50+ pills = prison). Legal only with a prescription.",
+      "sources": [
+        "bek",
+        "rigsadv"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "List B: possession without a prescription is fined as opioid pills (DKK 3,000 for up to 9 pills).",
+      "sources": [
+        "bek",
+        "rigsadv"
+      ],
+      "confidence": "high"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "List E (flunitrazepam List D). Unprescribed possession fined (DKK 3,000 up to 49 pills); 100+ pills means prison.",
+      "sources": [
+        "bek",
+        "rigsadv"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Medical MAOIs are prescription-only, not narcotics. Harmala/Syrian rue are not listed; ayahuasca is illegal because of DMT.",
+      "sources": [
+        "bek",
+        "ayahuasca"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "grey",
+      "note": "Prescription-only medicines, not narcotics: possession isn't a drug offence, but unauthorised supply is illegal.",
+      "sources": [
+        "bek"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

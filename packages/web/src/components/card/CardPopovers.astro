@@ -86,3 +86,21 @@ const dependenceSource =
   {data.content.dependence && <p>{data.content.dependence}</p>}
   <p class="psy-popover__note">{dependenceSource}</p>
 </div>
+
+<div class="psy-popover psy-popover--wide" id={`${uid}-legal`} popover data-local-legal-popover>
+  <div class="psy-popover__head">
+    <h3 data-local-legal-title>{t(locale, ui, "card.legal")}</h3>
+    <button type="button" class="psy-popover__close" popovertarget={`${uid}-legal`} popovertargetaction="hide" aria-label={closeLabel}>
+      <Icon name="ph:x-bold" aria-hidden="true" />
+    </button>
+  </div>
+  <p class="psy-legal psy-legal--popover">
+    <span class="psy-legal__status" data-local-status></span>
+    <span class="psy-legal__note" data-local-note></span>
+  </p>
+  <p data-local-summary></p>
+  <p data-local-drug-checking></p>
+  <h4 class="psy-popover__subhead">{t(locale, ui, "card.legalSources")}</h4>
+  <ul class="psy-popover__sources" data-local-sources></ul>
+  <p class="psy-popover__note">{t(locale, ui, "card.legalDisclaimer")}</p>
+</div>

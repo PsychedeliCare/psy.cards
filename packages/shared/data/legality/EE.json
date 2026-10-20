@@ -1,0 +1,257 @@
+{
+  "country": "EE",
+  "name": "Estonia",
+  "asOf": "2026-10",
+  "summary": "Using drugs or possessing a small amount is a misdemeanour, not a crime (fine up to 300 units ≈ €1,200, or detention). Larger amounts, supply and growing cannabis are crimes.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "Mürgistusteabeliin (Poison Information Line)",
+      "phone": "16662"
+    }
+  },
+  "callingForHelp": "'Good Samaritan' police practice: overdose calls often get only an ambulance; police attend if unsafe or minors are involved, and may waive small-amount cases.",
+  "callingForHelpConfidence": "high",
+  "drugChecking": "State institute TAI anonymously tests drug-residue items (bags, syringes) left at harm-reduction centres in Tallinn, Narva and Kohtla-Järve.",
+  "sources": {
+    "narkoLaw": {
+      "title": "Narko.ee (National Institute for Health Development): drug legislation in Estonia",
+      "url": "https://www.narko.ee/olukord-eestis/eesti-seadusandlus/"
+    },
+    "npals": {
+      "title": "Narkootiliste ja psühhotroopsete ainete ning nende lähteainete seadus (Riigi Teataja)",
+      "url": "https://www.riigiteataja.ee/akt/NPALS"
+    },
+    "hsa": {
+      "title": "Narko.ee: Good Samaritan act – calling for help can save a life",
+      "url": "https://www.narko.ee/hsa/"
+    },
+    "testing": {
+      "title": "Narko.ee: anonymous testing of drug-residue items",
+      "url": "https://www.narko.ee/kogukond/testimine/"
+    },
+    "drinkingAge": {
+      "title": "Legal drinking age (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "cannabisEe": {
+      "title": "Cannabis in Estonia (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Cannabis_in_Estonia"
+    },
+    "psilocybin": {
+      "title": "Legal status of psilocybin mushrooms (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "euReach": {
+      "title": "Dáil answer on nitrous oxide incl. EU REACH consumer restriction (Sept 2026), HRB National Drugs Library",
+      "url": "https://www.drugsandalcohol.ie/46896/"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "decriminalised",
+      "note": "Controlled. Using or holding a small amount is a misdemeanour (fine or detention); supply is a crime.",
+      "sources": [
+        "narkoLaw",
+        "npals"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "decriminalised",
+      "note": "Psilocybin mushrooms are explicitly controlled; small-amount possession is a misdemeanour.",
+      "sources": [
+        "narkoLaw",
+        "psilocybin"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "DMT controlled (ayahuasca counts as a DMT preparation); small-amount possession is a misdemeanour.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "decriminalised",
+      "note": "Mescaline is controlled; small-amount possession is a misdemeanour.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "decriminalised",
+      "note": "Controlled individually or via substance groups (list VI, since 2016); small amounts are a misdemeanour.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "decriminalised",
+      "note": "Controlled individually or via substance groups (list VI, since 2016); small amounts are a misdemeanour.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "decriminalised",
+      "note": "Controlled individually or via substance groups (list VI); small amounts are a misdemeanour.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "decriminalised",
+      "note": "Controlled individually or via substance groups (list VI); small amounts are a misdemeanour.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "medium"
+    },
+    "5-meo-xxt": {
+      "status": "decriminalised",
+      "note": "5-MeO-DMT and related tryptamines controlled (incl. via substance groups); small amounts are a misdemeanour.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Small amount (about 7.5 g) is a misdemeanour: fine up to ~€1,200 or detention. Growing cannabis is a crime. CBD products sold legally.",
+      "sources": [
+        "narkoLaw",
+        "cannabisEe"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Controlled substance: unprescribed use or small-amount possession is a misdemeanour; larger amounts are a crime.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "medium"
+    },
+    "mxe": {
+      "status": "decriminalised",
+      "note": "Controlled; small-amount possession is a misdemeanour.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not verified. DXM is not under the UN drug conventions; whether it is OTC or prescription-only in Estonia was not confirmed.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a controlled drug; national sales rules not verified. EU ban on consumer sales expected from Feb 2027.",
+      "sources": [
+        "narkoLaw",
+        "euReach"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "decriminalised",
+      "note": "Small amounts: misdemeanour (fine or detention); larger amounts and supply are crimes. ADHD medicines by prescription.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "Using or holding a small amount is a misdemeanour; larger amounts or supply are crimes (1–10+ years).",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "decriminalised",
+      "note": "Using or holding a small amount is a misdemeanour; larger amounts or supply are crimes.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 18 (sale, serving and supply to under-18s banned); shop sales limited to 10:00–22:00.",
+      "sources": [
+        "drinkingAge"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "decriminalised",
+      "note": "GHB is controlled (small amounts a misdemeanour). The status of GBL and 1,4-BD was not verified.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "decriminalised",
+      "note": "Heroin, fentanyl and other opioids: small-amount possession is a misdemeanour; larger amounts carry long prison terms.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine. Whether unprescribed possession is itself an offence was not verified.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Psychotropic substances: unprescribed use or small-amount possession is a misdemeanour.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Medical MAOIs are prescription-only; harmala/Syrian rue not known to be controlled. Ayahuasca contains DMT (controlled).",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "grey",
+      "note": "Prescription-only medicines, not controlled drugs.",
+      "sources": [
+        "narkoLaw"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

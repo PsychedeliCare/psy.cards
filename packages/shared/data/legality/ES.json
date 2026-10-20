@@ -1,0 +1,312 @@
+{
+  "country": "ES",
+  "name": "Spain",
+  "asOf": "2026-10",
+  "summary": "Possessing drugs for own use is not a crime. Possession or use in public is an administrative offence (€601–30,000 fine, LO 4/2015); private use isn't penalised. Supply is criminal. Drug checking available.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "Servicio de Información Toxicológica (INTCF), 24h",
+      "phone": "+34 91 562 04 20"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law. Use is not a crime and health staff are bound by confidentiality; police may attend public incidents and fine public possession. Failing to help is a crime (CP art. 195).",
+  "callingForHelpConfidence": "medium",
+  "drugChecking": "Legal and available: Energy Control tests samples in Barcelona, Madrid, Palma and Antequera, and by post.",
+  "sources": {
+    "euda": {
+      "title": "EUDA – Penalties for drug law offences in Europe at a glance (updated Sept 2024)",
+      "url": "https://www.euda.europa.eu/publications/topic-overviews/content/drug-law-penalties-at-a-glance_en"
+    },
+    "lo4": {
+      "title": "Ley Orgánica 4/2015 de protección de la seguridad ciudadana (BOE, consolidated)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-3442"
+    },
+    "cp": {
+      "title": "Código Penal, art. 368 – drug trafficking (BOE, consolidated)",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1995-25444"
+    },
+    "rd903": {
+      "title": "Ministerio de Sanidad (7 Oct 2025) – Royal Decree on medical cannabis standardised preparations",
+      "url": "https://www.sanidad.gob.es/gabinete/notasPrensa.do?id=6761"
+    },
+    "ketamine": {
+      "title": "Ministerial order including ketamine in Annex I of RD 2829/1977 (Iberley)",
+      "url": "https://www.iberley.es/legislacion/preambulo-i-nico-incluye-ketamina-anexo-i-rd-2829-197-fabricacion-distribucion-prescripcion-dispensacion-sustancias-preparados-psicotropicos"
+    },
+    "n2o": {
+      "title": "El Debate (17 Nov 2025) – nitrous oxide legal status in Spain and Balearic ban on recreational sale",
+      "url": "https://www.eldebate.com/espana/baleares/20251117/gas-risa-no-hace-gracia-ibiza-vendedores-sienten-impunes-48-horas-estan-calle-otra-vez_354937_amp.html"
+    },
+    "ayaLocal": {
+      "title": "The Local (8 Aug 2025) – What's the law on ayahuasca in Spain?",
+      "url": "https://www.thelocal.es/20250808/whats-the-law-on-ayahuasca-in-spain"
+    },
+    "iceers": {
+      "title": "ICEERS – Ayahuasca legal situation in Spain",
+      "url": "https://www.iceers.org/spain/"
+    },
+    "energyControl": {
+      "title": "Energy Control – substance analysis service",
+      "url": "https://energycontrol.org/servicio-de-analisis/"
+    },
+    "cscTni": {
+      "title": "TNI – Constitutional Court rulings and cannabis social clubs in Spain",
+      "url": "https://www.tni.org/en/node/23903"
+    },
+    "dxm": {
+      "title": "OlaDoctor – dextromethorphan medicines in Spain (prescription status)",
+      "url": "https://oladoctor.com/en/medicines/spain/ingredient/dextromethorphan"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    },
+    "wikiCannabis": {
+      "title": "Wikipedia – Legality of cannabis",
+      "url": "https://en.wikipedia.org/wiki/Legality_of_cannabis"
+    },
+    "wikiMush": {
+      "title": "Wikipedia – Legal status of psilocybin mushrooms",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "wikiDrink": {
+      "title": "Wikipedia – Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "decriminalised",
+      "note": "Not a crime to possess for own use. In public: administrative fine €601–30,000 (LO 4/2015); in private: no penalty. Supply is a crime (Penal Code art. 368).",
+      "sources": [
+        "euda",
+        "lo4",
+        "cp"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "decriminalised",
+      "note": "Psilocybin is controlled and mushrooms are treated as such: public possession fined (€601+), private use not penalised; selling is prosecuted.",
+      "sources": [
+        "lo4",
+        "wikiMush"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "DMT is controlled: public possession fined, private use not penalised. Ayahuasca isn't listed; courts often acquit, but its DMT can be prosecuted.",
+      "sources": [
+        "lo4",
+        "ayaLocal",
+        "iceers"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "decriminalised",
+      "note": "Mescaline is controlled: public possession fined (€601+), private use not penalised. The cacti aren't listed; selling them for consumption risks prosecution.",
+      "sources": [
+        "lo4",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "decriminalised",
+      "note": "DOM, DOB and DOC are UN Schedule I, which Spain applies directly: public possession fined, private use not penalised; supply is a crime.",
+      "sources": [
+        "lo4",
+        "incb",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "decriminalised",
+      "note": "25I-, 25B-, 25C-NBOMe are UN Schedule I: public possession fined (€601+), private use not penalised; supply is a crime.",
+      "sources": [
+        "lo4",
+        "incb",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "decriminalised",
+      "note": "2C-B is UN Schedule II: public possession fined (€601+), private use not penalised; supply is a crime. Other 2C-x may not be listed.",
+      "sources": [
+        "lo4",
+        "incb",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "unknown",
+      "note": "2C-T-2 and 2C-T-7 are not UN-scheduled; could not confirm a Spanish national listing. Supplying them for consumption may still be prosecuted.",
+      "sources": [
+        "incb",
+        "euda"
+      ],
+      "confidence": "low"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "5-MeO-DMT and 5-MeO-MiPT are not UN-scheduled; could not confirm a Spanish national listing. Supplying them may still be prosecuted.",
+      "sources": [
+        "incb",
+        "euda"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Private use and home growing out of public view not penalised; public possession/use: €601+ fine. Clubs are a grey zone. Medical: hospital-only (2025).",
+      "sources": [
+        "lo4",
+        "wikiCannabis",
+        "cscTni",
+        "rd903"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "decriminalised",
+      "note": "Nationally controlled psychotropic (also a medical/vet anaesthetic): public possession fined €601+, private use not penalised; supply is a crime.",
+      "sources": [
+        "ketamine",
+        "lo4"
+      ],
+      "confidence": "medium"
+    },
+    "mxe": {
+      "status": "decriminalised",
+      "note": "UN Schedule II since 2016, applied directly in Spain: public possession fined, private use not penalised; supply is a crime.",
+      "sources": [
+        "incb",
+        "euda",
+        "lo4"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "legal",
+      "note": "Not a controlled drug; several DXM cough syrups are sold in pharmacies without prescription.",
+      "sources": [
+        "dxm",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a controlled drug; selling it for inhalation isn't allowed, and the Balearic Islands ban recreational sale (since 2013). Possession isn't an offence.",
+      "sources": [
+        "n2o"
+      ],
+      "confidence": "medium"
+    },
+    "amphetamines": {
+      "status": "decriminalised",
+      "note": "Public possession fined (€601+), private use not penalised; supply is a crime. ADHD stimulants (methylphenidate, lisdexamfetamine) on prescription.",
+      "sources": [
+        "lo4",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "Public possession fined €601–30,000, private use not penalised. Supply, or amounts beyond a few days' use, can be prosecuted as trafficking.",
+      "sources": [
+        "lo4",
+        "cp",
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "decriminalised",
+      "note": "Public possession fined €601–30,000, private use not penalised. Supply, or amounts beyond a few days' use, can be prosecuted as trafficking.",
+      "sources": [
+        "lo4",
+        "cp",
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 18 (set by regional laws); many municipalities fine drinking in the street.",
+      "sources": [
+        "wikiDrink"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "decriminalised",
+      "note": "GHB is controlled: public possession fined, private use not penalised. GBL/1,4-BD are industrial solvents, not scheduled. Sodium oxybate is prescription-only.",
+      "sources": [
+        "incb",
+        "euda",
+        "lo4"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "decriminalised",
+      "note": "Heroin: public possession fined (€601+), private use not penalised; supply is a crime. Morphine, oxycodone, fentanyl are prescription-only.",
+      "sources": [
+        "lo4",
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine; not an internationally controlled drug. Selling or supplying it without authorisation is illegal.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only controlled psychotropics; non-prescribed possession in public can be fined like other drugs.",
+      "sources": [
+        "lo4",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Harmala alkaloids/Syrian rue aren't scheduled; ayahuasca is a grey area because it contains DMT. MAOI antidepressants are prescription-only.",
+      "sources": [
+        "ayaLocal",
+        "iceers"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

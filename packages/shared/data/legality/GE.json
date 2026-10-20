@@ -1,0 +1,264 @@
+{
+  "country": "GE",
+  "name": "Georgia",
+  "asOf": "2026-10",
+  "summary": "Very strict, toughened in 2025. Using cannabis in private isn't punished and ≤5 g is an administrative offence, but most other drugs have no or tiny 'small amount' limits, so possession is usually a crime.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112"
+  },
+  "poisonControlNote": "Unverified: WHO's 2023 directory lists the Toxicology National Information-Advisory Center, Tbilisi, as +995 99 53 33 20 (old format). Call 112 for poisoning.",
+  "callingForHelp": "No Good Samaritan protection. Since 2025 police can order a drug test on suspicion (not for cannabis) and refusal is an offence; a positive test can bring licence and job bans.",
+  "callingForHelpConfidence": "medium",
+  "drugChecking": "No drug-checking service found.",
+  "sources": {
+    "law": {
+      "title": "Law on Narcotic Drugs, Psychotropic Substances, Precursors and Narcological Assistance – Annexes 1–2 (amended to Apr 2026)",
+      "url": "https://matsne.gov.ge/en/document/view/1670322?impose=translateEn"
+    },
+    "parl": {
+      "title": "Parliament of Georgia – cannabis amendments to the Criminal Code (1 Jul 2025)",
+      "url": "https://parliament.ge/en/media/news/sakanonmdeblo-organom-siskhlis-samartlis-kodeksshi-tsvlilebebi-pirveli-mosmenit-miigho"
+    },
+    "civil": {
+      "title": "Civil.ge – Parliament adopts tougher cannabis rules (2 Jul 2025)",
+      "url": "https://civil.ge/?p=689664"
+    },
+    "ocm": {
+      "title": "OC Media – tougher drug laws, mandatory treatment, drug-test penalties (2025)",
+      "url": "https://oc-media.org/georgia-tightens-drug-laws-introduces-mandatory-treatment-and-penalties-for-avoiding-drug-tests"
+    },
+    "meduza": {
+      "title": "Meduza – cannabis prosecutions in Georgia after the 2025 reforms (Oct 2026)",
+      "url": "https://meduza.io/en/feature/2026/10/16/russian-emigrants-thought-marijuana-use-was-safe-in-georgia-now-some-are-facing-years-behind-bars"
+    },
+    "jam": {
+      "title": "JAMnews – drug-policy package incl. licence/job bans after positive tests (Mar 2025)",
+      "url": "https://jam-news.net/georgia-tightens-drug-policy-for-survival-of-future-generations/"
+    },
+    "euda": {
+      "title": "EUDA – Penalties for drug law offences at a glance",
+      "url": "https://www.euda.europa.eu/publications/topic-overviews/content/drug-law-penalties-at-a-glance_en"
+    },
+    "drinkAge": {
+      "title": "Wikipedia – Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "who": {
+      "title": "WHO – World directory of poisons centres (2023)",
+      "url": "https://www.who.int/data/gho/data/themes/topics/indicator-groups/poison-control-and-unintentional-poisoning"
+    },
+    "e112": {
+      "title": "Wikipedia – 112 emergency number (national numbers)",
+      "url": "https://en.wikipedia.org/wiki/112_(emergency_telephone_number)"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "'Small amount' is only ≤0.00002 g (20 µg), less than a typical tab; anything more is a crime. Smaller: admin fine/detention.",
+      "sources": [
+        "law",
+        "ocm"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "All fungi of the Strophariaceae family are controlled and psilocybin has no 'small amount', so any quantity is a crime.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "'Small amount' is ≤0.005 g, below a dose; more is a crime. Ayahuasca contains DMT.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Peyote (Lophophora) and San Pedro (Echinopsis) cacti are controlled; mescaline has no 'small amount', so any quantity is a crime.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "high"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOM and DOB are listed with no 'small amount', so any quantity is a crime.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "NBOMes are listed with no thresholds, so any amount triggers criminal liability.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B is listed with no 'small amount', so any quantity is a crime.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "unknown",
+      "note": "2C-T compounds were not found by name in the national lists; they may be treated as analogues or new psychoactive substances.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "low"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "5-MeO tryptamines were not found by name in the national lists; they may be treated as analogues or new psychoactive substances.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Private use by over-21s isn't punished (2018 ruling). ≤5 g dried/10 g fresh: admin offence, repeat = crime; 5–70 g: up to 6 yrs (2025).",
+      "sources": [
+        "parl",
+        "civil",
+        "euda",
+        "meduza"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Controlled psychotropic (List III). ≤0.1 g: administrative offence (first time); more is a crime.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is listed with no thresholds, so any amount triggers criminal liability.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "grey",
+      "note": "Dextromethorphan is explicitly excluded from the narcotics list, so it is not controlled; medicines rules apply.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Nitrous oxide is not on the controlled-substance lists.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "medium"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "'Small amount' for amphetamine or methamphetamine is ≤0.005 g, below a dose; more is a crime. Methylphenidate: no small amount.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "MDMA has no 'small amount', so possessing any quantity is a crime.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "'Small amount' is ≤0.06 g; anything more is a crime. Small amounts: fine 500–2,000 GEL or up to 60 days' detention.",
+      "sources": [
+        "law",
+        "ocm"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not controlled.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Sale of alcohol to under-18s is prohibited.",
+      "sources": [
+        "drinkAge"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB 'small amount' is ≤1 g (below a typical dose); more is a crime. GBL and 1,4-BD were not found on the lists.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin 'small amount' ≤0.005 g; oxycodone has none, so any amount is a crime. Prescription opioids need a prescription.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Controlled (List II), prescription-only. ≤1 g: administrative offence (first time); more is a crime.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "high"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Controlled psychotropics (List III), prescription-only; using medicines without a prescription is an administrative offence.",
+      "sources": [
+        "law",
+        "ocm"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "MAOI antidepressants are prescription-only; harmala alkaloids were not found on the lists; ayahuasca contains DMT (controlled).",
+      "sources": [
+        "law"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only antidepressants; not controlled substances.",
+      "sources": [
+        "law"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

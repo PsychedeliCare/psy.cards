@@ -19,9 +19,6 @@ interface Props {
 const { data, locale, uid, displayName, hasStructure } = Astro.props;
 const ui = getUiMessages(locale);
 const c = data.content;
-const spacing = c.spacing;
-const pattern = data.spacing.pattern ? [...data.spacing.pattern] : [];
-const spanUnit = data.spacing.unit ? t(locale, ui, `card.units.${data.spacing.unit}`) : "";
 const level = Math.min(5, Math.max(1, data.dependence.level));
 const levelLabel = t(locale, ui, `card.dependenceLevels.${level}`);
 const dependencePopover = `${uid}-dependence`;
@@ -34,6 +31,7 @@ const MAX_CAUTION = 6;
 const shownCaution = data.caution.slice(0, data.caution.length > MAX_CAUTION + 1 ? MAX_CAUTION : undefined);
 const hiddenCaution = data.caution.length - shownCaution.length;
 const combosHeadingId = `substance-combos-${data.key.replace(/[^a-z0-9_-]+/gi, "-")}`;
+const legalPopover = `${uid}-legal`;
 ---
 
 <section class="psy-face psy-face--back" id={`${uid}-back`} aria-labelledby={`${uid}-back-title`} data-hologram-host>
@@ -59,46 +57,6 @@ const combosHeadingId = `substance-combos-${data.key.replace(/[^a-z0-9_-]+/gi, "
   </header>
 
   <div class="psy-bento">
-    <div class="psy-row psy-row--back">
-      {spacing && (
-        <section class="psy-tile psy-tile--spacing" aria-labelledby={`${uid}-spacing`}>
-          <h3 id={`${uid}-spacing`}>
-            <Icon name="ph:calendar-dots-fill" aria-hidden="true" />
-            {t(locale, ui, "card.spacing")}
-          </h3>
-          <p class="psy-spacing__value">
-            <strong>{spacing.value}</strong>
-            <span>{spacing.label}</span>
-          </p>
-          {pattern.length > 0 && (
-            <div class="psy-spacing__pattern" aria-hidden="true">
-              <span class="psy-spacing__cells">
-                {pattern.map((cell) => <span class:list={["psy-spacing__cell", { "is-use": cell === "x" }]} />)}
-              </span>
-              <span class="psy-spacing__span">{tFormat(locale, ui, "card.spacingSpan", { count: String(pattern.length), unit: spanUnit })}</span>
-            </div>
-          )}
-          <p class="psy-tile__text">{spacing.text}</p>
-        </section>
-      )}
-      <section class="psy-tile psy-tile--dependence" aria-labelledby={`${uid}-dependence`}>
-        <div class="psy-tile__head">
-          <h3 id={`${uid}-dependence`}>
-            <Icon name="ph:link-break-fill" aria-hidden="true" />
-            {t(locale, ui, "card.dependence")}
-          </h3>
-          <button type="button" class="psy-info-btn" popovertarget={dependencePopover} aria-label={t(locale, ui, "card.info")}>
-            <Icon name="ph:info-bold" aria-hidden="true" />
-          </button>
-        </div>
-        <div class="psy-meter" data-level={level} role="meter" aria-valuemin="1" aria-valuemax="5" aria-valuenow={level} aria-valuetext={levelLabel} aria-labelledby={`${uid}-dependence`}>
-          {[1, 2, 3, 4, 5].map((step) => <span class:list={["psy-meter__step", { "is-on": step <= level }]} />)}
-        </div>
-        <p class="psy-meter__label">{levelLabel}</p>
-        {c.dependence && <p class="psy-tile__text psy-tile__text--small">{c.dependence}</p>}
-      </section>
-    </div>
-
     {c.risks && c.risks.length > 0 && (
       <section class="psy-tile psy-tile--risks" aria-labelledby={`${uid}-risks`}>
         <h3 id={`${uid}-risks`}>
@@ -156,25 +114,83 @@ const combosHeadingId = `substance-combos-${data.key.replace(/[^a-z0-9_-]+/gi, "
     </section>
 
     {c.overdose && (
-      <section class="psy-tile psy-tile--emergency" aria-labelledby={`${uid}-emergency`}>
+      <section class="psy-tile psy-tile--emergency" aria-labelledby={`${uid}-emergency`} data-local-emergency>
         <div class="psy-tile__head">
           <h3 id={`${uid}-emergency`}>
             <Icon name="ph:siren-fill" aria-hidden="true" />
             {t(locale, ui, "card.emergency")}
           </h3>
-          <a class="psy-call" href={`tel:${emergencyNumber}`}>
+          <a class="psy-call" href={`tel:${emergencyNumber}`} data-local-call>
             <Icon name="ph:phone-call-fill" aria-hidden="true" />
-            {tFormat(locale, ui, "card.call", { number: emergencyNumber })}
+            <span data-local-call-label>{tFormat(locale, ui, "card.call", { number: emergencyNumber })}</span>
           </a>
         </div>
         <p class="psy-tile__text psy-emergency__signs">
           <strong>{t(locale, ui, "card.signs")}:</strong> {c.overdose.signs.join(" · ")}
         </p>
         <ol class="psy-emergency__actions" aria-label={t(locale, ui, "card.actions")}>
-          {c.overdose.actions.map((action) => <li>{action}</li>)}
+          {c.overdose.actions.map((action) => <li data-emergency-text>{action}</li>)}
         </ol>
+        <p class="psy-emergency__local" data-local-emergency-extra hidden>
+          <a class="psy-emergency__poison" data-local-poison hidden>
+            <Icon name="ph:first-aid-kit-fill" aria-hidden="true" />
+            <span data-local-poison-label></span>
+          </a>
+          <span class="psy-emergency__calling" data-local-calling hidden></span>
+        </p>
       </section>
     )}
+
+    <section class="psy-tile psy-tile--help" aria-labelledby={`${uid}-help`} data-local-help hidden>
+      <h3 id={`${uid}-help`}>
+        <Icon name="ph:hand-heart-fill" aria-hidden="true" />
+        {t(locale, ui, "card.help")}
+      </h3>
+      <ul class="psy-help" data-local-help-list></ul>
+    </section>
+
+    <section class="psy-tile psy-tile--dependence" aria-labelledby={`${uid}-dependence`}>
+      <div class="psy-tile__head">
+        <h3 id={`${uid}-dependence`}>
+          <Icon name="ph:link-break-fill" aria-hidden="true" />
+          {t(locale, ui, "card.dependence")}
+        </h3>
+        <button type="button" class="psy-info-btn" popovertarget={dependencePopover} aria-label={t(locale, ui, "card.info")}>
+          <Icon name="ph:info-bold" aria-hidden="true" />
+        </button>
+      </div>
+      <div class="psy-meter" data-level={level} role="meter" aria-valuemin="1" aria-valuemax="5" aria-valuenow={level} aria-valuetext={levelLabel} aria-labelledby={`${uid}-dependence`}>
+        {[1, 2, 3, 4, 5].map((step) => <span class:list={["psy-meter__step", { "is-on": step <= level }]} />)}
+      </div>
+      <p class="psy-meter__label">{levelLabel}</p>
+      {c.dependence && <p class="psy-tile__text psy-tile__text--small">{c.dependence}</p>}
+    </section>
+
+    <section class="psy-tile psy-tile--legal" aria-labelledby={`${uid}-legal`} data-local-legal>
+      <div class="psy-tile__head">
+        <h3 id={`${uid}-legal`}>
+          <Icon name="ph:gavel-fill" aria-hidden="true" />
+          {t(locale, ui, "card.legal")}
+        </h3>
+        <button type="button" class="psy-country-btn" popovertarget="country-picker" data-country-button>
+          <span data-country-flag aria-hidden="true">🌍</span>
+          <span data-country-name>{t(locale, ui, "country.choose")}</span>
+          <Icon name="ph:caret-down-bold" aria-hidden="true" />
+        </button>
+      </div>
+      <p class="psy-legal" data-local-legal-body hidden>
+        <span class="psy-legal__status" data-local-status></span>
+        <span class="psy-legal__note" data-local-note></span>
+      </p>
+      <p class="psy-tile__text psy-tile__text--small" data-local-legal-empty>{t(locale, ui, "country.prompt")}</p>
+      <p class="psy-legal__foot" data-local-legal-foot hidden>
+        <span data-local-asof></span>
+        <button type="button" class="psy-legal__more" popovertarget={legalPopover}>
+          {t(locale, ui, "card.legalDetails")}
+          <Icon name="ph:caret-right-bold" aria-hidden="true" />
+        </button>
+      </p>
+    </section>
   </div>
 
   <span class="psy-curl" aria-hidden="true"></span>

@@ -1,0 +1,269 @@
+---
+/**
+ * /logo — cinematic 3D rendition of the psy.cards logo. The deck blooms
+ * into the seven-card fan (one card per category, in combo-table order,
+ * each showing that category's emblematic molecule) and the wordmark fades
+ * in. English only, not indexed.
+ */
+import "../styles/global.css";
+import substances from "../../../shared/data/substances.json";
+import { getGroupLabels, visibleGroupOrder, type GroupName } from "../data/config";
+import { keyToSlug } from "../data/slug";
+
+export const prerender = true;
+
+/** Emblematic substance per category; its molecule is drawn on the card. */
+const moleculeByGroup: Partial<Record<GroupName, keyof typeof substances>> = {
+  stimulant: "amphetamines",
+  empathogen: "mdma",
+  psychedelic: "lsd",
+  dissociative: "ketamine",
+  depressant: "benzodiazepines",
+  opioid: "opioids",
+  cannabinoid: "cannabis",
+};
+
+const groupLabels = getGroupLabels("en");
+const cards = visibleGroupOrder.map((group) => {
+  const key = moleculeByGroup[group]!;
+  return { group, slug: keyToSlug(key), compound: substances[key].compound };
+});
+const description = `The psy.cards logo: seven cards fanned out like a flower, one per category — ${cards
+  .map((card) => `${groupLabels[card.group].toLowerCase()} (${card.compound})`)
+  .join(", ")}.`;
+const letters = [..."PSY.CARDS"];
+---
+
+<!doctype html>
+<html lang="en" data-color-scheme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#050506" />
+    <meta name="robots" content="noindex" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preload" href="/fontshare/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <title>psy.cards — Logo</title>
+  </head>
+  <body class="logo-page">
+    <main class="logo-stage" data-logo-stage data-cards={JSON.stringify(cards)}>
+      <canvas class="logo-canvas" data-logo-canvas aria-hidden="true"></canvas>
+      <img class="logo-fallback" src="/favicon.png" alt="" width="600" height="600" />
+      <h1 class="logo-wordmark" data-wordmark>
+        <span class="sr-only">psy.cards</span>
+        <span class="logo-wordmark__letters" data-letters aria-hidden="true">
+          {letters.map((letter, i) => <span style={`--i: ${i}`}>{letter}</span>)}
+        </span>
+        <span class="logo-wordmark__shine" aria-hidden="true">{letters.join("")}</span>
+      </h1>
+      <p class="sr-only">{description}</p>
+      <button class="logo-replay" type="button" data-replay aria-label="Replay the animation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3" />
+          <path d="M4.5 4.5v3.7h3.7" />
+        </svg>
+      </button>
+    </main>
+    <noscript>
+      <style>
+        .logo-fallback { display: block; }
+        .logo-wordmark__letters > span { opacity: 1; filter: none; transform: none; }
+      </style>
+    </noscript>
+  </body>
+</html>
+
+<script>
+  import "../scripts/logo/index.ts";
+</script>
+
+<style>
+  .logo-page {
+    margin: 0;
+    min-height: 100svh;
+    overflow: hidden;
+    background: #050506;
+  }
+
+  .logo-stage {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2vmin;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  .logo-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .is-ready .logo-canvas {
+    opacity: 1;
+  }
+
+  .logo-fallback {
+    display: none;
+    width: min(72vw, 520px);
+    height: auto;
+  }
+
+  .is-fallback .logo-fallback {
+    display: block;
+    animation: fallback-in 1.4s cubic-bezier(0.16, 0.84, 0.24, 1) both;
+  }
+
+  @keyframes fallback-in {
+    from {
+      opacity: 0;
+      transform: translateY(4%) scale(0.92);
+      filter: blur(12px);
+    }
+  }
+
+  .logo-wordmark {
+    position: relative;
+    margin: 0;
+    font-family: "Satoshi-Variable", "Satoshi-Black", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 900;
+    font-size: clamp(44px, 11vw, 132px);
+    font-kerning: none;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    color: #f4f4f6;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .has-layout:not(.is-fallback) .logo-wordmark {
+    position: absolute;
+    left: var(--wordmark-x);
+    top: var(--wordmark-y);
+    font-size: var(--wordmark-size);
+    transform: translateX(-50%);
+  }
+
+  .logo-wordmark__letters > span {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(0.14em);
+    transform: translateY(0.16em) scale(1.05);
+  }
+
+  .is-wordmark .logo-wordmark__letters > span {
+    animation: letter-in 1.2s cubic-bezier(0.16, 0.84, 0.24, 1) both;
+    animation-delay: calc(var(--i) * 80ms);
+  }
+
+  @keyframes letter-in {
+    from {
+      opacity: 0;
+      filter: blur(0.14em);
+      transform: translateY(0.16em) scale(1.05);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: none;
+    }
+  }
+
+  .logo-wordmark__shine {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: transparent;
+    background-image: linear-gradient(
+      105deg,
+      transparent 0 40%,
+      var(--color-stimulant) 43%,
+      var(--color-empathogen) 44.5%,
+      var(--color-psychedelic) 46%,
+      var(--color-dissociative) 47.5%,
+      var(--color-depressant) 49%,
+      var(--color-opioid) 50.5%,
+      var(--color-cannabinoid) 52%,
+      transparent 55% 100%
+    );
+    background-size: 300% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    pointer-events: none;
+  }
+
+  .is-wordmark .logo-wordmark__shine {
+    animation: shine 1.9s cubic-bezier(0.45, 0.05, 0.3, 1) 1.15s both;
+  }
+
+  @keyframes shine {
+    to {
+      background-position: 0% 0;
+    }
+  }
+
+  .logo-replay {
+    position: absolute;
+    right: max(20px, env(safe-area-inset-right));
+    bottom: max(20px, env(safe-area-inset-bottom));
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.05);
+    color: rgb(255 255 255 / 0.78);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 0.8s ease,
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .logo-replay svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .is-settled:not(.is-fallback) .logo-replay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .logo-replay:hover,
+  .logo-replay:focus-visible {
+    background: rgb(255 255 255 / 0.12);
+    color: #fff;
+  }
+
+  .logo-replay:focus-visible {
+    outline: 2px solid var(--color-dissociative);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .is-wordmark .logo-wordmark__letters > span {
+      animation-duration: 0.01s;
+      animation-delay: 0s;
+    }
+    .is-wordmark .logo-wordmark__shine {
+      animation: none;
+    }
+  }
+</style>

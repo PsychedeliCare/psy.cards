@@ -32,6 +32,7 @@
 		B358157C70738845E8D155D4 /* DataPack in Resources */ = {isa = PBXBuildFile; fileRef = FDBA376BFA4FAF0FF1ED938E /* DataPack */; };
 		B8C0EBB4D73FA3EE38618D24 /* DataPackDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F70DF95F46E1607B8E17D0 /* DataPackDecodingTests.swift */; };
 		BB97EB804DB1CADB77944FAB /* BodyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740E11A7D412781F67D1658D /* BodyProfile.swift */; };
+		C01A4238484524EDE6A1086A /* LocalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A8B20B2DCB22D19ED49CA /* LocalInfo.swift */; };
 		C23005EAB6489CC0FD0BD637 /* DataPackStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A84BA0CC33DBB20B9C70BD /* DataPackStore.swift */; };
 		DBF5C801DF60B49B894308E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFDC5A4901A2E353550FE8D1 /* Assets.xcassets */; };
 		E37BB7D79F7939F26CA95E92 /* PsyCardsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281AF71EBE7DB1407431CB71 /* PsyCardsApp.swift */; };
@@ -56,12 +57,13 @@
 
 /* Begin PBXFileReference section */
 		0AB798AC6DBB4165223AAC58 /* WheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelView.swift; sourceTree = "<group>"; };
+		122A8B20B2DCB22D19ED49CA /* LocalInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalInfo.swift; sourceTree = "<group>"; };
 		14E4E7F0817027BD4D77A9C3 /* SubstanceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceDetailView.swift; sourceTree = "<group>"; };
 		15A926A15F35D31E3F2C72E1 /* DoseScaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseScaleView.swift; sourceTree = "<group>"; };
 		16AFB7F1C2776662A0124924 /* CombosMatrixView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombosMatrixView.swift; sourceTree = "<group>"; };
 		18CBE014C53CE4DB0BA567E0 /* PsyCardsUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PsyCardsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		281AF71EBE7DB1407431CB71 /* PsyCardsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsyCardsApp.swift; sourceTree = "<group>"; };
-		2A4DBA4815F947CC554D0205 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
+		2A4DBA4815F947CC554D0205 /* en.lproj */ = {isa = PBXFileReference; path = en.lproj; sourceTree = "<group>"; };
 		32499B13D99A22A074546062 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		3D7F70D1E90C8BC387FA1A64 /* PsyCardsTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PsyCardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46D1C1E7A800D938ACA30FD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -70,17 +72,17 @@
 		51062DC2513CD3D8D7EBF09D /* SubstanceCardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceCardDeck.swift; sourceTree = "<group>"; };
 		54C268FC94CA3499BE07D592 /* MarginViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarginViews.swift; sourceTree = "<group>"; };
 		6DE48C8938B060D3BDA08945 /* SubstanceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubstanceListView.swift; sourceTree = "<group>"; };
-		6E96626A83CBFB36D22F265C /* it.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = it.lproj; sourceTree = "<group>"; };
+		6E96626A83CBFB36D22F265C /* it.lproj */ = {isa = PBXFileReference; path = it.lproj; sourceTree = "<group>"; };
 		740E11A7D412781F67D1658D /* BodyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyProfile.swift; sourceTree = "<group>"; };
 		77817E0B83DD28E954FE47DC /* CardTourUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTourUITests.swift; sourceTree = "<group>"; };
-		7C77EFF60A694276158DA5B8 /* PsyCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PsyCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EDDB55AC8532C44CA9EFDDE /* fr.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fr.lproj; sourceTree = "<group>"; };
+		7C77EFF60A694276158DA5B8 /* PsyCards.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PsyCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EDDB55AC8532C44CA9EFDDE /* fr.lproj */ = {isa = PBXFileReference; path = fr.lproj; sourceTree = "<group>"; };
 		87F70DF95F46E1607B8E17D0 /* DataPackDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPackDecodingTests.swift; sourceTree = "<group>"; };
 		9B19FD51523956C2E2BC58BD /* FloatingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingCardView.swift; sourceTree = "<group>"; };
 		A7CAC7287DE90D682FBD555A /* HorizontalSwipeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalSwipeGesture.swift; sourceTree = "<group>"; };
 		A9A84BA0CC33DBB20B9C70BD /* DataPackStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPackStore.swift; sourceTree = "<group>"; };
 		AFDC5A4901A2E353550FE8D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BFC6FEF6B6DF6A720829CC2C /* de.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = de.lproj; sourceTree = "<group>"; };
+		BFC6FEF6B6DF6A720829CC2C /* de.lproj */ = {isa = PBXFileReference; path = de.lproj; sourceTree = "<group>"; };
 		C39A36FFB68F93C15DC4F024 /* CardModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModels.swift; sourceTree = "<group>"; };
 		D4D9873B94B37D101EC2B556 /* PsyCardsDesignTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsyCardsDesignTokens.swift; sourceTree = "<group>"; };
 		D72F7CA81D6BB90CD7B4B880 /* AppShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShell.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				C39A36FFB68F93C15DC4F024 /* CardModels.swift */,
 				F7E5E4628523F4D054AF0DF2 /* DataPackModels.swift */,
 				A9A84BA0CC33DBB20B9C70BD /* DataPackStore.swift */,
+				122A8B20B2DCB22D19ED49CA /* LocalInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -309,6 +312,9 @@
 					2FE8927E5BE2AE2E32641EDF = {
 						DevelopmentTeam = "";
 					};
+					811845075E181185E90C0966 = {
+						DevelopmentTeam = "";
+					};
 					D5F26C85254415B882E36987 = {
 						DevelopmentTeam = "";
 						TestTargetID = 811845075E181185E90C0966;
@@ -386,6 +392,7 @@
 				610C11E47299579461A0B333 /* FloatingCardView.swift in Sources */,
 				3C3B95308FEC9DDD6A88519E /* HologramView.swift in Sources */,
 				42675BC7458D696655EBDECC /* HorizontalSwipeGesture.swift in Sources */,
+				C01A4238484524EDE6A1086A /* LocalInfo.swift in Sources */,
 				B0FF3BE08BE867D94D0753D5 /* MarginViews.swift in Sources */,
 				E37BB7D79F7939F26CA95E92 /* PsyCardsApp.swift in Sources */,
 				93E4A91DA35934B77AF102F8 /* PsyCardsDesignTokens.swift in Sources */,
@@ -417,7 +424,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = N6XNEN5G84;
 				INFOPLIST_FILE = PsyCards/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = psy.cards;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -523,7 +529,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = N6XNEN5G84;
 				INFOPLIST_FILE = PsyCards/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = psy.cards;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

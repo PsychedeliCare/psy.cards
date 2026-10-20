@@ -1,0 +1,248 @@
+{
+  "country": "BY",
+  "name": "Belarus",
+  "asOf": "2026-10",
+  "summary": "Extremely harsh. Possessing any amount, even for own use, is a crime (up to 5 yrs). Selling: 3–8 yrs, 6–15 yrs if aggravated, up to 25 yrs if a death results. Analogues are covered too.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "103",
+    "poisonControlNote": "No public poison hotline could be verified; call 103 (ambulance)."
+  },
+  "callingForHelp": "No legal protection. Police are often involved in drug-related medical cases and any possession is a crime. Handing over drugs and actively helping police can exempt (CC art. 328 note).",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug checking services exist; harm reduction services are very limited.",
+  "sources": {
+    "uk": {
+      "title": "Criminal Code of Belarus, arts. 328, 328-1, 328-2, 329 (pravo.by, as amended to 2025)",
+      "url": "https://pravo.by/document/?guid=3871&p0=hk9900275"
+    },
+    "un1971": {
+      "title": "INCB Green List: psychotropic substances under international control (1971 Convention)",
+      "url": "https://www.incb.org/incb/en/psychotropics/green-list.html"
+    },
+    "wikiCannabis": {
+      "title": "Wikipedia: Legality of cannabis (Belarus: illegal for all uses)",
+      "url": "https://en.wikipedia.org/wiki/Legality_of_cannabis"
+    },
+    "wikiAge": {
+      "title": "Wikipedia: Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Possession of any amount without intent to sell: arrest, restricted freedom up to 5 yrs, or 2–5 yrs in prison.",
+      "sources": [
+        "uk",
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin is controlled; possessing any amount is a crime (up to 5 yrs). Growing fungi containing drugs: up to 3 yrs.",
+      "sources": [
+        "uk",
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "UN Schedule I; possession of any amount is a crime (up to 5 yrs). Ayahuasca contains DMT.",
+      "sources": [
+        "uk",
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "UN Schedule I; possession of any amount is a crime (up to 5 yrs).",
+      "sources": [
+        "uk",
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOM, DOC are UN-scheduled; possession of any amount is a crime.",
+      "sources": [
+        "uk",
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25I/25B/25C-NBOMe are UN Schedule I and analogues are also covered; possession of any amount is a crime.",
+      "sources": [
+        "uk",
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B and other 2C-x are UN-scheduled and analogues are covered; possession of any amount is a crime.",
+      "sources": [
+        "uk",
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7 are UN Schedule I; possession of any amount is a crime.",
+      "sources": [
+        "uk",
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "The Criminal Code also covers drug 'analogues', so 5-MeO tryptamines are very likely prosecuted like listed drugs (up to 5 yrs).",
+      "sources": [
+        "uk"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Possession of any amount: up to 5 yrs. Growing cannabis to obtain drugs: up to 3 yrs. Repeat public use within a year is also a crime. No medical use.",
+      "sources": [
+        "uk",
+        "wikiCannabis"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Controlled anaesthetic. Possession without a prescription is likely prosecuted like other controlled drugs (up to 5 yrs).",
+      "sources": [
+        "uk"
+      ],
+      "confidence": "medium"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is UN Schedule II; possession of any amount is a crime.",
+      "sources": [
+        "uk",
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not internationally controlled; its national status and pharmacy rules in Belarus could not be verified.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "unknown",
+      "note": "Could not verify whether nitrous oxide is restricted. Being intoxicated by 'stupefying substances' in public is an offence.",
+      "sources": [
+        "uk"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamine and methamphetamine: possession of any amount is a crime (up to 5 yrs); selling 3–15 yrs.",
+      "sources": [
+        "uk",
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "UN Schedule I; possession of any amount is a crime (up to 5 yrs).",
+      "sources": [
+        "uk",
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Possession of any amount is a crime (up to 5 yrs). Bringing drugs across the border: 3–7 yrs.",
+      "sources": [
+        "uk"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal and not a controlled substance.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 18; sale to minors is prohibited and public drunkenness is an offence.",
+      "sources": [
+        "wikiAge"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is UN Schedule II; possession of any amount is a crime. Status of GBL/1,4-BD not verified.",
+      "sources": [
+        "uk",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin and fentanyl-type drugs: possession of any amount is a crime; 'especially dangerous' drugs raise selling penalties. Rx opioids: prescription only.",
+      "sources": [
+        "uk"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine; whether it is on Belarus's controlled lists was not verified.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only, UN Schedule IV psychotropics; possession without a prescription can be prosecuted.",
+      "sources": [
+        "uk",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "Pharmaceutical MAOIs are prescription-only. The status of harmala/Syrian rue was not verified; DMT in ayahuasca is illegal.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

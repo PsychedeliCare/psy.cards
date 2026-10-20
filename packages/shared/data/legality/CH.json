@@ -1,0 +1,277 @@
+{
+  "country": "CH",
+  "name": "Switzerland",
+  "asOf": "2026-10",
+  "summary": "Four-pillar policy (prevention, therapy, harm reduction, enforcement). Adults: up to 10 g cannabis is not punishable and use is a CHF 100 ticket; other drug use is a fined contravention. Drug checking is legal.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "144",
+    "poisonControl": {
+      "name": "Tox Info Suisse",
+      "phone": "145"
+    }
+  },
+  "callingForHelp": "Ambulance (144) staff are bound by medical secrecy and police are not routinely called. Health and social workers need not report drug use (Art. 3c BetmG). No Good Samaritan law.",
+  "callingForHelpConfidence": "medium",
+  "drugChecking": "Legal, organised by cantons and cities: fixed and mobile services, e.g. in Zurich, Bern, Basel, Geneva and Lucerne.",
+  "sources": {
+    "betmg": {
+      "title": "Federal Act on Narcotics (BetmG, SR 812.121)",
+      "url": "https://www.fedlex.admin.ch/eli/cc/1952/241_241_245/de"
+    },
+    "betmvv": {
+      "title": "Narcotics Lists Ordinance (BetmVV-EDI, SR 812.121.11), status 13 March 2026",
+      "url": "https://www.fedlex.admin.ch/eli/cc/2011/363/de"
+    },
+    "obv": {
+      "title": "Fixed Penalties Ordinance (OBV, SR 314.11), item 8001",
+      "url": "https://www.fedlex.admin.ch/eli/cc/2019/93/de"
+    },
+    "bagGhb": {
+      "title": "FOPH factsheet GHB/GBL/1,4-BD (December 2025)",
+      "url": "https://www.bag.admin.ch/dam/de/sd-web/pGKhc17uLz45/2025_12_18_Factsheet_GHB_DE.pdf"
+    },
+    "infodrogN2O": {
+      "title": "Infodrog: nitrous oxide (Lachgas), legal situation",
+      "url": "https://www.infodrog.ch/de/wissen/suchtformen/lachgas.html"
+    },
+    "bvgerDxm": {
+      "title": "Federal Administrative Court: DXM cough medicines not to be sold in drugstores",
+      "url": "https://www.bvger.ch/en/newsroom/media-releases/cough-medicine-containing-psychoactive-substances-not-to-be-sold-in-drugstores-1069"
+    },
+    "bagDrugChecking": {
+      "title": "FOPH: drug checking",
+      "url": "https://www.bag.admin.ch/drug-checking-de"
+    },
+    "cannabisBill": {
+      "title": "Hanf-Magazin: National Council committee sends cannabis bill (20.473) back to subcommittee, May 2026",
+      "url": "https://www.hanf-magazin.com/news/cannabisregulierung-in-der-schweiz-sgk-n-verweist-vorlage-zurueck-an-subkommission/"
+    },
+    "alkg": {
+      "title": "Alcohol Act (AlkG, SR 680), Art. 41: no spirits to under-18s",
+      "url": "https://www.fedlex.admin.ch/eli/cc/48/425_437_457/de"
+    },
+    "lmg": {
+      "title": "Food Act (LMG, SR 817.0), Art. 14: no alcohol to under-16s",
+      "url": "https://www.fedlex.admin.ch/eli/cc/2017/62/de"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Prohibited (list d). Use or possession for own use is a contravention punished by a fine (Art. 19a BetmG); supply up to 3 years prison.",
+      "sources": [
+        "betmg",
+        "betmvv"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Hallucinogenic mushrooms (Psilocybe, Panaeolus, Conocybe, Stropharia), truffles included, are prohibited (list d). Own use is fined.",
+      "sources": [
+        "betmvv",
+        "betmg"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "DMT is prohibited (list d), so ayahuasca is illegal too. Own use is fined; supply carries prison.",
+      "sources": [
+        "betmvv",
+        "betmg"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline, peyote and San Pedro (Trichocereus pachanoi) are all listed as prohibited (list d).",
+      "sources": [
+        "betmvv"
+      ],
+      "confidence": "high"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOM, DOB and DOC are prohibited (list d); other analogues fall under the generic phenethylamine group (list e).",
+      "sources": [
+        "betmvv"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25B-, 25C- and 25I-NBOMe are prohibited (list d); other NBOMes fall under the generic phenethylamine group (list e).",
+      "sources": [
+        "betmvv"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B and other common 2C-x are prohibited (list d); remaining analogues fall under the generic phenethylamine group (list e).",
+      "sources": [
+        "betmvv"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7 are prohibited (list d); other 2C-T-x fall under the generic phenethylamine group (list e).",
+      "sources": [
+        "betmvv"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "5-MeO-DMT, 5-MeO-MiPT and 5-MeO-DiPT are named in list e (controlled like narcotics), which also has a generic tryptamine group.",
+      "sources": [
+        "betmvv",
+        "betmg"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Adults: ≤10 g for own use not punishable; use is a CHF 100 ticket. CBD under 1% THC legal. City pilot trials sell to enrolled adults; regulation bill pending.",
+      "sources": [
+        "betmg",
+        "betmvv",
+        "obv",
+        "cannabisBill"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Controlled narcotic (list b) used as a prescription medicine. Use or possession without prescription is an offence (fine for own use).",
+      "sources": [
+        "betmvv",
+        "betmg"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Prohibited (list d); other arylcyclohexylamines fall under a generic group (list e).",
+      "sources": [
+        "betmvv"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "medical",
+      "note": "Not a controlled narcotic. Cough medicines with DXM are category B since 2019: supplied only by pharmacists or doctors, not drugstores.",
+      "sources": [
+        "betmvv",
+        "bvgerDxm"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a narcotic. Supplying it for inhalation is banned under chemicals law (Basel case, final 2024); food/technical sale and possession are legal.",
+      "sources": [
+        "infodrogN2O"
+      ],
+      "confidence": "high"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamine and methamphetamine are controlled (list a): own use is fined, supply carries prison. ADHD drugs (methylphenidate etc.) on prescription.",
+      "sources": [
+        "betmvv",
+        "betmg"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Prohibited (list d). Own use is fined (Art. 19a BetmG); supply up to 3 years, more in serious cases.",
+      "sources": [
+        "betmvv",
+        "betmg"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Controlled narcotic. Own use is fined (Art. 19a BetmG); dealing up to 3 years prison, at least 1 year in serious cases.",
+      "sources": [
+        "betmvv",
+        "betmg"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely in food, drinks and tablets.",
+      "sources": [
+        "betmvv"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Beer, wine and cider from 16; spirits and alcopops from 18. Cantons may be stricter (e.g. Ticino: 18 for all alcohol).",
+      "sources": [
+        "lmg",
+        "alkg"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB and GBL are controlled (list a; GBL exempt only for industrial use); 1,4-BD is in list e. Sodium oxybate is a prescription medicine.",
+      "sources": [
+        "betmvv",
+        "bagGhb"
+      ],
+      "confidence": "high"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin is prohibited outside heroin-assisted treatment; morphine, oxycodone, fentanyl etc. are prescription-only controlled narcotics.",
+      "sources": [
+        "betmvv",
+        "betmg"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription medicine. Ready-to-use tramadol products are exempt from narcotics controls (list b) but still need a prescription.",
+      "sources": [
+        "betmvv"
+      ],
+      "confidence": "high"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Most are controlled prescription medicines (list b); designer benzodiazepines such as flualprazolam are prohibited (list d).",
+      "sources": [
+        "betmvv",
+        "betmg"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "Moclobemide and other MAOI drugs need a prescription. Harmala alkaloids/Syrian rue are not listed, but ayahuasca is illegal (DMT).",
+      "sources": [
+        "betmvv"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled narcotics.",
+      "sources": [
+        "betmvv"
+      ],
+      "confidence": "high"
+    }
+  }
+}

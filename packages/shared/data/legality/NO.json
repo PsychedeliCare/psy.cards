@@ -1,0 +1,268 @@
+{
+  "country": "NO",
+  "name": "Norway",
+  "asOf": "2026-10",
+  "summary": "Use and possession of narcotics are crimes; small amounts are usually fined. Since 2022, dependent users with small amounts are generally not prosecuted. A June 2025 reform law is not yet in force (Oct 2026).",
+  "emergency": {
+    "general": "112",
+    "ambulance": "113",
+    "poisonControl": {
+      "name": "Giftinformasjonen (Poison Information)",
+      "phone": "22 59 13 00"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law. Health staff have a duty of confidentiality. Dependent users found with small amounts are generally not prosecuted (2022 guidance).",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "Free, anonymous drug analysis in Oslo by Foreningen Tryggere Ruspolitikk since 2022 (not state-run). Overdose alerts: overdosefare.no.",
+  "sources": {
+    "nark": {
+      "title": "Narkotikaforskriften incl. narkotikalisten (Lovdata, as amended to 2026)",
+      "url": "https://lovdata.no/dokument/SF/forskrift/2013-02-14-199"
+    },
+    "ra2022": {
+      "title": "Riksadvokaten: guidelines after 2022 Supreme Court rulings (13 May 2022)",
+      "url": "https://www.riksadvokaten.no/wp-content/uploads/2022/05/Riksadvokatens-brev-13-mai-2022.pdf"
+    },
+    "reform": {
+      "title": "Stortinget Innst. 518 L (2024–2025) on the drug reform bill (Prop. 112 L)",
+      "url": "https://www.stortinget.no/globalassets/pdf/innstillinger/stortinget/2024-2025/inns-202425-518l.pdf"
+    },
+    "forelegg": {
+      "title": "Regjeringen: proposed simplified fines for minor drug cases (June 2026 consultation)",
+      "url": "https://www.regjeringen.no/no/aktuelt/foreslar-ordning-med-forenklet-forelegg-i-mindre-alvorlige-narkotikasaker/id3167830/"
+    },
+    "lystgass": {
+      "title": "Helsedirektoratet: new rules for sale and import of nitrous oxide",
+      "url": "https://www.helsedirektoratet.no/lov-og-forskrift/lystgass"
+    },
+    "ftr": {
+      "title": "Altinget: Oslo drug-testing service run by Foreningen Tryggere Ruspolitikk",
+      "url": "https://www.altinget.no/artikkel/oslo-politikere-haaper-aa-faa-med-seg-partiene-sine-paa-tilbud-om-testing-av-rusmidler"
+    },
+    "overdosefare": {
+      "title": "Nordic Alcohol & Drug Policy Network: Norway launches overdosefare.no (2026)",
+      "url": "https://www.nordicalcohol.org/post/norway-launches-national-overdose-alert-service-overdosefare-no"
+    },
+    "energyNo": {
+      "title": "Regjeringen: 16-year age limit for sale of energy drinks (from 1 Jan 2026)",
+      "url": "https://www.regjeringen.no/no/aktuelt/regjeringen-innforer-16-ars-aldersgrense-pa-salg-av-energidrikk/id3116510/"
+    },
+    "drinkingAge": {
+      "title": "Legal drinking age (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "ayahuasca": {
+      "title": "Legal status of ayahuasca by country (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_ayahuasca_by_country"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Narcotic. Use and possession are crimes; small amounts are usually fined.",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybe mushrooms, including spores and dried or prepared mushrooms, are explicitly on the narcotics list.",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "Narcotic; preparing DMT-containing plants (ayahuasca) is illegal.",
+      "sources": [
+        "nark",
+        "ayahuasca"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is a narcotic; mescaline extracted or prepared from cacti counts as a narcotic.",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOM and related amphetamines are on the narcotics list (individually or via group definitions).",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25I-, 25B-, 25C-NBOMe and others are on the narcotics list.",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B and other 2C-x are on the narcotics list.",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-x are covered by the narcotics list (individual entries and phenethylamine group).",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "medium"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "5-MeO-DMT, 5-MeO-MiPT and other 5-MeO tryptamines are on the narcotics list.",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "high"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Narcotic; small amounts are usually fined, and dependent users generally aren't prosecuted. Medical cannabis only on prescription.",
+      "sources": [
+        "nark",
+        "ra2022",
+        "reform"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "On the narcotics list: possession or use without a prescription is a crime.",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is on the narcotics list.",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "grey",
+      "note": "Not on Norway's narcotics list (2026). It's a medicine, so sale is pharmacy-regulated and importing it without a prescription is restricted.",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a narcotic. Since 1 July 2026, selling it for intoxication or to under-18s is banned, max 17 g per customer per day; consumer imports banned.",
+      "sources": [
+        "lystgass"
+      ],
+      "confidence": "high"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Narcotics. Dependent users with up to 5 g are generally not prosecuted (2022). ADHD medicines legal with a prescription.",
+      "sources": [
+        "nark",
+        "ra2022"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Narcotic; use and possession are crimes, usually fined for small amounts.",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Narcotic. Dependent users with up to 5 g are generally not prosecuted since the 2022 Supreme Court rulings; others are usually fined.",
+      "sources": [
+        "nark",
+        "ra2022"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal. Selling energy drinks to under-16s has been banned since 1 January 2026.",
+      "sources": [
+        "energyNo"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "From 18 for drinks under 22% ABV, 20 for stronger. Drinks over 4.7% are sold only at Vinmonopolet.",
+      "sources": [
+        "drinkingAge"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB, GBL and 1,4-butanediol are all on the narcotics list (industrial use needs a permit).",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "high"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin and opioid medicines are narcotics; dependent users with up to 5 g heroin are generally not prosecuted. Legal only with a prescription.",
+      "sources": [
+        "nark",
+        "ra2022"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "On the narcotics list: possession without a prescription is a crime.",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "high"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "On the narcotics list: unprescribed possession or use is a crime.",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Medical MAOIs are prescription-only; harmala/Syrian rue are not on the narcotics list. Ayahuasca is illegal (DMT).",
+      "sources": [
+        "nark",
+        "ayahuasca"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "grey",
+      "note": "Prescription-only, not narcotics: possession isn't a crime, but unauthorised sale is.",
+      "sources": [
+        "nark"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

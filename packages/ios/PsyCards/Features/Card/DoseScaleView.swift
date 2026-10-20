@@ -1,9 +1,10 @@
 import SwiftUI
 import UIKit
 
-/// Compact dose scale (web `card/DoseScale.astro`): coloured ranges on a
-/// shared track, level names above and boundary amounts below, placed
-/// without collisions against the real text widths.
+/// Linear dose chart (web `card/DoseScale.astro`): coloured ranges sitting on
+/// a continuous line with a dotted bracket under each range, level names
+/// above and boundary amounts below, placed without collisions against the
+/// real text widths.
 struct DoseScaleView: View {
     @Environment(DataPackStore.self) private var store
     let chart: DoseChart
@@ -19,6 +20,9 @@ struct DoseScaleView: View {
     private var segments: [DoseSegment] { chart.segments ?? [] }
     private var scaleMax: Double { chart.scaleMax ?? 1 }
     private var lineHeight: CGFloat { ceil(fontSize * 1.45) }
+    /// Dotted bracket under each range (start → end amount).
+    private let bracketHeight: CGFloat = 5
+    private let bracketGap: CGFloat = 2
 
     var body: some View {
         GeometryReader { geo in
@@ -27,14 +31,14 @@ struct DoseScaleView: View {
                 labelRow(width: width)
                     .frame(height: lineHeight)
                 track(width: width)
-                    .frame(height: trackHeight)
+                    .frame(height: trackHeight + bracketGap + bracketHeight, alignment: .top)
                     .padding(.top, 4)
-                    .padding(.bottom, 4)
+                    .padding(.bottom, 3)
                 tickRow(width: width)
                     .frame(height: lineHeight)
             }
         }
-        .frame(height: lineHeight * 2 + trackHeight + 8)
+        .frame(height: lineHeight * 2 + trackHeight + bracketGap + bracketHeight + 7)
         .accessibilityElement()
         .accessibilityLabel(Text(accessibilityText))
     }
@@ -115,13 +119,34 @@ struct DoseScaleView: View {
 
     private func track(width: CGFloat) -> some View {
         let height = trackHeight
-        return ZStack(alignment: .leading) {
+        return ZStack(alignment: .topLeading) {
             Canvas { context, size in
-                let h = size.height
+                let h = height
+                // The continuous line the ranges sit on.
+                let lineH = h * 0.45
                 context.fill(
-                    Path(roundedRect: CGRect(x: 0, y: 0, width: size.width, height: h), cornerRadius: h / 2),
-                    with: .color(PsyCardsColors.fg.opacity(0.09))
+                    Path(roundedRect: CGRect(x: -3, y: (h - lineH) / 2, width: size.width + 6, height: lineH), cornerRadius: lineH / 2),
+                    with: .color(PsyCardsColors.fg.opacity(0.11))
                 )
+                // Dotted brackets spanning each range.
+                for segment in segments where !segment.isPoint {
+                    let color = Color(hexString: segment.color)
+                    let x0 = size.width * segment.left / 100
+                    let x1 = x0 + max(size.width * segment.width / 100, h)
+                    let top = h + bracketGap
+                    var bracket = Path()
+                    bracket.move(to: CGPoint(x: x0 + 0.5, y: top))
+                    bracket.addLine(to: CGPoint(x: x0 + 0.5, y: top + bracketHeight))
+                    bracket.addLine(to: CGPoint(x: segment.openEnd ? x1 - h : x1 - 0.5, y: top + bracketHeight))
+                    if !segment.openEnd {
+                        bracket.addLine(to: CGPoint(x: x1 - 0.5, y: top))
+                    }
+                    context.stroke(
+                        bracket,
+                        with: .color(color.opacity(0.6)),
+                        style: StrokeStyle(lineWidth: 1, dash: [1.5, 1.8])
+                    )
+                }
                 let ring = max(1.5, h * 0.2)
                 for segment in segments {
                     let color = Color(hexString: segment.color)
@@ -181,7 +206,7 @@ struct DoseScaleView: View {
                     .transition(.scale.combined(with: .opacity))
             }
         }
-        .frame(width: width, height: height)
+        .frame(width: width, height: height + bracketGap + bracketHeight, alignment: .topLeading)
         .animation(.spring(response: 0.4, dampingFraction: 0.8), value: markerValue)
     }
 }

@@ -1,0 +1,252 @@
+{
+  "country": "MD",
+  "name": "Moldova",
+  "asOf": "2026-10",
+  "summary": "Using drugs without a prescription, or holding a 'small amount' without intent to sell, is a contravention (fine or community service, Contravention Code art. 85). Larger amounts and any supply are crimes.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControlNote": "No national public poison hotline could be verified; call 112."
+  },
+  "callingForHelp": "No Good Samaritan law is known. Medical staff are bound by confidentiality, but police may become involved; small-amount possession and use are contraventions, not crimes.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug checking service is known to operate in Moldova.",
+  "sources": {
+    "wikiCannabis": {
+      "title": "Wikipedia: Cannabis in Moldova (use and small-amount possession = administrative offence, art. 85)",
+      "url": "https://en.wikipedia.org/wiki/Cannabis_in_Moldova"
+    },
+    "wikiLegality": {
+      "title": "Wikipedia: Legality of cannabis (Moldova: decriminalised, no medical use)",
+      "url": "https://en.wikipedia.org/wiki/Legality_of_cannabis"
+    },
+    "wikiMush": {
+      "title": "Wikipedia: Legal status of psilocybin mushrooms (Moldova: psilocybin/psilocin listed)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "un1971": {
+      "title": "INCB Green List: psychotropic substances under international control (1971 Convention)",
+      "url": "https://www.incb.org/incb/en/psychotropics/green-list.html"
+    },
+    "wikiAge": {
+      "title": "Wikipedia: Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "decriminalised",
+      "note": "UN Schedule I. A 'small amount' for own use is a contravention (fine or community service); the legal limit for LSD may be very low. More is a crime.",
+      "sources": [
+        "wikiCannabis",
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "mushrooms": {
+      "status": "decriminalised",
+      "note": "Psilocybin and psilocin are listed. Small amounts for own use: contravention; larger amounts or growing to supply: crime.",
+      "sources": [
+        "wikiMush",
+        "wikiCannabis"
+      ],
+      "confidence": "low"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "UN Schedule I. Small amount for own use: contravention (fine or community service); more is a crime. Ayahuasca contains DMT.",
+      "sources": [
+        "wikiCannabis",
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "mescaline": {
+      "status": "decriminalised",
+      "note": "UN Schedule I. Small amount for own use: contravention; more is a crime.",
+      "sources": [
+        "wikiCannabis",
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "dox": {
+      "status": "decriminalised",
+      "note": "DOB, DOM, DOC are UN-scheduled. Small amount for own use: contravention; more is a crime.",
+      "sources": [
+        "wikiCannabis",
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "nbomes": {
+      "status": "decriminalised",
+      "note": "UN Schedule I. Small amount for own use: contravention; more is a crime. Limits for potent drugs may be tiny.",
+      "sources": [
+        "wikiCannabis",
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "2c-x": {
+      "status": "decriminalised",
+      "note": "2C-B and other 2C-x are UN-scheduled. Small amount for own use: contravention; more is a crime.",
+      "sources": [
+        "wikiCannabis",
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "2c-t-x": {
+      "status": "decriminalised",
+      "note": "2C-T-2 and 2C-T-7 are UN Schedule I. Small amount for own use: contravention; more is a crime.",
+      "sources": [
+        "wikiCannabis",
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "Not UN-scheduled; whether 5-MeO tryptamines are on Moldova's national list was not verified.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Use or a small amount without intent to sell: contravention (fine or community service). Larger amounts and growing to supply: crime. No medical cannabis.",
+      "sources": [
+        "wikiCannabis",
+        "wikiLegality"
+      ],
+      "confidence": "medium"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Prescription/veterinary anaesthetic; national control status was not verified.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "decriminalised",
+      "note": "Methoxetamine is UN Schedule II. Small amount for own use: contravention; more is a crime.",
+      "sources": [
+        "wikiCannabis",
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not internationally controlled; pharmacy (OTC vs prescription) status in Moldova was not verified.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "unknown",
+      "note": "No information found on nitrous oxide rules in Moldova.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "decriminalised",
+      "note": "UN-scheduled. Small amount for own use: contravention; more is a crime. Prescription stimulants need a prescription.",
+      "sources": [
+        "wikiCannabis",
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "UN Schedule I. Small amount for own use: contravention (fine or community service); more is a crime.",
+      "sources": [
+        "wikiCannabis",
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "cocaine": {
+      "status": "decriminalised",
+      "note": "Small amount for own use: contravention; more is a crime. The legal small-amount limit was not verified.",
+      "sources": [
+        "wikiCannabis"
+      ],
+      "confidence": "low"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal and not a controlled substance.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 18; sale to minors is prohibited.",
+      "sources": [
+        "wikiAge"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "decriminalised",
+      "note": "GHB is UN Schedule II. Small amount for own use: contravention; more is a crime. Status of GBL/1,4-BD not verified.",
+      "sources": [
+        "wikiCannabis",
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "opioids": {
+      "status": "decriminalised",
+      "note": "Heroin: small amount for own use is a contravention, more is a crime. Prescription opioids need a prescription; methadone substitution exists.",
+      "sources": [
+        "wikiCannabis"
+      ],
+      "confidence": "low"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine; whether possession without a prescription is penalised was not verified.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only, UN Schedule IV; use without a prescription falls under art. 85 as a contravention.",
+      "sources": [
+        "wikiCannabis",
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "Pharmaceutical MAOIs are prescription-only. The status of harmala/Syrian rue was not verified; DMT in ayahuasca is controlled.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

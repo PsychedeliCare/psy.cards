@@ -1,0 +1,281 @@
+{
+  "country": "BA",
+  "name": "Bosnia and Herzegovina",
+  "asOf": "2026-10",
+  "summary": "Rules differ by entity: in the Federation (FBiH) unauthorised possession of any drug is a crime (up to 1 yr); Republika Srpska and Brčko criminal codes only cover possession for sale. Supply: 1–10 yrs.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "124"
+  },
+  "poisonControlNote": "No poison information centre is listed in WHO's 2023 directory; call 124 (ambulance).",
+  "callingForHelp": "No Good Samaritan law or other specific legal protection for people who call for help in an overdose was found.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug-checking service found.",
+  "sources": {
+    "fbih": {
+      "title": "Criminal Code of the Federation of BiH, arts. 238–239 (consolidated to Sl. novine 58/2025)",
+      "url": "https://www.paragraf.ba/propisi/fbih/krivicni-zakon-federacije-bosne-i-hercegovine.html"
+    },
+    "rs": {
+      "title": "Criminal Code of Republika Srpska, arts. 207–208 (to Sl. glasnik 73/2023)",
+      "url": "https://www.paragraf.ba/propisi/republika-srpska/krivicni-zakon-republike-srpske.html"
+    },
+    "bd": {
+      "title": "Criminal Code of Brčko District, arts. 232–233 (to Sl. glasnik 14/2024)",
+      "url": "https://www.paragraf.ba/propisi/brcko/krivicni-zakon-brcko-distrikta-bosne-i-hercegovine.html"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    },
+    "drinkAge": {
+      "title": "Wikipedia – Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "who": {
+      "title": "WHO – World directory of poisons centres (2023)",
+      "url": "https://www.who.int/data/gho/data/themes/topics/indicator-groups/poison-control-and-unintentional-poisoning"
+    },
+    "e112": {
+      "title": "Wikipedia – 112 emergency number (national numbers)",
+      "url": "https://en.wikipedia.org/wiki/112_(emergency_telephone_number)"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "UN Schedule I. FBiH: possession is a crime (up to 1 yr, CC art. 239). Republika Srpska/Brčko: criminal only if held for sale.",
+      "sources": [
+        "fbih",
+        "rs",
+        "bd",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin is UN Schedule I; mushrooms presumably treated likewise. FBiH: possession up to 1 yr.",
+      "sources": [
+        "fbih",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "UN Schedule I. FBiH: possession is a crime (up to 1 yr, CC art. 239). Republika Srpska/Brčko: criminal only if held for sale.",
+      "sources": [
+        "fbih",
+        "rs",
+        "bd",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "UN Schedule I; cacti status not confirmed. FBiH: possession is a crime (up to 1 yr, CC art. 239). Republika Srpska/Brčko: criminal only if held for sale.",
+      "sources": [
+        "fbih",
+        "rs",
+        "bd",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOM, DOB, DOC: UN Schedule I. FBiH: possession is a crime (up to 1 yr, CC art. 239). Republika Srpska/Brčko: criminal only if held for sale.",
+      "sources": [
+        "fbih",
+        "rs",
+        "bd",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "UN Schedule I since 2015. FBiH: possession is a crime (up to 1 yr, CC art. 239). Republika Srpska/Brčko: criminal only if held for sale.",
+      "sources": [
+        "fbih",
+        "rs",
+        "bd",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B is UN Schedule II. FBiH: possession is a crime (up to 1 yr, CC art. 239). Republika Srpska/Brčko: criminal only if held for sale.",
+      "sources": [
+        "fbih",
+        "rs",
+        "bd",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "unknown",
+      "note": "2C-T compounds are not UN-controlled; national scheduling not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "5-MeO tryptamines are not UN-controlled; national scheduling not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "FBiH: possession is a crime (up to 1 yr, CC art. 239). Republika Srpska/Brčko: criminal only if held for sale. In RS, growing counts as production (1–10 yrs).",
+      "sources": [
+        "fbih",
+        "rs",
+        "bd"
+      ],
+      "confidence": "medium"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Anaesthetic used in hospitals and veterinary practice; not UN-controlled and national control status not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "UN Schedule II since 2016. FBiH: possession is a crime (up to 1 yr, CC art. 239). Republika Srpska/Brčko: criminal only if held for sale.",
+      "sources": [
+        "fbih",
+        "rs",
+        "bd",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not UN-controlled; national control and prescription status not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not internationally controlled; no national restriction confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "UN Schedule II. FBiH: possession is a crime (up to 1 yr, CC art. 239). Republika Srpska/Brčko: criminal only if held for sale.",
+      "sources": [
+        "fbih",
+        "rs",
+        "bd",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "UN Schedule I. FBiH: possession is a crime (up to 1 yr, CC art. 239). Republika Srpska/Brčko: criminal only if held for sale.",
+      "sources": [
+        "fbih",
+        "rs",
+        "bd",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "1961 Convention drug. FBiH: possession is a crime (up to 1 yr, CC art. 239). Republika Srpska/Brčko: criminal only if held for sale.",
+      "sources": [
+        "fbih",
+        "rs",
+        "bd"
+      ],
+      "confidence": "medium"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not controlled.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Selling alcohol to under-18s is an offence.",
+      "sources": [
+        "drinkAge"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is UN Schedule II (FBiH: possession up to 1 yr). GBL/1,4-BD status not confirmed.",
+      "sources": [
+        "fbih",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin etc. are controlled. FBiH: possession is a crime (up to 1 yr, CC art. 239). Republika Srpska/Brčko: criminal only if held for sale.",
+      "sources": [
+        "fbih",
+        "rs",
+        "bd"
+      ],
+      "confidence": "medium"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only painkiller; not UN-controlled and national control status not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "UN Schedule IV psychotropics; prescription-only.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "MAOI antidepressants are prescription-only; harmala/Syrian rue status not confirmed; ayahuasca contains DMT (controlled).",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only antidepressants; not controlled substances.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

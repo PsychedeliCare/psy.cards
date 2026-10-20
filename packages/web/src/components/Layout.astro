@@ -23,6 +23,8 @@ interface Props {
   showLanguageSwitcher?: boolean;
   comboRoute?: string;
   substanceBase?: string;
+  /** Keep internal review pages out of search engines. */
+  noindex?: boolean;
 }
 
 const {
@@ -35,6 +37,7 @@ const {
   showLanguageSwitcher = true,
   comboRoute = localePath(locale, "/combos"),
   substanceBase = localePath(locale, "/"),
+  noindex = false,
 } = Astro.props;
 
 const ui = getUiMessages(locale);
@@ -67,6 +70,7 @@ const i18nPayload = JSON.stringify({
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="application-name" content="psy.cards" />
     <meta name="description" content={resolvedDescription} />
+    {noindex && <meta name="robots" content="noindex" />}
     <title>{resolvedTitle}</title>
     <meta property="og:title" content={resolvedTitle} />
     <meta property="og:description" content={resolvedDescription} />
@@ -100,8 +104,10 @@ const i18nPayload = JSON.stringify({
       import { initHolographicCards } from "../scripts/holographic-cards.ts";
       import { initSubstanceCards } from "../scripts/substance-card.ts";
       import { initBodyDock } from "../scripts/body-dock.ts";
+      import { initLocalInfo } from "../scripts/local-info.ts";
 
       initBodyDock();
+      initLocalInfo();
       initSubstanceCards();
       initSmilesDrawer();
       initTimingCharts();

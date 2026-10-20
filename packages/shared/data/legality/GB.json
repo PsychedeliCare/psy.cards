@@ -1,0 +1,287 @@
+{
+  "country": "GB",
+  "name": "United Kingdom",
+  "asOf": "2026-10",
+  "summary": "Misuse of Drugs Act 1971 (Classes A/B/C): possessing controlled drugs is a crime. Psychoactive Substances Act 2016 bans supplying other highs (possession legal outside prisons). Drug checking needs a Home Office licence.",
+  "emergency": {
+    "general": "999",
+    "ambulance": "999",
+    "poisonControl": {
+      "name": "NHS 111 (non-emergency medical advice)",
+      "phone": "111"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law. Ambulance crews don't routinely call police; many forces attend overdoses only if there is a death, violence or risk to crews. NHS confidentiality applies.",
+  "callingForHelpConfidence": "medium",
+  "drugChecking": "Legal only under Home Office licence: The Loop (Bristol, London, events) and WEDINOS (Wales, anonymous postal testing).",
+  "sources": {
+    "moda": {
+      "title": "Misuse of Drugs Act 1971",
+      "url": "https://www.legislation.gov.uk/ukpga/1971/38/contents"
+    },
+    "mdr": {
+      "title": "Misuse of Drugs Regulations 2001",
+      "url": "https://www.legislation.gov.uk/uksi/2001/3998/contents"
+    },
+    "psa": {
+      "title": "Psychoactive Substances Act 2016",
+      "url": "https://www.legislation.gov.uk/ukpga/2016/2/contents"
+    },
+    "hmr": {
+      "title": "Human Medicines Regulations 2012",
+      "url": "https://www.legislation.gov.uk/uksi/2012/1916/contents"
+    },
+    "nitrous": {
+      "title": "Home Office: Nitrous oxide ban guidance (Class C from 8 Nov 2023)",
+      "url": "https://www.gov.uk/government/publications/nitrous-oxide-ban/nitrous-oxide-ban-guidance"
+    },
+    "ghb2022": {
+      "title": "Home Office circular 001/2022: reclassification of GHB, GBL and 1,4-BD",
+      "url": "https://www.gov.uk/government/publications/circular-0012022-reclassification-of-ghb-and-related-substances"
+    },
+    "acmdKetamine": {
+      "title": "ACMD decision on the classification of ketamine (Jan 2026)",
+      "url": "https://www.gov.uk/government/news/acmd-announces-decision-on-the-classification-of-ketamine"
+    },
+    "ketamineResponse": {
+      "title": "Lancashire PCC on government response to ketamine classification (Aug 2026)",
+      "url": "https://www.lancashire-pcc.gov.uk/commissioner-welcomes-government-response-on-ketamine-classification/"
+    },
+    "tramadol": {
+      "title": "Home Office: scheduling of tramadol (consultation outcome)",
+      "url": "https://www.gov.uk/government/consultations/scheduling-of-tramadol-and-exemptions-for-temazepam-prescriptions"
+    },
+    "energyDrinks": {
+      "title": "ITV News: under-16s in England to be banned from buying energy drinks (July 2026)",
+      "url": "https://www.itv.com/news/2026-07-16/under-16s-in-england-to-be-banned-from-buying-energy-drinks"
+    },
+    "loop": {
+      "title": "The Loop: drug checking services",
+      "url": "https://wearetheloop.org/drug-checking"
+    },
+    "overdoseProtocol": {
+      "title": "Avon and Somerset Police: illegal drugs overdose response procedure",
+      "url": "https://www.avonandsomerset.police.uk/about/policies-and-procedures/illegal-drugs-overdose-response-procedure"
+    },
+    "ayahuasca": {
+      "title": "Legal status of ayahuasca by country (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_ayahuasca_by_country"
+    },
+    "drinkingAge": {
+      "title": "Legal drinking age (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Class A: up to 7 years in prison for possession, life for supply.",
+      "sources": [
+        "moda"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Class A since 2005, fresh or dried. Spores contain no psilocybin and are not controlled.",
+      "sources": [
+        "moda"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "Class A. Ayahuasca and other DMT-containing preparations are treated as Class A.",
+      "sources": [
+        "moda",
+        "ayahuasca"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is Class A. Owning ornamental cacti (San Pedro, peyote) isn't itself an offence, but preparing them for use is.",
+      "sources": [
+        "moda"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "Class A: DOB, DOM, DOC etc. are covered by the phenethylamine generic definition.",
+      "sources": [
+        "moda"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "Class A since June 2014.",
+      "sources": [
+        "moda"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "Class A (2C-B, 2C-I, 2C-E etc. fall under the phenethylamine generic definition).",
+      "sources": [
+        "moda"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "Class A: 2C-T-2, 2C-T-7 and similar are covered by the phenethylamine generic definition.",
+      "sources": [
+        "moda"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "Class A: 5-MeO-DMT and most 5-MeO tryptamines (incl. 5-MeO-MiPT) fall under the tryptamine generic and ether clauses.",
+      "sources": [
+        "moda"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Class B: up to 5 years for possession; small amounts often get a warning or caution. Medical cannabis only via specialist prescription (since 2018).",
+      "sources": [
+        "moda"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Class B: possession without prescription up to 5 years. ACMD advised (Jan 2026) against Class A; government still considering it (Aug 2026).",
+      "sources": [
+        "moda",
+        "acmdKetamine",
+        "ketamineResponse"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Class B (since 2013): up to 5 years for possession.",
+      "sources": [
+        "moda"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "legal",
+      "note": "Not a controlled drug; sold as an over-the-counter cough medicine. Licensed medicines are exempt from the Psychoactive Substances Act.",
+      "sources": [
+        "psa",
+        "hmr"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "illegal",
+      "note": "Class C since 8 Nov 2023: possessing it to inhale for a high is an offence (up to 2 years). Lawful uses (catering, medical) remain.",
+      "sources": [
+        "nitrous"
+      ],
+      "confidence": "high"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamine Class B, methamphetamine Class A. Prescribed ADHD medicines (lisdexamfetamine, dexamfetamine, methylphenidate) are legal with a prescription.",
+      "sources": [
+        "moda",
+        "mdr"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Class A: up to 7 years for possession, life for supply.",
+      "sources": [
+        "moda"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Class A (powder and crack). In Scotland police may give a recorded warning for possession.",
+      "sources": [
+        "moda"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal. England plans to ban sales of high-caffeine energy drinks (>150 mg/L) to under-16s from April 2027.",
+      "sources": [
+        "energyDrinks"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal to buy from 18. Minimum unit pricing applies in Scotland and Wales.",
+      "sources": [
+        "drinkingAge"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB, GBL and 1,4-BD have been Class B since 13 April 2022 (up to 5 years for possession). Sodium oxybate is a prescription medicine.",
+      "sources": [
+        "ghb2022"
+      ],
+      "confidence": "high"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin, morphine, oxycodone and fentanyl are Class A; codeine is Class B (low-dose codeine sold in pharmacies). Legal only with a prescription.",
+      "sources": [
+        "moda",
+        "mdr"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Class C, Schedule 3 since June 2014: possession without a prescription is an offence (up to 2 years).",
+      "sources": [
+        "moda",
+        "tramadol"
+      ],
+      "confidence": "high"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Class C: possession without a prescription is an offence. Street 'benzos' such as etizolam are also Class C.",
+      "sources": [
+        "moda",
+        "mdr"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Medical MAOIs are prescription-only but not controlled. Syrian rue/harmala aren't controlled, but supply for a high breaches the PSA. Ayahuasca is Class A.",
+      "sources": [
+        "psa",
+        "hmr",
+        "ayahuasca"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "grey",
+      "note": "Prescription-only but not controlled: possessing them without a prescription isn't an offence, but supplying them is.",
+      "sources": [
+        "hmr"
+      ],
+      "confidence": "high"
+    }
+  }
+}

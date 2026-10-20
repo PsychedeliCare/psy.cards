@@ -1,0 +1,263 @@
+{
+  "country": "FR",
+  "name": "France",
+  "asOf": "2026-10",
+  "summary": "Strict prohibition: any use of a stupéfiant is a crime (up to 1 year and €3,750). Police often use a €200 fixed criminal fine (AFD) for cannabis, cocaine or ecstasy. Harm reduction incl. drug checking is legal.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "15",
+    "poisonControl": {
+      "name": "Centre antipoison de Paris (regional centres nationwide)",
+      "phone": "+33 1 40 05 48 48"
+    }
+  },
+  "callingForHelp": "SAMU (15) doctors are bound by medical secrecy, but police may also attend. No Good Samaritan law; failing to help a person in danger is itself an offence.",
+  "callingForHelpConfidence": "medium",
+  "drugChecking": "Allowed within the harm-reduction framework (2016 health law); offered by some CAARUD and associations, varies by city.",
+  "sources": {
+    "disUsage": {
+      "title": "Drogues Info Service: drug use and the law (AFD amounts, alternatives)",
+      "url": "https://www.drogues-info-service.fr/Tout-savoir-sur-les-drogues/La-loi-et-les-drogues/L-usage-de-stupefiants"
+    },
+    "disInterdites": {
+      "title": "Drogues Info Service: prohibited drugs (ANSM stupéfiants list)",
+      "url": "https://www.drogues-info-service.fr/Tout-savoir-sur-les-drogues/La-loi-et-les-drogues/Les-drogues-interdites"
+    },
+    "csp": {
+      "title": "Public Health Code (Code de la santé publique), Légifrance",
+      "url": "https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006072665/"
+    },
+    "anN2O": {
+      "title": "Assemblée nationale: bill restricting nitrous oxide sales to professionals (adopted 29 Jan 2025)",
+      "url": "https://www.assemblee-nationale.fr/dyn/17/dossiers/restreindre_vente_protoxyde_azote_professionnels_renforcer_prevention"
+    },
+    "senatN2O": {
+      "title": "Sénat: nitrous oxide bill pending (ppl24-295)",
+      "url": "https://www.senat.fr/dossier-legislatif/ppl24-295.html"
+    },
+    "srfN2O": {
+      "title": "SRF: France plans to criminalise nitrous oxide use (May 2026)",
+      "url": "https://www.srf.ch/news/international/keine-harmlosen-ballone-frankreich-will-lachgaskonsum-strafbar-machen"
+    },
+    "ansmCannabis": {
+      "title": "ANSM: medical cannabis (status April 2026)",
+      "url": "https://ansm.sante.fr/dossiers-thematiques/cannabis-a-usage-medical"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Stupéfiant. Use is a crime (up to 1 year, €3,750); possession and supply are punished far more heavily.",
+      "sources": [
+        "disUsage",
+        "disInterdites"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin and hallucinogenic mushrooms (Psilocybe, Stropharia, Conocybe…) are stupéfiants; truffles included.",
+      "sources": [
+        "disInterdites",
+        "csp"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "Stupéfiant. Ayahuasca and its source plants are also classified as stupéfiants (since 2005).",
+      "sources": [
+        "disInterdites",
+        "csp"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is a stupéfiant. Mescaline cacti are sold as ornamentals; their status when intended for consumption was not verified.",
+      "sources": [
+        "disInterdites"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOM, DOB and DOC are internationally controlled and classified as stupéfiants.",
+      "sources": [
+        "disInterdites"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25B-, 25C- and 25I-NBOMe are internationally controlled stupéfiants; other analogues may also be listed.",
+      "sources": [
+        "disInterdites"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B and other common 2C-x are stupéfiants.",
+      "sources": [
+        "disInterdites"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7 are internationally controlled stupéfiants.",
+      "sources": [
+        "disInterdites"
+      ],
+      "confidence": "medium"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "Not internationally controlled. We could not verify whether 5-MeO-DMT or 5-MeO-MiPT are on France's stupéfiants list.",
+      "sources": [
+        "disInterdites"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Use is a crime; police often issue a €200 fixed criminal fine (AFD), recorded on the criminal record. Low-THC CBD (≤0.3%) is legal.",
+      "sources": [
+        "disUsage",
+        "ansmCannabis"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Stupéfiant used in anaesthesia (and as esketamine spray). Possession without prescription is treated like other illegal drugs.",
+      "sources": [
+        "disInterdites",
+        "csp"
+      ],
+      "confidence": "medium"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Stupéfiant (controlled EU-wide since 2014).",
+      "sources": [
+        "disInterdites"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "medical",
+      "note": "Prescription-only since July 2017 because of recreational misuse; not a stupéfiant.",
+      "sources": [
+        "csp"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Adults may possess it. Supply to minors and sales in bars/tobacconists banned (2021); many local bans. Stricter bills pending.",
+      "sources": [
+        "csp",
+        "anN2O",
+        "senatN2O",
+        "srfN2O"
+      ],
+      "confidence": "medium"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamine and methamphetamine are stupéfiants. Methylphenidate for ADHD is available only on secure prescription.",
+      "sources": [
+        "disInterdites",
+        "csp"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Stupéfiant. Use is a crime, often handled with the €200 AFD; possession and supply much heavier.",
+      "sources": [
+        "disUsage",
+        "disInterdites"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Stupéfiant. Use is a crime, often handled with the €200 AFD (recorded); trafficking up to 10 years or more.",
+      "sources": [
+        "disUsage",
+        "disInterdites"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely.",
+      "sources": [
+        "disInterdites"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal for adults; selling or giving alcohol to under-18s is banned.",
+      "sources": [
+        "csp"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is a stupéfiant (sodium oxybate on prescription). GBL and 1,4-BD are not stupéfiants, but selling them to the public is banned.",
+      "sources": [
+        "disInterdites",
+        "csp"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin is banned; morphine, oxycodone and fentanyl are stupéfiants on secure prescription only.",
+      "sources": [
+        "disInterdites",
+        "csp"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only; since 2025 it must be prescribed on a secure prescription (ordonnance sécurisée).",
+      "sources": [
+        "csp"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only psychotropic medicines; some need a secure prescription. Possession without prescription is an offence.",
+      "sources": [
+        "csp"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "illegal",
+      "note": "Harmala alkaloids, Syrian rue and Banisteriopsis caapi are stupéfiants (2005), so ayahuasca is illegal. Moclobemide etc. on prescription.",
+      "sources": [
+        "disInterdites",
+        "csp"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not stupéfiants.",
+      "sources": [
+        "csp"
+      ],
+      "confidence": "high"
+    }
+  }
+}

@@ -1,0 +1,298 @@
+{
+  "country": "BE",
+  "name": "Belgium",
+  "asOf": "2026-10",
+  "summary": "1921 drug law with generic bans on whole NPS groups (2017). Adults with ≤3 g cannabis or one plant usually only get a simplified police report, but it stays illegal. Recreational nitrous banned since 2024.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "Antigifcentrum / Centre Antipoisons",
+      "phone": "070 245 245"
+    }
+  },
+  "callingForHelp": "Ambulance (112) staff are bound by professional secrecy and police are not routinely called for an overdose. No specific Good Samaritan protection.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "Available in Brussels through Modus Vivendi's testing service; very limited elsewhere.",
+  "sources": {
+    "dlCannabis": {
+      "title": "De DrugLijn: penalties for cannabis possession",
+      "url": "https://www.druglijn.be/drugs/cannabis/welke-straffen-bij-cannabisbezit/"
+    },
+    "dlNitrous": {
+      "title": "De DrugLijn: nitrous oxide and the law (RD 29 March 2024)",
+      "url": "https://www.druglijn.be/drugs/lachgas-en-vluchtige-snuifmiddelen/wet/"
+    },
+    "dlGhb": {
+      "title": "De DrugLijn: GHB/GBL and the law",
+      "url": "https://www.druglijn.be/drugs/ghb/wet/"
+    },
+    "dlKetamine": {
+      "title": "De DrugLijn: ketamine and the law",
+      "url": "https://www.druglijn.be/drugs/ketamine/wet/"
+    },
+    "dlHallucinogens": {
+      "title": "De DrugLijn: LSD and hallucinogens and the law",
+      "url": "https://www.druglijn.be/drugs/lsd-en-tripmiddelen/wet/"
+    },
+    "dlTruffles": {
+      "title": "De DrugLijn: are magic truffles legal in Belgium?",
+      "url": "https://www.druglijn.be/drugs/lsd-en-tripmiddelen/zijn-magic-truffles-legaal-in-belgie/"
+    },
+    "dlAyahuasca": {
+      "title": "De DrugLijn: what is ayahuasca?",
+      "url": "https://www.druglijn.be/drugs/lsd-en-tripmiddelen/wat-is-ayahuasca/"
+    },
+    "dlNps": {
+      "title": "De DrugLijn: NPS and the law (generic bans, royal decree 2017)",
+      "url": "https://www.druglijn.be/drugs/nps/wet/"
+    },
+    "dlXtc": {
+      "title": "De DrugLijn: ecstasy and the law",
+      "url": "https://www.druglijn.be/drugs/xtc/wet/"
+    },
+    "dlSpeed": {
+      "title": "De DrugLijn: speed and the law",
+      "url": "https://www.druglijn.be/drugs/speed/wet/"
+    },
+    "dlCocaine": {
+      "title": "De DrugLijn: cocaine and the law",
+      "url": "https://www.druglijn.be/drugs/cocaine/wet/"
+    },
+    "dlHeroin": {
+      "title": "De DrugLijn: heroin and the law",
+      "url": "https://www.druglijn.be/drugs/heroine/wet/"
+    },
+    "dlAlcohol": {
+      "title": "De DrugLijn: alcohol and the law",
+      "url": "https://www.druglijn.be/drugs/alcohol/wet/"
+    },
+    "bcfi": {
+      "title": "BCFI/CBIP: antitussives (dextromethorphan products)",
+      "url": "https://www.bcfi.be/nl/chapters/5?frag=3913"
+    },
+    "dlPainkillers": {
+      "title": "De DrugLijn: painkillers and the law (narcotic painkillers on prescription)",
+      "url": "https://www.druglijn.be/drugs/medicatie/pijnstillers/"
+    },
+    "dlSedatives": {
+      "title": "De DrugLijn: sleeping pills and sedatives (prescription only)",
+      "url": "https://www.druglijn.be/drugs/medicatie/slaap-en-kalmeringsmiddelen/"
+    },
+    "dlAntidepressants": {
+      "title": "De DrugLijn: antidepressants",
+      "url": "https://www.druglijn.be/drugs/medicatie/antidepressiva/"
+    },
+    "modusVivendi": {
+      "title": "Modus Vivendi (harm reduction, testing service)",
+      "url": "https://modusvivendi-be.org/"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Possession, purchase and sale are banned; use is punished via possession. Penalties: 3 months–5 years and/or fines.",
+      "sources": [
+        "dlHallucinogens"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Hallucinogenic mushrooms and magic truffles (Psilocybe etc.) are illegal in any amount, despite Dutch smartshop claims.",
+      "sources": [
+        "dlTruffles",
+        "dlHallucinogens"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "DMT is banned; possession, sale and use of ayahuasca are illegal.",
+      "sources": [
+        "dlHallucinogens",
+        "dlAyahuasca"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline and peyote cactus are banned; the status of San Pedro cactus was not verified.",
+      "sources": [
+        "dlHallucinogens"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB and related amphetamines are banned, individually and through the 2017 generic amphetamine group ban.",
+      "sources": [
+        "dlHallucinogens",
+        "dlNps"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25B-, 25C- and 25I-NBOMe are internationally controlled; other NBOMes are likely covered by the 2017 generic group bans.",
+      "sources": [
+        "dlNps"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B has been banned since 1998; other 2C-x fall under the 2017 generic group bans.",
+      "sources": [
+        "dlNps"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7 are internationally controlled; other 2C-T-x are likely covered by the 2017 generic group bans.",
+      "sources": [
+        "dlNps"
+      ],
+      "confidence": "medium"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "Tryptamines are banned as a group since the 2017 royal decree, covering 5-MeO-DMT, 5-MeO-MiPT and similar.",
+      "sources": [
+        "dlNps"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Adults with ≤3 g or one female plant usually get a simplified police report and seizure (lowest priority). Minors, nuisance or minors present: prosecution.",
+      "sources": [
+        "dlCannabis"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Controlled under narcotics law; legal only on prescription (hospital/vet use). Illegal possession: 3 months–5 years and/or fines.",
+      "sources": [
+        "dlKetamine"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Controlled (EU-wide since 2014) and covered by the 2017 generic bans.",
+      "sources": [
+        "dlNps"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Licensed cough medicine sold in pharmacies; not a controlled drug. Whether a prescription is needed was not verified.",
+      "sources": [
+        "bcfi"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "illegal",
+      "note": "Since 8 Apr 2024, buying, possessing or using it recreationally is an offence (fine €120–200 for a first offence); sale to minors banned since 2021.",
+      "sources": [
+        "dlNitrous"
+      ],
+      "confidence": "high"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Speed and methamphetamine are banned; possession can bring 3 months–5 years and/or fines. Doctors may prescribe amphetamines in some cases.",
+      "sources": [
+        "dlSpeed"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Banned; possession can bring 3 months–5 years prison and/or fines.",
+      "sources": [
+        "dlXtc"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Banned; possession can bring 3 months–5 years prison and/or fines; trafficking much more.",
+      "sources": [
+        "dlCocaine"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely.",
+      "sources": [
+        "dlNps"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Beer and wine from 16; spirits and spirit-based drinks from 18. Vending machines need ID-card age checks.",
+      "sources": [
+        "dlAlcohol"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB banned since 1996; GBL also controlled since the 2017 royal decree. Status of 1,4-BD not verified.",
+      "sources": [
+        "dlGhb"
+      ],
+      "confidence": "high"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin is banned (possession: 3 months–5 years and/or fines). Morphine, oxycodone, fentanyl etc. only on prescription.",
+      "sources": [
+        "dlHeroin",
+        "dlPainkillers"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only narcotic painkiller.",
+      "sources": [
+        "dlPainkillers"
+      ],
+      "confidence": "high"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Sold only on prescription in pharmacies; controlled psychotropic medicines.",
+      "sources": [
+        "dlSedatives"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "Pharmaceutical MAOIs are prescription-only. Ayahuasca is illegal (DMT); harmala/Syrian rue status not verified.",
+      "sources": [
+        "dlAyahuasca",
+        "dlAntidepressants"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines.",
+      "sources": [
+        "dlAntidepressants"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "country": "BG",
+  "name": "Bulgaria",
+  "asOf": "2026-10",
+  "summary": "Possessing any amount is a crime: 1–6 yrs plus a fine for 'high-risk' drugs (incl. cannabis), up to 5 yrs for 'risk' drugs. Minor cases can end with a fine only, but it is still a criminal case. Smuggling: 10–15 yrs.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "150",
+    "poisonControl": {
+      "name": "Toxicology Clinic & information centre, UMBAL 'N. I. Pirogov', Sofia (hospital switchboard)",
+      "phone": "+359 2 9154 411"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law. Medical confidentiality applies, but police may attend overdoses and possession of any amount is a crime.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No legal drug checking service is known in Bulgaria.",
+  "sources": {
+    "nk": {
+      "title": "Penal Code, Arts. 242 and 354a–354v (lex.bg consolidated text, 2026)",
+      "url": "https://lex.bg/laws/ldoc/1589654529"
+    },
+    "wikiCannabis": {
+      "title": "Wikipedia: Cannabis in Bulgaria (List I high-risk drug; no medical use)",
+      "url": "https://en.wikipedia.org/wiki/Cannabis_in_Bulgaria"
+    },
+    "wikiMush": {
+      "title": "Wikipedia: Legal status of psilocybin mushrooms",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "wikiAge": {
+      "title": "Wikipedia: Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "un1971": {
+      "title": "UN Convention on Psychotropic Substances 1971 – Green List (substances in Schedules I–IV)",
+      "url": "https://www.incb.org/incb/en/psychotropics/green-list.html"
+    },
+    "euN2O": {
+      "title": "EU Perspectives (Mar 2026): nitrous oxide classified reprotoxic; large canisters may be barred from consumer sale from Feb 2027",
+      "url": "https://euperspectives.eu/2026/03/nitrous-oxide-deaths-and-injuries-fuel-calls-for-eu-wide-restrictions/"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "High-risk drug. Possession: 1–6 yrs plus a fine (BGN 2,000–10,000, ≈€1,020–5,110). Minor case: fine up to BGN 1,000 (≈€511).",
+      "sources": [
+        "nk",
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin/psilocin are banned high-risk substances; possessing mushrooms containing them is a crime (1–6 yrs plus fine).",
+      "sources": [
+        "nk",
+        "wikiMush"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "UN Schedule I, high-risk; possession is a crime (1–6 yrs plus fine). Ayahuasca contains DMT.",
+      "sources": [
+        "nk",
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "UN Schedule I, high-risk; possession is a crime (1–6 yrs plus fine).",
+      "sources": [
+        "nk",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOM, DOC etc. are UN-scheduled; possession is a crime (1–6 yrs plus fine).",
+      "sources": [
+        "nk",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25I-, 25B-, 25C-NBOMe are UN Schedule I; possession is a crime (1–6 yrs plus fine).",
+      "sources": [
+        "nk",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B and other 2C-x are UN-scheduled; possession is a crime.",
+      "sources": [
+        "nk",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7 are UN Schedule I; possession is a crime.",
+      "sources": [
+        "nk",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "Bulgaria controls many tryptamines and drug analogues are covered by the Penal Code; status of each 5-MeO compound not verified individually.",
+      "sources": [
+        "nk"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Classed as high-risk like heroin: possession 1–6 yrs plus fine; minor case fine only. Growing: 2–5 yrs. No medical cannabis.",
+      "sources": [
+        "nk",
+        "wikiCannabis"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Prescription anaesthetic. Not UN-scheduled, but believed to be nationally controlled, so possession without authorisation would be a drug crime.",
+      "sources": [
+        "nk"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is UN Schedule II; possession is a crime.",
+      "sources": [
+        "nk",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not internationally controlled; pharmacy (OTC vs prescription) status in Bulgaria was not verified.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "unknown",
+      "note": "Not known to be a scheduled narcotic; any national sales restrictions were not verified. EU limits on large canisters may apply from 2027.",
+      "sources": [
+        "euN2O"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "High-risk drugs; possession is a crime (1–6 yrs plus fine). Prescription stimulants for ADHD are tightly controlled.",
+      "sources": [
+        "nk",
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "High-risk drug; possession is a crime (1–6 yrs plus fine). Minor case: fine up to BGN 1,000 (≈€511).",
+      "sources": [
+        "nk",
+        "wikiCannabis"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "High-risk drug; possession is a crime (1–6 yrs plus fine). Bringing drugs across the border: 10–15 yrs.",
+      "sources": [
+        "nk"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal and not a controlled substance.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 18; sale to minors is prohibited.",
+      "sources": [
+        "wikiAge"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is UN-scheduled and controlled; possession without authorisation is a crime. Status of GBL/1,4-BD not verified.",
+      "sources": [
+        "nk",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin is high-risk: possession 1–6 yrs plus fine. Morphine, oxycodone, fentanyl are prescription-only; without one it is a crime.",
+      "sources": [
+        "nk",
+        "wikiCannabis"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine. Whether it is on Bulgaria's controlled list was not verified.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only, UN Schedule IV. Possessing controlled 'risk' substances without authorisation: up to 5 yrs plus fine.",
+      "sources": [
+        "nk",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "Pharmaceutical MAOIs are prescription-only. The status of harmala/Syrian rue was not verified; DMT (ayahuasca) is illegal.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

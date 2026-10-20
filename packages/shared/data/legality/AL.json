@@ -1,0 +1,279 @@
+{
+  "country": "AL",
+  "name": "Albania",
+  "asOf": "2026-10",
+  "summary": "Possession for personal use 'in small doses' is excluded from the drug-dealing offence (Criminal Code art. 283) but read narrowly (about one dose); more is prosecuted as dealing (5–10 yrs). Art. 283 is under review.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "127"
+  },
+  "poisonControlNote": "No poison information centre is listed in WHO's 2023 directory; the QSUT 'Mother Teresa' hospital in Tirana has a clinical toxicology service.",
+  "callingForHelp": "No Good Samaritan law or other specific legal protection for people who call for help in an overdose was found.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug-checking service found.",
+  "sources": {
+    "cc": {
+      "title": "Criminal Code, arts. 283–286 (official QPZ edition, hosted by ICNL)",
+      "url": "https://www.icnl.org/wp-content/uploads/Albania_penal.pdf"
+    },
+    "emcdda": {
+      "title": "EMCDDA – Albania national drug report (personal-use exemption; 2008 Supreme Court 'single dose' ruling)",
+      "url": "https://www.euda.europa.eu/system/files/media/publications/documents/4700/National%20drug%20report_Albania.pdf"
+    },
+    "consult": {
+      "title": "Public consultation on Criminal Code amendments incl. art. 283 (Oct–Nov 2025)",
+      "url": "https://konsultimipublik.gov.al/documents/RENJK_889_Raporti-i-konsultimit-publik---projektligj-Per-disa-shtesa-dhe-ndryshime-ne-Kodin-Penal.docx"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    },
+    "wikiCannabis": {
+      "title": "Wikipedia – Legality of cannabis",
+      "url": "https://en.wikipedia.org/wiki/Legality_of_cannabis"
+    },
+    "drinkAge": {
+      "title": "Wikipedia – Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "who": {
+      "title": "WHO – World directory of poisons centres (2023)",
+      "url": "https://www.who.int/data/gho/data/themes/topics/indicator-groups/poison-control-and-unintentional-poisoning"
+    },
+    "e112": {
+      "title": "Wikipedia – 112 emergency number (national numbers)",
+      "url": "https://en.wikipedia.org/wiki/112_(emergency_telephone_number)"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "decriminalised",
+      "note": "UN Schedule I. Own use in small doses isn't a crime (CC art. 283), read narrowly; more is prosecuted as dealing (5–10 yrs).",
+      "sources": [
+        "cc",
+        "emcdda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "mushrooms": {
+      "status": "decriminalised",
+      "note": "Psilocybin is UN Schedule I; mushrooms presumably treated likewise. Small own-use doses aren't a crime (art. 283).",
+      "sources": [
+        "cc",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "UN Schedule I (ayahuasca contains DMT). Own use in small doses isn't a crime (CC art. 283), read narrowly; more is prosecuted as dealing (5–10 yrs).",
+      "sources": [
+        "cc",
+        "emcdda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "decriminalised",
+      "note": "UN Schedule I; cacti status not confirmed. Own use in small doses isn't a crime (CC art. 283), read narrowly; more is prosecuted as dealing (5–10 yrs).",
+      "sources": [
+        "cc",
+        "emcdda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "decriminalised",
+      "note": "DOM, DOB, DOC are UN Schedule I. Own use in small doses isn't a crime (CC art. 283), read narrowly; more is prosecuted as dealing (5–10 yrs).",
+      "sources": [
+        "cc",
+        "emcdda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "decriminalised",
+      "note": "UN Schedule I since 2015. Own use in small doses isn't a crime (CC art. 283), read narrowly; more is prosecuted as dealing (5–10 yrs).",
+      "sources": [
+        "cc",
+        "emcdda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "decriminalised",
+      "note": "2C-B is UN Schedule II. Own use in small doses isn't a crime (CC art. 283), read narrowly; more is prosecuted as dealing (5–10 yrs).",
+      "sources": [
+        "cc",
+        "emcdda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "unknown",
+      "note": "2C-T compounds are not UN-controlled; national scheduling not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "5-MeO tryptamines are not UN-controlled; national scheduling not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Own use in small doses isn't a crime (art. 283); cultivation: 3–7 yrs. A July 2023 law allows licensed medical/industrial cultivation.",
+      "sources": [
+        "cc",
+        "emcdda",
+        "wikiCannabis"
+      ],
+      "confidence": "medium"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Anaesthetic used in hospitals and veterinary practice; not UN-controlled and national control status not confirmed.",
+      "sources": [
+        "incb",
+        "cc"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "decriminalised",
+      "note": "UN Schedule II since 2016. Own use in small doses isn't a crime (CC art. 283), read narrowly; more is prosecuted as dealing (5–10 yrs).",
+      "sources": [
+        "cc",
+        "emcdda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not UN-controlled; national control and prescription status not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not internationally controlled; no national restriction confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "decriminalised",
+      "note": "UN Schedule II. Own use in small doses isn't a crime (CC art. 283), read narrowly; more is prosecuted as dealing (5–10 yrs).",
+      "sources": [
+        "cc",
+        "emcdda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "UN Schedule I. Own use in small doses isn't a crime (CC art. 283), read narrowly; more is prosecuted as dealing (5–10 yrs).",
+      "sources": [
+        "cc",
+        "emcdda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "cocaine": {
+      "status": "decriminalised",
+      "note": "1961 Convention drug. Own use in small doses isn't a crime (CC art. 283), read narrowly; more is prosecuted as dealing (5–10 yrs).",
+      "sources": [
+        "cc",
+        "emcdda"
+      ],
+      "confidence": "medium"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not controlled.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "18+: sales to minors are banned and under-18s may not drink in public places.",
+      "sources": [
+        "drinkAge"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "decriminalised",
+      "note": "GHB is UN Schedule II (small own-use doses not a crime). GBL/1,4-BD status not confirmed.",
+      "sources": [
+        "cc",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "decriminalised",
+      "note": "Heroin etc. are controlled. Own use in small doses isn't a crime (CC art. 283), read narrowly; more is prosecuted as dealing (5–10 yrs).",
+      "sources": [
+        "cc",
+        "emcdda"
+      ],
+      "confidence": "medium"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only painkiller; not UN-controlled and national control status not confirmed.",
+      "sources": [
+        "incb",
+        "cc"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "UN Schedule IV psychotropics; prescription-only.",
+      "sources": [
+        "incb",
+        "cc"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "MAOI antidepressants are prescription-only; harmala/Syrian rue status not confirmed; ayahuasca contains DMT (controlled).",
+      "sources": [
+        "incb",
+        "cc"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only antidepressants; not controlled substances.",
+      "sources": [
+        "incb",
+        "cc"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

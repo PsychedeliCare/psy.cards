@@ -236,15 +236,19 @@
         },
         "effects": [
           {
+            "icon": "sun-fill",
             "label": "Umore (settimane)"
           },
           {
+            "icon": "warning-fill",
             "label": "Potenzia altre"
           },
           {
+            "icon": "moon-fill",
             "label": "Insonnia"
           },
           {
+            "icon": "fork-knife-fill",
             "label": "Interazioni con cibi"
           }
         ]
@@ -404,15 +408,19 @@
         },
         "effects": [
           {
+            "icon": "sun-fill",
             "label": "Umore (settimane)"
           },
           {
+            "icon": "smiley-sad-fill",
             "label": "Nausea"
           },
           {
+            "icon": "heart-fill",
             "label": "Attenua l'MDMA"
           },
           {
+            "icon": "moon-fill",
             "label": "Sonno alterato"
           }
         ]
@@ -541,15 +549,19 @@
         },
         "effects": [
           {
+            "icon": "lightning-fill",
             "label": "Energia"
           },
           {
+            "icon": "target-fill",
             "label": "Concentrazione"
           },
           {
+            "icon": "chat-circle-dots-fill",
             "label": "Loquacità"
           },
           {
+            "icon": "heartbeat-fill",
             "label": "Battito rapido"
           }
         ]
@@ -961,15 +973,19 @@
         },
         "effects": [
           {
+            "icon": "lightning-fill",
             "label": "Energia"
           },
           {
+            "icon": "crown-fill",
             "label": "Sicurezza"
           },
           {
+            "icon": "chat-circle-dots-fill",
             "label": "Loquacità"
           },
           {
+            "icon": "heartbeat-fill",
             "label": "Battito rapido"
           }
         ]
@@ -1519,15 +1535,19 @@
         },
         "effects": [
           {
+            "icon": "lightning-fill",
             "label": "Vigilanza"
           },
           {
+            "icon": "target-fill",
             "label": "Concentrazione"
           },
           {
+            "icon": "heartbeat-fill",
             "label": "Nervosismo"
           },
           {
+            "icon": "moon-fill",
             "label": "Sonno disturbato"
           }
         ]
@@ -2033,15 +2053,19 @@
         },
         "effects": [
           {
+            "icon": "heart-fill",
             "label": "Empatia"
           },
           {
+            "icon": "smiley-fill",
             "label": "Euforia"
           },
           {
+            "icon": "music-notes-fill",
             "label": "Amore per la musica"
           },
           {
+            "icon": "tooth-fill",
             "label": "Mascella serrata"
           }
         ]
@@ -2872,15 +2896,19 @@
         },
         "effects": [
           {
+            "icon": "eye-fill",
             "label": "Visioni"
           },
           {
+            "icon": "smiley-fill",
             "label": "Euforia"
           },
           {
+            "icon": "lightbulb-fill",
             "label": "Introspezione"
           },
           {
+            "icon": "clock-countdown-fill",
             "label": "Tempo distorto"
           }
         ]
@@ -3505,15 +3533,19 @@
         },
         "effects": [
           {
+            "icon": "eye-fill",
             "label": "Visioni"
           },
           {
+            "icon": "smiley-fill",
             "label": "Euforia"
           },
           {
+            "icon": "lightbulb-fill",
             "label": "Introspezione"
           },
           {
+            "icon": "smiley-sad-fill",
             "label": "Nausea"
           }
         ]
@@ -4040,15 +4072,19 @@
         },
         "effects": [
           {
+            "icon": "eye-fill",
             "label": "Visioni intense"
           },
           {
+            "icon": "sparkle-fill",
             "label": "Breakthrough"
           },
           {
+            "icon": "heartbeat-fill",
             "label": "Rush corporeo"
           },
           {
+            "icon": "timer-fill",
             "label": "Brevissimo"
           }
         ]
@@ -5024,15 +5060,19 @@
         },
         "effects": [
           {
+            "icon": "eye-fill",
             "label": "Visioni"
           },
           {
+            "icon": "heart-fill",
             "label": "Empatia"
           },
           {
+            "icon": "lightbulb-fill",
             "label": "Introspezione"
           },
           {
+            "icon": "smiley-sad-fill",
             "label": "Nausea"
           }
         ]
@@ -5666,15 +5706,19 @@
         },
         "effects": [
           {
+            "icon": "eye-fill",
             "label": "Visioni"
           },
           {
+            "icon": "lightning-fill",
             "label": "Stimolazione"
           },
           {
+            "icon": "hourglass-medium-fill",
             "label": "Lunghissimo"
           },
           {
+            "icon": "snowflake-fill",
             "label": "Arti freddi"
           }
         ]
@@ -5922,15 +5966,19 @@
         },
         "effects": [
           {
+            "icon": "eye-fill",
             "label": "Visioni"
           },
           {
+            "icon": "lightning-fill",
             "label": "Stimolazione"
           },
           {
+            "icon": "smiley-nervous-fill",
             "label": "Ansia"
           },
           {
+            "icon": "heartbeat-fill",
             "label": "Battito rapido"
           }
         ]
@@ -6199,15 +6247,19 @@
         },
         "effects": [
           {
+            "icon": "eye-fill",
             "label": "Visioni"
           },
           {
+            "icon": "smiley-fill",
             "label": "Euforia"
           },
           {
+            "icon": "hand-fill",
             "label": "Tatto amplificato"
           },
           {
+            "icon": "lightning-fill",
             "label": "Energia"
           }
         ]
@@ -6657,15 +6709,19 @@
         },
         "effects": [
           {
+            "icon": "eye-fill",
             "label": "Visioni"
           },
           {
+            "icon": "lightbulb-fill",
             "label": "Introspezione"
           },
           {
+            "icon": "hourglass-medium-fill",
             "label": "Lungo"
           },
           {
+            "icon": "smiley-sad-fill",
             "label": "Nausea"
           }
         ]
@@ -6906,15 +6962,19 @@
         },
         "effects": [
           {
+            "icon": "sparkle-fill",
             "label": "Dissoluzione dell'ego"
           },
           {
+            "icon": "wind-fill",
             "label": "Rush travolgente"
           },
           {
+            "icon": "timer-fill",
             "label": "Breve"
           },
           {
+            "icon": "smiley-sad-fill",
             "label": "Vomito"
           }
         ]
@@ -7246,15 +7306,19 @@
         },
         "effects": [
           {
+            "icon": "person-simple-fill",
             "label": "Distacco"
           },
           {
+            "icon": "hand-fill",
             "label": "Intorpidimento"
           },
           {
+            "icon": "smiley-fill",
             "label": "Euforia"
           },
           {
+            "icon": "person-simple-throw-fill",
             "label": "Goffaggine"
           }
         ]
@@ -7926,15 +7990,19 @@
         },
         "effects": [
           {
+            "icon": "person-simple-fill",
             "label": "Distacco"
           },
           {
+            "icon": "smiley-fill",
             "label": "Euforia"
           },
           {
+            "icon": "lightning-fill",
             "label": "Stimolazione"
           },
           {
+            "icon": "hand-fill",
             "label": "Intorpidimento"
           }
         ]
@@ -9056,15 +9124,19 @@
         },
         "effects": [
           {
+            "icon": "person-simple-fill",
             "label": "Distacco"
           },
           {
+            "icon": "music-notes-fill",
             "label": "Euforia musicale"
           },
           {
+            "icon": "eye-fill",
             "label": "Visioni"
           },
           {
+            "icon": "smiley-sad-fill",
             "label": "Nausea"
           }
         ]
@@ -9701,15 +9773,19 @@
         },
         "effects": [
           {
+            "icon": "smiley-fill",
             "label": "Risate"
           },
           {
+            "icon": "ear-fill",
             "label": "Suoni distorti"
           },
           {
+            "icon": "cloud-fill",
             "label": "Sognante"
           },
           {
+            "icon": "timer-fill",
             "label": "Rush breve"
           }
         ]
@@ -10001,15 +10077,19 @@
         },
         "effects": [
           {
+            "icon": "smiley-fill",
             "label": "Rilassamento"
           },
           {
+            "icon": "users-fill",
             "label": "Socievolezza"
           },
           {
+            "icon": "person-simple-throw-fill",
             "label": "Goffaggine"
           },
           {
+            "icon": "eye-slash-fill",
             "label": "Blackout"
           }
         ]
@@ -10604,15 +10684,19 @@
         },
         "effects": [
           {
+            "icon": "smiley-fill",
             "label": "Euforia"
           },
           {
+            "icon": "users-fill",
             "label": "Socievolezza"
           },
           {
+            "icon": "bed-fill",
             "label": "Sonnolenza"
           },
           {
+            "icon": "warning-fill",
             "label": "Svenimento improvviso"
           }
         ]
@@ -11106,15 +11190,19 @@
         },
         "effects": [
           {
+            "icon": "smiley-fill",
             "label": "Calma"
           },
           {
+            "icon": "bed-fill",
             "label": "Sonnolenza"
           },
           {
+            "icon": "eye-slash-fill",
             "label": "Vuoti di memoria"
           },
           {
+            "icon": "person-simple-throw-fill",
             "label": "Goffaggine"
           }
         ]
@@ -11360,15 +11448,19 @@
         },
         "effects": [
           {
+            "icon": "smiley-fill",
             "label": "Euforia calda"
           },
           {
+            "icon": "bandaids-fill",
             "label": "Analgesia"
           },
           {
+            "icon": "bed-fill",
             "label": "Sonnolenza"
           },
           {
+            "icon": "wind-fill",
             "label": "Respiro lento"
           }
         ]
@@ -11543,15 +11635,19 @@
         },
         "effects": [
           {
+            "icon": "bandaids-fill",
             "label": "Analgesia"
           },
           {
+            "icon": "smiley-fill",
             "label": "Lieve euforia"
           },
           {
+            "icon": "smiley-sad-fill",
             "label": "Nausea"
           },
           {
+            "icon": "lightning-fill",
             "label": "Rischio convulsioni"
           }
         ]
@@ -12097,15 +12193,19 @@
         },
         "effects": [
           {
+            "icon": "smiley-fill",
             "label": "Rilassamento"
           },
           {
+            "icon": "fork-knife-fill",
             "label": "Fame chimica"
           },
           {
+            "icon": "music-notes-fill",
             "label": "Sensi amplificati"
           },
           {
+            "icon": "smiley-nervous-fill",
             "label": "Ansia"
           }
         ]

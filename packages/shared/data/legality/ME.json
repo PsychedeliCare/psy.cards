@@ -1,0 +1,256 @@
+{
+  "country": "ME",
+  "name": "Montenegro",
+  "asOf": "2026-10",
+  "summary": "Possession for personal use is a misdemeanour (fine €100–2,000), not a crime; using drugs in public: fine €100–1,000 or up to 30 days. Supply is a crime (2–10 yrs).",
+  "emergency": {
+    "general": "112",
+    "ambulance": "124"
+  },
+  "poisonControlNote": "No poison information centre is listed in WHO's 2023 directory; call 112 or 124.",
+  "callingForHelp": "No Good Samaritan law or other specific legal protection for people who call for help in an overdose was found.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug-checking service found.",
+  "sources": {
+    "euda": {
+      "title": "EUDA – Penalties for drug law offences at a glance",
+      "url": "https://www.euda.europa.eu/publications/topic-overviews/content/drug-law-penalties-at-a-glance_en"
+    },
+    "cc": {
+      "title": "Criminal Code of Montenegro, arts. 300–301",
+      "url": "https://www.paragraf.me/propisi-crnegore/krivicni-zakonik-crne-gore.html"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    },
+    "drinkAge": {
+      "title": "Wikipedia – Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "who": {
+      "title": "WHO – World directory of poisons centres (2023)",
+      "url": "https://www.who.int/data/gho/data/themes/topics/indicator-groups/poison-control-and-unintentional-poisoning"
+    },
+    "e112": {
+      "title": "Wikipedia – 112 emergency number (national numbers)",
+      "url": "https://en.wikipedia.org/wiki/112_(emergency_telephone_number)"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "decriminalised",
+      "note": "UN Schedule I. Own-use possession: misdemeanour fine €100–2,000; use in public: fine €100–1,000 or up to 30 days.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "decriminalised",
+      "note": "Psilocybin is UN Schedule I; mushrooms presumably treated likewise. Own-use possession: misdemeanour.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "UN Schedule I. Own-use possession: misdemeanour fine €100–2,000; use in public: fine €100–1,000 or up to 30 days.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "decriminalised",
+      "note": "UN Schedule I; cacti status not confirmed. Own-use possession: misdemeanour fine €100–2,000; use in public: fine €100–1,000 or up to 30 days.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "decriminalised",
+      "note": "DOM, DOB, DOC: UN Schedule I. Own-use possession: misdemeanour fine €100–2,000; use in public: fine €100–1,000 or up to 30 days.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "decriminalised",
+      "note": "UN Schedule I since 2015. Own-use possession: misdemeanour fine €100–2,000; use in public: fine €100–1,000 or up to 30 days.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "decriminalised",
+      "note": "2C-B is UN Schedule II. Own-use possession: misdemeanour fine €100–2,000; use in public: fine €100–1,000 or up to 30 days.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "unknown",
+      "note": "Not UN-controlled; whether the national NPS rulebook lists 2C-T compounds was not confirmed.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "Not UN-controlled; whether the national NPS rulebook lists 5-MeO tryptamines was not confirmed.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Own-use possession: misdemeanour fine €100–2,000; use in public: fine €100–1,000 or up to 30 days. Producing or selling: crime (2–10 yrs).",
+      "sources": [
+        "euda",
+        "cc"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Anaesthetic; national control status not confirmed (not UN-controlled).",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "decriminalised",
+      "note": "UN Schedule II since 2016. Own-use possession: misdemeanour fine €100–2,000; use in public: fine €100–1,000 or up to 30 days.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not UN-controlled; national control and prescription status not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not internationally controlled; no national restriction confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "decriminalised",
+      "note": "UN Schedule II. Own-use possession: misdemeanour fine €100–2,000; use in public: fine €100–1,000 or up to 30 days.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "UN Schedule I. Own-use possession: misdemeanour fine €100–2,000; use in public: fine €100–1,000 or up to 30 days.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "decriminalised",
+      "note": "1961 Convention drug. Own-use possession: misdemeanour fine €100–2,000; use in public: fine €100–1,000 or up to 30 days.",
+      "sources": [
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not controlled.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Sale to under-18s is prohibited.",
+      "sources": [
+        "drinkAge"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "decriminalised",
+      "note": "GHB is UN Schedule II (own-use possession: misdemeanour). GBL/1,4-BD status not confirmed.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "decriminalised",
+      "note": "Heroin etc.: own-use possession is a misdemeanour (€100–2,000). Rx opioids: prescription only.",
+      "sources": [
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only; possessing such medicines without a prescription is a misdemeanour (fine €100–2,000).",
+      "sources": [
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only; possessing such medicines without a prescription is a misdemeanour (fine €100–2,000).",
+      "sources": [
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "MAOI antidepressants are prescription-only; harmala/Syrian rue status not confirmed; ayahuasca contains DMT.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only antidepressants; not controlled substances.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

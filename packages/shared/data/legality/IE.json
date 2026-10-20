@@ -1,0 +1,279 @@
+{
+  "country": "IE",
+  "name": "Ireland",
+  "asOf": "2026-10",
+  "summary": "Misuse of Drugs Acts 1977–2016: possessing a controlled drug is a crime. Since 1 Sep 2026, Gardaí can refer first-time adult possession to the HSE instead of court. Selling other 'highs' is banned (2010 Act).",
+  "emergency": {
+    "general": "112 or 999",
+    "ambulance": "112 or 999",
+    "poisonControl": {
+      "name": "National Poisons Information Centre (public line, 8am–10pm)",
+      "phone": "01 809 2166"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law. Ambulance crews don't routinely involve Gardaí and medical confidentiality applies, but Gardaí may attend some scenes.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "HSE runs free, anonymous 'back of house' drug checking at some festivals (Safer Nightlife, since 2022). No fixed-site service.",
+  "sources": {
+    "mda": {
+      "title": "Misuse of Drugs Act 1977",
+      "url": "https://www.irishstatutebook.ie/eli/1977/act/12/enacted/en/html"
+    },
+    "mdr2017": {
+      "title": "Misuse of Drugs Regulations 2017 (S.I. 173/2017)",
+      "url": "https://www.irishstatutebook.ie/eli/2017/si/173/made/en/print"
+    },
+    "si2010": {
+      "title": "Misuse of Drugs (Amendment) Regulations 2010 (S.I. 200/2010) – GBL/1,4-BD",
+      "url": "https://www.irishstatutebook.ie/eli/2010/si/200/made/en/print"
+    },
+    "si2006": {
+      "title": "Misuse of Drugs (Amendment) Regulations 2006 (S.I. 53/2006) – psilocybin mushrooms",
+      "url": "https://www.irishstatutebook.ie/eli/2006/si/53/made/en/print"
+    },
+    "psa2010": {
+      "title": "Criminal Justice (Psychoactive Substances) Act 2010",
+      "url": "https://www.irishstatutebook.ie/eli/2010/act/22/enacted/en/html"
+    },
+    "hrs": {
+      "title": "An Garda Síochána: Health Referral Scheme from 1 September 2026",
+      "url": "https://www.garda.ie/en/about-us/our-departments/office-of-corporate-communications/press-releases/2026/september/31-08-2026-an-garda-siochana-will-implement-the-health-referral-scheme-from-1st-september-2026.html"
+    },
+    "nitrous": {
+      "title": "Dáil answer on nitrous oxide incl. EU REACH consumer restriction (Sept 2026), HRB National Drugs Library",
+      "url": "https://www.drugsandalcohol.ie/46896/"
+    },
+    "icgp2017": {
+      "title": "ICGP: New Misuse of Drugs Regulations 2017 – advice for GP prescribing",
+      "url": "https://www.drugsandalcohol.ie/27243"
+    },
+    "hseFestivals": {
+      "title": "RTÉ: HSE initiative to combat drug harm at festivals (Aug 2026)",
+      "url": "https://www.drugsandalcohol.ie/46646/"
+    },
+    "drinkingAge": {
+      "title": "Legal drinking age (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "ssriPQ": {
+      "title": "Dáil answer: fluoxetine is prescription-only; supply without prescription is an offence",
+      "url": "https://www.oireachtas.ie/en/debates/question/2013-06-20/244/"
+    },
+    "ayahuasca": {
+      "title": "Legal status of ayahuasca by country (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_ayahuasca_by_country"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Schedule 1 controlled drug. First-time adult possession may be referred to the HSE (Health Referral Scheme, Sept 2026).",
+      "sources": [
+        "mdr2017",
+        "hrs"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Any fungus containing psilocin is Schedule 1 (fresh mushrooms controlled since Jan 2006).",
+      "sources": [
+        "mdr2017",
+        "si2006"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "Schedule 1. Ayahuasca counts as a DMT preparation; a 2014 religious-exemption bid failed.",
+      "sources": [
+        "mdr2017",
+        "ayahuasca"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is Schedule 1. The cacti aren't listed by name, but mescaline prepared from them is controlled.",
+      "sources": [
+        "mdr2017"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "Schedule 1: covered by the phenethylamine generic definition.",
+      "sources": [
+        "mdr2017"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "Schedule 1 (25I-, 25B-, 25C-NBOMe listed).",
+      "sources": [
+        "mdr2017"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "Schedule 1: covered by the phenethylamine generic definition.",
+      "sources": [
+        "mdr2017"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "Schedule 1: covered by the phenethylamine generic definition.",
+      "sources": [
+        "mdr2017"
+      ],
+      "confidence": "medium"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "Schedule 1: tryptamine generic plus ether clause covers 5-MeO-DMT and 5-MeO-MiPT.",
+      "sources": [
+        "mdr2017"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Schedule 1. Adult Caution Scheme and the HSE Health Referral Scheme (Sept 2026) can divert first offences. Medical Cannabis Access Programme exists.",
+      "sources": [
+        "mda",
+        "hrs"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Schedule 3 controlled drug: possession without a prescription is an offence.",
+      "sources": [
+        "mdr2017"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Schedule 1 (methoxetamine listed).",
+      "sources": [
+        "mdr2017"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "legal",
+      "note": "Not a controlled drug; sold in pharmacy cough medicines without prescription.",
+      "sources": [
+        "mdr2017"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not controlled: possession isn't an offence, but selling it for inhalation is (2010 Act). EU ban on consumer sales expected from Feb 2027.",
+      "sources": [
+        "nitrous",
+        "psa2010"
+      ],
+      "confidence": "high"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamine and methamphetamine are Schedule 2. ADHD medicines (lisdexamfetamine, methylphenidate) are legal with a prescription.",
+      "sources": [
+        "mdr2017"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Schedule 1 controlled drug; possession is an offence.",
+      "sources": [
+        "mdr2017"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Schedule 2; possession is an offence (up to 7 years on indictment).",
+      "sources": [
+        "mda",
+        "mdr2017"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal.",
+      "sources": [
+        "mda"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal to buy from 18. Minimum unit pricing since January 2022.",
+      "sources": [
+        "drinkingAge"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is Schedule 2. GBL and 1,4-BD are controlled; possession is lawful only if not for human ingestion.",
+      "sources": [
+        "mdr2017",
+        "si2010"
+      ],
+      "confidence": "high"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin and opioids like morphine, oxycodone and fentanyl are Schedule 2; legal only with a prescription. Low-dose codeine is pharmacy-only.",
+      "sources": [
+        "mdr2017"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "grey",
+      "note": "Prescription-only, but not listed in the 2017 Misuse of Drugs Regulations: possession isn't a drugs offence; supply without prescription is.",
+      "sources": [
+        "mdr2017"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Schedule 4 Part 1: possession without a prescription has been an offence since May 2017 (also z-drugs).",
+      "sources": [
+        "mdr2017",
+        "icgp2017"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Medical MAOIs are prescription-only, not controlled. Harmala/Syrian rue aren't scheduled (selling as a high is banned). Ayahuasca is illegal (DMT).",
+      "sources": [
+        "mdr2017",
+        "psa2010",
+        "ayahuasca"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "grey",
+      "note": "Prescription-only but not controlled: possession isn't an offence; supply without a prescription is.",
+      "sources": [
+        "ssriPQ"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

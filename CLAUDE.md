@@ -44,6 +44,7 @@ combogen/          TripSit/combogen git submodule
 - `packages/web/public/assets/` — Static assets
 - `packages/web/astro.config.mjs` — Astro config (static output + PWA)
 - `packages/shared/data/` — substances SMILES + extended combos
+- `packages/shared/data/legality/<CC>.json` + `organisations.json` — per-country legal status, emergency numbers and harm reduction services for the card backs (web: `/data/local/<cc>.json` via `data/local-info.ts`; apps: `DataPack/local.json`)
 - `packages/shared/i18n/` — UI strings + content overlays (en/fr/de/it)
 - Output mode is **static** (not SSR); Cloudflare Worker only remaps event domains
 

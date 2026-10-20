@@ -1,9 +1,9 @@
 package cards.psy.app.ui.card
 
-import android.content.Intent
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,17 +17,21 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.shadow
@@ -35,20 +39,26 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
-import androidx.core.net.toUri
 import cards.psy.app.R
 import cards.psy.app.data.CardContent
+import cards.psy.app.data.CardEffect
+import cards.psy.app.data.LocalInfoStore
 import cards.psy.app.data.Overdose
 import cards.psy.app.data.PersonalDose
 import cards.psy.app.data.PersonalDoseMath
@@ -58,6 +68,7 @@ import cards.psy.app.data.Sex
 import cards.psy.app.data.SpacingText
 import cards.psy.app.data.SubstanceCard
 import cards.psy.app.ui.LocalBody
+import cards.psy.app.ui.LocalCountry
 import cards.psy.app.ui.LocalPack
 import cards.psy.app.ui.components.CardTile
 import cards.psy.app.ui.components.PhIcon
@@ -69,8 +80,10 @@ import cards.psy.app.ui.theme.PsyColors
 // ------------------------------------------------------------- Front
 
 /**
- * Card front (web `card/CardFront.astro`): dose scale, personal figure,
- * timing, toxicity margin and preparation advice.
+ * Card front (web `card/CardFront.astro`), the facts: dose scale (acute
+ * toxicity as its footnote), personal figure, effects, timing, spacing and
+ * preparation advice. `minHeight` keeps the card's proportions; the footer
+ * sits at the bottom.
  */
 @Composable
 fun CardFront(
@@ -81,6 +94,7 @@ fun CardFront(
     onShowRoutes: () -> Unit,
     onShowCompare: () -> Unit,
     modifier: Modifier = Modifier,
+    minHeight: Dp = 0.dp,
 ) {
     val pack = LocalPack.current
     val body = LocalBody.current
@@ -90,6 +104,7 @@ fun CardFront(
     val isPerKgChart = card.personal is PersonalDose.PerKgChart
     val showDoseTip = card.primary?.chartable == true && content.dose != null && !isPerKgChart
     val showSideTile = card.personal != null || showDoseTip
+    val effects = content.effects.orEmpty()
     val perKgWeight = if (card.primary?.perKg == true) body.weightKg else null
     val personal = card.personal
     val markerValue = if (personal is PersonalDose.MgPerKg && body.sex != null && body.weightKg != null) {
@@ -101,7 +116,7 @@ fun CardFront(
             MoleculeHologram(moleculeAsset, swipe, Modifier.align(Alignment.TopEnd).padding(top = 4.dp).size(210.dp))
         }
         Column(
-            Modifier.fillMaxWidth().padding(start = 14.dp, end = 14.dp, top = 20.dp, bottom = 12.dp),
+            Modifier.fillMaxWidth().heightIn(min = minHeight).padding(start = 14.dp, end = 14.dp, top = 20.dp, bottom = 12.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             // Header
@@ -134,7 +149,7 @@ fun CardFront(
                 }
             }
 
-            // Dose
+            // Dose, with acute toxicity as its footnote
             CardTile {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     TileHeading("scales-fill", pack.t("card.dose"), iconColor = hue)
@@ -169,53 +184,23 @@ fun CardFront(
                     primary != null -> DoseList(primary.rows)
                     content.dose != null -> Text(content.dose, fontSize = 15.sp, color = PsyColors.fg)
                 }
+                ToxicityFootnote(card, onShowCompare)
             }
 
-            if (showSideTile || card.hasTiming) {
+            if (showSideTile || effects.isNotEmpty()) {
                 Row(Modifier.height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     if (showSideTile) {
                         CardTile(Modifier.weight(1f).fillMaxHeight()) { PersonalTileBody(card, hue) }
                     }
-                    if (card.hasTiming) {
-                        CardTile(Modifier.weight(1f).fillMaxHeight()) { TimingTileBody(card, hue) }
+                    if (effects.isNotEmpty()) {
+                        CardTile(Modifier.weight(1f).fillMaxHeight()) { EffectsTileBody(effects, hue) }
                     }
                 }
             }
 
-            // Toxicity margin
-            CardTile {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    TileHeading("skull-fill", pack.t("card.margin"), Modifier.weight(1f), iconColor = hue)
-                    TileChip(onClick = onShowCompare) {
-                        PhIcon("chart-bar-horizontal-fill", size = 13.dp)
-                        Text(pack.t("card.marginCompare"))
-                    }
-                }
-                MarginMeter(
-                    margin = card.margin,
-                    danger = card.marginDanger,
-                    alcoholRatio = if (card.key == "alcohol") null else (pack.gable.firstOrNull { it.key == "alcohol" }?.ratio ?: 10.0),
-                    face = face,
-                    modifier = Modifier.padding(horizontal = 2.dp, vertical = if (card.margin == null) 2.dp else 4.dp),
-                )
-                val margin = card.margin
-                Text(
-                    buildAnnotatedString {
-                        withStyle(SpanStyle(fontWeight = FontWeight.Bold, color = PsyColors.fg)) {
-                            append(
-                                if (margin == null) pack.t("card.marginUnknown")
-                                else pack.t(if (margin.atLeast) "card.marginAtLeast" else "card.marginLabel", "ratio" to pack.number(margin.ratio)),
-                            )
-                        }
-                        margin?.compound?.let { append(" ($it)") }
-                        if (margin?.extrapolated == true) withStyle(SpanStyle(color = PsyColors.fgMute)) { append(", ${pack.t("card.marginExtrapolated")}") }
-                        if (margin == null) content.marginNote?.let { append(" $it") }
-                    },
-                    fontSize = 13.sp,
-                    lineHeight = 17.sp,
-                    color = PsyColors.inkSoft,
-                )
-            }
+            if (card.hasTiming) CardTile { TimingTileBody(card, hue) }
+
+            content.spacing?.let { spacing -> CardTile { SpacingTileBody(card, spacing, hue) } }
 
             // Test & prepare
             if (content.prepare != null) {
@@ -229,6 +214,8 @@ fun CardFront(
                 }
             }
 
+            Spacer(Modifier.weight(1f))
+
             // Footer
             Row(Modifier.padding(top = 4.dp), verticalAlignment = Alignment.CenterVertically) {
                 Image(painterResource(R.drawable.logo), null, Modifier.size(18.dp).clip(RoundedCornerShape(4.dp)))
@@ -237,6 +224,51 @@ fun CardFront(
                 Spacer(Modifier.weight(1f))
                 FlipButton(pack.t("card.flipToSafety"), "arrows-clockwise-bold", prominent = true, onClick = onFlip)
             }
+        }
+    }
+}
+
+/**
+ * "Lethal dose ≈ 16× a usual dose (compound), estimated from animal data":
+ * one muted line under the dose; the comparison chart is one tap away. Only
+ * a narrow margin (NBOMes, 5-MeO) is flagged.
+ */
+@Composable
+private fun ToxicityFootnote(card: SubstanceCard, onShowCompare: () -> Unit) {
+    val pack = LocalPack.current
+    val margin = card.margin
+    val text = buildString {
+        append(
+            if (margin == null) pack.t("card.marginUnknown")
+            else pack.t(if (margin.atLeast) "card.marginAtLeast" else "card.marginLabel", "ratio" to pack.number(margin.ratio)),
+        )
+        margin?.compound?.let { append(" ($it)") }
+        if (margin?.extrapolated == true) append(", ${pack.t("card.marginExtrapolated")}")
+        if (margin == null) card.content.marginNote?.let { append(" · $it") }
+    }
+    val danger = card.marginDanger
+    val color = if (danger) PsyColors.emergencyInk else PsyColors.fgMute
+    Column {
+        DashedDivider()
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .clickable(onClickLabel = pack.t("card.marginCompare"), role = Role.Button, onClick = onShowCompare)
+                .padding(top = 7.dp)
+                .testTag("margin-compare"),
+            verticalAlignment = Alignment.Top,
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
+            PhIcon(if (danger) "warning-fill" else "skull-fill", Modifier.padding(top = 2.dp), size = 11.dp, tint = color)
+            Text(
+                text,
+                fontSize = 11.sp,
+                lineHeight = 14.sp,
+                fontWeight = if (danger) FontWeight.Bold else FontWeight.Medium,
+                color = color,
+                modifier = Modifier.weight(1f),
+            )
+            PhIcon("caret-right-bold", Modifier.padding(top = 3.dp).alpha(0.5f), size = 9.dp, tint = color)
         }
     }
 }
@@ -301,6 +333,24 @@ private fun ColumnScope.PersonalTileBody(card: SubstanceCard, hue: Color) {
     }
 }
 
+/** What it does, each effect with its icon (web `.psy-tile--effects`). */
+@Composable
+private fun ColumnScope.EffectsTileBody(effects: List<CardEffect>, hue: Color) {
+    val pack = LocalPack.current
+    TileHeading("sparkle-fill", pack.t("substanceCard.effects"), iconColor = hue)
+    Column(Modifier.semantics(mergeDescendants = true) {}, verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        effects.forEach { effect ->
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(7.dp)) {
+                Box(Modifier.width(16.dp), contentAlignment = Alignment.Center) { PhIcon(effect.icon, size = 14.dp, tint = hue) }
+                Text(effect.label, fontSize = 13.sp, lineHeight = 16.sp, fontWeight = FontWeight.SemiBold, color = PsyColors.fg)
+            }
+        }
+    }
+}
+
+private val TimingValueStyle = TextStyle(fontSize = 15.sp, fontWeight = FontWeight.Black, color = PsyColors.fg, fontFeatureSettings = "tnum")
+
+/** Onset · duration · after-effects side by side, split by dotted rules. */
 @Composable
 private fun ColumnScope.TimingTileBody(card: SubstanceCard, hue: Color) {
     val pack = LocalPack.current
@@ -310,30 +360,82 @@ private fun ColumnScope.TimingTileBody(card: SubstanceCard, hue: Color) {
         card.timing.duration?.let { "card.duration" to it },
         card.timing.after?.let { "card.afterEffects" to it },
     )
-    Column {
+    Row {
         rows.forEachIndexed { index, (key, value) ->
-            Row(Modifier.padding(vertical = 6.dp), verticalAlignment = Alignment.Bottom) {
-                Text(pack.t(key), fontSize = 12.sp, fontWeight = FontWeight.SemiBold, color = PsyColors.fgMute)
-                Spacer(Modifier.weight(1f))
-                Text(
+            Column(
+                Modifier
+                    .weight(1f)
+                    .then(if (index > 0) Modifier.drawBehind { dashedLine(Offset(0f, 0f), Offset(0f, size.height)) } else Modifier)
+                    .padding(start = if (index == 0) 0.dp else 10.dp)
+                    .semantics(mergeDescendants = true) {},
+                verticalArrangement = Arrangement.spacedBy(2.dp),
+            ) {
+                Text(pack.t(key), fontSize = 12.sp, fontWeight = FontWeight.SemiBold, color = PsyColors.fgMute, maxLines = 1)
+                BasicText(
                     buildAnnotatedString {
-                        withStyle(SpanStyle(fontSize = 15.sp, fontWeight = FontWeight.Black)) { append(value.value) }
-                        withStyle(SpanStyle(fontSize = 11.sp, fontWeight = FontWeight.SemiBold, color = PsyColors.fgMute)) { append(" ${value.shortUnit}") }
+                        append(value.value)
+                        withStyle(SpanStyle(fontSize = 0.73.em, fontWeight = FontWeight.SemiBold, color = PsyColors.fgMute)) { append(" ${value.shortUnit}") }
                     },
-                    color = PsyColors.fg,
+                    style = TimingValueStyle,
                     maxLines = 1,
+                    autoSize = TextAutoSize.StepBased(minFontSize = 11.sp, maxFontSize = TimingValueStyle.fontSize, stepSize = 0.5.sp),
                 )
             }
-            if (index < rows.size - 1) DashedDivider()
         }
     }
+}
+
+/** How often (web `.psy-tile--spacing`): the interval, a calendar of use over the span and why. */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun ColumnScope.SpacingTileBody(card: SubstanceCard, spacing: SpacingText, hue: Color) {
+    val pack = LocalPack.current
+    TileHeading("calendar-dots-fill", pack.t("card.spacing"), iconColor = hue)
+    // Value and calendar side by side when they fit, else stacked.
+    FlowRow(
+        Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+        itemVerticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(
+            buildAnnotatedString {
+                withStyle(SpanStyle(fontSize = 22.sp, fontWeight = FontWeight.Black, color = PsyColors.fg, letterSpacing = (-0.6).sp)) { append(spacing.value) }
+                append("  ")
+                withStyle(SpanStyle(fontSize = 12.sp, fontWeight = FontWeight.Black, color = hue)) { append(spacing.label) }
+            },
+            modifier = Modifier.padding(end = 12.dp),
+        )
+        val cells = card.spacing.cells
+        if (cells.isNotEmpty()) {
+            Column(Modifier.clearAndSetSemantics {}, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                    cells.forEach { used ->
+                        Box(
+                            Modifier
+                                .size(8.dp)
+                                .then(if (used) Modifier.shadow(4.dp, CircleShape, ambientColor = hue, spotColor = hue) else Modifier)
+                                .background(if (used) hue else PsyColors.fg.copy(alpha = 0.13f), CircleShape),
+                        )
+                    }
+                }
+                Text(
+                    pack.t("card.spacingSpan", "count" to "${cells.size}", "unit" to pack.t("card.units.${card.spacing.unit ?: "week"}")),
+                    fontSize = 11.sp,
+                    color = PsyColors.fgMute,
+                )
+            }
+        }
+    }
+    TileText(spacing.text)
 }
 
 // -------------------------------------------------------------- Back
 
 /**
- * Card back (web `card/CardBack.astro`): spacing, dependence, key risks,
- * combinations to avoid and what to do in an emergency.
+ * Card back (web `card/CardBack.astro`), safety: key risks, combinations to
+ * avoid, what to do in an emergency (local numbers), local help,
+ * dependence and the legal status in the person's country.
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -343,17 +445,22 @@ fun CardBack(
     onSelectCombo: (String) -> Unit,
     onShowAllCombos: () -> Unit,
     onShowDependence: () -> Unit,
+    onShowLegal: () -> Unit,
+    onPickCountry: () -> Unit,
     modifier: Modifier = Modifier,
+    minHeight: Dp = 0.dp,
 ) {
     val pack = LocalPack.current
+    val country = LocalCountry.current
     val content: CardContent = card.content
     val hue = PsyColors.group(card.group)
     val maxAvoid = 7
     val shown = if (card.avoid.size > maxAvoid + 1) card.avoid.take(maxAvoid) else card.avoid
     val hidden = card.avoid.size - shown.size
+    val organisations = country.organisations(card.key)
 
     Column(
-        modifier.fillMaxWidth().padding(start = 14.dp, end = 14.dp, top = 20.dp, bottom = 14.dp),
+        modifier.fillMaxWidth().heightIn(min = minHeight).padding(start = 14.dp, end = 14.dp, top = 20.dp, bottom = 14.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Row(Modifier.padding(bottom = 4.dp), verticalAlignment = Alignment.Top) {
@@ -369,24 +476,6 @@ fun CardBack(
                 )
             }
             FlipButton(pack.t("card.faceDose"), "arrows-counter-clockwise-bold", prominent = false, onClick = onFlip)
-        }
-
-        Row(Modifier.height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            content.spacing?.let { spacing ->
-                CardTile(Modifier.weight(1.5f).fillMaxHeight()) { SpacingTileBody(card, spacing, hue) }
-            }
-            CardTile(Modifier.weight(1f).fillMaxHeight()) {
-                val level = card.dependence.clampedLevel
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    TileHeading("link-break-fill", pack.t("card.dependence"), Modifier.weight(1f), iconColor = hue)
-                    IconButton(onClick = onShowDependence, modifier = Modifier.size(28.dp)) {
-                        PhIcon("info-bold", size = 13.dp, tint = PsyColors.fgMute)
-                    }
-                }
-                DependenceMeter(level)
-                Text(pack.t("card.dependenceLevels.$level"), fontSize = 17.sp, fontWeight = FontWeight.Black, color = PsyColors.fg)
-                content.dependence?.let { Text(it, fontSize = 12.sp, lineHeight = 16.sp, color = PsyColors.fgMute) }
-            }
         }
 
         content.risks?.takeIf { it.isNotEmpty() }?.let { risks ->
@@ -441,41 +530,29 @@ fun CardBack(
         }
 
         content.overdose?.let { EmergencyTile(it) }
-    }
-}
 
-@Composable
-private fun ColumnScope.SpacingTileBody(card: SubstanceCard, spacing: SpacingText, hue: Color) {
-    val pack = LocalPack.current
-    TileHeading("calendar-dots-fill", pack.t("card.spacing"), iconColor = hue)
-    Text(
-        buildAnnotatedString {
-            withStyle(SpanStyle(fontSize = 22.sp, fontWeight = FontWeight.Black, color = PsyColors.fg, letterSpacing = (-0.6).sp)) { append(spacing.value) }
-            append("  ")
-            withStyle(SpanStyle(fontSize = 12.sp, fontWeight = FontWeight.Black, color = hue)) { append(spacing.label) }
-        },
-    )
-    val cells = card.spacing.cells
-    if (cells.isNotEmpty()) {
-        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                cells.forEach { used ->
-                    Box(
-                        Modifier
-                            .size(8.dp)
-                            .then(if (used) Modifier.shadow(4.dp, CircleShape, ambientColor = hue, spotColor = hue) else Modifier)
-                            .background(if (used) hue else PsyColors.fg.copy(alpha = 0.13f), CircleShape),
-                    )
+        if (organisations.isNotEmpty()) HelpTile(organisations, hue)
+
+        CardTile {
+            val level = card.dependence.clampedLevel
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                TileHeading("link-break-fill", pack.t("card.dependence"), Modifier.weight(1f), iconColor = hue)
+                IconButton(
+                    onClick = onShowDependence,
+                    modifier = Modifier.size(28.dp).semantics { contentDescription = pack.t("card.info") },
+                ) {
+                    PhIcon("info-bold", size = 13.dp, tint = PsyColors.fgMute)
                 }
             }
-            Text(
-                pack.t("card.spacingSpan", "count" to "${cells.size}", "unit" to pack.t("card.units.${card.spacing.unit ?: "week"}")),
-                fontSize = 11.sp,
-                color = PsyColors.fgMute,
-            )
+            DependenceMeter(level)
+            Text(pack.t("card.dependenceLevels.$level"), fontSize = 17.sp, fontWeight = FontWeight.Black, color = PsyColors.fg)
+            content.dependence?.let { Text(it, fontSize = 12.sp, lineHeight = 16.sp, color = PsyColors.fgMute) }
         }
+
+        LegalTile(card, hue, onPickCountry = onPickCountry, onShowDetails = onShowLegal)
+
+        Spacer(Modifier.weight(1f))
     }
-    TileText(spacing.text)
 }
 
 @Composable
@@ -496,11 +573,14 @@ private fun RiskRow(risk: RiskItem) {
     }
 }
 
+/** What to do in an emergency, with the person's local numbers. */
 @Composable
 private fun EmergencyTile(overdose: Overdose) {
     val pack = LocalPack.current
-    val context = LocalContext.current
-    val number = pack.t("card.emergencyNumber")
+    val country = LocalCountry.current
+    val dial = rememberDialer()
+    val number = country.emergencyNumber
+    val info = country.current
     CardTile(
         modifier = Modifier.drawBehind {
             drawRect(
@@ -523,11 +603,12 @@ private fun EmergencyTile(overdose: Overdose) {
                 textColor = PsyColors.emergencyInk,
             )
             Surface(
-                onClick = { context.startActivity(Intent(Intent.ACTION_DIAL, "tel:$number".toUri())) },
+                onClick = { dial(number) },
                 shape = CircleShape,
                 color = PsyColors.emergencyStrong,
                 contentColor = Color.White,
                 shadowElevation = 6.dp,
+                modifier = Modifier.testTag("emergency-call"),
             ) {
                 Row(
                     Modifier.defaultMinSize(minHeight = 36.dp).padding(horizontal = 12.dp),
@@ -555,8 +636,30 @@ private fun EmergencyTile(overdose: Overdose) {
             overdose.actions.forEachIndexed { index, action ->
                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     Text("${index + 1}.", fontSize = 13.sp, fontWeight = FontWeight.Black, color = PsyColors.emergencyMarker)
-                    Text(action, fontSize = 13.sp, lineHeight = 17.sp, color = PsyColors.fg)
+                    Text(LocalInfoStore.localiseEmergency(action, number), fontSize = 13.sp, lineHeight = 17.sp, color = PsyColors.fg)
                 }
+            }
+        }
+        // Poison centre and whether calling for help usually involves the police.
+        val poison = info?.emergency?.poison
+        val calling = info?.callingForHelp
+        if (poison != null || calling != null) {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                DashedDivider(PsyColors.emergency.copy(alpha = 0.35f))
+                if (poison != null) {
+                    Row(
+                        Modifier
+                            .padding(top = 2.dp)
+                            .clip(CircleShape)
+                            .clickable(onClickLabel = poison.name, role = Role.Button) { dial(poison.phone) },
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(5.dp),
+                    ) {
+                        PhIcon("first-aid-kit-fill", size = 13.dp, tint = PsyColors.emergencyInk)
+                        Text(pack.t("card.poisonCentre", "number" to poison.phone), fontSize = 12.sp, fontWeight = FontWeight.Black, color = PsyColors.emergencyInk)
+                    }
+                }
+                calling?.let { Text(it, fontSize = 11.sp, lineHeight = 15.sp, color = PsyColors.inkSoft) }
             }
         }
     }
@@ -569,19 +672,13 @@ fun TileText(text: String, color: Color = PsyColors.inkSoft) {
     Text(text, fontSize = 13.sp, lineHeight = 17.sp, color = color)
 }
 
+private fun androidx.compose.ui.graphics.drawscope.DrawScope.dashedLine(start: Offset, end: Offset, color: Color = PsyColors.tileEdge) {
+    drawLine(color, start, end, strokeWidth = 1.dp.toPx(), pathEffect = PathEffect.dashPathEffect(floatArrayOf(6f, 6f)))
+}
+
 @Composable
-private fun DashedDivider() {
-    Box(
-        Modifier.fillMaxWidth().height(1.dp).drawBehind {
-            drawLine(
-                PsyColors.tileEdge,
-                Offset(0f, 0f),
-                Offset(size.width, 0f),
-                strokeWidth = 1.dp.toPx(),
-                pathEffect = PathEffect.dashPathEffect(floatArrayOf(6f, 6f)),
-            )
-        },
-    )
+private fun DashedDivider(color: Color = PsyColors.tileEdge) {
+    Box(Modifier.fillMaxWidth().height(1.dp).drawBehind { dashedLine(Offset(0f, 0f), Offset(size.width, 0f), color) })
 }
 
 /** "Risks & safety ⟳" / "⟲ Dose" (web `.psy-flip`). */
@@ -607,7 +704,7 @@ fun FlipButton(title: String, icon: String, prominent: Boolean, onClick: () -> U
 }
 
 @Composable
-fun DependenceMeter(level: Int, height: androidx.compose.ui.unit.Dp = 8.dp) {
+fun DependenceMeter(level: Int, height: Dp = 8.dp) {
     Row(horizontalArrangement = Arrangement.spacedBy(3.dp)) {
         (1..5).forEach { step ->
             Box(

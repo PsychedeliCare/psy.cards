@@ -3,6 +3,8 @@ package cards.psy.app
 import cards.psy.app.data.BodyProfileStore
 import cards.psy.app.data.ComboGrouping
 import cards.psy.app.data.DataPack
+import cards.psy.app.data.LegalStatus
+import cards.psy.app.data.LocalInfoStore
 import cards.psy.app.data.PersonalDose
 import cards.psy.app.data.PersonalDoseMath
 import cards.psy.app.data.Sex
@@ -15,6 +17,7 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.io.File
+import java.util.Locale
 
 /** Reads the generated data pack straight from the app's assets. */
 private fun pack(locale: String = "en"): DataPack {
@@ -36,6 +39,16 @@ class DataPackTest {
         assertEquals("mg", card.primary?.unit)
         assertEquals(listOf("maois", "dxm", "tramadol"), card.avoid.map { it.key })
         assertEquals(PersonalDose.MgPerKg(male = 1.5, female = 1.3), card.personal)
+    }
+
+    /** Effects are translated by the overlays but keep the authored icons. */
+    @Test fun cardEffectsKeepTheirIconsInEveryLocale() {
+        val icons = pack().card("mdma")!!.content.effects!!.map { it.icon }
+        assertEquals(4, icons.size)
+        SupportedLocales.forEach { locale ->
+            assertEquals(locale, icons, pack(locale).card("mdma")!!.content.effects!!.map { it.icon })
+        }
+        assertTrue(pack("fr").card("mdma")!!.content.effects!!.none { it.label == "Love of music" })
     }
 
     /** Column keys that differ from the dataset's (dxm → dextromethorphan) still resolve. */
@@ -61,6 +74,57 @@ class DataPackTest {
     @Test fun localeAwareNumbers() {
         assertEquals("1,5", pack("fr").number(1.5, 1))
         assertEquals("1.5", pack().number(1.5, 1))
+    }
+}
+
+class LocalInfoTest {
+    private val countries = LocalInfoStore.decode(File("src/main/assets/datapack/local.json").readText()).countries
+
+    @Test fun decodesEveryCountry() {
+        assertTrue(countries.size >= 40)
+        val ch = countries.getValue("CH")
+        assertEquals("144", ch.emergency.number)
+        assertEquals("145", ch.emergency.poison?.phone)
+        assertEquals(LegalStatus.illegal, ch.substances.getValue("mdma").status)
+        assertTrue(countries.values.all { it.emergency.number.isNotBlank() })
+    }
+
+    @Test fun unknownStatusesFallBack() {
+        val pack = LocalInfoStore.decode(
+            """{"countries":{"ZZ":{"country":"ZZ","name":"Nowhere","asOf":"2026","emergency":{"number":"112"},"substances":{"lsd":{"status":"sideways"}}}}}""",
+        )
+        assertEquals(LegalStatus.unknown, pack.countries.getValue("ZZ").substances.getValue("lsd").status)
+    }
+
+    @Test fun savedChoiceElseDeviceRegion() {
+        val store = LocalInfoStore(countries, prefs = null, regions = listOf("US", "ch"))
+        assertEquals("CH", store.code)
+        assertFalse(store.isChosen)
+        assertEquals("144", store.emergencyNumber)
+        store.setCountry("DE")
+        assertTrue(store.isChosen)
+        store.setCountry("??")
+        assertNull(store.code)
+        assertEquals("112", store.emergencyNumber)
+    }
+
+    @Test fun organisationsSkipPoisonCentresAndPreferSubstanceServices() {
+        val store = LocalInfoStore(countries, prefs = null, regions = listOf("CH"))
+        val picked = store.organisations("mdma")
+        assertTrue(picked.size in 1..3)
+        assertTrue(picked.none { "poison-centre" in it.services })
+        val specific = countries.getValue("CH").organisations.filter { "mdma" in it.substances && "poison-centre" !in it.services }
+        if (specific.isNotEmpty()) assertEquals(specific.first(), picked.first())
+    }
+
+    @Test fun localNumbersAndNames() {
+        assertEquals("🇨🇭", LocalInfoStore.flag("ch"))
+        assertEquals("tel:+41445551234", LocalInfoStore.telUri("+41 44 555 12 34"))
+        assertEquals("Call 144 now, not 1120", LocalInfoStore.localiseEmergency("Call 112 now, not 1120", "144"))
+        val store = LocalInfoStore(countries, prefs = null)
+        assertEquals("Suisse", store.name("CH", Locale.FRENCH))
+        val codes = store.sortedCodes(Locale.GERMAN)
+        assertEquals(codes.map { store.name(it, Locale.GERMAN) }.sortedWith(java.text.Collator.getInstance(Locale.GERMAN)), codes.map { store.name(it, Locale.GERMAN) })
     }
 }
 

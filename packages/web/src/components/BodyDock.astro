@@ -8,6 +8,7 @@ import { Icon } from "@twodft/astro-icon/components";
 import type { Locale } from "../i18n/locales";
 import { getUiMessages } from "../i18n/load-locale";
 import { t } from "../i18n/ui";
+import { listCountries } from "../data/local-info";
 
 interface Props {
   locale?: Locale;
@@ -15,6 +16,7 @@ interface Props {
 
 const { locale = "en" } = Astro.props;
 const ui = getUiMessages(locale);
+const countries = listCountries(locale);
 ---
 
 <aside class="body-dock" data-body-dock aria-label={t(locale, ui, "body.title")} hidden>
@@ -57,6 +59,17 @@ const ui = getUiMessages(locale);
 
     <button
       type="button"
+      class="body-dock__country"
+      popovertarget="country-picker"
+      data-country-button
+      title={t(locale, ui, "country.title")}
+    >
+      <span data-country-flag aria-hidden="true">🌍</span>
+      <span class="body-dock__country-name" data-country-name>{t(locale, ui, "country.choose")}</span>
+    </button>
+
+    <button
+      type="button"
       class="body-dock__save"
       role="switch"
       aria-checked="true"
@@ -74,6 +87,27 @@ const ui = getUiMessages(locale);
     </button>
   </div>
 </aside>
+
+<div class="country-picker" id="country-picker" popover data-country-picker>
+  <div class="country-picker__head">
+    <h2>{t(locale, ui, "country.title")}</h2>
+    <button type="button" class="country-picker__close" popovertarget="country-picker" popovertargetaction="hide" aria-label={t(locale, ui, "layout.close")}>
+      <Icon name="ph:x-bold" aria-hidden="true" />
+    </button>
+  </div>
+  <p class="country-picker__hint">{t(locale, ui, "country.hint")}</p>
+  <ul class="country-picker__list" role="listbox" aria-label={t(locale, ui, "country.title")}>
+    {countries.map((country) => (
+      <li>
+        <button type="button" role="option" aria-selected="false" data-country-option={country.code}>
+          <span aria-hidden="true">{country.flag}</span>
+          <span>{country.name}</span>
+        </button>
+      </li>
+    ))}
+  </ul>
+  <p class="country-picker__note">{t(locale, ui, "country.privacy")}</p>
+</div>
 
 <button type="button" class="body-dock-fab" data-body-show hidden aria-label={t(locale, ui, "body.show")}>
   <Icon name="ph:user-fill" aria-hidden="true" />

@@ -3,6 +3,7 @@ import SwiftUI
 struct AboutView: View {
     @Environment(DataPackStore.self) private var store
     @Environment(BodyProfileStore.self) private var profile
+    @Environment(LocalInfoStore.self) private var localInfo
 
     var body: some View {
         List {
@@ -24,6 +25,8 @@ struct AboutView: View {
                 }
                 .pickerStyle(.navigationLink)
             }
+
+            countrySection
 
             bodySection
 
@@ -117,6 +120,27 @@ struct AboutView: View {
             Text(store.t("body.title"))
         } footer: {
             Text(store.t("body.privacyDevice"))
+        }
+    }
+
+    @ViewBuilder
+    private var countrySection: some View {
+        if !localInfo.countries.isEmpty {
+            Section {
+                Picker(selection: Binding(get: { localInfo.code }, set: { localInfo.setCountry($0) })) {
+                    Text(store.t("country.choose")).tag(String?.none)
+                    ForEach(localInfo.sortedCodes(locale: store.swiftLocale), id: \.self) { code in
+                        Text("\(LocalInfoStore.flag(code))  \(localInfo.name(of: code, locale: store.swiftLocale))")
+                            .tag(String?.some(code))
+                    }
+                } label: {
+                    Label(store.t("country.title"), systemImage: "globe.europe.africa.fill")
+                }
+                .pickerStyle(.navigationLink)
+                .accessibilityIdentifier("country-picker")
+            } footer: {
+                Text("\(store.t("country.hint")) \(store.t("country.privacy"))")
+            }
         }
     }
 

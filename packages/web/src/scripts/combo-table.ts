@@ -13,6 +13,54 @@ function addToIndex(index: CellIndex, key: string | undefined, cell: HTMLElement
   index.set(key, matches);
 }
 
+/** The table header pins under the sticky site header, whatever its height. */
+function trackSiteHeaderHeight(): void {
+  const header = document.querySelector<HTMLElement>(".site-header");
+  if (!header) return;
+  const root = document.documentElement;
+  const update = () => root.style.setProperty("--site-header-h", `${header.offsetHeight}px`);
+  update();
+  new ResizeObserver(update).observe(header);
+}
+
+/**
+ * Substance headers are decks of cards: the picked card starts sliding out at
+ * once (the modal then carries it on, see card-motion.ts) and settles back
+ * into its deck when the modal closes.
+ */
+function initCardPulls(wrap: HTMLElement): void {
+  const release = (card: HTMLElement) => {
+    card.classList.remove("is-pulling");
+    const deck = card.closest<HTMLElement>(".stack");
+    if (!deck) return;
+    deck.classList.remove("is-settling");
+    void deck.offsetWidth;
+    deck.classList.add("is-settling");
+    deck.addEventListener("animationend", () => deck.classList.remove("is-settling"), { once: true });
+  };
+
+  wrap.addEventListener("click", (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const card = (event.target as Element | null)?.closest<HTMLElement>("[data-card-pull]");
+    if (!card) return;
+    wrap.querySelectorAll<HTMLElement>("[data-card-pull].is-pulling").forEach((other) => {
+      if (other !== card) other.classList.remove("is-pulling");
+    });
+    card.classList.add("is-pulling");
+    if (window.matchMedia("(pointer: coarse)").matches) navigator.vibrate?.(6);
+    // If no modal picks the card up (e.g. it opened as a page), drop it back.
+    window.setTimeout(() => {
+      if (card.classList.contains("is-pulling") && !document.querySelector("[data-modal-root][data-open='true']")) {
+        release(card);
+      }
+    }, 1500);
+  });
+
+  wrap.addEventListener("card-motion:returned", (event) => {
+    if (event.target instanceof HTMLElement) release(event.target);
+  });
+}
+
 function initComboTable(wrap: HTMLElement): void {
   if (wrap.dataset.tableInit === "true") return;
 
@@ -24,6 +72,7 @@ function initComboTable(wrap: HTMLElement): void {
 
   wrap.dataset.tableInit = "true";
   initComboTooltips(wrap);
+  initCardPulls(wrap);
 
   const categoryNav = wrap.nextElementSibling;
   const categoryControls =
@@ -113,6 +162,9 @@ function initComboTable(wrap: HTMLElement): void {
     if (!(target instanceof Element)) return;
     const active = target.closest<HTMLElement>("[data-hover-cell]");
     if (!active || !wrap.contains(active)) {
+      // The 2px gaps between cells belong to the table: keep the current
+      // highlight there, or it flashes off and on as the pointer crosses them.
+      if (target.closest(".combos-table")) return;
       clearHover();
       return;
     }
@@ -323,5 +375,6 @@ function initComboTable(wrap: HTMLElement): void {
 }
 
 export function initComboTables(): void {
+  trackSiteHeaderHeight();
   elements<HTMLElement>(document, ".table-wrap").forEach(initComboTable);
 }

@@ -1,0 +1,290 @@
+{
+  "country": "PL",
+  "name": "Poland",
+  "asOf": "2026-10",
+  "summary": "Possessing any amount of a controlled drug is a crime (up to 3 yrs; 1–10 yrs for a 'significant quantity'). Prosecutors may drop small personal-use cases (art. 62a), but it is discretionary. NPS possession: fine.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "999",
+    "poisonControl": {
+      "name": "Toxicology Information Centre, Kraków (one of several regional centres)",
+      "phone": "+48 12 411 99 99"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law. Medical staff are bound by confidentiality, but police may attend overdoses, especially in public places, and possession itself is a crime.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No legal drug checking service; holding a sample to test is still possession. Reagent test kits are sold.",
+  "sources": {
+    "upn": {
+      "title": "Act on Counteracting Drug Addiction (consolidated, Dz.U. 2023 poz. 1939), arts. 62, 62a, 62b",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2023/1939/text.html"
+    },
+    "wykaz": {
+      "title": "Health Ministry list of psychotropic substances, narcotics and NPS (consolidated, Dz.U. 2024 poz. 1139)",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2024/1139/text.pdf"
+    },
+    "wykaz2026": {
+      "title": "Amendment to the drug lists (Dz.U. 2026 poz. 934, in force 28 Jul 2026; HHC moved to II-P)",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2026/934/text.pdf"
+    },
+    "nowela2026": {
+      "title": "Act of 3 July 2026 amending the drug act (Dz.U. 2026 poz. 1004; substitution treatment, possession rules unchanged)",
+      "url": "https://api.sejm.gov.pl/eli/acts/DU/2026/1004/text.pdf"
+    },
+    "sejm2026": {
+      "title": "Sejm debate, 27 May 2026: no fixed gram thresholds; art. 62a used rarely and unevenly",
+      "url": "https://api.sejm.gov.pl/sejm/term10/proceedings/58/2026-05-27/transcripts/037"
+    },
+    "interpN2O": {
+      "title": "Sejm interpellation no. 14726 on nitrous oxide (Health Ministry reply, Feb 2026)",
+      "url": "https://api.sejm.gov.pl/sejm/term10/interpellations/14726/body"
+    },
+    "snGbl": {
+      "title": "Supreme Court judgment III KK 25/24 (8 May 2024): GBL treated as a psychotropic substance",
+      "url": "https://www.sn.pl/sites/orzecznictwo/Orzeczenia3/III%20KK%2025-24-1.pdf"
+    },
+    "mpDxm": {
+      "title": "mp.pl: limits on OTC sale of medicines with pseudoephedrine, codeine and dextromethorphan",
+      "url": "https://www.mp.pl/pacjent/aktualnosci/151087,ograniczenia-w-sprzedazy-lekow-zawierajacych-substancje-psychoaktywne"
+    },
+    "trzezwosc": {
+      "title": "Act on Upbringing in Sobriety and Counteracting Alcoholism (no sale to under-18s)",
+      "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19820350230"
+    },
+    "wikiMush": {
+      "title": "Wikipedia: Legal status of psilocybin mushrooms",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "bocMed": {
+      "title": "Business of Cannabis: Poland's 2024 limits on telemedicine cannabis prescriptions",
+      "url": "https://businessofcannabis.com/the-polish-pivot-what-happens-when-telehealth-meets-regulation/"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Group I-P. Possession is a crime (up to 3 yrs; minor case: fine or up to 1 yr). Small personal-use cases may be dropped (art. 62a).",
+      "sources": [
+        "wykaz",
+        "upn"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin/psilocin are group I-P, so possessing or growing mushrooms containing them is a crime. Spores and grow kits are sold openly.",
+      "sources": [
+        "wykaz",
+        "upn",
+        "wikiMush"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "Group I-P; ayahuasca containing DMT is covered too. Possession is a crime (up to 3 yrs); small cases may be dropped (art. 62a).",
+      "sources": [
+        "wykaz",
+        "upn"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is group I-P; possession is a crime (up to 3 yrs). The cacti themselves are not named on the lists.",
+      "sources": [
+        "wykaz",
+        "upn"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOC, DOM etc. are group I-P; possession is a crime (up to 3 yrs).",
+      "sources": [
+        "wykaz",
+        "upn"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25I-, 25B-, 25C-NBOMe and others are group I-P; possession is a crime (up to 3 yrs).",
+      "sources": [
+        "wykaz",
+        "upn"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B is group II-P and other 2C-x are listed; possession is a crime (up to 3 yrs).",
+      "sources": [
+        "wykaz",
+        "upn"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7 are group I-P; possession is a crime (up to 3 yrs).",
+      "sources": [
+        "wykaz",
+        "upn"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "5-MeO-DMT, 5-MeO-MiPT and 5-MeO-DALT are listed; possession is a crime (up to 3 yrs). Unlisted NPS: possession punished by a fine (art. 62b).",
+      "sources": [
+        "wykaz",
+        "upn"
+      ],
+      "confidence": "high"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Possession is a crime; art. 62a dismissal is discretionary. Medical cannabis on prescription (in-person visit needed since 2024). HHC banned (2026).",
+      "sources": [
+        "upn",
+        "sejm2026",
+        "bocMed",
+        "wykaz2026"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Group II-P; a medicine for human and veterinary use. Possession without a prescription is a crime (up to 3 yrs).",
+      "sources": [
+        "wykaz",
+        "upn"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is group II-P; possession is a crime (up to 3 yrs).",
+      "sources": [
+        "wykaz",
+        "upn"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "legal",
+      "note": "Explicitly excluded from the drug lists. Sold OTC in pharmacies with a per-sale cap (360 mg DXM per purchase).",
+      "sources": [
+        "wykaz",
+        "mpDxm"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a listed drug and not treated as a 'substitute' (Health Ministry, Feb 2026). Sold as a food gas; no specific recreational ban yet.",
+      "sources": [
+        "interpN2O"
+      ],
+      "confidence": "high"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamine and methamphetamine are listed; possession is a crime (up to 3 yrs). ADHD medicines (e.g. methylphenidate) are prescription-only.",
+      "sources": [
+        "wykaz",
+        "upn"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Group I-P. Possession is a crime (up to 3 yrs; 1–10 yrs for a 'significant quantity', which has no fixed gram limit).",
+      "sources": [
+        "wykaz",
+        "upn",
+        "sejm2026"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Listed narcotic (I-N). Possession is a crime (up to 3 yrs); small personal-use cases may be dropped (art. 62a).",
+      "sources": [
+        "wykaz",
+        "upn"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal and not a controlled substance.",
+      "sources": [
+        "wykaz"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 18; sale to under-18s is prohibited. Some municipalities restrict night-time sales.",
+      "sources": [
+        "trzezwosc"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is group II-P and courts treat GBL as psychotropic (Supreme Court 2024); possession is a crime. 1,4-BD is not listed. Oxybate is Rx.",
+      "sources": [
+        "wykaz",
+        "snGbl",
+        "upn"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin possession is a crime (up to 3 yrs). Morphine, oxycodone, fentanyl are Rx-only. A 2026 law widens access to opioid substitution treatment.",
+      "sources": [
+        "wykaz",
+        "upn",
+        "nowela2026"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine; not on the controlled-drug lists, so possession without a prescription is not a drug-law crime.",
+      "sources": [
+        "wykaz"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only; most are group IV-P psychotropics, so possession without a prescription can be prosecuted under art. 62.",
+      "sources": [
+        "wykaz",
+        "upn"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Pharmaceutical MAOIs (e.g. moclobemide) are prescription-only. Harmala alkaloids/Syrian rue are not listed; DMT in ayahuasca is.",
+      "sources": [
+        "wykaz"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "wykaz"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

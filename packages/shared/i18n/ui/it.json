@@ -327,7 +327,36 @@
     "phaseAfter": "dopo",
     "caution": "Attenzione",
     "marginShort": "Dose letale",
-    "marginValue": "≈ {ratio}× abituale"
+    "marginValue": "≈ {ratio}× abituale",
+    "legal": "Stato legale",
+    "legalStatus": {
+      "legal": "Legale",
+      "medical": "Solo con ricetta",
+      "decriminalised": "Depenalizzato",
+      "grey": "Zona grigia",
+      "illegal": "Illegale",
+      "unknown": "Incerto"
+    },
+    "legalDetails": "Dettagli e fonti",
+    "legalSources": "Fonti",
+    "legalAsOf": "Non è una consulenza legale · {date}",
+    "legalDisclaimer": "Un riassunto, non una consulenza legale. Le leggi e la loro applicazione cambiano: nel dubbio chiedi a un servizio locale.",
+    "help": "Aiuto e supporto",
+    "poisonCentre": "Consulenza antiveleni {number}",
+    "services": {
+      "drug-checking": "Drug checking",
+      "counselling": "Consulenza",
+      "helpline": "Linea d'ascolto",
+      "nightlife": "Prevenzione nelle feste",
+      "peer-support": "Supporto tra pari",
+      "naloxone": "Naloxone",
+      "needle-exchange": "Scambio siringhe",
+      "consumption-room": "Sala del consumo",
+      "online-counselling": "Consulenza online",
+      "info": "Informazioni",
+      "treatment": "Trattamento",
+      "poison-centre": "Centro antiveleni"
+    }
   },
   "body": {
     "title": "Il tuo corpo",
@@ -345,5 +374,13 @@
     "clear": "Cancella",
     "hide": "Nascondi",
     "show": "Personalizza le dosi"
+  },
+  "country": {
+    "title": "Il tuo paese",
+    "choose": "Paese",
+    "prompt": "Scegli il tuo paese per vedere la legge, il numero d'emergenza e l'aiuto locale.",
+    "hint": "Imposta il numero d'emergenza, lo stato legale e i servizi locali mostrati sulle carte.",
+    "privacy": "Salvato solo su questo dispositivo.",
+    "noData": "Ancora nessun dato per questo paese."
   }
 }

@@ -25,7 +25,8 @@ from `local.properties` (`sdk.dir=…`) or `ANDROID_HOME`.
 
 `pnpm datapack` (`packages/shared/scripts/build-datapack.mjs`) writes, per
 locale, `app/src/main/assets/datapack/<locale>/{substances,combos,cards,meta,ui}.json`,
-the Phosphor icons as vector drawables (`res/drawable/ph_*.xml`,
+`datapack/local.json` (per-country legal status, emergency numbers and harm
+reduction services for the card backs, shared by every locale), the Phosphor icons as vector drawables (`res/drawable/ph_*.xml`,
 `status_*.xml`) and `generated/GeneratedAssets.kt`, which maps icon and
 molecule names to resource ids. Molecule structures come from
 `render-molecules.mjs` (`res/drawable-nodpi/molecule_*.png`).
@@ -37,7 +38,9 @@ in-app picker via `AppCompatDelegate.setApplicationLocales`).
 
 ## Structure
 
-- `data/` — data pack models and loading, body profile, dose maths
+- `data/` — data pack models and loading, body profile, dose maths, the
+  person's country (`LocalInfo.kt`: chosen on a card, in the body dock or in
+  Settings, else the device region)
 - `ui/card/` — card deck (3D flip, swipe), faces, charts, hologram, body dock
 - `ui/substance/` — card + details, timing chart
 - `ui/list/`, `ui/wheel/`, `ui/combos/`, `ui/settings/` — top-level screens
@@ -54,4 +57,5 @@ adb shell am start -a android.intent.action.VIEW -d psycards://mdma cards.psy.ap
 ```
 
 Compose test tags are exposed as resource ids, so UI Automator / Maestro
-can target `card-deck`, `side-safety`, `dock-plus`, `row-<slug>`, …
+can target `card-deck`, `side-safety`, `dock-plus`, `row-<slug>`,
+`combo-row-<slug>`, `card-country`, `legal-details`, …

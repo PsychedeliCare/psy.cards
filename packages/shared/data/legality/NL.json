@@ -1,0 +1,249 @@
+{
+  "country": "NL",
+  "name": "Netherlands",
+  "asOf": "2026-10",
+  "summary": "Opium Act: List I hard drugs, List II soft drugs. Cannabis is tolerated (≤5 g, coffeeshops). Generic NPS ban (List IA) since July 2025; nitrous on List II since 2023. Drug checking (DIMS) is widely available.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControlNote": "The national poison centre (NVIC) only advises health professionals; the public should call 112 or a GP/out-of-hours doctor (huisartsenpost)."
+  },
+  "callingForHelp": "Ambulance staff are bound by medical confidentiality and police are not normally called for an overdose. No Good Samaritan law, but small personal amounts are rarely prosecuted.",
+  "callingForHelpConfidence": "medium",
+  "drugChecking": "Legal and widespread: the DIMS network (Trimbos Institute) offers anonymous testing at dozens of locations nationwide.",
+  "sources": {
+    "opiumwet": {
+      "title": "Opium Act (Opiumwet), version in force from 17 September 2026",
+      "url": "https://wetten.overheid.nl/BWBR0001941/2026-09-17"
+    },
+    "gedoog": {
+      "title": "Rijksoverheid: toleration policy for soft drugs and coffeeshops",
+      "url": "https://www.rijksoverheid.nl/themas/familie-zorg-en-gezondheid/drugs/gedoogbeleid-softdrugs-en-coffeeshops"
+    },
+    "wietexp": {
+      "title": "Rijksoverheid: closed coffeeshop chain experiment (wietexperiment)",
+      "url": "https://www.rijksoverheid.nl/themas/familie-zorg-en-gezondheid/experiment-gesloten-coffeeshopketen-wietexperiment"
+    },
+    "hardsoft": {
+      "title": "Rijksoverheid: the law distinguishes hard and soft drugs",
+      "url": "https://www.rijksoverheid.nl/themas/familie-zorg-en-gezondheid/drugs/wet-maakt-verschil-harddrugs-en-softdrugs"
+    },
+    "alcoholwet": {
+      "title": "Alcohol Act (Alcoholwet), Arts. 20 and 45",
+      "url": "https://wetten.overheid.nl/BWBR0002458/"
+    },
+    "dims": {
+      "title": "DIMS drug testing service",
+      "url": "https://www.drugs-test.nl/"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "List I (hard drug). Possession is a crime (max 1 year for a small own-use amount); small amounts for own use are often only seized.",
+      "sources": [
+        "opiumwet",
+        "hardsoft"
+      ],
+      "confidence": "medium"
+    },
+    "mushrooms": {
+      "status": "grey",
+      "note": "Magic mushrooms are List II (banned since 2008), but truffles (sclerotia) are not covered and are sold legally to adults in smartshops.",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "List I (hard drug); DMT extracts and ayahuasca are illegal.",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "grey",
+      "note": "Mescaline itself is List I, but peyote and San Pedro cacti are not listed and are sold legally; extracts are illegal.",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOC and DOM are List I; other analogues are banned through the List IA phenethylamine group (since July 2025).",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25B-, 25C- and 25I-NBOMe are List I; all other NBOMes are banned through the generic List IA phenethylamine group (since July 2025).",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B and other common 2C-x are List I; remaining analogues are banned through the List IA phenethylamine group (since July 2025).",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7 are List I; other 2C-T-x fall under the List IA phenethylamine group.",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "grey",
+      "note": "5-MeO-DMT and 5-MeO-MiPT are not on Lists I/II, and tryptamines are not among the List IA generic groups, so they are unscheduled.",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Tolerated: ≤5 g and ≤5 plants usually not prosecuted; coffeeshops sell ≤5 g/day to adults (residents rule, enforced locally). Legal-supply trial in 10 towns.",
+      "sources": [
+        "opiumwet",
+        "gedoog",
+        "wietexp"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Not on the Opium Act lists; prescription-only medicine. Selling it breaches medicines law; possession for own use is not a crime.",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "medium"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "List I (hard drug).",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Explicitly excluded from the Opium Act, so possessing it is not an offence. Whether DXM cough medicines need a prescription was not verified.",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "illegal",
+      "note": "List II since 1 Jan 2023: possession, sale and import banned except for medical, technical or food use. A small amount for own use is a minor offence.",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamine and methamphetamine are List I. Dexamfetamine and methylphenidate for ADHD are available on prescription.",
+      "sources": [
+        "opiumwet",
+        "hardsoft"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "List I (hard drug). Possession is a crime; small amounts for own use are often only seized. Testing via DIMS is legal.",
+      "sources": [
+        "opiumwet",
+        "hardsoft",
+        "dims"
+      ],
+      "confidence": "medium"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "List I. Possession up to 6 years (1 year for a small own-use amount); dealing up to 8 years, import/export up to 12.",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely.",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Sale and supply to under-18s are banned, and under-18s may not carry alcohol in public places.",
+      "sources": [
+        "alcoholwet"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is List I (hard drug). GBL and 1,4-BD are not on the Opium Act lists (industrial chemicals). Sodium oxybate on prescription.",
+      "sources": [
+        "opiumwet",
+        "hardsoft"
+      ],
+      "confidence": "high"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin and other opioids are List I; morphine, oxycodone and fentanyl only on prescription. Heroin-assisted treatment exists.",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Not on the Opium Act lists; prescription-only medicine.",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "List II (e.g. diazepam) and prescription-only; possession without prescription is an offence.",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "Prescription-only. Harmala alkaloids/Syrian rue are not listed, but ayahuasca contains DMT (List I).",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled.",
+      "sources": [
+        "opiumwet"
+      ],
+      "confidence": "high"
+    }
+  }
+}

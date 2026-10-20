@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import cards.psy.app.data.LegalStatus
 import kotlin.math.abs
 import kotlin.math.log10
 
@@ -64,15 +65,15 @@ object PsyColors {
         else -> Color(0xFFEF4444)
     }
 
-    /** Toxicity margin track: red ≤ 5×, green at 1000× on a log scale. */
-    val marginStops = arrayOf(
-        0f to hsl(0f, 0.72f, 0.50f),
-        0.23f to hsl(0f, 0.72f, 0.50f),
-        0.333f to hsl(17f, 0.80f, 0.52f),
-        0.5f to hsl(45f, 0.85f, 0.52f),
-        0.667f to hsl(73f, 0.70f, 0.48f),
-        1f to hsl(130f, 0.60f, 0.45f),
-    )
+    /** Legal status pills (web `.psy-legal__status[data-status]`). */
+    fun legal(status: LegalStatus) = when (status) {
+        LegalStatus.legal -> Color(0xFF4ADE80)
+        LegalStatus.medical -> Color(0xFF60A5FA)
+        LegalStatus.decriminalised -> Color(0xFFFACC15)
+        LegalStatus.grey -> Color(0xFFCBD5E1)
+        LegalStatus.illegal -> Color(0xFFF87171)
+        LegalStatus.unknown -> Color(0xFFA1A1AA)
+    }
 
     fun marginHue(ratio: Double) = (((log10(ratio) - 0.7) / 2.3).coerceIn(0.0, 1.0) * 130).toFloat()
 

@@ -1,0 +1,276 @@
+{
+  "country": "UA",
+  "name": "Ukraine",
+  "asOf": "2026-10",
+  "summary": "A 'small amount' for own use is an administrative offence (fine, community work or up to 15 days' arrest); more is a crime. Many limits are tiny (cocaine 0.02 g, LSD 10 µg). Medical cannabis legal since Aug 2024.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "103",
+    "poisonControlNote": "No national public poison hotline could be verified; call 103 or 112."
+  },
+  "callingForHelp": "No Good Samaritan law. Medical confidentiality applies, but police may be involved. Voluntarily starting drug treatment exempts from criminal liability for basic possession (CC art. 309(4)).",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No established public drug checking service is known; its legal status is unclear.",
+  "sources": {
+    "koap44": {
+      "title": "Code of Administrative Offences art. 44 (small amounts without intent to sell)",
+      "url": "https://zakon.rada.gov.ua/laws/show/80731-10"
+    },
+    "kk309": {
+      "title": "Criminal Code art. 309 (possession without intent to sell; ed. 18 Sep 2026)",
+      "url": "https://zakon.rada.gov.ua/laws/show/2341-14"
+    },
+    "moz188n": {
+      "title": "Health Ministry Order 188, Table 1: small/large amounts of narcotic drugs (ed. 2 Jun 2026)",
+      "url": "https://zakon.rada.gov.ua/laws/show/z0512-00"
+    },
+    "moz188p": {
+      "title": "Health Ministry Order 188, Table 2: small/large amounts of psychotropic substances (ed. 2026)",
+      "url": "https://zakon.rada.gov.ua/laws/show/z0513-00"
+    },
+    "kmu770": {
+      "title": "Cabinet Resolution 770: list of narcotic drugs, psychotropics and precursors (ed. 6 Oct 2026)",
+      "url": "https://zakon.rada.gov.ua/laws/show/770-2000-%D0%BF"
+    },
+    "wikiCannabis": {
+      "title": "Wikipedia: Cannabis in Ukraine (medical cannabis law signed Feb 2024, in force 16 Aug 2024)",
+      "url": "https://en.wikipedia.org/wiki/Cannabis_in_Ukraine"
+    },
+    "wikiAge": {
+      "title": "Wikipedia: Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "'Small amount' is only 0.00001 g (10 µg), less than one tab, so typical amounts are a crime (fine, probation or restriction of liberty; more: prison).",
+      "sources": [
+        "moz188p",
+        "kk309"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Small amount is ≤0.5 g of mushroom (≤0.01 g psilocybin), below a typical dose; above that is a crime. Spores are sold.",
+      "sources": [
+        "moz188p",
+        "kk309"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "Up to 0.15 g: administrative fine, community work or up to 15 days' arrest. More: crime (fine/probation; 1.5 g+ up to 3 yrs).",
+      "sources": [
+        "moz188p",
+        "koap44",
+        "kk309"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Small amount is ≤0.15 g, less than one dose; above that is a crime.",
+      "sources": [
+        "moz188p",
+        "kk309"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "decriminalised",
+      "note": "DOB, DOC: up to 0.15 g is an administrative offence; above that is a crime (1.5 g+ up to 3 yrs).",
+      "sources": [
+        "moz188p",
+        "koap44",
+        "kk309"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "decriminalised",
+      "note": "25I/25B/25C-NBOMe: up to 0.15 g is an administrative offence; above that is a crime.",
+      "sources": [
+        "moz188p",
+        "koap44",
+        "kk309"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B 'small amount' is only 0.01 g (below one dose), so typical possession is a crime.",
+      "sources": [
+        "moz188p",
+        "kk309"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7: small amount only 0.01 g, so typical possession is a crime.",
+      "sources": [
+        "moz188p",
+        "kk309"
+      ],
+      "confidence": "medium"
+    },
+    "5-meo-xxt": {
+      "status": "decriminalised",
+      "note": "5-MeO-DMT: up to 0.15 g is an administrative offence (5-MeO-DIPT/-DALT: 0.015 g). Tryptamine derivatives are covered generically.",
+      "sources": [
+        "moz188p",
+        "kmu770",
+        "koap44"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Up to 5 g herb / 0.5 g resin: admin offence. More: crime (500 g+: up to 3 yrs). Medical cannabis on prescription since Aug 2024 law.",
+      "sources": [
+        "moz188n",
+        "koap44",
+        "kk309",
+        "wikiCannabis"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Controlled medicine. Without a prescription up to 1 g is an administrative offence; more is a crime.",
+      "sources": [
+        "moz188p",
+        "koap44",
+        "kk309"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "decriminalised",
+      "note": "Up to 0.15 g: administrative offence; more: crime.",
+      "sources": [
+        "moz188p",
+        "koap44",
+        "kk309"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "grey",
+      "note": "Explicitly excluded from the controlled lists; sold as a cough medicine (prescription/OTC status not verified).",
+      "sources": [
+        "kmu770"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not on the controlled-substance lists; no specific consumer rules were found.",
+      "sources": [
+        "kmu770"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "decriminalised",
+      "note": "Amphetamine or methamphetamine up to 0.15 g: admin offence; more: crime (1.5 g+ up to 3 yrs). ADHD stimulants are tightly controlled.",
+      "sources": [
+        "moz188p",
+        "koap44",
+        "kk309"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "Up to 0.15 g MDMA (about one pill): admin offence. More: crime; 1.5 g+ 'large' (up to 3 yrs).",
+      "sources": [
+        "moz188p",
+        "koap44",
+        "kk309"
+      ],
+      "confidence": "medium"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "'Small amount' is only 0.02 g; above that is a crime (fine/probation; 1 g+ 'large', up to 3 yrs).",
+      "sources": [
+        "moz188n",
+        "kk309"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal and not a controlled substance.",
+      "sources": [
+        "kmu770"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 18; sale to minors is prohibited. Martial-law curfews and local sales limits may apply.",
+      "sources": [
+        "wikiAge"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB and GBL: 'small amount' is only 0.5 g (less than one dose), so typical possession is a crime.",
+      "sources": [
+        "moz188p",
+        "kk309"
+      ],
+      "confidence": "high"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin small amount is 0.005 g, so any real amount is a crime; methadone 0.02 g. Prescription opioids need a prescription.",
+      "sources": [
+        "moz188n",
+        "kk309"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Listed narcotic, prescription-only. Without a prescription up to 0.5 g is an admin offence; more is a crime.",
+      "sources": [
+        "moz188n",
+        "kmu770",
+        "kk309"
+      ],
+      "confidence": "high"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Controlled, prescription-only. Small-amount limits are low (diazepam 0.1 g, alprazolam 0.01 g), so ~10+ tablets without a prescription can be a crime.",
+      "sources": [
+        "moz188p",
+        "kk309"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Harmala alkaloids/Syrian rue are not on the controlled lists; pharmaceutical MAOIs are Rx-only. DMT in ayahuasca is controlled.",
+      "sources": [
+        "kmu770"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "kmu770"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

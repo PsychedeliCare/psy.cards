@@ -1,0 +1,259 @@
+{
+  "country": "AM",
+  "name": "Armenia",
+  "asOf": "2026-10",
+  "summary": "Using drugs without a prescription or possessing small amounts is an administrative offence (fines, higher if repeated within a year); larger amounts are crimes. Seeking treatment voluntarily avoids liability for use.",
+  "emergency": {
+    "general": "911",
+    "ambulance": "103"
+  },
+  "poisonControlNote": "No poison information centre is listed for Armenia in WHO's 2023 directory; call 911 or 103 (112 also works from mobiles).",
+  "callingForHelp": "No Good Samaritan law. People who voluntarily ask a medical facility for help with drug use are released from administrative liability for use.",
+  "callingForHelpConfidence": "medium",
+  "drugChecking": "No drug-checking service found.",
+  "sources": {
+    "euda": {
+      "title": "EUDA – Penalties for drug law offences at a glance",
+      "url": "https://www.euda.europa.eu/publications/topic-overviews/content/drug-law-penalties-at-a-glance_en"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    },
+    "wikiCannabis": {
+      "title": "Wikipedia – Legality of cannabis",
+      "url": "https://en.wikipedia.org/wiki/Legality_of_cannabis"
+    },
+    "drinkAge": {
+      "title": "Wikipedia – Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "who": {
+      "title": "WHO – World directory of poisons centres (2023)",
+      "url": "https://www.who.int/data/gho/data/themes/topics/indicator-groups/poison-control-and-unintentional-poisoning"
+    },
+    "emerg": {
+      "title": "Wikipedia – List of emergency telephone numbers",
+      "url": "https://en.wikipedia.org/wiki/List_of_emergency_telephone_numbers"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "decriminalised",
+      "note": "UN Schedule I. Small amounts: administrative fine (higher if repeated within a year); larger amounts are crimes.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "mushrooms": {
+      "status": "decriminalised",
+      "note": "Psilocybin is UN Schedule I; how mushrooms are treated was not confirmed. Small amounts: administrative fine.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "UN Schedule I (ayahuasca contains DMT). Small amounts: administrative fine (higher if repeated within a year); larger amounts are crimes.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "decriminalised",
+      "note": "UN Schedule I; status of cacti not confirmed. Small amounts: administrative fine (higher if repeated within a year); larger amounts are crimes.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "decriminalised",
+      "note": "DOM, DOB, DOC are UN Schedule I. Small amounts: administrative fine (higher if repeated within a year); larger amounts are crimes.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "decriminalised",
+      "note": "UN Schedule I since 2015. Small amounts: administrative fine (higher if repeated within a year); larger amounts are crimes.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "decriminalised",
+      "note": "2C-B is UN Schedule II. Small amounts: administrative fine (higher if repeated within a year); larger amounts are crimes.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "unknown",
+      "note": "2C-T compounds are not UN-controlled; national scheduling not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "5-MeO tryptamines are not UN-controlled; national scheduling not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Use or small-amount possession: administrative fine (higher if repeated within a year); larger amounts are crimes. No medical cannabis.",
+      "sources": [
+        "euda",
+        "wikiCannabis"
+      ],
+      "confidence": "medium"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Anaesthetic used in hospitals and veterinary practice; not UN-controlled and national control status not confirmed.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "decriminalised",
+      "note": "UN Schedule II since 2016. Small amounts: administrative fine (higher if repeated within a year); larger amounts are crimes.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not UN-controlled; national control and prescription status not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not internationally controlled; no national restriction confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "decriminalised",
+      "note": "Amphetamine and methamphetamine are UN Schedule II. Small amounts: administrative fine (higher if repeated within a year); larger amounts are crimes.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "UN Schedule I. Small amounts: administrative fine (higher if repeated within a year); larger amounts are crimes.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "cocaine": {
+      "status": "decriminalised",
+      "note": "Controlled under the 1961 Convention. Small amounts: administrative fine (higher if repeated within a year); larger amounts are crimes.",
+      "sources": [
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not controlled.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Sale to under-18s is prohibited, though ID checks are rare.",
+      "sources": [
+        "drinkAge"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "decriminalised",
+      "note": "GHB is UN Schedule II (small amounts: administrative fine). GBL/1,4-BD status not confirmed.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "decriminalised",
+      "note": "Heroin etc. are controlled. Small amounts: administrative fine (higher if repeated within a year); larger amounts are crimes. Rx opioids need a prescription.",
+      "sources": [
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only painkiller; not UN-controlled and national control status not confirmed.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "UN Schedule IV, prescription-only; using without a prescription is an administrative offence (fine).",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "MAOI antidepressants are prescription-only; harmala/Syrian rue status not confirmed; ayahuasca contains DMT (controlled).",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only antidepressants; not controlled substances.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "country": "HR",
+  "name": "Croatia",
+  "asOf": "2026-10",
+  "summary": "Possessing drugs for personal use is a misdemeanour (fine of about €660–2,650; treatment can be ordered instead), not a crime. Selling, intent to sell and growing are crimes. Medical cannabis is legal.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "194",
+    "poisonControl": {
+      "name": "Centar za kontrolu otrovanja, Institute for Medical Research (IMI), Zagreb",
+      "phone": "+385 1 2348 342"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law. Personal-use possession is only a misdemeanour and medical staff are bound by confidentiality, but police may attend overdoses.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No established public drug checking service is known in Croatia.",
+  "sources": {
+    "zszd": {
+      "title": "IDPC (Dec 2012): Croatia decriminalises possession for personal use from 2013 (fine up to ~€2,680, rehab or community service possible)",
+      "url": "https://idpc.net/alerts/2012/12/croatia-decriminalizes-drug-use"
+    },
+    "wikiCannabis": {
+      "title": "Wikipedia: Cannabis in Croatia (misdemeanour fine 5,000–20,000 kn; medical since 2015)",
+      "url": "https://en.wikipedia.org/wiki/Cannabis_in_Croatia"
+    },
+    "wikiMush": {
+      "title": "Wikipedia: Legal status of psilocybin mushrooms (Croatia: decriminalised)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "un1971": {
+      "title": "INCB Green List: psychotropic substances under international control (1971 Convention)",
+      "url": "https://www.incb.org/incb/en/psychotropics/green-list.html"
+    },
+    "wikiAge": {
+      "title": "Wikipedia: Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "euN2O": {
+      "title": "EU Perspectives (Mar 2026): nitrous oxide classified reprotoxic; large canisters may be barred from consumer sale from Feb 2027",
+      "url": "https://euperspectives.eu/2026/03/nitrous-oxide-deaths-and-injuries-fuel-calls-for-eu-wide-restrictions/"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "decriminalised",
+      "note": "Possession for own use: misdemeanour fine (≈€660–2,650). Amounts or circumstances suggesting sale make it a crime.",
+      "sources": [
+        "zszd",
+        "wikiCannabis",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "mushrooms": {
+      "status": "decriminalised",
+      "note": "Possession for own use: misdemeanour fine. Growing is formally illegal but rarely enforced.",
+      "sources": [
+        "zszd",
+        "wikiMush"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "UN Schedule I. Possession for own use: misdemeanour fine; supply is a crime. Ayahuasca contains DMT.",
+      "sources": [
+        "zszd",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "decriminalised",
+      "note": "UN Schedule I. Possession for own use: misdemeanour fine; supply is a crime.",
+      "sources": [
+        "zszd",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "decriminalised",
+      "note": "DOB, DOM, DOC are UN-scheduled. Possession for own use: misdemeanour fine.",
+      "sources": [
+        "zszd",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "decriminalised",
+      "note": "25I/25B/25C-NBOMe are UN Schedule I. Possession for own use: misdemeanour fine.",
+      "sources": [
+        "zszd",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "decriminalised",
+      "note": "2C-B and other 2C-x are UN-scheduled. Possession for own use: misdemeanour fine.",
+      "sources": [
+        "zszd",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "decriminalised",
+      "note": "2C-T-2 and 2C-T-7 are UN Schedule I. Possession for own use: misdemeanour fine.",
+      "sources": [
+        "zszd",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "Not UN-scheduled; whether 5-MeO-DMT and related tryptamines are on Croatia's national list was not verified.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Possession for own use: misdemeanour fine (≈€660–2,650). Growing or selling is a crime. Cannabis medicines on prescription since 2015.",
+      "sources": [
+        "wikiCannabis",
+        "zszd"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Prescription/veterinary anaesthetic. Without a prescription, possession is treated like other drugs (misdemeanour fine).",
+      "sources": [
+        "zszd"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "decriminalised",
+      "note": "Methoxetamine is UN Schedule II. Possession for own use: misdemeanour fine.",
+      "sources": [
+        "zszd",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not internationally controlled; pharmacy (OTC vs prescription) status in Croatia was not verified.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "unknown",
+      "note": "Not a known controlled drug; national sales rules were not verified. EU limits on large canisters may apply from 2027.",
+      "sources": [
+        "euN2O"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "decriminalised",
+      "note": "Possession for own use: misdemeanour fine; supply is a crime. ADHD medicines are prescription-only.",
+      "sources": [
+        "zszd",
+        "un1971"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "Possession for own use: misdemeanour fine (≈€660–2,650); supply or intent to sell is a crime.",
+      "sources": [
+        "zszd",
+        "wikiCannabis"
+      ],
+      "confidence": "medium"
+    },
+    "cocaine": {
+      "status": "decriminalised",
+      "note": "Possession for own use: misdemeanour fine; supply or intent to sell is a crime.",
+      "sources": [
+        "zszd"
+      ],
+      "confidence": "medium"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal and not a controlled substance.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 18; sale and serving to under-18s is prohibited.",
+      "sources": [
+        "wikiAge"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "decriminalised",
+      "note": "GHB is controlled; possession for own use is a misdemeanour fine. Status of GBL/1,4-BD not verified. Oxybate is prescription-only.",
+      "sources": [
+        "zszd",
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "opioids": {
+      "status": "decriminalised",
+      "note": "Heroin possession for own use: misdemeanour fine; supply is a crime. Prescription opioids need a prescription; opioid substitution is available.",
+      "sources": [
+        "zszd"
+      ],
+      "confidence": "medium"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine; whether possession without a prescription is penalised was not verified.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only, UN Schedule IV; possession without a prescription is likely treated as an illicit-drug misdemeanour.",
+      "sources": [
+        "zszd",
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "Pharmaceutical MAOIs are prescription-only. The status of harmala/Syrian rue was not verified; DMT in ayahuasca is controlled.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "un1971"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

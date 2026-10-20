@@ -1,0 +1,89 @@
+---
+/**
+ * A two-sided holographic card for the /about page.
+ *
+ * `.fly` stays where the layout puts it (it is what scripts/about-page.ts
+ * measures); `.fly__body` slides in from `from` as the card scrolls into
+ * view, `.hc` tilts under the pointer and `.hc__inner` turns from the
+ * branded reverse to the front. Without JS (or with reduced motion) the card
+ * simply sits face up. Every card is A6 (105 × 148 mm), like the print set.
+ */
+interface Props {
+  /** Side the card flies in from. */
+  from?: "left" | "right" | "bottom";
+  /** Accent: a category or status colour. */
+  hue?: string;
+  /** Start of the entrance, as a fraction of its scroll range (0–0.8). */
+  delay?: number;
+  /** Turn from the reverse while flying in. */
+  flip?: boolean;
+  /** Resting rotation in degrees. */
+  rest?: number;
+  /** Molecule mask for the reverse (`/assets/molecules/<slug>.png`). */
+  molecule?: string;
+  /** Small caption on the reverse. */
+  backLabel?: string;
+  /** Wraps a real substance card (no face padding, its own foil). */
+  real?: boolean;
+  class?: string;
+  style?: string;
+}
+
+const {
+  from = "left",
+  hue = "#99c659",
+  delay = 0,
+  flip = true,
+  rest = 0,
+  molecule,
+  backLabel,
+  real = false,
+  class: className,
+  style = "",
+} = Astro.props;
+---
+
+<div
+  class:list={["fly", className]}
+  data-fly={from}
+  data-fly-delay={delay}
+  data-fly-flip={flip ? "" : undefined}
+  style={`--hue: ${hue}; --rest: ${rest}deg; ${style}`}
+>
+  <div class="fly__body">
+    <div class:list={["hc", real && "hc--real"]} data-tilt>
+      <div class="hc__inner">
+        <div class="hc__face hc__face--front">
+          <slot />
+          {!real && <span class="hc__foil" aria-hidden="true" />}
+          <span class="hc__glare" aria-hidden="true" />
+        </div>
+        {
+          flip && (
+            <div class="hc__face hc__face--back" aria-hidden="true">
+              {Astro.slots.has("back") ? (
+                <slot name="back" />
+              ) : (
+                <div class="hc-back">
+                  {molecule && (
+                    <span
+                      class="hc-back__molecule"
+                      style={`--mask: url(/assets/molecules/${molecule}.png)`}
+                    />
+                  )}
+                  <span class="hc-back__brand">
+                    <img src="/favicon.png" alt="" width="28" height="28" />
+                    psy.cards
+                  </span>
+                  {backLabel && <span class="hc-back__label">{backLabel}</span>}
+                </div>
+              )}
+              <span class="hc__foil" aria-hidden="true" />
+              <span class="hc__glare" aria-hidden="true" />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</div>

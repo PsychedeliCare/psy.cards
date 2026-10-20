@@ -162,7 +162,12 @@ data class CardContent(
     val dependence: String? = null,
     val risks: List<RiskItem>? = null,
     val overdose: Overdose? = null,
+    val effects: List<CardEffect>? = null,
 )
+
+/** An effect on the card front (authored with its Phosphor icon). */
+@Serializable
+data class CardEffect(val icon: String, val label: String)
 
 @Serializable
 data class SpacingText(val value: String, val label: String, val text: String)

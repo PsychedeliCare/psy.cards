@@ -1,0 +1,225 @@
+{
+  "country": "MC",
+  "name": "Monaco",
+  "asOf": "2026-10",
+  "summary": "Very strict: using drugs or possessing them for own use is punishable by 6 months–3 years prison (Law 890). Using drugs in a group is punished like trafficking (5–10 years). No known drug checking.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "18",
+    "poisonControl": {
+      "name": "Centre antipoison de Marseille (France)",
+      "phone": "+33 4 91 75 25 25"
+    }
+  },
+  "callingForHelp": "No specific legal protection found. Note that group drug use is itself a serious offence in Monaco; emergency medical staff are bound by medical secrecy.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug checking service known in Monaco.",
+  "sources": {
+    "loi890": {
+      "title": "Law No. 890 of 1 July 1970 on narcotics (Legimonaco)",
+      "url": "https://legimonaco.mc/tnc/loi/1970/07-01-890/"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Internationally controlled. Use or possession for own use: 6 months–3 years prison and/or fine; group use punished like trafficking.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "medium"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin is internationally controlled; mushrooms are presumably covered as in France (not verified). Own use: 6 months–3 years.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "low"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "Internationally controlled; ayahuasca therefore illegal. Own use: 6 months–3 years prison.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is internationally controlled; status of cacti not verified.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOM, DOB and DOC are internationally controlled.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25B-, 25C- and 25I-NBOMe are internationally controlled; other analogues not verified.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B is internationally controlled; other 2C-x not verified.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7 are internationally controlled.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "medium"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "Not internationally controlled; Monaco's ministerial list could not be checked.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Use or possession for own use: 6 months–3 years prison and/or fine; group use punished like trafficking (5–10 years).",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Medicine; likely classified as in France (stupéfiant) but not verified. Possession without prescription is risky.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Methoxetamine is widely controlled (EU-wide since 2014); Monaco's ministerial list could not be checked.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "low"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not a controlled drug internationally; Monegasque prescription rules not verified (in France it is prescription-only).",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "unknown",
+      "note": "No Monegasque rule found; French rules do not apply automatically.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Internationally controlled; own use 6 months–3 years prison. Prescription stimulants only with a prescription.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Internationally controlled. Own use: 6 months–3 years prison; using in a group is punished like trafficking.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Internationally controlled. Own use: 6 months–3 years; supply 5–10 years, production/import 10–20 years.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal for adults; rules on sales to minors exist but the exact age limit was not verified.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "low"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is internationally controlled; status of GBL/1,4-BD not verified.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin is banned; prescription opioids are controlled medicines. Own use: 6 months–3 years prison.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine (status as narcotic not verified).",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Internationally controlled psychotropic medicines; prescription only.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "Prescription-only medicines; ayahuasca is illegal (DMT); harmala status not verified.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines.",
+      "sources": [
+        "loi890"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

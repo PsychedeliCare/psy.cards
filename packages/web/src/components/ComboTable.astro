@@ -99,7 +99,7 @@ function getDisplayLabel(label: string) {
               columns.map((col) => (
                 <th
                   scope="col"
-                  class={`col-head group-${col.group} category-surface cell-text ${getLabelSizeClass(col.label)}`}
+                  class={`col-head stack group-${col.group} ${getLabelSizeClass(col.label)}`}
                   data-substance-slug={col.slug}
                   data-col-key={col.key}
                   data-col-group={col.group}
@@ -108,8 +108,9 @@ function getDisplayLabel(label: string) {
                 >
                   <a
                     href={`${substanceBase}${col.slug}`}
-                    class="label-link col-link"
+                    class="label-link col-link stack-card category-surface cell-text"
                     data-substance={`${substanceBase}${col.slug}`}
+                    data-card-pull
                   >
                     <span class="label-text">{getDisplayLabel(col.label)}</span>
                   </a>
@@ -130,7 +131,7 @@ function getDisplayLabel(label: string) {
             <tr data-row-substance={row.key} data-row-common={String(isCommonSubstance(row.key))}>
               <th
                 scope="row"
-                class={`row-head group-${row.group} category-surface cell-text ${getLabelSizeClass(row.label)}`}
+                class={`row-head stack group-${row.group} ${getLabelSizeClass(row.label)}`}
                 data-substance-slug={row.slug}
                 data-row-key={row.key}
                 data-row-group={row.group}
@@ -139,8 +140,9 @@ function getDisplayLabel(label: string) {
               >
                 <a
                   href={`${substanceBase}${row.slug}`}
-                  class="label-link row-link"
+                  class="label-link row-link stack-card category-surface cell-text"
                   data-substance={`${substanceBase}${row.slug}`}
+                  data-card-pull
                 >
                   <span class="label-text">{getDisplayLabel(row.label)}</span>
                 </a>
@@ -225,6 +227,10 @@ function getDisplayLabel(label: string) {
     --table-cell-size: var(--table-cell-width);
     --cell-size: var(--table-cell-height);
     --row-head-size: calc(var(--table-cell-width) + var(--cell-gap));
+    --stack-radius: clamp(7px, calc(var(--table-cell-height) * 0.17), 10px);
+    /* How far each header card runs under the next one. */
+    --stack-overlap-y: calc(var(--table-cell-height) * 0.5);
+    --stack-overlap-x: calc(var(--table-cell-width) * 0.4);
     --ink: var(--color-ink);
     width: 100%;
     padding: 0;
@@ -239,7 +245,8 @@ function getDisplayLabel(label: string) {
 
   .table-head-stick {
     position: sticky;
-    top: 0;
+    /* Pinned under the site header (its height is measured by combo-table.ts). */
+    top: var(--site-header-h, 0px);
     z-index: 8;
     display: grid;
     grid-template-columns: var(--row-head-size) 1fr;
@@ -473,6 +480,113 @@ function getDisplayLabel(label: string) {
     padding: 0;
   }
 
+  /* Substance headers: one stack of rounded cards per axis. Each card
+     extends under the card after it (rows: downwards, columns: to the
+     right), so the stack reads as overlapping cards; hovering lifts a card
+     up. Clicking pulls it out into the substance card modal and drops it
+     back into place when the modal closes (see card-motion.ts). */
+  .stack {
+    position: relative;
+    background: transparent;
+  }
+
+  .combos-table th.stack {
+    overflow: visible;
+  }
+
+  .stack .stack-card {
+    position: absolute;
+    z-index: 1;
+    width: auto;
+    height: auto;
+    border-radius: var(--stack-radius);
+    color: var(--hue-ink, #0b0b0c);
+    text-shadow: var(--hue-ink-shadow, none);
+    transition:
+      transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 240ms ease,
+      filter 160ms ease;
+  }
+
+  /* Rows: the card runs down under the next row's card; its shadow falls
+     on the card above. */
+  .row-head.stack .stack-card {
+    inset: 0 4px calc(-1 * var(--stack-overlap-y)) 0;
+    padding-bottom: calc(var(--stack-overlap-y) + 2px);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.34),
+      0 -2px 5px -1px rgb(0 0 0 / 0.5);
+  }
+
+  /* Columns: the card runs right under the next column's card. */
+  .col-head.stack .stack-card {
+    inset: 5px calc(-1 * var(--stack-overlap-x)) 0 0;
+    padding-right: calc(var(--stack-overlap-x) + 4px);
+    box-shadow:
+      inset 1px 1px 0 rgb(255 255 255 / 0.3),
+      -2px 0 5px -1px rgb(0 0 0 / 0.5);
+  }
+
+  @media (hover: hover) {
+    .row-head.stack:hover .stack-card {
+      transform: translateY(-5px);
+      box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 0.4),
+        0 -3px 8px -2px rgb(0 0 0 / 0.6);
+    }
+
+    .col-head.stack:hover .stack-card {
+      transform: translateY(-5px);
+      box-shadow:
+        inset 1px 1px 0 rgb(255 255 255 / 0.36),
+        -2px 0 5px -1px rgb(0 0 0 / 0.5),
+        0 6px 10px -4px rgb(0 0 0 / 0.65);
+    }
+  }
+
+  .stack .stack-card:active {
+    transition-duration: 90ms;
+  }
+
+  .row-head.stack .stack-card:active {
+    transform: translateY(-2px);
+  }
+
+  .col-head.stack .stack-card:active {
+    transform: translateY(-2px);
+  }
+
+  /* Picked: the card starts to slide out before the modal takes over. */
+  .stack.stack .stack-card.is-pulling {
+    transform: translateY(-6px);
+    transition-duration: 140ms;
+  }
+
+  /* Back in place after the modal closes. */
+  .stack.is-settling .stack-card {
+    animation: card-settle 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes card-settle {
+    0% { transform: translateY(-6px); }
+    60% { transform: translateY(1.5px); }
+  }
+
+  .stack-card:focus-visible {
+    outline: 2px solid var(--color-fg);
+    outline-offset: 1px;
+  }
+
+  /* Highlighting dims header cards without making them see-through (the
+     cards overlap, so opacity would show the ones underneath). */
+  .table-wrap[data-hovering="true"] .stack[data-hover-cell] {
+    opacity: 1;
+  }
+
+  .table-wrap[data-hovering="true"] .stack:not(.is-highlight) .stack-card {
+    filter: brightness(0.42) saturate(0.7);
+  }
+
   .label-link {
     display: flex;
     width: 100%;
@@ -514,7 +628,6 @@ function getDisplayLabel(label: string) {
     width: var(--table-cell-width);
     min-width: var(--table-cell-width);
     background-clip: padding-box;
-    box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.04);
   }
 
   .row-head .row-link {
@@ -524,6 +637,10 @@ function getDisplayLabel(label: string) {
   .row-head .row-link:hover,
   .col-head .label-link:hover {
     filter: brightness(1.2);
+  }
+
+  .diag {
+    border-radius: var(--stack-radius);
   }
 
   .diag .diag-link {
@@ -587,7 +704,12 @@ function getDisplayLabel(label: string) {
     }
 
     .label-xs .label-text {
-      font-size: 10.5px;
+      font-size: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .stack .stack-card {
+      padding-inline: 4px;
     }
 
     .label-sm .label-text {
@@ -613,8 +735,10 @@ function getDisplayLabel(label: string) {
   }
 
   @media (prefers-reduced-motion: reduce) {
-    [data-hover-cell] {
+    [data-hover-cell],
+    .stack-card {
       transition: none !important;
+      animation: none !important;
     }
 
     .search-trigger {

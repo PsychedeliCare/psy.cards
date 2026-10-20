@@ -215,12 +215,13 @@ private struct FloatingCardBackdrop: View {
 
 extension View {
     /// Presents `item` as a floating card over this view, zooming out of the
-    /// `matchedTransitionSource` with the substance key as id when given.
-    func floatingCard(item: Binding<Substance?>, zoomNamespace: Namespace.ID? = nil) -> some View {
+    /// `matchedTransitionSource` with `sourceID` (default: the substance key)
+    /// as id when a namespace is given.
+    func floatingCard(item: Binding<Substance?>, zoomNamespace: Namespace.ID? = nil, sourceID: String? = nil) -> some View {
         fullScreenCover(item: item) { substance in
             FloatingCardView(substance: substance)
                 .presentationBackground { FloatingCardBackdrop() }
-                .modifier(ZoomTransition(sourceID: substance.key, namespace: zoomNamespace))
+                .modifier(ZoomTransition(sourceID: sourceID ?? substance.key, namespace: zoomNamespace))
         }
     }
 }

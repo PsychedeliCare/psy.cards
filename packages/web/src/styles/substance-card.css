@@ -101,9 +101,11 @@
   --card-w: min(100cqi, 30rem, var(--card-max-h-w));
   --face: color-mix(in oklab, var(--color-ink-2) 94%, var(--hue, #888) 6%);
   --face-edge: color-mix(in oklab, var(--color-fg) 13%, transparent);
-  --tile: color-mix(in oklab, var(--color-fg) 4.5%, transparent);
-  --tile-edge: color-mix(in oklab, var(--color-fg) 8%, transparent);
-  --ink-soft: color-mix(in oklab, var(--color-fg) 84%, transparent);
+  /* Near-opaque tiles: text never sits on the hologram or molecule. */
+  --tile: color-mix(in oklab, color-mix(in oklab, var(--color-fg) 7%, var(--face)) 94%, transparent);
+  --tile-edge: color-mix(in oklab, var(--color-fg) 10%, transparent);
+  --ink-soft: color-mix(in oklab, var(--color-fg) 92%, transparent);
+  --card-mute: color-mix(in oklab, var(--color-fg) 72%, transparent);
   --flip-ms: 720ms;
   width: var(--card-w);
   font-size: max(10px, calc(var(--card-w) / var(--card-em)));
@@ -209,6 +211,19 @@
 .psy-deck:has(.psy-deck__radio[value="back"]:checked) .psy-face--back {
   visibility: visible;
   transition-delay: 0s;
+}
+
+/* One side at a time: the card takes the height of the side that shows, so
+   the shorter side never ends in a block of empty space. */
+.psy-face--back,
+.psy-deck:has(.psy-deck__radio[value="back"]:checked) .psy-face--front {
+  position: absolute;
+  inset: 0 0 auto;
+}
+
+.psy-deck:has(.psy-deck__radio[value="back"]:checked) .psy-face--back {
+  position: relative;
+  inset: auto;
 }
 
 /* Vertical scrolling stays native; horizontal swipes flip the card. */
@@ -318,7 +333,7 @@
 .psy-face--back {
   --face: color-mix(in oklab, #08080a 95%, var(--hue, #888) 5%);
   --foil-rest: 0.04;
-  --tile: color-mix(in oklab, var(--color-fg) 5.5%, transparent);
+  --tile: color-mix(in oklab, color-mix(in oklab, var(--color-fg) 8%, var(--face)) 94%, transparent);
 }
 
 .psy-face--back .psy-foil {
@@ -556,9 +571,6 @@
   flex: 1 1 0;
 }
 
-.psy-row--back > .psy-tile--spacing {
-  flex-grow: 1.5;
-}
 
 .psy-tile {
   display: flex;
@@ -568,14 +580,8 @@
   padding: 0.6em 0.72em 0.64em;
   border: 1px solid var(--tile-edge);
   border-radius: 0.85em;
+  /* No backdrop blur: blur inside the tilted 3D card flickers. */
   background: var(--tile);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-}
-
-.psy-tile--prepare,
-.psy-tile--emergency {
-  flex-grow: 1;
 }
 
 .psy-tile h3 {
@@ -583,8 +589,8 @@
   align-items: center;
   gap: 0.4em;
   margin: 0;
-  color: var(--color-fg-mute);
-  font-size: 0.62em;
+  color: var(--card-mute);
+  font-size: 0.64em;
   font-weight: 800;
   letter-spacing: 0.1em;
   line-height: 1.2;
@@ -614,8 +620,8 @@
 .psy-tile__text {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.72em;
-  line-height: 1.31;
+  font-size: 0.76em;
+  line-height: 1.34;
   text-wrap: pretty;
 }
 
@@ -640,8 +646,8 @@
 }
 
 .psy-tile__text--small {
-  font-size: 0.66em;
-  color: var(--color-fg-mute);
+  font-size: 0.7em;
+  color: var(--card-mute);
 }
 
 .psy-ref {
@@ -773,12 +779,42 @@
   font-weight: 650;
 }
 
+/* Linear chart: a thin continuous line, ranges as thicker bars on it and a
+   dotted bracket under each range spanning its start → end amounts. */
 .psy-dose__track {
   position: relative;
   height: 0.62em;
-  margin: 0.2em 0 0.3em;
+  margin: 0.2em 0 0.72em;
+}
+
+.psy-dose__track::before {
+  content: "";
+  position: absolute;
+  inset: 50% -0.3em auto;
+  height: 0.28em;
   border-radius: 999px;
-  background: color-mix(in oklab, var(--color-fg) 9%, transparent);
+  background: color-mix(in oklab, var(--color-fg) 11%, transparent);
+  transform: translateY(-50%);
+}
+
+.psy-dose__range {
+  position: absolute;
+  top: calc(100% + 0.16em);
+  left: var(--l);
+  width: var(--w);
+  height: 0.4em;
+  border: 1px dotted var(--c);
+  border-top: 0;
+  border-radius: 0 0 0.22em 0.22em;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.psy-dose__range--open {
+  border-right: 0;
+  border-bottom-right-radius: 0;
+  -webkit-mask-image: linear-gradient(90deg, #000 55%, transparent);
+  mask-image: linear-gradient(90deg, #000 55%, transparent);
 }
 
 .psy-dose__bar {
@@ -894,113 +930,50 @@
 
 /* ---------- Toxicity margin ---------- */
 
-/* A slim row: label, log-scale meter (1× → 1000×), value and a compare
-   button. Detail lives in the comparison popover. */
-.psy-margin-row {
+/* Acute toxicity as a muted footnote of the dose tile; the comparison chart
+   is one tap away. Only a narrow margin is flagged in colour. */
+.psy-tox {
   display: flex;
   align-items: center;
-  gap: 0.55em;
-  min-width: 0;
-  margin-top: 0.1em;
-  padding-top: 0.45em;
+  gap: 0.4em;
+  width: 100%;
+  margin: 0.05em 0 0;
+  padding: 0.4em 0 0;
+  border: 0;
   border-top: 1px dashed var(--tile-edge);
+  color: var(--card-mute);
+  background: none;
+  font: inherit;
+  font-size: 0.66em;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
 }
 
-.psy-margin-row h3 {
+.psy-tox svg {
   flex: none;
+  width: 1.15em;
+  height: 1.15em;
+  opacity: 0.8;
 }
 
-.psy-margin {
-  flex: 1;
-  min-width: 4em;
+.psy-tox__text {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
-.psy-margin__track {
-  position: relative;
-  height: 0.42em;
-  margin: 0;
-  border-radius: 999px;
-  /* Same hue mapping as the comparison chart: red ≤ 5×, green at 1000×. */
-  background: linear-gradient(
-    90deg,
-    hsl(0 72% 50%) 0%,
-    hsl(0 72% 50%) 23%,
-    hsl(17 80% 52%) 33.3%,
-    hsl(45 85% 52%) 50%,
-    hsl(73 70% 48%) 66.7%,
-    hsl(130 60% 45%) 100%
-  );
+.psy-tox__more {
+  opacity: 0.5;
 }
 
-.is-unknown .psy-margin__track {
-  height: 0.42em;
-  background: repeating-linear-gradient(
-    135deg,
-    color-mix(in oklab, var(--color-fg) 22%, transparent) 0 0.25em,
-    color-mix(in oklab, var(--color-fg) 6%, transparent) 0.25em 0.5em
-  );
+.psy-tox:hover,
+.psy-tox:focus-visible {
+  color: var(--color-fg);
 }
 
-.is-unknown.is-danger .psy-margin__track {
-  background: repeating-linear-gradient(
-    135deg,
-    color-mix(in oklab, #ef4444 70%, transparent) 0 0.25em,
-    color-mix(in oklab, #ef4444 20%, transparent) 0.25em 0.5em
-  );
-}
-
-.psy-margin__dot {
-  position: absolute;
-  top: 50%;
-  left: var(--x);
-  z-index: 1;
-  width: 0.9em;
-  height: 0.9em;
-  border: 0.16em solid var(--face);
-  border-radius: 50%;
-  background: var(--color-fg);
-  box-shadow: 0 0 0 0.08em rgb(0 0 0 / 0.45);
-  transform: translate(-50%, -50%);
-}
-
-.psy-margin__dot.is-estimate {
-  border-style: dashed;
-  border-color: var(--color-fg);
-  background: var(--face);
-}
-
-.psy-margin__value {
-  flex: none;
-  font-size: 0.68em;
-  font-weight: 800;
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-
-.psy-margin__ref {
-  /* Alcohol as a familiar reference, marked above the track. */
-  position: absolute;
-  bottom: calc(100% + 0.08em);
-  left: var(--x);
-  display: grid;
-  place-items: center;
-  color: var(--color-fg-mute);
-  transform: translateX(-50%);
-}
-
-.psy-margin__ref::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  width: 1px;
-  height: 0.5em;
-  background: currentColor;
-}
-
-.psy-margin__ref svg {
-  width: 0.8em;
-  height: 0.8em;
+.psy-tox.is-danger {
+  color: color-mix(in oklab, #f87171 80%, var(--color-fg));
+  font-weight: 700;
 }
 
 /* ---------- Effects & effects over time ---------- */
@@ -1125,6 +1098,7 @@
 /* ---------- Footer / flip ---------- */
 
 .psy-foot {
+  margin-top: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1185,6 +1159,15 @@
 }
 
 /* ---------- Back: spacing & dependence ---------- */
+
+/* Full-width on the front: the interval and its calendar side by side. */
+.psy-spacing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3em 0.9em;
+}
 
 .psy-spacing__value {
   display: flex;
@@ -1402,6 +1385,262 @@
   font-weight: 850;
 }
 
+.psy-emergency__local {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3em 0.7em;
+  margin: 0.1em 0 0;
+  padding-top: 0.4em;
+  border-top: 1px dashed color-mix(in oklab, #ef4444 35%, transparent);
+  color: var(--ink-soft);
+  font-size: 0.68em;
+  line-height: 1.32;
+}
+
+.psy-emergency__local[hidden],
+.psy-emergency__local [hidden] {
+  display: none;
+}
+
+.psy-emergency__poison {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  color: #fecaca;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.psy-emergency__poison svg {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.psy-emergency__poison:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Local help ---------- */
+
+.psy-tile--help[hidden] {
+  display: none;
+}
+
+.psy-help {
+  display: grid;
+  gap: 0.45em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.psy-help__item {
+  display: grid;
+  gap: 0.12em;
+  padding-left: 0.6em;
+  border-left: 0.16em solid color-mix(in oklab, var(--hue, var(--color-fg)) 70%, transparent);
+}
+
+.psy-help__item + .psy-help__item {
+  padding-top: 0.05em;
+}
+
+.psy-help__name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2em 0.5em;
+  margin: 0;
+  font-size: 0.78em;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.psy-help__name a {
+  color: var(--color-fg);
+  text-decoration: none;
+}
+
+.psy-help__name a:hover {
+  text-decoration: underline;
+}
+
+.psy-help__where {
+  color: var(--color-fg-mute);
+  font-size: 0.86em;
+  font-weight: 650;
+}
+
+.psy-help__text {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.7em;
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+
+.psy-help__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25em;
+  margin: 0.1em 0 0;
+  font-size: 0.64em;
+}
+
+.psy-help__service {
+  padding: 0.12em 0.5em;
+  border-radius: 999px;
+  color: var(--color-fg);
+  background: color-mix(in oklab, var(--color-fg) 8%, transparent);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.psy-help__phone {
+  margin-left: auto;
+  color: var(--color-fg);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.psy-help__phone:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Legal status ---------- */
+
+.psy-country-btn {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.35em;
+  max-width: 55%;
+  min-height: 2em;
+  padding: 0 0.6em 0 0.45em;
+  border: 1px solid var(--tile-edge);
+  border-radius: 999px;
+  color: var(--color-fg);
+  background: color-mix(in oklab, var(--color-fg) 6%, transparent);
+  font: inherit;
+  font-size: 0.64em;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.psy-country-btn [data-country-name] {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.psy-country-btn svg {
+  flex: none;
+  width: 0.9em;
+  height: 0.9em;
+  opacity: 0.6;
+}
+
+.psy-country-btn:hover {
+  background: color-mix(in oklab, var(--color-fg) 11%, transparent);
+}
+
+.psy-legal {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  margin: 0;
+  font-size: 0.72em;
+  line-height: 1.32;
+}
+
+.psy-legal[hidden],
+.psy-legal__foot[hidden],
+[data-local-legal-empty][hidden] {
+  display: none;
+}
+
+.psy-legal__status {
+  flex: none;
+  padding: 0.15em 0.6em;
+  border-radius: 999px;
+  color: var(--color-ink);
+  background: var(--legal, var(--color-fg-mute));
+  font-size: 0.92em;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.psy-legal__status[data-status="legal"] { --legal: #4ade80; }
+.psy-legal__status[data-status="medical"] { --legal: #60a5fa; }
+.psy-legal__status[data-status="decriminalised"] { --legal: #facc15; }
+.psy-legal__status[data-status="grey"] { --legal: #cbd5e1; }
+.psy-legal__status[data-status="illegal"] { --legal: #f87171; }
+.psy-legal__status[data-status="unknown"] { --legal: #a1a1aa; }
+
+.psy-legal__note {
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.psy-legal__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5em;
+  margin: 0;
+  color: var(--color-fg-mute);
+  font-size: 0.6em;
+}
+
+.psy-legal__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2em;
+  padding: 0;
+  border: 0;
+  color: var(--color-fg);
+  background: none;
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.psy-legal__more svg {
+  width: 0.9em;
+  height: 0.9em;
+}
+
+.psy-legal--popover {
+  font-size: 0.9em;
+  margin-bottom: 0.6em;
+}
+
+.psy-popover__subhead {
+  margin: 0.9em 0 0.3em;
+  color: var(--color-fg-mute);
+  font-size: 0.72em;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.psy-popover__sources {
+  display: grid;
+  gap: 0.3em;
+  margin: 0;
+  padding-left: 1.1em;
+  font-size: 0.84em;
+}
+
+.psy-popover__sources a {
+  color: var(--color-fg);
+}
+
 /* ---------- Popovers (other routes, comparison, ratings) ---------- */
 
 .psy-popover {
@@ -1573,6 +1812,8 @@
     .psy-deck:has(.psy-deck__radio[value="back"]:checked) .psy-card__inner {
       grid-template-columns: 1fr 1fr;
       column-gap: var(--deck-gap);
+      /* Each side keeps its own height instead of stretching to the other. */
+      align-items: start;
       transform: none;
       transition: none;
     }
@@ -1580,6 +1821,8 @@
     .psy-face,
     .psy-deck:has(.psy-deck__radio[value="back"]:checked) .psy-face--front {
       grid-area: auto;
+      position: relative;
+      inset: auto;
       /* Each side tilts on its own when both are shown. */
       transform: perspective(calc(var(--card-w) * 4)) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
       visibility: visible;
@@ -1600,7 +1843,7 @@
 
 html[data-color-scheme="light"] .psy-card {
   --face: color-mix(in oklab, #ffffff 94%, var(--hue, #888) 6%);
-  --tile: color-mix(in oklab, var(--color-fg) 4%, transparent);
+  --tile: color-mix(in oklab, color-mix(in oklab, var(--color-fg) 4%, var(--face)) 94%, transparent);
 }
 
 .psy-popover {

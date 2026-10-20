@@ -3,7 +3,6 @@ import { Icon } from "@twodft/astro-icon/components";
 import DoseScale from "./DoseScale.astro";
 import EffectCurve from "./EffectCurve.astro";
 import { buildEffectCurve } from "../../lib/effect-curve";
-import { getDisplayLabel } from "../../data/config";
 import MoleculeFigure from "../MoleculeFigure.astro";
 import { getRouteIcon, getRouteLabel, type DoseChart } from "../../lib/dose-chart";
 import type { CardData } from "../../data/harm-reduction";
@@ -35,16 +34,17 @@ const showSideTile = Boolean(personal) || showDoseTip;
 
 const curve = buildEffectCurve(data.timing);
 const effects = c.effects ?? [];
-const alcoholLabel = getDisplayLabel(locale, "alcohol");
 
+// Acute toxicity is a footnote of the dose: one muted line, details in the
+// comparison popover. Only a narrow margin (NBOMes, 5-MeO) is flagged.
 const margin = data.margin;
-const marginPos = margin ? Math.min(100, (Math.log10(margin.ratio) / 3) * 100) : 0;
 const marginText = margin
   ? tFormat(locale, ui, margin.atLeast ? "card.marginAtLeast" : "card.marginLabel", { ratio: String(margin.ratio) })
   : t(locale, ui, "card.marginUnknown");
-const alcoholRatio = data.gable.find((row) => row.key === "alcohol")?.ratio ?? 10;
-const showAlcoholTick = data.key !== "alcohol";
 const routesPopover = `${uid}-routes`;
+const spacing = c.spacing;
+const pattern = data.spacing.pattern ? [...data.spacing.pattern] : [];
+const spanUnit = data.spacing.unit ? t(locale, ui, `card.units.${data.spacing.unit}`) : "";
 const marginPopover = `${uid}-margin`;
 const routeName = (route: string) => getRouteLabel(route);
 ---
@@ -108,38 +108,19 @@ const routeName = (route: string) => getRouteLabel(route);
       ) : (
         <p class="psy-tile__text psy-tile__text--lead">{c.dose}</p>
       )}
-      <div
-        class:list={["psy-margin-row", { "is-unknown": !margin, "is-danger": data.marginDanger }]}
-        aria-labelledby={`${uid}-margin-title`}
-        role="group"
+      <button
+        type="button"
+        class:list={["psy-tox", { "is-danger": data.marginDanger }]}
+        popovertarget={marginPopover}
+        aria-label={`${marginText}${margin?.extrapolated ? `, ${t(locale, ui, "card.marginExtrapolated")}` : ""}. ${t(locale, ui, "card.marginCompare")}`}
       >
-        <h3 id={`${uid}-margin-title`}>
-          <Icon name="ph:skull-fill" aria-hidden="true" />
-          {t(locale, ui, "card.marginShort")}
-        </h3>
-        <div class="psy-margin" aria-hidden="true">
-          <div class="psy-margin__track">
-            {showAlcoholTick && (
-              <span class="psy-margin__ref" style={`--x: ${(Math.log10(alcoholRatio) / 3) * 100}%`} title={alcoholLabel}>
-                <Icon name="ph:wine-fill" />
-              </span>
-            )}
-            {margin && (
-              <span class:list={["psy-margin__dot", { "is-estimate": margin.extrapolated }]} style={`--x: ${marginPos}%`} />
-            )}
-          </div>
-        </div>
-        <span class="psy-margin__value" title={marginText}>
-          {margin
-            ? tFormat(locale, ui, "card.marginValue", { ratio: `${margin.atLeast ? ">" : ""}${margin.ratio}` })
-            : t(locale, ui, "card.marginUnknown")}
-          <span class="sr-only">. {marginText}{margin?.extrapolated ? `, ${t(locale, ui, "card.marginExtrapolated")}` : ""}</span>
+        <Icon name={data.marginDanger ? "ph:warning-fill" : "ph:skull-fill"} aria-hidden="true" />
+        <span class="psy-tox__text">
+          {marginText}
+          {!margin && c.marginNote && <span class="psy-tox__note"> · {c.marginNote}</span>}
         </span>
-        <button type="button" class="psy-info-btn" popovertarget={marginPopover} aria-label={t(locale, ui, "card.marginCompare")}>
-          <Icon name="ph:chart-bar-horizontal-fill" aria-hidden="true" />
-        </button>
-      </div>
-      {!margin && c.marginNote && <p class="psy-tile__text psy-tile__text--small">{c.marginNote}</p>}
+        <Icon name="ph:caret-right-bold" class="psy-tox__more" aria-hidden="true" />
+      </button>
     </section>
 
     {(showSideTile || effects.length > 0) && (
@@ -209,6 +190,30 @@ const routeName = (route: string) => getRouteLabel(route);
           {t(locale, ui, "card.effectsOverTime")}
         </h3>
         <EffectCurve timing={data.timing} locale={locale} widthEm={19.6} />
+      </section>
+    )}
+
+    {spacing && (
+      <section class="psy-tile psy-tile--spacing" aria-labelledby={`${uid}-spacing`}>
+        <h3 id={`${uid}-spacing`}>
+          <Icon name="ph:calendar-dots-fill" aria-hidden="true" />
+          {t(locale, ui, "card.spacing")}
+        </h3>
+        <div class="psy-spacing">
+          <p class="psy-spacing__value">
+            <strong>{spacing.value}</strong>
+            <span>{spacing.label}</span>
+          </p>
+          {pattern.length > 0 && (
+            <div class="psy-spacing__pattern" aria-hidden="true">
+              <span class="psy-spacing__cells">
+                {pattern.map((cell) => <span class:list={["psy-spacing__cell", { "is-use": cell === "x" }]} />)}
+              </span>
+              <span class="psy-spacing__span">{tFormat(locale, ui, "card.spacingSpan", { count: String(pattern.length), unit: spanUnit })}</span>
+            </div>
+          )}
+        </div>
+        <p class="psy-tile__text">{spacing.text}</p>
       </section>
     )}
 

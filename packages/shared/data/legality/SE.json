@@ -1,0 +1,261 @@
+{
+  "country": "SE",
+  "name": "Sweden",
+  "asOf": "2026-10",
+  "summary": "Zero-tolerance policy: possessing and even using narcotics is a crime (minor cases: fine or up to 6 months). Many new substances are banned as 'health-hazardous goods'. No drug checking services.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "Giftinformationscentralen (non-urgent advice; call 112 if acute)",
+      "phone": "010-456 67 00"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law and drug use is itself a crime. Health staff secrecy rules generally stop them reporting minor drug offences to police, but police may attend.",
+  "callingForHelpConfidence": "medium",
+  "drugChecking": "No drug checking services; there is no legal exemption for testing drugs outside police and forensic labs.",
+  "sources": {
+    "nsl": {
+      "title": "Narkotikastrafflag (1968:64)",
+      "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/narkotikastrafflag-196864_sfs-1968-64/"
+    },
+    "hfv": {
+      "title": "Lag (1999:42) om förbud mot vissa hälsofarliga varor",
+      "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/lag-199942-om-forbud-mot-vissa-halsofarliga_sfs-1999-42/"
+    },
+    "osl": {
+      "title": "Offentlighets- och sekretesslag (2009:400)",
+      "url": "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/offentlighets-och-sekretesslag-2009400_sfs-2009-400/"
+    },
+    "lustgas": {
+      "title": "Folkhälsomyndigheten: rules for sale of nitrous oxide from 1 July 2025",
+      "url": "https://www.folkhalsomyndigheten.se/nyheter-och-press/nyhetsarkiv/2025/juni/beslut-om-foreskrifter-for-forsaljning-av-lustgas/"
+    },
+    "dxm": {
+      "title": "Dextrometorfan (Swedish Wikipedia) – narcotic since 2008",
+      "url": "https://sv.wikipedia.org/wiki/Dextrometorfan"
+    },
+    "psilocybin": {
+      "title": "Legal status of psilocybin mushrooms (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "ayahuasca": {
+      "title": "Legal status of ayahuasca by country (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_ayahuasca_by_country"
+    },
+    "drinkingAge": {
+      "title": "Legal drinking age (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "energy": {
+      "title": "Energy drink: regulation by country (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Energy_drink"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Narcotic. Possession or use (e.g. a positive drug test) is a crime; minor cases get a fine or up to 6 months.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin mushrooms are narcotics. Spores and grow kits are sold, but growing fruiting mushrooms is illegal.",
+      "sources": [
+        "nsl",
+        "psilocybin"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "Narcotic; ayahuasca and DMT plant preparations are illegal.",
+      "sources": [
+        "nsl",
+        "ayahuasca"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is a narcotic; preparations made from mescaline cacti count as narcotics.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOM, DOC and similar are classed as narcotics.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25I-, 25B-, 25C-NBOMe are classed as narcotics.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B and most other 2C-x are narcotics.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7 are narcotics.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "medium"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "5-MeO-DMT is a narcotic; most other 5-MeO tryptamines are narcotics or banned 'health-hazardous goods'.",
+      "sources": [
+        "nsl",
+        "hfv"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Narcotic; use itself is a crime and police can require drug tests. Medical cannabis only for a few licensed patients.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Narcotic medicine: possession or use without a prescription is a narcotics offence.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "medium"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Classed as a narcotic.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "illegal",
+      "note": "Classed as a narcotic since 2008 (list V); no DXM cough medicines are sold in Sweden.",
+      "sources": [
+        "dxm"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a narcotic. Since 1 July 2025 sales to under-18s or for intoxication are banned; consumers may buy only ≤9 g cartridges, two per sale.",
+      "sources": [
+        "lustgas"
+      ],
+      "confidence": "high"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Narcotics. ADHD medicines (e.g. lisdexamfetamine, methylphenidate) are legal only with a prescription.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Narcotic; possession or use is a crime.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Narcotic; possession or use is a crime.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal. No legal age limit on energy drinks; retailers voluntarily refuse sales to under-15s.",
+      "sources": [
+        "energy"
+      ],
+      "confidence": "medium"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Systembolaget (state monopoly) sells from 20; bars and restaurants from 18; shops sell beer up to 3.5% ABV from 18.",
+      "sources": [
+        "drinkingAge"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB, GBL and 1,4-BD are classed as narcotics (with industrial exemptions). Sodium oxybate is prescription-only.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin and opioid medicines are narcotics; legal only with a prescription.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Classed as a narcotic since 2008: possession without a prescription is a narcotics offence.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Narcotics: unprescribed possession or use is a narcotics offence. Designer benzos are also classified.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Medical MAOIs are prescription-only, not narcotics. Harmala/Syrian rue are not known to be controlled; ayahuasca is illegal (DMT).",
+      "sources": [
+        "nsl",
+        "ayahuasca"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "grey",
+      "note": "Prescription-only, not narcotics: possession isn't a crime, but selling them or importing without permission is.",
+      "sources": [
+        "nsl"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

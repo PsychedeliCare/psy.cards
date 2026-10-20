@@ -1,0 +1,273 @@
+{
+  "country": "AD",
+  "name": "Andorra",
+  "asOf": "2026-10",
+  "summary": "Possessing drugs for own use is a crime (prison up to 1 year or arrest, plus fine); cannabis is a minor offence (arrest or fine). A new Penal Code (Llei 18/2026) raises the fines from mid-December 2026.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "116"
+  },
+  "poisonControlNote": "No national poison centre found; call SUM 116. Spain's SIT (+34 91 562 04 20, 24h) is the nearest Spanish-language centre.",
+  "callingForHelp": "No Good Samaritan law. Own-use possession is a crime, so police involvement is possible. Failing to help or call for help for someone in grave danger is an offence.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No drug-checking service found.",
+  "sources": {
+    "cp2017": {
+      "title": "Codi penal (Llei 9/2005), consolidated text 2017 – arts. 281–284, 499–500 (BOPA)",
+      "url": "https://www.bopa.ad/Legislacio/Detall?doc=GL20171026_12_41_22"
+    },
+    "cp2026": {
+      "title": "Llei 18/2026, del 15 de juliol, qualificada del Codi penal – arts. 145, 314–317, 545–547 (BOPA 13 Aug 2026)",
+      "url": "https://www.bopa.ad/Legislacio/Detall?doc=CGL_2026_07_24_09_24_47"
+    },
+    "saas": {
+      "title": "SAAS – Servei d'Urgències Mèdiques (SUM 116)",
+      "url": "https://www.saas.ad/"
+    },
+    "visitAndorra": {
+      "title": "Visit Andorra – public services (police 110, fire 118)",
+      "url": "https://visitandorra.com/en/public-services/"
+    },
+    "wikiCannabisAd": {
+      "title": "Wikipedia – Cannabis in Andorra",
+      "url": "https://en.wikipedia.org/wiki/Cannabis_in_Andorra"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Own-use possession is a crime: prison up to 1 year or arrest, plus fine up to €1,200 (2 years in public venues). New Code from mid-Dec 2026: fine €1,000–2,000.",
+      "sources": [
+        "cp2017",
+        "cp2026"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin is internationally controlled, so it counts as a 'toxic drug': own-use possession is a crime (prison up to 1 year or arrest, plus fine).",
+      "sources": [
+        "cp2017",
+        "cp2026",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "Own-use possession is a crime: prison up to 1 year or arrest, plus fine up to €1,200 (2 years in public venues). New Code from mid-Dec 2026: fine €1,000–2,000.",
+      "sources": [
+        "cp2017",
+        "cp2026",
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Own-use possession is a crime: prison up to 1 year or arrest, plus fine up to €1,200 (2 years in public venues). New Code from mid-Dec 2026: fine €1,000–2,000.",
+      "sources": [
+        "cp2017",
+        "cp2026",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "Own-use possession is a crime: prison up to 1 year or arrest, plus fine up to €1,200 (2 years in public venues). New Code from mid-Dec 2026: fine €1,000–2,000.",
+      "sources": [
+        "cp2017",
+        "cp2026",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "Own-use possession is a crime: prison up to 1 year or arrest, plus fine up to €1,200 (2 years in public venues). New Code from mid-Dec 2026: fine €1,000–2,000.",
+      "sources": [
+        "cp2017",
+        "cp2026",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "Own-use possession is a crime: prison up to 1 year or arrest, plus fine up to €1,200 (2 years in public venues). New Code from mid-Dec 2026: fine €1,000–2,000.",
+      "sources": [
+        "cp2017",
+        "cp2026",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "Not UN-scheduled, but the Penal Code also covers substances of 'similar nature and effects', so likely treated as a toxic drug (own-use possession is a crime).",
+      "sources": [
+        "cp2017",
+        "cp2026",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "Not UN-scheduled, but the Penal Code also covers substances of 'similar nature and effects', so likely treated as a toxic drug (own-use possession is a crime).",
+      "sources": [
+        "cp2017",
+        "cp2026",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Own-use possession or growing: minor offence, arrest or fine up to €600 (also for public use). From mid-Dec 2026: arrest plus €500–1,200 fine.",
+      "sources": [
+        "cp2017",
+        "cp2026",
+        "wikiCannabisAd"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Prescription anaesthetic. Not UN-scheduled, but likely a 'toxic drug' under the similarity clause, so non-prescribed possession may be prosecuted.",
+      "sources": [
+        "cp2017",
+        "cp2026",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "UN Schedule II since 2016: a 'toxic drug', so own-use possession is a crime (prison up to 1 year or arrest, plus fine).",
+      "sources": [
+        "cp2017",
+        "cp2026",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not a controlled drug; could not confirm its pharmacy/prescription status in Andorra.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "unknown",
+      "note": "Not UN-scheduled; no specific rule found.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Own-use possession is a crime: prison up to 1 year or arrest, plus fine up to €1,200 (2 years in public venues). New Code from mid-Dec 2026: fine €1,000–2,000.",
+      "sources": [
+        "cp2017",
+        "cp2026",
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Own-use possession is a crime: prison up to 1 year or arrest, plus fine up to €1,200 (2 years in public venues). New Code from mid-Dec 2026: fine €1,000–2,000.",
+      "sources": [
+        "cp2017",
+        "cp2026"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Own-use possession is a crime: prison up to 1 year or arrest, plus fine up to €1,200 (2 years in public venues). New Code from mid-Dec 2026: fine €1,000–2,000.",
+      "sources": [
+        "cp2017",
+        "cp2026"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal for adults; supplying alcohol to under-18s is an offence (Penal Code 2026, art. 546).",
+      "sources": [
+        "cp2026"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is UN Schedule II, so own-use possession is a crime; GBL/1,4-BD may fall under the 'similar effects' clause.",
+      "sources": [
+        "cp2017",
+        "cp2026",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin: own-use possession is a crime (prison up to 1 year or arrest, plus fine). Prescription opioids are medical-only.",
+      "sources": [
+        "cp2017",
+        "cp2026"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only; UN Schedule IV, so non-prescribed possession could be prosecuted as own-use drug possession.",
+      "sources": [
+        "cp2017",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "MAOI antidepressants are prescription-only; status of harmala alkaloids/ayahuasca not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

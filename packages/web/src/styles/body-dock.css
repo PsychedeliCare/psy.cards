@@ -311,3 +311,153 @@ html[data-color-scheme="light"] .body-dock-fab {
   background: color-mix(in oklab, #ffffff 86%, transparent);
   box-shadow: 0 14px 34px -16px rgb(0 0 0 / 0.25);
 }
+
+/* ---------- Country ---------- */
+
+.body-dock__country {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  max-width: 11rem;
+  padding: 0 11px 0 9px;
+  border: 0;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--color-fg) 7%, transparent);
+  font-size: 13px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.body-dock__country:hover {
+  background: color-mix(in oklab, var(--color-fg) 12%, transparent);
+}
+
+.body-dock__country-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 560px) {
+  .body-dock__country-name {
+    display: none;
+  }
+}
+
+/* One picker for the whole page, opened from the dock or any card back. */
+.country-picker {
+  position: fixed;
+  inset: auto 0 0;
+  width: min(30rem, 100vw);
+  max-height: min(80dvh, 40rem);
+  margin: auto auto 0;
+  padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+  border: 1px solid color-mix(in oklab, var(--color-fg) 14%, transparent);
+  border-radius: 22px 22px 0 0;
+  color: var(--color-fg);
+  background: color-mix(in oklab, var(--color-ink-2) 96%, transparent);
+  box-shadow: 0 -20px 60px -20px rgb(0 0 0 / 0.7);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+@media (min-width: 640px) {
+  .country-picker {
+    inset: 0;
+    margin: auto;
+    border-radius: 22px;
+    padding-bottom: 16px;
+  }
+}
+
+.country-picker::backdrop {
+  background: rgb(0 0 0 / 0.5);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.country-picker__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.country-picker__head h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+}
+
+.country-picker__close {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  color: var(--color-fg);
+  background: color-mix(in oklab, var(--color-fg) 9%, transparent);
+  cursor: pointer;
+}
+
+.country-picker__close svg {
+  width: 14px;
+  height: 14px;
+}
+
+.country-picker__hint,
+.country-picker__note {
+  margin: 6px 0 12px;
+  color: var(--color-fg-mute);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.country-picker__note {
+  margin: 12px 0 0;
+  font-size: 12px;
+}
+
+.country-picker__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.country-picker__list button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 40px;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: var(--color-fg);
+  background: color-mix(in oklab, var(--color-fg) 4%, transparent);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.country-picker__list button:hover {
+  background: color-mix(in oklab, var(--color-fg) 9%, transparent);
+}
+
+.country-picker__list button[aria-selected="true"] {
+  border-color: color-mix(in oklab, var(--color-fg) 40%, transparent);
+  background: color-mix(in oklab, var(--color-fg) 13%, transparent);
+  font-weight: 800;
+}
+
+.country-picker__list button span:first-child {
+  font-size: 18px;
+  line-height: 1;
+}

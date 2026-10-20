@@ -1,0 +1,272 @@
+{
+  "country": "DE",
+  "name": "Germany",
+  "asOf": "2026-10",
+  "summary": "BtMG makes possession of most drugs a crime, but prosecutors may drop small personal-use cases (§31a). Adults may possess cannabis (KCanG, 2024). The NpSG bans whole NPS groups. Drug checking only where states allow it.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "Giftnotruf Berlin (other regions: local area code + 19240)",
+      "phone": "+49 30 19240"
+    }
+  },
+  "callingForHelp": "Ambulance crews (112) are bound by medical confidentiality and usually do not call police for an overdose; police may attend after violence or a death. No Good Samaritan law.",
+  "callingForHelpConfidence": "medium",
+  "drugChecking": "Legal only where a state regulation under §10b BtMG exists, e.g. Berlin (since 2023); several other states have rules or drafts.",
+  "sources": {
+    "btmg": {
+      "title": "Narcotics Act (BtMG) with Annexes I–III",
+      "url": "https://www.gesetze-im-internet.de/btmg_1981/"
+    },
+    "kcang": {
+      "title": "Consumer Cannabis Act (KCanG), §§ 3, 34, 36",
+      "url": "https://www.gesetze-im-internet.de/kcang/"
+    },
+    "npsg": {
+      "title": "New Psychoactive Substances Act (NpSG), as amended 7 January 2026",
+      "url": "https://www.gesetze-im-internet.de/npsg/"
+    },
+    "amvv": {
+      "title": "Prescription Medicines Ordinance (AMVV), Annex 1",
+      "url": "https://www.gesetze-im-internet.de/amvv/"
+    },
+    "juschg": {
+      "title": "Youth Protection Act (JuSchG), § 9 alcohol",
+      "url": "https://www.gesetze-im-internet.de/juschg/__9.html"
+    },
+    "bmgN2O": {
+      "title": "Federal Ministry of Health: cabinet adopts nitrous oxide and K.O.-drops ban (July 2025)",
+      "url": "https://www.bundesgesundheitsministerium.de/presse/pressemitteilungen/bundeskabinett-beschliesst-lachgasverbot-pm-01-07-25"
+    },
+    "aerzteblattN2O": {
+      "title": "Deutsches Ärzteblatt: nitrous oxide ban applies from 12 April 2026",
+      "url": "https://www.aerzteblatt.de/news/lachgas-verbot-gilt-ab-12-april"
+    },
+    "hibCannabis": {
+      "title": "Bundestag hib: interim report on the cannabis law evaluation",
+      "url": "https://www.bundestag.de/presse/hib/kurzmeldungen-1104544"
+    },
+    "bwDrugChecking": {
+      "title": "Baden-Württemberg prepares drug-checking regulation (2026)",
+      "url": "https://www.baden-wuerttemberg.de/de/service/presse/pressemitteilung/pid/land-bereitet-drug-checking-verordnung-vor"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "BtMG Annex I. Possession is a crime (up to 5 years); prosecutors may drop cases involving small amounts for own use (§31a).",
+      "sources": [
+        "btmg"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin/psilocin are Annex I; mushrooms, truffles, mycelium and spores intended for intoxication are covered too. Possession is a crime.",
+      "sources": [
+        "btmg"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "DMT is Annex I; ayahuasca and DMT-containing plants intended for use are illegal.",
+      "sources": [
+        "btmg"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is Annex I. Peyote/San Pedro cacti are legal as ornamentals but illegal if intended for consumption.",
+      "sources": [
+        "btmg"
+      ],
+      "confidence": "high"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOC and DOM are Annex I, DOI Annex II; other analogues fall under the NpSG phenethylamine group (trade is a crime).",
+      "sources": [
+        "btmg",
+        "npsg"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25B-, 25C-, 25I- and 25N-NBOMe are Annex I; other NBOMes fall under the NpSG (possession banned, not a crime; trade a crime).",
+      "sources": [
+        "btmg",
+        "npsg"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B, 2C-C, 2C-D, 2C-E, 2C-I and 2C-P are Annex I; other 2C-x fall under the NpSG phenethylamine group.",
+      "sources": [
+        "btmg",
+        "npsg"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7 are Annex I; other 2C-T-x fall under the NpSG (possession banned but not a crime; trade a crime).",
+      "sources": [
+        "btmg",
+        "npsg"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "5-MeO-DMT and 5-MeO-DiPT are Annex I. 5-MeO-MiPT etc. fall under the NpSG tryptamine group: possession banned (not a crime), trade a crime.",
+      "sources": [
+        "btmg",
+        "npsg"
+      ],
+      "confidence": "high"
+    },
+    "cannabis": {
+      "status": "legal",
+      "note": "Adults 18+: 25 g in public, 50 g and 3 plants at home; social clubs, no shops. 25–30 g is a fine, more a crime. No use near schools. Law under evaluation.",
+      "sources": [
+        "kcang",
+        "hibCannabis"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Not under the BtMG; prescription-only medicine (AMVV). Selling it breaches medicines law; possession for own use is not itself a crime.",
+      "sources": [
+        "amvv",
+        "btmg"
+      ],
+      "confidence": "medium"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "BtMG Annex I; possession is a crime.",
+      "sources": [
+        "btmg"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "legal",
+      "note": "Pharmacy-only cough medicine sold without prescription (not listed in the AMVV); not a controlled drug.",
+      "sources": [
+        "amvv",
+        "btmg"
+      ],
+      "confidence": "high"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Since 12 Apr 2026: no sale to or possession by under-18s, no online or vending-machine sales; cartridges max 8.4 g, max 10 per sale; bigger tanks banned.",
+      "sources": [
+        "npsg",
+        "aerzteblattN2O",
+        "bmgN2O"
+      ],
+      "confidence": "high"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamine is Annex III, methamphetamine Annex II: possession without prescription is a crime. ADHD drugs need a narcotics prescription.",
+      "sources": [
+        "btmg"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "BtMG Annex I. Possession is a crime (up to 5 years); §31a may apply to small amounts for own use.",
+      "sources": [
+        "btmg"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "BtMG Annex III. Possession without prescription is a crime (up to 5 years); small personal-use cases may be dropped (§31a).",
+      "sources": [
+        "btmg"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely in food, drinks and tablets.",
+      "sources": [
+        "btmg"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Beer and wine from 16 (14 with a parent), spirits and alcopops from 18.",
+      "sources": [
+        "juschg"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is Annex III (sodium oxybate on prescription). Since 2026, GBL and 1,4-BD (>20%) are NpSG-banned except industrial use; trade is a crime.",
+      "sources": [
+        "btmg",
+        "npsg",
+        "bmgN2O"
+      ],
+      "confidence": "high"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin is Annex I (diamorphine only in supervised treatment); morphine, oxycodone and fentanyl need a narcotics prescription.",
+      "sources": [
+        "btmg"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine (AMVV), not under the BtMG; selling without authorisation is an offence.",
+      "sources": [
+        "amvv",
+        "btmg"
+      ],
+      "confidence": "high"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "BtMG Annex III; normal-dose tablets are exempt preparations but prescription-only. Designer benzos (e.g. flualprazolam) are Annex II.",
+      "sources": [
+        "btmg",
+        "amvv"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "Moclobemide/tranylcypromine are prescription-only. Harmala alkaloids/Syrian rue are not controlled, but ayahuasca (DMT) is illegal.",
+      "sources": [
+        "amvv",
+        "btmg"
+      ],
+      "confidence": "high"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines (AMVV); not controlled drugs.",
+      "sources": [
+        "amvv"
+      ],
+      "confidence": "high"
+    }
+  }
+}

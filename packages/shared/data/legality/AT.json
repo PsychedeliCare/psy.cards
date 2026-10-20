@@ -1,0 +1,279 @@
+{
+  "country": "AT",
+  "name": "Austria",
+  "asOf": "2026-10",
+  "summary": "Possession is a crime under the SMG, but personal-use cases go to health authorities and prosecutors must suspend them (\"Therapie statt Strafe\"). The NPS law punishes only supply. Drug checking is legal.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "144",
+    "poisonControl": {
+      "name": "Vergiftungsinformationszentrale (VIZ)",
+      "phone": "+43 1 406 43 43"
+    }
+  },
+  "callingForHelp": "Ambulance (144) staff are bound by confidentiality and police are not routinely informed; personal-use offences go to health authorities first. No Good Samaritan law.",
+  "callingForHelpConfidence": "medium",
+  "drugChecking": "Legal and available: checkit! (Vienna, fixed site and events) and Z6 drug checking (Innsbruck).",
+  "sources": {
+    "smg": {
+      "title": "Narcotic Substances Act (SMG), §§ 13, 27, 35",
+      "url": "https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10011040"
+    },
+    "sv": {
+      "title": "Narcotics Ordinance (Suchtgiftverordnung, SV), annexes",
+      "url": "https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10011053"
+    },
+    "pv": {
+      "title": "Psychotropic Substances Ordinance (PV)",
+      "url": "https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10011054"
+    },
+    "npsg": {
+      "title": "New Psychoactive Substances Act (NPSG)",
+      "url": "https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20007605"
+    },
+    "npsv": {
+      "title": "NPS Ordinance (NPSV) with generic substance groups",
+      "url": "https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=20007642"
+    },
+    "rezept": {
+      "title": "Prescription Ordinance (Rezeptpflichtverordnung)",
+      "url": "https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10010358"
+    },
+    "parlN2O": {
+      "title": "Parliament motion 988/A(E) on nitrous oxide misuse (10 July 2026)",
+      "url": "https://www.parlament.gv.at/dokument/XXVIII/A/988/fname_1773545.pdf"
+    },
+    "jugendschutz": {
+      "title": "Burgenland youth-protection amendment 2019 (spirits from 18, harmonised across states)",
+      "url": "https://apps.bgld.gv.at/web/landesrecht.nsf/0/97DFB2C939686B86C1258370003393FD/$FILE/RV%201441%20JugendschutzG-Novelle%202019.pdf"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Suchtgift (SV Annex V). Possession is a crime (up to 6 months if for own use), but personal-use cases must be suspended (§35 SMG).",
+      "sources": [
+        "sv",
+        "smg"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Supplying psilocybin mushrooms or growing them for intoxication is a crime (§27(1)3 SMG); personal-use cases are suspended. Spores/grow kits are sold.",
+      "sources": [
+        "smg",
+        "sv"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "Suchtgift (SV Annex V), so ayahuasca is illegal. Personal-use cases are suspended (§35 SMG).",
+      "sources": [
+        "sv",
+        "smg"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is a Suchtgift (SV Annex V). Mescaline cacti (San Pedro, peyote) are not listed and are sold as ornamentals.",
+      "sources": [
+        "sv",
+        "smg"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOB, DOC and DOM are Suchtgifte (SV); other analogues fall under the NPS phenethylamine group (supply is a crime).",
+      "sources": [
+        "sv",
+        "npsv"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25B-, 25C- and 25I-NBOMe are Suchtgifte (SV); other NBOMes fall under NPS generic groups (supply a crime, possession not).",
+      "sources": [
+        "sv",
+        "npsv",
+        "npsg"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B, 2C-I and other common 2C-x are Suchtgifte (SV); others fall under the NPS phenethylamine group (supply up to 2 years).",
+      "sources": [
+        "sv",
+        "npsv",
+        "npsg"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "illegal",
+      "note": "2C-T-2 and 2C-T-7 are Suchtgifte (SV); other 2C-T-x fall under the NPS phenethylamine group.",
+      "sources": [
+        "sv",
+        "npsv"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "grey",
+      "note": "Not Suchtgifte, but covered by the NPS tryptamine group: supply for gain is a crime (up to 2 years); possession is not punished but is confiscated.",
+      "sources": [
+        "sv",
+        "npsv",
+        "npsg"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Possession is a crime, but personal-use cases go to health authorities and prosecutors must suspend them (1–2 year probation). Low-THC CBD sold.",
+      "sources": [
+        "smg"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Not a Suchtmittel; prescription-only medicine. Supplying it without authorisation breaches medicines law; possession is not an SMG offence.",
+      "sources": [
+        "sv",
+        "pv",
+        "rezept"
+      ],
+      "confidence": "medium"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "Listed in the SV (treated as Suchtgift); possession is a crime, personal-use cases suspended.",
+      "sources": [
+        "sv",
+        "smg"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "legal",
+      "note": "Cough medicines with ≤15 mg DXM per dose are sold in pharmacies without prescription; higher doses need one. Not a Suchtmittel.",
+      "sources": [
+        "rezept",
+        "sv"
+      ],
+      "confidence": "high"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not controlled under SMG or NPSG; no federal sales ban as of mid-2026 (parliament motions pending). Food/technical sale and possession legal.",
+      "sources": [
+        "parlN2O",
+        "npsg"
+      ],
+      "confidence": "medium"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamine and methamphetamine are Suchtgifte: possession is a crime, personal-use cases suspended. ADHD drugs on prescription.",
+      "sources": [
+        "sv",
+        "smg"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Suchtgift (SV Annex V). Possession is a crime; personal-use cases are suspended (§35 SMG).",
+      "sources": [
+        "sv",
+        "smg"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Suchtgift. Possession is a crime (§27 SMG); personal-use cases suspended; dealing above threshold amounts is punished much more severely.",
+      "sources": [
+        "sv",
+        "smg"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely.",
+      "sources": [
+        "sv"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Beer and wine from 16; spirits and spirit-based mixed drinks from 18 (state youth-protection laws, harmonised in 2019).",
+      "sources": [
+        "jugendschutz"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is a Suchtgift (SV Annex V). GBL and 1,4-BD are listed NPS (NPSV): supplying them for intoxication is a crime, possession is not.",
+      "sources": [
+        "sv",
+        "npsv",
+        "npsg"
+      ],
+      "confidence": "high"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin is banned; morphine, oxycodone and fentanyl are Suchtgifte on narcotics prescription; possession without one is a crime.",
+      "sources": [
+        "sv",
+        "smg"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription medicine. Tramadol preparations are listed as Suchtgift (SV Annex III), so possession without prescription is an SMG offence.",
+      "sources": [
+        "sv",
+        "rezept"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Psychotropic substances (PV): prescription-only; possession without prescription is an offence under the SMG.",
+      "sources": [
+        "pv",
+        "smg"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "Prescription-only (e.g. moclobemide). Harmala alkaloids are not listed, but ayahuasca is illegal because DMT is a Suchtgift.",
+      "sources": [
+        "rezept",
+        "sv"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled substances.",
+      "sources": [
+        "rezept"
+      ],
+      "confidence": "high"
+    }
+  }
+}

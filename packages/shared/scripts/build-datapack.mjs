@@ -125,7 +125,81 @@ const UI_ICONS = [
   "grid-nine-fill",
   "gear-six-fill",
   "record-fill",
+  "hand-heart-fill",
+  "gavel-fill",
+  "first-aid-kit-fill",
+  "phone-fill",
+  "arrow-square-out-bold",
 ];
+
+const LEGAL_STATUSES = ["legal", "medical", "decriminalised", "grey", "illegal", "unknown"];
+
+/** The first dialable number in a field like "112 or 999" (web local-info.ts). */
+function dialable(value) {
+  return value?.match(/\+?\d[\d\s-]*\d|\d/)?.[0].trim();
+}
+
+/**
+ * Country-specific card data (legal status, emergency numbers, harm
+ * reduction organisations), shared by every locale. Mirrors
+ * packages/web/src/data/local-info.ts (getLocalInfo).
+ */
+function buildLocalInfo() {
+  const dir = path.join(sharedRoot, "data/legality");
+  const files = fs.existsSync(dir)
+    ? fs.readdirSync(dir).filter((name) => /^[A-Z]{2}\.json$/.test(name) && name !== "ZZ.json")
+    : [];
+  const organisations = readSharedJsonIfExists("data/organisations.json", { organisations: [] }).organisations ?? [];
+  const score = (org) => (org.featured ? 4 : 0) + (org.scope === "national" ? 2 : org.scope === "online" ? 1 : 0);
+  const countries = {};
+  for (const name of files.sort()) {
+    const file = JSON.parse(fs.readFileSync(path.join(dir, name), "utf8"));
+    const code = file.country.toUpperCase();
+    const sources = file.sources ?? {};
+    const substances = {};
+    for (const [key, entry] of Object.entries(file.substances ?? {})) {
+      substances[key] = {
+        status: LEGAL_STATUSES.includes(entry.status) ? entry.status : "unknown",
+        note: entry.note ?? null,
+        confidence: entry.confidence ?? null,
+        sources: (entry.sources ?? []).flatMap((id) => (sources[id] ? [{ title: sources[id].title, url: sources[id].url ?? null }] : [])),
+      };
+    }
+    countries[code] = {
+      country: code,
+      name: file.name,
+      asOf: file.asOf,
+      summary: file.summary ?? null,
+      emergency: {
+        number: dialable(file.emergency?.ambulance) ?? dialable(file.emergency?.general) ?? "112",
+        general: file.emergency?.general ?? null,
+        poison: dialable(file.emergency?.poisonControl?.phone)
+          ? { name: file.emergency.poisonControl.name, phone: dialable(file.emergency.poisonControl.phone) }
+          : null,
+        poisonNote: file.poisonControlNote ?? null,
+      },
+      callingForHelp: file.callingForHelp ?? null,
+      drugChecking: file.drugChecking ?? null,
+      substances,
+      organisations: organisations
+        .filter((org) => org.country?.toUpperCase() === code)
+        .sort((a, b) => score(b) - score(a))
+        .map((org) => ({
+          id: org.id,
+          name: org.name,
+          city: org.city ?? null,
+          scope: org.scope,
+          services: org.services ?? [],
+          url: org.url ?? null,
+          phone: org.phone ?? null,
+          substances: org.substances ?? ["all"],
+          featured: Boolean(org.featured),
+          description: org.description ?? {},
+        })),
+    };
+  }
+  return { countries };
+}
 
 function readJson(relativePath) {
   return JSON.parse(fs.readFileSync(path.join(monorepoRoot, relativePath), "utf8"));
@@ -461,6 +535,7 @@ function mergeContent(base = {}, overlay = {}) {
     spacing: overlay.spacing ? { ...base.spacing, ...overlay.spacing } : base.spacing,
     overdose: overlay.overdose ? { ...base.overdose, ...overlay.overdose } : base.overdose,
     risks: base.risks?.map((risk, index) => ({ ...risk, ...overlay.risks?.[index], icon: risk.icon })),
+    effects: base.effects?.map((effect, index) => ({ ...effect, ...overlay.effects?.[index], icon: effect.icon })),
   };
 }
 
@@ -573,6 +648,7 @@ function buildCards({ localeBundle, enBundle, columns, matrix, drugs, hr, substa
     if (!data) throw new Error(`Missing harm reduction data for "${key}"`);
     const content = mergeContent(en[key], local[key]);
     for (const risk of content.risks ?? []) iconSet.add(risk.icon);
+    for (const effect of content.effects ?? []) iconSet.add(effect.icon);
 
     const ownDrug = getDrug(drugs, key, localeBundle.drugOverlays);
     const doseDrug =
@@ -891,6 +967,9 @@ function main() {
     console.log(`Wrote ${locale} datapack (${substanceList.length} substances, ${Object.keys(cards).length} cards)`);
   }
 
+  const local = buildLocalInfo();
+  for (const root of outputRoots) writeJson(path.join(root, "local.json"), local);
+  console.log(`Wrote local info (${Object.keys(local.countries).length} countries)`);
   for (const root of outputRoots) writeJson(path.join(root, "manifest.json"), manifest);
   const iconCount = writeIcons(iconSet);
   console.log(`Wrote ${iconCount} vector icons${hasAndroid ? " (iOS + Android)" : " (iOS)"}`);

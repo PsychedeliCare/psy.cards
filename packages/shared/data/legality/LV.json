@@ -1,0 +1,252 @@
+{
+  "country": "LV",
+  "name": "Latvia",
+  "asOf": "2026-10",
+  "summary": "First-time use or possession of a small amount is an administrative offence, not a crime; a repeat after a formal warning is a crime (Criminal Law s.253²). Supply carries long prison terms.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "113",
+    "poisonControl": {
+      "name": "Saindēšanās un zāļu informācijas centrs (Poison and Drug Information Centre)",
+      "phone": "67042473"
+    }
+  },
+  "callingForHelp": "Since July 2024 the Criminal Law (s.254) exempts from criminal liability for drug use or possession anyone who gives or arranges help to someone overdosing.",
+  "callingForHelpConfidence": "high",
+  "drugChecking": "No drug checking service found.",
+  "sources": {
+    "kl": {
+      "title": "Krimināllikums (Criminal Law), sections 253–254",
+      "url": "https://likumi.lv/ta/id/88966-kriminallikums"
+    },
+    "drinkingAge": {
+      "title": "Legal drinking age (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    },
+    "energy": {
+      "title": "Energy drink: regulation by country (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Energy_drink"
+    },
+    "cannabisLv": {
+      "title": "Cannabis in Latvia (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Cannabis_in_Latvia"
+    },
+    "psilocybin": {
+      "title": "Legal status of psilocybin mushrooms (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "ayahuasca": {
+      "title": "Legal status of ayahuasca by country (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_ayahuasca_by_country"
+    },
+    "euReach": {
+      "title": "Dáil answer on nitrous oxide incl. EU REACH consumer restriction (Sept 2026), HRB National Drugs Library",
+      "url": "https://www.drugsandalcohol.ie/46896/"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "decriminalised",
+      "note": "First small-amount possession or use is an administrative offence; a repeat after a formal warning is a crime.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "medium"
+    },
+    "mushrooms": {
+      "status": "decriminalised",
+      "note": "Psilocybin mushrooms count as a narcotic; first small-amount possession is administrative, repeat is a crime.",
+      "sources": [
+        "kl",
+        "psilocybin"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "DMT controlled; plants aren't banned, but DMT preparations (ayahuasca) are. First small amount is administrative.",
+      "sources": [
+        "kl",
+        "ayahuasca"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "decriminalised",
+      "note": "Mescaline is controlled; first small-amount possession is administrative, repeat is a crime.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "decriminalised",
+      "note": "Controlled; first small-amount possession is administrative, repeat after warning is a crime.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "decriminalised",
+      "note": "Controlled; first small-amount possession is administrative, repeat after warning is a crime.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "decriminalised",
+      "note": "Controlled; first small-amount possession is administrative, repeat after warning is a crime.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "decriminalised",
+      "note": "Controlled; first small-amount possession is administrative, repeat after warning is a crime.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "medium"
+    },
+    "5-meo-xxt": {
+      "status": "decriminalised",
+      "note": "5-MeO-DMT and related tryptamines are controlled (new psychoactive substances also banned); first small amount is administrative.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "First small-amount possession/use is an administrative offence (fines reported up to €280 for ~1 g); a repeat after a formal warning is a crime.",
+      "sources": [
+        "kl",
+        "cannabisLv"
+      ],
+      "confidence": "medium"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Controlled medicine: unprescribed small-amount possession is treated like other drugs (administrative first, then criminal).",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "medium"
+    },
+    "mxe": {
+      "status": "decriminalised",
+      "note": "Controlled; first small-amount possession is administrative, repeat after warning is a crime.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "low"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not verified. DXM is not under the UN drug conventions; whether it is OTC or prescription-only in Latvia was not confirmed.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a controlled drug; national sales rules not verified. EU ban on consumer sales expected from Feb 2027.",
+      "sources": [
+        "euReach"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "decriminalised",
+      "note": "First small-amount possession is administrative; repeat after warning is a crime. ADHD medicines by prescription.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "First small-amount possession is administrative; repeat after warning is a crime.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "medium"
+    },
+    "cocaine": {
+      "status": "decriminalised",
+      "note": "First small-amount possession is administrative; repeat after warning is a crime.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "medium"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal, but selling energy drinks to under-18s has been banned since 2016.",
+      "sources": [
+        "energy"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 18; buyers aged 18–25 must show ID.",
+      "sources": [
+        "drinkingAge"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "decriminalised",
+      "note": "GHB is controlled; first small-amount possession is administrative. Status of GBL/1,4-BD not verified.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "low"
+    },
+    "opioids": {
+      "status": "decriminalised",
+      "note": "Heroin and other opioids: first small-amount possession is administrative; repeat after warning is a crime.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "medium"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine. Whether unprescribed possession is itself an offence was not verified.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Psychotropic substances: unprescribed small-amount possession is treated like other drugs.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Medical MAOIs are prescription-only; harmala/Syrian rue not known to be controlled. Ayahuasca preparations are illegal (DMT).",
+      "sources": [
+        "ayahuasca"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "grey",
+      "note": "Prescription-only medicines, not controlled drugs.",
+      "sources": [
+        "kl"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

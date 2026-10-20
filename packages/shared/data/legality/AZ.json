@@ -1,0 +1,279 @@
+{
+  "country": "AZ",
+  "name": "Azerbaijan",
+  "asOf": "2026-10",
+  "summary": "Using drugs or holding less than the legal 'significant amount' is an administrative offence (fine 300–400 AZN or up to 2 months' arrest); more is a crime (up to 3 yrs; dealing 3–7 yrs, more if aggravated).",
+  "emergency": {
+    "general": "112",
+    "ambulance": "103",
+    "poisonControl": {
+      "name": "Poison Information Unit, Baku (24h)",
+      "phone": "+994 12 597 99 24"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law. Voluntarily handing over drugs exempts from liability; refusing a medical drug test is fined (300–400 AZN).",
+  "callingForHelpConfidence": "medium",
+  "drugChecking": "No drug-checking service found.",
+  "sources": {
+    "cc": {
+      "title": "Criminal Code, art. 234 (illegal drug circulation)",
+      "url": "https://e-qanun.az/framework/46947"
+    },
+    "cao": {
+      "title": "Code of Administrative Offences, arts. 206–208, 455",
+      "url": "https://e-qanun.az/framework/46960"
+    },
+    "list": {
+      "title": "Law No. 960-IIQ (2005) – lists of controlled narcotic drugs, psychotropics and precursors (as amended)",
+      "url": "https://e-qanun.az/framework/11268"
+    },
+    "dxmLaw": {
+      "title": "Law No. 1164-VIQD (24 May 2024) amending the control lists (dextromethorphan)",
+      "url": "https://e-qanun.az/framework/57001"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    },
+    "who": {
+      "title": "WHO – World directory of poisons centres (2023)",
+      "url": "https://www.who.int/data/gho/data/themes/topics/indicator-groups/poison-control-and-unintentional-poisoning"
+    },
+    "e112": {
+      "title": "Wikipedia – 112 emergency number (national numbers)",
+      "url": "https://en.wikipedia.org/wiki/112_(emergency_telephone_number)"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "decriminalised",
+      "note": "Listed. Below the legal 'significant amount': fine 300–400 AZN or up to 2 months' arrest; above it: up to 3 yrs.",
+      "sources": [
+        "list",
+        "cao",
+        "cc"
+      ],
+      "confidence": "medium"
+    },
+    "mushrooms": {
+      "status": "decriminalised",
+      "note": "Psilocybin/psilocin are listed; mushrooms are presumably treated likewise. Small amounts: fine or arrest.",
+      "sources": [
+        "list",
+        "cao"
+      ],
+      "confidence": "low"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "DMT is listed (ayahuasca contains DMT). Below the legal 'significant amount': fine 300–400 AZN or up to 2 months' arrest; above it: up to 3 yrs.",
+      "sources": [
+        "list",
+        "cao",
+        "cc"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "decriminalised",
+      "note": "Mescaline is listed; status of cacti not confirmed. Below the legal 'significant amount': fine 300–400 AZN or up to 2 months' arrest; above it: up to 3 yrs.",
+      "sources": [
+        "list",
+        "cao",
+        "cc"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "decriminalised",
+      "note": "DOM and DOB are listed. Below the legal 'significant amount': fine 300–400 AZN or up to 2 months' arrest; above it: up to 3 yrs.",
+      "sources": [
+        "list",
+        "cao",
+        "cc"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "decriminalised",
+      "note": "25B-, 25C-, 25I-NBOMe are listed. Below the legal 'significant amount': fine 300–400 AZN or up to 2 months' arrest; above it: up to 3 yrs.",
+      "sources": [
+        "list",
+        "cao",
+        "cc"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "decriminalised",
+      "note": "2C-B is listed. Below the legal 'significant amount': fine 300–400 AZN or up to 2 months' arrest; above it: up to 3 yrs.",
+      "sources": [
+        "list",
+        "cao",
+        "cc"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "unknown",
+      "note": "2C-T compounds were not found by name in the national lists (not UN-controlled).",
+      "sources": [
+        "list",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "5-MeO tryptamines were not found by name in the national lists (not UN-controlled).",
+      "sources": [
+        "list",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Small amounts and small-scale cultivation for own use are administrative offences (fine or up to 2 months' arrest); more is a crime.",
+      "sources": [
+        "cao",
+        "cc",
+        "list"
+      ],
+      "confidence": "medium"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Ketamine was not found on the narcotic/psychotropic lists (only methoxyketamine); hospital anaesthetic.",
+      "sources": [
+        "list"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "decriminalised",
+      "note": "Methoxetamine is listed. Below the legal 'significant amount': fine 300–400 AZN or up to 2 months' arrest; above it: up to 3 yrs.",
+      "sources": [
+        "list",
+        "cao",
+        "cc"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "medical",
+      "note": "Since May 2024 single-ingredient dextromethorphan is a controlled psychotropic (List III); combination cold medicines are exempt.",
+      "sources": [
+        "dxmLaw",
+        "list"
+      ],
+      "confidence": "high"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Nitrous oxide is not on the controlled-substance lists.",
+      "sources": [
+        "list"
+      ],
+      "confidence": "medium"
+    },
+    "amphetamines": {
+      "status": "decriminalised",
+      "note": "Amphetamines and methylphenidate are listed. Below the legal 'significant amount': fine 300–400 AZN or up to 2 months' arrest; above it: up to 3 yrs.",
+      "sources": [
+        "list",
+        "cao",
+        "cc"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "MDMA is listed. Below the legal 'significant amount': fine 300–400 AZN or up to 2 months' arrest; above it: up to 3 yrs.",
+      "sources": [
+        "list",
+        "cao",
+        "cc"
+      ],
+      "confidence": "medium"
+    },
+    "cocaine": {
+      "status": "decriminalised",
+      "note": "Cocaine is listed. Below the legal 'significant amount': fine 300–400 AZN or up to 2 months' arrest; above it: up to 3 yrs.",
+      "sources": [
+        "list",
+        "cao",
+        "cc"
+      ],
+      "confidence": "medium"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not controlled; selling energy drinks to minors is fined (CAO 455.2).",
+      "sources": [
+        "cao"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Selling alcohol to minors (under 18) is fined; minimum retail prices apply (CAO 455).",
+      "sources": [
+        "cao"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "unknown",
+      "note": "GHB, GBL and 1,4-butanediol were not found by name in the national lists, although GHB is UN Schedule II.",
+      "sources": [
+        "list",
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "opioids": {
+      "status": "decriminalised",
+      "note": "Heroin, morphine, oxycodone, fentanyl are listed. Small amounts: fine/arrest; more: up to 3 yrs. Rx opioids need a prescription.",
+      "sources": [
+        "list",
+        "cao",
+        "cc"
+      ],
+      "confidence": "medium"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Tramadol was not found on the narcotic/psychotropic lists; prescription medicine.",
+      "sources": [
+        "list"
+      ],
+      "confidence": "low"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Controlled psychotropics (List III), prescription-only; unprescribed use is an administrative offence.",
+      "sources": [
+        "list",
+        "cao"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "MAOI antidepressants are prescription-only; harmala alkaloids were not found on the lists; ayahuasca contains DMT.",
+      "sources": [
+        "list"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only antidepressants; not controlled substances.",
+      "sources": [
+        "list"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

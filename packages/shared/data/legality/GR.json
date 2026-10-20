@@ -1,0 +1,250 @@
+{
+  "country": "GR",
+  "name": "Greece",
+  "asOf": "2026-10",
+  "summary": "Drug use and possession for own use are criminal offences (Law 4139/2013, art. 29: up to 5 months' prison, can go unpunished if one-off; dependent users can be diverted to treatment). Medical cannabis legal.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "166",
+    "poisonControl": {
+      "name": "Poison Information Centre, Athens (24h)",
+      "phone": "+30 210 779 3777"
+    }
+  },
+  "callingForHelp": "No specific Good Samaritan law found. Use and possession remain criminal, so police involvement is possible; health staff are bound by medical confidentiality.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No established public drug-checking service found.",
+  "sources": {
+    "euda": {
+      "title": "EUDA – Penalties for drug law offences in Europe at a glance (updated Sept 2024)",
+      "url": "https://www.euda.europa.eu/publications/topic-overviews/content/drug-law-penalties-at-a-glance_en"
+    },
+    "wikiCannabisGr": {
+      "title": "Wikipedia – Cannabis in Greece",
+      "url": "https://en.wikipedia.org/wiki/Cannabis_in_Greece"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    },
+    "wikiMush": {
+      "title": "Wikipedia – Legal status of psilocybin mushrooms",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "wikiDrink": {
+      "title": "Wikipedia – Legal drinking age",
+      "url": "https://en.wikipedia.org/wiki/Legal_drinking_age"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "Use and possession for own use are crimes: up to 5 months' prison, often suspended; may go unpunished if one-off and kept off criminal record copies.",
+      "sources": [
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin/psilocin are controlled and mushrooms are treated as psilocin: possession for own use is a crime (up to 5 months' prison).",
+      "sources": [
+        "euda",
+        "wikiMush"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "DMT is UN Schedule I: possession for own use is a crime (up to 5 months' prison, often suspended).",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is UN Schedule I: possession for own use is a crime (up to 5 months' prison). Status of cacti not confirmed.",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOM, DOB, DOC are UN Schedule I: possession for own use is a crime (up to 5 months' prison, often suspended).",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "NBOMes are UN Schedule I: possession for own use is a crime (up to 5 months' prison, often suspended).",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B is UN Schedule II: possession for own use is a crime (up to 5 months' prison, often suspended).",
+      "sources": [
+        "euda",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "unknown",
+      "note": "2C-T-2/2C-T-7 are not UN-scheduled; could not confirm whether Greece lists them nationally.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "5-meo-xxt": {
+      "status": "unknown",
+      "note": "5-MeO-DMT and 5-MeO-MiPT are not UN-scheduled; could not confirm whether Greece lists them nationally.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Possession or growing for own use: up to 5 months' prison (may go unpunished if one-off). Medical cannabis legal since 2017.",
+      "sources": [
+        "euda",
+        "wikiCannabisGr"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "unknown",
+      "note": "Prescription anaesthetic; could not confirm its national control status. If controlled, non-prescribed possession is a crime.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "UN Schedule II since 2016: possession for own use is a crime (up to 5 months' prison).",
+      "sources": [
+        "incb",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not a controlled drug; could not confirm its pharmacy/prescription status in Greece.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "unknown",
+      "note": "Not UN-scheduled; no national ban or rule found in sources checked.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Possession for own use is a crime (up to 5 months' prison, often suspended). Methylphenidate is available on prescription for ADHD.",
+      "sources": [
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "Use and possession for own use are crimes: up to 5 months' prison, often suspended; may go unpunished if one-off and kept off criminal record copies.",
+      "sources": [
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Use and possession for own use are crimes: up to 5 months' prison, often suspended; may go unpunished if one-off and kept off criminal record copies.",
+      "sources": [
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal for adults; selling alcohol to under-18s is prohibited.",
+      "sources": [
+        "wikiDrink"
+      ],
+      "confidence": "medium"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is UN Schedule II: possession for own use is a crime. GBL/1,4-BD status not confirmed. Sodium oxybate is prescription-only.",
+      "sources": [
+        "incb",
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin: possession for own use is a crime (up to 5 months' prison); dependent users can be diverted to treatment. Prescription opioids medical-only.",
+      "sources": [
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only (list D); possession without a prescription can be prosecuted as drug possession.",
+      "sources": [
+        "euda"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "MAOI antidepressants are prescription-only. Status of harmala alkaloids/ayahuasca not confirmed (DMT is controlled).",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

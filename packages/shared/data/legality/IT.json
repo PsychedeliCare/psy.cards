@@ -1,0 +1,309 @@
+{
+  "country": "IT",
+  "name": "Italy",
+  "asOf": "2026-10",
+  "summary": "Possessing any drug for personal use is an administrative offence (licence/passport suspension, DPR 309/90 art. 75); supply is a crime. Hemp-flower sales banned in 2025. No legal drug-checking framework.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "118",
+    "poisonControl": {
+      "name": "Centro Antiveleni Milano (Niguarda), 24h",
+      "phone": "+39 02 6610 1029"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law. Personal-use possession is not a crime, so health staff have no duty to report it and are bound by secrecy. Failing to help someone in danger is an offence (c.p. art. 593).",
+  "callingForHelpConfidence": "medium",
+  "drugChecking": "No national legal framework; a few regional outreach projects (e.g. Neutravel, Piedmont) offer checking at events.",
+  "sources": {
+    "euda": {
+      "title": "EUDA – Penalties for drug law offences in Europe at a glance (updated Sept 2024)",
+      "url": "https://www.euda.europa.eu/publications/topic-overviews/content/drug-law-penalties-at-a-glance_en"
+    },
+    "dpr75": {
+      "title": "DPR 309/1990, art. 75 – administrative sanctions for personal use (Normattiva)",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1990-10-09;309~art75"
+    },
+    "dm2006": {
+      "title": "Ministry of Health decree, 11 April 2006 – indicative personal-use quantity limits",
+      "url": "https://www.gazzettaufficiale.it/eli/id/2006/04/24/06A04031/sg"
+    },
+    "dm2019": {
+      "title": "DM 23 Dec 2019 (tiletamine) – confirms ketamine is in Table I and medicines Section A",
+      "url": "https://antidroga.interno.gov.it/wp-content/uploads/2020/11/D.M.-23-dicembre-2019-3.pdf"
+    },
+    "dm2021": {
+      "title": "DM 24 May 2021 – GHB/oxybate in Table IV and medicines Section B",
+      "url": "https://antidroga.interno.gov.it/wp-content/uploads/2021/06/D.M.-24-MAGGIO-2021-1.pdf"
+    },
+    "dm2022": {
+      "title": "DM 23 Feb 2022 – ayahuasca, harmine, harmaline, B. caapi, P. viridis added to Table I",
+      "url": "https://portale.fnomceo.it/wp-content/uploads/2022/03/decreto-23-febbraio-2022.pdf"
+    },
+    "smTables": {
+      "title": "San Marino DD 136/2026 – drug tables reproducing Italy's DPR 309/90 tables (used as a proxy for current Italian listings)",
+      "url": "https://www.consigliograndeegenerale.sm/on-line/home/archivio-leggi-decreti-e-regolamenti/documento17160432.html"
+    },
+    "emcddaGbl": {
+      "title": "Drugnet Ireland summary of EMCDDA GHB/GBL paper (2008) – Italy controls GHB precursors",
+      "url": "https://www.drugsandalcohol.ie/12086/"
+    },
+    "ilpostLight": {
+      "title": "Il Post (24 Jul 2026) – the 2025 'cannabis light' ban in the courts",
+      "url": "https://www.ilpost.it/2026/07/24/criminalizzazione-cannabis-light-tribunali/"
+    },
+    "ilpostN2o": {
+      "title": "Il Post (1 Jun 2026) – nitrous oxide is not a scheduled drug in Italy",
+      "url": "https://www.ilpost.it/2026/06/01/gas-esilarante/"
+    },
+    "codifaDxm": {
+      "title": "Codifa – Recotuss Sedativo (dextromethorphan), SOP non-prescription medicine",
+      "url": "https://www.codifa.it/farmaci/r/recotuss-sedativo-destrometorfano-bromidrato-antitussivi-oppioidi"
+    },
+    "balduzzi": {
+      "title": "DL 158/2012 (Balduzzi), art. 7 – ban on selling alcohol to under-18s",
+      "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2012-09-13;158"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    },
+    "wikiMush": {
+      "title": "Wikipedia – Legal status of psilocybin mushrooms",
+      "url": "https://en.wikipedia.org/wiki/Legal_status_of_psilocybin_mushrooms"
+    },
+    "neutravel": {
+      "title": "Neutravel (Piedmont) – nightlife harm reduction and drug checking",
+      "url": "https://www.neutravel.net/"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "decriminalised",
+      "note": "Table I: personal possession is an administrative offence (licence/passport suspension 2–12 months; first minor case may get a warning). Supply is a crime.",
+      "sources": [
+        "dpr75",
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "decriminalised",
+      "note": "Psilocybin and Psilocybe/Conocybe/Stropharia fungi are Table I: personal possession is an administrative offence. Growing or selling is a crime.",
+      "sources": [
+        "dpr75",
+        "smTables",
+        "wikiMush"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "Table I: personal possession is an administrative offence (2–12 months document suspension). Ayahuasca and its plants were added to Table I in 2022.",
+      "sources": [
+        "dpr75",
+        "dm2022"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "decriminalised",
+      "note": "Mescaline and peyote (Lophophora williamsii) are Table I: personal possession is administrative. San Pedro cacti are not named in the tables.",
+      "sources": [
+        "dpr75",
+        "smTables"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "decriminalised",
+      "note": "DOM, DOB and DOC are Table I: personal possession is an administrative offence (2–12 months document suspension); supply is a crime.",
+      "sources": [
+        "dpr75",
+        "smTables",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "decriminalised",
+      "note": "25I-, 25B-, 25C-NBOMe and many analogues are Table I: personal possession is an administrative offence; supply is a crime.",
+      "sources": [
+        "dpr75",
+        "smTables"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "decriminalised",
+      "note": "2C-B, 2C-I and analogues are Table I: personal possession is an administrative offence (2–12 months document suspension); supply is a crime.",
+      "sources": [
+        "dpr75",
+        "smTables"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "decriminalised",
+      "note": "2C-T-2, 2C-T-7 and 2C-T-21 are listed in Table I: personal possession is an administrative offence; supply is a crime.",
+      "sources": [
+        "dpr75",
+        "smTables"
+      ],
+      "confidence": "medium"
+    },
+    "5-meo-xxt": {
+      "status": "decriminalised",
+      "note": "5-MeO-DMT, 5-MeO-MiPT and 5-MeO-DiPT are listed in Table I: personal possession is an administrative offence; supply is a crime.",
+      "sources": [
+        "dpr75",
+        "smTables"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "Table II: personal possession → 1–3 months document suspension (indicative limit 500 mg THC). Medical use legal. 'Cannabis light' flower sales banned in 2025.",
+      "sources": [
+        "dpr75",
+        "dm2006",
+        "ilpostLight",
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "decriminalised",
+      "note": "Table I (also a licensed anaesthetic): non-prescribed personal possession is an administrative offence (2–12 months document suspension). Supply is a crime.",
+      "sources": [
+        "dpr75",
+        "dm2019"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "decriminalised",
+      "note": "Methoxetamine is Table I (UN-controlled since 2016): personal possession is an administrative offence; supply is a crime.",
+      "sources": [
+        "dpr75",
+        "smTables",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "legal",
+      "note": "Sold in pharmacies as cough medicine without prescription (SOP); dextromethorphan is expressly excluded from the drug tables.",
+      "sources": [
+        "codifaDxm",
+        "smTables"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a scheduled drug and no national ban on recreational sale (2026), but some towns ban sale or use by local ordinance.",
+      "sources": [
+        "ilpostN2o"
+      ],
+      "confidence": "medium"
+    },
+    "amphetamines": {
+      "status": "decriminalised",
+      "note": "Amphetamine and methamphetamine are Table I: personal possession is administrative. ADHD drugs (methylphenidate, lisdexamfetamine) need a special prescription.",
+      "sources": [
+        "dpr75",
+        "smTables"
+      ],
+      "confidence": "medium"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "Table I: personal possession is an administrative offence (indicative limit 750 mg MDMA); supply is a crime.",
+      "sources": [
+        "dpr75",
+        "dm2006"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "decriminalised",
+      "note": "Table I: personal possession is an administrative offence (indicative limit 750 mg cocaine); supply is a crime.",
+      "sources": [
+        "dpr75",
+        "dm2006"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not a controlled substance; sold freely.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal for adults; selling or serving alcohol to under-18s is prohibited (since 2012).",
+      "sources": [
+        "balduzzi"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "decriminalised",
+      "note": "GHB and GBL are Table IV: personal possession means 1–3 months document suspension. Sodium oxybate (Alcover, Xyrem) is a prescription medicine.",
+      "sources": [
+        "dpr75",
+        "dm2021",
+        "smTables",
+        "emcddaGbl"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "decriminalised",
+      "note": "Heroin and other opioids are Table I: personal possession is administrative (heroin indicative limit 250 mg). Prescription opioids are medical-only.",
+      "sources": [
+        "dpr75",
+        "dm2006"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription opioid listed in the drug tables; non-prescribed personal possession is an administrative offence like other drugs.",
+      "sources": [
+        "smTables",
+        "dpr75"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only and listed in Table IV; non-prescribed personal possession means 1–3 months document suspension.",
+      "sources": [
+        "dpr75",
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "decriminalised",
+      "note": "Harmine, harmaline, B. caapi and ayahuasca are Table I since 2022: personal possession is administrative. MAOI antidepressants are prescription-only.",
+      "sources": [
+        "dm2022",
+        "dpr75"
+      ],
+      "confidence": "high"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs, so possession itself is not penalised.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

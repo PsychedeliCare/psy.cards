@@ -1,0 +1,120 @@
+---
+/**
+ * Line map of Europe for the /about page. Countries light up in waves
+ * (`data-wave`) as scripts/about-page.ts raises `data-stage` on the section;
+ * lines run from Switzerland (home of the first PsyCare partners) to each
+ * capital.
+ * Outlines: src/data/europe-map.json (scripts/build-europe-map.mjs).
+ */
+import map from "../../data/europe-map.json";
+import { waveOf } from "../../data/europe-waves";
+
+const origin = map.countries.find((country) => country.id === "CH")!;
+const reach = Math.max(...map.countries.map((c) => Math.hypot(c.x - origin.x, c.y - origin.y)));
+const ripple = (x: number, y: number) => (Math.hypot(x - origin.x, y - origin.y) / reach).toFixed(3);
+
+/** A gentle arc from Bern, bowed to the north. */
+function arc(x: number, y: number): string {
+  const mx = (origin.x + x) / 2;
+  const my = (origin.y + y) / 2;
+  const length = Math.hypot(x - origin.x, y - origin.y);
+  const nx = -(y - origin.y) / length;
+  const ny = (x - origin.x) / length;
+  const bow = length * 0.18 * (ny > 0 ? -1 : 1);
+  return `M${origin.x} ${origin.y}Q${(mx + nx * bow).toFixed(1)} ${(my + ny * bow).toFixed(1)} ${x} ${y}`;
+}
+
+const pct = (value: number, total: number) => `${((value / total) * 100).toFixed(2)}%`;
+const landings = [
+  { id: "GB", code: "EN", label: "English" },
+  { id: "FR", code: "FR", label: "Français" },
+  { id: "DE", code: "DE", label: "Deutsch" },
+  { id: "IT", code: "IT", label: "Italiano" },
+].map((landing) => {
+  const country = map.countries.find((c) => c.id === landing.id)!;
+  return { ...landing, left: pct(country.x, map.width), top: pct(country.y, map.height) };
+});
+---
+
+<div class="eu-map" style={`--map-ratio: ${map.width} / ${map.height}`}>
+  <svg
+    viewBox={`0 0 ${map.width} ${map.height}`}
+    role="img"
+    aria-label="Map of Europe: 50 countries light up in four waves, starting from Switzerland."
+  >
+    <defs>
+      <radialGradient id="eu-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#fff" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#fff" stop-opacity="0" />
+      </radialGradient>
+      <linearGradient id="eu-line" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#99c659" />
+        <stop offset="50%" stop-color="#63addd" />
+        <stop offset="100%" stop-color="#b881b9" />
+      </linearGradient>
+    </defs>
+    <path class="eu-context" d={map.context} />
+    <g class="eu-countries">
+      {
+        map.countries.map((country) => (
+          <path
+            class="eu-country"
+            d={country.d}
+            data-cc={country.id}
+            data-wave={waveOf(country.id)}
+            style={`--ripple: ${ripple(country.x, country.y)}`}
+          />
+        ))
+      }
+    </g>
+    <g class="eu-lines">
+      {
+        map.countries
+          .filter((country) => country.id !== "CH")
+          .map((country) => (
+            <path
+              class="eu-line"
+              d={arc(country.x, country.y)}
+              pathLength="1"
+              data-wave={waveOf(country.id)}
+              style={`--ripple: ${ripple(country.x, country.y)}`}
+            />
+          ))
+      }
+    </g>
+    <g class="eu-dots">
+      {
+        map.countries.map((country) => (
+          <circle
+            class="eu-dot"
+            cx={country.x}
+            cy={country.y}
+            r="2.6"
+            data-wave={waveOf(country.id)}
+            style={`--ripple: ${ripple(country.x, country.y)}`}
+          />
+        ))
+      }
+    </g>
+    <g class="eu-origin" transform={`translate(${origin.x} ${origin.y})`}>
+      <circle class="eu-origin__pulse" r="10" />
+      <circle class="eu-origin__pulse eu-origin__pulse--late" r="10" />
+      <circle class="eu-origin__core" r="4" />
+    </g>
+  </svg>
+
+  {
+    landings.map((landing, index) => (
+      <span
+        class="eu-landing"
+        style={`left: ${landing.left}; top: ${landing.top}; --i: ${index}`}
+        aria-hidden="true"
+      >
+        <span class="eu-landing__card">
+          <b>{landing.code}</b>
+          <small>{landing.label}</small>
+        </span>
+      </span>
+    ))
+  }
+</div>

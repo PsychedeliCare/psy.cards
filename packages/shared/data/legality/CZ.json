@@ -1,0 +1,304 @@
+{
+  "country": "CZ",
+  "name": "Czechia",
+  "asOf": "2026-10",
+  "summary": "Since 2026 adults 21+ may hold limited cannabis and grow 3 plants. For other drugs a small amount for own use is a misdemeanour (fine up to CZK 50,000); more is a crime. Any supply is a crime.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "155",
+    "poisonControl": {
+      "name": "Toxikologické informační středisko (TIS)",
+      "phone": "+420 224 919 293"
+    }
+  },
+  "callingForHelp": "No Good Samaritan law. Paramedics are bound by medical confidentiality and police are not routinely sent to overdoses, but they do attend deaths, violence or public incidents.",
+  "callingForHelpConfidence": "low",
+  "drugChecking": "No standard drug checking service; some NGOs offer reagent tests at events. The legal status of on-site testing is unclear.",
+  "sources": {
+    "tz": {
+      "title": "Criminal Code 40/2009 Coll., §§ 283a–285 (version from 1 Jan 2026)",
+      "url": "https://www.zakonyprolidi.cz/cs/2009-40"
+    },
+    "znl": {
+      "title": "Addictive Substances Act 167/1998 Coll., § 5(12)–(13) cannabis limits, § 33l psilocybin, § 39 misdemeanours",
+      "url": "https://www.zakonyprolidi.cz/cs/1998-167"
+    },
+    "nv463": {
+      "title": "Government Decree 463/2013 Coll. on lists of addictive substances (version 25 Jun 2026)",
+      "url": "https://www.zakonyprolidi.cz/cs/2013-463"
+    },
+    "ns2014": {
+      "title": "Supreme Court opinion Tpjn 301/2013 on 'greater than small' amounts (police archive)",
+      "url": "https://archiv.policie.gov.cz/clanek/mnozstvi-vetsi-nez-male.aspx"
+    },
+    "echo24": {
+      "title": "Echo24: Supreme Court tightens 'greater than small' drug amounts (indicative values)",
+      "url": "https://www.echo24.cz/a/iuFWj/nejvyssi-soud-zprisnil-vetsi-nez-male-mnozstvi-drog"
+    },
+    "expats": {
+      "title": "Expats.cz: Inside Czechia's 2026 cannabis laws",
+      "url": "https://www.expats.cz/czech-news/article/inside-czechia-s-2026-cannabis-laws-how-much-can-you-legally-grow-and-possess"
+    },
+    "nv552": {
+      "title": "Government Decree 552/2025 Coll. on medical psilocybin (from 1 Jan 2026)",
+      "url": "https://www.epravo.cz/top/zakony/sbirka-zakonu/sb/2025/552"
+    },
+    "mzcrGbl": {
+      "title": "Ministry of Health FOI reply: GBL listed in Annex 6 of Decree 463/2013 from 1 Apr 2025",
+      "url": "https://mzd.gov.cz/zadost-o-informace-ze-dne-30-5-2025/"
+    },
+    "suklDxm": {
+      "title": "SÚKL letter (2017): two dextromethorphan products moved to prescription-only",
+      "url": "https://sukl.gov.cz/wp-content/uploads/2025/02/Informacni-dopis-pro-zdravotnicke-pracovniky_dextromethorfan_15.8.2017.pdf"
+    },
+    "zoz": {
+      "title": "Act 65/2017 Coll. on protection of health from addictive substances (alcohol sales age 18)",
+      "url": "https://www.zakonyprolidi.cz/cs/2017-65"
+    },
+    "euN2O": {
+      "title": "EU Perspectives (Mar 2026): nitrous oxide classified reprotoxic; large canisters may be barred from consumer sale from Feb 2027",
+      "url": "https://euperspectives.eu/2026/03/nitrous-oxide-deaths-and-injuries-fuel-calls-for-eu-wide-restrictions/"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "decriminalised",
+      "note": "Small amount for own use: misdemeanour (fine up to CZK 50,000). Above a 'small amount' (courts' guide: a few blotters) it is a crime, up to 2 yrs.",
+      "sources": [
+        "znl",
+        "tz",
+        "ns2014"
+      ],
+      "confidence": "medium"
+    },
+    "mushrooms": {
+      "status": "decriminalised",
+      "note": "Small amount or growing a few: misdemeanour. Courts' guide: >40 mushrooms is a crime (up to 1 yr). Spores legal. Medical psilocybin only in clinics since 2026.",
+      "sources": [
+        "znl",
+        "tz",
+        "echo24",
+        "nv552"
+      ],
+      "confidence": "high"
+    },
+    "dmt": {
+      "status": "decriminalised",
+      "note": "DMT is listed. Small amount: misdemeanour fine; more is a crime (up to 2 yrs). Ayahuasca counts as a DMT preparation.",
+      "sources": [
+        "nv463",
+        "znl",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "decriminalised",
+      "note": "Mescaline is listed. Small amounts (incl. growing a few cacti for own use) are a misdemeanour; larger amounts are a crime (up to 1–2 yrs).",
+      "sources": [
+        "nv463",
+        "znl",
+        "tz"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "decriminalised",
+      "note": "DOB, DOC, DOM etc. are listed. Small amount for own use: misdemeanour fine; more is a crime (up to 2 yrs).",
+      "sources": [
+        "nv463",
+        "znl",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "nbomes": {
+      "status": "decriminalised",
+      "note": "25I-, 25B-, 25C-NBOMe are listed. Small amount for own use: misdemeanour fine; more is a crime (up to 2 yrs).",
+      "sources": [
+        "nv463",
+        "znl",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "2c-x": {
+      "status": "decriminalised",
+      "note": "2C-B and other 2C-x are listed. Small amount for own use: misdemeanour fine; more is a crime (up to 2 yrs).",
+      "sources": [
+        "nv463",
+        "znl",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "2c-t-x": {
+      "status": "decriminalised",
+      "note": "2C-T-2 and 2C-T-7 are listed. Small amount for own use: misdemeanour fine; more is a crime (up to 2 yrs).",
+      "sources": [
+        "nv463",
+        "znl",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "5-meo-xxt": {
+      "status": "grey",
+      "note": "5-MeO-DMT is not on the main drug lists (2026 check). 5-MeO-MiPT, 5-MeO-DALT and 5-MeO-AMT are listed: small amount = misdemeanour.",
+      "sources": [
+        "nv463",
+        "znl"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "decriminalised",
+      "note": "From 1 Jan 2026, 21+: up to 25 g in public, 100 g at home and 3 plants are legal. Up to 50 g/200 g: fine; more is a crime. No legal sales.",
+      "sources": [
+        "znl",
+        "tz",
+        "expats"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Prescription/veterinary medicine and a controlled psychotropic. Without a prescription: small amount = misdemeanour, more is a crime.",
+      "sources": [
+        "nv463",
+        "znl",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "mxe": {
+      "status": "decriminalised",
+      "note": "Methoxetamine is listed. Small amount for own use: misdemeanour fine; more is a crime (up to 2 yrs).",
+      "sources": [
+        "nv463",
+        "znl",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "dxm": {
+      "status": "legal",
+      "note": "Not a controlled drug (explicitly excluded). Some cough products are sold in pharmacies; higher-strength tablets are prescription-only since 2017.",
+      "sources": [
+        "nv463",
+        "suklDxm"
+      ],
+      "confidence": "medium"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a controlled drug and no specific consumer ban found. EU chemical rules may stop sales of large canisters to the public from Feb 2027.",
+      "sources": [
+        "nv463",
+        "euN2O"
+      ],
+      "confidence": "medium"
+    },
+    "amphetamines": {
+      "status": "decriminalised",
+      "note": "Small amount: misdemeanour. Courts' guide: >1.5 g methamphetamine is a crime. ADHD medicines (e.g. methylphenidate) are prescription-only.",
+      "sources": [
+        "znl",
+        "tz",
+        "ns2014",
+        "echo24"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "decriminalised",
+      "note": "Small amount for own use: misdemeanour fine. Above a 'small amount' (courts' guide: a few pills) it is a crime, up to 2 yrs.",
+      "sources": [
+        "znl",
+        "tz",
+        "ns2014"
+      ],
+      "confidence": "medium"
+    },
+    "cocaine": {
+      "status": "decriminalised",
+      "note": "Small amount for own use: misdemeanour fine. Courts' guide: more than about 1 g is a crime (up to 2 yrs).",
+      "sources": [
+        "znl",
+        "tz",
+        "echo24"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Legal and unrestricted for adults.",
+      "sources": [
+        "nv463"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "Legal from 18; selling or serving alcohol to under-18s is prohibited.",
+      "sources": [
+        "zoz"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "decriminalised",
+      "note": "GHB is listed and GBL was added in 2025 (industrial products it can't be easily extracted from are exempt). Small amount: misdemeanour. Oxybate is Rx.",
+      "sources": [
+        "nv463",
+        "mzcrGbl",
+        "znl"
+      ],
+      "confidence": "high"
+    },
+    "opioids": {
+      "status": "decriminalised",
+      "note": "Small amount: misdemeanour; courts' guide: >1.5 g heroin is a crime. Morphine, oxycodone, fentanyl etc. are prescription-only.",
+      "sources": [
+        "znl",
+        "tz",
+        "echo24"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only medicine. It is not on the Czech controlled-drug lists, so possession without a prescription is not a drug offence.",
+      "sources": [
+        "nv463"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Prescription-only and controlled psychotropics. Without a prescription: small amount = misdemeanour, more is a crime.",
+      "sources": [
+        "nv463",
+        "znl",
+        "tz"
+      ],
+      "confidence": "high"
+    },
+    "maois": {
+      "status": "grey",
+      "note": "Pharmaceutical MAOIs (e.g. moclobemide) are prescription-only. Harmala alkaloids/Syrian rue are not listed, but DMT in ayahuasca is.",
+      "sources": [
+        "nv463"
+      ],
+      "confidence": "medium"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only medicines; not controlled drugs, so possession without a prescription is not an offence.",
+      "sources": [
+        "nv463"
+      ],
+      "confidence": "medium"
+    }
+  }
+}

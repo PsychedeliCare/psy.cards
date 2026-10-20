@@ -1,0 +1,270 @@
+{
+  "country": "TR",
+  "name": "Türkiye",
+  "asOf": "2026-10",
+  "summary": "Very strict: buying, possessing or using any drug is a crime (2–5 yrs). First offences usually get a 5-yr deferred prosecution with at least 1 yr of probation and drug tests. Selling: 10+ yrs.",
+  "emergency": {
+    "general": "112",
+    "ambulance": "112",
+    "poisonControl": {
+      "name": "National Poison Information Centre (UZEM), 24h",
+      "phone": "114"
+    }
+  },
+  "callingForHelp": "Health workers must report signs of a crime (TCK 280). A user who asks for treatment before any investigation starts is not punished and need not be reported (TCK 192/4).",
+  "callingForHelpConfidence": "high",
+  "drugChecking": "No drug-checking service found.",
+  "sources": {
+    "tck": {
+      "title": "Turkish Criminal Code No. 5237, arts. 188, 191, 192, 280 (consolidated)",
+      "url": "https://www.mevzuat.gov.tr/MevzuatMetin/1.5.5237.pdf"
+    },
+    "euda": {
+      "title": "EUDA – Penalties for drug law offences at a glance",
+      "url": "https://www.euda.europa.eu/publications/topic-overviews/content/drug-law-penalties-at-a-glance_en"
+    },
+    "incb": {
+      "title": "INCB Green List 2026 – psychotropic substances under international control",
+      "url": "https://www.incb.org/incb/uploads/documents/Psychotropics/forms/greenlist/2026/2510307E.pdf"
+    },
+    "alc": {
+      "title": "Law No. 4250 on alcohol, art. 6 (sales rules)",
+      "url": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=4250&MevzuatTur=1&MevzuatTertip=3"
+    },
+    "tuseb": {
+      "title": "TÜSEB public health institute – nitrous oxide misuse report (Dec 2025)",
+      "url": "https://files.tuseb.gov.tr/tuhke/files/yayinlar/2026-03-24-14-17-49.pdf"
+    },
+    "uzem": {
+      "title": "Ministry of Health – poisoning diagnosis and treatment guide (UZEM 114), 2025",
+      "url": "https://hsgm.saglik.gov.tr/media/attachments/2025/07/03/zehirlenme-tani-ve-tedavi-rehberi.pdf"
+    },
+    "wiki5meo": {
+      "title": "Wikipedia – 5-MeO-DMT (legal status)",
+      "url": "https://en.wikipedia.org/wiki/5-MeO-DMT"
+    },
+    "titck": {
+      "title": "TİTCK – green-prescription requirement for a tramadol product (2016)",
+      "url": "https://titck.gov.tr/storage/announcement/53TuoVI9.pdf"
+    },
+    "e112": {
+      "title": "Wikipedia – 112 emergency number (national numbers)",
+      "url": "https://en.wikipedia.org/wiki/112_(emergency_telephone_number)"
+    }
+  },
+  "substances": {
+    "lsd": {
+      "status": "illegal",
+      "note": "UN Schedule I. Buying, possessing or using: 2–5 yrs (TCK 191); first offence usually deferred prosecution with probation.",
+      "sources": [
+        "tck",
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "mushrooms": {
+      "status": "illegal",
+      "note": "Psilocybin is UN Schedule I; mushrooms containing it are prosecuted as drugs. Possession/use: 2–5 yrs (TCK 191).",
+      "sources": [
+        "tck",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dmt": {
+      "status": "illegal",
+      "note": "UN Schedule I (ayahuasca contains DMT). Buying, possessing or using: 2–5 yrs (TCK 191); first offence usually deferred prosecution with probation.",
+      "sources": [
+        "tck",
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "mescaline": {
+      "status": "illegal",
+      "note": "Mescaline is UN Schedule I; the status of ornamental cacti was not confirmed. Possession/use: 2–5 yrs (TCK 191).",
+      "sources": [
+        "tck",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dox": {
+      "status": "illegal",
+      "note": "DOM, DOB and DOC are UN Schedule I. Buying, possessing or using: 2–5 yrs (TCK 191); first offence usually deferred prosecution with probation.",
+      "sources": [
+        "tck",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "nbomes": {
+      "status": "illegal",
+      "note": "25I-, 25B-, 25C-NBOMe are UN Schedule I. Buying, possessing or using: 2–5 yrs (TCK 191); first offence usually deferred prosecution with probation.",
+      "sources": [
+        "tck",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-x": {
+      "status": "illegal",
+      "note": "2C-B is UN Schedule II. Buying, possessing or using: 2–5 yrs (TCK 191); first offence usually deferred prosecution with probation.",
+      "sources": [
+        "tck",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "2c-t-x": {
+      "status": "unknown",
+      "note": "2C-T compounds are not UN-controlled; national scheduling not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "5-meo-xxt": {
+      "status": "illegal",
+      "note": "5-MeO-DMT has been controlled since Dec 2013; other 5-MeO tryptamines not confirmed. Possession/use: 2–5 yrs.",
+      "sources": [
+        "wiki5meo",
+        "tck"
+      ],
+      "confidence": "medium"
+    },
+    "cannabis": {
+      "status": "illegal",
+      "note": "Possession/use: 2–5 yrs (TCK 191), +50% near schools, hospitals etc.; first offence usually deferred prosecution with probation and tests.",
+      "sources": [
+        "tck",
+        "euda"
+      ],
+      "confidence": "high"
+    },
+    "ketamine": {
+      "status": "medical",
+      "note": "Prescription-only anaesthetic; unprescribed supply of such medicines is prosecuted like dealing (TCK 188/6). Exact scheduling not confirmed.",
+      "sources": [
+        "tck"
+      ],
+      "confidence": "low"
+    },
+    "mxe": {
+      "status": "illegal",
+      "note": "UN Schedule II since 2016. Buying, possessing or using: 2–5 yrs (TCK 191); first offence usually deferred prosecution with probation.",
+      "sources": [
+        "tck",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "dxm": {
+      "status": "unknown",
+      "note": "Not UN-controlled; national control and prescription status of dextromethorphan not confirmed.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "nitrous": {
+      "status": "grey",
+      "note": "Not a controlled drug; a 2025 public-health institute report says sales face no specific legal restrictions and calls for rules.",
+      "sources": [
+        "tuseb"
+      ],
+      "confidence": "medium"
+    },
+    "amphetamines": {
+      "status": "illegal",
+      "note": "Amphetamines are controlled (supply penalties +50%); ADHD stimulants are prescription-only. Possession: 2–5 yrs.",
+      "sources": [
+        "tck"
+      ],
+      "confidence": "high"
+    },
+    "mdma": {
+      "status": "illegal",
+      "note": "UN Schedule I. Buying, possessing or using: 2–5 yrs (TCK 191); first offence usually deferred prosecution with probation.",
+      "sources": [
+        "tck",
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "cocaine": {
+      "status": "illegal",
+      "note": "Possession/use: 2–5 yrs (TCK 191); supply penalties are increased by half for cocaine and heroin.",
+      "sources": [
+        "tck"
+      ],
+      "confidence": "high"
+    },
+    "caffeine": {
+      "status": "legal",
+      "note": "Not controlled.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "high"
+    },
+    "alcohol": {
+      "status": "legal",
+      "note": "18+. Shop sales banned 22:00–06:00; no sales at schools, hospitals, stadiums or petrol stations, or near schools/places of worship.",
+      "sources": [
+        "alc"
+      ],
+      "confidence": "high"
+    },
+    "ghb/gbl": {
+      "status": "illegal",
+      "note": "GHB is UN Schedule II (possession/use: 2–5 yrs). National status of GBL and 1,4-BD not confirmed.",
+      "sources": [
+        "tck",
+        "incb"
+      ],
+      "confidence": "medium"
+    },
+    "opioids": {
+      "status": "illegal",
+      "note": "Heroin/morphine possession: 2–5 yrs; supply penalties +50%. Prescription opioids are legal only with a prescription.",
+      "sources": [
+        "tck"
+      ],
+      "confidence": "high"
+    },
+    "tramadol": {
+      "status": "medical",
+      "note": "Prescription-only; some tramadol products need a controlled 'green' prescription. Unprescribed supply: TCK 188/6.",
+      "sources": [
+        "titck",
+        "tck"
+      ],
+      "confidence": "medium"
+    },
+    "benzodiazepines": {
+      "status": "medical",
+      "note": "Controlled prescription psychotropics; supplying them without a prescription is prosecuted like dealing (TCK 188/6).",
+      "sources": [
+        "tck"
+      ],
+      "confidence": "medium"
+    },
+    "maois": {
+      "status": "medical",
+      "note": "MAOI antidepressants are prescription-only; Syrian rue is not known to be controlled; ayahuasca contains DMT.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "low"
+    },
+    "ssris": {
+      "status": "medical",
+      "note": "Prescription-only antidepressants; not controlled substances.",
+      "sources": [
+        "incb"
+      ],
+      "confidence": "medium"
+    }
+  }
+}
