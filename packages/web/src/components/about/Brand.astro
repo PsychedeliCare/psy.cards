@@ -1,0 +1,15 @@
+---
+/**
+ * The platform name as set on /about: in capitals, with the dot pulled off
+ * the C (in capitals it sits right against it, and far from the open Y).
+ * The text stays "psy.cards", so screen readers say the name rather than
+ * spelling it out, and it copies as typed.
+ */
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span class:list={["lp-brand", className]}>psy<span class="lp-brand__dot">.</span>cards</span>

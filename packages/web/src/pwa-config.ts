@@ -23,8 +23,9 @@ export const PWA_NAVIGATE_FALLBACK_DENYLIST = [
   /^\/cache(?:\/|$)/,
   // The reference page must never be replaced by the interactive combos shell.
   /^\/sources(?:\/|$)/,
-  // The 3D logo is online-only (see PWA_GLOB_IGNORES).
+  // The 3D logo and the unlisted /about page are online-only (see PWA_GLOB_IGNORES).
   /^\/logo(?:\/|$)/,
+  /^\/about(?:\/|$)/,
 ];
 
 /**
@@ -41,7 +42,8 @@ export const PWA_GLOB_PATTERNS = [
 /**
  * Redundant font formats — woff2 is enough for offline use. The 3D logo
  * (/logo, and the /about hero that reuses it) bundles three.js into the
- * `scene` chunk; it is decoration, so offline installs skip it.
+ * `scene` chunk; it is decoration, so offline installs skip it. /about is an
+ * unlisted landing page: installs never download it or its own assets.
  */
 export const PWA_GLOB_IGNORES = [
   "**/*.{ttf,woff,eot}",
@@ -49,6 +51,9 @@ export const PWA_GLOB_IGNORES = [
   "logo/**",
   "_astro/logo.astro_*.js",
   "_astro/scene.*.js",
+  "about/**",
+  "_astro/AboutPage.astro_*.js",
+  "_astro/about.*.css",
 ];
 
 /** Allow large font assets and hero images in the precache manifest. */

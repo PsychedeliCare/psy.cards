@@ -1,0 +1,95 @@
+---
+/**
+ * A small, static drugs wheel for /about: the seven categories the cards are
+ * grouped and coloured by (after The Drugs Wheel), each with its substances
+ * around the rim. Hovering a segment names it.
+ */
+import { getColumns, getGroupLabels, visibleGroupOrder } from "../../data/config";
+import type { Locale } from "../../i18n/locales";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
+const columns = getColumns(locale);
+const groupLabels = getGroupLabels(locale);
+const groups = visibleGroupOrder.map((group) => ({
+  group,
+  label: groupLabels[group],
+  substances: columns.filter((column) => column.group === group),
+}));
+const total = groups.reduce((sum, group) => sum + group.substances.length, 0);
+
+const C = 160;
+const SEGMENT = 360 / groups.length;
+const GAP = 1.8;
+const round = (n: number) => Math.round(n * 100) / 100;
+const point = (r: number, deg: number) => {
+  const rad = (deg * Math.PI) / 180;
+  return [round(C + r * Math.sin(rad)), round(C - r * Math.cos(rad))];
+};
+/** Annular sector from `a0` to `a1` degrees (clockwise from 12 o'clock). */
+const sector = (r0: number, r1: number, a0: number, a1: number) => {
+  const large = a1 - a0 > 180 ? 1 : 0;
+  const [x0, y0] = point(r1, a0);
+  const [x1, y1] = point(r1, a1);
+  const [x2, y2] = point(r0, a1);
+  const [x3, y3] = point(r0, a0);
+  return `M${x0} ${y0}A${r1} ${r1} 0 ${large} 1 ${x1} ${y1}L${x2} ${y2}A${r0} ${r0} 0 ${large} 0 ${x3} ${y3}Z`;
+};
+/** Arc for a label, drawn so text reads upright on the lower half too. */
+const labelArc = (r: number, a0: number, a1: number) => {
+  const mid = (a0 + a1) / 2;
+  const flip = mid > 90 && mid < 270;
+  const [sx, sy] = point(r, flip ? a1 : a0);
+  const [ex, ey] = point(r, flip ? a0 : a1);
+  return `M${sx} ${sy}A${r} ${r} 0 0 ${flip ? 0 : 1} ${ex} ${ey}`;
+};
+
+const slices = groups.map((group, index) => {
+  const a0 = index * SEGMENT + GAP / 2;
+  const a1 = (index + 1) * SEGMENT - GAP / 2;
+  const mid = (a0 + a1) / 2;
+  const flip = mid > 90 && mid < 270;
+  const step = (a1 - a0) / group.substances.length;
+  return {
+    ...group,
+    path: sector(62, 118, a0, a1),
+    arc: labelArc(flip ? 96 : 86, a0 + 0.5, a1 - 0.5),
+    substances: group.substances.map((substance, i) => ({
+      ...substance,
+      path: sector(123, 150, a0 + i * step + 0.6, a0 + (i + 1) * step - 0.6),
+    })),
+  };
+});
+---
+
+<svg class="lp-wheel" viewBox="0 0 320 320" role="img" aria-labelledby="lp-wheel-title">
+  <title id="lp-wheel-title">
+    {groups.length} categories, {total} substances: {groups.map((group) => `${group.label} (${group.substances.map((s) => s.label).join(", ")})`).join("; ")}
+  </title>
+  <defs>
+    {slices.map((slice) => <path id={`lp-wheel-arc-${slice.group}`} d={slice.arc} />)}
+  </defs>
+  {
+    slices.map((slice) => (
+      <g class="lp-wheel__group" style={`--c: var(--color-${slice.group})`}>
+        <path class="lp-wheel__category" d={slice.path}>
+          <title>{slice.label}</title>
+        </path>
+        <text class="lp-wheel__label">
+          <textPath href={`#lp-wheel-arc-${slice.group}`} startOffset="50%" text-anchor="middle">{slice.label}</textPath>
+        </text>
+        {slice.substances.map((substance) => (
+          <path class="lp-wheel__substance" d={substance.path}>
+            <title>{substance.label}</title>
+          </path>
+        ))}
+      </g>
+    ))
+  }
+  <circle class="lp-wheel__hub" cx={C} cy={C} r="57" />
+  <text class="lp-wheel__count" x={C} y={C + 4} text-anchor="middle">{groups.length}</text>
+  <text class="lp-wheel__caption" x={C} y={C + 24} text-anchor="middle">categories</text>
+</svg>

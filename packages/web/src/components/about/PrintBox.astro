@@ -1,0 +1,68 @@
+---
+/**
+ * A mockup of the boxed print set for /about: a rigid index box whose
+ * holographic lid floats above it, showing the cards inside sorted behind
+ * seven colour-coded category dividers. Pure CSS 3D (styles/about.css);
+ * it flies in and tilts like the cards (the `.fly` / `.hc` hooks).
+ */
+import { getColumns, getGroupLabels, visibleGroupOrder } from "../../data/config";
+import type { Locale } from "../../i18n/locales";
+import Brand from "./Brand.astro";
+
+interface Props {
+  locale?: Locale;
+  edition?: string;
+  from?: "left" | "right" | "bottom";
+  delay?: number;
+  rest?: number;
+  class?: string;
+}
+
+const { locale = "en", edition = "English", from = "right", delay = 0, rest = 0, class: className } = Astro.props;
+const groupLabels = getGroupLabels(locale);
+const columns = getColumns(locale);
+// Back to front, so the first category stands at the front of the box.
+const dividers = visibleGroupOrder
+  .map((group, index) => ({ group, label: groupLabels[group], count: columns.filter((c) => c.group === group).length, index }))
+  .reverse();
+---
+
+<div class:list={["fly fly--box", className]} data-fly={from} data-fly-delay={delay} style={`--rest: ${rest}deg`}>
+  <div class="fly__body">
+    <div class="hc box" role="img" aria-label={`The boxed set: a rigid box with a holographic lid, holding ${columns.length} cards sorted behind ${visibleGroupOrder.length} colour-coded category dividers.`}>
+      <div class="box__scene" aria-hidden="true">
+        <div class="box__base">
+          <span class="box__face box__face--back"></span>
+          <span class="box__face box__face--bottom"></span>
+          <span class="box__face box__face--left"></span>
+          {
+            dividers.map((divider) => (
+              <span class="box__divider" style={`--c: var(--color-${divider.group}); --i: ${divider.index}; --n: ${visibleGroupOrder.length}`}>
+                <span class="box__tab">{divider.label}</span>
+              </span>
+            ))
+          }
+          <span class="box__face box__face--right"></span>
+          <span class="box__face box__face--front">
+            <span class="box__label"><Brand /></span>
+            <span class="box__stripes">
+              {visibleGroupOrder.map((group) => <i style={`--c: var(--color-${group})`} />)}
+            </span>
+          </span>
+        </div>
+        <div class="box__lid">
+          <span class="box__face box__lid-side box__lid-side--back"></span>
+          <span class="box__face box__lid-side box__lid-side--left"></span>
+          <span class="box__face box__lid-side box__lid-side--right"></span>
+          <span class="box__face box__lid-side box__lid-side--front"><span>Edition 2 · {edition}</span></span>
+          <span class="box__face box__lid-top">
+            <span class="box__holo"></span>
+            <img src="/favicon.png" alt="" width="64" height="64" />
+            <span class="box__wordmark"><Brand /></span>
+            <span class="box__meta">{columns.length} substances · {visibleGroupOrder.length} categories</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

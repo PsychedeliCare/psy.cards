@@ -5,6 +5,8 @@
  * content in between and a brand footer. Sizes are in cqi of the card, so
  * the same A6 layout holds at any width.
  */
+import Brand from "./Brand.astro";
+
 interface Props {
   /** Small index in the top corner, e.g. "01". */
   index?: string;
@@ -45,7 +47,7 @@ const Tag = href ? "a" : "div";
       <p class="pc-foot">
         <span class="pc-brand">
           <img src="/favicon.png" alt="" width="14" height="14" />
-          psy.cards
+          <Brand />
         </span>
         <span>{foot}</span>
       </p>

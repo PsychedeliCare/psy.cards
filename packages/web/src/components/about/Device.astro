@@ -1,0 +1,55 @@
+---
+/**
+ * A phone in its frame for /about: iPhone (Dynamic Island) or Android
+ * (punch-hole camera). It flies in and tilts like the cards (the `.fly` /
+ * `.hc` hooks in scripts/about-page.ts). The slot is the screen, laid out in
+ * `em` of the screen width so it scales with the frame. The screen is a
+ * picture of the app: assistive tech gets `label` instead of its contents.
+ */
+import { Icon } from "@twodft/astro-icon/components";
+
+interface Props {
+  kind?: "iphone" | "android";
+  label: string;
+  from?: "left" | "right" | "bottom";
+  delay?: number;
+  rest?: number;
+  time?: string;
+  /** Airplane mode in the status bar (offline screens). */
+  offline?: boolean;
+  class?: string;
+}
+
+const { kind = "iphone", label, from = "bottom", delay = 0, rest = 0, time, offline = false, class: className } = Astro.props;
+const clock = time ?? (kind === "iphone" ? "9:41" : "12:30");
+---
+
+<div class:list={["fly fly--device", className]} data-fly={from} data-fly-delay={delay} style={`--rest: ${rest}deg`}>
+  <div class="fly__body">
+    <div class:list={["hc device", `device--${kind}`]} role="img" aria-label={label}>
+      <span class="device__key device__key--a" aria-hidden="true"></span>
+      <span class="device__key device__key--b" aria-hidden="true"></span>
+      <div class="device__screen" aria-hidden="true">
+        <div class="device__status">
+          <span class="device__time">{clock}</span>
+          <span class="device__camera"></span>
+          <span class="device__icons">
+            {offline ? (
+              <Icon name="ph:airplane-fill" />
+            ) : kind === "iphone" ? (
+              <Icon name="ph:cell-signal-full-fill" />
+            ) : (
+              <Icon name="ph:wifi-high-bold" />
+            )}
+            <Icon name="ph:battery-high-fill" />
+          </span>
+        </div>
+        <div class="device__content">
+          <slot />
+        </div>
+        <span class="device__home"></span>
+      </div>
+      <span class="device__glare" aria-hidden="true"></span>
+    </div>
+  </div>
+</div>

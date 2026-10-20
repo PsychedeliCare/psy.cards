@@ -1,0 +1,185 @@
+---
+/**
+ * Screens of the native apps for /about's apps phase, drawn from the same
+ * data as the cards: the dose chart and "For you" maths, a combination
+ * sheet and the offline data pack. Laid out in em of the screen width
+ * (see Device.astro); the look follows the SwiftUI and Compose apps.
+ */
+import fs from "node:fs";
+import path from "node:path";
+import { Icon } from "@twodft/astro-icon/components";
+import DoseScale from "../card/DoseScale.astro";
+import { getCardData } from "../../data/harm-reduction";
+import { getInteraction } from "../../data/combos";
+import { getColumns, getDisplayLabel, getGroupLabels } from "../../data/config";
+import { getLocalInfo, listCountries } from "../../data/local-info";
+import { locales, type Locale } from "../../i18n/locales";
+import { bacPerUnit, caffeineSingleDoseMg, unitsToLimit, upperLimitMg } from "../../lib/personal-dose";
+import { buildEffectCurve } from "../../lib/effect-curve";
+import type { DoseChart } from "../../lib/dose-chart";
+
+interface Props {
+  view: "calculator" | "sheet" | "offline";
+  locale?: Locale;
+}
+
+const { view, locale = "en" } = Astro.props;
+const label = (key: string) => getDisplayLabel(locale, key);
+const groupLabels = getGroupLabels(locale);
+const columns = getColumns(locale);
+
+// Calculator: a 75 kg man, as set in the "Your body" sheet.
+const WEIGHT = 75;
+const mdma = getCardData("mdma", locale);
+const mdmaChart = mdma.primary?.chartable ? (mdma.primary as DoseChart) : undefined;
+const mdmaFactor = mdma.personal?.kind === "mgPerKg" ? mdma.personal.male : 1.5;
+const mdmaLimit = upperLimitMg(WEIGHT, mdmaFactor);
+const marker = mdmaChart ? Math.min(100, (mdmaLimit / mdmaChart.scaleMax) * 100) : 0;
+const curve = buildEffectCurve(mdma.timing);
+const hours = (value?: { value: string; unit: string }) => (value ? `${value.value} ${value.unit === "minutes" ? "min" : "h"}` : "");
+const alcohol = getCardData("alcohol", locale).personal;
+const perUnit = alcohol?.kind === "bac" ? bacPerUnit(alcohol.gramsPerUnit, WEIGHT, alcohol.rMale) : 0;
+const units = alcohol?.kind === "bac" ? unitsToLimit(alcohol.limitPermille, perUnit) : 0;
+const caffeine = getCardData("caffeine", locale).personal;
+const caffeineMg = caffeine?.kind === "caffeine" ? caffeineSingleDoseMg(WEIGHT, caffeine.singleMgPerKg, caffeine.singleMaxMg) : 0;
+const fmt = (n: number, digits = 0) => new Intl.NumberFormat(locale, { maximumFractionDigits: digits }).format(n);
+
+// Sheet: ketamine with alcohol, over the combination grid.
+const combo = getInteraction("ketamine", "alcohol", locale);
+const ketamine = getCardData("ketamine", locale);
+const grid = columns.slice(0, 11).map((row) =>
+  columns.slice(0, 8).map((column) =>
+    row.key === column.key ? `var(--color-${row.group})` : `var(--color-${getInteraction(row.key, column.key, locale).definition.statusKey})`
+  )
+);
+
+// Offline: what the data pack holds, measured from the generated pack.
+function dataPackSize(): string {
+  try {
+    const root = path.resolve(process.cwd(), "../ios/PsyCards/Resources/DataPack");
+    const walk = (dir: string): number =>
+      fs.readdirSync(dir, { withFileTypes: true }).reduce(
+        (sum, entry) => sum + (entry.isDirectory() ? walk(path.join(dir, entry.name)) : fs.statSync(path.join(dir, entry.name)).size),
+        0
+      );
+    return `${fmt(walk(root) / 1e6, 1)} MB`;
+  } catch {
+    return "≈ 4 MB";
+  }
+}
+const pack = view === "offline" ? dataPackSize() : "";
+const comboCount = (columns.length * (columns.length - 1)) / 2;
+const swiss = getLocalInfo("CH");
+---
+
+{view === "calculator" && (
+  <div class="scr scr--ios">
+    <header class="scr-nav">
+      <span class="scr-nav__back"><Icon name="ph:caret-left-bold" />Substances</span>
+      <span class="scr-nav__action"><Icon name="ph:arrows-clockwise-bold" /></span>
+    </header>
+    <div class="scr-card" style="--hue: var(--color-empathogen)">
+      <p class="scr-chip">{groupLabels.empathogen}</p>
+      <p class="scr-card__title">{label("mdma")}</p>
+      <p class="scr-label"><Icon name="ph:scales-fill" />Dose · oral · mg</p>
+      {mdmaChart && (
+        <div class="scr-dose">
+          <DoseScale chart={mdmaChart} locale={locale} widthEm={17} />
+          <span class="scr-dose__marker" style={`--x: ${(marker / 100).toFixed(3)}`}><span>you</span></span>
+        </div>
+      )}
+      {curve && (
+        <div class="scr-curve">
+          <p class="scr-label"><Icon name="ph:clock-fill" />Effects over time</p>
+          <div class="scr-curve__bars">
+            {curve.bars.map((bar) => <i class={`is-${bar.phase}`} style={`--h: ${bar.height.toFixed(2)}`} />)}
+          </div>
+          <p class="scr-curve__note">Onset {hours(mdma.timing.onset)} · lasts {hours(mdma.timing.duration)}</p>
+        </div>
+      )}
+      <div class="scr-foryou">
+        <Icon name="ph:user-fill" />
+        <span>
+          <small>Your upper limit</small>
+          <b>{fmt(mdmaLimit)} mg</b>
+        </span>
+        <em>{fmt(mdmaFactor, 1)} mg/kg × {WEIGHT} kg</em>
+      </div>
+    </div>
+    <div class="scr-sheet scr-glass">
+      <span class="scr-sheet__grab"></span>
+      <p class="scr-sheet__title">Your body</p>
+      <div class="scr-row">
+        <span class="scr-segmented"><span class="is-on"><Icon name="ph:gender-male-bold" />Male</span><span><Icon name="ph:gender-female-bold" />Female</span></span>
+        <span class="scr-stepper"><span>−</span><b>{WEIGHT} kg</b><span>+</span></span>
+      </div>
+      <ul class="scr-results">
+        <li style="--c: var(--color-empathogen)"><span>{label("mdma")}</span><b>≤ {fmt(mdmaLimit)} mg</b></li>
+        <li style="--c: var(--color-depressant)"><span>{label("alcohol")}</span><b>+{fmt(perUnit, 2)} ‰ <small>per unit · {fmt(units, 1)} to {fmt(alcohol?.kind === "bac" ? alcohol.limitPermille : 0.5, 1)} ‰</small></b></li>
+        <li style="--c: var(--color-stimulant)"><span>{label("caffeine")}</span><b>≤ {fmt(caffeineMg)} mg <small>at once</small></b></li>
+      </ul>
+    </div>
+  </div>
+)}
+
+{view === "sheet" && (
+  <div class="scr scr--android">
+    <header class="scr-appbar">
+      <b>Combinations</b>
+      <Icon name="ph:magnifying-glass-bold" />
+    </header>
+    <div class="scr-grid" style={`--cols: ${grid[0]!.length}`}>
+      {grid.flat().map((color) => <i style={`--c: ${color}`} />)}
+    </div>
+    <div class="scr-bottomsheet">
+      <span class="scr-sheet__grab"></span>
+      <p class="scr-pair">
+        <span style="--c: var(--color-dissociative)">{label("ketamine")}</span>
+        <Icon name="ph:plus-bold" />
+        <span style="--c: var(--color-depressant)">{label("alcohol")}</span>
+      </p>
+      <p class="scr-status" style={`--c: var(--color-${combo.definition.statusKey})`}>
+        <Icon name="ph:x-circle-fill" />{combo.definition.label}
+      </p>
+      <p class="scr-text">{combo.note}</p>
+      <p class="scr-label"><Icon name="ph:siren-fill" />If it happens</p>
+      <ol class="scr-steps">
+        {(ketamine.content.overdose?.actions ?? []).slice(0, 2).map((action) => <li>{action}</li>)}
+      </ol>
+      <p class="scr-source"><Icon name="ph:books-bold" />TripSit combination chart · cited studies</p>
+      <div class="scr-buttons">
+        <span>{label("ketamine")} card</span>
+        <span>{label("alcohol")} card</span>
+      </div>
+    </div>
+  </div>
+)}
+
+{view === "offline" && (
+  <div class="scr scr--ios">
+    <p class="scr-largetitle">Settings</p>
+    <div class="scr-banner">
+      <Icon name="ph:cloud-check-fill" />
+      <span><b>Ready offline</b><small>Everything is on this phone: no signal, account or tracking needed.</small></span>
+    </div>
+    <p class="scr-section">Offline data</p>
+    <ul class="scr-list">
+      <li><Icon name="ph:cards-fill" />Substances<b>{columns.length}</b></li>
+      <li><Icon name="ph:grid-four-fill" />Combinations<b>{comboCount}</b></li>
+      <li><Icon name="ph:map-pin-fill" />Countries<b>{listCountries(locale).length}</b></li>
+      <li><Icon name="ph:translate-bold" />Languages<b>{locales.map((code) => code.toUpperCase()).join(" ")}</b></li>
+      <li><Icon name="ph:hard-drives-fill" />Data pack<b>{pack}</b></li>
+    </ul>
+    <p class="scr-section">Where you are</p>
+    <ul class="scr-list">
+      <li><span class="scr-flag">🇨🇭</span>Country<b>Switzerland <Icon name="ph:caret-right-bold" /></b></li>
+      <li><Icon name="ph:phone-call-fill" />Emergency<b>{swiss?.emergency.number ?? "112"}</b></li>
+      <li><Icon name="ph:first-aid-kit-fill" />Poison centre<b>{swiss?.emergency.poison?.phone ?? "—"}</b></li>
+    </ul>
+    <nav class="scr-tabbar scr-glass">
+      <span><Icon name="ph:cards-fill" />Substances</span>
+      <span><Icon name="ph:grid-four-fill" />Combos</span>
+      <span class="is-on"><Icon name="ph:gear-six-fill" />Settings</span>
+    </nav>
+  </div>
+)}

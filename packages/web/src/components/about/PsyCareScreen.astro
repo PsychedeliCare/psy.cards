@@ -1,0 +1,177 @@
+---
+/**
+ * Screens of the planned PsyCare app for /about: a responder's certificate,
+ * the alert on the lock screen, availability, and the three steps of an
+ * alert (staff request, matching, briefing). Laid out in em of the screen
+ * width (see Device.astro), with the same look as the psy.cards apps.
+ */
+import { Icon } from "@twodft/astro-icon/components";
+
+type View = "certificate" | "alert" | "availability" | "request" | "match" | "briefing";
+
+interface Props {
+  view: View;
+  /** Inline SVG of the QR code shown on the certificate. */
+  qr?: string;
+}
+
+const { view, qr } = Astro.props;
+
+const week = [
+  ["Mon", 0],
+  ["Tue", 0],
+  ["Wed", 0],
+  ["Thu", 1],
+  ["Fri", 2],
+  ["Sat", 2],
+  ["Sun", 1],
+] as const;
+const modules = [
+  ["Safe space", 1],
+  ["De-escalation", 1],
+  ["Medical handover", 1],
+  ["Integration", 0.6],
+] as const;
+const responders = [
+  { initials: "AL", role: "Level 2 · EN FR", distance: "350 m", state: "Notified" },
+  { initials: "JM", role: "Therapist · DE EN", distance: "600 m", state: "Notified" },
+  { initials: "SK", role: "Level 1 · IT", distance: "—", state: "Busy" },
+];
+---
+
+{view === "certificate" && (
+  <div class="scr scr--ios scr--psycare">
+    <p class="scr-largetitle">Certificate</p>
+    <div class="scr-cert">
+      <span class="scr-cert__foil"></span>
+      <p class="scr-cert__kicker"><img src="/favicon.png" alt="" width="14" height="14" />PsyCare responder</p>
+      <p class="scr-cert__level">Level 2</p>
+      <p class="scr-cert__role">Peer supporter</p>
+      <div class="scr-cert__foot">
+        <dl class="scr-cert__specs">
+          <div><dt>Languages</dt><dd>EN · FR · DE</dd></div>
+          <div><dt>Valid until</dt><dd>Dec 2029</dd></div>
+          <div><dt>Issued with</dt><dd>Local partner</dd></div>
+        </dl>
+        {qr && <div class="scr-cert__qr" set:html={qr} />}
+      </div>
+    </div>
+    <p class="scr-section">Training</p>
+    <ul class="scr-list scr-list--progress">
+      {modules.map(([name, done]) => (
+        <li style={`--done: ${done}`}>
+          <Icon name={done === 1 ? "ph:check-circle-fill" : "ph:circle-dashed-bold"} />
+          {name}
+          <b>{done === 1 ? "Done" : `${Math.round(done * 100)} %`}</b>
+          <i></i>
+        </li>
+      ))}
+    </ul>
+    <p class="scr-cta" style="--c: var(--color-opioid)"><Icon name="ph:qr-code-bold" />Show to event staff</p>
+  </div>
+)}
+
+{view === "alert" && (
+  <div class="scr scr--lock">
+    <svg class="scr-map" viewBox="0 0 200 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M-10 290 C 40 250, 80 300, 120 240 S 190 170, 210 130" />
+      <path d="M20 60 C 60 120, 90 90, 110 160 S 140 330, 170 410" />
+      <path d="M0 200 H 200" class="is-faint" />
+      <path d="M100 0 V 400" class="is-faint" />
+      <rect x="20" y="90" width="46" height="26" rx="6" />
+      <rect x="128" y="270" width="48" height="28" rx="6" />
+      <rect x="124" y="56" width="48" height="24" rx="6" />
+      <text x="43" y="107">Stage A</text>
+      <text x="152" y="288">Camping</text>
+      <text x="148" y="72">Chill-out</text>
+    </svg>
+    <span class="scr-radar"><i></i><i></i><i></i><Icon name="ph:first-aid-fill" /></span>
+    <p class="scr-lock__time">02:14</p>
+    <p class="scr-lock__date">Saturday 17 July</p>
+    <div class="scr-notification scr-glass">
+      <p class="scr-notification__head"><img src="/favicon.png" alt="" width="16" height="16" />PSYCARE ALERT<small>now</small></p>
+      <p class="scr-notification__title">PsyCare needed: medical tent, Stage B</p>
+      <p class="scr-notification__text">Requested by the first-aid team · 350 m · about 4 min on foot</p>
+      <p class="scr-notification__actions"><span class="is-primary">Accept</span><span>Not now</span></p>
+    </div>
+  </div>
+)}
+
+{view === "availability" && (
+  <div class="scr scr--android scr--psycare">
+    <header class="scr-appbar"><b>Availability</b><Icon name="ph:bell-ringing-fill" /></header>
+    <div class="scr-toggle-row">
+      <span><b>Available now</b><small>Alerts within 2 km of the site</small></span>
+      <span class="scr-switch is-on"></span>
+    </div>
+    <p class="scr-section">This week</p>
+    <ul class="scr-week">
+      {week.map(([day, level]) => <li><span>{day}</span><i style={`--level: ${level}`}></i></li>)}
+    </ul>
+    <p class="scr-section">Alerts</p>
+    <ul class="scr-list">
+      <li><Icon name="ph:translate-bold" />Languages<b>EN · FR · DE</b></li>
+      <li><Icon name="ph:map-pin-area-fill" />Radius<b>2 km</b></li>
+      <li><Icon name="ph:siren-fill" />Type<b>PsyCare only</b></li>
+    </ul>
+    <p class="scr-section">Next shifts</p>
+    <ul class="scr-list">
+      <li><Icon name="ph:calendar-check-fill" />Sunrise Festival<b>Fri 22–04</b></li>
+      <li><Icon name="ph:calendar-check-fill" />Club night, Lausanne<b>Sat 23–05</b></li>
+    </ul>
+  </div>
+)}
+
+{view === "request" && (
+  <div class="scr scr--ios scr--psycare">
+    <p class="scr-largetitle">Request PsyCare</p>
+    <p class="scr-hint">First-aid and awareness staff</p>
+    <div class="scr-field"><Icon name="ph:map-pin-fill" /><span><small>Where</small>Medical tent, Stage B</span></div>
+    <div class="scr-field"><Icon name="ph:note-pencil-bold" /><span><small>Need</small>Guest anxious, conscious, with a friend</span></div>
+    <div class="scr-field"><Icon name="ph:translate-bold" /><span><small>Language</small>English</span></div>
+    <p class="scr-section">Urgency</p>
+    <p class="scr-segmented scr-segmented--wide"><span>Can wait</span><span class="is-on">Soon</span><span>Now</span></p>
+    <p class="scr-cta" style="--c: var(--color-dangerous)"><Icon name="ph:siren-fill" />Request PsyCare</p>
+  </div>
+)}
+
+{view === "match" && (
+  <div class="scr scr--ios scr--psycare">
+    <p class="scr-largetitle">Finding help</p>
+    <div class="scr-pulse"><span class="scr-radar"><i></i><i></i><i></i><Icon name="ph:first-aid-fill" /></span></div>
+    <p class="scr-hint">Certified, available, nearby, speaking English</p>
+    <ul class="scr-people">
+      {responders.map((person) => (
+        <li class:list={[person.state === "Busy" && "is-off"]}>
+          <b>{person.initials}</b>
+          <span>{person.role}<small>{person.distance}</small></span>
+          <em>{person.state}</em>
+        </li>
+      ))}
+    </ul>
+    <p class="scr-banner scr-banner--info"><Icon name="ph:first-aid-kit-fill" /><span><b>Medical tent informed</b><small>They can still call an ambulance at any time.</small></span></p>
+    <p class="scr-cta scr-cta--quiet">Cancel request</p>
+  </div>
+)}
+
+{view === "briefing" && (
+  <div class="scr scr--ios scr--psycare">
+    <p class="scr-banner scr-banner--ok"><Icon name="ph:check-circle-fill" /><span><b>AL accepted</b><small>Arriving in about 4 minutes</small></span></p>
+    <p class="scr-section">Meeting point</p>
+    <div class="scr-minimap">
+      <svg viewBox="0 0 200 90" aria-hidden="true">
+        <path d="M0 70 C 50 40, 90 80, 130 46 S 190 20, 200 16" />
+        <rect x="120" y="30" width="46" height="24" rx="6" />
+        <circle cx="60" cy="58" r="5" />
+      </svg>
+      <span>Medical tent, Stage B</span>
+    </div>
+    <p class="scr-section">Briefing</p>
+    <ul class="scr-checks">
+      <li class="is-done">Guest anxious, conscious, with a friend</li>
+      <li class="is-done">No medical emergency so far</li>
+      <li>Hand over to medical staff if needed</li>
+    </ul>
+    <p class="scr-cta" style="--c: var(--color-safe)"><Icon name="ph:hand-heart-fill" />I've arrived</p>
+  </div>
+)}

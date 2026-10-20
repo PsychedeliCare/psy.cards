@@ -14,7 +14,13 @@ import { Icon } from "@twodft/astro-icon/components";
 import SubstanceCard from "../components/SubstanceCard.astro";
 import HoloCard from "../components/about/HoloCard.astro";
 import Face from "../components/about/Face.astro";
+import Brand from "../components/about/Brand.astro";
 import EuropeMap from "../components/about/EuropeMap.astro";
+import DrugWheel from "../components/about/DrugWheel.astro";
+import Device from "../components/about/Device.astro";
+import AppScreen from "../components/about/AppScreen.astro";
+import PsyCareScreen from "../components/about/PsyCareScreen.astro";
+import PrintBox from "../components/about/PrintBox.astro";
 import PartnerLogos from "../components/PartnerLogos.astro";
 import { getColumns, getDisplayLabel, visibleGroupOrder, type GroupName } from "../data/config";
 import { getInteraction } from "../data/combos";
@@ -24,7 +30,6 @@ import { keyToSlug } from "../data/slug";
 import { qrCodeSvg } from "../lib/qr-code";
 import { PWA_THEME_COLOR } from "../pwa-config";
 import { getUiMessages } from "../i18n/load-locale";
-import { t } from "../i18n/ui";
 import { locales, localePath, type Locale } from "../i18n/locales";
 
 interface Props {
@@ -55,7 +60,7 @@ const liveLanguages: string[] = EUROPE_WAVES[0]!.languages;
 const euLanguageCount = euLanguages.length;
 const label = (key: string) => getDisplayLabel(locale, key);
 
-const title = "psy.cards — Harm reduction for all of Europe";
+const title = "PSY.CARDS — Harm reduction for all of Europe";
 const description =
   "Verified harm-reduction information on two-sided A6 cards, for the web, native apps, social media and print, in every European language.";
 const ogImage = new URL("/assets/opengraph.jpg", Astro.site ?? Astro.url.origin).href;
@@ -79,6 +84,40 @@ const moleculeByGroup: Partial<Record<GroupName, string>> = {
 };
 const logoCards = visibleGroupOrder.map((group) => ({ group, slug: keyToSlug(moleculeByGroup[group]!) }));
 const letters = [..."PSY.CARDS"];
+const wordmarkTail = "CARDS";
+
+// What the cards are built on (packages/shared/data/sources.json and the
+// card sources in harm-reduction.json), in plain words.
+const builtOn = [
+  {
+    title: "Data",
+    items: [
+      { name: "TripSit drug database", href: "https://github.com/TripSit/drugs", text: "Doses by route, onset and duration for every substance." },
+      { name: "TripSit combination chart", href: "https://github.com/TripSit/combogen", text: `Risk ratings for all ${comboCount} pairs, and the ${substanceCount} substances it covers.` },
+      { name: "PsychonautWiki", href: "https://psychonautwiki.org", text: "Effect descriptions, linked from each card." },
+      { name: "The Drugs Wheel", href: "https://www.thedrugswheel.com/", text: "Mark Adley's seven categories, which group and colour the cards." },
+      { name: "Country files", href: LINKS.sources, text: `Emergency numbers, drug laws and local services for ${countryCount} countries, each with its legal sources.` },
+      { name: "Wikipedia", href: "https://en.wikipedia.org/wiki/List_of_drug_combinations", text: "Street names for combinations, so search finds the words people use (CC BY-SA)." },
+    ],
+  },
+  {
+    title: "Research",
+    items: [
+      { name: "Gable, Addiction (2004)", href: "https://doi.org/10.1111/j.1360-0443.2004.00744.x", text: "Lethal versus usual doses: the toxicity margin under each dose chart." },
+      { name: "Nutt et al., The Lancet (2007)", href: "https://doi.org/10.1016/S0140-6736(07)60464-4", text: "Expert ratings behind the dependence meter." },
+      { name: "Saferparty.ch, EFSA, UK CMOs, Widmark", text: "The MDMA, caffeine and alcohol limits behind the “For you” calculators." },
+      { name: "EUDA, European Drug Report 2025", href: LINKS.euda, text: "The overdose figures on this page." },
+    ],
+  },
+  {
+    title: "Tools",
+    items: [
+      { name: "SmilesDrawer", href: "https://github.com/reymond-group/smilesDrawer", text: "Draws each molecule from its SMILES string." },
+      { name: "Astro, SwiftUI and Jetpack Compose", text: "The web app and the native apps, built from one shared data pack." },
+      { name: "three.js and WebGPU", text: "The holographic foils and the logo at the top of this page." },
+    ],
+  },
+];
 
 // Problem cards: real data from the combination chart and the card backs.
 const riskyPairs = [
@@ -113,35 +152,15 @@ const legend = [
 ] as const;
 const qr = await qrCodeSvg("https://psy.cards", 132);
 
-// Phase 02: "don't mix" chips straight from the combination data.
-const dangerousWith = (key: string, limit: number) =>
-  columns
-    .filter((column) => column.key !== key)
-    .filter((column) => {
-      const status = getInteraction(key, column.key, locale).definition.statusKey;
-      return status === "dangerous" || status === "serotoninsyndrome";
-    })
-    .slice(0, limit)
-    .map((column) => label(column.key));
-
-// Phase 02: the apps show the legal status and emergency number of the
-// country you're in (Switzerland and Germany here), from the card-back data.
-const localFor = (code: string, key: string) => {
-  const info = getLocalInfo(code);
-  const status = info?.substances[key]?.status ?? "unknown";
-  return { code, number: info?.emergency.number ?? "112", status: t(locale, ui, `card.legalStatus.${status}`) };
-};
-const iosLocal = localFor("CH", "ketamine");
-const androidLocal = localFor("DE", "mdma");
-
 const phases = [
   { id: "phase-web", n: "01", short: "Web" },
   { id: "phase-apps", n: "02", short: "Apps" },
   { id: "phase-social", n: "03", short: "Social" },
   { id: "phase-pilot", n: "04", short: "First print" },
   { id: "phase-scale", n: "05", short: "20,000 sets" },
-  { id: "europe", n: "06", short: "Europe" },
-  { id: "psycare", n: "07", short: "PsyCare" },
+  { id: "phase-festivals", n: "06", short: "Festivals" },
+  { id: "europe", n: "07", short: "Europe" },
+  { id: "psycare", n: "08", short: "PsyCare" },
 ];
 
 const posts = [
@@ -183,22 +202,13 @@ const posts = [
   },
 ];
 
-// Phase 05: each deck lists its own section titles, from the shared UI strings.
+// Phase 05: one boxed edition per launch language.
 const deckSpecs = [
-  { code: "en", language: "English", tag: "Know your dose", hue: "var(--color-stimulant)", molecule: "amphetamines" },
-  { code: "fr", language: "Français", tag: "Connais ta dose", hue: "var(--color-empathogen)", molecule: "mdma" },
-  { code: "de", language: "Deutsch", tag: "Kenne deine Dosis", hue: "var(--color-psychedelic)", molecule: "lsd" },
-  { code: "it", language: "Italiano", tag: "Conosci la tua dose", hue: "var(--color-dissociative)", molecule: "ketamine" },
+  { code: "en", language: "English", tag: "Know your dose", hue: "var(--color-stimulant)" },
+  { code: "fr", language: "Français", tag: "Connais ta dose", hue: "var(--color-empathogen)" },
+  { code: "de", language: "Deutsch", tag: "Kenne deine Dosis", hue: "var(--color-psychedelic)" },
+  { code: "it", language: "Italiano", tag: "Conosci la tua dose", hue: "var(--color-dissociative)" },
 ] as const;
-const decks = deckSpecs.map((deck) => {
-  const messages = getUiMessages(deck.code);
-  return {
-    ...deck,
-    sections: ["card.dose", "card.forYou", "card.effectsOverTime", "card.risks", "card.avoid", "card.emergency", "card.spacing"].map((key) =>
-      t(deck.code, messages, key)
-    ),
-  };
-});
 
 const waves = [
   {
@@ -231,15 +241,6 @@ const waveCounts = EUROPE_WAVES.reduce<Array<{ countries: number; languages: num
   return totals;
 }, []);
 
-const week = [
-  ["Mon", 0],
-  ["Tue", 0],
-  ["Wed", 0],
-  ["Thu", 1],
-  ["Fri", 2],
-  ["Sat", 2],
-  ["Sun", 1],
-] as const;
 ---
 
 <!doctype html>
@@ -253,6 +254,8 @@ const week = [
     <link rel="apple-touch-icon" href="/appicon.png" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <!-- Unlisted: nothing links here, and search engines should not list it. -->
+    <meta name="robots" content="noindex" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
@@ -276,7 +279,7 @@ const week = [
     <header class="lp-nav" data-lp-nav>
       <a class="lp-nav__brand" href="#top" aria-label="psy.cards — back to top">
         <img src="/favicon.png" alt="" width="30" height="30" />
-        <span>psy.cards</span>
+        <Brand />
       </a>
       <nav class="lp-nav__links" aria-label="Sections">
         <a href="#why">Why</a>
@@ -319,7 +322,7 @@ const week = [
             Drug safety, on <span class="lp-holo-text">two sides of a card.</span>
           </h1>
           <p class="lp-hero__lead lp-rise">
-            psy.cards condenses verified harm-reduction data into A6 cards: dose and timing on the
+            <Brand /> condenses verified harm-reduction data into A6 cards: dose and timing on the
             front, risks, interactions and local help on the back. The web version is live in four
             languages. Apps, social media and printed decks come next, then the rest of Europe.
           </p>
@@ -343,9 +346,9 @@ const week = [
           <img class="lp-logo__fallback" src="/favicon.png" alt="" width="600" height="600" />
           <p class="lp-logo__word" data-hero-word>
             <span class="lp-logo__letters" data-letters>
-              {letters.map((letter, i) => <span style={`--i: ${i}`}>{letter}</span>)}
+              {letters.map((letter, i) => <span class:list={[letter === "." && "lp-brand__dot"]} style={`--i: ${i}`}>{letter}</span>)}
             </span>
-            <span class="lp-logo__shine">{letters.join("")}</span>
+            <span class="lp-logo__shine">PSY<span class="lp-brand__dot">.</span>{wordmarkTail}</span>
           </p>
         </div>
 
@@ -448,6 +451,53 @@ const week = [
             </li>
           </ul>
         </div>
+
+        <div class="lp-built">
+          <div class="lp-built__intro lp-reveal">
+            <p class="lp-eyebrow">Built on open knowledge</p>
+            <h3 class="lp-h3">The work of others, condensed and credited</h3>
+            <p>
+              <Brand /> doesn't invent doses or risk ratings. It brings together what harm-reduction
+              communities and researchers have published, cross-checks it, translates it and puts it in
+              the same place on every card. Every claim links back to its source.
+            </p>
+            <figure class="lp-built__wheel">
+              <DrugWheel locale={locale} />
+              <figcaption>
+                Seven categories, after <a href="https://www.thedrugswheel.com/" target="_blank" rel="noreferrer noopener">The Drugs Wheel</a>:
+                each card takes the colour of its category, so a stimulant never looks like an opioid.
+              </figcaption>
+            </figure>
+          </div>
+          <div class="lp-built__lists">
+            {
+              builtOn.map((group) => (
+                <section class="lp-built__group lp-reveal" aria-label={group.title}>
+                  <h4>{group.title}</h4>
+                  <ul>
+                    {group.items.map((item) => (
+                      <li>
+                        <span class="lp-built__bullet" aria-hidden="true" />
+                        <span>
+                          {item.href ? (
+                            <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer noopener" : undefined}>{item.name}</a>
+                          ) : (
+                            <b>{item.name}</b>
+                          )}
+                          <small>{item.text}</small>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))
+            }
+            <a class="lp-built__more" href={LINKS.sources} hreflang="en">
+              Every source, revision and method
+              <Icon name="ph:arrow-right-bold" aria-hidden="true" />
+            </a>
+          </div>
+        </div>
       </section>
 
       <!-- ───────────── The cards ───────────── -->
@@ -497,7 +547,7 @@ const week = [
       <section class="lp-section lp-roadmap" id="roadmap">
         <header class="lp-head lp-head--center lp-reveal">
           <p class="lp-eyebrow">Roadmap</p>
-          <h2 class="lp-h2">Seven phases, from the web app to a Europe-wide network.</h2>
+          <h2 class="lp-h2">Eight phases, from the web app to a Europe-wide network.</h2>
           <p class="lp-lead">
             Each phase brings the same content to more people. The last one adds trained people for
             when a card isn't enough.
@@ -521,7 +571,7 @@ const week = [
         <article class="lp-phase" id="phase-web" style="--hue: var(--color-psychedelic)">
           <div class="lp-phase__copy lp-reveal">
             <p class="lp-phase__meta"><span class="lp-phase__n">Phase 01</span><span class="lp-status lp-status--live">Live</span></p>
-            <h3 class="lp-h3">psy.cards on the web</h3>
+            <h3 class="lp-h3"><Brand /> on the web</h3>
             <p>
               All {substanceCount} substances and their {comboCount} combinations, in English, French,
               German and Italian. Free, open source, installable and usable offline. Every printed
@@ -561,7 +611,7 @@ const week = [
             <HoloCard from="bottom" delay={0.3} hue="var(--color-psychedelic)" rest={-7} class="lp-card-qr" flip={false}>
               <Face class="pc--qr">
                 <div class="pc-qr" set:html={qr} />
-                <p class="pc-qr__url">psy.cards</p>
+                <p class="pc-qr__url"><Brand /></p>
                 <p class="pc-qr__note">Printed on every card</p>
               </Face>
             </HoloCard>
@@ -569,108 +619,48 @@ const week = [
         </article>
 
         <!-- 02 · Apps -->
-        <article class="lp-phase lp-phase--flip" id="phase-apps" style="--hue: var(--color-dissociative)">
-          <div class="lp-phase__copy lp-reveal">
+        <article class="lp-phase lp-phase--wide" id="phase-apps" style="--hue: var(--color-dissociative)">
+          <div class="lp-phase__copy lp-phase__copy--center lp-reveal">
             <p class="lp-phase__meta"><span class="lp-phase__n">Phase 02</span><span class="lp-status lp-status--build">In development</span></p>
             <h3 class="lp-h3">Apps for iPhone, iPad and Android</h3>
             <p>
               The same two-sided cards, built natively in SwiftUI and Jetpack Compose from the same data
-              as the web. They work fully offline, calculate limits from your weight, and show the
-              emergency number for the country you're in.
+              as the web, with what a phone does better: calculators set to your body, detailed sheets
+              for every substance and combination, and the whole database on the phone.
             </p>
-            <ul class="lp-facts">
-              <li><Icon name="ph:airplane-tilt-bold" aria-hidden="true" />Offline data pack</li>
-              <li><Icon name="ph:phone-call-bold" aria-hidden="true" />Local emergency numbers</li>
-              <li><Icon name="ph:sparkle-bold" aria-hidden="true" />Liquid Glass · Material 3</li>
-              <li><Icon name="ph:translate-bold" aria-hidden="true" />Four languages</li>
-            </ul>
             <div class="lp-stores">
               <span class="lp-store"><Icon name="ph:apple-logo-fill" aria-hidden="true" /><span><small>Coming soon to the</small>App Store</span></span>
               <span class="lp-store"><Icon name="ph:google-play-logo-fill" aria-hidden="true" /><span><small>Coming soon on</small>Google Play</span></span>
             </div>
           </div>
-          <div class="lp-phase__visual lp-visual--pair">
-            <HoloCard from="left" hue="var(--color-dissociative)" rest={-4} class="lp-card-app" molecule="ketamine" backLabel="iOS">
-              <div class="pc pc--app">
-                <div class="pc-status">
-                  <span>9:41</span>
-                  <span class="pc-island"></span>
-                  <span class="pc-status__icons"><Icon name="ph:cell-signal-full-fill" aria-hidden="true" /><Icon name="ph:battery-full-fill" aria-hidden="true" /></span>
-                </div>
-                <p class="pc-chip">Dissociatives</p>
-                <p class="pc-app__name">{label("ketamine")}</p>
-                <div class="pc-dose" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-                <p class="pc-dose__labels"><span>light</span><span>common</span><span>strong</span><span>heavy</span></p>
-                <div class="pc-tiles">
-                  <div class="pc-tile">
-                    <p class="pc-tile__h">Effects over time</p>
-                    <div class="pc-bars" aria-hidden="true">{[3, 7, 10, 9, 8, 6, 5, 4, 3, 2, 2, 1].map((h) => <i style={`--h: ${h}`} />)}</div>
-                  </div>
-                  <div class="pc-tile">
-                    <p class="pc-tile__h">Don't mix</p>
-                    <p class="pc-mix">{dangerousWith("ketamine", 3).map((name) => <span>{name}</span>)}</p>
-                  </div>
-                </div>
-                <div class="pc-tile">
-                  <p class="pc-tile__h">Test and prepare</p>
-                  <p class="pc-tile__text">Test it, start low, sit down and stay with friends.</p>
-                </div>
-                <div class="pc-tiles">
-                  <div class="pc-tile">
-                    <p class="pc-tile__h">Legal · {iosLocal.code}</p>
-                    <p class="pc-tile__value">{iosLocal.status}</p>
-                  </div>
-                  <div class="pc-tile pc-tile--sos">
-                    <p class="pc-tile__h">Too much?</p>
-                    <p class="pc-tile__value"><Icon name="ph:phone-fill" aria-hidden="true" />Call {iosLocal.number}</p>
-                  </div>
-                </div>
-                <div class="pc-tabbar">
-                  <span class="is-on"><Icon name="ph:cards-fill" aria-hidden="true" />Cards</span>
-                  <span><Icon name="ph:grid-four-fill" aria-hidden="true" />Combos</span>
-                  <span><Icon name="ph:wifi-slash-bold" aria-hidden="true" />Offline</span>
-                </div>
-              </div>
-            </HoloCard>
-            <HoloCard from="bottom" delay={0.15} hue="var(--color-empathogen)" rest={3} class="lp-card-app lp-card-app--android" molecule="mdma" backLabel="Android">
-              <div class="pc pc--app pc--android">
-                <div class="pc-status">
-                  <span>12:30</span>
-                  <span class="pc-punch"></span>
-                  <span class="pc-status__icons"><Icon name="ph:wifi-high-bold" aria-hidden="true" /><Icon name="ph:battery-high-fill" aria-hidden="true" /></span>
-                </div>
-                <p class="pc-chip">Empathogens</p>
-                <p class="pc-app__name">{label("mdma")}</p>
-                <div class="pc-dose" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-                <p class="pc-dose__labels"><span>light</span><span>common</span><span>strong</span><span>heavy</span></p>
-                <div class="pc-tiles">
-                  <div class="pc-tile">
-                    <p class="pc-tile__h">For you</p>
-                    <p class="pc-tile__big">70 kg</p>
-                    <p class="pc-tile__text">Upper limit from your weight</p>
-                  </div>
-                  <div class="pc-tile">
-                    <p class="pc-tile__h">Don't mix</p>
-                    <p class="pc-mix">{dangerousWith("mdma", 3).map((name) => <span>{name}</span>)}</p>
-                  </div>
-                </div>
-                <div class="pc-tile">
-                  <p class="pc-tile__h">Effects over time</p>
-                  <div class="pc-bars" aria-hidden="true">{[2, 5, 9, 10, 9, 8, 6, 4, 3, 2, 1, 1].map((h) => <i style={`--h: ${h}`} />)}</div>
-                </div>
-                <div class="pc-tiles">
-                  <div class="pc-tile">
-                    <p class="pc-tile__h">Legal · {androidLocal.code}</p>
-                    <p class="pc-tile__value">{androidLocal.status}</p>
-                  </div>
-                  <div class="pc-tile pc-tile--sos">
-                    <p class="pc-tile__h">Too much?</p>
-                    <p class="pc-tile__value"><Icon name="ph:phone-fill" aria-hidden="true" />Call {androidLocal.number}</p>
-                  </div>
-                </div>
-                <div class="pc-navbar"><i></i></div>
-              </div>
-            </HoloCard>
+          <div class="lp-devices">
+            <figure class="lp-device">
+              <Device kind="iphone" from="left" rest={-3} label={`The MDMA card on iPhone, with a 75 kg body set: the dose chart marks the upper limit, and the "Your body" sheet lists limits for MDMA, alcohol and caffeine.`}>
+                <AppScreen view="calculator" locale={locale} />
+              </Device>
+              <figcaption class="lp-reveal">
+                <b><Icon name="ph:user-focus-bold" aria-hidden="true" />Calculators set to you</b>
+                <span>Enter your weight and sex once: every card shows your MDMA limit, what one drink does to your blood alcohol and how much caffeine at once.</span>
+              </figcaption>
+            </figure>
+            <figure class="lp-device lp-device--raised">
+              <Device kind="android" from="bottom" delay={0.1} label="The combination grid on Android, with the sheet for ketamine and alcohol open: dangerous, why, what to do and the sources.">
+                <AppScreen view="sheet" locale={locale} />
+              </Device>
+              <figcaption class="lp-reveal">
+                <b><Icon name="ph:rows-bold" aria-hidden="true" />Detailed sheets</b>
+                <span>Tap any pair or substance for the full picture: why it's risky, what to do if it goes wrong, and where the advice comes from.</span>
+              </figcaption>
+            </figure>
+            <figure class="lp-device">
+              <Device kind="iphone" from="right" delay={0.2} rest={3} offline label={`Settings on iPhone in airplane mode: ready offline, with ${substanceCount} substances, ${comboCount} combinations and ${countryCount} countries on the phone.`}>
+                <AppScreen view="offline" locale={locale} />
+              </Device>
+              <figcaption class="lp-reveal">
+                <b><Icon name="ph:airplane-tilt-bold" aria-hidden="true" />Works offline</b>
+                <span>Every card, combination and country file lives on the phone: no signal, account or tracking, even in a field at 3 a.m.</span>
+              </figcaption>
+            </figure>
           </div>
         </article>
 
@@ -745,7 +735,7 @@ const week = [
                 <HoloCard from="left" delay={0.08 * index} hue="var(--color-empathogen)" rest={angle} class={`lp-pilot-back lp-pilot-back--${index + 1}`} flip={false}>
                   <div class="hc-back">
                     <span class="hc-back__molecule" style={`--mask: url(/assets/molecules/${["mescaline", "mushrooms", "dmt"][index]}.png)`}></span>
-                    <span class="hc-back__brand"><img src="/favicon.png" alt="" width="28" height="28" />psy.cards</span>
+                    <span class="hc-back__brand"><img src="/favicon.png" alt="" width="28" height="28" /><Brand /></span>
                   </div>
                 </HoloCard>
               ))
@@ -766,41 +756,90 @@ const week = [
         </article>
 
         <!-- 05 · Scale -->
-        <article class="lp-phase lp-phase--wide" id="phase-scale" style="--hue: var(--color-stimulant)">
-          <div class="lp-phase__copy lp-phase__copy--center lp-reveal">
+        <article class="lp-phase lp-phase--flip" id="phase-scale" style="--hue: var(--color-stimulant)">
+          <div class="lp-phase__copy lp-reveal">
             <p class="lp-phase__meta"><span class="lp-phase__n">Phase 05</span><span class="lp-status">Planned</span></p>
-            <h3 class="lp-h3">4 × 5,000 card sets</h3>
+            <h3 class="lp-h3">20,000 boxed sets that open up the “drugs” box</h3>
             <p>
-              After the pilot, 5,000 sets each in English, French, German and Italian: 20,000 decks for
-              festivals, nightlife venues, drug-checking services and outreach teams.
+              Most people keep a single mental box labelled “drugs”. This set opens it up: {substanceCount}{" "}
+              cards sorted behind seven colour-coded dividers, so the difference between a stimulant, a
+              psychedelic and an opioid shows at a glance, in effects, in risks and in what never to mix.
             </p>
+            <p>
+              After the pilot, 5,000 sets each in English, French, German and Italian, in a rigid box with
+              a holographic print, for festivals, nightlife venues, drug-checking services and outreach
+              teams.
+            </p>
+            <ul class="lp-facts">
+              <li><Icon name="ph:package-bold" aria-hidden="true" />Rigid two-piece box</li>
+              <li><Icon name="ph:sparkle-bold" aria-hidden="true" />Holographic foil lid</li>
+              <li><Icon name="ph:tabs-bold" aria-hidden="true" />Seven category dividers</li>
+              <li><Icon name="ph:translate-bold" aria-hidden="true" />4 × 5,000 sets</li>
+            </ul>
           </div>
-          <div class="lp-visual--decks">
-            {
-              decks.map((deck, index) => (
-                <div class="lp-deck">
-                  <HoloCard from={index < 2 ? "left" : "right"} delay={Math.abs(index - 1.5) * 0.12} hue={deck.hue} rest={(index - 1.5) * 2.5} molecule={deck.molecule} backLabel={deck.code.toUpperCase()}>
-                    <Face index={deck.code.toUpperCase()} kicker="5,000 sets" spine={`Edition 2 · ${deck.language}`} foot={deck.language} lang={deck.code}>
-                      <p class="pc-deck__tag">{deck.tag}</p>
-                      <ul class="pc-toc">
-                        {deck.sections.map((section) => <li>{section}</li>)}
-                      </ul>
-                      <p class="pc-deck__count"><b data-count-to="5000">5,000</b> sets</p>
-                    </Face>
-                  </HoloCard>
-                </div>
-              ))
-            }
+          <div class="lp-phase__visual lp-visual--box">
+            <PrintBox locale={locale} from="right" rest={-2} />
+            <ul class="lp-editions lp-reveal" aria-label="Editions">
+              {deckSpecs.map((deck) => (
+                <li style={`--c: ${deck.hue}`} lang={deck.code}>
+                  <b>{deck.code.toUpperCase()}</b>
+                  <span>{deck.tag}</span>
+                  <small>5,000 sets</small>
+                </li>
+              ))}
+            </ul>
           </div>
-          <p class="lp-decks-total lp-reveal"><b data-count-to="20000">20,000</b> decks in four languages</p>
+        </article>
+        <p class="lp-decks-total lp-reveal"><b data-count-to="20000">20,000</b> boxed sets in four languages</p>
+
+        <!-- 06 · Festival editions -->
+        <article class="lp-phase" id="phase-festivals" style="--hue: var(--color-cannabinoid)">
+          <div class="lp-phase__copy lp-reveal">
+            <p class="lp-phase__meta"><span class="lp-phase__n">Phase 06</span><span class="lp-status">Planned</span></p>
+            <h3 class="lp-h3">Festival editions</h3>
+            <p>
+              Card sets branded with each festival and printed with more cost-effective materials and
+              processes: digital print on recycled board, no foil, in runs sized to the event. The backs
+              carry the festival's own services, so the help on the card is the help on site.
+            </p>
+            <ul class="lp-facts">
+              <li><Icon name="ph:flag-banner-bold" aria-hidden="true" />Co-branded with the festival</li>
+              <li><Icon name="ph:recycle-bold" aria-hidden="true" />Recycled board, no foil</li>
+              <li><Icon name="ph:map-pin-area-bold" aria-hidden="true" />On-site services on the back</li>
+              <li><Icon name="ph:stack-bold" aria-hidden="true" />Runs sized to each event</li>
+            </ul>
+          </div>
+          <div class="lp-phase__visual lp-visual--festival">
+            <HoloCard from="left" hue="var(--color-cannabinoid)" rest={-8} class="lp-card-fest lp-card-fest--back" flip={false} matte>
+              <div class="pc pc--fest-cover">
+                <p class="pc-fest__name">Sunrise<br />Festival</p>
+                <p class="pc-fest__x">× <Brand /></p>
+                <p class="pc-fest__year">2028 · Welfare edition</p>
+              </div>
+            </HoloCard>
+            <HoloCard from="bottom" delay={0.12} hue="var(--color-cannabinoid)" rest={4} class="lp-card-fest" flip={false} matte>
+              <Face kicker="On site" spine="Sunrise Festival × PSY.CARDS" foot="Printed on recycled board">
+                <p class="pc-h">Help at Sunrise</p>
+                <ul class="pc-fest__services">
+                  <li><Icon name="ph:hand-heart-fill" aria-hidden="true" /><span><b>Welfare tent</b>Behind Stage B, open all night</span></li>
+                  <li><Icon name="ph:test-tube-fill" aria-hidden="true" /><span><b>Drug checking</b>Info point, 18:00 to 02:00</span></li>
+                  <li><Icon name="ph:first-aid-fill" aria-hidden="true" /><span><b>PsyCare</b>Ask any steward or the medical tent</span></li>
+                  <li><Icon name="ph:drop-fill" aria-hidden="true" /><span><b>Free water</b>At every bar</span></li>
+                  <li><Icon name="ph:moon-stars-fill" aria-hidden="true" /><span><b>Quiet zone</b>Chill-out dome, by the lake</span></li>
+                  <li><Icon name="ph:users-three-fill" aria-hidden="true" /><span><b>Lost your friends?</b>Meeting point at the main gate</span></li>
+                </ul>
+                <p class="pc-fest__sos"><Icon name="ph:phone-call-fill" aria-hidden="true" />Emergency: 112 · say “Sunrise, Stage B”</p>
+              </Face>
+            </HoloCard>
+          </div>
         </article>
       </section>
 
-      <!-- ───────────── 06 · Europe ───────────── -->
+      <!-- ───────────── 07 · Europe ───────────── -->
       <section class="lp-europe" id="europe" data-lp-europe data-stage="0" style="--hue: var(--color-depressant)">
         <div class="lp-europe__sticky">
           <div class="lp-europe__copy">
-            <p class="lp-phase__meta"><span class="lp-phase__n">Phase 06</span><span class="lp-status">Planned</span></p>
+            <p class="lp-phase__meta"><span class="lp-phase__n">Phase 07</span><span class="lp-status">Planned</span></p>
             <h3 class="lp-h3">All of Europe, in every official EU language.</h3>
             <p class="lp-europe__lead">
               Card backs already cover {countryCount} countries. Next is the content itself: all{" "}
@@ -833,15 +872,16 @@ const week = [
         </div>
       </section>
 
-      <!-- ───────────── 07 · PsyCare ───────────── -->
+      <!-- ───────────── 08 · PsyCare ───────────── -->
       <section class="lp-section lp-psycare" id="psycare" style="--hue: var(--color-opioid)">
         <header class="lp-head lp-head--center lp-reveal">
-          <p class="lp-phase__meta lp-phase__meta--center"><span class="lp-phase__n">Phase 07</span><span class="lp-status">Long term</span></p>
+          <p class="lp-phase__meta lp-phase__meta--center"><span class="lp-phase__n">Phase 08</span><span class="lp-status">Target · Q4 2027</span></p>
           <h2 class="lp-h2">PsyCare at scale</h2>
           <p class="lp-lead">
             PsyCare teams support people through difficult psychedelic experiences at events. There
-            aren't enough trained teams to cover every event, so this phase is about training more
-            people and getting them where they're needed.
+            aren't enough trained teams to cover every event, so this phase trains more people and gets
+            them where they're needed, with local harm-reduction organisations as partners. The target
+            is a first certified network by the fourth quarter of 2027.
           </p>
         </header>
 
@@ -850,31 +890,22 @@ const week = [
             <p class="lp-eyebrow">Training and certification</p>
             <h3 class="lp-h3">Open training, recognised certification</h3>
             <p>
-              A curriculum built on the cards: set and setting, de-escalation, creating a safe space and
-              knowing when to hand over to medical staff. Peers and professionals earn a certificate
-              that festivals and partner organisations across Europe can check.
+              A curriculum built on the cards and taught with the local organisations that already run
+              PsyCare and welfare teams: set and setting, de-escalation, creating a safe space and knowing
+              when to hand over to medical staff. Peers and professionals earn a certificate that
+              festivals and partners across Europe can check.
             </p>
+            <ul class="lp-facts">
+              <li><Icon name="ph:handshake-bold" aria-hidden="true" />With local harm-reduction organisations</li>
+              <li><Icon name="ph:certificate-bold" aria-hidden="true" />Certificate anyone can verify</li>
+            </ul>
           </div>
-          <div class="lp-psycare__visual">
-            <HoloCard from="right" hue="var(--color-opioid)" rest={-3} class="lp-card-cert" molecule="mushrooms" backLabel="PsyCare">
-              <Face kicker="Certificate" spine="PsyCare · Responder certificate" foot="No. 000001 · verify via QR">
-                <span class="pc-seal pc-seal--cert" style="--mask: url(/assets/molecules/mushrooms.png)" aria-hidden="true"></span>
-                <p class="pc-cert__title">Certified PsyCare responder</p>
-                <p class="pc-cert__name"><span>Name</span><i></i></p>
-                <dl class="pc-specs">
-                  <div><dt>Level</dt><dd>2 · Peer supporter</dd></div>
-                  <div><dt>Languages</dt><dd>EN · FR · DE</dd></div>
-                  <div><dt>Valid at</dt><dd>Partner events in Europe</dd></div>
-                </dl>
-                <ul class="pc-tags">
-                  <li>Safe space</li><li>De-escalation</li><li>Medical handover</li><li>Integration</li>
-                </ul>
-                <div class="pc-verify">
-                  <div class="pc-qr" set:html={qr} />
-                  <p>Scan to check the certificate is valid and current.</p>
-                </div>
-              </Face>
-            </HoloCard>
+          <div class="lp-psycare__visual lp-devices lp-devices--single">
+            <figure class="lp-device">
+              <Device kind="iphone" from="right" rest={2} label="A PsyCare responder's certificate in the app: level 2 peer supporter, languages, validity and a QR code, above the progress of each training module.">
+                <PsyCareScreen view="certificate" qr={qr} />
+              </Device>
+            </figure>
           </div>
         </div>
 
@@ -893,100 +924,38 @@ const week = [
               person in crisis.
             </p>
           </div>
-          <div class="lp-psycare__visual lp-visual--pair">
-            <HoloCard from="left" hue="var(--color-opioid)" rest={-3} class="lp-card-radar" molecule="lsd" backLabel="Alert network">
-              <div class="pc pc--radar">
-                <span class="pc-spine" aria-hidden="true"><span>Alert network · Event map</span></span>
-                <svg class="pc-radar__site" viewBox="0 0 200 282" aria-hidden="true">
-                  <path d="M10 210 C 50 180, 80 220, 120 170 S 180 120, 195 90" />
-                  <path d="M20 40 C 60 80, 90 60, 110 110 S 140 230, 170 270" />
-                  <path d="M0 140 H 200" class="is-faint" />
-                  <path d="M100 0 V 282" class="is-faint" />
-                  <rect x="22" y="56" width="42" height="24" rx="6" />
-                  <rect x="128" y="190" width="44" height="26" rx="6" />
-                  <rect x="126" y="34" width="44" height="22" rx="6" />
-                  <text x="43" y="72">Stage A</text>
-                  <text x="150" y="207">Camping</text>
-                  <text x="148" y="49">Chill-out</text>
-                </svg>
-                <span class="pc-radar__ring"></span>
-                <span class="pc-radar__ring pc-radar__ring--2"></span>
-                <span class="pc-radar__ring pc-radar__ring--3"></span>
-                <span class="pc-radar__center"><Icon name="ph:first-aid-fill" aria-hidden="true" /></span>
-                <span class="pc-radar__dot is-accept" style="--x: 64%; --y: 28%"></span>
-                <span class="pc-radar__dot" style="--x: 28%; --y: 52%"></span>
-                <span class="pc-radar__dot" style="--x: 80%; --y: 50%"></span>
-                <span class="pc-radar__dot is-off" style="--x: 18%; --y: 20%"></span>
-                <span class="pc-radar__dot" style="--x: 86%; --y: 14%"></span>
-                <div class="pc-alert">
-                  <div class="pc-alert__head">
-                    <img src="/favicon.png" alt="" width="18" height="18" />
-                    <span>PSYCARE ALERT</span>
-                    <small>now</small>
-                  </div>
-                  <p class="pc-alert__title">PsyCare needed: medical tent, Stage B</p>
-                  <p class="pc-alert__text">Requested by the first-aid team · 350 m · about 4 min</p>
-                  <div class="pc-alert__actions"><span class="is-primary">Accept</span><span>Not now</span></div>
-                </div>
-              </div>
-            </HoloCard>
-            <HoloCard from="bottom" delay={0.2} hue="var(--color-opioid)" rest={3} class="lp-card-radar lp-card-radar--profile" molecule="mushrooms" backLabel="Responder">
-              <Face kicker="Responder" spine="Alert network · Availability" foot="Verified · Level 2">
-                <p class="pc-h">Availability</p>
-                <ul class="pc-week">
-                  {week.map(([day, level]) => <li><span>{day}</span><i style={`--level: ${level}`}></i></li>)}
-                </ul>
-                <dl class="pc-specs">
-                  <div><dt>Languages</dt><dd>EN · FR · DE</dd></div>
-                  <div><dt>Radius</dt><dd>2 km around the site</dd></div>
-                  <div><dt>Alerts</dt><dd>PsyCare emergencies only</dd></div>
-                </dl>
-                <p class="pc-toggle"><span class="pc-switch"></span>Available now</p>
-              </Face>
-            </HoloCard>
+          <div class="lp-psycare__visual lp-devices lp-devices--pair">
+            <figure class="lp-device">
+              <Device kind="iphone" from="left" rest={-3} time="" label="A PsyCare alert on the lock screen over the festival map: PsyCare needed at the medical tent by Stage B, 350 metres away, with Accept and Not now.">
+                <PsyCareScreen view="alert" />
+              </Device>
+            </figure>
+            <figure class="lp-device lp-device--raised">
+              <Device kind="android" from="bottom" delay={0.15} rest={3} time="02:16" label="A responder's availability on Android: available now within 2 km, a week of availability and alert settings.">
+                <PsyCareScreen view="availability" />
+              </Device>
+            </figure>
           </div>
         </div>
 
-        <ol class="lp-grid lp-grid--3 lp-flow">
-          <li>
-            <HoloCard from="bottom" hue="var(--color-dangerous)" flip={false}>
-              <Face index="1" kicker="Trigger" spine="How an alert works · 1 of 3" foot="First-aid or awareness staff">
-                <p class="pc-h">Staff request PsyCare</p>
-                <p class="pc-text">Medical or awareness staff ask for support from the app, with a location and a short description of the need.</p>
-                <div class="pc-ui">
-                  <span class="pc-ui__field"><Icon name="ph:map-pin-fill" aria-hidden="true" />Medical tent, Stage B</span>
-                  <span class="pc-ui__field"><Icon name="ph:note-pencil-bold" aria-hidden="true" />Guest anxious, conscious</span>
-                  <span class="pc-ui__button"><Icon name="ph:siren-fill" aria-hidden="true" />Request PsyCare</span>
-                </div>
-              </Face>
-            </HoloCard>
+        <ol class="lp-devices lp-flow">
+          <li class="lp-device">
+            <Device kind="iphone" from="bottom" time="2:09" label="Staff request PsyCare: the medical tent at Stage B, an anxious but conscious guest, English, soon.">
+              <PsyCareScreen view="request" />
+            </Device>
+            <p class="lp-flow__step lp-reveal"><span>1</span><b>Staff request PsyCare</b>First-aid or awareness staff send a location and a short description of the need.</p>
           </li>
-          <li>
-            <HoloCard from="bottom" delay={0.12} hue="var(--color-caution)" flip={false}>
-              <Face index="2" kicker="Match" spine="How an alert works · 2 of 3" foot="Nearest available first">
-                <p class="pc-h">Responders nearby get an alert</p>
-                <p class="pc-text">Only certified responders who are available, close by and speak the right language.</p>
-                <ul class="pc-people">
-                  <li><b>AL</b><span>Level 2 · EN FR</span><em>350 m</em></li>
-                  <li><b>JM</b><span>Therapist · DE EN</span><em>600 m</em></li>
-                  <li class="is-off"><b>SK</b><span>Level 1 · IT</span><em>busy</em></li>
-                </ul>
-              </Face>
-            </HoloCard>
+          <li class="lp-device">
+            <Device kind="iphone" from="bottom" delay={0.12} time="2:10" label="Finding help: certified responders nearby who speak English are notified; one is busy.">
+              <PsyCareScreen view="match" />
+            </Device>
+            <p class="lp-flow__step lp-reveal"><span>2</span><b>Responders nearby get an alert</b>Only certified responders who are available, close by and speak the right language.</p>
           </li>
-          <li>
-            <HoloCard from="bottom" delay={0.24} hue="var(--color-safe)" flip={false}>
-              <Face index="3" kicker="Respond" spine="How an alert works · 3 of 3" foot="Handover to medical staff if needed">
-                <p class="pc-h">One accepts and goes</p>
-                <p class="pc-text">The first to accept gets the meeting point and a short briefing; the others are released.</p>
-                <ul class="pc-checks">
-                  <li class="is-done">Accepted · arriving in 4 min</li>
-                  <li class="is-done">Meeting point: medical tent</li>
-                  <li>Briefing with first-aid team</li>
-                  <li>Handover or follow-up</li>
-                </ul>
-              </Face>
-            </HoloCard>
+          <li class="lp-device">
+            <Device kind="iphone" from="bottom" delay={0.24} time="2:14" label="Accepted: a responder arrives in about four minutes, with the meeting point and a short briefing.">
+              <PsyCareScreen view="briefing" />
+            </Device>
+            <p class="lp-flow__step lp-reveal"><span>3</span><b>One accepts and goes</b>The first to accept gets the meeting point and a briefing; the others are released.</p>
           </li>
         </ol>
       </section>
@@ -997,7 +966,7 @@ const week = [
           <p class="lp-eyebrow">Get involved</p>
           <h2 class="lp-h2">How to help</h2>
           <p class="lp-lead">
-            psy.cards is open source and non-commercial. Funding, contributions and partners decide how
+            <Brand /> is open source and non-commercial. Funding, contributions and partners decide how
             fast the roadmap moves.
           </p>
         </header>
@@ -1011,7 +980,7 @@ const week = [
               <ul class="pc-list">
                 <li>Pilot print run</li><li>Translations</li><li>Scientific review</li>
               </ul>
-              <span class="pc-cta__link">Support psy.cards <Icon name="ph:arrow-up-right-bold" aria-hidden="true" /></span>
+              <span class="pc-cta__link">Support <Brand /> <Icon name="ph:arrow-up-right-bold" aria-hidden="true" /></span>
             </Face>
           </HoloCard>
           <HoloCard from="bottom" delay={0.1} hue="var(--color-psychedelic)" rest={0} molecule="lsd" backLabel="Contribute">
@@ -1026,7 +995,7 @@ const week = [
             </Face>
           </HoloCard>
           <HoloCard from="right" delay={0.2} hue="var(--color-dissociative)" rest={3} molecule="ketamine" backLabel="Download">
-            <Face index="↓" kicker="Use it" spine="Get involved · 3 of 3" foot="psy.cards" href={LINKS.webApp} class="pc--cta">
+            <Face index="↓" kicker="Use it" spine="Get involved · 3 of 3" foot="Web · iOS · Android" href={LINKS.webApp} class="pc--cta">
               <Icon name="ph:device-mobile-camera-fill" class="pc-cta__icon" aria-hidden="true" />
               <p class="pc-cta__title">Get the app</p>
               <p class="pc-text">The iOS and Android apps are in development. The web app installs on any phone and works offline.</p>
@@ -1078,7 +1047,7 @@ const week = [
         </div>
       </div>
       <p class="lp-footer__disclaimer">
-        psy.cards provides harm-reduction information, not medical advice. In an emergency, call your
+        <Brand /> provides harm-reduction information, not medical advice. In an emergency, call your
         local emergency number (112 works across the EU).
       </p>
     </footer>

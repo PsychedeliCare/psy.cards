@@ -223,7 +223,7 @@ function initFlies(): { wake: () => void } {
   // so a card flying in from the side never widens its row.
   const phone = window.matchMedia("(max-width: 640px)").matches;
   const flies: Fly[] = [...document.querySelectorAll<HTMLElement>("[data-fly]")].map((root) => {
-    const swiped = phone && Boolean(root.closest(".lp-grid, .lp-visual--decks, .lp-visual--social"));
+    const swiped = phone && Boolean(root.closest(".lp-grid, .lp-devices, .lp-visual--social"));
     const side = swiped ? "bottom" : root.dataset.fly;
     const hc = root.querySelector<HTMLElement>(".hc")!;
     return {
@@ -231,7 +231,7 @@ function initFlies(): { wake: () => void } {
       body: root.querySelector<HTMLElement>(".fly__body")!,
       hc,
       inner: hc.querySelector<HTMLElement>(":scope > .hc__inner"),
-      lit: [...hc.querySelectorAll<HTMLElement>(".hc__foil, .hc__glare, .hc-back__molecule, .pc-seal")],
+      lit: [...hc.querySelectorAll<HTMLElement>(".hc__foil, .hc__glare, .hc-back__molecule, .pc-seal, .device__glare, .box__holo")],
       dir: side === "left" ? -1 : side === "right" ? 1 : 0,
       vertical: side === "bottom",
       delay: clamp(Number(root.dataset.flyDelay) || 0, 0, 0.8),
@@ -421,17 +421,20 @@ function initCounters(reduce: boolean): void {
 
 function initNav(): () => void {
   const nav = document.querySelector<HTMLElement>("[data-lp-nav]");
+  const hero = document.querySelector<HTMLElement>("[data-lp-hero]");
   const links = [...(nav?.querySelectorAll<HTMLAnchorElement>(".lp-nav__links a") ?? [])];
   const sections = links
     .map((link) => document.querySelector<HTMLElement>(link.hash))
     .filter((section): section is HTMLElement => Boolean(section));
   return () => {
     if (!nav) return;
-    nav.classList.toggle("is-scrolled", window.scrollY > 24);
+    // Shown once the hero (and its own calls to action) has scrolled away.
+    const past = !hero || hero.getBoundingClientRect().bottom < nav.offsetHeight + 24;
     const line = window.innerHeight * 0.4;
     let active: HTMLElement | undefined;
     for (const section of sections) if (section.getBoundingClientRect().top <= line) active = section;
     if (active && active.getBoundingClientRect().bottom < line) active = undefined;
+    nav.classList.toggle("is-shown", past);
     links.forEach((link) => link.classList.toggle("is-active", Boolean(active) && link.hash === `#${active!.id}`));
   };
 }

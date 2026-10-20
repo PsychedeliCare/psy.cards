@@ -8,6 +8,8 @@
  * branded reverse to the front. Without JS (or with reduced motion) the card
  * simply sits face up. Every card is A6 (105 × 148 mm), like the print set.
  */
+import Brand from "./Brand.astro";
+
 interface Props {
   /** Side the card flies in from. */
   from?: "left" | "right" | "bottom";
@@ -25,6 +27,8 @@ interface Props {
   backLabel?: string;
   /** Wraps a real substance card (no face padding, its own foil). */
   real?: boolean;
+  /** Plain print, without the holographic foil (the cheaper editions). */
+  matte?: boolean;
   class?: string;
   style?: string;
 }
@@ -38,6 +42,7 @@ const {
   molecule,
   backLabel,
   real = false,
+  matte = false,
   class: className,
   style = "",
 } = Astro.props;
@@ -51,11 +56,11 @@ const {
   style={`--hue: ${hue}; --rest: ${rest}deg; ${style}`}
 >
   <div class="fly__body">
-    <div class:list={["hc", real && "hc--real"]} data-tilt>
+    <div class:list={["hc", real && "hc--real", matte && "hc--matte"]} data-tilt>
       <div class="hc__inner">
         <div class="hc__face hc__face--front">
           <slot />
-          {!real && <span class="hc__foil" aria-hidden="true" />}
+          {!real && !matte && <span class="hc__foil" aria-hidden="true" />}
           <span class="hc__glare" aria-hidden="true" />
         </div>
         {
@@ -73,7 +78,7 @@ const {
                   )}
                   <span class="hc-back__brand">
                     <img src="/favicon.png" alt="" width="28" height="28" />
-                    psy.cards
+                    <Brand />
                   </span>
                   {backLabel && <span class="hc-back__label">{backLabel}</span>}
                 </div>
