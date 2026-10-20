@@ -91,30 +91,38 @@
   position: absolute;
   width: 60vmax;
   aspect-ratio: 1;
-  border-radius: 50%;
-  filter: blur(80px);
   opacity: 0.16;
+  /* Soft edges are baked into the gradient: a blur filter would be
+     re-applied by the compositor on every frame of the endless drift. */
+  background: radial-gradient(
+    closest-side,
+    color-mix(in oklab, var(--orb) 88%, transparent) 0%,
+    color-mix(in oklab, var(--orb) 68%, transparent) 30%,
+    color-mix(in oklab, var(--orb) 30%, transparent) 62%,
+    color-mix(in oklab, var(--orb) 8%, transparent) 84%,
+    transparent 100%
+  );
   animation: lp-drift 28s ease-in-out infinite alternate;
 }
 
 .lp-orb--a {
+  --orb: var(--color-psychedelic);
   top: -25vmax;
   left: -15vmax;
-  background: radial-gradient(circle, var(--color-psychedelic), transparent 65%);
 }
 
 .lp-orb--b {
+  --orb: var(--color-dissociative);
   top: 30vh;
   right: -25vmax;
-  background: radial-gradient(circle, var(--color-dissociative), transparent 65%);
   animation-duration: 34s;
   animation-delay: -8s;
 }
 
 .lp-orb--c {
+  --orb: var(--color-cannabinoid);
   bottom: -30vmax;
   left: 20vw;
-  background: radial-gradient(circle, var(--color-cannabinoid), transparent 65%);
   opacity: 0.1;
   animation-duration: 40s;
   animation-delay: -16s;
@@ -512,10 +520,12 @@
   }
 }
 
+/* The pointer tilt and the turn are inline transforms (scripts/about-page.ts):
+   custom properties set here would restyle the whole card on every frame. */
 .hc {
   position: relative;
   transform-style: preserve-3d;
-  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform: none;
   transition: transform 0.7s var(--lp-ease);
 }
 
@@ -526,7 +536,6 @@
 .hc__inner {
   display: grid;
   transform-style: preserve-3d;
-  transform: rotateY(var(--flip, 0deg));
 }
 
 .hc__face {
@@ -625,6 +634,11 @@
   background-position: center, var(--gx) var(--gy);
   -webkit-mask-image: radial-gradient(farthest-corner circle at var(--gx) var(--gy), #000 0%, rgb(0 0 0 / 0.5) 35%, rgb(0 0 0 / 0.12) 80%);
   mask-image: radial-gradient(farthest-corner circle at var(--gx) var(--gy), #000 0%, rgb(0 0 0 / 0.5) 35%, rgb(0 0 0 / 0.12) 80%);
+}
+
+/* The scroll-driven light is already eased by the script, where a transition
+   would restart on every frame; only the jumps into and out of hover fade. */
+.hc:is([data-hover], [data-settling]) :is(.hc__foil, .hc__glare) {
   transition: opacity 0.45s ease;
 }
 
@@ -650,7 +664,6 @@
   opacity: var(--glare, 0.3);
   mix-blend-mode: overlay;
   background: radial-gradient(farthest-corner circle at var(--gx) var(--gy), rgb(255 255 255 / 0.6), rgb(255 255 255 / 0.08) 32%, transparent 58%);
-  transition: opacity 0.45s ease;
 }
 
 /* The branded reverse. */

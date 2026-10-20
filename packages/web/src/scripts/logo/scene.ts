@@ -74,6 +74,8 @@ export type LogoSceneOptions = {
   onLayout: (box: { x: number; y: number; width: number }) => void;
   onWordmark: () => void;
   onSettled: () => void;
+  /** Frame rate once the intro has settled: its light and dust then drift slowly. Default: every frame. */
+  settledFps?: number;
 };
 
 /** Molecule placement in card space: centre and square size (card widths). */
@@ -500,9 +502,14 @@ export async function createLogoScene(options: LogoSceneOptions) {
 
   const tip = new Vector3();
   const centrePoint = new Vector3();
+  const settledInterval = options.settledFps ? 1000 / options.settledFps : 0;
+  let drawnAt = 0;
 
   const frame = (now: number) => {
     const t = frozen ?? (now - start) / 1000;
+    // Past the intro only the ambient light moves: draw less often.
+    if (settledInterval && frozen === null && t > end && now - drawnAt < settledInterval - 2) return;
+    drawnAt = now;
     const clock = now / 1000;
 
     // Backdrop & lights

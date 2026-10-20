@@ -264,3 +264,17 @@ test("unsupported WebGPU keeps static cards without loading the renderer", async
   const dispose = initHolographicCards(() => { assert.fail("must not load WebGPU"); }); env.cleanup(dispose);
   env.intersections[0].notify(); await flush();
 });
+
+test("cards far out of view release their renderer and get a new one when they return", async (t) => {
+  const env = environment(t), { canvas } = env.card(); let creates = 0, disposes = 0;
+  const dispose = initHolographicCards(async () => ({ createRenderer: () => {
+    creates++; return { ready: Promise.resolve(), setActive() {}, dispose() { disposes++; } };
+  } })); env.cleanup(dispose);
+  const [near, far] = env.intersections;
+  near.notify(); await flush(); assert.equal(creates, 1);
+  near.notify(false); far.notify(false); await flush();
+  assert.equal(disposes, 1);
+  assert.equal(canvas.dataset.hologramReady, undefined);
+  far.notify(); near.notify(); await flush();
+  assert.equal(creates, 2);
+});

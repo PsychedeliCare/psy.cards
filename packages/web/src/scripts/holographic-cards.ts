@@ -12,8 +12,23 @@ type Entry = {
 };
 const mounted = new WeakMap<Document, () => void>();
 const selector = "canvas[data-molecule-mask]";
+/** A hologram is prepared this close to the viewport, so it is ready when it scrolls in… */
+const NEAR = "50% 0px";
+/** …and released (with its GPU device) once it is this far away. */
+const FAR = "200% 0px";
 
-/** One manager covers server-rendered cards and fetched list, wheel and modal fragments. */
+/** Runs `callback` when the main thread is idle, or right away where that is unknown. */
+function whenIdle(callback: () => void): void {
+  if (typeof window !== "undefined" && "requestIdleCallback" in window) window.requestIdleCallback(callback, { timeout: 600 });
+  else callback();
+}
+
+/**
+ * One manager covers server-rendered cards and fetched list, wheel and modal
+ * fragments. Renderers are created in idle time as a card nears the viewport
+ * (setting up WebGPU mid-scroll would drop frames) and disposed once it is
+ * well out of view.
+ */
 export function initHolographicCards(
   load: RendererLoader = () => import("./holographic/index.ts"),
 ): () => void {
@@ -59,14 +74,14 @@ export function initHolographicCards(
       console.warn("Substance hologram unavailable; keeping the static molecule.", error);
     };
     module ??= load();
-    void module.then(({ createRenderer }) => {
+    void module.then(({ createRenderer }) => whenIdle(() => {
       if (!current()) return;
       entry.pending = false;
       if (!active(canvas, entry)) return;
       const renderer = createRenderer(canvas, entry.host, canvas.dataset.moleculeMask!, failure);
       entry.renderer = renderer;
       void renderer.ready.catch(failure);
-    }).catch(failure);
+    })).catch(failure);
   };
   const syncAll = () => { for (const [canvas, entry] of entries) sync(canvas, entry); };
   const intersection = new IntersectionObserver((changes) => {
@@ -77,7 +92,13 @@ export function initHolographicCards(
       entry.visible = change.isIntersecting;
       sync(canvas, entry);
     }
-  });
+  }, { rootMargin: NEAR });
+  const distance = new IntersectionObserver((changes) => {
+    for (const change of changes) {
+      const entry = entries.get(change.target as HTMLCanvasElement);
+      if (entry && !change.isIntersecting) release(entry);
+    }
+  }, { rootMargin: FAR });
   const register = (canvas: HTMLCanvasElement) => {
     if (entries.has(canvas)) return;
     const host = canvas.closest<HTMLElement>("[data-hologram-host], .substance-card");
@@ -86,6 +107,7 @@ export function initHolographicCards(
     delete canvas.dataset.hologramReady;
     entries.set(canvas, { host, visible: false, pending: false, failed: false, generation: 0 });
     intersection.observe(canvas);
+    distance.observe(canvas);
   };
   const scan = (root: ParentNode) => {
     root.querySelectorAll<HTMLCanvasElement>(selector).forEach(register);
@@ -101,6 +123,7 @@ export function initHolographicCards(
     for (const [canvas, entry] of entries) {
       if (!canvas.isConnected) {
         intersection.unobserve(canvas);
+        distance.unobserve(canvas);
         release(entry);
         entries.delete(canvas);
       }
@@ -125,6 +148,7 @@ export function initHolographicCards(
     disposed = true;
     content.disconnect();
     intersection.disconnect();
+    distance.disconnect();
     motion.removeEventListener("change", syncAll);
     print.removeEventListener("change", syncAll);
     document.removeEventListener("visibilitychange", syncAll);

@@ -5,7 +5,8 @@
  * - `[data-fly]` cards slide in from their side as they scroll into view,
  *   turning from the branded reverse to the front;
  * - cards tilt under the pointer and their holographic foil follows the light;
- * - text reveals, counters, the nav, the roadmap rail and the Europe map.
+ * - text reveals, counters, the nav, the roadmap rail and the Europe map;
+ * - looping decorations (pulses, radar, shimmer) pause while off screen.
  *
  * Scroll positions drive targets; the cards ease towards them, so the motion
  * is scrubbed but never jittery. With reduced motion only static states are
@@ -16,6 +17,9 @@ type Fly = {
   root: HTMLElement;
   body: HTMLElement;
   hc: HTMLElement;
+  inner: HTMLElement | null;
+  /** The few elements that draw the light (foil, glare, rainbow seals). */
+  lit: HTMLElement[];
   dir: number;
   vertical: boolean;
   delay: number;
@@ -23,7 +27,28 @@ type Fly = {
   rest: number;
   current: number;
   hover: boolean;
+  /** Last values written, so an unchanged frame touches nothing. */
+  written: Record<string, string>;
 };
+
+/**
+ * Writes the light's position onto the elements that draw it. Custom
+ * properties inherit, so setting them on the card itself would restyle its
+ * whole subtree (a full substance card for the real ones) on every frame.
+ */
+function setLight(fly: Fly, values: Record<"--gx" | "--gy" | "--foil" | "--glare", string>): void {
+  for (const [name, value] of Object.entries(values)) {
+    if (fly.written[name] === value) continue;
+    fly.written[name] = value;
+    for (const element of fly.lit) element.style.setProperty(name, value);
+  }
+}
+
+function setStyle(fly: Fly, key: string, element: HTMLElement | null, property: "transform" | "opacity", value: string): void {
+  if (!element || fly.written[key] === value) return;
+  fly.written[key] = value;
+  element.style[property] = value;
+}
 
 const clamp = (value: number, min = 0, max = 1) => Math.min(max, Math.max(min, value));
 const easeOut = (t: number) => 1 - (1 - t) ** 3;
@@ -37,6 +62,7 @@ export function initAboutPage(): void {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   showBackSides();
+  pauseOffscreenLoops();
   initHeroLogo(reduce);
   initReveal(reduce);
   initCounters(reduce);
@@ -70,14 +96,47 @@ function showBackSides(): void {
     });
 }
 
+/* ---------- Off-screen loops ---------- */
+
+/**
+ * Infinite CSS animations only run while their element is on screen. A
+ * running one restyles its element on every frame (and re-lays out SVG),
+ * which keeps the main thread busy even when nothing visible moves.
+ */
+function pauseOffscreenLoops(): void {
+  const loops = new Map<Element, Animation[]>();
+  for (const animation of document.getAnimations()) {
+    const effect = animation.effect;
+    if (!(effect instanceof KeyframeEffect) || !effect.target) continue;
+    if (effect.getComputedTiming().iterations !== Infinity) continue;
+    // The fixed backdrop is always in view.
+    if (effect.target.closest(".lp-ambient")) continue;
+    loops.set(effect.target, [...(loops.get(effect.target) ?? []), animation]);
+  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        for (const animation of loops.get(entry.target) ?? []) {
+          if (entry.isIntersecting) animation.play();
+          else animation.pause();
+        }
+      }
+    },
+    { rootMargin: "10% 0px" }
+  );
+  loops.forEach((_, element) => observer.observe(element));
+}
+
 /* ---------- Hero: the /logo intro ---------- */
 
 type LogoScene = Awaited<ReturnType<typeof import("./logo/scene").createLogoScene>>;
 
 /**
  * Mounts the three.js logo intro (owned by /logo) in the hero, on a
- * transparent canvas. It loads when the hero first shows and pauses while
- * the hero is off screen. Offline or without WebGL, the flat logo shows.
+ * transparent canvas. It loads when the hero first shows, is built once the
+ * page is idle (compiling the scene would otherwise hold up the first
+ * frames), draws its settled ambience at 30 fps and pauses while the hero is
+ * off screen. Offline or without WebGL, the flat logo shows.
  */
 function initHeroLogo(reduce: boolean): void {
   const stage = document.querySelector<HTMLElement>("[data-hero-logo]");
@@ -116,11 +175,13 @@ function initHeroLogo(reduce: boolean): void {
     requested = true;
     try {
       const { createLogoScene } = await import("./logo/scene");
+      await idle();
       scene = await createLogoScene({
         canvas,
         cards,
         reducedMotion: reduce,
         transparent: true,
+        settledFps: 30,
         onLayout: (next) => {
           // The canvas overhangs the stage (its edges fade out): shift into stage space.
           box = { ...next, x: next.x + canvas.offsetLeft, y: next.y + canvas.offsetTop };
@@ -147,6 +208,14 @@ function initHeroLogo(reduce: boolean): void {
   ).observe(stage);
 }
 
+/** Resolves when the main thread is idle (or soon, where that is unknown). */
+function idle(timeout = 1200): Promise<void> {
+  return new Promise((resolve) => {
+    if ("requestIdleCallback" in window) window.requestIdleCallback(() => resolve(), { timeout });
+    else window.setTimeout(resolve, 120);
+  });
+}
+
 /* ---------- Flying cards ---------- */
 
 function initFlies(): { wake: () => void } {
@@ -156,10 +225,13 @@ function initFlies(): { wake: () => void } {
   const flies: Fly[] = [...document.querySelectorAll<HTMLElement>("[data-fly]")].map((root) => {
     const swiped = phone && Boolean(root.closest(".lp-grid, .lp-visual--decks, .lp-visual--social"));
     const side = swiped ? "bottom" : root.dataset.fly;
+    const hc = root.querySelector<HTMLElement>(".hc")!;
     return {
       root,
       body: root.querySelector<HTMLElement>(".fly__body")!,
-      hc: root.querySelector<HTMLElement>(".hc")!,
+      hc,
+      inner: hc.querySelector<HTMLElement>(":scope > .hc__inner"),
+      lit: [...hc.querySelectorAll<HTMLElement>(".hc__foil, .hc__glare, .hc-back__molecule, .pc-seal")],
       dir: side === "left" ? -1 : side === "right" ? 1 : 0,
       vertical: side === "bottom",
       delay: clamp(Number(root.dataset.flyDelay) || 0, 0, 0.8),
@@ -167,12 +239,12 @@ function initFlies(): { wake: () => void } {
       rest: Number.parseFloat(getComputedStyle(root).getPropertyValue("--rest")) || 0,
       current: 0,
       hover: false,
+      written: {},
     };
   });
   const byHc = new Map(flies.map((fly) => [fly.hc, fly]));
   const nearby = new Set<Fly>();
-  const started = performance.now();
-  let last = started;
+  let last = performance.now();
   let running = false;
 
   const observer = new IntersectionObserver(
@@ -189,8 +261,8 @@ function initFlies(): { wake: () => void } {
   );
   flies.forEach((fly) => observer.observe(fly.root));
 
-  function target(fly: Fly, vh: number): number {
-    const rect = fly.root.getBoundingClientRect();
+  // `.fly` is never transformed, so its box is a stable measure.
+  function target(fly: Fly, rect: DOMRect, vh: number): number {
     const center = rect.top + rect.height / 2;
     const start = vh + rect.height * 0.35;
     const end = vh * 0.66;
@@ -198,7 +270,7 @@ function initFlies(): { wake: () => void } {
     return clamp((progress - fly.delay) / (1 - fly.delay));
   }
 
-  function render(fly: Fly, vh: number): void {
+  function render(fly: Fly, rect: DOMRect, vh: number): void {
     const p = fly.current;
     const e = easeOut(p);
     const inv = 1 - e;
@@ -209,35 +281,39 @@ function initFlies(): { wake: () => void } {
     const rx = fly.vertical ? inv * 45 : 0;
     const ry = inv * fly.dir * -30;
     const rz = fly.rest + inv * (fly.vertical ? 6 : fly.dir * 18);
-    fly.body.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, ${z.toFixed(1)}px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) rotateZ(${rz.toFixed(2)}deg)`;
-    fly.body.style.opacity = clamp(p * 3.5).toFixed(3);
-    if (fly.flip) fly.hc.style.setProperty("--flip", `${((1 - easeInOut(p)) * 180 * (fly.dir || 1)).toFixed(2)}deg`);
+    setStyle(fly, "transform", fly.body, "transform", `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, ${z.toFixed(1)}px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) rotateZ(${rz.toFixed(2)}deg)`);
+    setStyle(fly, "opacity", fly.body, "opacity", clamp(p * 3.5).toFixed(3));
+    if (fly.flip) setStyle(fly, "flip", fly.inner, "transform", `rotateY(${((1 - easeInOut(p)) * 180 * (fly.dir || 1)).toFixed(2)}deg)`);
     if (fly.hover) return;
 
     // The foil blooms while the card turns, then catches the light as it
     // moves through the viewport (touch screens get the sheen this way too).
     const sweep = Math.sin(Math.PI * p) ** 2;
-    const rect = fly.root.getBoundingClientRect();
     const place = clamp((rect.top + rect.height / 2) / vh);
     const gx = 50 + (0.5 - place) * 70 + inv * (fly.dir || 1) * 60;
     const gy = 12 + place * 60;
-    fly.hc.style.setProperty("--gx", `${gx.toFixed(1)}%`);
-    fly.hc.style.setProperty("--gy", `${gy.toFixed(1)}%`);
-    fly.hc.style.setProperty("--foil", (0.1 + sweep * 0.6).toFixed(3));
-    fly.hc.style.setProperty("--glare", (0.28 + sweep * 0.35).toFixed(3));
+    setLight(fly, {
+      "--gx": `${gx.toFixed(1)}%`,
+      "--gy": `${gy.toFixed(1)}%`,
+      "--foil": (0.1 + sweep * 0.6).toFixed(2),
+      "--glare": (0.28 + sweep * 0.35).toFixed(2),
+    });
   }
 
   function tick(now: number): void {
     const vh = window.innerHeight;
     const step = 1 - Math.pow(1 - 0.14, Math.min(64, now - last) / 16.67);
     last = now;
+    // Measure every card before writing to any: interleaving reads and
+    // writes forces a style and layout pass per card.
+    const frame = [...nearby].map((fly) => ({ fly, rect: fly.root.getBoundingClientRect() }));
     let busy = false;
-    for (const fly of nearby) {
-      const goal = target(fly, vh);
+    for (const { fly, rect } of frame) {
+      const goal = target(fly, rect, vh);
       const delta = goal - fly.current;
       fly.current = Math.abs(delta) < 0.0008 ? goal : fly.current + delta * step;
       if (fly.current !== goal) busy = true;
-      render(fly, vh);
+      render(fly, rect, vh);
     }
     running = busy;
     if (busy) requestAnimationFrame(tick);
@@ -253,10 +329,12 @@ function initFlies(): { wake: () => void } {
   // Start every card in its resting place for the current scroll position,
   // so jumping to an anchor never leaves cards stranded off-screen above it.
   const vh = window.innerHeight;
-  for (const fly of flies) {
-    fly.current = fly.root.getBoundingClientRect().bottom < 0 ? 1 : target(fly, vh);
-    render(fly, vh);
-  }
+  const rects = flies.map((fly) => fly.root.getBoundingClientRect());
+  flies.forEach((fly, index) => {
+    const rect = rects[index]!;
+    fly.current = rect.bottom < 0 ? 1 : target(fly, rect, vh);
+    render(fly, rect, vh);
+  });
   initTilt(byHc, wake);
   wake();
   return { wake };
@@ -266,6 +344,7 @@ function initFlies(): { wake: () => void } {
 
 function initTilt(byHc: Map<HTMLElement, Fly>, wake: () => void): void {
   if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  const settling = new WeakMap<HTMLElement, number>();
   for (const [hc, fly] of byHc) {
     // Listen on the untransformed anchor: the tilted card itself would slip
     // out from under the pointer at its edges and flicker.
@@ -275,18 +354,18 @@ function initTilt(byHc: Map<HTMLElement, Fly>, wake: () => void): void {
       const py = clamp((event.clientY - rect.top) / rect.height);
       fly.hover = true;
       hc.toggleAttribute("data-hover", true);
-      hc.style.setProperty("--rx", `${((0.5 - py) * 22).toFixed(2)}deg`);
-      hc.style.setProperty("--ry", `${((px - 0.5) * 26).toFixed(2)}deg`);
-      hc.style.setProperty("--gx", `${(px * 100).toFixed(1)}%`);
-      hc.style.setProperty("--gy", `${(py * 100).toFixed(1)}%`);
-      hc.style.setProperty("--foil", "0.5");
-      hc.style.setProperty("--glare", "0.6");
+      setStyle(fly, "tilt", hc, "transform", `rotateX(${((0.5 - py) * 22).toFixed(2)}deg) rotateY(${((px - 0.5) * 26).toFixed(2)}deg)`);
+      setLight(fly, { "--gx": `${(px * 100).toFixed(1)}%`, "--gy": `${(py * 100).toFixed(1)}%`, "--foil": "0.5", "--glare": "0.6" });
     });
     fly.root.addEventListener("pointerleave", () => {
       fly.hover = false;
       hc.removeAttribute("data-hover");
-      hc.style.setProperty("--rx", "0deg");
-      hc.style.setProperty("--ry", "0deg");
+      // Let the light fade back to its scroll-driven value.
+      hc.toggleAttribute("data-settling", true);
+      window.clearTimeout(settling.get(hc));
+      settling.set(hc, window.setTimeout(() => hc.removeAttribute("data-settling"), 500));
+      // Back to the stylesheet's resting transform, through its transition.
+      setStyle(fly, "tilt", hc, "transform", "");
       wake();
     });
   }
