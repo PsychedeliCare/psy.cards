@@ -117,6 +117,19 @@ function toPublicPathname(pathname: string): string {
     : normalized;
 }
 
+/**
+ * Falls back to a full page load for a card the modal could not show, unless
+ * that page is the one already open: this document may be a stand-in for the
+ * URL (an old service worker's offline shell), and loading it again would
+ * serve the same stand-in, fail the same way and reload forever.
+ */
+function loadPageInstead(url: string): void {
+  const target = new URL(url, window.location.origin);
+  const here = new URL(window.location.href);
+  if (normalizePathname(target.pathname) === normalizePathname(here.pathname) && target.search === here.search) return;
+  window.location.assign(target.href);
+}
+
 function comboUrl(slug: string): string {
   return `${rootRoute}?combo=${encodeURIComponent(slug)}`;
 }
@@ -614,7 +627,7 @@ function closeModal(root: HTMLElement) {
 async function navigateToModal(target: ModalTarget, push: boolean, origin?: HTMLElement): Promise<void> {
   const root = ensureModal();
   if (!root) {
-    window.location.assign(target.url);
+    loadPageInstead(target.url);
     return;
   }
   const content = root.querySelector<HTMLElement>("[data-modal-content]");
@@ -630,7 +643,7 @@ async function navigateToModal(target: ModalTarget, push: boolean, origin?: HTML
   const fragment = await fetchModalContent(target);
   if (token !== navigationToken) return;
   if (!fragment) {
-    window.location.assign(target.url);
+    loadPageInstead(target.url);
     return;
   }
   cancelMotion?.();

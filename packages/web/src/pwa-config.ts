@@ -7,34 +7,6 @@ export const PWA_THEME_COLOR = "#0b0b0c";
 export const PWA_BACKGROUND_COLOR = "#0b0b0c";
 export const PWA_START_URL = "/";
 
-/** HTML/JSON routes that should not fall back to the combos shell. */
-export const PWA_NAVIGATE_FALLBACK_DENYLIST = [
-  /^\/card\//,
-  /^\/combo-data\//,
-  /^\/data\//,
-  /^\/(?:fr|de|it)\/card\//,
-  /^\/(?:fr|de|it)\/combo-data\//,
-  /^\/burning-mountain(?:\/|$)/,
-  /^\/(?:fr|de|it)\/burning-mountain(?:\/|$)/,
-  // Wheel uses ?s= query state; never substitute the combos shell for it.
-  /^\/wheel(?:\/|$)/,
-  /^\/(?:fr|de|it)\/wheel(?:\/|$)/,
-  // Cache inspector must hit the network so a stuck SW can still be cleared.
-  /^\/cache(?:\/|$)/,
-  // The reference page must never be replaced by the interactive combos shell.
-  /^\/sources(?:\/|$)/,
-  // The 3D logo and the unlisted /about page are online-only (see PWA_GLOB_IGNORES).
-  /^\/logo(?:\/|$)/,
-  /^\/about(?:\/|$)/,
-];
-
-/**
- * Precache lookups ignore these query keys so `/wheel/?s=lsd` still hits
- * the cached `/wheel/index.html` instead of navigateFallback (reload loops
- * in Safari when the SW serves the wrong document for a parameterized URL).
- */
-export const PWA_IGNORE_URL_PARAMETERS = [/^s$/, /^utm_/];
-
 export const PWA_GLOB_PATTERNS = [
   "**/*.{html,js,css,woff2,svg,png,jpg,webp,json}",
 ];
@@ -58,3 +30,27 @@ export const PWA_GLOB_IGNORES = [
 
 /** Allow large font assets and hero images in the precache manifest. */
 export const PWA_MAX_CACHE_BYTES = 5 * 1024 * 1024;
+
+type PrecacheEntry = { url: string; revision: string | null; size: number };
+
+/**
+ * The URL a built page is served at without a redirect. Astro writes
+ * `mdma/index.html`; Cloudflare answers `/mdma/index.html` and `/mdma` with a
+ * 307 to `/mdma/`. Precaching a redirecting URL costs a redirect per page at
+ * install (and Safari rejects redirected responses for navigations), so each
+ * page is precached once, as `mdma/`. The service worker (src/sw.ts) maps
+ * the other spellings onto it.
+ */
+export function canonicalPageUrl(url: string): string {
+  if (url === "index.html") return "./";
+  if (url.endsWith("/index.html")) return url.slice(0, -"index.html".length);
+  return url.replace(/\.html$/, "");
+}
+
+/** Workbox manifest transform applying `canonicalPageUrl` to every page. */
+export function canonicalPageEntries(entries: PrecacheEntry[]) {
+  return {
+    manifest: entries.map((entry) => (entry.url.endsWith(".html") ? { ...entry, url: canonicalPageUrl(entry.url) } : entry)),
+    warnings: [] as string[],
+  };
+}

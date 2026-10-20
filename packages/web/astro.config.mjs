@@ -10,11 +10,10 @@ import {
   PWA_BACKGROUND_COLOR,
   PWA_GLOB_IGNORES,
   PWA_GLOB_PATTERNS,
-  PWA_IGNORE_URL_PARAMETERS,
   PWA_MAX_CACHE_BYTES,
-  PWA_NAVIGATE_FALLBACK_DENYLIST,
   PWA_START_URL,
   PWA_THEME_COLOR,
+  canonicalPageEntries,
 } from './src/pwa-config.ts';
 
 // https://astro.build/config
@@ -25,12 +24,14 @@ export default defineConfig({
     mdx(),
     icon(),
     AstroPWA({
-      registerType: "prompt",
+      // Our own worker (src/sw.ts): it never substitutes one page for another,
+      // and a new deploy takes over as soon as it is installed.
+      strategies: "injectManifest",
+      srcDir: "src",
+      filename: "sw.ts",
+      registerType: "autoUpdate",
       minify: false,
       includeAssets: ["favicon.png", "appicon.png"],
-      experimental: {
-        directoryAndTrailingSlashHandler: true,
-      },
       manifest: {
         name: "psy.cards",
         short_name: "psy.cards",
@@ -58,33 +59,11 @@ export default defineConfig({
         lang: "en",
         categories: ["health", "medical", "education"],
       },
-      workbox: {
+      injectManifest: {
         globPatterns: PWA_GLOB_PATTERNS,
         globIgnores: PWA_GLOB_IGNORES,
-        navigateFallback: "/combos/index.html",
-        navigateFallbackDenylist: PWA_NAVIGATE_FALLBACK_DENYLIST,
-        ignoreURLParametersMatching: PWA_IGNORE_URL_PARAMETERS,
-        cleanupOutdatedCaches: true,
         maximumFileSizeToCacheInBytes: PWA_MAX_CACHE_BYTES,
-        runtimeCaching: [
-          {
-            urlPattern: ({ url }) =>
-              /^\/(?:(?:fr|de|it)\/)?(?:card|combo-data|data)\//.test(
-                url.pathname
-              ),
-            handler: "CacheFirst",
-            options: {
-              cacheName: "psy-cards-content",
-              expiration: {
-                maxEntries: 2000,
-                maxAgeSeconds: 60 * 60 * 24 * 365,
-              },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
-        ],
+        manifestTransforms: [canonicalPageEntries],
       },
       devOptions: {
         enabled: false,

@@ -12,6 +12,12 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["--filter", "@psy.cards/web", "dev", "--port", "4331"],
       "port": 4331
+    },
+    {
+      "name": "web-cloudflare",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@psy.cards/web", "preview:cloudflare"],
+      "port": 8788
     }
   ]
 }
