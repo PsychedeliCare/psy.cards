@@ -26,6 +26,17 @@ export const PWA_GLOB_IGNORES = [
   "about/**",
   "_astro/AboutPage.astro_*.js",
   "_astro/about.*.css",
+  // Combination cards are built from data bundled with the page scripts; the
+  // JSON copies are a network fallback, and the "Download for offline use"
+  // panel caches them on request. Print layouts are for printing, online.
+  // Both were most of the precache, and install time is how long a visitor
+  // on an old worker waits for this one to take over.
+  "combo-data/**",
+  "*/combo-data/**",
+  "print/**",
+  "*/print/**",
+  "print-cards/**",
+  "*/print-cards/**",
 ];
 
 /** Allow large font assets and hero images in the precache manifest. */

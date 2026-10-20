@@ -19,6 +19,7 @@ import {
   rotationForSubstance,
 } from "../lib/dial-geometry";
 import { getPageI18n, getUiString } from "../i18n/client";
+import { CARD_REQUEST_HEADERS } from "./card-request";
 
 const SNAP_DURATION_MS = 280;
 const WHEEL_SNAP_DEBOUNCE_MS = 110;
@@ -264,7 +265,7 @@ export function initSubstanceDial(): void {
       cardRequest = new AbortController();
       try {
         const res = await fetch(`${localePrefix}/card/${slug}`, {
-          headers: { Accept: "text/html" },
+          headers: CARD_REQUEST_HEADERS,
           signal: cardRequest.signal,
         });
         if (!res.ok) throw new Error("Card unavailable");

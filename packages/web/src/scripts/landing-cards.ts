@@ -15,6 +15,7 @@ import {
   type JSAnimation,
 } from "animejs";
 import { getPageI18n, getUiString } from "../i18n/client";
+import { CARD_REQUEST_HEADERS } from "./card-request";
 
 const DESKTOP_MQ = "(min-width: 821px)";
 const CARD_UPDATE_DEBOUNCE_MS = 160;
@@ -228,7 +229,7 @@ async function updateCard(slug: string, push: boolean): Promise<void> {
     cardRequest = new AbortController();
     try {
       const res = await fetch(`${localePrefix}/card/${slug}`, {
-        headers: { Accept: "text/html" },
+        headers: CARD_REQUEST_HEADERS,
         signal: cardRequest.signal,
       });
       if (!res.ok) throw new Error("Card unavailable");

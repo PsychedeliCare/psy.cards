@@ -32,6 +32,20 @@ self.skipWaiting();
 clientsClaim();
 cleanupOutdatedCaches();
 
+// Answers "which worker are you?" so a page left over from an older worker
+// (see the update card in src/worker.js) knows it can reload into this one.
+const WORKER_VERSION = 2;
+self.addEventListener("message", (event) => {
+  if (event.data?.type === "psy:version") event.ports[0]?.postMessage(WORKER_VERSION);
+});
+
+// Workers before this one kept card fragments in "psy-cards-content", served
+// cache-first for a year; drop it so nothing from them outlives the switch.
+const LEGACY_CACHES = ["psy-cards-content"];
+self.addEventListener("activate", (event) => {
+  event.waitUntil(Promise.all(LEGACY_CACHES.map((name) => caches.delete(name))));
+});
+
 /** A path to a page rather than a file: no extension in its last segment. */
 function isPagePath(pathname: string): boolean {
   const last = pathname.split("/").pop() ?? "";
@@ -57,7 +71,7 @@ registerRoute(
   ({ url, request }) =>
     request.method === "GET" && /^\/(?:(?:fr|de|it)\/)?(?:card|combo-data|data)\//.test(url.pathname),
   new CacheFirst({
-    cacheName: "psy-cards-content",
+    cacheName: "psy-cards-content-v2",
     plugins: [
       new CacheableResponsePlugin({ statuses: [200] }),
       new ExpirationPlugin({ maxEntries: 2000, maxAgeSeconds: 60 * 60 * 24 * 365 }),

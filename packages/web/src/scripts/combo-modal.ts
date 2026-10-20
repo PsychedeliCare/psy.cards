@@ -21,6 +21,7 @@ import {
 } from "../data/combo-card-data";
 import type { IconName } from "../data/definitions";
 import { statusIcons } from "../data/status-icons";
+import { CARD_REQUEST_HEADERS } from "./card-request";
 
 const DEFAULT_ROOT_ROUTE = "/combos";
 const BURNING_MOUNTAIN_HOSTS = new Set(["bm.psy.cards", "burning-mountain.psy.cards"]);
@@ -250,7 +251,7 @@ function getModalTargetFromAnchor(anchor: HTMLAnchorElement): ModalTarget | null
 async function fetchSubstanceCardFragment(slug: string): Promise<Node | null> {
   try {
     const res = await fetch(`${cardRoutePrefix}/${slug}`, {
-      headers: { Accept: "text/html" },
+      headers: CARD_REQUEST_HEADERS,
     });
     if (!res.ok) return null;
     const html = await res.text();

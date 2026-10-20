@@ -144,6 +144,48 @@ function burningMountainAssetPath(pathname) {
 	return ensureDirectorySlash(`${BURNING_MOUNTAIN_ROUTE}/${segments.join("/")}`);
 }
 
+/**
+ * Service workers installed before October 2026 answered any page they did
+ * not know with the combos page, whose script then loads `/card/<path>` and,
+ * when that 404s, reloads the page: forever (/about did this). That old code
+ * keeps running on visitors' devices until the new worker (src/sw.ts) takes
+ * over. Current pages send X-Psy-Card with their card requests; a missing
+ * card requested without it gets this "updating" card instead of a 404, which
+ * the old page shows rather than reloading, and which reloads it into the
+ * real page as soon as the new worker controls it. /cache is the manual way
+ * out.
+ */
+const CARD_PATH = /^\/(?:(fr|de|it)\/)?card\/[^/]+\/?$/;
+const UPDATE_COPY = {
+	en: ["PSY.CARDS is updating", "This page opens by itself in a moment.", "Still here after a minute? Reset PSY.CARDS on this device"],
+	fr: ["PSY.CARDS se met à jour", "Cette page s'ouvre d'elle-même dans un instant.", "Toujours là après une minute ? Réinitialisez PSY.CARDS sur cet appareil"],
+	de: ["PSY.CARDS wird aktualisiert", "Diese Seite öffnet sich gleich von selbst.", "Nach einer Minute noch hier? PSY.CARDS auf diesem Gerät zurücksetzen"],
+	it: ["PSY.CARDS si sta aggiornando", "Questa pagina si apre da sola tra un momento.", "Ancora qui dopo un minuto? Reimposta PSY.CARDS su questo dispositivo"],
+};
+// Runs in the old page (fragments' <script>s don't): reload once a worker
+// that answers "psy:version" (src/sw.ts) is active, or when it takes over.
+const UPDATE_SCRIPT = `(function(){var s=navigator.serviceWorker;if(!s)return;var k='psy-update-reloads',n=+(sessionStorage.getItem(k)||0);function go(){if(n>2)return;sessionStorage.setItem(k,n+1);location.reload()}s.addEventListener('controllerchange',go);s.getRegistration().then(function(r){if(!r)return;r.update();var w=r.active;if(!w)return;var c=new MessageChannel();c.port1.onmessage=function(e){if(e.data>=2)go()};w.postMessage({type:'psy:version'},[c.port2])})})()`;
+
+function updateCard(locale) {
+	const [title, text, reset] = UPDATE_COPY[locale] ?? UPDATE_COPY.en;
+	const html = `<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>${title}</title></head><body><div data-card-fragment><div style="display:grid;justify-items:center;gap:12px;max-width:340px;margin:0 auto;padding:40px 24px;border-radius:24px;background:#151518;color:#f3f3f5;font:16px/1.5 system-ui,sans-serif;text-align:center"><img src="/favicon.png" alt="" width="56" height="56" onload="${UPDATE_SCRIPT.replace(/"/g, "&quot;")}"><h2 style="margin:0;font-size:22px">${title}</h2><p style="margin:0;color:#b9b9c0">${text}</p><a href="/cache/" style="color:#f3f3f5;font-size:14px">${reset}</a></div></div></body></html>`;
+	return new Response(html, {
+		headers: {
+			"content-type": "text/html; charset=utf-8",
+			"cache-control": "no-store",
+			"x-robots-tag": "noindex",
+		},
+	});
+}
+
+async function cardOrUpdate(request, env, locale) {
+	const response = await env.ASSETS.fetch(request);
+	// Current pages mark their requests (src/scripts/card-request.ts) and
+	// handle a 404 themselves.
+	if (response.status !== 404 || request.headers.has("x-psy-card")) return response;
+	return updateCard(locale);
+}
+
 export default {
 	fetch(request, env) {
 		const url = new URL(request.url);
@@ -169,6 +211,9 @@ export default {
 		if (mainSiteBmIndex) {
 			return env.ASSETS.fetch(withPath(request, mainSiteBmIndex));
 		}
+
+		const card = url.pathname.match(CARD_PATH);
+		if (card) return cardOrUpdate(request, env, card[1] ?? "en");
 
 		return env.ASSETS.fetch(request);
 	},

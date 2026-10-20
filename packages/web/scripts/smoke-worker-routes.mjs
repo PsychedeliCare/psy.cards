@@ -106,6 +106,29 @@ const checks = [
 		status: 200,
 		assetPath: "/wheel",
 	},
+	{
+		url: "https://psy.cards/card/lsd/",
+		status: 200,
+		assetPath: "/card/lsd/",
+	},
+	// A card that doesn't exist. Current pages mark their requests and get the
+	// 404; old service workers' combos page doesn't, and gets the "updating"
+	// card instead of a 404 it would loop on.
+	{
+		url: "https://psy.cards/card/about/",
+		headers: { "X-Psy-Card": "1" },
+		status: 404,
+	},
+	{
+		url: "https://psy.cards/card/about/",
+		status: 200,
+		bodyIncludes: ["data-card-fragment", "PSY.CARDS is updating", "psy:version", 'href="/cache/"'],
+	},
+	{
+		url: "https://psy.cards/fr/card/about/",
+		status: 200,
+		bodyIncludes: ["data-card-fragment", "PSY.CARDS se met à jour"],
+	},
 ];
 
 const assetPaths = [];
@@ -114,13 +137,14 @@ const env = {
 		fetch(request) {
 			const url = new URL(request.url);
 			assetPaths.push(url.pathname);
+			if (url.pathname.includes("/card/about")) return new Response("not found", { status: 404 });
 			return new Response(`asset:${url.pathname}`);
 		},
 	},
 };
 
 for (const check of checks) {
-	const response = await worker.fetch(new Request(check.url), env);
+	const response = await worker.fetch(new Request(check.url, { headers: check.headers }), env);
 	if (response.status !== check.status) {
 		throw new Error(`${check.url}: expected ${check.status}, got ${response.status}`);
 	}
@@ -128,6 +152,13 @@ for (const check of checks) {
 	const location = response.headers.get("location");
 	if (check.location && location !== check.location) {
 		throw new Error(`${check.url}: expected location ${check.location}, got ${location}`);
+	}
+
+	if (check.bodyIncludes) {
+		const body = await response.text();
+		for (const text of check.bodyIncludes) {
+			if (!body.includes(text)) throw new Error(`${check.url}: expected the body to include ${text}`);
+		}
 	}
 
 	if (check.assetPath) {
