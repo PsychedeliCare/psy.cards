@@ -132,6 +132,17 @@
 }
 
 .psy-face {
+  --face-radius: 1.35em;
+  /* Category accent along the top edge. It is a background layer of the
+     face rather than a clipped child: Safari stops clipping children to the
+     rounded corners once the hologram canvas or the tilt composites them. */
+  --face-band: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--hue, #888), black 10%),
+      var(--hue, #888) 40%,
+      color-mix(in oklab, var(--hue, #888), white 18%)
+    )
+    top / 100% 0.32em no-repeat border-box;
   grid-area: 1 / 1;
   position: relative;
   display: flex;
@@ -139,11 +150,11 @@
   gap: 0.5em;
   min-width: 0;
   min-height: calc(var(--card-w) * var(--card-ratio));
-  padding: 1.1em 1em 0.75em;
+  padding: 1.05em 0.95em 0.7em;
   border: 1px solid var(--face-edge);
-  border-radius: 1.35em;
+  border-radius: var(--face-radius);
   overflow: clip;
-  background: var(--face);
+  background: var(--face-band), var(--face);
   box-shadow:
     0 0.1em 0 color-mix(in oklab, var(--color-fg) 6%, transparent) inset,
     0 1.6em 3.2em -1.4em rgb(0 0 0 / 0.55),
@@ -157,22 +168,6 @@
   transition: visibility 0s linear 0s;
 }
 
-/* Category accent along the top edge. */
-.psy-face::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 0.32em;
-  z-index: 2;
-  background: linear-gradient(
-    90deg,
-    color-mix(in oklab, var(--hue, #888), black 10%),
-    var(--hue, #888) 40%,
-    color-mix(in oklab, var(--hue, #888), white 18%)
-  );
-  pointer-events: none;
-}
-
 .psy-face > :not(.molecule-figure, .substance-hologram, .psy-foil, .psy-curl, [popover]) {
   position: relative;
   z-index: 1;
@@ -180,6 +175,7 @@
 
 .psy-face--front {
   background:
+    var(--face-band),
     radial-gradient(110% 62% at 100% 0%, color-mix(in oklab, var(--hue, #888) 20%, transparent), transparent 62%),
     radial-gradient(80% 50% at 0% 100%, color-mix(in oklab, var(--hue, #888) 8%, transparent), transparent 70%),
     var(--face);
@@ -190,6 +186,7 @@
   visibility: hidden;
   transition-delay: var(--flip-ms);
   background:
+    var(--face-band),
     radial-gradient(90% 55% at 0% 0%, color-mix(in oklab, var(--hue, #888) 13%, transparent), transparent 62%),
     repeating-linear-gradient(
       135deg,
@@ -467,29 +464,15 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.3em;
+  gap: 0.32em;
   min-width: 0;
-  margin-top: 0.15em;
-}
-
-.psy-head__aliases {
-  padding-right: 6em;
-}
-
-.psy-head__group {
-  margin: 0;
-  padding: 0.38em 0.8em;
-  border-radius: 999px;
-  font-size: 0.6em;
-  font-weight: 800;
-  letter-spacing: 0.09em;
-  line-height: 1;
-  text-transform: uppercase;
+  margin-top: 0.1em;
 }
 
 .psy-head__title {
-  margin: 0.04em 0 0;
-  font-size: 2.3em;
+  margin: 0;
+  padding-right: 4em;
+  font-size: 2.2em;
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.04em;
@@ -497,14 +480,35 @@
 }
 
 .psy-head__title--long {
-  font-size: 1.8em;
+  font-size: 1.75em;
   letter-spacing: -0.03em;
 }
 
-.psy-head__aliases {
+/* Category and street names share one line under the title. */
+.psy-head__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25em 0.5em;
   margin: 0;
+  padding-right: 5em;
+}
+
+.psy-head__group {
+  flex: none;
+  padding: 0.38em 0.75em;
+  border-radius: 999px;
+  font-size: 0.58em;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.psy-head__aliases {
+  min-width: 0;
   color: var(--color-fg-mute);
-  font-size: 0.72em;
+  font-size: 0.7em;
   line-height: 1.3;
 }
 
@@ -526,8 +530,9 @@
 }
 
 .psy-head__title--back {
-  margin-top: 0.1em;
-  font-size: 1.5em;
+  margin-top: 0.08em;
+  padding-right: 0;
+  font-size: 1.35em;
   letter-spacing: -0.03em;
 }
 
@@ -537,6 +542,9 @@
   inset: 0 0 auto auto;
   width: 13.5em;
   height: 13.5em;
+  /* Rounded on its own: a WebGPU canvas is composited, and Safari does not
+     clip composited children to the face's corners. */
+  border-top-right-radius: calc(var(--face-radius) - 1px);
 }
 
 .psy-face .molecule-figure {
@@ -553,33 +561,30 @@
 
 /* ---------- Bento ---------- */
 
+/* A 12-column bento: tiles pair up 7/5 or span the row, and rows share any
+   height the card has to spare so the face ends flush with its last tile. */
 .psy-bento {
-  display: flex;
+  display: grid;
   flex: 1;
-  flex-direction: column;
-  gap: 0.4em;
-  min-width: 0;
-}
-
-.psy-row {
-  display: flex;
-  gap: 0.4em;
-  min-width: 0;
-}
-
-.psy-row > .psy-tile {
-  flex: 1 1 0;
-}
-
-
-.psy-tile {
-  display: flex;
-  flex-direction: column;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-content: stretch;
   gap: 0.36em;
   min-width: 0;
-  padding: 0.6em 0.72em 0.64em;
+}
+
+.psy-span-12 { grid-column: span 12; }
+.psy-span-7 { grid-column: span 7; }
+.psy-span-5 { grid-column: span 5; }
+
+.psy-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  min-width: 0;
+  padding: 0.52em 0.66em 0.58em;
   border: 1px solid var(--tile-edge);
-  border-radius: 0.85em;
+  border-radius: 0.8em;
   /* No backdrop blur: blur inside the tilted 3D card flickers. */
   background: var(--tile);
 }
@@ -588,13 +593,50 @@
   display: flex;
   align-items: center;
   gap: 0.4em;
+  min-width: 0;
   margin: 0;
   color: var(--card-mute);
-  font-size: 0.64em;
+  font-size: 0.62em;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.09em;
   line-height: 1.2;
   text-transform: uppercase;
+}
+
+/* Tiles that open details: one button covers the whole tile, while the
+   links and buttons inside stay on top and keep their own action. */
+.psy-tap {
+  cursor: pointer;
+}
+
+.psy-tap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 0.8em;
+}
+
+.psy-tile--tap {
+  transition: border-color 140ms ease, background-color 140ms ease;
+}
+
+.psy-tile--tap :is(a, button, label):not(.psy-tap) {
+  position: relative;
+  z-index: 2;
+}
+
+.psy-tile--tap:has(.psy-tap:hover) {
+  border-color: color-mix(in oklab, var(--color-fg) 22%, transparent);
+}
+
+.psy-tile--tap:has(.psy-tap:focus-visible) {
+  outline: 2px solid var(--color-safe);
+  outline-offset: 1px;
+}
+
+.psy-tap:focus-visible {
+  outline: none;
 }
 
 .psy-tile h3 svg {
@@ -620,8 +662,8 @@
 .psy-tile__text {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.76em;
-  line-height: 1.34;
+  font-size: 0.72em;
+  line-height: 1.32;
   text-wrap: pretty;
 }
 
@@ -646,7 +688,7 @@
 }
 
 .psy-tile__text--small {
-  font-size: 0.7em;
+  font-size: 0.67em;
   color: var(--card-mute);
 }
 
@@ -937,7 +979,7 @@
   align-items: center;
   gap: 0.4em;
   width: 100%;
-  margin: 0.05em 0 0;
+  margin: auto 0 0;
   padding: 0.4em 0 0;
   border: 0;
   border-top: 1px dashed var(--tile-edge);
@@ -978,22 +1020,36 @@
 
 /* ---------- Effects & effects over time ---------- */
 
+.psy-tile--effects {
+  container-type: inline-size;
+}
+
 .psy-effects {
   display: grid;
-  gap: 0.24em;
+  align-content: start;
+  gap: 0.3em 0.6em;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+/* Two columns once the tile has the whole row to itself. */
+@container (min-width: 16em) {
+  .psy-effects {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .psy-effects li {
   display: flex;
   align-items: center;
   gap: 0.45em;
+  min-width: 0;
   color: var(--color-fg);
   font-size: 0.7em;
   font-weight: 650;
   line-height: 1.2;
+  hyphens: auto;
 }
 
 .psy-effects svg {
@@ -1005,6 +1061,7 @@
 
 .psy-curve {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 0.2em;
   padding: 0 0.1em;
@@ -1013,10 +1070,12 @@
 /* Intensity curve sampled as rounded bars, coloured by phase. */
 .psy-curve__bars {
   display: flex;
+  flex: 1 1 2.3em;
   align-items: flex-end;
-  gap: 0.14em;
-  height: 2.6em;
-  margin-top: 0.15em;
+  gap: 0.12em;
+  min-height: 2.3em;
+  max-height: 3.4em;
+  margin-top: 0.1em;
 }
 
 .psy-curve__bar {
@@ -1158,28 +1217,25 @@
   box-shadow: none;
 }
 
-/* ---------- Back: spacing & dependence ---------- */
+/* ---------- Spacing & dependence ---------- */
 
-/* Full-width on the front: the interval and its calendar side by side. */
-.psy-spacing {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.3em 0.9em;
+/* Interval and calendar stacked in a compact tile; why it matters is one
+   tap away. */
+.psy-tile--spacing {
+  container-type: inline-size;
 }
 
 .psy-spacing__value {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.1em 0.45em;
+  gap: 0.05em 0.45em;
   margin: 0;
 }
 
 .psy-spacing__value strong {
   color: var(--color-fg);
-  font-size: 1.3em;
+  font-size: 1.25em;
   font-weight: 850;
   line-height: 1.05;
   letter-spacing: -0.03em;
@@ -1187,7 +1243,7 @@
 
 .psy-spacing__value span {
   color: var(--hue, var(--color-fg-mute));
-  font-size: 0.66em;
+  font-size: 0.64em;
   font-weight: 800;
 }
 
@@ -1196,16 +1252,17 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.2em 0.5em;
+  margin: 0.1em 0 0;
 }
 
 .psy-spacing__cells {
   display: flex;
-  gap: 0.22em;
+  gap: 0.18em;
 }
 
 .psy-spacing__cell {
-  width: 0.58em;
-  height: 0.58em;
+  width: 0.5em;
+  height: 0.5em;
   border-radius: 50%;
   background: color-mix(in oklab, var(--color-fg) 13%, transparent);
 }
@@ -1217,8 +1274,46 @@
 
 .psy-spacing__span {
   color: var(--color-fg-mute);
-  font-size: 0.58em;
+  font-size: 0.56em;
   white-space: nowrap;
+}
+
+.psy-spacing {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+/* A whole row to itself: value and calendar side by side. */
+@container (min-width: 18em) {
+  .psy-spacing {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.3em 1em;
+  }
+
+  .psy-spacing .psy-spacing__pattern {
+    margin: 0;
+  }
+}
+
+.psy-popover .psy-spacing__value strong {
+  font-size: 1.6em;
+}
+
+.psy-popover .psy-spacing__value span {
+  font-size: 0.8em;
+}
+
+.psy-popover .psy-spacing__cell {
+  width: 0.7em;
+  height: 0.7em;
+}
+
+.psy-popover .psy-spacing__span {
+  font-size: 0.75em;
 }
 
 .psy-meter {
@@ -1242,16 +1337,77 @@
 
 .psy-meter__label {
   margin: 0;
-  font-size: 0.92em;
+  font-size: 0.88em;
   font-weight: 850;
   letter-spacing: -0.01em;
+}
+
+/* ---------- Back: legal · help · dependence ----------
+   Local tiles share the last row: legal and dependence pair up 7/5, or
+   three abreast once there are local services to list. */
+
+.psy-tile--legal,
+.psy-tile--help,
+.psy-tile--dependence {
+  container-type: inline-size;
+}
+
+.psy-tile--legal { grid-column: span 7; }
+.psy-tile--dependence { grid-column: span 5; }
+.psy-tile--help { grid-column: span 12; }
+
+.psy-bento--back:has(.psy-tile--help:not([hidden])) :is(.psy-tile--legal, .psy-tile--help, .psy-tile--dependence) {
+  grid-column: span 4;
+}
+
+.psy-tile--legal .psy-tile__head,
+.psy-tile--help .psy-tile__head {
+  flex-wrap: wrap;
+  row-gap: 0.3em;
+}
+
+/* Narrow tiles keep the headline figure; the prose is in the popover and
+   the whole tile opens it. */
+@container (max-width: 10.5em) {
+  .psy-dependence__text,
+  .psy-help-names .psy-help__where {
+    display: none;
+  }
+
+  .psy-tile h3 {
+    letter-spacing: 0.05em;
+  }
+
+  .psy-tile--dependence .psy-info-btn {
+    width: 0;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  .psy-tile--dependence .psy-info-btn svg {
+    display: none;
+  }
+
+  .psy-tile--dependence .psy-meter__label::after {
+    content: " ›";
+    color: var(--color-fg-mute);
+    font-weight: 700;
+  }
+}
+
+@container (max-width: 6.5em) {
+  .psy-tile h3 svg {
+    display: none;
+  }
 }
 
 /* ---------- Back: risks, combos, emergency ---------- */
 
 .psy-risks {
   display: grid;
-  gap: 0.42em;
+  gap: 0.34em;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1259,17 +1415,17 @@
 
 .psy-risks li {
   display: grid;
-  grid-template-columns: 1.75em minmax(0, 1fr);
-  align-items: start;
-  gap: 0.55em;
+  grid-template-columns: 1.55em minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5em;
 }
 
 .psy-risks__icon {
   display: grid;
   place-items: center;
-  width: 1.75em;
-  height: 1.75em;
-  border-radius: 0.55em;
+  width: 1.55em;
+  height: 1.55em;
+  border-radius: 0.5em;
   color: #fdba74;
   background: color-mix(in oklab, #f97316 18%, transparent);
 }
@@ -1282,13 +1438,20 @@
 .psy-risks p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.7em;
-  line-height: 1.3;
+  font-size: 0.69em;
+  line-height: 1.28;
   text-wrap: pretty;
 }
 
 .psy-risks strong {
   color: var(--color-fg);
+}
+
+.psy-avoid-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35em 0.6em;
 }
 
 .psy-avoid {
@@ -1300,11 +1463,15 @@
   list-style: none;
 }
 
+.psy-avoid-body .psy-caution {
+  flex: 1 1 14em;
+}
+
 .psy-avoid__chip {
   display: inline-flex;
   align-items: center;
   gap: 0.3em;
-  min-height: 2.1em;
+  min-height: 1.95em;
   padding: 0 0.6em 0 0.42em;
   border-radius: 999px;
   font-size: 0.68em;
@@ -1345,7 +1512,7 @@
   flex: none;
   align-items: center;
   gap: 0.35em;
-  min-height: 2.3em;
+  min-height: 2.15em;
   padding: 0 0.8em 0 0.65em;
   border-radius: 999px;
   color: #fff;
@@ -1371,13 +1538,13 @@
 
 .psy-emergency__actions {
   display: grid;
-  gap: 0.12em;
+  gap: 0.1em;
   margin: 0;
   padding-left: 1.25em;
   list-style: decimal;
   color: var(--color-fg);
-  font-size: 0.7em;
-  line-height: 1.32;
+  font-size: 0.69em;
+  line-height: 1.3;
 }
 
 .psy-emergency__actions li::marker {
@@ -1388,14 +1555,15 @@
 .psy-emergency__local {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
+  justify-content: space-between;
   gap: 0.3em 0.7em;
-  margin: 0.1em 0 0;
-  padding-top: 0.4em;
+  margin: 0.05em 0 0;
+  padding-top: 0.35em;
   border-top: 1px dashed color-mix(in oklab, #ef4444 35%, transparent);
   color: var(--ink-soft);
   font-size: 0.68em;
-  line-height: 1.32;
+  line-height: 1.3;
 }
 
 .psy-emergency__local[hidden],
@@ -1422,10 +1590,95 @@
   text-decoration: underline;
 }
 
+.psy-emergency__calling {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  padding: 0;
+  border: 0;
+  color: var(--ink-soft);
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline dotted color-mix(in oklab, var(--color-fg) 40%, transparent);
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.psy-emergency__calling svg {
+  width: 1.1em;
+  height: 1.1em;
+  color: #fca5a5;
+}
+
+.psy-emergency__calling:hover {
+  color: var(--color-fg);
+}
+
 /* ---------- Local help ---------- */
 
 .psy-tile--help[hidden] {
   display: none;
+}
+
+.psy-help-names {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.22em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.psy-help-names__item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4em;
+  min-width: 0;
+  font-size: 0.7em;
+  font-weight: 750;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.psy-help-names__item > :first-child {
+  overflow: hidden;
+  min-width: 0;
+  color: var(--color-fg);
+  text-decoration: none;
+  text-overflow: ellipsis;
+}
+
+.psy-help-names__item a:hover {
+  text-decoration: underline;
+}
+
+.psy-help-names__item .psy-help__where {
+  flex: none;
+}
+
+.psy-help-names__more {
+  display: flex;
+  margin-top: auto;
+}
+
+/* With the row to itself, names run on one line and end with the link. */
+@container (min-width: 16em) {
+  .psy-help-names {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25em 0.9em;
+  }
+
+  .psy-help-names__item {
+    max-width: 100%;
+  }
+
+  .psy-help-names__more {
+    margin: 0 0 0 auto;
+  }
 }
 
 .psy-help {
@@ -1516,10 +1769,10 @@
 
 .psy-country-btn {
   display: inline-flex;
-  flex: none;
+  flex: 0 1 auto;
   align-items: center;
   gap: 0.35em;
-  max-width: 55%;
+  max-width: 100%;
   min-height: 2em;
   padding: 0 0.6em 0 0.45em;
   border: 1px solid var(--tile-edge);
@@ -1551,15 +1804,25 @@
 
 .psy-legal {
   display: flex;
-  align-items: baseline;
-  gap: 0.5em;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3em;
   margin: 0;
-  font-size: 0.72em;
-  line-height: 1.32;
+  font-size: 0.7em;
+  line-height: 1.3;
+}
+
+.psy-tile--legal .psy-legal__note {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  color: var(--card-mute);
+  font-size: 0.95em;
 }
 
 .psy-legal[hidden],
-.psy-legal__foot[hidden],
 [data-local-legal-empty][hidden] {
   display: none;
 }
@@ -1587,27 +1850,24 @@
   text-wrap: pretty;
 }
 
-.psy-legal__foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5em;
-  margin: 0;
-  color: var(--color-fg-mute);
-  font-size: 0.6em;
-}
-
 .psy-legal__more {
   display: inline-flex;
+  align-self: flex-start;
   align-items: center;
   gap: 0.2em;
-  padding: 0;
+  margin-top: auto;
+  padding: 0.15em 0 0;
   border: 0;
   color: var(--color-fg);
   background: none;
   font: inherit;
+  font-size: 0.62em;
   font-weight: 750;
   cursor: pointer;
+}
+
+.psy-legal__more[hidden] {
+  display: none;
 }
 
 .psy-legal__more svg {
@@ -1790,6 +2050,19 @@
   box-shadow: 0 0 0 2px var(--color-fg);
 }
 
+/* ---------- Phone card ----------
+   Larger type on a narrower card: a little less padding around it. */
+
+@container psy-deck (max-width: 28rem) {
+  .psy-face {
+    padding: 0.95em 0.8em 0.6em;
+  }
+
+  .psy-tile {
+    padding: 0.48em 0.58em 0.52em;
+  }
+}
+
 /* ---------- Spread: both sides when there is room ----------
    Kept last so it overrides the single-card rules above. */
 
@@ -1816,6 +2089,10 @@
       align-items: start;
       transform: none;
       transition: none;
+      /* Nothing flips here. In a shared 3D context the half of a tilted side
+         under the pointer sinks behind this element's plane, which then takes
+         the pointer: hover drops, the side springs back and clicks miss. */
+      transform-style: flat;
     }
 
     .psy-face,

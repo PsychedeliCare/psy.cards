@@ -586,9 +586,9 @@
 }
 
 .hc--real .psy-card {
-  /* A little smaller than the app's 28.5 so the densest cards fit A6. */
+  /* The app's own scale: every card fits A6 at 28.5. */
   --card-w: var(--w);
-  --card-em: 33;
+  --card-em: 28.5;
   --card-ratio: calc(148 / 105);
   font-size: calc(var(--card-w) / var(--card-em));
   transform: none !important;

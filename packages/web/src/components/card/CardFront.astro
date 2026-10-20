@@ -41,12 +41,19 @@ const margin = data.margin;
 const marginText = margin
   ? tFormat(locale, ui, margin.atLeast ? "card.marginAtLeast" : "card.marginLabel", { ratio: String(margin.ratio) })
   : t(locale, ui, "card.marginUnknown");
-const routesPopover = `${uid}-routes`;
+const routesPopover = `${uid}-pop-routes`;
 const spacing = c.spacing;
 const pattern = data.spacing.pattern ? [...data.spacing.pattern] : [];
 const spanUnit = data.spacing.unit ? t(locale, ui, `card.units.${data.spacing.unit}`) : "";
-const marginPopover = `${uid}-margin`;
+const marginPopover = `${uid}-pop-margin`;
+const spacingPopover = `${uid}-pop-spacing`;
 const routeName = (route: string) => getRouteLabel(route);
+
+// Bento on a 12-column grid: tiles pair up 7/5 (wide content | compact
+// content) and take the whole row when their partner is missing.
+const span = (pair: boolean, wide: boolean) => (pair ? (wide ? "psy-span-7" : "psy-span-5") : "psy-span-12");
+const pairPersonal = showSideTile && Boolean(spacing);
+const pairCurve = Boolean(curve) && effects.length > 0;
 ---
 
 <section class="psy-face psy-face--front" id={`${uid}-front`} aria-labelledby={`${uid}-title`} data-hologram-host>
@@ -61,13 +68,17 @@ const routeName = (route: string) => getRouteLabel(route);
   <MoleculeFigure substanceKey={data.key} />
 
   <header class="psy-head">
-    {groupLabel && <p class="psy-head__group category-surface cell-text">{groupLabel}</p>}
     <h2 class:list={["psy-head__title", { "psy-head__title--long": displayName.length > 11 }]} id={`${uid}-title`}>{displayName}</h2>
-    {aliases.length > 0 && <p class="psy-head__aliases">{aliases.slice(0, 4).join(" · ")}</p>}
+    {(groupLabel || aliases.length > 0) && (
+      <p class="psy-head__meta">
+        {groupLabel && <span class="psy-head__group category-surface cell-text">{groupLabel}</span>}
+        {aliases.length > 0 && <span class="psy-head__aliases">{aliases.slice(0, 4).join(" · ")}</span>}
+      </p>
+    )}
   </header>
 
   <div class="psy-bento">
-    <section class="psy-tile psy-tile--dose" aria-labelledby={`${uid}-dose`}>
+    <section class="psy-tile psy-tile--dose psy-span-12" aria-labelledby={`${uid}-dose`}>
       <div class="psy-tile__head">
         <h3 id={`${uid}-dose`}>
           <Icon name="ph:scales-fill" aria-hidden="true" />
@@ -123,102 +134,104 @@ const routeName = (route: string) => getRouteLabel(route);
       </button>
     </section>
 
-    {(showSideTile || effects.length > 0) && (
-      <div class="psy-row">
-        {showSideTile && (
-          <section
-            class="psy-tile psy-tile--personal"
-            data-personal={personal?.kind}
-            data-male={personal?.kind === "mgPerKg" ? personal.male : personal?.kind === "bac" ? personal.rMale : undefined}
-            data-female={personal?.kind === "mgPerKg" ? personal.female : personal?.kind === "bac" ? personal.rFemale : undefined}
-            data-grams={personal?.kind === "bac" ? personal.gramsPerUnit : undefined}
-            data-limit={personal?.kind === "bac" ? personal.limitPermille : undefined}
-            data-per-kg={personal?.kind === "caffeine" ? personal.singleMgPerKg : undefined}
-            data-max={personal?.kind === "caffeine" ? personal.singleMaxMg : undefined}
-            data-daily={personal?.kind === "caffeine" ? personal.dailyMg : undefined}
-            data-ref-weight={personal?.kind === "referenceWeight" ? personal.weightKg : undefined}
-            data-min-kg={personal?.kind === "perKgChart" ? commonSegment?.start : undefined}
-            data-max-kg={personal?.kind === "perKgChart" ? commonSegment?.end : undefined}
-            aria-live="polite"
-          >
-            <h3>
-              <Icon name={personal ? "ph:user-fill" : "ph:sparkle-fill"} aria-hidden="true" />
-              {personal ? t(locale, ui, "card.forYou") : t(locale, ui, "card.startLow")}
-            </h3>
-            {personal && personal.kind !== "referenceWeight" && (
-              <div class="psy-personal" data-personal-result hidden>
-                <p class="psy-personal__value"><output data-personal-value></output></p>
-                <p class="psy-personal__label" data-personal-label></p>
-                <p class="psy-personal__formula" data-personal-formula></p>
-              </div>
-            )}
-            {personal?.kind === "referenceWeight" && (
-              <p class="psy-tile__text">
-                {tFormat(locale, ui, "card.refWeight", { weight: String(personal.weightKg) })}{" "}
-                <span data-personal-ref></span>
-              </p>
-            )}
-            <p class="psy-tile__text" data-personal-empty={personal && personal.kind !== "referenceWeight" ? "" : undefined}>
-              {personal?.kind === "bac"
-                ? t(locale, ui, "card.setBody")
-                : personal?.kind === "caffeine"
-                  ? t(locale, ui, "card.setWeight")
-                  : c.dose}
-            </p>
-          </section>
-        )}
-        {effects.length > 0 && (
-          <section class="psy-tile psy-tile--effects" aria-labelledby={`${uid}-effects`}>
-            <h3 id={`${uid}-effects`}>
-              <Icon name="ph:sparkle-fill" aria-hidden="true" />
-              {t(locale, ui, "substanceCard.effects")}
-            </h3>
-            <ul class="psy-effects">
-              {effects.map((effect) => (
-                <li><Icon name={`ph:${effect.icon}`} aria-hidden="true" />{effect.label}</li>
-              ))}
-            </ul>
-          </section>
-        )}
-      </div>
-    )}
-
-    {curve && (
-      <section class="psy-tile psy-tile--curve" aria-labelledby={`${uid}-curve`}>
-        <h3 id={`${uid}-curve`}>
-          <Icon name="ph:clock-fill" aria-hidden="true" />
-          {t(locale, ui, "card.effectsOverTime")}
+    {showSideTile && (
+      <section
+        class:list={["psy-tile psy-tile--personal", span(pairPersonal, true)]}
+        data-personal={personal?.kind}
+        data-male={personal?.kind === "mgPerKg" ? personal.male : personal?.kind === "bac" ? personal.rMale : undefined}
+        data-female={personal?.kind === "mgPerKg" ? personal.female : personal?.kind === "bac" ? personal.rFemale : undefined}
+        data-grams={personal?.kind === "bac" ? personal.gramsPerUnit : undefined}
+        data-limit={personal?.kind === "bac" ? personal.limitPermille : undefined}
+        data-per-kg={personal?.kind === "caffeine" ? personal.singleMgPerKg : undefined}
+        data-max={personal?.kind === "caffeine" ? personal.singleMaxMg : undefined}
+        data-daily={personal?.kind === "caffeine" ? personal.dailyMg : undefined}
+        data-ref-weight={personal?.kind === "referenceWeight" ? personal.weightKg : undefined}
+        data-min-kg={personal?.kind === "perKgChart" ? commonSegment?.start : undefined}
+        data-max-kg={personal?.kind === "perKgChart" ? commonSegment?.end : undefined}
+        aria-live="polite"
+      >
+        <h3>
+          <Icon name={personal ? "ph:user-fill" : "ph:sparkle-fill"} aria-hidden="true" />
+          {personal ? t(locale, ui, "card.forYou") : t(locale, ui, "card.startLow")}
         </h3>
-        <EffectCurve timing={data.timing} locale={locale} widthEm={19.6} />
+        {personal && personal.kind !== "referenceWeight" && (
+          <div class="psy-personal" data-personal-result hidden>
+            <p class="psy-personal__value"><output data-personal-value></output></p>
+            <p class="psy-personal__label" data-personal-label></p>
+            <p class="psy-personal__formula" data-personal-formula></p>
+          </div>
+        )}
+        {personal?.kind === "referenceWeight" && (
+          <p class="psy-tile__text">
+            {tFormat(locale, ui, "card.refWeight", { weight: String(personal.weightKg) })}{" "}
+            <span data-personal-ref></span>
+          </p>
+        )}
+        <p class="psy-tile__text" data-personal-empty={personal && personal.kind !== "referenceWeight" ? "" : undefined}>
+          {personal?.kind === "bac"
+            ? t(locale, ui, "card.setBody")
+            : personal?.kind === "caffeine"
+              ? t(locale, ui, "card.setWeight")
+              : c.dose}
+        </p>
       </section>
     )}
 
     {spacing && (
-      <section class="psy-tile psy-tile--spacing" aria-labelledby={`${uid}-spacing`}>
-        <h3 id={`${uid}-spacing`}>
-          <Icon name="ph:calendar-dots-fill" aria-hidden="true" />
-          {t(locale, ui, "card.spacing")}
-        </h3>
+      <section class:list={["psy-tile psy-tile--spacing psy-tile--tap", span(pairPersonal, false)]} aria-labelledby={`${uid}-spacing`}>
+        <div class="psy-tile__head">
+          <h3 id={`${uid}-spacing`}>
+            <Icon name="ph:calendar-dots-fill" aria-hidden="true" />
+            {t(locale, ui, "card.spacing")}
+          </h3>
+          <button type="button" class="psy-info-btn psy-tap" popovertarget={spacingPopover} aria-label={`${t(locale, ui, "card.spacing")}: ${spacing.value}. ${t(locale, ui, "card.why")}`}>
+            <Icon name="ph:info-bold" aria-hidden="true" />
+          </button>
+        </div>
         <div class="psy-spacing">
           <p class="psy-spacing__value">
             <strong>{spacing.value}</strong>
             <span>{spacing.label}</span>
           </p>
           {pattern.length > 0 && (
-            <div class="psy-spacing__pattern" aria-hidden="true">
+            <p class="psy-spacing__pattern" aria-hidden="true">
               <span class="psy-spacing__cells">
                 {pattern.map((cell) => <span class:list={["psy-spacing__cell", { "is-use": cell === "x" }]} />)}
               </span>
               <span class="psy-spacing__span">{tFormat(locale, ui, "card.spacingSpan", { count: String(pattern.length), unit: spanUnit })}</span>
-            </div>
+            </p>
           )}
         </div>
-        <p class="psy-tile__text">{spacing.text}</p>
+      </section>
+    )}
+
+    {curve && (
+      <section class:list={["psy-tile psy-tile--curve", span(pairCurve, true)]} aria-labelledby={`${uid}-curve`}>
+        <h3 id={`${uid}-curve`}>
+          <Icon name="ph:clock-fill" aria-hidden="true" />
+          {t(locale, ui, "card.effectsOverTime")}
+        </h3>
+        {/* Plot widths on the phone card, the narrowest: 7 of 12 columns, or all of them. */}
+        <EffectCurve timing={data.timing} locale={locale} widthEm={pairCurve ? 11.5 : 19.6} />
+      </section>
+    )}
+
+    {effects.length > 0 && (
+      <section class:list={["psy-tile psy-tile--effects", span(pairCurve, false)]} aria-labelledby={`${uid}-effects`}>
+        <h3 id={`${uid}-effects`}>
+          <Icon name="ph:sparkle-fill" aria-hidden="true" />
+          {t(locale, ui, "substanceCard.effects")}
+        </h3>
+        <ul class="psy-effects">
+          {effects.map((effect) => (
+            <li><Icon name={`ph:${effect.icon}`} aria-hidden="true" />{effect.label}</li>
+          ))}
+        </ul>
       </section>
     )}
 
     {c.prepare && (
-      <section class="psy-tile psy-tile--prepare" aria-labelledby={`${uid}-prepare`}>
+      <section class="psy-tile psy-tile--prepare psy-span-12" aria-labelledby={`${uid}-prepare`}>
         <h3 id={`${uid}-prepare`}>
           <Icon name="ph:test-tube-fill" aria-hidden="true" />
           {t(locale, ui, "card.prepare")}

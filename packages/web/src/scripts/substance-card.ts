@@ -219,7 +219,7 @@ function burst(element: HTMLElement): void {
 
 /* ---------- Hover tilt & corner hotspots ---------- */
 
-const TILT_MAX_DEG = 6;
+const TILT_MAX_DEG = 4;
 const CORNER_EM = 3.2;
 const INTERACTIVE = 'a, button, label, input, select, textarea, summary, [popover], [tabindex]:not([tabindex="-1"])';
 
@@ -248,9 +248,28 @@ function tiltTargetFor(target: Element): HTMLElement | null {
   return deck && isSpread(deck) ? target.closest<HTMLElement>(".psy-face") : card;
 }
 
-function cornerAt(face: HTMLElement, x: number, y: number): string | null {
+type Rect = { left: number; top: number; right: number; bottom: number };
+
+/**
+ * Where an element sits before its own transform: its offset parent (the
+ * deck, or the spread card) is never tilted. Reading the tilted box instead
+ * feeds the tilt back into itself, and the edge under the pointer recedes
+ * out from under it, so the card shivers between tilted and flat.
+ */
+function layoutRect(element: HTMLElement): Rect {
+  const parent = element.offsetParent;
+  const origin = parent?.getBoundingClientRect() ?? { left: 0, top: 0 };
+  const left = origin.left + (parent?.clientLeft ?? 0) + element.offsetLeft;
+  const top = origin.top + (parent?.clientTop ?? 0) + element.offsetTop;
+  return { left, top, right: left + element.offsetWidth, bottom: top + element.offsetHeight };
+}
+
+function contains(rect: Rect, x: number, y: number): boolean {
+  return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+}
+
+function cornerAt(face: HTMLElement, rect: Rect, x: number, y: number): string | null {
   const zone = CORNER_EM * parseFloat(getComputedStyle(face).fontSize);
-  const rect = face.getBoundingClientRect();
   const left = x - rect.left < zone;
   const right = rect.right - x < zone;
   const top = y - rect.top < zone;
@@ -258,29 +277,56 @@ function cornerAt(face: HTMLElement, x: number, y: number): string | null {
   return (left || right) && (top || bottom) ? `${top ? "t" : "b"}${left ? "l" : "r"}` : null;
 }
 
+/** The side showing in a stacked card. */
+function visibleFace(card: HTMLElement): HTMLElement | null {
+  const back = card.closest(DECK)?.querySelector<HTMLInputElement>('.psy-deck__radio[value="back"]');
+  return card.querySelector<HTMLElement>(back?.checked ? ".psy-face--back" : ".psy-face--front");
+}
+
+/** The face's layout box: its own when spread, the card's when stacked. */
+function faceRect(face: HTMLElement): Rect {
+  const deck = face.closest<HTMLElement>(DECK);
+  const card = face.closest<HTMLElement>(".psy-card");
+  return layoutRect(deck && card && !isSpread(deck) ? card : face);
+}
+
 function applyHover(): void {
   hoverFrame = 0;
   const event = lastHover;
   if (!event) return;
+  const { clientX: x, clientY: y } = event;
   const target = event.target instanceof Element && !event.target.closest("[popover]") ? event.target : null;
 
-  const face = target?.closest<HTMLElement>(".psy-face") ?? null;
+  // Keep the side under the pointer while the pointer is inside its untilted
+  // box, even when the tilted edge has slid away from under it.
+  let element = target ? tiltTargetFor(target) : null;
+  let tiltRect = element ? layoutRect(element) : null;
+  if (!element && tilted?.isConnected && !target?.closest("[popover]")) {
+    const rect = layoutRect(tilted);
+    if (contains(rect, x, y)) {
+      element = tilted;
+      tiltRect = rect;
+    }
+  }
+
+  const face =
+    target?.closest<HTMLElement>(".psy-face") ??
+    (element?.matches(".psy-face") ? element : element ? visibleFace(element) : null);
   if (cornerFace && cornerFace !== face) delete cornerFace.dataset.corner;
   cornerFace = face;
   if (face) {
-    const corner = isInteractive(target!, face) ? null : cornerAt(face, event.clientX, event.clientY);
+    const corner = target && isInteractive(target, face) ? null : cornerAt(face, faceRect(face), x, y);
     if (corner) face.dataset.corner = corner;
     else delete face.dataset.corner;
   }
 
-  const element = target ? tiltTargetFor(target) : null;
   if (tilted && tilted !== element) clearTilt(tilted);
-  if (!element || reducedMotion.matches) return;
+  if (!element || !tiltRect || reducedMotion.matches) return;
   tilted = element;
-  // Measure against the untilted box so the tilt doesn't feed back on itself.
-  const rect = element.getBoundingClientRect();
-  const px = Math.min(1, Math.max(0, 0.5 + (event.clientX - (rect.left + rect.width / 2)) / element.offsetWidth));
-  const py = Math.min(1, Math.max(0, 0.5 + (event.clientY - (rect.top + rect.height / 2)) / element.offsetHeight));
+  const width = tiltRect.right - tiltRect.left;
+  const height = tiltRect.bottom - tiltRect.top;
+  const px = Math.min(1, Math.max(0, (x - tiltRect.left) / width));
+  const py = Math.min(1, Math.max(0, (y - tiltRect.top) / height));
   element.style.setProperty("--tilt-x", `${((0.5 - py) * 2 * TILT_MAX_DEG).toFixed(2)}deg`);
   element.style.setProperty("--tilt-y", `${((px - 0.5) * 2 * TILT_MAX_DEG).toFixed(2)}deg`);
   element.style.setProperty("--glare-x", `${(px * 100).toFixed(1)}%`);
@@ -323,7 +369,7 @@ function handleCornerClick(event: MouseEvent): void {
   const target = event.target instanceof Element ? event.target : null;
   const face = target?.closest<HTMLElement>(".psy-face");
   if (!face || isInteractive(target!, face) || !(window.getSelection()?.isCollapsed ?? true)) return;
-  const corner = cornerAt(face, event.clientX, event.clientY);
+  const corner = cornerAt(face, faceRect(face), event.clientX, event.clientY);
   const deck = face.closest<HTMLElement>(DECK);
   if (!corner || !deck) return;
   event.preventDefault();

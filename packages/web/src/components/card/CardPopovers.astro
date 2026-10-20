@@ -1,8 +1,10 @@
 ---
 /**
- * Popovers opened from the card (other routes, toxicity comparison,
- * dependence rating). They live outside the 3D card: Chromium does not paint
- * top-layer content whose ancestor sits in a backface-hidden 3D context.
+ * Popovers opened from the card (other routes, toxicity comparison, spacing,
+ * dependence rating, local help and law). They live outside the 3D card:
+ * Chromium does not paint top-layer content whose ancestor sits in a
+ * backface-hidden 3D context. Their ids carry `-pop-` so they never collide
+ * with the tile headings' ids (`popovertarget` would find the heading).
  */
 import { Icon } from "@twodft/astro-icon/components";
 import DoseScale from "./DoseScale.astro";
@@ -23,6 +25,9 @@ interface Props {
 const { data, locale, uid, displayName } = Astro.props;
 const ui = getUiMessages(locale);
 const level = Math.min(5, Math.max(1, data.dependence.level));
+const spacing = data.content.spacing;
+const pattern = data.spacing.pattern ? [...data.spacing.pattern] : [];
+const spanUnit = data.spacing.unit ? t(locale, ui, `card.units.${data.spacing.unit}`) : "";
 const closeLabel = t(locale, ui, "layout.close");
 const dependenceSource =
   data.dependence.nutt !== undefined
@@ -34,10 +39,10 @@ const dependenceSource =
 ---
 
 {data.otherRoutes.length > 0 && (
-  <div class="psy-popover" id={`${uid}-routes`} popover>
+  <div class="psy-popover" id={`${uid}-pop-routes`} popover>
     <div class="psy-popover__head">
       <h3>{displayName} · {t(locale, ui, "card.otherRoutes")}</h3>
-      <button type="button" class="psy-popover__close" popovertarget={`${uid}-routes`} popovertargetaction="hide" aria-label={closeLabel}>
+      <button type="button" class="psy-popover__close" popovertarget={`${uid}-pop-routes`} popovertargetaction="hide" aria-label={closeLabel}>
         <Icon name="ph:x-bold" aria-hidden="true" />
       </button>
     </div>
@@ -61,10 +66,10 @@ const dependenceSource =
   </div>
 )}
 
-<div class="psy-popover psy-popover--wide" id={`${uid}-margin`} popover>
+<div class="psy-popover psy-popover--wide" id={`${uid}-pop-margin`} popover>
   <div class="psy-popover__head">
     <h3>{t(locale, ui, "card.marginChartTitle")}</h3>
-    <button type="button" class="psy-popover__close" popovertarget={`${uid}-margin`} popovertargetaction="hide" aria-label={closeLabel}>
+    <button type="button" class="psy-popover__close" popovertarget={`${uid}-pop-margin`} popovertargetaction="hide" aria-label={closeLabel}>
       <Icon name="ph:x-bold" aria-hidden="true" />
     </button>
   </div>
@@ -73,10 +78,10 @@ const dependenceSource =
   <p class="psy-popover__note">{t(locale, ui, "card.marginCaveat")}</p>
 </div>
 
-<div class="psy-popover" id={`${uid}-dependence`} popover>
+<div class="psy-popover" id={`${uid}-pop-dependence`} popover>
   <div class="psy-popover__head">
     <h3>{t(locale, ui, "card.dependence")}: {t(locale, ui, `card.dependenceLevels.${level}`)}</h3>
-    <button type="button" class="psy-popover__close" popovertarget={`${uid}-dependence`} popovertargetaction="hide" aria-label={closeLabel}>
+    <button type="button" class="psy-popover__close" popovertarget={`${uid}-pop-dependence`} popovertargetaction="hide" aria-label={closeLabel}>
       <Icon name="ph:x-bold" aria-hidden="true" />
     </button>
   </div>
@@ -87,10 +92,55 @@ const dependenceSource =
   <p class="psy-popover__note">{dependenceSource}</p>
 </div>
 
-<div class="psy-popover psy-popover--wide" id={`${uid}-legal`} popover data-local-legal-popover>
+{spacing && (
+  <div class="psy-popover" id={`${uid}-pop-spacing`} popover>
+    <div class="psy-popover__head">
+      <h3>{displayName} · {t(locale, ui, "card.spacing")}</h3>
+      <button type="button" class="psy-popover__close" popovertarget={`${uid}-pop-spacing`} popovertargetaction="hide" aria-label={closeLabel}>
+        <Icon name="ph:x-bold" aria-hidden="true" />
+      </button>
+    </div>
+    <p class="psy-spacing__value">
+      <strong>{spacing.value}</strong>
+      <span>{spacing.label}</span>
+    </p>
+    {pattern.length > 0 && (
+      <p class="psy-spacing__pattern" aria-hidden="true">
+        <span class="psy-spacing__cells">
+          {pattern.map((cell) => <span class:list={["psy-spacing__cell", { "is-use": cell === "x" }]} />)}
+        </span>
+        <span class="psy-spacing__span">{tFormat(locale, ui, "card.spacingSpan", { count: String(pattern.length), unit: spanUnit })}</span>
+      </p>
+    )}
+    <p>{spacing.text}</p>
+  </div>
+)}
+
+<div class="psy-popover psy-popover--wide" id={`${uid}-pop-help`} popover data-local-help-popover>
+  <div class="psy-popover__head">
+    <h3 data-local-help-title>{t(locale, ui, "card.help")}</h3>
+    <button type="button" class="psy-popover__close" popovertarget={`${uid}-pop-help`} popovertargetaction="hide" aria-label={closeLabel}>
+      <Icon name="ph:x-bold" aria-hidden="true" />
+    </button>
+  </div>
+  <ul class="psy-help" data-local-help-list></ul>
+</div>
+
+<div class="psy-popover" id={`${uid}-pop-calling`} popover data-local-calling-popover>
+  <div class="psy-popover__head">
+    <h3>{t(locale, ui, "card.policeQuestion")}</h3>
+    <button type="button" class="psy-popover__close" popovertarget={`${uid}-pop-calling`} popovertargetaction="hide" aria-label={closeLabel}>
+      <Icon name="ph:x-bold" aria-hidden="true" />
+    </button>
+  </div>
+  <p data-local-calling-text></p>
+  <p class="psy-popover__note">{t(locale, ui, "card.legalDisclaimer")}</p>
+</div>
+
+<div class="psy-popover psy-popover--wide" id={`${uid}-pop-legal`} popover data-local-legal-popover>
   <div class="psy-popover__head">
     <h3 data-local-legal-title>{t(locale, ui, "card.legal")}</h3>
-    <button type="button" class="psy-popover__close" popovertarget={`${uid}-legal`} popovertargetaction="hide" aria-label={closeLabel}>
+    <button type="button" class="psy-popover__close" popovertarget={`${uid}-pop-legal`} popovertargetaction="hide" aria-label={closeLabel}>
       <Icon name="ph:x-bold" aria-hidden="true" />
     </button>
   </div>
@@ -102,5 +152,5 @@ const dependenceSource =
   <p data-local-drug-checking></p>
   <h4 class="psy-popover__subhead">{t(locale, ui, "card.legalSources")}</h4>
   <ul class="psy-popover__sources" data-local-sources></ul>
-  <p class="psy-popover__note">{t(locale, ui, "card.legalDisclaimer")}</p>
+  <p class="psy-popover__note">{t(locale, ui, "card.legalDisclaimer")} <span data-local-asof></span></p>
 </div>

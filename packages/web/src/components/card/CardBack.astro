@@ -21,7 +21,7 @@ const ui = getUiMessages(locale);
 const c = data.content;
 const level = Math.min(5, Math.max(1, data.dependence.level));
 const levelLabel = t(locale, ui, `card.dependenceLevels.${level}`);
-const dependencePopover = `${uid}-dependence`;
+const dependencePopover = `${uid}-pop-dependence`;
 const emergencyNumber = t(locale, ui, "card.emergencyNumber");
 // Two rows of chips at most; the full list lives in the details below.
 const MAX_AVOID = 7;
@@ -31,7 +31,9 @@ const MAX_CAUTION = 6;
 const shownCaution = data.caution.slice(0, data.caution.length > MAX_CAUTION + 1 ? MAX_CAUTION : undefined);
 const hiddenCaution = data.caution.length - shownCaution.length;
 const combosHeadingId = `substance-combos-${data.key.replace(/[^a-z0-9_-]+/gi, "-")}`;
-const legalPopover = `${uid}-legal`;
+const legalPopover = `${uid}-pop-legal`;
+const helpPopover = `${uid}-pop-help`;
+const callingPopover = `${uid}-pop-calling`;
 ---
 
 <section class="psy-face psy-face--back" id={`${uid}-back`} aria-labelledby={`${uid}-back-title`} data-hologram-host>
@@ -56,9 +58,9 @@ const legalPopover = `${uid}-legal`;
     </label>
   </header>
 
-  <div class="psy-bento">
+  <div class="psy-bento psy-bento--back">
     {c.risks && c.risks.length > 0 && (
-      <section class="psy-tile psy-tile--risks" aria-labelledby={`${uid}-risks`}>
+      <section class="psy-tile psy-tile--risks psy-span-12" aria-labelledby={`${uid}-risks`}>
         <h3 id={`${uid}-risks`}>
           <Icon name="ph:warning-fill" aria-hidden="true" />
           {t(locale, ui, "card.risks")}
@@ -74,47 +76,49 @@ const legalPopover = `${uid}-legal`;
       </section>
     )}
 
-    <section class="psy-tile psy-tile--avoid" aria-labelledby={`${uid}-avoid`}>
+    <section class="psy-tile psy-tile--avoid psy-span-12" aria-labelledby={`${uid}-avoid`}>
       <h3 id={`${uid}-avoid`}>
         <Icon name="ph:prohibit-fill" aria-hidden="true" />
         {t(locale, ui, "card.avoid")}
       </h3>
-      {data.avoid.length > 0 ? (
-        <ul class="psy-avoid">
-          {shownAvoid.map((combo) => (
-            <li class={`status-${combo.statusKey}`}>
-              <a href={combo.href} data-combo={combo.slug} class="psy-avoid__chip status-surface cell-text" title={combo.statusLabel}>
-                <StatusIcon name={combo.icon} size="1.05em" />
-                {combo.label}
-              </a>
-            </li>
-          ))}
-          {hiddenAvoid > 0 && (
-            <li>
-              <a href={`#${combosHeadingId}`} class="psy-avoid__chip psy-avoid__more" data-scroll-to-combos>
-                {tFormat(locale, ui, "card.otherRoutesCount", { count: String(hiddenAvoid) })}
-              </a>
-            </li>
-          )}
-        </ul>
-      ) : (
-        <p class="psy-tile__text">{t(locale, ui, "card.avoidNone")}</p>
-      )}
-      {data.caution.length > 0 && (
-        <p class="psy-tile__text psy-tile__text--small psy-caution">
-          <strong>{t(locale, ui, "card.caution")}:</strong>{" "}
-          {shownCaution.map((combo, index) => (
-            <><a href={combo.href} data-combo={combo.slug}>{combo.label}</a>{index < shownCaution.length - 1 ? ", " : ""}</>
-          ))}
-          {hiddenCaution > 0 && (
-            <>{" "}<a href={`#${combosHeadingId}`} data-scroll-to-combos>+{hiddenCaution}</a></>
-          )}
-        </p>
-      )}
+      <div class="psy-avoid-body">
+        {data.avoid.length > 0 ? (
+          <ul class="psy-avoid">
+            {shownAvoid.map((combo) => (
+              <li class={`status-${combo.statusKey}`}>
+                <a href={combo.href} data-combo={combo.slug} class="psy-avoid__chip status-surface cell-text" title={combo.statusLabel}>
+                  <StatusIcon name={combo.icon} size="1.05em" />
+                  {combo.label}
+                </a>
+              </li>
+            ))}
+            {hiddenAvoid > 0 && (
+              <li>
+                <a href={`#${combosHeadingId}`} class="psy-avoid__chip psy-avoid__more" data-scroll-to-combos>
+                  {tFormat(locale, ui, "card.otherRoutesCount", { count: String(hiddenAvoid) })}
+                </a>
+              </li>
+            )}
+          </ul>
+        ) : (
+          <p class="psy-tile__text">{t(locale, ui, "card.avoidNone")}</p>
+        )}
+        {data.caution.length > 0 && (
+          <p class="psy-tile__text psy-tile__text--small psy-caution">
+            <strong>{t(locale, ui, "card.caution")}:</strong>{" "}
+            {shownCaution.map((combo, index) => (
+              <><a href={combo.href} data-combo={combo.slug}>{combo.label}</a>{index < shownCaution.length - 1 ? ", " : ""}</>
+            ))}
+            {hiddenCaution > 0 && (
+              <>{" "}<a href={`#${combosHeadingId}`} data-scroll-to-combos>+{hiddenCaution}</a></>
+            )}
+          </p>
+        )}
+      </div>
     </section>
 
     {c.overdose && (
-      <section class="psy-tile psy-tile--emergency" aria-labelledby={`${uid}-emergency`} data-local-emergency>
+      <section class="psy-tile psy-tile--emergency psy-span-12" aria-labelledby={`${uid}-emergency`} data-local-emergency>
         <div class="psy-tile__head">
           <h3 id={`${uid}-emergency`}>
             <Icon name="ph:siren-fill" aria-hidden="true" />
@@ -136,37 +140,15 @@ const legalPopover = `${uid}-legal`;
             <Icon name="ph:first-aid-kit-fill" aria-hidden="true" />
             <span data-local-poison-label></span>
           </a>
-          <span class="psy-emergency__calling" data-local-calling hidden></span>
+          <button type="button" class="psy-emergency__calling" popovertarget={callingPopover} data-local-calling hidden>
+            <Icon name="ph:info-bold" aria-hidden="true" />
+            {t(locale, ui, "card.policeQuestion")}
+          </button>
         </p>
       </section>
     )}
 
-    <section class="psy-tile psy-tile--help" aria-labelledby={`${uid}-help`} data-local-help hidden>
-      <h3 id={`${uid}-help`}>
-        <Icon name="ph:hand-heart-fill" aria-hidden="true" />
-        {t(locale, ui, "card.help")}
-      </h3>
-      <ul class="psy-help" data-local-help-list></ul>
-    </section>
-
-    <section class="psy-tile psy-tile--dependence" aria-labelledby={`${uid}-dependence`}>
-      <div class="psy-tile__head">
-        <h3 id={`${uid}-dependence`}>
-          <Icon name="ph:link-break-fill" aria-hidden="true" />
-          {t(locale, ui, "card.dependence")}
-        </h3>
-        <button type="button" class="psy-info-btn" popovertarget={dependencePopover} aria-label={t(locale, ui, "card.info")}>
-          <Icon name="ph:info-bold" aria-hidden="true" />
-        </button>
-      </div>
-      <div class="psy-meter" data-level={level} role="meter" aria-valuemin="1" aria-valuemax="5" aria-valuenow={level} aria-valuetext={levelLabel} aria-labelledby={`${uid}-dependence`}>
-        {[1, 2, 3, 4, 5].map((step) => <span class:list={["psy-meter__step", { "is-on": step <= level }]} />)}
-      </div>
-      <p class="psy-meter__label">{levelLabel}</p>
-      {c.dependence && <p class="psy-tile__text psy-tile__text--small">{c.dependence}</p>}
-    </section>
-
-    <section class="psy-tile psy-tile--legal" aria-labelledby={`${uid}-legal`} data-local-legal>
+    <section class="psy-tile psy-tile--legal psy-tile--tap" aria-labelledby={`${uid}-legal`} data-local-legal>
       <div class="psy-tile__head">
         <h3 id={`${uid}-legal`}>
           <Icon name="ph:gavel-fill" aria-hidden="true" />
@@ -182,14 +164,45 @@ const legalPopover = `${uid}-legal`;
         <span class="psy-legal__status" data-local-status></span>
         <span class="psy-legal__note" data-local-note></span>
       </p>
+      <button type="button" class="psy-legal__more psy-tap" popovertarget={legalPopover} data-local-legal-foot hidden>
+        {t(locale, ui, "card.legalDetails")}
+        <Icon name="ph:caret-right-bold" aria-hidden="true" />
+      </button>
       <p class="psy-tile__text psy-tile__text--small" data-local-legal-empty>{t(locale, ui, "country.prompt")}</p>
-      <p class="psy-legal__foot" data-local-legal-foot hidden>
-        <span data-local-asof></span>
-        <button type="button" class="psy-legal__more" popovertarget={legalPopover}>
-          {t(locale, ui, "card.legalDetails")}
-          <Icon name="ph:caret-right-bold" aria-hidden="true" />
+    </section>
+
+    <section class="psy-tile psy-tile--help psy-tile--tap" aria-labelledby={`${uid}-help`} data-local-help hidden>
+      <div class="psy-tile__head">
+        <h3 id={`${uid}-help`}>
+          <Icon name="ph:hand-heart-fill" aria-hidden="true" />
+          {t(locale, ui, "card.help")}
+        </h3>
+      </div>
+      <ul class="psy-help-names" data-local-help-names>
+        <li class="psy-help-names__more">
+          <button type="button" class="psy-legal__more psy-tap" popovertarget={helpPopover}>
+            {t(locale, ui, "card.helpAll")}
+            <Icon name="ph:caret-right-bold" aria-hidden="true" />
+          </button>
+        </li>
+      </ul>
+    </section>
+
+    <section class="psy-tile psy-tile--dependence psy-tile--tap" aria-labelledby={`${uid}-dependence`}>
+      <div class="psy-tile__head">
+        <h3 id={`${uid}-dependence`}>
+          <Icon name="ph:link-break-fill" aria-hidden="true" />
+          {t(locale, ui, "card.dependence")}
+        </h3>
+        <button type="button" class="psy-info-btn psy-tap" popovertarget={dependencePopover} aria-label={t(locale, ui, "card.info")}>
+          <Icon name="ph:info-bold" aria-hidden="true" />
         </button>
-      </p>
+      </div>
+      <div class="psy-meter" data-level={level} role="meter" aria-valuemin="1" aria-valuemax="5" aria-valuenow={level} aria-valuetext={levelLabel} aria-labelledby={`${uid}-dependence`}>
+        {[1, 2, 3, 4, 5].map((step) => <span class:list={["psy-meter__step", { "is-on": step <= level }]} />)}
+      </div>
+      <p class="psy-meter__label">{levelLabel}</p>
+      {c.dependence && <p class="psy-tile__text psy-tile__text--small psy-dependence__text">{c.dependence}</p>}
     </section>
   </div>
 

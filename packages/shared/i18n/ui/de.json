@@ -338,6 +338,9 @@
       "unknown": "Unklar"
     },
     "legalDetails": "Details & Quellen",
+    "why": "Warum?",
+    "policeQuestion": "Kommt die Polizei?",
+    "helpAll": "Alle Angebote",
     "legalSources": "Quellen",
     "legalAsOf": "Keine Rechtsberatung · {date}",
     "legalDisclaimer": "Eine Zusammenfassung, keine Rechtsberatung. Gesetze und ihre Durchsetzung ändern sich: Frag im Zweifel eine lokale Fachstelle.",

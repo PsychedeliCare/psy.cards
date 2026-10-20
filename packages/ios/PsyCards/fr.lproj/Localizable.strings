@@ -275,6 +275,9 @@
 "card.legalStatus.illegal" = "Illégal";
 "card.legalStatus.unknown" = "Incertain";
 "card.legalDetails" = "Détails et sources";
+"card.why" = "Pourquoi ?";
+"card.policeQuestion" = "La police viendra-t-elle ?";
+"card.helpAll" = "Tous les services";
 "card.legalSources" = "Sources";
 "card.legalAsOf" = "Pas un avis juridique · {date}";
 "card.legalDisclaimer" = "Un résumé, pas un avis juridique. Les lois et leur application changent : en cas de doute, renseigne-toi auprès d'un service local.";

@@ -338,6 +338,9 @@
       "unknown": "Unclear"
     },
     "legalDetails": "Details & sources",
+    "why": "Why?",
+    "policeQuestion": "Will police come?",
+    "helpAll": "All services",
     "legalSources": "Sources",
     "legalAsOf": "Not legal advice · {date}",
     "legalDisclaimer": "A summary, not legal advice. Laws and how they are enforced change: check a local service if in doubt.",

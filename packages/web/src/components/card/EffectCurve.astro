@@ -44,7 +44,9 @@ const summary = [
   timing.onset && `${t(locale, ui, "card.onset")} ${timing.onset.value} ${timing.onset.unit === "minutes" ? "min" : "h"}`,
   timing.duration && `${t(locale, ui, "card.duration")} ${timing.duration.value} ${timing.duration.unit === "minutes" ? "min" : "h"}`,
   timing.after && `${t(locale, ui, "card.afterEffects")} ${timing.after.value} ${timing.after.unit === "minutes" ? "min" : "h"}`,
-].filter(Boolean);
+].filter((item): item is string => Boolean(item));
+// Each figure wraps as a whole ("After 1–72 h", never a lone "h").
+const summaryText = summary.map((item) => item.replaceAll(" ", " ")).join(" · ");
 ---
 
 {curve && (
@@ -61,6 +63,6 @@ const summary = [
         </span>
       ))}
     </div>
-    {summary.length > 0 && <p class="psy-curve__summary">{summary.join(" · ")}</p>}
+    {summary.length > 0 && <p class="psy-curve__summary">{summaryText}</p>}
   </div>
 )}

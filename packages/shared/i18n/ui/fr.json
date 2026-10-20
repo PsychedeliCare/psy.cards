@@ -338,6 +338,9 @@
       "unknown": "Incertain"
     },
     "legalDetails": "Détails et sources",
+    "why": "Pourquoi ?",
+    "policeQuestion": "La police viendra-t-elle ?",
+    "helpAll": "Tous les services",
     "legalSources": "Sources",
     "legalAsOf": "Pas un avis juridique · {date}",
     "legalDisclaimer": "Un résumé, pas un avis juridique. Les lois et leur application changent : en cas de doute, renseigne-toi auprès d'un service local.",

@@ -197,6 +197,20 @@ function renderOrganisation(org: Organisation, locale: string): HTMLLIElement {
   return item;
 }
 
+/** One line per service on the card: its name, linking out when it has a site. */
+function renderOrganisationName(org: Organisation): HTMLLIElement {
+  const item = el("li", "psy-help-names__item");
+  const name = org.url ? el("a", undefined, org.name) : el("span", undefined, org.name);
+  if (name instanceof HTMLAnchorElement) {
+    name.href = org.url!;
+    name.target = "_blank";
+    name.rel = "noreferrer noopener";
+  }
+  item.append(name);
+  if (org.city && org.scope === "regional") item.append(el("span", "psy-help__where", org.city));
+  return item;
+}
+
 function applyToCard(card: HTMLElement, info: LocalInfo | null, code: string | undefined, names: Map<string, string>): void {
   const key = card.dataset.substanceKey ?? "";
   const locale = getPageI18n()?.locale ?? "en";
@@ -221,6 +235,8 @@ function applyToCard(card: HTMLElement, info: LocalInfo | null, code: string | u
     line.dataset.original ??= line.textContent ?? "";
     line.textContent = line.dataset.original.replace(/\b112\b/g, number);
   });
+  // Whether calling usually involves the police is a tap away: it is long,
+  // and the card keeps room for what to do.
   card.querySelectorAll<HTMLElement>("[data-local-emergency-extra]").forEach((extra) => {
     const poison = extra.querySelector<HTMLAnchorElement>("[data-local-poison]");
     const calling = extra.querySelector<HTMLElement>("[data-local-calling]");
@@ -238,19 +254,25 @@ function applyToCard(card: HTMLElement, info: LocalInfo | null, code: string | u
         poison.title = poisonInfo.name;
       }
     }
-    if (calling) {
-      calling.hidden = !info?.callingForHelp;
-      calling.textContent = info?.callingForHelp ?? "";
-    }
+    if (calling) calling.hidden = !info?.callingForHelp;
     extra.hidden = !poisonInfo && !info?.callingForHelp;
   });
+  card.querySelectorAll<HTMLElement>("[data-local-calling-text]").forEach((text) => {
+    text.textContent = info?.callingForHelp ?? "";
+  });
 
-  // Local services.
+  // Local services: names on the card, descriptions and numbers in the popover.
+  const orgs = info ? pickOrganisations(info, key) : [];
   card.querySelectorAll<HTMLElement>("[data-local-help]").forEach((tile) => {
-    const list = tile.querySelector("[data-local-help-list]");
-    const orgs = info ? pickOrganisations(info, key) : [];
-    list?.replaceChildren(...orgs.map((org) => renderOrganisation(org, locale)));
+    const names = tile.querySelector("[data-local-help-names]");
+    const more = names?.querySelector(".psy-help-names__more");
+    names?.replaceChildren(...orgs.map(renderOrganisationName), ...(more ? [more] : []));
     tile.hidden = orgs.length === 0;
+  });
+  card.querySelectorAll<HTMLElement>("[data-local-help-popover]").forEach((popover) => {
+    popover.querySelector("[data-local-help-list]")?.replaceChildren(...orgs.map((org) => renderOrganisation(org, locale)));
+    const title = popover.querySelector("[data-local-help-title]");
+    if (title) title.textContent = `${getUiString("card.help", "Help & support")}${name ? ` · ${name}` : ""}`;
   });
 
   // Legal status, with details and sources in the popover.
@@ -271,8 +293,6 @@ function applyToCard(card: HTMLElement, info: LocalInfo | null, code: string | u
     setStatus(tile.querySelector("[data-local-status]"), legal.status);
     const note = tile.querySelector("[data-local-note]");
     if (note) note.textContent = legal.note ?? "";
-    const asOf = tile.querySelector("[data-local-asof]");
-    if (asOf) asOf.textContent = fill(getUiString("card.legalAsOf", "Not legal advice · {date}"), { date: info.asOf });
   });
 
   const popover = card.querySelector<HTMLElement>("[data-local-legal-popover]");
@@ -282,6 +302,8 @@ function applyToCard(card: HTMLElement, info: LocalInfo | null, code: string | u
     setStatus(popover.querySelector("[data-local-status]"), legal.status);
     const note = popover.querySelector("[data-local-note]");
     if (note) note.textContent = legal.note ?? "";
+    const asOf = popover.querySelector("[data-local-asof]");
+    if (asOf) asOf.textContent = `(${info.asOf})`;
     const summary = popover.querySelector("[data-local-summary]");
     if (summary) summary.textContent = info.summary ?? "";
     const checking = popover.querySelector<HTMLElement>("[data-local-drug-checking]");
